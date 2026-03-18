@@ -2060,7 +2060,7 @@ function App() {
                       <table className="report-table report-table-compact">
                         <thead>
                           <tr>
-                            <th>Nhóm</th>
+                            <th>{reportDrillTab === 'giao_dich' ? 'Ngày hồ sơ' : 'Nhóm'}</th>
                             <th>Diễn giải</th>
                             <th>Giá trị</th>
                           </tr>
@@ -2068,7 +2068,7 @@ function App() {
                         <tbody>
                           {reportDrillTab === 'giao_dich' ? (reportDetail?.gl?.items || []).slice(-8).map((item) => (
                             <tr key={item.entry_id}>
-                              <td>Giao dịch</td>
+                              <td>{item.event_date || item.meta?.event_date || '-'}</td>
                               <td>{item.narration || item.entry_id}</td>
                               <td>{formatCurrency(item.debit_total)}</td>
                             </tr>
