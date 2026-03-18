@@ -293,22 +293,8 @@ function normalizeCaseItem(raw, fallbackIndex = 0) {
     ? raw.evidence.map((entry) => normalizeEvidenceEntry(entry, false)).filter(Boolean)
     : []
 
-  let stagedEvidence = Array.isArray(raw.staged_evidence)
-    ? raw.staged_evidence.map((entry) => normalizeEvidenceEntry(entry, true)).filter(Boolean)
-    : []
-
-  if (!stagedEvidence.length) {
-    const pending = raw.pendingPosting && typeof raw.pendingPosting === 'object'
-      ? raw.pendingPosting
-      : raw.pending_posting && typeof raw.pending_posting === 'object'
-        ? raw.pending_posting
-        : null
-    const pendingAttachments = pending && Array.isArray(pending.received_attachments) ? pending.received_attachments : []
-    stagedEvidence = pendingAttachments.map((entry) => normalizeEvidenceEntry(entry, true)).filter(Boolean)
-  }
-
   const mergedEvidenceMap = new Map()
-  ;[...committedEvidence, ...stagedEvidence].forEach((entry) => {
+  committedEvidence.forEach((entry) => {
     const key = String(entry.previewRef || entry.name || '')
     if (!key || mergedEvidenceMap.has(key)) return
     mergedEvidenceMap.set(key, entry)
@@ -543,8 +529,14 @@ function App() {
   const unfinishedCases = useMemo(() => cases.filter((item) => item.status !== 'hoan_tat'), [cases])
   const previewFileUrl = useMemo(() => {
     if (!previewFileRef || !activeCaseId) return ''
-    return `/api/demo/evidence/${encodeURIComponent(activeCaseId)}/${encodeURIComponent(previewFileRef)}`
-  }, [previewFileRef, activeCaseId])
+    const params = new URLSearchParams()
+    if (currentEmail) {
+      params.set('email', currentEmail)
+    }
+    const query = params.toString()
+    const basePath = `/api/demo/evidence/${encodeURIComponent(activeCaseId)}/${encodeURIComponent(previewFileRef)}`
+    return query ? `${basePath}?${query}` : basePath
+  }, [previewFileRef, activeCaseId, currentEmail])
   const isPdfPreview = /\.pdf$/i.test(previewFileName)
   const isImagePreview = /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(previewFileName)
   const isXmlPreview = /\.xml$/i.test(previewFileName)
@@ -2278,7 +2270,7 @@ function App() {
                       }}
                     >
                       <FileText size={15} />
-                      <span>{name.isStaged ? `${name.name} (tạm)` : name.name}</span>
+                      <span>{name.name}</span>
                     </a>
                   ))}
                 </div>
