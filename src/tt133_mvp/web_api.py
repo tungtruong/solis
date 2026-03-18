@@ -1381,7 +1381,12 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 current_path = f"{path}_{tag}" if path else tag
                 value = clean_extracted_value(str(node.text or ""))
                 if value:
-                    path_values.setdefault(current_path, []).append(value)
+                    # Store full path and all suffix aliases to make schema-key mapping resilient
+                    # across root prefixes and nesting differences.
+                    path_parts = current_path.split("_")
+                    for idx in range(len(path_parts)):
+                        suffix_key = "_".join(path_parts[idx:])
+                        path_values.setdefault(suffix_key, []).append(value)
                     path_values.setdefault(tag, []).append(value)
                 for child in list(node):
                     walk(child, current_path)
