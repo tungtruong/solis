@@ -192,27 +192,37 @@ function parseDocRtfToSections(rawText) {
   ]
 }
 
-function TypingText({ text, speed = 8 }) {
+function TypingText({ text, speed = 8, onComplete }) {
   const [visibleText, setVisibleText] = useState('')
 
   useEffect(() => {
     const source = String(text || '')
     setVisibleText('')
-    if (!source) return undefined
+    if (!source) {
+      if (typeof onComplete === 'function') {
+        onComplete()
+      }
+      return undefined
+    }
 
     let index = 0
+    let done = false
     const timer = window.setInterval(() => {
       index += 1
       setVisibleText(source.slice(0, index))
       if (index >= source.length) {
         window.clearInterval(timer)
+        if (!done && typeof onComplete === 'function') {
+          done = true
+          onComplete()
+        }
       }
     }, speed)
 
     return () => {
       window.clearInterval(timer)
     }
-  }, [text, speed])
+  }, [text, speed, onComplete])
 
   return <span>{visibleText}</span>
 }
@@ -327,6 +337,7 @@ function App() {
   const [actionNotice, setActionNotice] = useState('')
   const [caseActionNotice, setCaseActionNotice] = useState('')
   const [isSendingCaseCommand, setIsSendingCaseCommand] = useState(false)
+  const [timelineVisibleCount, setTimelineVisibleCount] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -410,6 +421,15 @@ function App() {
         { label: 'Nghiệp vụ', value: String(pendingPosting.event_type || pendingEvent.event_type || '-') },
       ]
     : []
+
+  const timelineSignature = useMemo(
+    () => timeline.map((event) => String(event?.id || '')).join('|'),
+    [timeline],
+  )
+
+  useEffect(() => {
+    setTimelineVisibleCount(timeline.length ? 1 : 0)
+  }, [activeCaseId, timeline.length, timelineSignature])
   const unfinishedCases = useMemo(() => cases.filter((item) => item.status !== 'hoan_tat'), [cases])
   const previewFileUrl = previewFileName ? `/evidence/${previewFileName}` : ''
   const isPdfPreview = /\.pdf$/i.test(previewFileName)
@@ -1424,11 +1444,11 @@ function App() {
               ) : null}
 
               <div className="timeline-stream scrollable-pane">
-                {timeline.map((event, index) => (
+                {timeline.slice(0, timelineVisibleCount).map((event, index) => (
                   <article key={event.id} className={event.kind === 'analysis' ? 'timeline-card analysis' : 'timeline-card'}>
                     <div className="line-col">
                       <span className="dot" />
-                      {index < timeline.length - 1 ? <span className="line" /> : null}
+                      {index < timelineVisibleCount - 1 ? <span className="line" /> : null}
                     </div>
                     <div className="card-body">
                       <div className="card-top">
@@ -1438,7 +1458,19 @@ function App() {
                         </div>
                         <time>{event.time}</time>
                       </div>
-                      <p><TypingText text={event.body} speed={8} /></p>
+                      <p>
+                        <TypingText
+                          text={event.body}
+                          speed={8}
+                          onComplete={() => {
+                            setTimelineVisibleCount((prev) => {
+                              if (prev >= timeline.length) return prev
+                              if (index !== prev - 1) return prev
+                              return prev + 1
+                            })
+                          }}
+                        />
+                      </p>
                     </div>
                   </article>
                 ))}
