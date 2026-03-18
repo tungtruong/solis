@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "source": "TT133 MVP event narration rules",
+  "narration_policy": {
+    "language": "vi-VN",
+    "require_vietnamese_diacritics_for_system_text": true,
+    "tone": "khẳng_định",
+    "disallow_uncertain_phrases": [
+      "có thể",
+      "dường như",
+      "hình như",
+      "có lẽ",
+      "ước tính",
+      "khoảng"
+    ]
+  },
+  "items": [
+    {
+      "event_code": "gop_von",
+      "template": "{person_name} vừa góp vốn {amount_vnd_natural} vào công ty.",
+      "fallbacks": {
+        "person_name": "Chủ sở hữu"
+      }
+    },
+    {
+      "event_code": "rut_tien",
+      "template": "Công ty vừa chuyển {amount_vnd_natural} từ tài khoản {from_account} sang tài khoản {to_account}."
+    },
+    {
+      "event_code": "tam_ung",
+      "template": "Công ty vừa tạm ứng cho {person_name} số tiền {amount_vnd_natural}.",
+      "fallbacks": {
+        "person_name": "nhân sự phụ trách"
+      }
+    },
+    {
+      "event_code": "nop_tien",
+      "template": "Công ty vừa nộp {amount_vnd_natural} vào tài khoản ngân hàng."
+    },
+    {
+      "event_code": "hoan_ung",
+      "template": "{person_name} vừa hoàn ứng cho công ty số tiền {amount_vnd_natural}.",
+      "fallbacks": {
+        "person_name": "Nhân sự phụ trách"
+      }
+    },
+    {
+      "event_code": "ban_hang_dich_vu",
+      "template": "Công ty vừa cung cấp dịch vụ {service_name} cho {counterparty} tại {location} và nhận số tiền {amount_vnd_natural}.",
+      "fallbacks": {
+        "service_name": "theo hợp đồng",
+        "counterparty": "khách hàng",
+        "location": "địa điểm kinh doanh"
+      }
+    },
+    {
+      "event_code": "mua_hang_dung_noi_bo",
+      "template": "Công ty vừa thanh toán cho {counterparty} số tiền {amount_vnd_natural} để mua {purpose}.",
+      "fallbacks": {
+        "counterparty": "nhà cung cấp",
+        "purpose": "hàng dùng nội bộ"
+      }
+    },
+    {
+      "event_code": "mua_dich_vu",
+      "template": "Công ty vừa thanh toán cho {counterparty} số tiền {amount_vnd_natural} để mua dịch vụ {purpose}.",
+      "fallbacks": {
+        "counterparty": "nhà cung cấp",
+        "purpose": "phục vụ hoạt động doanh nghiệp"
+      }
+    },
+    {
+      "event_code": "mua_tscd",
+      "template": "Công ty vừa mua tài sản cố định từ {counterparty} với số tiền {amount_vnd_natural}.",
+      "fallbacks": {
+        "counterparty": "nhà cung cấp"
+      }
+    },
+    {
+      "event_code": "khau_hao",
+      "template": "Công ty vừa ghi nhận khấu hao kỳ này với số tiền {amount_vnd_natural}."
+    },
+    {
+      "event_code": "nop_thue",
+      "template": "Công ty vừa nộp thuế số tiền {amount_vnd_natural} qua ngân hàng."
+    },
+    {
+      "event_code": "phan_bo_ccdc",
+      "template": "Công ty vừa phân bổ chi phí công cụ dụng cụ kỳ này với số tiền {amount_vnd_natural}."
+    },
+    {
+      "event_code": "phan_bo_chi_phi_tra_truoc",
+      "template": "Công ty vừa phân bổ chi phí trả trước kỳ này với số tiền {amount_vnd_natural}."
+    }
+  ]
+}
