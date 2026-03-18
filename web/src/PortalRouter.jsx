@@ -5,6 +5,8 @@ import './PortalRouter.css'
 const STORAGE_TOKEN_KEY = 'solis.auth.token'
 const STORAGE_EMAIL_KEY = 'solis.auth.email'
 const STORAGE_HAS_PROFILE_KEY = 'solis.auth.hasCompanyProfile'
+const STORAGE_COMPANY_ID_KEY = 'solis.auth.companyId'
+const STORAGE_COMPANY_NAME_KEY = 'solis.auth.companyName'
 
 function normalizePathname(pathname) {
   const normalized = String(pathname || '/').replace(/\/+$/, '')
@@ -23,11 +25,13 @@ function pushPath(pathname) {
 }
 
 function readSession() {
-  if (typeof window === 'undefined') return { token: '', email: '', hasCompanyProfile: false }
+  if (typeof window === 'undefined') return { token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' }
   return {
     token: String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || ''),
     email: String(window.sessionStorage.getItem(STORAGE_EMAIL_KEY) || ''),
     hasCompanyProfile: window.sessionStorage.getItem(STORAGE_HAS_PROFILE_KEY) === 'true',
+    companyId: String(window.sessionStorage.getItem(STORAGE_COMPANY_ID_KEY) || ''),
+    companyName: String(window.sessionStorage.getItem(STORAGE_COMPANY_NAME_KEY) || ''),
   }
 }
 
@@ -35,12 +39,16 @@ function writeSession(session) {
   window.sessionStorage.setItem(STORAGE_TOKEN_KEY, String(session.token || ''))
   window.sessionStorage.setItem(STORAGE_EMAIL_KEY, String(session.email || ''))
   window.sessionStorage.setItem(STORAGE_HAS_PROFILE_KEY, String(Boolean(session.hasCompanyProfile)))
+  window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, String(session.companyId || ''))
+  window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, String(session.companyName || ''))
 }
 
 function clearSession() {
   window.sessionStorage.removeItem(STORAGE_TOKEN_KEY)
   window.sessionStorage.removeItem(STORAGE_EMAIL_KEY)
   window.sessionStorage.removeItem(STORAGE_HAS_PROFILE_KEY)
+  window.sessionStorage.removeItem(STORAGE_COMPANY_ID_KEY)
+  window.sessionStorage.removeItem(STORAGE_COMPANY_NAME_KEY)
 }
 
 function parseErrorMessage(payload, fallback) {
@@ -156,6 +164,8 @@ function LoginPage({ onNavigate, session, setSession }) {
         token: String(payload.token || ''),
         email: String(payload.email || email || ''),
         hasCompanyProfile: Boolean(payload.has_company_profile),
+        companyId: String(payload.company_id || ''),
+        companyName: String(payload.company_name || ''),
       }
       setSession(nextSession)
       writeSession(nextSession)
@@ -267,7 +277,12 @@ function OnboardPage({ onNavigate, session, setSession }) {
         setForm((prev) => ({ ...prev, ...payload.profile }))
       }
       if (payload.is_complete) {
-        const nextSession = { ...session, hasCompanyProfile: true }
+        const nextSession = {
+          ...session,
+          hasCompanyProfile: true,
+          companyId: String(payload.profile?.company_id || companyId || ''),
+          companyName: String(payload.profile?.company_name || ''),
+        }
         setSession(nextSession)
         writeSession(nextSession)
         onNavigate('/SolisAcc')
@@ -346,7 +361,12 @@ function OnboardPage({ onNavigate, session, setSession }) {
         throw new Error(parseErrorMessage(payload, 'Lưu thông tin thất bại'))
       }
       const completed = Boolean(payload.is_complete) && isProfileComplete(payload.profile)
-      const nextSession = { ...session, hasCompanyProfile: completed }
+      const nextSession = {
+        ...session,
+        hasCompanyProfile: completed,
+        companyId: String(payload.profile?.company_id || form.company_id || ''),
+        companyName: String(payload.profile?.company_name || form.company_name || ''),
+      }
       setSession(nextSession)
       writeSession(nextSession)
       if (completed) {
@@ -384,6 +404,22 @@ function OnboardPage({ onNavigate, session, setSession }) {
           <button type="button" className="cta-sub cta-sub-solid" onClick={() => setCreateMode(true)}>
             Tạo công ty mới
           </button>
+          <div className="onboard-actions-inline">
+            <button type="button" className="cta-sub cta-sub-solid" onClick={() => onNavigate('/')}>
+              Exit
+            </button>
+            <button
+              type="button"
+              className="cta-sub cta-sub-solid"
+              onClick={() => {
+                clearSession()
+                setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
+                onNavigate('/login')
+              }}
+            >
+              Logout tài khoản
+            </button>
+          </div>
         </div>
       ) : null}
 
@@ -448,6 +484,22 @@ function OnboardPage({ onNavigate, session, setSession }) {
               Quay lại danh sách công ty
             </button>
           ) : null}
+          <div className="onboard-actions-inline">
+            <button type="button" className="cta-sub cta-sub-solid" onClick={() => onNavigate('/')}>
+              Exit
+            </button>
+            <button
+              type="button"
+              className="cta-sub cta-sub-solid"
+              onClick={() => {
+                clearSession()
+                setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
+                onNavigate('/login')
+              }}
+            >
+              Logout tài khoản
+            </button>
+          </div>
         </form>
       ) : null}
     </PublicShell>

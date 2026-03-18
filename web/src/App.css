@@ -218,6 +218,60 @@
   font-weight: 600;
 }
 
+.user-menu-wrap {
+  position: relative;
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(280px, 80vw);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 16px 30px rgba(22, 40, 63, 0.2);
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+  z-index: 80;
+}
+
+.user-menu-title {
+  margin: 0;
+  font-weight: 700;
+  color: #153355;
+  font-size: 0.88rem;
+}
+
+.user-menu-subtitle {
+  margin: 0 0 4px;
+  color: #4b6887;
+  font-size: 0.8rem;
+}
+
+.user-menu-btn {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #204567;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.user-menu-btn:hover {
+  background: #e8f2ff;
+}
+
+.user-menu-btn.danger {
+  color: #9a3e31;
+}
+
+.user-menu-btn.danger:hover {
+  background: #ffe9e5;
+}
+
 .workspace-grid {
   height: calc(100dvh - 68px);
   display: grid;
@@ -2109,6 +2163,53 @@
   color: #a2412f;
   padding: 10px;
   font-weight: 700;
+}
+
+.modal-success {
+  border-radius: 10px;
+  background: #e9fff3;
+  color: #1e6f45;
+  padding: 10px;
+  font-weight: 700;
+}
+
+.company-edit-modal {
+  width: min(820px, 94vw);
+}
+
+.company-edit-form-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.company-edit-form-grid label {
+  display: grid;
+  gap: 6px;
+  color: #284d6d;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.company-edit-form-grid input,
+.company-edit-form-grid select {
+  border: 1px solid #cad9ec;
+  border-radius: 10px;
+  padding: 9px 10px;
+  font-size: 0.84rem;
+  color: #1b3c5e;
+}
+
+.readonly-input {
+  background: #f3f7fc;
+  color: #5a6b7d;
+}
+
+@media (max-width: 900px) {
+  .company-edit-form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .modal-actions {

@@ -321,6 +321,7 @@ class AdjustmentPayload(BaseModel):
 
 class DemoUiActionPayload(BaseModel):
     email: str = "demo@wssmeas.local"
+    company_id: str = ""
     action: str
     text: str = ""
     case_id: str = ""
@@ -339,6 +340,7 @@ class DemoUiActionWithAttachmentsPayload(DemoUiActionPayload):
 
 class ComplianceActionPayload(BaseModel):
     email: str = "demo@wssmeas.local"
+    company_id: str = ""
     period: str
     report_id: str
     submitted_by: str = ""
@@ -346,6 +348,7 @@ class ComplianceActionPayload(BaseModel):
 
 class OpeningBalancesPayload(BaseModel):
     email: str = "demo@wssmeas.local"
+    company_id: str = ""
     lines: List[Dict[str, Any]] = []
 
 
@@ -474,6 +477,91 @@ def build_ui_hints(has_company_profile: bool, last_action: str) -> Dict[str, Any
         "context": "ready",
         "last_action": last_action,
     }
+
+
+def resolve_company_id_for_user(email: str, requested_company_id: str = "") -> str:
+    normalized_email = email.lower().strip()
+    requested = str(requested_company_id or "").strip()
+
+    memberships = storage.list_user_memberships(normalized_email)
+    membership_ids = {str(item.get("company_id") or "").strip() for item in memberships}
+    membership_ids.discard("")
+
+    if requested and requested in membership_ids:
+        return requested
+
+    if requested:
+        onboard_company = storage.get_onboarding_company(normalized_email, requested)
+        if onboard_company and str(onboard_company.get("company_id") or "").strip():
+            return str(onboard_company.get("company_id"))
+
+    default_membership = storage.get_default_company_id(normalized_email)
+    if default_membership:
+        return str(default_membership)
+
+    if memberships:
+        first_membership_company_id = str(memberships[0].get("company_id") or "").strip()
+        if first_membership_company_id:
+            return first_membership_company_id
+
+    default_onboard = storage.get_default_onboarding_company(normalized_email)
+    if default_onboard and str(default_onboard.get("company_id") or "").strip():
+        return str(default_onboard.get("company_id"))
+
+    if requested:
+        return requested
+
+    return "COMP-DEFAULT"
+
+
+def company_scope_key(company_id: str) -> str:
+    normalized_company_id = str(company_id or "").strip() or "COMP-DEFAULT"
+    return f"company::{normalized_company_id}"
+
+
+def _build_accessible_company_items(email: str) -> tuple[list[dict[str, Any]], str]:
+    normalized_email = email.lower().strip()
+    memberships = storage.list_user_memberships(normalized_email)
+    onboarding_companies = storage.list_onboarding_companies(normalized_email)
+
+    combined: dict[str, dict[str, Any]] = {}
+
+    for membership in memberships:
+        company_id = str(membership.get("company_id") or "").strip()
+        if not company_id:
+            continue
+        company_payload = storage.get_company(company_id) or {}
+        merged = {**company_payload, **membership}
+        merged["company_id"] = company_id
+        merged["company_name"] = str(
+            merged.get("company_name") or company_payload.get("company_name") or membership.get("company_name") or company_id
+        )
+        merged["tax_code"] = str(merged.get("tax_code") or company_payload.get("tax_code") or membership.get("tax_code") or "")
+        merged["is_default"] = bool(membership.get("is_default"))
+        combined[company_id] = merged
+
+    for onboarding in onboarding_companies:
+        company_id = str(onboarding.get("company_id") or "").strip()
+        if not company_id:
+            continue
+        if company_id in combined:
+            if bool(onboarding.get("is_default")):
+                combined[company_id]["is_default"] = True
+            continue
+        fallback = dict(onboarding)
+        fallback["company_id"] = company_id
+        fallback["company_name"] = str(fallback.get("company_name") or company_id)
+        fallback["tax_code"] = str(fallback.get("tax_code") or "")
+        fallback["is_default"] = bool(fallback.get("is_default"))
+        combined[company_id] = fallback
+
+    items = list(combined.values())
+    items.sort(key=lambda item: (0 if bool(item.get("is_default")) else 1, str(item.get("company_name") or "")))
+    default_company = next((item for item in items if bool(item.get("is_default"))), None)
+    default_company_id = str(default_company.get("company_id") or "") if default_company else ""
+    if not default_company_id and items:
+        default_company_id = str(items[0].get("company_id") or "")
+    return items, default_company_id
 
 
 def build_demo_dashboard_meta() -> Dict[str, Any]:
@@ -739,14 +827,15 @@ def health() -> Dict[str, Any]:
 
 
 @app.get("/api/demo/cases")
-def get_demo_cases(email: str = "demo@wssmeas.local") -> Dict[str, Any]:
+def get_demo_cases(email: str = "demo@wssmeas.local", company_id: str = "") -> Dict[str, Any]:
     normalized_email = email.lower().strip()
-    items = storage.list_case_items(normalized_email)
-    ui_content = storage.get_ui_content(normalized_email, "main_panels") or {}
-    entries = _derive_journal_entries_from_truth(normalized_email)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
+    scoped_data_key = company_scope_key(resolved_company_id)
+    items = storage.list_case_items(scoped_data_key)
+    ui_content = storage.get_ui_content(scoped_data_key, "main_panels") or {}
+    entries = _derive_journal_entries_from_truth(scoped_data_key)
     current_user = storage.get_user(normalized_email)
-    default_company_id = storage.get_default_company_id(normalized_email)
-    default_company = storage.get_company(default_company_id) if default_company_id else None
+    default_company = storage.get_company(resolved_company_id)
 
     trial_balance = report_service.summarize_accounts(entries)
 
@@ -811,7 +900,10 @@ def get_demo_cases(email: str = "demo@wssmeas.local") -> Dict[str, Any]:
         "total": len(items),
         "email": normalized_email,
         "current_user": current_user,
-        "company": default_company,
+        "company": {
+            **(default_company or {}),
+            "company_id": resolved_company_id,
+        },
         "dashboard_meta": build_demo_dashboard_meta(),
         "server_panels": {
             "reports_tips": [
@@ -848,14 +940,16 @@ def get_demo_identity() -> Dict[str, Any]:
 
 
 @app.get("/api/demo/compliance")
-def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.local") -> Dict[str, Any]:
+def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.local", company_id: str = "") -> Dict[str, Any]:
     normalized_email = email.lower().strip()
-    filings = ensure_compliance_seed(normalized_email, period)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
+    scoped_data_key = company_scope_key(resolved_company_id)
+    filings = ensure_compliance_seed(scoped_data_key, period)
     filings = _apply_late_status(filings)
 
     report_by_id = {str(item.get("report_id")): item for item in filings}
     gtgt_amount = float(report_by_id.get("gtgt", {}).get("amount", 0) or 0)
-    entries = _derive_journal_entries_from_truth(normalized_email)
+    entries = _derive_journal_entries_from_truth(scoped_data_key)
     financial = report_service.generate_financial_statements(entries, datetime.utcnow().date().isoformat())
     doanh_thu = float(financial.get("ket_qua_hoat_dong_kinh_doanh", {}).get("doanh_thu", 0) or 0)
     expected_vat = max(round(doanh_thu * 0.1), 0)
@@ -868,7 +962,7 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
     if not issues:
         issues.append("Không phát hiện sai lệch trọng yếu trước khi nộp.")
 
-    history = storage.list_compliance_submission_history(normalized_email, period)
+    history = storage.list_compliance_submission_history(scoped_data_key, period)
     active_report = filings[0] if filings else None
     xml_preview = ""
     if active_report:
@@ -881,6 +975,7 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
 
     return {
         "email": normalized_email,
+        "company_id": resolved_company_id,
         "period": period,
         "period_options": [
             {"value": "2026-03", "label": "Tháng 3/2026"},
@@ -895,11 +990,13 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
 
 
 @app.get("/api/demo/opening-balances")
-def get_demo_opening_balances(email: str = "demo@wssmeas.local") -> Dict[str, Any]:
+def get_demo_opening_balances(email: str = "demo@wssmeas.local", company_id: str = "") -> Dict[str, Any]:
     normalized_email = email.lower().strip()
-    payload = storage.get_opening_balances(normalized_email)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
+    payload = storage.get_opening_balances(company_scope_key(resolved_company_id))
     return {
         "email": normalized_email,
+        "company_id": resolved_company_id,
         "lines": payload.get("lines", []) if isinstance(payload, dict) else [],
     }
 
@@ -907,16 +1004,18 @@ def get_demo_opening_balances(email: str = "demo@wssmeas.local") -> Dict[str, An
 @app.post("/api/demo/opening-balances")
 def upsert_demo_opening_balances(payload: OpeningBalancesPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
+    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
     now = datetime.utcnow().isoformat() + "Z"
     data = {"lines": payload.lines}
-    storage.upsert_opening_balances(normalized_email, data, now)
-    return {"saved": True, "email": normalized_email, "lines": payload.lines}
+    storage.upsert_opening_balances(company_scope_key(resolved_company_id), data, now)
+    return {"saved": True, "email": normalized_email, "company_id": resolved_company_id, "lines": payload.lines}
 
 
 @app.post("/api/demo/compliance/export-xml")
 def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
-    filing = storage.get_compliance_filing(normalized_email, payload.period, payload.report_id)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    filing = storage.get_compliance_filing(company_scope_key(resolved_company_id), payload.period, payload.report_id)
     if not filing:
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
 
@@ -936,7 +1035,8 @@ def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, An
 @app.post("/api/demo/compliance/export-pdf")
 def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
-    filing = storage.get_compliance_filing(normalized_email, payload.period, payload.report_id)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    filing = storage.get_compliance_filing(company_scope_key(resolved_company_id), payload.period, payload.report_id)
     if not filing:
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
 
@@ -956,14 +1056,16 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
 @app.post("/api/demo/compliance/submit")
 def submit_demo_compliance(payload: ComplianceActionPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
-    filing = storage.get_compliance_filing(normalized_email, payload.period, payload.report_id)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    scoped_data_key = company_scope_key(resolved_company_id)
+    filing = storage.get_compliance_filing(scoped_data_key, payload.period, payload.report_id)
     if not filing:
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
 
     now = datetime.utcnow().isoformat() + "Z"
     updated = {**filing, "status": "da_nop"}
     storage.upsert_compliance_filing(
-        email=normalized_email,
+        email=scoped_data_key,
         period=payload.period,
         report_id=payload.report_id,
         status="da_nop",
@@ -981,7 +1083,7 @@ def submit_demo_compliance(payload: ComplianceActionPayload) -> Dict[str, Any]:
     }
     storage.add_compliance_submission_history(
         history_id=f"HIS-{uuid.uuid4().hex[:8].upper()}",
-        email=normalized_email,
+        email=scoped_data_key,
         period=payload.period,
         report_id=payload.report_id,
         payload=history_record,
@@ -994,6 +1096,8 @@ def submit_demo_compliance(payload: ComplianceActionPayload) -> Dict[str, Any]:
 @app.post("/api/demo/ui-action")
 def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
+    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    scoped_data_key = company_scope_key(resolved_company_id)
     now = datetime.utcnow().isoformat() + "Z"
     text = payload.text.strip()
 
@@ -1718,7 +1822,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             return any(token in lowered_cmd for token in reject_tokens)
 
         case_id = payload.case_id or "CASE"
-        case_items = storage.list_case_items(normalized_email)
+        case_items = storage.list_case_items(scoped_data_key)
         current_item: Optional[Dict[str, Any]] = None
         if payload.case_id:
             for item in case_items:
@@ -1770,7 +1874,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "updatedAt": datetime.utcnow().date().isoformat(),
                     }
                     next_items.append(updated_item)
-                storage.replace_case_items(normalized_email, next_items, now)
+                storage.replace_case_items(scoped_data_key, next_items, now)
 
             return {
                 "ok": True,
@@ -1801,7 +1905,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             posting_result = posting_engine.post(pending_event)
             posting_accepted = bool(posting_result.accepted and posting_result.journal_entry)
             if posting_accepted:
-                storage.upsert_case_event(normalized_email, case_id, pending_event, now)
+                storage.upsert_case_event(scoped_data_key, case_id, pending_event, now)
 
             result_body = (
                 "Đã tạo bút toán tự động thành công."
@@ -1863,7 +1967,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "updatedAt": posting_event_date,
                     }
                     next_items.append(updated_item)
-                storage.replace_case_items(normalized_email, next_items, now)
+                storage.replace_case_items(scoped_data_key, next_items, now)
 
             return {
                 "ok": True,
@@ -2009,7 +2113,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 changed = True
 
             if changed:
-                storage.replace_case_items(normalized_email, next_items, now)
+                storage.replace_case_items(scoped_data_key, next_items, now)
 
         return {
             "ok": True,
@@ -2049,8 +2153,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "reasoning": ["Hồ sơ nháp vừa được tạo."],
         }
         now = datetime.utcnow().isoformat() + "Z"
-        current = storage.list_case_items(normalized_email)
-        storage.replace_case_items(normalized_email, [item, *current], now)
+        current = storage.list_case_items(scoped_data_key)
+        storage.replace_case_items(scoped_data_key, [item, *current], now)
         return {"ok": True, "message": "Đã tạo hồ sơ mới.", "case": item}
 
     if payload.action == "delete_case":
@@ -2068,17 +2172,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             except OSError:
                 pass
 
-        current_items = storage.list_case_items(normalized_email)
+        current_items = storage.list_case_items(scoped_data_key)
         next_items = [item for item in current_items if str(item.get("id") or "") != target_case_id]
         removed_items = len(current_items) - len(next_items)
         if removed_items:
-            storage.replace_case_items(normalized_email, next_items, now)
+            storage.replace_case_items(scoped_data_key, next_items, now)
 
-        current_events = storage.list_case_events(normalized_email)
+        current_events = storage.list_case_events(scoped_data_key)
         next_events = [event for event in current_events if str(event.get("case_id") or "") != target_case_id]
         removed_events = len(current_events) - len(next_events)
         if removed_events:
-            storage.replace_case_events(normalized_email, next_events, now)
+            storage.replace_case_events(scoped_data_key, next_events, now)
 
         if not removed_items and not removed_events:
             return {
@@ -2104,9 +2208,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 def get_demo_detailed_reports(
     as_of_date: Optional[str] = None,
     email: str = "demo@wssmeas.local",
+    company_id: str = "",
 ) -> Dict[str, Any]:
     normalized_email = email.lower().strip()
-    entries = _derive_journal_entries_from_truth(normalized_email, as_of_date)
+    resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
+    entries = _derive_journal_entries_from_truth(company_scope_key(resolved_company_id), as_of_date)
 
     derived_as_of_date = as_of_date
     if not derived_as_of_date:
@@ -2342,6 +2448,7 @@ def get_demo_detailed_reports(
 
     return {
         "email": normalized_email,
+        "company_id": resolved_company_id,
         "as_of_date": derived_as_of_date,
         "gl": {
             "items": gl_items,
@@ -2394,19 +2501,25 @@ def login_demo(payload: LoginPayload, request: Request) -> Dict[str, Any]:
 
     storage.save_session(token, normalized_email, now)
     _clear_login_rate_limit(normalized_email, request)
-    default_company = storage.get_default_onboarding_company(normalized_email)
+    company_items, default_company_id = _build_accessible_company_items(normalized_email)
+    default_company = next((item for item in company_items if str(item.get("company_id") or "") == default_company_id), None)
     has_company = bool(default_company and _profile_complete(default_company))
     return {
         "token": token,
         "email": normalized_email,
         "has_company_profile": has_company,
+        "company_id": str(default_company.get("company_id") or "") if default_company else "",
+        "company_name": str(default_company.get("company_name") or "") if default_company else "",
         "ui_hints": build_ui_hints(has_company, "login"),
     }
 
 
 @app.get("/api/company/profile")
 def get_company_profile(email: str = Depends(get_current_email)) -> Dict[str, Any]:
-    profile = storage.get_default_onboarding_company(email) or storage.get_company_profile(email)
+    company_items, default_company_id = _build_accessible_company_items(email)
+    profile = next((item for item in company_items if str(item.get("company_id") or "") == default_company_id), None)
+    if not profile:
+        profile = storage.get_default_onboarding_company(email) or storage.get_company_profile(email)
     if not profile:
         return {
             "exists": False,
@@ -2483,26 +2596,51 @@ def lookup_company_by_tax_code(tax_code: str, email: str = Depends(get_current_e
             "profile": existing,
         }
 
+    for company in storage.list_companies():
+        if _normalize_tax_code(str(company.get("tax_code") or "")) == normalized_tax:
+            merged = dict(company)
+            merged["tax_code"] = normalized_tax
+            return {
+                "found": True,
+                "source": "company_db",
+                "profile": merged,
+            }
+
     external = _lookup_company_by_tax_code_external(normalized_tax)
     return external
 
 
 @app.get("/api/onboard/companies")
 def list_onboard_companies(email: str = Depends(get_current_email)) -> Dict[str, Any]:
-    companies = storage.list_onboarding_companies(email)
-    default_company = next((item for item in companies if bool(item.get("is_default"))), None)
+    companies, default_company_id = _build_accessible_company_items(email)
     return {
         "items": companies,
-        "default_company_id": str(default_company.get("company_id")) if default_company else "",
+        "default_company_id": default_company_id,
     }
 
 
 @app.post("/api/onboard/select-company")
 def select_onboard_company(payload: SelectCompanyPayload, email: str = Depends(get_current_email)) -> Dict[str, Any]:
-    company = storage.get_onboarding_company(email, payload.company_id)
+    company_items, _ = _build_accessible_company_items(email)
+    company = next((item for item in company_items if str(item.get("company_id") or "") == payload.company_id), None)
     if not company:
         raise HTTPException(status_code=404, detail="COMPANY_NOT_FOUND")
+
+    role = str(company.get("role") or "owner")
+    membership_payload = {
+        "company_name": str(company.get("company_name") or payload.company_id),
+        "tax_code": str(company.get("tax_code") or ""),
+        "scope": str(company.get("scope") or "accounting"),
+    }
     now = datetime.utcnow().isoformat() + "Z"
+    storage.upsert_user_company_membership(
+        email=email,
+        company_id=payload.company_id,
+        role=role,
+        is_default=True,
+        payload=membership_payload,
+        updated_at=now,
+    )
     storage.set_default_onboarding_company(email, payload.company_id, now)
     return {
         "selected": True,
@@ -2520,7 +2658,21 @@ def create_or_update_onboard_company(payload: CompanyProfilePayload, email: str 
     if not normalized_tax:
         raise HTTPException(status_code=400, detail="INVALID_TAX_CODE")
 
-    company_id = str(profile_data.get("company_id") or f"COMP-{normalized_tax}").strip()
+    requested_company_id = str(profile_data.get("company_id") or "").strip()
+    existing_company = storage.get_company(requested_company_id) if requested_company_id else None
+
+    if not existing_company:
+        for company in storage.list_companies():
+            if _normalize_tax_code(str(company.get("tax_code") or "")) == normalized_tax:
+                existing_company = company
+                break
+
+    company_id = str(existing_company.get("company_id") or requested_company_id or f"COMP-{normalized_tax}").strip()
+
+    existing_tax_code = _normalize_tax_code(str(existing_company.get("tax_code") or "")) if existing_company else ""
+    if existing_tax_code and existing_tax_code != normalized_tax:
+        raise HTTPException(status_code=400, detail="TAX_CODE_IMMUTABLE")
+
     profile_data["company_id"] = company_id
     profile_data["tax_code"] = normalized_tax
 
@@ -2542,6 +2694,11 @@ def create_or_update_onboard_company(payload: CompanyProfilePayload, email: str 
             "address": profile_data.get("address"),
             "legal_representative": profile_data.get("legal_representative"),
             "established_date": profile_data.get("established_date"),
+            "accounting_software_start_date": profile_data.get("accounting_software_start_date"),
+            "fiscal_year_start": profile_data.get("fiscal_year_start"),
+            "tax_declaration_cycle": profile_data.get("tax_declaration_cycle"),
+            "default_bank_account": profile_data.get("default_bank_account"),
+            "accountant_email": profile_data.get("accountant_email"),
         },
         now,
         now,

@@ -21,6 +21,9 @@ import {
 import './App.css'
 
 const CASE_PAGE_SIZE = 20
+const STORAGE_TOKEN_KEY = 'solis.auth.token'
+const STORAGE_COMPANY_ID_KEY = 'solis.auth.companyId'
+const STORAGE_COMPANY_NAME_KEY = 'solis.auth.companyName'
 
 const initialCaseItems = []
 const defaultStatusOptions = [{ value: 'tat_ca', label: 'Tất cả' }]
@@ -373,6 +376,7 @@ function App() {
   const moduleMenuRef = useRef(null)
   const statusFilterRef = useRef(null)
   const notificationRef = useRef(null)
+  const userMenuRef = useRef(null)
   const attachmentInputRef = useRef(null)
   const [cases, setCases] = useState(initialCaseItems)
   const [query, setQuery] = useState('')
@@ -400,6 +404,27 @@ function App() {
   const [statusOptions, setStatusOptions] = useState(defaultStatusOptions)
   const [uiContent, setUiContent] = useState({})
   const [currentEmail, setCurrentEmail] = useState('')
+  const [currentCompanyId, setCurrentCompanyId] = useState('')
+  const [currentCompanyName, setCurrentCompanyName] = useState('')
+  const [companyChoices, setCompanyChoices] = useState([])
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const [isCompanyEditOpen, setIsCompanyEditOpen] = useState(false)
+  const [isCompanySaving, setIsCompanySaving] = useState(false)
+  const [companyEditError, setCompanyEditError] = useState('')
+  const [companyEditSuccess, setCompanyEditSuccess] = useState('')
+  const [companyEditForm, setCompanyEditForm] = useState({
+    company_id: '',
+    company_name: '',
+    tax_code: '',
+    address: '',
+    legal_representative: '',
+    established_date: '',
+    accounting_software_start_date: '',
+    fiscal_year_start: '',
+    tax_declaration_cycle: 'thang',
+    default_bank_account: '',
+    accountant_email: '',
+  })
   const [reportDetail, setReportDetail] = useState(null)
   const [reportLoading, setReportLoading] = useState(false)
   const [reportError, setReportError] = useState('')
@@ -440,7 +465,12 @@ function App() {
     let cancelled = false
 
     const loader = async () => {
-      const response = await fetch('/api/demo/cases')
+      const params = new URLSearchParams()
+      const initialEmail = String(window.sessionStorage.getItem('solis.auth.email') || '')
+      const initialCompanyId = String(window.sessionStorage.getItem(STORAGE_COMPANY_ID_KEY) || '')
+      if (initialEmail) params.set('email', initialEmail)
+      if (initialCompanyId) params.set('company_id', initialCompanyId)
+      const response = await fetch(`/api/demo/cases?${params.toString()}`)
       if (!response.ok) return
       const payload = await response.json()
       const items = Array.isArray(payload?.items) ? payload.items : []
@@ -469,6 +499,16 @@ function App() {
         setDashboardMeta(nextDashboardMeta)
         setServerPanels(nextServerPanels)
         setCurrentEmail(String(payload?.email || ''))
+        const payloadCompanyId = String(payload?.company?.company_id || currentCompanyId || '')
+        const payloadCompanyName = String(payload?.company?.company_name || currentCompanyName || '')
+        if (payloadCompanyId) {
+          setCurrentCompanyId(payloadCompanyId)
+          window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, payloadCompanyId)
+        }
+        if (payloadCompanyName) {
+          setCurrentCompanyName(payloadCompanyName)
+          window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, payloadCompanyName)
+        }
       }
 
       if (!cancelled && normalized.length) {
@@ -482,6 +522,144 @@ function App() {
       cancelled = true
     }
   }, [])
+
+  useEffect(() => {
+    const storedCompanyId = String(window.sessionStorage.getItem(STORAGE_COMPANY_ID_KEY) || '')
+    const storedCompanyName = String(window.sessionStorage.getItem(STORAGE_COMPANY_NAME_KEY) || '')
+    if (storedCompanyId) setCurrentCompanyId(storedCompanyId)
+    if (storedCompanyName) setCurrentCompanyName(storedCompanyName)
+  }, [])
+
+  useEffect(() => {
+    const onMouseDown = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setIsUserMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onMouseDown)
+    return () => document.removeEventListener('mousedown', onMouseDown)
+  }, [])
+
+  useEffect(() => {
+    const token = String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || '')
+    if (!token) return
+    let cancelled = false
+
+    const loadCompanyContext = async () => {
+      try {
+        const companiesResponse = await fetch('/api/onboard/companies', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        const companiesPayload = await companiesResponse.json().catch(() => ({}))
+        if (cancelled || !companiesResponse.ok) return
+        const items = Array.isArray(companiesPayload.items) ? companiesPayload.items : []
+        setCompanyChoices(items)
+
+        const resolvedCompanyId =
+          String(window.sessionStorage.getItem(STORAGE_COMPANY_ID_KEY) || '') ||
+          String(companiesPayload.default_company_id || '') ||
+          String(items[0]?.company_id || '')
+
+        const resolvedCompany =
+          items.find((item) => String(item.company_id || '') === resolvedCompanyId) ||
+          items[0] ||
+          null
+
+        if (resolvedCompany) {
+          const nextCompanyId = String(resolvedCompany.company_id || '')
+          const nextCompanyName = String(resolvedCompany.company_name || '')
+          setCurrentCompanyId(nextCompanyId)
+          setCurrentCompanyName(nextCompanyName)
+          window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, nextCompanyId)
+          window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, nextCompanyName)
+          setCompanyEditForm((prev) => ({ ...prev, ...resolvedCompany }))
+        }
+      } catch {
+        // Keep existing context when onboarding API is unavailable.
+      }
+    }
+
+    loadCompanyContext()
+    return () => {
+      cancelled = true
+    }
+  }, [currentEmail])
+
+  const handleCompanyEditField = useCallback((field, value) => {
+    setCompanyEditForm((prev) => ({ ...prev, [field]: value }))
+  }, [])
+
+  const openCompanyEditModal = useCallback(() => {
+    setCompanyEditError('')
+    setCompanyEditSuccess('')
+    setIsCompanyEditOpen(true)
+    setIsUserMenuOpen(false)
+  }, [])
+
+  const goToOnboard = useCallback(() => {
+    window.location.assign('/onboard')
+  }, [])
+
+  const handleWorkspaceLogout = useCallback(() => {
+    setIsUserMenuOpen(false)
+    window.sessionStorage.setItem('solis.auth.hasCompanyProfile', 'false')
+    window.sessionStorage.removeItem(STORAGE_COMPANY_ID_KEY)
+    window.sessionStorage.removeItem(STORAGE_COMPANY_NAME_KEY)
+    window.location.assign('/onboard')
+  }, [])
+
+  const saveCompanyEdit = useCallback(async () => {
+    const token = String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || '')
+    if (!token) {
+      setCompanyEditError('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.')
+      return
+    }
+
+    setIsCompanySaving(true)
+    setCompanyEditError('')
+    setCompanyEditSuccess('')
+    try {
+      const payload = {
+        company_id: String(companyEditForm.company_id || currentCompanyId || ''),
+        tax_code: String(companyEditForm.tax_code || ''),
+        company_name: String(companyEditForm.company_name || ''),
+        address: String(companyEditForm.address || ''),
+        legal_representative: String(companyEditForm.legal_representative || ''),
+        established_date: String(companyEditForm.established_date || ''),
+        accounting_software_start_date: String(companyEditForm.accounting_software_start_date || ''),
+        fiscal_year_start: String(companyEditForm.fiscal_year_start || ''),
+        tax_declaration_cycle: String(companyEditForm.tax_declaration_cycle || 'thang'),
+        default_bank_account: String(companyEditForm.default_bank_account || ''),
+        accountant_email: String(companyEditForm.accountant_email || currentEmail || ''),
+      }
+
+      const response = await fetch('/api/onboard/companies', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok || !result?.saved) {
+        throw new Error('Không thể cập nhật thông tin công ty.')
+      }
+
+      const nextName = String(result?.profile?.company_name || payload.company_name || '')
+      const nextCompanyId = String(result?.profile?.company_id || payload.company_id || '')
+      setCurrentCompanyName(nextName)
+      setCurrentCompanyId(nextCompanyId)
+      window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, nextName)
+      window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, nextCompanyId)
+      setCompanyEditForm((prev) => ({ ...prev, ...result.profile }))
+      setCompanyEditSuccess('Đã cập nhật thông tin công ty.')
+    } catch (error) {
+      setCompanyEditError(error.message || 'Không thể cập nhật thông tin công ty.')
+    } finally {
+      setIsCompanySaving(false)
+    }
+  }, [companyEditForm, currentCompanyId, currentEmail])
 
   const statusFilterLabel = statusOptions.find((item) => item.value === statusFilter)?.label || 'Tất cả'
 
@@ -557,10 +735,13 @@ function App() {
     if (currentEmail) {
       params.set('email', currentEmail)
     }
+    if (currentCompanyId) {
+      params.set('company_id', currentCompanyId)
+    }
     const query = params.toString()
     const basePath = `/api/demo/evidence/${encodeURIComponent(activeCaseId)}/${encodeURIComponent(previewFileRef)}`
     return query ? `${basePath}?${query}` : basePath
-  }, [previewFileRef, activeCaseId, currentEmail])
+  }, [previewFileRef, activeCaseId, currentEmail, currentCompanyId])
   const isPdfPreview = /\.pdf$/i.test(previewFileName)
   const isImagePreview = /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(previewFileName)
   const isXmlPreview = /\.xml$/i.test(previewFileName)
@@ -916,6 +1097,9 @@ function App() {
       if (currentEmail) {
         params.set('email', currentEmail)
       }
+      if (currentCompanyId) {
+        params.set('company_id', currentCompanyId)
+      }
       const response = await fetch(`/api/demo/reports/detailed?${params.toString()}`)
       if (!response.ok) {
         throw new Error('Không tải được báo cáo chi tiết')
@@ -944,7 +1128,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [activeSection, currentEmail, reportAsOfDate])
+  }, [activeSection, currentEmail, currentCompanyId, reportAsOfDate])
 
   useEffect(() => {
     if (!['dashboard', 'compliance'].includes(activeSection)) return undefined
@@ -953,6 +1137,7 @@ function App() {
     const loader = async () => {
       const params = new URLSearchParams({ period: compliancePeriod })
       if (currentEmail) params.set('email', currentEmail)
+      if (currentCompanyId) params.set('company_id', currentCompanyId)
       const response = await fetch(`/api/demo/compliance?${params.toString()}`)
       if (!response.ok) {
         throw new Error('Không tải được dữ liệu tuân thủ kê khai')
@@ -978,7 +1163,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [activeSection, currentEmail, compliancePeriod, complianceReportId])
+  }, [activeSection, currentEmail, currentCompanyId, compliancePeriod, complianceReportId])
 
   async function runUiAction(action, text = '', caseId = '') {
     const attachmentPayload = await Promise.all(
@@ -1012,6 +1197,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: currentEmail || 'demo@wssmeas.local',
+        company_id: currentCompanyId || '',
         action,
         text,
         case_id: caseId,
@@ -1034,6 +1220,7 @@ function App() {
   async function reloadDemoCases(preferredCaseId = '') {
     const params = new URLSearchParams()
     if (currentEmail) params.set('email', currentEmail)
+    if (currentCompanyId) params.set('company_id', currentCompanyId)
     const response = await fetch(`/api/demo/cases?${params.toString()}`)
     if (!response.ok) return
     const payload = await response.json()
@@ -1127,6 +1314,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: currentEmail || 'demo@wssmeas.local',
+        company_id: currentCompanyId || '',
         period: compliancePeriod,
         report_id: String(complianceActiveReport.report_id),
       }),
@@ -1146,6 +1334,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: currentEmail || 'demo@wssmeas.local',
+        company_id: currentCompanyId || '',
         period: compliancePeriod,
         report_id: String(complianceActiveReport.report_id),
         submitted_by: currentEmail || 'demo@wssmeas.local',
@@ -1158,6 +1347,7 @@ function App() {
     setActionNotice('Đã nộp báo cáo điện tử thành công')
     const params = new URLSearchParams({ period: compliancePeriod })
     if (currentEmail) params.set('email', currentEmail)
+    if (currentCompanyId) params.set('company_id', currentCompanyId)
     const reload = await fetch(`/api/demo/compliance?${params.toString()}`)
     if (reload.ok) {
       const payload = await reload.json()
@@ -1337,10 +1527,38 @@ function App() {
           <button type="button" className="icon-action" aria-label="Trợ giúp" onClick={() => setActiveSection('settings')}>
             <HelpCircle size={17} />
           </button>
-          <button type="button" className="user-chip" onClick={() => setActiveSection('settings')}>
-            <UserCircle2 size={18} />
-            <span>{currentEmail || 'Đang tải người dùng'}</span>
-          </button>
+          <div className="user-menu-wrap" ref={userMenuRef}>
+            <button type="button" className="user-chip" onClick={() => setIsUserMenuOpen((prev) => !prev)}>
+              <UserCircle2 size={18} />
+              <span>{currentCompanyName || 'Chưa chọn công ty'}</span>
+              <ChevronDown size={14} />
+            </button>
+            {isUserMenuOpen ? (
+              <div className="user-menu-dropdown">
+                <p className="user-menu-title">{currentCompanyName || 'Công ty hiện tại'}</p>
+                <p className="user-menu-subtitle">{currentEmail || 'Đang tải tài khoản'}</p>
+                <button type="button" className="user-menu-btn" onClick={openCompanyEditModal}>
+                  Sửa thông tin công ty
+                </button>
+                <button
+                  type="button"
+                  className="user-menu-btn"
+                  onClick={() => {
+                    setActiveSection('settings')
+                    setIsUserMenuOpen(false)
+                  }}
+                >
+                  Settings
+                </button>
+                <button type="button" className="user-menu-btn danger" onClick={handleWorkspaceLogout}>
+                  Logout
+                </button>
+                <button type="button" className="user-menu-btn" onClick={goToOnboard}>
+                  Chọn công ty khác
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
       </header>
 
@@ -2463,6 +2681,99 @@ function App() {
               </button>
               <button type="button" className="modal-btn danger" onClick={confirmDeleteActiveCase}>
                 Xóa hồ sơ
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {isCompanyEditOpen ? (
+        <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="company-edit-title">
+          <div className="modal-card company-edit-modal">
+            <h3 id="company-edit-title">Cập nhật thông tin công ty</h3>
+            <div className="company-edit-form-grid">
+              <label>
+                Mã số thuế
+                <input value={companyEditForm.tax_code || ''} readOnly className="readonly-input" />
+              </label>
+              <label>
+                Tên công ty
+                <input
+                  value={companyEditForm.company_name || ''}
+                  onChange={(event) => handleCompanyEditField('company_name', event.target.value)}
+                />
+              </label>
+              <label>
+                Địa chỉ
+                <input value={companyEditForm.address || ''} onChange={(event) => handleCompanyEditField('address', event.target.value)} />
+              </label>
+              <label>
+                Người đại diện pháp luật
+                <input
+                  value={companyEditForm.legal_representative || ''}
+                  onChange={(event) => handleCompanyEditField('legal_representative', event.target.value)}
+                />
+              </label>
+              <label>
+                Ngày thành lập
+                <input
+                  type="date"
+                  value={companyEditForm.established_date || ''}
+                  onChange={(event) => handleCompanyEditField('established_date', event.target.value)}
+                />
+              </label>
+              <label>
+                Ngày bắt đầu phần mềm kế toán
+                <input
+                  type="date"
+                  value={companyEditForm.accounting_software_start_date || ''}
+                  onChange={(event) => handleCompanyEditField('accounting_software_start_date', event.target.value)}
+                />
+              </label>
+              <label>
+                Ngày bắt đầu năm tài chính
+                <input
+                  type="date"
+                  value={companyEditForm.fiscal_year_start || ''}
+                  onChange={(event) => handleCompanyEditField('fiscal_year_start', event.target.value)}
+                />
+              </label>
+              <label>
+                Chu kỳ kê khai
+                <select
+                  value={companyEditForm.tax_declaration_cycle || 'thang'}
+                  onChange={(event) => handleCompanyEditField('tax_declaration_cycle', event.target.value)}
+                >
+                  <option value="thang">Tháng</option>
+                  <option value="quy">Quý</option>
+                </select>
+              </label>
+              <label>
+                Tài khoản ngân hàng mặc định
+                <input
+                  value={companyEditForm.default_bank_account || ''}
+                  onChange={(event) => handleCompanyEditField('default_bank_account', event.target.value)}
+                />
+              </label>
+              <label>
+                Email kế toán
+                <input
+                  type="email"
+                  value={companyEditForm.accountant_email || ''}
+                  onChange={(event) => handleCompanyEditField('accountant_email', event.target.value)}
+                />
+              </label>
+            </div>
+
+            {companyEditError ? <p className="modal-warning">{companyEditError}</p> : null}
+            {companyEditSuccess ? <p className="modal-success">{companyEditSuccess}</p> : null}
+
+            <div className="modal-actions">
+              <button type="button" className="modal-btn secondary" onClick={() => setIsCompanyEditOpen(false)}>
+                Đóng
+              </button>
+              <button type="button" className="modal-btn" onClick={saveCompanyEdit} disabled={isCompanySaving}>
+                {isCompanySaving ? 'Đang lưu...' : 'Lưu thay đổi'}
               </button>
             </div>
           </div>
