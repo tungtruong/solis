@@ -458,13 +458,18 @@ function App() {
     }
   }, [previewFileName, previewFileUrl, isDocxPagePreview])
 
-  function confirmDeleteActiveCase() {
+  async function confirmDeleteActiveCase() {
     if (!activeCase) return
-    const nextCases = cases.filter((item) => item.id !== activeCase.id)
-    setCases(nextCases)
-    setActiveSection('cases')
-    setActiveCaseId(nextCases[0]?.id || '')
-    setIsDeleteModalOpen(false)
+    try {
+      const payload = await runUiAction('delete_case', '', activeCase.id)
+      await reloadDemoCases('')
+      setActiveSection('cases')
+      setCaseActionNotice(payload?.message || 'Đã xóa hồ sơ')
+    } catch (error) {
+      setCaseActionNotice(error.message || 'Không xóa được hồ sơ')
+    } finally {
+      setIsDeleteModalOpen(false)
+    }
   }
 
   function openPreview(name) {

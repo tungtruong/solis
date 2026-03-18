@@ -1321,6 +1321,40 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         storage.replace_case_items(normalized_email, [item, *current], now)
         return {"ok": True, "message": "Đã tạo hồ sơ mới.", "case": item}
 
+    if payload.action == "delete_case":
+        target_case_id = str(payload.case_id or "").strip()
+        if not target_case_id:
+            return {"ok": False, "message": "Thiếu mã hồ sơ cần xóa."}
+
+        current_items = storage.list_case_items(normalized_email)
+        next_items = [item for item in current_items if str(item.get("id") or "") != target_case_id]
+        removed_items = len(current_items) - len(next_items)
+        if removed_items:
+            storage.replace_case_items(normalized_email, next_items, now)
+
+        current_events = storage.list_case_events(normalized_email)
+        next_events = [event for event in current_events if str(event.get("case_id") or "") != target_case_id]
+        removed_events = len(current_events) - len(next_events)
+        if removed_events:
+            storage.replace_case_events(normalized_email, next_events, now)
+
+        if not removed_items and not removed_events:
+            return {
+                "ok": True,
+                "message": "Không tìm thấy hồ sơ trong dữ liệu để xóa.",
+                "deleted_case_id": target_case_id,
+                "removed_items": 0,
+                "removed_events": 0,
+            }
+
+        return {
+            "ok": True,
+            "message": "Đã xóa hồ sơ khỏi database.",
+            "deleted_case_id": target_case_id,
+            "removed_items": removed_items,
+            "removed_events": removed_events,
+        }
+
     return {"ok": True, "message": "Đã xử lý thao tác giao diện.", "updated_at": now}
 
 
