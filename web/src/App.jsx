@@ -261,6 +261,59 @@ function normalizeCaseItem(raw, fallbackIndex = 0) {
     hoan_tat: 'Hoàn tất',
   }
 
+  const normalizeEvidenceEntry = (entry, fallbackStaged = false) => {
+    if (typeof entry === 'string') {
+      const name = String(entry).trim()
+      if (!name) return null
+      return {
+        name,
+        previewRef: name,
+        isStaged: Boolean(fallbackStaged),
+      }
+    }
+    if (!entry || typeof entry !== 'object') return null
+
+    const name = String(entry.name || entry.display_name || entry.file_name || entry.stored_name || entry.preview_ref || '').trim()
+    if (!name) return null
+    const previewRef = String(entry.preview_ref || entry.ref || entry.stored_name || name).trim()
+    const isStaged = Boolean(
+      entry.is_staged ||
+      entry.storage === 'staging' ||
+      fallbackStaged ||
+      previewRef.startsWith('stg__'),
+    )
+    return {
+      name,
+      previewRef,
+      isStaged,
+    }
+  }
+
+  const committedEvidence = Array.isArray(raw.evidence)
+    ? raw.evidence.map((entry) => normalizeEvidenceEntry(entry, false)).filter(Boolean)
+    : []
+
+  let stagedEvidence = Array.isArray(raw.staged_evidence)
+    ? raw.staged_evidence.map((entry) => normalizeEvidenceEntry(entry, true)).filter(Boolean)
+    : []
+
+  if (!stagedEvidence.length) {
+    const pending = raw.pendingPosting && typeof raw.pendingPosting === 'object'
+      ? raw.pendingPosting
+      : raw.pending_posting && typeof raw.pending_posting === 'object'
+        ? raw.pending_posting
+        : null
+    const pendingAttachments = pending && Array.isArray(pending.received_attachments) ? pending.received_attachments : []
+    stagedEvidence = pendingAttachments.map((entry) => normalizeEvidenceEntry(entry, true)).filter(Boolean)
+  }
+
+  const mergedEvidenceMap = new Map()
+  ;[...committedEvidence, ...stagedEvidence].forEach((entry) => {
+    const key = String(entry.previewRef || entry.name || '')
+    if (!key || mergedEvidenceMap.has(key)) return
+    mergedEvidenceMap.set(key, entry)
+  })
+
   return {
     id,
     code: raw.code || String(id).toUpperCase(),
@@ -271,7 +324,7 @@ function normalizeCaseItem(raw, fallbackIndex = 0) {
     status,
     statusLabel: raw.statusLabel || statusLabelMap[status] || 'Mới',
     timeline: Array.isArray(raw.timeline) ? raw.timeline : [],
-    evidence: Array.isArray(raw.evidence) ? raw.evidence : [],
+    evidence: Array.from(mergedEvidenceMap.values()),
     reasoning: Array.isArray(raw.reasoning) ? raw.reasoning : [],
     pendingPosting:
       raw.pendingPosting && typeof raw.pendingPosting === 'object'
@@ -329,6 +382,7 @@ function App() {
   const [isAdvancedMode, setIsAdvancedMode] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [previewFileName, setPreviewFileName] = useState('')
+  const [previewFileRef, setPreviewFileRef] = useState('')
   const [structuredSections, setStructuredSections] = useState([])
   const [structuredLoading, setStructuredLoading] = useState(false)
   const [structuredError, setStructuredError] = useState('')
@@ -487,7 +541,10 @@ function App() {
     setTimelineVisibleCount(firstUntypedIndex + 1)
   }, [activeCaseId, timeline.length, timelineSignature, hasTypedKey])
   const unfinishedCases = useMemo(() => cases.filter((item) => item.status !== 'hoan_tat'), [cases])
-  const previewFileUrl = previewFileName ? `/evidence/${previewFileName}` : ''
+  const previewFileUrl = useMemo(() => {
+    if (!previewFileRef || !activeCaseId) return ''
+    return `/api/demo/evidence/${encodeURIComponent(activeCaseId)}/${encodeURIComponent(previewFileRef)}`
+  }, [previewFileRef, activeCaseId])
   const isPdfPreview = /\.pdf$/i.test(previewFileName)
   const isImagePreview = /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(previewFileName)
   const isXmlPreview = /\.xml$/i.test(previewFileName)
@@ -630,12 +687,18 @@ function App() {
     }
   }
 
-  function openPreview(name) {
-    setPreviewFileName(name)
+  function openPreview(entry) {
+    if (!entry) return
+    const fileName = String(entry.name || '').trim()
+    const fileRef = String(entry.previewRef || fileName).trim()
+    if (!fileName || !fileRef) return
+    setPreviewFileName(fileName)
+    setPreviewFileRef(fileRef)
   }
 
   function closePreview() {
     setPreviewFileName('')
+    setPreviewFileRef('')
   }
 
   function openCaseFromNotification(caseId) {
@@ -2207,7 +2270,7 @@ function App() {
                   {evidence.map((name) => (
                     <a
                       href="#"
-                      key={name}
+                      key={name.previewRef || name.name}
                       className="evidence-item"
                       onClick={(event) => {
                         event.preventDefault()
@@ -2215,7 +2278,7 @@ function App() {
                       }}
                     >
                       <FileText size={15} />
-                      <span>{name}</span>
+                      <span>{name.isStaged ? `${name.name} (tạm)` : name.name}</span>
                     </a>
                   ))}
                 </div>

@@ -3,7 +3,9 @@ from __future__ import annotations
 import base64
 import binascii
 from collections import Counter
+import mimetypes
 import re
+import shutil
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -11,6 +13,7 @@ from typing import Any, Dict, List, Optional
 from xml.etree import ElementTree as ET
 
 from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -118,6 +121,126 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+UPLOADS_ROOT = Path(WORKSPACE_ROOT) / "data" / "uploads"
+STAGING_UPLOADS_ROOT = Path(WORKSPACE_ROOT) / "data" / "uploads_staging"
+
+
+def _safe_email_fragment(email: str) -> str:
+    return str(email or "").lower().strip().replace("@", "_at_").replace(".", "_")
+
+
+def _sanitize_case_id(case_id: str) -> str:
+    value = re.sub(r"[^A-Za-z0-9_-]", "", str(case_id or ""))
+    return value or "CASE"
+
+
+def _sanitize_file_name(file_name: str, fallback_name: str = "attachment.bin") -> str:
+    name = Path(str(file_name or "")).name
+    return name or fallback_name
+
+
+def _sanitize_session_id(session_id: str) -> str:
+    value = re.sub(r"[^A-Za-z0-9_-]", "", str(session_id or ""))
+    return value or "session"
+
+
+def _build_permanent_attachment_path(email: str, case_id: str, file_name: str) -> Path:
+    return UPLOADS_ROOT / _safe_email_fragment(email) / _sanitize_case_id(case_id) / _sanitize_file_name(file_name)
+
+
+def _build_staged_attachment_path(email: str, case_id: str, session_id: str, file_name: str) -> Path:
+    return (
+        STAGING_UPLOADS_ROOT
+        / _safe_email_fragment(email)
+        / _sanitize_case_id(case_id)
+        / _sanitize_session_id(session_id)
+        / _sanitize_file_name(file_name)
+    )
+
+
+def _delete_staged_attachments(email: str, case_id: str, staged_attachments: List[Any]) -> None:
+    for item in staged_attachments:
+        if not isinstance(item, dict):
+            continue
+        session_id = str(item.get("session_id") or "")
+        stored_name = str(item.get("stored_name") or item.get("name") or "")
+        if not session_id or not stored_name:
+            continue
+        staged_path = _build_staged_attachment_path(email, case_id, session_id, stored_name)
+        try:
+            if staged_path.exists():
+                staged_path.unlink()
+        except OSError:
+            continue
+
+    case_staging_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(email) / _sanitize_case_id(case_id)
+    try:
+        if case_staging_dir.exists() and not any(case_staging_dir.rglob("*")):
+            case_staging_dir.rmdir()
+    except OSError:
+        pass
+
+
+def _commit_staged_attachments(email: str, case_id: str, staged_attachments: List[Any]) -> List[str]:
+    committed_names: List[str] = []
+    if not staged_attachments:
+        return committed_names
+
+    for item in staged_attachments:
+        if not isinstance(item, dict):
+            legacy_name = _sanitize_file_name(str(item or ""))
+            if legacy_name:
+                committed_names.append(legacy_name)
+            continue
+
+        session_id = str(item.get("session_id") or "")
+        stored_name = _sanitize_file_name(str(item.get("stored_name") or item.get("name") or ""))
+        if not session_id or not stored_name:
+            continue
+
+        staged_path = _build_staged_attachment_path(email, case_id, session_id, stored_name)
+        permanent_path = _build_permanent_attachment_path(email, case_id, stored_name)
+        permanent_path.parent.mkdir(parents=True, exist_ok=True)
+
+        if staged_path.exists():
+            shutil.move(str(staged_path), str(permanent_path))
+
+        committed_names.append(stored_name)
+
+    _delete_staged_attachments(email, case_id, staged_attachments)
+    return committed_names
+
+
+@app.get("/api/demo/evidence/{case_id}/{file_ref}")
+def get_demo_evidence_file(
+    case_id: str,
+    file_ref: str,
+    email: str = "demo@wssmeas.local",
+) -> FileResponse:
+    normalized_email = email.lower().strip()
+    normalized_case_id = _sanitize_case_id(case_id)
+    normalized_ref = str(file_ref or "").strip()
+
+    attachment_path: Optional[Path] = None
+
+    if normalized_ref.startswith("stg__"):
+        parts = normalized_ref.split("__", 2)
+        if len(parts) == 3:
+            session_id = _sanitize_session_id(parts[1])
+            staged_name = _sanitize_file_name(parts[2])
+            attachment_path = _build_staged_attachment_path(normalized_email, normalized_case_id, session_id, staged_name)
+    elif normalized_ref.startswith("perm__"):
+        file_name = _sanitize_file_name(normalized_ref.split("__", 1)[1])
+        attachment_path = _build_permanent_attachment_path(normalized_email, normalized_case_id, file_name)
+    else:
+        attachment_path = _build_permanent_attachment_path(normalized_email, normalized_case_id, normalized_ref)
+
+    if not attachment_path or not attachment_path.exists() or not attachment_path.is_file():
+        raise HTTPException(status_code=404, detail="EVIDENCE_FILE_NOT_FOUND")
+
+    media_type = mimetypes.guess_type(str(attachment_path.name))[0] or "application/octet-stream"
+    return FileResponse(str(attachment_path), media_type=media_type, filename=attachment_path.name)
 
 
 class LoginPayload(BaseModel):
@@ -739,13 +862,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         except (ValueError, binascii.Error):
             return b""
 
-    def save_case_attachments(case_id: str, attachments: List[DemoAttachmentPayload]) -> List[str]:
+    def save_case_attachments_to_staging(case_id: str, attachments: List[DemoAttachmentPayload]) -> List[Dict[str, Any]]:
         if not attachments:
             return []
-        safe_email = normalized_email.replace("@", "_at_").replace(".", "_")
-        case_dir = Path(WORKSPACE_ROOT) / "data" / "uploads" / safe_email / case_id
+        normalized_case_id = _sanitize_case_id(case_id)
+        session_id = datetime.utcnow().strftime("%Y%m%d%H%M%S") + uuid.uuid4().hex[:6]
+        case_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id / _sanitize_session_id(session_id)
         case_dir.mkdir(parents=True, exist_ok=True)
-        stored_names: List[str] = []
+        staged_items: List[Dict[str, Any]] = []
         timestamp_prefix = datetime.utcnow().strftime("%Y%m%d%H%M%S")
 
         for idx, item in enumerate(attachments, start=1):
@@ -754,9 +878,19 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             file_path = case_dir / safe_name
             content = decode_attachment_content(str(item.content_base64 or ""))
             file_path.write_bytes(content)
-            stored_names.append(safe_name)
+            staged_items.append(
+                {
+                    "name": original_name,
+                    "stored_name": safe_name,
+                    "preview_ref": f"stg__{_sanitize_session_id(session_id)}__{safe_name}",
+                    "session_id": _sanitize_session_id(session_id),
+                    "storage": "staging",
+                    "mime_type": str(item.mime_type or "application/octet-stream"),
+                    "size": int(item.size or 0),
+                }
+            )
 
-        return stored_names
+        return staged_items
 
     def parse_number_token(token: str) -> float:
         cleaned = token.strip().replace(" ", "")
@@ -817,14 +951,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             return content.decode("utf-8", errors="ignore")
         return ""
 
-    def parse_attachment_details(attachments: List[DemoAttachmentPayload], stored_names: List[str]) -> Dict[str, Any]:
+    def parse_attachment_details(attachments: List[DemoAttachmentPayload], attachment_names: List[str]) -> Dict[str, Any]:
         details: Dict[str, Any] = {
             "supplier_name": "",
             "service_name": "",
             "invoice_number": "",
             "invoice_content": "",
             "amount": 0.0,
-            "files": stored_names,
+            "files": attachment_names,
             "parse_meta": {
                 "invoice_type": "unknown",
                 "schema_version": "",
@@ -1389,6 +1523,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         pending_posting = current_item.get("pending_posting") if isinstance(current_item, dict) and isinstance(current_item.get("pending_posting"), dict) else None
 
         if pending_posting and is_reject_command(text):
+            staged_for_cleanup = pending_posting.get("received_attachments") if isinstance(pending_posting, dict) else []
+            if isinstance(staged_for_cleanup, list):
+                _delete_staged_attachments(normalized_email, case_id, staged_for_cleanup)
+
             timeline_entries = [
                 {
                     "id": f"{case_id}-user-reject-{uuid.uuid4().hex[:6]}",
@@ -1422,6 +1560,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "status": "dang_xu_ly",
                         "statusLabel": "Đang xử lý",
                         "pending_posting": None,
+                        "staged_evidence": [],
                         "updatedAt": datetime.utcnow().date().isoformat(),
                     }
                     next_items.append(updated_item)
@@ -1446,6 +1585,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 or pending_event.get("event_date")
                 or datetime.utcnow().date().isoformat()
             )
+
+            staged_attachments = pending_posting.get("received_attachments") if isinstance(pending_posting, dict) else []
+            committed_attachment_names: List[str] = []
+            if isinstance(staged_attachments, list):
+                committed_attachment_names = _commit_staged_attachments(normalized_email, case_id, staged_attachments)
 
             posting_result = posting_engine.post(pending_event)
             posting_accepted = bool(posting_result.accepted and posting_result.journal_entry)
@@ -1486,11 +1630,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
                     current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
                     current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
+                    current_evidence = item.get("evidence") if isinstance(item.get("evidence"), list) else []
+                    merged_evidence = [*current_evidence]
+                    for attachment_name in committed_attachment_names:
+                        if attachment_name and attachment_name not in merged_evidence:
+                            merged_evidence.append(attachment_name)
                     next_status = "cho_duyet" if posting_accepted else "dang_xu_ly"
                     next_status_label = "Chờ duyệt" if posting_accepted else "Đang xử lý"
                     updated_item = {
                         **item,
                         "timeline": [*current_timeline, *timeline_entries],
+                        "evidence": merged_evidence,
                         "reasoning": [
                             (
                                 f"Khách hàng đã đồng ý post và hệ thống đã sinh bút toán {posting_result.journal_entry.get('entry_id')}."
@@ -1502,6 +1652,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "status": next_status,
                         "statusLabel": next_status_label,
                         "pending_posting": None,
+                        "staged_evidence": [],
                         "updatedAt": datetime.utcnow().date().isoformat(),
                     }
                     next_items.append(updated_item)
@@ -1522,9 +1673,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         attachment_count = len(payload.attachments)
-        stored_attachment_names = save_case_attachments(case_id, payload.attachments)
-        attachment_details = parse_attachment_details(payload.attachments, stored_attachment_names)
-        inferred = infer_event_from_input(text, stored_attachment_names, attachment_details)
+        staged_attachments = save_case_attachments_to_staging(case_id, payload.attachments)
+        staged_attachment_names = [str(item.get("name") or item.get("stored_name") or "") for item in staged_attachments]
+        attachment_details = parse_attachment_details(payload.attachments, staged_attachment_names)
+        inferred = infer_event_from_input(text, staged_attachment_names, attachment_details)
         inferred_event = dict(inferred["event"])
         inferred_event["case_id"] = case_id
         inferred_event["event_date"] = str(
@@ -1556,14 +1708,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         ]
 
         extract_body = (
-            f"Đã tiếp nhận hồ sơ: {', '.join(stored_attachment_names)}"
-            if stored_attachment_names
+            f"Đã tiếp nhận hồ sơ: {', '.join(staged_attachment_names)}"
+            if staged_attachment_names
             else "Đã tiếp nhận hồ sơ: không có tệp đính kèm"
         )
 
         user_message = text or "Gửi hồ sơ đính kèm"
-        if stored_attachment_names:
-            user_message += f"\nĐính kèm: {', '.join(stored_attachment_names)}"
+        if staged_attachment_names:
+            user_message += f"\nĐính kèm: {', '.join(staged_attachment_names)}"
 
         confirm_body = "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
 
@@ -1612,19 +1764,22 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     continue
 
                 current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
-                current_evidence = item.get("evidence") if isinstance(item.get("evidence"), list) else []
                 current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
-                merged_evidence = [*current_evidence]
-                for attachment_name in stored_attachment_names:
-                    if attachment_name not in merged_evidence:
-                        merged_evidence.append(attachment_name)
 
                 updated_item = {
                     **item,
                     "timeline": [*current_timeline, *timeline_entries],
-                    "evidence": merged_evidence,
+                    "staged_evidence": [
+                        {
+                            "name": str(attachment.get("name") or ""),
+                            "preview_ref": str(attachment.get("preview_ref") or ""),
+                            "storage": "staging",
+                            "is_staged": True,
+                        }
+                        for attachment in staged_attachments
+                    ],
                     "reasoning": [
-                        f"Đã phân tích hồ sơ với {len(stored_attachment_names)} tệp đính kèm.",
+                        f"Đã phân tích hồ sơ với {len(staged_attachment_names)} tệp đính kèm.",
                         "Đang chờ khách hàng xác nhận trước khi post bút toán.",
                         *current_reasoning,
                     ],
@@ -1638,7 +1793,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "event": inferred_event,
                         "parse_rows": parse_table_rows,
                         "parse_meta": attachment_details.get("parse_meta", {}),
-                        "received_attachments": stored_attachment_names,
+                        "received_attachments": staged_attachments,
                     },
                     "updatedAt": datetime.utcnow().date().isoformat(),
                 }
@@ -1652,7 +1807,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "ok": True,
             "message": "Đã tiếp nhận và phân tích hồ sơ. Vui lòng khách hàng xác nhận thông tin và đồng ý post để hệ thống hạch toán.",
             "timeline_entries": timeline_entries,
-            "received_attachments": stored_attachment_names,
+            "received_attachments": staged_attachment_names,
+            "staged_attachments": staged_attachments,
             "posting_accepted": False,
             "requires_confirmation": True,
             "proposed_posting": {
@@ -1662,6 +1818,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "invoice_number": invoice_no,
                 "amount": parsed_amount,
                 "attachment_count": attachment_count,
+                "staged_attachments": staged_attachments,
                 "parse_rows": parse_table_rows,
                 "parse_meta": attachment_details.get("parse_meta", {}),
             },
@@ -1692,6 +1849,16 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         target_case_id = str(payload.case_id or "").strip()
         if not target_case_id:
             return {"ok": False, "message": "Thiếu mã hồ sơ cần xóa."}
+
+        normalized_case_id = _sanitize_case_id(target_case_id)
+        permanent_dir = UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id
+        staging_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id
+        for candidate in [permanent_dir, staging_dir]:
+            try:
+                if candidate.exists():
+                    shutil.rmtree(candidate)
+            except OSError:
+                pass
 
         current_items = storage.list_case_items(normalized_email)
         next_items = [item for item in current_items if str(item.get("id") or "") != target_case_id]
