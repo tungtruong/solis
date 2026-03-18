@@ -331,11 +331,23 @@ function formatCurrency(value) {
   return `${amount.toLocaleString('vi-VN')} VND`
 }
 
-function cleanNarrationText(value) {
-  return String(value || '')
-    .replace(/(^|\s)vừa(?=\s|$)/gi, '$1')
+function formatReportNarration(value, fallback = '') {
+  let text = String(value || '').trim()
+  if (!text) {
+    text = String(fallback || '').trim()
+  }
+  if (!text) return '-'
+
+  text = text
+    .replace(/\b[Cc](?:ô|o)ng\s*ty\b[^,.;:!?]*/g, '')
+    .replace(/\b(?:số\s*tiền|so\s*tien|trị\s*giá|tri\s*gia|giá\s*trị|gia\s*tri)\b\s*[:\-]?\s*[^,.;:!?]*/gi, '')
+    .replace(/\b\d{1,3}(?:[\.\,\s]\d{3})+(?:\s*(?:đ|đồng|dong|vnd))?\b/gi, '')
+    .replace(/\b\d+(?:[\.,]\d+)?\s*(?:tỷ|ty|triệu|trieu|nghìn|nghin|ngàn|ngan|k)\s*(?:đồng|dong)?\b/gi, '')
     .replace(/\s{2,}/g, ' ')
+    .replace(/\s+([,.;:!?])/g, '$1')
     .trim()
+
+  return text || String(fallback || '').trim() || '-'
 }
 
 function downloadBase64File(fileName, mimeType, contentBase64) {
@@ -396,7 +408,6 @@ function App() {
   const [reportEntity, setReportEntity] = useState('toan_bo')
   const [reportTxnFilter, setReportTxnFilter] = useState('tat_ca')
   const [reportDrillTab, setReportDrillTab] = useState('giao_dich')
-  const [reportDrillFirstColPct, setReportDrillFirstColPct] = useState(34)
   const [dashboardQuery, setDashboardQuery] = useState('')
   const [compliancePeriod, setCompliancePeriod] = useState('2026-03')
   const [complianceReportId, setComplianceReportId] = useState('gtgt')
@@ -408,6 +419,11 @@ function App() {
   const [caseActionNotice, setCaseActionNotice] = useState('')
   const [isSendingCaseCommand, setIsSendingCaseCommand] = useState(false)
   const [timelineVisibleCount, setTimelineVisibleCount] = useState(0)
+  const [reportDrillColumnWidths, setReportDrillColumnWidths] = useState({
+    first: 170,
+    second: 520,
+  })
+  const [reportDrillResize, setReportDrillResize] = useState(null)
   const typedMessageKeysRef = useRef(new Set())
 
   const hasTypedKey = useCallback((key) => {
@@ -1224,6 +1240,48 @@ function App() {
       document.removeEventListener('mouseup', onMouseUp)
     }
   }, [dragSide, leftWidth, rightWidth])
+
+  useEffect(() => {
+    if (!reportDrillResize) return undefined
+
+    function onMouseMove(event) {
+      const delta = event.clientX - reportDrillResize.startX
+      const nextWidth = Math.max(120, Math.min(900, reportDrillResize.startWidth + delta))
+      setReportDrillColumnWidths((prev) => ({
+        ...prev,
+        [reportDrillResize.column]: nextWidth,
+      }))
+    }
+
+    function onMouseUp() {
+      setReportDrillResize(null)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
+
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+    document.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseup', onMouseUp)
+
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseup', onMouseUp)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
+  }, [reportDrillResize])
+
+  function startReportDrillResize(column, event) {
+    const startWidth = Number(reportDrillColumnWidths[column] || 0)
+    if (!startWidth) return
+    event.preventDefault()
+    setReportDrillResize({
+      column,
+      startX: event.clientX,
+      startWidth,
+    })
+  }
 
   const gridStyle = {
     '--left-width': `${isCompactSidebar ? 86 : leftWidth}px`,
@@ -2064,47 +2122,54 @@ function App() {
                         </button>
                       ))}
                     </div>
-                    <div className="report-column-control" role="group" aria-label="Điều chỉnh độ rộng cột bảng giao dịch">
-                      <label htmlFor="report-drill-col-width">Độ rộng cột đầu</label>
-                      <input
-                        id="report-drill-col-width"
-                        type="range"
-                        min="24"
-                        max="60"
-                        value={reportDrillFirstColPct}
-                        onChange={(event) => setReportDrillFirstColPct(Number(event.target.value))}
-                      />
-                      <span>{reportDrillFirstColPct}% / {100 - reportDrillFirstColPct}%</span>
-                    </div>
                     <div className="report-table-wrap">
                       <table className="report-table report-table-compact">
                         <colgroup>
-                          <col style={{ width: `${reportDrillFirstColPct}%` }} />
-                          <col style={{ width: `${100 - reportDrillFirstColPct}%` }} />
+                          <col style={{ width: `${reportDrillColumnWidths.first}px` }} />
+                          <col style={{ width: `${reportDrillColumnWidths.second}px` }} />
+                          <col />
                         </colgroup>
                         <thead>
                           <tr>
-                            <th>{reportDrillTab === 'giao_dich' ? 'Ngày hồ sơ' : 'Nhóm'}</th>
-                            <th>Diễn giải</th>
+                            <th className="report-resizable-th">
+                              {reportDrillTab === 'giao_dich' ? 'Ngày hồ sơ' : 'Nhóm'}
+                              <button
+                                type="button"
+                                className="report-col-resize-grip"
+                                aria-label="Co giãn cột ngày hồ sơ"
+                                onMouseDown={(event) => startReportDrillResize('first', event)}
+                              />
+                            </th>
+                            <th className="report-resizable-th">
+                              Diễn giải
+                              <button
+                                type="button"
+                                className="report-col-resize-grip"
+                                aria-label="Co giãn cột diễn giải"
+                                onMouseDown={(event) => startReportDrillResize('second', event)}
+                              />
+                            </th>
+                            <th>Giá trị</th>
                           </tr>
                         </thead>
                         <tbody>
                           {reportDrillTab === 'giao_dich' ? (reportDetail?.gl?.items || []).slice(-8).map((item) => (
                             <tr key={item.entry_id}>
                               <td>{item.event_date || item.meta?.event_date || '-'}</td>
-                              <td>{cleanNarrationText(item.narration || item.entry_id)}</td>
+                              <td>{formatReportNarration(item.narration, item.entry_id)}</td>
+                              <td>{formatCurrency(item.debit_total)}</td>
                             </tr>
                           )) : null}
                           {reportDrillTab === 'cong_no' ? (
                             <>
-                              <tr><td>Công nợ</td><td>Phải trả: {formatCurrency(payableValue)}</td></tr>
-                              <tr><td>Công nợ</td><td>Phải thu: {formatCurrency(receivableValue)}</td></tr>
+                              <tr><td>Công nợ</td><td>Phải trả</td><td>{formatCurrency(payableValue)}</td></tr>
+                              <tr><td>Công nợ</td><td>Phải thu</td><td>{formatCurrency(receivableValue)}</td></tr>
                             </>
                           ) : null}
                           {reportDrillTab === 'chi_phi' ? (
                             <>
-                              <tr><td>Chi phí</td><td>Tổng chi phí kỳ: {formatCurrency(reportCost)}</td></tr>
-                              <tr><td>Chi phí</td><td>Tỷ trọng chi phí / doanh thu: {reportCostRatioPct.toFixed(1)}%</td></tr>
+                              <tr><td>Chi phí</td><td>Tổng chi phí kỳ</td><td>{formatCurrency(reportCost)}</td></tr>
+                              <tr><td>Chi phí</td><td>Tỷ trọng chi phí / doanh thu</td><td>{reportCostRatioPct.toFixed(1)}%</td></tr>
                             </>
                           ) : null}
                         </tbody>

@@ -1308,11 +1308,6 @@
   font-size: 0.82rem;
 }
 
-.report-drill-row .report-table {
-  min-width: 0;
-  table-layout: fixed;
-}
-
 .report-analysis-layout {
   gap: 12px;
 }
@@ -1366,29 +1361,6 @@
 .report-drill-row {
   display: grid;
   gap: 10px;
-}
-
-.report-column-control {
-  display: grid;
-  grid-template-columns: auto minmax(180px, 320px) auto;
-  align-items: center;
-  gap: 10px;
-}
-
-.report-column-control label {
-  font-size: 0.8rem;
-  color: #486481;
-  font-weight: 700;
-}
-
-.report-column-control input[type='range'] {
-  width: 100%;
-}
-
-.report-column-control span {
-  font-size: 0.8rem;
-  color: #3f5c79;
-  font-weight: 700;
 }
 
 .report-to-compliance {
@@ -1525,6 +1497,40 @@
   background: #f6faff;
   color: #2e4f70;
   font-weight: 700;
+}
+
+.report-resizable-th {
+  position: relative;
+  padding-right: 20px;
+}
+
+.report-col-resize-grip {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  bottom: 0;
+  width: 12px;
+  border: 0;
+  background: transparent;
+  cursor: col-resize;
+  padding: 0;
+}
+
+.report-col-resize-grip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #b8cce3;
+}
+
+.report-col-resize-grip:hover::after,
+.report-col-resize-grip:focus-visible::after {
+  background: #5aa4e3;
 }
 
 .entry-id-small {
