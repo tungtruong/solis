@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "rule_id": "tt133_mvp_2026_attachment_parse_rules",
+    "version": "2026.03.18",
+    "source": "Extracted from src/tt133_mvp/web_api.py run_demo_ui_action",
+    "purpose": "Central review sheet for attachment parsing and event inference rules"
+  },
+  "staging": {
+    "session_id_format": "YYYYMMDDHHMMSS + 6 hex chars",
+    "stored_name_format": "{timestamp}_{index2}_{original_name}",
+    "preview_ref_format": "stg__{session_id}__{stored_name}",
+    "default_mime_type": "application/octet-stream"
+  },
+  "money_detection": {
+    "regex": "(\\d[\\d\\.,]*)\\s*(triệu|trieu|nghìn|nghin|ngàn|ngan|k|đ|vnd|dong)?",
+    "units": {
+      "triệu": 1000000,
+      "trieu": 1000000,
+      "nghìn": 1000,
+      "nghin": 1000,
+      "ngàn": 1000,
+      "ngan": 1000,
+      "k": 1000,
+      "đ": 1,
+      "vnd": 1,
+      "dong": 1
+    },
+    "rules": {
+      "ignore_long_numeric_identifier_without_unit": true,
+      "long_numeric_identifier_threshold": 10,
+      "minimum_amount_without_unit": 1000,
+      "maximum_amount": 100000000000
+    }
+  },
+  "field_regex_fallback": {
+    "supplier_name": "(nhà\\s*cung\\s*cấp|supplier|vendor|seller)\\s*[:\\-]?\\s*([^\\n\\r;]{3,120})",
+    "service_name": "(dịch\\s*vụ|service|hàng\\s*hóa|description|nội\\s*dung)\\s*[:\\-]?\\s*([^\\n\\r;]{3,160})",
+    "invoice_number": "(số\\s*hóa\\s*đơn|invoice\\s*no|invoice|sohd)\\s*[:\\-]?\\s*([A-Za-z0-9\\-_/]{4,40})",
+    "invoice_date": "(\\d{4}[\\-/]\\d{1,2}[\\-/]\\d{1,2}|\\d{1,2}[\\-/]\\d{1,2}[\\-/]\\d{4}|\\d{8})"
+  },
+  "date_normalization": {
+    "supported_input_patterns": [
+      "YYYY-MM-DD",
+      "DD-MM-YYYY",
+      "YYYY/MM/DD",
+      "DD/MM/YYYY",
+      "YYYYMMDD"
+    ],
+    "output_pattern": "YYYY-MM-DD"
+  },
+  "schema_detection": {
+    "invoice_types": [
+      "viettel_variant",
+      "misa_custom",
+      "gdt_standard",
+      "unknown"
+    ],
+    "misa_keywords": ["misa", "amis"],
+    "signature_keywords": ["<signature", "<dscks", "signedinfo"],
+    "version_tags": ["pban", "version", "schema_version"]
+  },
+  "schema_paths": {
+    "viettel_variant": {
+      "supplier": [
+        "hdon_dlhdon_ndhdon_nban_ten",
+        "dlhdon_ndhdon_nban_ten",
+        "ndhdon_nban_ten",
+        "nban_ten"
+      ],
+      "service": [
+        "hdon_dlhdon_ndhdon_dshhdvu_hhdvu_thhdvu",
+        "dlhdon_ndhdon_dshhdvu_hhdvu_thhdvu",
+        "ndhdon_dshhdvu_hhdvu_thhdvu",
+        "thhdvu"
+      ],
+      "invoice": [
+        "hdon_dlhdon_ttchung_shdon",
+        "dlhdon_ttchung_shdon",
+        "ttchung_shdon",
+        "shdon"
+      ],
+      "issue_date": [
+        "hdon_dlhdon_ttchung_nlap",
+        "dlhdon_ttchung_nlap",
+        "ttchung_nlap",
+        "nlap",
+        "ngayhoadon"
+      ],
+      "seller_tax_code": [
+        "hdon_dlhdon_ndhdon_nban_mst",
+        "dlhdon_ndhdon_nban_mst",
+        "ndhdon_nban_mst",
+        "nban_mst"
+      ],
+      "subtotal_candidates": [
+        "hdon_dlhdon_ndhdon_ttoan_tgtcthue",
+        "dlhdon_ndhdon_ttoan_tgtcthue",
+        "ndhdon_ttoan_tgtcthue",
+        "tgtcthue"
+      ],
+      "vat_candidates": [
+        "hdon_dlhdon_ndhdon_ttoan_tgtthue",
+        "dlhdon_ndhdon_ttoan_tgtthue",
+        "ndhdon_ttoan_tgtthue",
+        "tgtthue"
+      ],
+      "total_candidates": [
+        "hdon_dlhdon_ndhdon_ttoan_tgtttbso",
+        "dlhdon_ndhdon_ttoan_tgtttbso",
+        "ndhdon_ttoan_tgtttbso",
+        "tgtttbso"
+      ],
+      "line_amounts": [
+        "hdon_dlhdon_ndhdon_dshhdvu_hhdvu_thtien",
+        "dlhdon_ndhdon_dshhdvu_hhdvu_thtien",
+        "ndhdon_dshhdvu_hhdvu_thtien",
+        "thtien"
+      ],
+      "tax_rates": [
+        "hdon_dlhdon_ndhdon_dshhdvu_hhdvu_tsuat",
+        "dlhdon_ndhdon_dshhdvu_hhdvu_tsuat",
+        "ndhdon_dshhdvu_hhdvu_tsuat",
+        "tsuat"
+      ]
+    },
+    "misa_custom": {
+      "supplier": ["sellername", "supplier", "counterparty_name"],
+      "service": ["description", "itemname", "tendichvu"],
+      "invoice": ["invoiceno", "invoice_no", "invoice"],
+      "issue_date": ["invoicedate", "issue_date", "ngayhoadon", "ngaylap"],
+      "seller_tax_code": ["sellertaxcode", "mst", "taxcode"],
+      "subtotal_candidates": ["untaxedamount", "amount_untaxed", "subtotal"],
+      "vat_candidates": ["vatamount", "taxamount"],
+      "total_candidates": ["amounttotal", "totalamount", "amount_total"],
+      "line_amounts": ["lineamount", "thtien"],
+      "tax_rates": ["taxrate", "tsuat"]
+    },
+    "default": {
+      "supplier": ["supplier", "sellername", "counterparty_name", "tennguoiban", "nban_ten"],
+      "service": ["description", "itemname", "thhdvu", "diengiai"],
+      "invoice": ["invoiceno", "invoice_no", "invoice", "shdon"],
+      "issue_date": ["invoicedate", "issue_date", "ngayhoadon", "ngaylap", "nlap"],
+      "seller_tax_code": ["sellertaxcode", "mst", "taxcode", "nban_mst"],
+      "subtotal_candidates": ["untaxedamount", "subtotal", "tgtcthue", "amount_untaxed"],
+      "vat_candidates": ["vatamount", "taxamount", "tgtthue"],
+      "total_candidates": ["amounttotal", "totalamount", "tgtttbso", "amount_total"],
+      "line_amounts": ["lineamount", "thtien"],
+      "tax_rates": ["taxrate", "tsuat"]
+    }
+  },
+  "confidence_and_reconcile": {
+    "xml_candidate_confidence": {
+      "supplier": 0.95,
+      "service": 0.9,
+      "invoice": 0.95,
+      "issue_date": 0.92,
+      "total_tag_amount": 0.95,
+      "subtotal_tag_amount": 0.75
+    },
+    "text_candidate_confidence": {
+      "supplier": 0.6,
+      "service": 0.6,
+      "invoice": 0.65,
+      "issue_date": 0.6,
+      "money_mention": 0.55,
+      "xml_plain_text_fallback": 0.4
+    },
+    "amount_pick_priority": [
+      "majority_vote(total_tag, subtotal_plus_vat, sum_line_items_plus_vat)",
+      "total_tag",
+      "strongest_amount_source"
+    ],
+    "majority_vote_min_count": 2,
+    "amount_confidence_if_vote": 0.95,
+    "amount_confidence_if_total_tag": 0.88,
+    "issues_thresholds": {
+      "subtotal_vat_vs_total_tolerance": 2,
+      "line_plus_vat_vs_total_tolerance": 3,
+      "vat_over_subtotal_ratio": 0.5
+    },
+    "overall_confidence_formula": "(supplier + service + invoice + amount) / 4",
+    "review_threshold": 0.75,
+    "status_rules": {
+      "suspicious_if_issue_contains": "bất thường",
+      "needs_review_if": ["has_any_issue", "overall_confidence_below_threshold", "invoice_type_is_unknown"],
+      "ok_otherwise": true
+    }
+  },
+  "content_limits": {
+    "invoice_content_max_chars": 260,
+    "clean_text_max_chars": 180,
+    "clean_tax_code_max_chars": 30
+  },
+  "command_confirmation_rules": {
+    "reject_tokens": [
+      "không đồng ý",
+      "khong dong y",
+      "không post",
+      "khong post",
+      "hủy post",
+      "huy post",
+      "sửa lại",
+      "sua lai"
+    ],
+    "confirm_tokens": [
+      "xác nhận",
+      "xac nhan",
+      "đồng ý post",
+      "dong y post",
+      "đồng ý hạch toán",
+      "dong y hach toan",
+      "confirm post",
+      "post luôn",
+      "thực hiện post"
+    ]
+  },
+  "event_inference_rules": {
+    "priority_order": [
+      "gop_von",
+      "nop_thue",
+      "ban_hang_dich_vu",
+      "mua_dich_vu_default"
+    ],
+    "gop_von": {
+      "keywords": ["góp vốn", "von"],
+      "default_amount": 100000000.0,
+      "reference_prefix": "AUTO-CAP",
+      "source_id": "bank_statement",
+      "debit_credit_flag": "credit"
+    },
+    "nop_thue": {
+      "keywords": ["thuế", "gtgt", "vat"],
+      "file_keywords": ["tax"],
+      "default_amount": 3000000.0,
+      "reference_prefix": "AUTO-TAX",
+      "source_id": "bank_statement",
+      "debit_credit_flag": "debit",
+      "tax_payable_account": "3331",
+      "payment_channel": "bank"
+    },
+    "ban_hang_dich_vu": {
+      "keywords": ["bán"],
+      "file_keywords": ["sales", "out-"],
+      "vat_rate": 0.1,
+      "default_untaxed_amount": 15000000.0,
+      "source_id": "sales_invoice_xml",
+      "buyer_tax_code": "0310001111",
+      "payment_status": "unpaid"
+    },
+    "mua_dich_vu_default": {
+      "vat_rate": 0.1,
+      "default_untaxed_amount": 6000000.0,
+      "source_id": "purchase_invoice_xml",
+      "seller_tax_code": "0109999999",
+      "goods_service_type": "service",
+      "service_term_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    "invoice_number_default_format": "AUTO-IN-{HHMMSS}",
+    "supplier_default": "Nhà cung cấp từ hồ sơ đính kèm",
+    "service_default": "Mua dịch vụ từ hồ sơ đính kèm"
+  },
+  "timeline_templates": {
+    "extract_body_with_files": "Đã tiếp nhận hồ sơ: {file_list}",
+    "extract_body_no_files": "Đã tiếp nhận hồ sơ: không có tệp đính kèm",
+    "confirm_body": "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
+  }
+}
