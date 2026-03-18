@@ -197,6 +197,22 @@ class PostingEngine:
             return self._enforce_narration_policy("Công ty vừa ghi nhận một sự kiện kinh tế mới.")
 
         template = str(rule.get("template", "Công ty vừa ghi nhận một sự kiện kinh tế."))
+        payment_status = str(event.get("payment_status") or "").strip().lower()
+        payment_account = str(event.get("payment_account") or "").strip()
+        is_payable_purchase = (
+            event_type in {"mua_dich_vu", "mua_hang_dung_noi_bo", "mua_tscd"}
+            and (
+                payment_status in {"unpaid", "pending", "payable", "cong_no", "chua_thanh_toan"}
+                or payment_account == "331"
+            )
+        )
+        if is_payable_purchase:
+            if event_type == "mua_dich_vu":
+                template = "Công ty vừa ghi nhận hóa đơn dịch vụ {purpose} từ {counterparty}, công nợ phải trả nhà cung cấp."
+            elif event_type == "mua_hang_dung_noi_bo":
+                template = "Công ty vừa ghi nhận hóa đơn mua {purpose} từ {counterparty}, công nợ phải trả nhà cung cấp."
+            elif event_type == "mua_tscd":
+                template = "Công ty vừa ghi nhận mua tài sản cố định từ {counterparty}, công nợ phải trả nhà cung cấp."
         fallbacks = rule.get("fallbacks", {})
 
         amount = self._resolve_amount("total_amount", event)
