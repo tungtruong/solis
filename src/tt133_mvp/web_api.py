@@ -1781,17 +1781,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         if staged_attachment_names:
             user_message += f"\nĐính kèm: {', '.join(staged_attachment_names)}"
 
-        committed_attachment_names = _commit_staged_attachments(normalized_email, case_id, staged_attachments)
-        posting_result = posting_engine.post(inferred_event)
-        posting_accepted = bool(posting_result.accepted and posting_result.journal_entry)
-        if posting_accepted:
-            storage.upsert_case_event(normalized_email, case_id, inferred_event, now)
-
-        result_body = (
-            "Đã tạo bút toán tự động thành công."
-            if posting_accepted and posting_result.journal_entry
-            else f"Không thể tạo bút toán tự động: {posting_result.reason or 'Thiếu dữ liệu chuẩn.'}"
-        )
+        confirm_body = "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
 
         timeline_entries = [
             {
@@ -1820,11 +1810,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
             {
-                "id": f"{case_id}-result-{uuid.uuid4().hex[:6]}",
+                "id": f"{case_id}-confirm-{uuid.uuid4().hex[:6]}",
                 "kind": "analysis",
                 "role": "system",
-                "title": "Kết quả hạch toán",
-                "body": result_body,
+                "title": "Yêu cầu xác nhận",
+                "body": confirm_body,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
         ]
@@ -1839,32 +1829,36 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
                 current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
                 current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
-                current_evidence = item.get("evidence") if isinstance(item.get("evidence"), list) else []
-                merged_evidence = [*current_evidence]
-                for attachment_name in committed_attachment_names:
-                    if attachment_name and attachment_name not in merged_evidence:
-                        merged_evidence.append(attachment_name)
 
                 updated_item = {
                     **item,
                     "timeline": [*current_timeline, *timeline_entries],
-                    "evidence": merged_evidence,
-                    "staged_evidence": [],
+                    "staged_evidence": [
+                        {
+                            "name": str(attachment.get("name") or ""),
+                            "preview_ref": str(attachment.get("preview_ref") or ""),
+                            "storage": "staging",
+                            "is_staged": True,
+                        }
+                        for attachment in staged_attachments
+                    ],
                     "reasoning": [
-                        (
-                            f"Hệ thống đã post tự động và sinh bút toán {posting_result.journal_entry.get('entry_id')}."
-                            if posting_accepted and posting_result.journal_entry
-                            else f"Hệ thống chưa thể post tự động: {posting_result.reason or 'Thiếu dữ liệu'}"
-                        ),
                         f"Đã phân tích hồ sơ với {len(staged_attachment_names)} tệp đính kèm.",
+                        "Đang chờ khách hàng xác nhận trước khi post bút toán.",
                         *current_reasoning,
                     ],
                     "amount": f"{parsed_amount:,.0f} VND" if parsed_amount > 0 else item.get("amount", "0 VND"),
                     "partner": str(supplier_name or item.get("partner") or "Đối tác"),
                     "title": str(service_name or item.get("title") or "Hồ sơ kế toán"),
-                    "status": "hoan_tat" if posting_accepted else "dang_xu_ly",
-                    "statusLabel": "Hoàn tất" if posting_accepted else "Đang xử lý",
-                    "pending_posting": None,
+                    "status": "cho_xac_nhan",
+                    "statusLabel": "Chờ khách hàng xác nhận",
+                    "pending_posting": {
+                        "event_type": inferred["event_type"],
+                        "event": inferred_event,
+                        "parse_rows": parse_table_rows,
+                        "parse_meta": attachment_details.get("parse_meta", {}),
+                        "received_attachments": staged_attachments,
+                    },
                     "updatedAt": inferred_event_date,
                 }
                 next_items.append(updated_item)
@@ -1875,17 +1869,12 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         return {
             "ok": True,
-            "message": (
-                "Đã tiếp nhận hồ sơ và post tự động thành công."
-                if posting_accepted and posting_result.journal_entry
-                else f"Đã tiếp nhận hồ sơ nhưng chưa thể post tự động: {posting_result.reason or 'Thiếu dữ liệu chuẩn.'}"
-            ),
+            "message": "Đã tiếp nhận và phân tích hồ sơ. Vui lòng khách hàng xác nhận thông tin và đồng ý post để hệ thống hạch toán.",
             "timeline_entries": timeline_entries,
             "received_attachments": staged_attachment_names,
-            "staged_attachments": [],
-            "posting_accepted": posting_accepted,
-            "posting_reason": posting_result.reason,
-            "requires_confirmation": False,
+            "staged_attachments": staged_attachments,
+            "posting_accepted": False,
+            "requires_confirmation": True,
             "proposed_posting": {
                 "event_type": inferred["event_type"],
                 "supplier_name": supplier_name,
@@ -1893,7 +1882,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "invoice_number": invoice_no,
                 "amount": parsed_amount,
                 "attachment_count": attachment_count,
-                "staged_attachments": [],
+                "staged_attachments": staged_attachments,
                 "parse_rows": parse_table_rows,
                 "parse_meta": attachment_details.get("parse_meta", {}),
             },
