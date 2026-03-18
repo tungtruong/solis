@@ -783,8 +783,12 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         for match in re.finditer(r"(\d[\d\.,]*)\s*(triệu|trieu|nghìn|nghin|ngàn|ngan|k|đ|vnd|dong)?", text, flags=re.IGNORECASE):
             token = str(match.group(1) or "")
             unit = str(match.group(2) or "").lower()
+            token_digits = re.sub(r"\D", "", token)
             base_value = parse_number_token(token)
             if base_value <= 0:
+                continue
+            # Ignore long numeric identifiers (invoice item codes, signature blocks) when no currency unit is present.
+            if not unit and len(token_digits) > 10:
                 continue
             if unit in {"triệu", "trieu"}:
                 base_value *= 1_000_000
@@ -793,6 +797,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             elif unit in {"đ", "vnd", "dong"}:
                 base_value *= 1
             elif base_value < 1000:
+                continue
+            elif base_value > 100_000_000_000:
                 continue
             values.append(base_value)
         return values
@@ -848,6 +854,22 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             if ext == ".xml":
                 try:
                     root = ET.fromstring(text)
+                    def collect_xml_fields(node: ET.Element, path: str = "") -> None:
+                        tag = str(node.tag)
+                        if "}" in tag:
+                            tag = tag.rsplit("}", 1)[1]
+                        current_tag = tag.strip().lower()
+                        current_path = f"{path}_{current_tag}" if path else current_tag
+                        value = clean_extracted_value(str(node.text or ""))
+                        if value:
+                            if current_tag not in field_values:
+                                field_values[current_tag] = value
+                            if current_path not in field_values:
+                                field_values[current_path] = value
+                        for child in list(node):
+                            collect_xml_fields(child, current_path)
+
+                    collect_xml_fields(root)
                     for node in root.iter():
                         tag = str(node.tag)
                         if "}" in tag:
@@ -859,7 +881,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 except ET.ParseError:
                     pass
 
-            amount_candidates.extend(parse_money_mentions(plain_text))
+            if ext != ".xml":
+                amount_candidates.extend(parse_money_mentions(plain_text))
 
             supplier_match = re.search(r"(nhà\s*cung\s*cấp|supplier|vendor|seller)\s*[:\-]?\s*([^\n\r;]{3,120})", plain_text, flags=re.IGNORECASE)
             if supplier_match and not details["supplier_name"]:
@@ -882,6 +905,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         if not details["supplier_name"]:
             details["supplier_name"] = clean_extracted_value(pick_first([
+                "hdon_dlhdon_ndhdon_nban_ten",
+                "ndhdon_nban_ten",
+                "dlhdon_ndhdon_nban_ten",
+                "nban_ten",
                 "tennguoiban",
                 "nguoiban",
                 "tenban",
@@ -892,6 +919,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             ]), max_len=120)
         if not details["service_name"]:
             details["service_name"] = clean_extracted_value(pick_first([
+                "ndhdon_dshhdvu_hhdvu_thhdvu",
+                "dlhdon_ndhdon_dshhdvu_hhdvu_thhdvu",
+                "thhdvu",
                 "tendichvu",
                 "tenhanghoa",
                 "diengiai",
@@ -901,6 +931,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             ]), max_len=160)
         if not details["invoice_number"]:
             details["invoice_number"] = clean_extracted_value(pick_first([
+                "dlhdon_ttchung_shdon",
+                "ttchung_shdon",
+                "shdon",
                 "sohoadon",
                 "invoice",
                 "invoiceno",
@@ -909,6 +942,12 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             ]), max_len=40)
 
         xml_amount_text = pick_first([
+            "dlhdon_ndhdon_ttoan_tgtttbso",
+            "ndhdon_ttoan_tgtttbso",
+            "tgtttbso",
+            "dlhdon_ndhdon_ttoan_tgtcthue",
+            "ndhdon_ttoan_tgtcthue",
+            "tgtcthue",
             "tongtienthanhtoan",
             "tongthanhtoan",
             "amounttotal",
