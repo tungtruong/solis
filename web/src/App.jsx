@@ -598,10 +598,6 @@ function App() {
     setIsUserMenuOpen(false)
   }, [])
 
-  const goToOnboard = useCallback(() => {
-    window.location.assign('/onboard')
-  }, [])
-
   const handleWorkspaceLogout = useCallback(() => {
     setIsUserMenuOpen(false)
     window.sessionStorage.setItem('solis.auth.hasCompanyProfile', 'false')
@@ -1554,9 +1550,6 @@ function App() {
                 </button>
                 <button type="button" className="user-menu-btn danger" onClick={handleWorkspaceLogout}>
                   Logout
-                </button>
-                <button type="button" className="user-menu-btn" onClick={goToOnboard}>
-                  Chọn công ty khác
                 </button>
               </div>
             ) : null}
