@@ -339,7 +339,6 @@ function formatReportNarration(value, fallback = '') {
   if (!text) return '-'
 
   text = text
-    .replace(/\b[Cc](?:ô|o)ng\s*ty\b[^,.;:!?]*/g, '')
     .replace(/\b(?:số\s*tiền|so\s*tien|trị\s*giá|tri\s*gia|giá\s*trị|gia\s*tri)\b\s*[:\-]?\s*[^,.;:!?]*/gi, '')
     .replace(/\b\d{1,3}(?:[\.\,\s]\d{3})+(?:\s*(?:đ|đồng|dong|vnd))?\b/gi, '')
     .replace(/\b\d+(?:[\.,]\d+)?\s*(?:tỷ|ty|triệu|trieu|nghìn|nghin|ngàn|ngan|k)\s*(?:đồng|dong)?\b/gi, '')
