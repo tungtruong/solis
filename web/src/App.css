@@ -133,11 +133,6 @@ body {
   font-size: 0.84rem;
 }
 
-.breadcrumb span {
-  margin: 0 6px;
-  color: #89a3bf;
-}
-
 .topbar-right {
   display: flex;
   align-items: center;
@@ -169,18 +164,6 @@ body {
   background: #eef7ff;
   border-color: #d1e5f8;
   color: #2a5f91;
-}
-
-.chip-ai.online {
-  background: #ebfbf3;
-  border-color: #bfe8d0;
-  color: #19754b;
-}
-
-.chip-ai.fallback {
-  background: #fff6ec;
-  border-color: #f2d7b3;
-  color: #a1610f;
 }
 
 .workspace-grid {
@@ -338,22 +321,6 @@ body {
   background: #e8f2ff;
 }
 
-.status-moi {
-  color: #6f4fad;
-  background: #f4ecff;
-}
-
-.status-cho_xac_nhan {
-  color: #9a5e0e;
-  background: #fff4df;
-}
-
-.status-hoan_tat,
-.status-da_post {
-  color: var(--success);
-  background: #e8f8f1;
-}
-
 .left-footer {
   margin-top: auto;
   padding-top: 10px;
@@ -438,11 +405,6 @@ body {
   animation: slideUp 0.24s ease;
 }
 
-.event-card:hover {
-  border-color: #bcd6f0;
-  box-shadow: 0 8px 18px rgba(24, 77, 130, 0.1);
-}
-
 .event-card.event-user {
   margin-left: 34px;
   border-color: #c8dcf5;
@@ -485,45 +447,6 @@ body {
   font-size: 0.93rem;
 }
 
-.event-fields {
-  width: 100%;
-  margin-top: 8px;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.event-fields th,
-.event-fields td {
-  border-bottom: 1px solid #d7e5f3;
-  padding: 7px 8px;
-  text-align: left;
-}
-
-.event-fields th {
-  color: #3f658a;
-  background: #edf6ff;
-}
-
-.posting-confirm-box {
-  margin: 0 12px 12px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid #f0d8b1;
-  background: linear-gradient(160deg, #fffaf2 0%, #fff3e3 100%);
-}
-
-.posting-confirm-box p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #7e4f12;
-}
-
-.posting-actions {
-  margin-top: 10px;
-  display: flex;
-  gap: 8px;
-}
-
 .chat-form {
   border-top: 1px solid var(--line);
   display: grid;
@@ -562,14 +485,6 @@ button {
   font-family: inherit;
 }
 
-.primary-btn:disabled,
-.ghost-btn:disabled {
-  opacity: 0.72;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
 .primary-btn {
   background: linear-gradient(120deg, #1696a1, #2f7ce4);
   color: #fff;
@@ -594,29 +509,6 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.attachment-pills {
-  border-top: 1px solid #d8e6f4;
-  padding: 8px 11px 11px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.attachment-pill {
-  border: 1px solid #c8ddf3;
-  background: #eef6ff;
-  color: #28557f;
-  border-radius: 999px;
-  padding: 5px 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.attachment-pill:hover {
-  border-color: #9fc3e7;
-  background: #e5f1ff;
 }
 
 .panel-right {
