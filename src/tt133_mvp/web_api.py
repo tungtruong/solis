@@ -1402,7 +1402,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 storage.upsert_case_event(normalized_email, case_id, pending_event, now)
 
             result_body = (
-                f"Đã tạo bút toán tự động thành công (Entry: {posting_result.journal_entry.get('entry_id')})."
+                "Đã tạo bút toán tự động thành công."
                 if posting_accepted and posting_result.journal_entry
                 else f"Không thể tạo bút toán tự động: {posting_result.reason or 'Thiếu dữ liệu chuẩn.'}"
             )
@@ -1458,7 +1458,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
             return {
                 "ok": True,
-                "message": f"Đã nhận xác nhận của khách hàng. {result_body}",
+                "message": (
+                    "Đã nhận xác nhận của khách hàng. Đã tạo bút toán tự động thành công."
+                    if posting_accepted and posting_result.journal_entry
+                    else f"Đã nhận xác nhận của khách hàng. {result_body}"
+                ),
                 "timeline_entries": timeline_entries,
                 "posting_accepted": posting_accepted,
                 "posting_reason": posting_result.reason,
@@ -1535,21 +1539,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         amount_text = f"{parsed_amount:,.0f}"
 
         extract_body = (
-            f"Đã tiếp nhận yêu cầu xử lý hồ sơ và nhận {attachment_count} tệp đính kèm."
-            if attachment_count
-            else "Đã tiếp nhận yêu cầu xử lý hồ sơ không kèm tệp đính kèm."
+            f"Đã tiếp nhận hồ sơ: {', '.join(stored_attachment_names)}"
+            if stored_attachment_names
+            else "Đã tiếp nhận hồ sơ: không có tệp đính kèm"
         )
 
         user_message = text or "Gửi hồ sơ đính kèm"
         if stored_attachment_names:
             user_message += f"\nĐính kèm: {', '.join(stored_attachment_names)}"
-
-        if attachment_count:
-            extract_body = (
-                f"Đã nhận hồ sơ: Nhà cung cấp {supplier_name}, dịch vụ {service_name}, số hóa đơn {invoice_no}, số tiền {amount_text} đồng."
-            )
-            if invoice_excerpt:
-                extract_body += f" Nội dung hóa đơn: {invoice_excerpt[:180]}"
 
         confirm_body = "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
 

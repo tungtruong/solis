@@ -442,6 +442,9 @@ function App() {
   const reasoning = Array.isArray(activeCase?.reasoning) ? activeCase.reasoning : []
   const pendingPosting = activeCase?.pendingPosting && typeof activeCase.pendingPosting === 'object' ? activeCase.pendingPosting : null
   const pendingEvent = pendingPosting?.event && typeof pendingPosting.event === 'object' ? pendingPosting.event : null
+  const pendingInvoiceDate = String(
+    pendingEvent?.issue_date || pendingEvent?.statement_date || pendingEvent?.event_date || '',
+  ).trim()
   const pendingAmount = Number(
     pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || pendingEvent?.untaxed_amount || 0,
   )
@@ -450,10 +453,12 @@ function App() {
         { label: 'Nhà cung cấp', value: String(pendingEvent.counterparty_name || pendingEvent.seller_name || '-') },
         { label: 'Nội dung', value: String(pendingEvent.description || pendingEvent.goods_service_type || '-') },
         { label: 'Số hóa đơn', value: String(pendingEvent.invoice_no || pendingEvent.reference_no || '-') },
+        { label: 'Ngày hóa đơn', value: pendingInvoiceDate || '-' },
         { label: 'Số tiền', value: pendingAmount > 0 ? formatCurrency(pendingAmount) : '-' },
         { label: 'Nghiệp vụ', value: String(pendingPosting.event_type || pendingEvent.event_type || '-') },
       ]
     : []
+  const shouldShowParseSummary = pendingParseRows.length > 0 && timelineVisibleCount >= timeline.length
 
   const timelineSignature = useMemo(
     () => timeline.map((event) => String(event?.id || '')).join('|'),
@@ -995,7 +1000,7 @@ function App() {
       await reloadDemoCases(targetCaseId)
       setPrompt('')
       setAttachedFiles([])
-      setCaseActionNotice(payload?.message || 'Đã gửi lệnh')
+      setCaseActionNotice('')
     } catch (error) {
       setCaseActionNotice(error.message || 'Không gửi được lệnh')
     } finally {
@@ -1010,7 +1015,7 @@ function App() {
       const commandText = agree ? 'Xác nhận và đồng ý post' : 'Không đồng ý post'
       const payload = await runUiAction('case_command', commandText, activeCaseId)
       await reloadDemoCases(activeCaseId)
-      setCaseActionNotice(payload?.message || (agree ? 'Đã xác nhận post' : 'Đã từ chối post'))
+      setCaseActionNotice('')
     } catch (error) {
       setCaseActionNotice(error.message || 'Không xử lý được xác nhận')
     } finally {
@@ -1531,7 +1536,7 @@ function App() {
               </div>
 
               <div className="command-box">
-                {pendingParseRows.length ? (
+                {shouldShowParseSummary ? (
                   <section className="parse-summary-box">
                     <div className="parse-summary-head">
                       <h4>Thông tin parse hồ sơ</h4>
