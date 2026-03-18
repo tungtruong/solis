@@ -1292,8 +1292,8 @@ function App() {
     <div className="app-shell">
       <header className="global-header">
         <div className="brand-block">
-          <div className="logo-mark">WS</div>
-          <div className="brand-name">WSSMEAS Tài chính AI</div>
+          <div className="logo-mark">SO</div>
+          <div className="brand-name">Solis Tài chính AI</div>
         </div>
 
         <div className="breadcrumb">
