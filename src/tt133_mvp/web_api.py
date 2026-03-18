@@ -1647,6 +1647,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 or pending_event.get("event_date")
                 or datetime.utcnow().date().isoformat()
             )
+            posting_event_date = str(pending_event.get("event_date") or datetime.utcnow().date().isoformat())
 
             staged_attachments = pending_posting.get("received_attachments") if isinstance(pending_posting, dict) else []
             committed_attachment_names: List[str] = []
@@ -1715,7 +1716,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "statusLabel": next_status_label,
                         "pending_posting": None,
                         "staged_evidence": [],
-                        "updatedAt": datetime.utcnow().date().isoformat(),
+                        "updatedAt": posting_event_date,
                     }
                     next_items.append(updated_item)
                 storage.replace_case_items(normalized_email, next_items, now)
@@ -1747,6 +1748,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             or inferred_event.get("event_date")
             or datetime.utcnow().date().isoformat()
         )
+        inferred_event_date = str(inferred_event.get("event_date") or datetime.utcnow().date().isoformat())
 
         supplier_name = str(attachment_details.get("supplier_name") or inferred_event.get("counterparty_name") or "Nhà cung cấp")
         service_name = str(attachment_details.get("service_name") or inferred_event.get("description") or "dịch vụ")
@@ -1857,7 +1859,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "parse_meta": attachment_details.get("parse_meta", {}),
                         "received_attachments": staged_attachments,
                     },
-                    "updatedAt": datetime.utcnow().date().isoformat(),
+                        "updatedAt": inferred_event_date,
                 }
                 next_items.append(updated_item)
                 changed = True
