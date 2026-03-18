@@ -1115,6 +1115,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
     scoped_data_key = company_scope_key(resolved_company_id)
     now = datetime.utcnow().isoformat() + "Z"
     text = payload.text.strip()
+    selected_company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    selected_company_tax_code = _normalize_tax_code(str(selected_company_profile.get("tax_code") or ""))
+    selected_company_name = str(selected_company_profile.get("company_name") or "").strip()
+    selected_company_address = str(selected_company_profile.get("address") or "").strip()
 
     def decode_attachment_content(raw_base64: str) -> bytes:
         payload_base64 = raw_base64
@@ -1221,6 +1225,12 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "invoice_number": "",
             "invoice_date": "",
             "invoice_content": "",
+            "seller_name": "",
+            "buyer_name": "",
+            "seller_address": "",
+            "buyer_address": "",
+            "seller_tax_code": "",
+            "buyer_tax_code": "",
             "amount": 0.0,
             "files": attachment_names,
             "parse_meta": {
@@ -1235,11 +1245,21 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "overall": 0.0,
                 },
                 "issues": [],
+                "warnings": [],
                 "reconcile": {},
+                "company_validation": {
+                    "company_tax_code": selected_company_tax_code,
+                    "is_tax_code_match": False,
+                    "matched_party": "",
+                    "invoice_role": "",
+                    "has_invoice_tax_code": False,
+                    "blocking_reason": "",
+                },
             },
         }
 
         issues: List[str] = []
+        warnings: List[str] = []
         xml_schema_counter: Counter[str] = Counter()
         xml_versions: List[str] = []
 
@@ -1247,6 +1267,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "supplier_name": [],
             "service_name": [],
             "invoice_number": [],
+            "seller_name": [],
+            "buyer_name": [],
+            "seller_address": [],
+            "buyer_address": [],
         }
         amount_sources: List[Dict[str, Any]] = []
         date_sources: List[Dict[str, Any]] = []
@@ -1260,6 +1284,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             cleaned = re.sub(r"<[^>]+>", " ", str(value or ""))
             cleaned = re.sub(r"\s+", " ", cleaned).strip(" \t\r\n:;,-")
             return cleaned[:max_len]
+
+        def normalize_text_field(value: str) -> str:
+            lowered = clean_extracted_value(value, max_len=240).lower()
+            return re.sub(r"[^a-z0-9]", "", lowered)
 
         def local_tag(tag: str) -> str:
             raw = str(tag or "")
@@ -1452,6 +1480,36 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "ndhdon_nban_mst",
                         "nban_mst",
                     ]),
+                    "buyer_tax_code": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nmua_mst",
+                        "dlhdon_ndhdon_nmua_mst",
+                        "ndhdon_nmua_mst",
+                        "nmua_mst",
+                    ]),
+                    "seller_name": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nban_ten",
+                        "dlhdon_ndhdon_nban_ten",
+                        "ndhdon_nban_ten",
+                        "nban_ten",
+                    ]),
+                    "buyer_name": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nmua_ten",
+                        "dlhdon_ndhdon_nmua_ten",
+                        "ndhdon_nmua_ten",
+                        "nmua_ten",
+                    ]),
+                    "seller_address": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nban_dchi",
+                        "dlhdon_ndhdon_nban_dchi",
+                        "ndhdon_nban_dchi",
+                        "nban_dchi",
+                    ]),
+                    "buyer_address": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nmua_dchi",
+                        "dlhdon_ndhdon_nmua_dchi",
+                        "ndhdon_nmua_dchi",
+                        "nmua_dchi",
+                    ]),
                     "subtotal_candidates": pick_all_amounts(path_values, [
                         "hdon_dlhdon_ndhdon_ttoan_tgtcthue",
                         "dlhdon_ndhdon_ttoan_tgtcthue",
@@ -1491,6 +1549,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "invoice": pick_first_path(path_values, ["invoiceno", "invoice_no", "invoice"]),
                     "issue_date": pick_first_path(path_values, ["invoicedate", "issue_date", "ngayhoadon", "ngaylap"]),
                     "seller_tax_code": pick_first_path(path_values, ["sellertaxcode", "mst", "taxcode"]),
+                    "buyer_tax_code": pick_first_path(path_values, ["buyertaxcode", "buyer_tax_code", "mst_buyer"]),
+                    "seller_name": pick_first_path(path_values, ["sellername", "supplier", "counterparty_name"]),
+                    "buyer_name": pick_first_path(path_values, ["buyername", "customername", "counterparty_buyer_name"]),
+                    "seller_address": pick_first_path(path_values, ["selleraddress", "supplier_address", "diachinguoiban"]),
+                    "buyer_address": pick_first_path(path_values, ["buyeraddress", "customeraddress", "diachinguoimua"]),
                     "subtotal_candidates": pick_all_amounts(path_values, ["untaxedamount", "amount_untaxed", "subtotal"]),
                     "vat_candidates": pick_all_amounts(path_values, ["vatamount", "taxamount"]),
                     "total_candidates": pick_all_amounts(path_values, ["amounttotal", "totalamount", "amount_total"]),
@@ -1504,6 +1567,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "invoice": pick_first_path(path_values, ["invoiceno", "invoice_no", "invoice", "shdon"]),
                 "issue_date": pick_first_path(path_values, ["invoicedate", "issue_date", "ngayhoadon", "ngaylap", "nlap"]),
                 "seller_tax_code": pick_first_path(path_values, ["sellertaxcode", "mst", "taxcode", "nban_mst"]),
+                "buyer_tax_code": pick_first_path(path_values, ["buyertaxcode", "buyer_tax_code", "nmua_mst"]),
+                "seller_name": pick_first_path(path_values, ["sellername", "supplier", "counterparty_name", "tennguoiban", "nban_ten"]),
+                "buyer_name": pick_first_path(path_values, ["buyername", "customername", "tennguoimua", "nmua_ten"]),
+                "seller_address": pick_first_path(path_values, ["selleraddress", "nban_dchi", "diachinguoiban"]),
+                "buyer_address": pick_first_path(path_values, ["buyeraddress", "nmua_dchi", "diachinguoimua"]),
                 "subtotal_candidates": pick_all_amounts(path_values, ["untaxedamount", "subtotal", "tgtcthue", "amount_untaxed"]),
                 "vat_candidates": pick_all_amounts(path_values, ["vatamount", "taxamount", "tgtthue"]),
                 "total_candidates": pick_all_amounts(path_values, ["amounttotal", "totalamount", "tgtttbso", "amount_total"]),
@@ -1559,11 +1627,22 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     add_text_candidate("supplier_name", str(mapped.get("supplier") or ""), 0.95, f"{invoice_type}:supplier")
                     add_text_candidate("service_name", str(mapped.get("service") or ""), 0.9, f"{invoice_type}:service")
                     add_text_candidate("invoice_number", str(mapped.get("invoice") or ""), 0.95, f"{invoice_type}:invoice")
+                    add_text_candidate("seller_name", str(mapped.get("seller_name") or ""), 0.9, f"{invoice_type}:seller_name")
+                    add_text_candidate("buyer_name", str(mapped.get("buyer_name") or ""), 0.9, f"{invoice_type}:buyer_name")
+                    add_text_candidate("seller_address", str(mapped.get("seller_address") or ""), 0.85, f"{invoice_type}:seller_address")
+                    add_text_candidate("buyer_address", str(mapped.get("buyer_address") or ""), 0.85, f"{invoice_type}:buyer_address")
                     add_date_source(str(mapped.get("issue_date") or ""), 0.92, f"{invoice_type}:issue_date")
 
                     seller_tax_code = clean_extracted_value(str(mapped.get("seller_tax_code") or ""), max_len=30)
+                    buyer_tax_code = clean_extracted_value(str(mapped.get("buyer_tax_code") or ""), max_len=30)
                     if seller_tax_code and not re.fullmatch(r"\d{10}(?:-\d{3})?", seller_tax_code):
                         issues.append(f"Mã số thuế người bán không đúng định dạng: {seller_tax_code}")
+                    if buyer_tax_code and not re.fullmatch(r"\d{10}(?:-\d{3})?", buyer_tax_code):
+                        issues.append(f"Mã số thuế người mua không đúng định dạng: {buyer_tax_code}")
+                    if seller_tax_code and not details["seller_tax_code"]:
+                        details["seller_tax_code"] = seller_tax_code
+                    if buyer_tax_code and not details["buyer_tax_code"]:
+                        details["buyer_tax_code"] = buyer_tax_code
 
                     mapped_subtotals = [float(v) for v in mapped.get("subtotal_candidates", []) if float(v) > 0]
                     mapped_vats = [float(v) for v in mapped.get("vat_candidates", []) if float(v) > 0]
@@ -1597,6 +1676,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 if invoice_match:
                     add_text_candidate("invoice_number", invoice_match.group(2), 0.65, "text:regex_invoice")
 
+                seller_tax_match = re.search(r"(mst\s*người\s*bán|mã\s*số\s*thuế\s*người\s*bán|seller\s*tax\s*code)\s*[:\-]?\s*(\d{10}(?:-\d{3})?)", plain_text, flags=re.IGNORECASE)
+                if seller_tax_match and not details["seller_tax_code"]:
+                    details["seller_tax_code"] = seller_tax_match.group(2)
+
+                buyer_tax_match = re.search(r"(mst\s*người\s*mua|mã\s*số\s*thuế\s*người\s*mua|buyer\s*tax\s*code)\s*[:\-]?\s*(\d{10}(?:-\d{3})?)", plain_text, flags=re.IGNORECASE)
+                if buyer_tax_match and not details["buyer_tax_code"]:
+                    details["buyer_tax_code"] = buyer_tax_match.group(2)
+
                 date_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", plain_text)
                 if date_match:
                     add_date_source(date_match.group(1), 0.6, "text:regex_date")
@@ -1607,10 +1694,18 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         supplier_best = pick_best_text("supplier_name")
         service_best = pick_best_text("service_name")
         invoice_best = pick_best_text("invoice_number")
+        seller_name_best = pick_best_text("seller_name")
+        buyer_name_best = pick_best_text("buyer_name")
+        seller_address_best = pick_best_text("seller_address")
+        buyer_address_best = pick_best_text("buyer_address")
 
         details["supplier_name"] = supplier_best["value"]
         details["service_name"] = service_best["value"]
         details["invoice_number"] = invoice_best["value"]
+        details["seller_name"] = seller_name_best["value"]
+        details["buyer_name"] = buyer_name_best["value"]
+        details["seller_address"] = seller_address_best["value"]
+        details["buyer_address"] = buyer_address_best["value"]
 
         if date_sources:
             best_date = sorted(date_sources, key=lambda item: item["confidence"], reverse=True)[0]
@@ -1669,6 +1764,48 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         if not details["invoice_number"]:
             issues.append("Không xác định được số hóa đơn")
 
+        company_validation: Dict[str, Any] = {
+            "company_tax_code": selected_company_tax_code,
+            "is_tax_code_match": False,
+            "matched_party": "",
+            "invoice_role": "",
+            "has_invoice_tax_code": False,
+            "blocking_reason": "",
+        }
+
+        normalized_seller_tax = _normalize_tax_code(str(details.get("seller_tax_code") or ""))
+        normalized_buyer_tax = _normalize_tax_code(str(details.get("buyer_tax_code") or ""))
+        details["seller_tax_code"] = normalized_seller_tax
+        details["buyer_tax_code"] = normalized_buyer_tax
+        company_validation["has_invoice_tax_code"] = bool(normalized_seller_tax or normalized_buyer_tax)
+
+        if selected_company_tax_code:
+            if normalized_seller_tax == selected_company_tax_code:
+                company_validation["is_tax_code_match"] = True
+                company_validation["matched_party"] = "seller"
+                company_validation["invoice_role"] = "outbound"
+            elif normalized_buyer_tax == selected_company_tax_code:
+                company_validation["is_tax_code_match"] = True
+                company_validation["matched_party"] = "buyer"
+                company_validation["invoice_role"] = "inbound"
+            else:
+                company_validation["blocking_reason"] = "Mã số thuế trên hóa đơn không thuộc công ty đang đăng nhập"
+
+            matched_name = details.get("seller_name") if company_validation["matched_party"] == "seller" else details.get("buyer_name")
+            matched_address = details.get("seller_address") if company_validation["matched_party"] == "seller" else details.get("buyer_address")
+            normalized_company_name = normalize_text_field(selected_company_name)
+            normalized_company_address = normalize_text_field(selected_company_address)
+            normalized_matched_name = normalize_text_field(str(matched_name or ""))
+            normalized_matched_address = normalize_text_field(str(matched_address or ""))
+
+            if company_validation["is_tax_code_match"] and normalized_company_name and normalized_matched_name:
+                if normalized_company_name not in normalized_matched_name and normalized_matched_name not in normalized_company_name:
+                    warnings.append("Cảnh báo: MST khớp nhưng tên công ty trên hóa đơn khác hồ sơ công ty")
+
+            if company_validation["is_tax_code_match"] and normalized_company_address and normalized_matched_address:
+                if normalized_company_address not in normalized_matched_address and normalized_matched_address not in normalized_company_address:
+                    warnings.append("Cảnh báo: MST khớp nhưng địa chỉ trên hóa đơn khác hồ sơ công ty")
+
         if xml_schema_counter:
             dominant_schema = xml_schema_counter.most_common(1)[0][0]
         else:
@@ -1699,7 +1836,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "overall": round(float(overall_confidence), 3),
             },
             "issues": issues,
+            "warnings": warnings,
             "reconcile": reconcile,
+            "company_validation": company_validation,
         }
 
         return details
@@ -1714,6 +1853,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         service_name = str(details.get("service_name") or "Mua dịch vụ từ hồ sơ đính kèm")
         invoice_number = str(details.get("invoice_number") or f"AUTO-IN-{datetime.utcnow().strftime('%H%M%S')}")
         amount_from_attachment = float(details.get("amount") or 0)
+        parse_meta = details.get("parse_meta") if isinstance(details.get("parse_meta"), dict) else {}
+        company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
+        invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
 
         if "góp vốn" in lowered or "von" in lowered:
             amount = detected_amount or amount_from_attachment or 100000000.0
@@ -1749,7 +1891,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 },
             }
 
-        if "bán" in lowered or "sales" in joined_files or "out-" in joined_files:
+        if invoice_role == "outbound" or "bán" in lowered or "sales" in joined_files or "out-" in joined_files:
             untaxed = detected_amount or amount_from_attachment or 15000000.0
             vat_amount = round(untaxed * 0.1)
             return {
@@ -1771,6 +1913,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "payment_status": "unpaid",
                 },
             }
+
+        if invoice_role and invoice_role != "inbound":
+            invoice_role = "inbound"
 
         untaxed = detected_amount or amount_from_attachment or 6000000.0
         vat_amount = round(untaxed * 0.1)
@@ -2002,6 +2147,63 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         staged_attachments = save_case_attachments_to_staging(case_id, payload.attachments)
         staged_attachment_names = [str(item.get("name") or item.get("stored_name") or "") for item in staged_attachments]
         attachment_details = parse_attachment_details(payload.attachments, staged_attachment_names)
+        parse_meta = attachment_details.get("parse_meta") if isinstance(attachment_details.get("parse_meta"), dict) else {}
+        company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
+        parse_warnings = parse_meta.get("warnings") if isinstance(parse_meta.get("warnings"), list) else []
+        tax_match_ok = bool(company_validation.get("is_tax_code_match"))
+        blocking_reason = str(company_validation.get("blocking_reason") or "").strip()
+
+        if not tax_match_ok:
+            if payload.case_id:
+                changed = False
+                next_items = []
+                for item in case_items:
+                    if str(item.get("id") or "") != payload.case_id:
+                        next_items.append(item)
+                        continue
+
+                    current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
+                    current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
+                    reject_message = blocking_reason or "Hóa đơn không thuộc công ty đang đăng nhập (MST không khớp)."
+                    reject_timeline = {
+                        "id": f"{case_id}-reject-tax-{uuid.uuid4().hex[:6]}",
+                        "kind": "analysis",
+                        "role": "system",
+                        "title": "Từ chối hồ sơ",
+                        "body": reject_message,
+                        "time": datetime.utcnow().strftime("%H:%M"),
+                    }
+
+                    updated_item = {
+                        **item,
+                        "timeline": [*current_timeline, reject_timeline],
+                        "reasoning": [
+                            "Hệ thống từ chối hồ sơ vì MST trên hóa đơn không khớp với công ty đang đăng nhập.",
+                            *current_reasoning,
+                        ],
+                        "status": "can_xu_ly",
+                        "statusLabel": "Cần xử lý",
+                        "updatedAt": datetime.utcnow().date().isoformat(),
+                    }
+                    next_items.append(updated_item)
+                    changed = True
+
+                if changed:
+                    storage.replace_case_items(scoped_data_key, next_items, now)
+
+            return {
+                "ok": False,
+                "message": blocking_reason or "Từ chối xử lý: mã số thuế trên hóa đơn không khớp công ty đang đăng nhập.",
+                "received_attachments": staged_attachment_names,
+                "staged_attachments": staged_attachments,
+                "requires_confirmation": False,
+                "proposed_posting": {
+                    "attachment_count": attachment_count,
+                    "parse_meta": parse_meta,
+                },
+                "updated_at": now,
+            }
+
         inferred = infer_event_from_input(text, staged_attachment_names, attachment_details)
         inferred_event = dict(inferred["event"])
         inferred_event["case_id"] = case_id
@@ -2032,6 +2234,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             {"label": "Số hóa đơn", "value": invoice_no},
             {"label": "Ngày hóa đơn", "value": invoice_date or "-"},
             {"label": "Số tiền", "value": f"{amount_text} đồng"},
+            {"label": "MST người bán", "value": str(attachment_details.get("seller_tax_code") or "-")},
+            {"label": "MST người mua", "value": str(attachment_details.get("buyer_tax_code") or "-")},
+            {"label": "Vai trò hóa đơn", "value": "Đầu ra" if str(company_validation.get("invoice_role") or "") == "outbound" else "Đầu vào"},
         ]
 
         extract_body = (
@@ -2081,6 +2286,18 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
         ]
+
+        if parse_warnings:
+            timeline_entries.append(
+                {
+                    "id": f"{case_id}-warnings-{uuid.uuid4().hex[:6]}",
+                    "kind": "analysis",
+                    "role": "system",
+                    "title": "Cảnh báo đối chiếu",
+                    "body": "\n".join(str(item) for item in parse_warnings),
+                    "time": datetime.utcnow().strftime("%H:%M"),
+                }
+            )
 
         if payload.case_id:
             changed = False

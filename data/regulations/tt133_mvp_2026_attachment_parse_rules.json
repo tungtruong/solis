@@ -36,7 +36,9 @@
     "supplier_name": "(nhà\\s*cung\\s*cấp|supplier|vendor|seller)\\s*[:\\-]?\\s*([^\\n\\r;]{3,120})",
     "service_name": "(dịch\\s*vụ|service|hàng\\s*hóa|description|nội\\s*dung)\\s*[:\\-]?\\s*([^\\n\\r;]{3,160})",
     "invoice_number": "(số\\s*hóa\\s*đơn|invoice\\s*no|invoice|sohd)\\s*[:\\-]?\\s*([A-Za-z0-9\\-_/]{4,40})",
-    "invoice_date": "(\\d{4}[\\-/]\\d{1,2}[\\-/]\\d{1,2}|\\d{1,2}[\\-/]\\d{1,2}[\\-/]\\d{4}|\\d{8})"
+    "invoice_date": "(\\d{4}[\\-/]\\d{1,2}[\\-/]\\d{1,2}|\\d{1,2}[\\-/]\\d{1,2}[\\-/]\\d{4}|\\d{8})",
+    "seller_tax_code": "(mst\\s*người\\s*bán|mã\\s*số\\s*thuế\\s*người\\s*bán|seller\\s*tax\\s*code)\\s*[:\\-]?\\s*(\\d{10}(?:-\\d{3})?)",
+    "buyer_tax_code": "(mst\\s*người\\s*mua|mã\\s*số\\s*thuế\\s*người\\s*mua|buyer\\s*tax\\s*code)\\s*[:\\-]?\\s*(\\d{10}(?:-\\d{3})?)"
   },
   "date_normalization": {
     "supported_input_patterns": [
@@ -92,6 +94,36 @@
         "ndhdon_nban_mst",
         "nban_mst"
       ],
+      "buyer_tax_code": [
+        "hdon_dlhdon_ndhdon_nmua_mst",
+        "dlhdon_ndhdon_nmua_mst",
+        "ndhdon_nmua_mst",
+        "nmua_mst"
+      ],
+      "seller_name": [
+        "hdon_dlhdon_ndhdon_nban_ten",
+        "dlhdon_ndhdon_nban_ten",
+        "ndhdon_nban_ten",
+        "nban_ten"
+      ],
+      "buyer_name": [
+        "hdon_dlhdon_ndhdon_nmua_ten",
+        "dlhdon_ndhdon_nmua_ten",
+        "ndhdon_nmua_ten",
+        "nmua_ten"
+      ],
+      "seller_address": [
+        "hdon_dlhdon_ndhdon_nban_dchi",
+        "dlhdon_ndhdon_nban_dchi",
+        "ndhdon_nban_dchi",
+        "nban_dchi"
+      ],
+      "buyer_address": [
+        "hdon_dlhdon_ndhdon_nmua_dchi",
+        "dlhdon_ndhdon_nmua_dchi",
+        "ndhdon_nmua_dchi",
+        "nmua_dchi"
+      ],
       "subtotal_candidates": [
         "hdon_dlhdon_ndhdon_ttoan_tgtcthue",
         "dlhdon_ndhdon_ttoan_tgtcthue",
@@ -129,6 +161,11 @@
       "invoice": ["invoiceno", "invoice_no", "invoice"],
       "issue_date": ["invoicedate", "issue_date", "ngayhoadon", "ngaylap"],
       "seller_tax_code": ["sellertaxcode", "mst", "taxcode"],
+      "buyer_tax_code": ["buyertaxcode", "buyer_tax_code", "mst_buyer"],
+      "seller_name": ["sellername", "supplier", "counterparty_name"],
+      "buyer_name": ["buyername", "customername", "counterparty_buyer_name"],
+      "seller_address": ["selleraddress", "supplier_address", "diachinguoiban"],
+      "buyer_address": ["buyeraddress", "customeraddress", "diachinguoimua"],
       "subtotal_candidates": ["untaxedamount", "amount_untaxed", "subtotal"],
       "vat_candidates": ["vatamount", "taxamount"],
       "total_candidates": ["amounttotal", "totalamount", "amount_total"],
@@ -141,6 +178,11 @@
       "invoice": ["invoiceno", "invoice_no", "invoice", "shdon"],
       "issue_date": ["invoicedate", "issue_date", "ngayhoadon", "ngaylap", "nlap"],
       "seller_tax_code": ["sellertaxcode", "mst", "taxcode", "nban_mst"],
+      "buyer_tax_code": ["buyertaxcode", "buyer_tax_code", "nmua_mst"],
+      "seller_name": ["sellername", "supplier", "counterparty_name", "tennguoiban", "nban_ten"],
+      "buyer_name": ["buyername", "customername", "tennguoimua", "nmua_ten"],
+      "seller_address": ["selleraddress", "nban_dchi", "diachinguoiban"],
+      "buyer_address": ["buyeraddress", "nmua_dchi", "diachinguoimua"],
       "subtotal_candidates": ["untaxedamount", "subtotal", "tgtcthue", "amount_untaxed"],
       "vat_candidates": ["vatamount", "taxamount", "tgtthue"],
       "total_candidates": ["amounttotal", "totalamount", "tgtttbso", "amount_total"],
@@ -218,6 +260,7 @@
     "priority_order": [
       "gop_von",
       "nop_thue",
+      "invoice_role_from_company_tax",
       "ban_hang_dich_vu",
       "mua_dich_vu_default"
     ],
@@ -237,6 +280,21 @@
       "debit_credit_flag": "debit",
       "tax_payable_account": "3331",
       "payment_channel": "bank"
+    },
+    "invoice_role_from_company_tax": {
+      "role_logic": {
+        "company_tax_as_seller": "outbound",
+        "company_tax_as_buyer": "inbound"
+      },
+      "enforcement": {
+        "require_tax_match": true,
+        "reject_when_unmatched": true,
+        "reject_reason": "Mã số thuế trên hóa đơn không thuộc công ty đang đăng nhập"
+      },
+      "warnings": {
+        "name_mismatch": "Cảnh báo: MST khớp nhưng tên công ty trên hóa đơn khác hồ sơ công ty",
+        "address_mismatch": "Cảnh báo: MST khớp nhưng địa chỉ trên hóa đơn khác hồ sơ công ty"
+      }
     },
     "ban_hang_dich_vu": {
       "keywords": ["bán"],
