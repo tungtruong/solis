@@ -52,6 +52,20 @@ function parseErrorMessage(payload, fallback) {
   return fallback
 }
 
+function isProfileComplete(profile) {
+  if (!profile || typeof profile !== 'object') return false
+  const requiredFields = [
+    'company_name',
+    'tax_code',
+    'address',
+    'fiscal_year_start',
+    'tax_declaration_cycle',
+    'default_bank_account',
+    'accountant_email',
+  ]
+  return requiredFields.every((field) => String(profile[field] || '').trim().length > 0)
+}
+
 function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding = true }) {
   return (
     <div className="public-root">
@@ -64,8 +78,6 @@ function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding =
         </button>
         <nav className="public-nav" aria-label="Điều hướng công khai">
           <button type="button" onClick={() => onNavigate('/login')}>Đăng nhập</button>
-          <button type="button" onClick={() => onNavigate('/onboard')}>Onboard</button>
-          <button type="button" className="nav-primary" onClick={() => onNavigate('/SolisAcc')}>SolisAcc</button>
         </nav>
       </header>
       <main className="public-main">
@@ -74,7 +86,7 @@ function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding =
           <h1>{title}</h1>
           {showBackToLanding ? (
             <button type="button" className="public-link" onClick={() => onNavigate('/')}>
-              Ve trang chu
+              Về trang chủ
             </button>
           ) : null}
           {children}
@@ -94,46 +106,41 @@ function LandingPage({ onNavigate }) {
           <span className="brand-logo">SO</span>
           <span className="brand-text">Solis</span>
         </button>
-        <nav className="public-nav" aria-label="Dieu huong landing">
-          <button type="button" onClick={() => onNavigate('/login')}>Dang nhap</button>
-          <button type="button" onClick={() => onNavigate('/onboard')}>Onboard</button>
-          <button type="button" className="nav-primary" onClick={() => onNavigate('/SolisAcc')}>Vao SolisAcc</button>
+        <nav className="public-nav" aria-label="Điều hướng landing">
+          <button type="button" className="nav-primary" onClick={() => onNavigate('/login')}>Đăng nhập</button>
         </nav>
       </header>
 
       <main className="landing-main">
         <section className="landing-hero">
-          <p className="public-eyebrow">He sinh thai tai chinh AI cho doanh nghiep</p>
+          <p className="public-eyebrow">Hệ sinh thái tài chính AI cho doanh nghiệp</p>
           <h1>
-            Van hanh ke toan thoi gian thuc voi
+            Vận hành kế toán thời gian thực với
             <span> Solis</span>
           </h1>
           <p>
-            Landing page nay la cua website chinh. Phan he ke toan duoc tach sang duong dan /SolisAcc.
-            Ban co the vao /login de dang nhap va /onboard de khai bao doanh nghiep.
+            Đây là landing page của website chính. Sau khi đăng nhập, hệ thống sẽ đưa bạn đến Onboard.
+            Khi thông tin doanh nghiệp đã đầy đủ, bạn sẽ được chuyển vào trang SolisAcc.
           </p>
           <div className="landing-actions">
             <button type="button" className="cta-main" onClick={() => onNavigate('/login')}>
-              Bat dau voi dang nhap
-            </button>
-            <button type="button" className="cta-sub" onClick={() => onNavigate('/SolisAcc')}>
-              Mo SolisAcc ngay
+              Bắt đầu với Đăng nhập
             </button>
           </div>
         </section>
 
-        <section className="landing-cards" aria-label="Gia tri noi bat">
+        <section className="landing-cards" aria-label="Giá trị nổi bật">
           <article>
-            <h2>Auto posting co kiem soat</h2>
-            <p>Phan tich hoa don, map tai khoan theo TT133 va sinh but toan de ban phe duyet nhanh.</p>
+            <h2>Auto posting có kiểm soát</h2>
+            <p>Phân tích hóa đơn, map tài khoản theo TT133 và sinh bút toán để bạn phê duyệt nhanh.</p>
           </article>
           <article>
-            <h2>Ban dieu khien van hanh</h2>
-            <p>Theo doi case, chung tu, bao cao va trang thai xu ly tren mot giao dien thong nhat.</p>
+            <h2>Bảng điều khiển vận hành</h2>
+            <p>Theo dõi case, chứng từ, báo cáo và trạng thái xử lý trên một giao diện thống nhất.</p>
           </article>
           <article>
-            <h2>San sang ket noi</h2>
-            <p>Thong nhat login, onboard va workspace ke toan tren cac route rieng de mo rong ve sau.</p>
+            <h2>Sẵn sàng kết nối</h2>
+            <p>Thống nhất login, onboard và workspace kế toán trên các route riêng để mở rộng về sau.</p>
           </article>
         </section>
       </main>
@@ -159,7 +166,7 @@ function LoginPage({ onNavigate, session, setSession }) {
       })
       const payload = await response.json().catch(() => ({}))
       if (!response.ok) {
-        throw new Error(parseErrorMessage(payload, 'Dang nhap that bai'))
+        throw new Error(parseErrorMessage(payload, 'Đăng nhập thất bại'))
       }
       const nextSession = {
         token: String(payload.token || ''),
@@ -168,28 +175,28 @@ function LoginPage({ onNavigate, session, setSession }) {
       }
       setSession(nextSession)
       writeSession(nextSession)
-      onNavigate(nextSession.hasCompanyProfile ? '/SolisAcc' : '/onboard')
+      onNavigate('/onboard')
     } catch (submitError) {
-      setError(submitError.message || 'Dang nhap that bai')
+      setError(submitError.message || 'Đăng nhập thất bại')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <PublicShell title="Dang nhap Solis" eyebrow="Route /login" onNavigate={onNavigate}>
+    <PublicShell title="Đăng nhập Solis" eyebrow="Route /login" onNavigate={onNavigate}>
       <form className="public-form" onSubmit={handleSubmit}>
         <label>
           Email
           <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
         </label>
         <label>
-          Mat khau
+          Mật khẩu
           <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required minLength={3} />
         </label>
         {error ? <p className="form-error">{error}</p> : null}
         <button type="submit" className="cta-main" disabled={loading}>
-          {loading ? 'Dang xu ly...' : 'Dang nhap'}
+          {loading ? 'Đang xử lý...' : 'Đăng nhập'}
         </button>
       </form>
     </PublicShell>
@@ -223,13 +230,20 @@ function OnboardPage({ onNavigate, session, setSession }) {
         })
         const payload = await response.json().catch(() => ({}))
         if (!response.ok) {
-          throw new Error(parseErrorMessage(payload, 'Khong tai duoc ho so cong ty'))
+          throw new Error(parseErrorMessage(payload, 'Không tải được hồ sơ công ty'))
         }
         if (!ignore && payload.exists && payload.profile) {
-          setForm((prev) => ({ ...prev, ...payload.profile }))
+          const profile = payload.profile
+          setForm((prev) => ({ ...prev, ...profile }))
+          if (isProfileComplete(profile)) {
+            const nextSession = { ...session, hasCompanyProfile: true }
+            setSession(nextSession)
+            writeSession(nextSession)
+            onNavigate('/SolisAcc')
+          }
         }
       } catch (loadError) {
-        if (!ignore) setError(loadError.message || 'Khong tai duoc ho so cong ty')
+        if (!ignore) setError(loadError.message || 'Không tải được hồ sơ công ty')
       } finally {
         if (!ignore) setLoadingProfile(false)
       }
@@ -238,7 +252,7 @@ function OnboardPage({ onNavigate, session, setSession }) {
     return () => {
       ignore = true
     }
-  }, [session.token])
+  }, [onNavigate, session, session.token, setSession])
 
   function updateField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }))
@@ -247,7 +261,7 @@ function OnboardPage({ onNavigate, session, setSession }) {
   async function handleSubmit(event) {
     event.preventDefault()
     if (!session.token) {
-      setError('Ban can dang nhap truoc khi onboard')
+      setError('Bạn cần đăng nhập trước khi onboard')
       return
     }
     setSubmitting(true)
@@ -264,59 +278,59 @@ function OnboardPage({ onNavigate, session, setSession }) {
       })
       const payload = await response.json().catch(() => ({}))
       if (!response.ok) {
-        throw new Error(parseErrorMessage(payload, 'Luu thong tin that bai'))
+        throw new Error(parseErrorMessage(payload, 'Lưu thông tin thất bại'))
       }
       const nextSession = { ...session, hasCompanyProfile: true }
       setSession(nextSession)
       writeSession(nextSession)
-      setSuccess('Da luu ho so cong ty thanh cong')
+      setSuccess('Đã lưu hồ sơ công ty thành công')
       setTimeout(() => onNavigate('/SolisAcc'), 450)
     } catch (submitError) {
-      setError(submitError.message || 'Luu thong tin that bai')
+      setError(submitError.message || 'Lưu thông tin thất bại')
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <PublicShell title="Onboard doanh nghiep" eyebrow="Route /onboard" onNavigate={onNavigate}>
+    <PublicShell title="Onboard doanh nghiệp" eyebrow="Route /onboard" onNavigate={onNavigate}>
       <form className="public-form" onSubmit={handleSubmit}>
         <label>
-          Ten cong ty
+          Tên công ty
           <input value={form.company_name} onChange={(event) => updateField('company_name', event.target.value)} required />
         </label>
         <label>
-          Ma so thue
+          Mã số thuế
           <input value={form.tax_code} onChange={(event) => updateField('tax_code', event.target.value)} required />
         </label>
         <label>
-          Dia chi
+          Địa chỉ
           <input value={form.address} onChange={(event) => updateField('address', event.target.value)} required />
         </label>
         <label>
-          Ngay bat dau nam tai chinh
+          Ngày bắt đầu năm tài chính
           <input type="date" value={form.fiscal_year_start} onChange={(event) => updateField('fiscal_year_start', event.target.value)} required />
         </label>
         <label>
-          Chu ky ke khai
+          Chu kỳ kê khai
           <select value={form.tax_declaration_cycle} onChange={(event) => updateField('tax_declaration_cycle', event.target.value)}>
-            <option value="thang">Thang</option>
-            <option value="quy">Quy</option>
+            <option value="thang">Tháng</option>
+            <option value="quy">Quý</option>
           </select>
         </label>
         <label>
-          Tai khoan ngan hang mac dinh
+          Tài khoản ngân hàng mặc định
           <input value={form.default_bank_account} onChange={(event) => updateField('default_bank_account', event.target.value)} required />
         </label>
         <label>
-          Email ke toan
+          Email kế toán
           <input type="email" value={form.accountant_email} onChange={(event) => updateField('accountant_email', event.target.value)} required />
         </label>
-        {loadingProfile ? <p className="form-note">Dang tai profile hien co...</p> : null}
+        {loadingProfile ? <p className="form-note">Đang tải hồ sơ hiện có...</p> : null}
         {error ? <p className="form-error">{error}</p> : null}
         {success ? <p className="form-success">{success}</p> : null}
         <button type="submit" className="cta-main" disabled={submitting}>
-          {submitting ? 'Dang luu...' : 'Luu va vao SolisAcc'}
+          {submitting ? 'Đang lưu...' : 'Lưu và vào SolisAcc'}
         </button>
       </form>
     </PublicShell>
@@ -358,6 +372,12 @@ export default function PortalRouter() {
   }
 
   if (path === '/SolisAcc' || path.startsWith('/SolisAcc/')) {
+    if (!session.token) {
+      return <LoginPage onNavigate={navigate} session={session} setSession={setSession} />
+    }
+    if (!session.hasCompanyProfile) {
+      return <OnboardPage onNavigate={navigate} session={session} setSession={setSession} />
+    }
     return <App />
   }
 
@@ -368,11 +388,11 @@ export default function PortalRouter() {
   if (path === '/onboard') {
     if (!session.token) {
       return (
-        <PublicShell title="Ban chua dang nhap" eyebrow="Route /onboard" onNavigate={navigate}>
-          <p>Vui long dang nhap truoc khi khai bao thong tin doanh nghiep.</p>
+        <PublicShell title="Bạn chưa đăng nhập" eyebrow="Route /onboard" onNavigate={navigate}>
+          <p>Vui lòng đăng nhập trước khi khai báo thông tin doanh nghiệp.</p>
           <div className="landing-actions">
             <button type="button" className="cta-main" onClick={() => navigate('/login')}>
-              Di den login
+              Đi đến đăng nhập
             </button>
           </div>
         </PublicShell>
