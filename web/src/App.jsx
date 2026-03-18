@@ -82,33 +82,69 @@ function parseJsonToSections(rawText) {
 }
 
 function parseXmlToSections(rawText) {
+  const normalizedText = String(rawText || '').replace(/^\uFEFF/, '').trim()
   const parser = new DOMParser()
-  const doc = parser.parseFromString(rawText, 'application/xml')
-  const parserError = doc.querySelector('parsererror')
+  let doc = parser.parseFromString(normalizedText, 'application/xml')
+  let parserError = doc.querySelector('parsererror')
+  if (parserError) {
+    const firstTag = normalizedText.indexOf('<')
+    const lastTag = normalizedText.lastIndexOf('>')
+    if (firstTag >= 0 && lastTag > firstTag) {
+      const sliced = normalizedText.slice(firstTag, lastTag + 1)
+      doc = parser.parseFromString(sliced, 'application/xml')
+      parserError = doc.querySelector('parsererror')
+    }
+  }
   if (parserError) {
     throw new Error('Không đọc được nội dung XML')
   }
 
   const root = doc.documentElement
-  if (!root) return []
+  if (!root) {
+    return [{ title: 'Dữ liệu XML', rows: [{ label: 'Giá trị', value: '-' }] }]
+  }
 
-  const sections = Array.from(root.children).map((sectionNode) => {
+  function flattenNodeToRows(node, pathPrefix = '') {
     const rows = []
-    Array.from(sectionNode.children).forEach((child) => {
-      if (child.children.length) {
-        Array.from(child.children).forEach((subChild) => {
-          rows.push({
-            label: `${formatFieldLabel(child.tagName)} / ${formatFieldLabel(subChild.tagName)}`,
-            value: (subChild.textContent || '').trim() || '-',
-          })
-        })
-      } else {
-        rows.push({
-          label: formatFieldLabel(child.tagName),
-          value: (child.textContent || '').trim() || '-',
-        })
-      }
+    const children = Array.from(node.children || [])
+    const nodeLabel = formatFieldLabel(node.tagName)
+    const currentPath = pathPrefix || nodeLabel
+
+    Array.from(node.attributes || []).forEach((attr) => {
+      rows.push({
+        label: `${currentPath} / @${String(attr.name || '').trim()}`,
+        value: String(attr.value || '').trim() || '-',
+      })
     })
+
+    if (!children.length) {
+      const value = String(node.textContent || '').trim()
+      rows.push({
+        label: currentPath,
+        value: value || '-',
+      })
+      return rows
+    }
+
+    children.forEach((child) => {
+      const childLabel = formatFieldLabel(child.tagName)
+      const nextPath = pathPrefix ? `${pathPrefix} / ${childLabel}` : childLabel
+      rows.push(...flattenNodeToRows(child, nextPath))
+    })
+
+    return rows
+  }
+
+  const sectionNodes = Array.from(root.children || [])
+  if (!sectionNodes.length) {
+    return [{
+      title: formatFieldLabel(root.tagName || 'XML'),
+      rows: [{ label: formatFieldLabel(root.tagName || 'Giá trị'), value: String(root.textContent || '').trim() || '-' }],
+    }]
+  }
+
+  const sections = sectionNodes.map((sectionNode) => {
+    const rows = flattenNodeToRows(sectionNode)
 
     return {
       title: formatFieldLabel(sectionNode.tagName),
@@ -154,6 +190,31 @@ function parseDocRtfToSections(rawText) {
       rows: normalizedRows.length ? normalizedRows : [{ label: 'Dữ liệu', value: '-' }],
     },
   ]
+}
+
+function TypingText({ text, speed = 8 }) {
+  const [visibleText, setVisibleText] = useState('')
+
+  useEffect(() => {
+    const source = String(text || '')
+    setVisibleText('')
+    if (!source) return undefined
+
+    let index = 0
+    const timer = window.setInterval(() => {
+      index += 1
+      setVisibleText(source.slice(0, index))
+      if (index >= source.length) {
+        window.clearInterval(timer)
+      }
+    }, speed)
+
+    return () => {
+      window.clearInterval(timer)
+    }
+  }, [text, speed])
+
+  return <span>{visibleText}</span>
 }
 
 function normalizeCaseItem(raw, fallbackIndex = 0) {
@@ -1341,7 +1402,7 @@ function App() {
                         </div>
                         <time>{event.time}</time>
                       </div>
-                      <p>{event.body}</p>
+                      <p><TypingText text={event.body} speed={8} /></p>
                     </div>
                   </article>
                 ))}
@@ -2134,7 +2195,7 @@ function App() {
                               {section.rows.map((row) => (
                                 <tr key={`${section.title}-${row.label}`}>
                                   <td>{row.label}</td>
-                                  <td>{row.value}</td>
+                                  <td>{isXmlPreview ? <TypingText text={row.value} speed={6} /> : row.value}</td>
                                 </tr>
                               ))}
                             </tbody>
