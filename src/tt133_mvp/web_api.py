@@ -41,7 +41,7 @@ MOCK_COMPANY_ID = "COMP-WS-001"
 MOCK_COMPANY_PROFILE = {
     "company_id": MOCK_COMPANY_ID,
     "company_name": "Công ty TNHH WSSMEAS Mock",
-    "tax_code": "0312345678",
+    "tax_code": "9999999998",
     "address": "12 Nguyễn Huệ, Quận 1, TP.HCM",
     "fiscal_year_start": "01-01",
     "tax_declaration_cycle": "monthly",
@@ -2593,6 +2593,8 @@ def lookup_company_by_tax_code(tax_code: str, email: str = Depends(get_current_e
         }
 
     for company in storage.list_companies():
+        if str(company.get("company_id") or "").strip() == MOCK_COMPANY_ID:
+            continue
         if _normalize_tax_code(str(company.get("tax_code") or "")) == normalized_tax:
             merged = dict(company)
             merged["tax_code"] = normalized_tax
@@ -2659,6 +2661,8 @@ def create_or_update_onboard_company(payload: CompanyProfilePayload, email: str 
 
     if not existing_company:
         for company in storage.list_companies():
+            if str(company.get("company_id") or "").strip() == MOCK_COMPANY_ID:
+                continue
             if _normalize_tax_code(str(company.get("tax_code") or "")) == normalized_tax:
                 existing_company = company
                 break
