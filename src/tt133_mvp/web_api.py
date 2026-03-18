@@ -956,6 +956,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "supplier_name": "",
             "service_name": "",
             "invoice_number": "",
+            "invoice_date": "",
             "invoice_content": "",
             "amount": 0.0,
             "files": attachment_names,
@@ -985,6 +986,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "invoice_number": [],
         }
         amount_sources: List[Dict[str, Any]] = []
+        date_sources: List[Dict[str, Any]] = []
         schema_totals: List[float] = []
         schema_subtotals: List[float] = []
         schema_vat_values: List[float] = []
@@ -1032,6 +1034,47 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             amount_sources.append(
                 {
                     "value": float(value),
+                    "confidence": max(0.0, min(float(confidence), 1.0)),
+                    "source": source,
+                }
+            )
+
+        def normalize_date_value(value: str) -> str:
+            raw = clean_extracted_value(value, max_len=80)
+            if not raw:
+                return ""
+
+            raw = raw.replace("T", " ")
+            date_token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
+            if not date_token_match:
+                return ""
+
+            token = date_token_match.group(1)
+            normalized = token.replace("/", "-").strip()
+
+            if re.fullmatch(r"\d{8}", normalized):
+                try:
+                    parsed = datetime.strptime(normalized, "%Y%m%d")
+                    return parsed.date().isoformat()
+                except ValueError:
+                    return ""
+
+            for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
+                try:
+                    parsed = datetime.strptime(normalized, fmt)
+                    return parsed.date().isoformat()
+                except ValueError:
+                    continue
+
+            return ""
+
+        def add_date_source(value: str, confidence: float, source: str) -> None:
+            normalized = normalize_date_value(value)
+            if not normalized:
+                return
+            date_sources.append(
+                {
+                    "value": normalized,
                     "confidence": max(0.0, min(float(confidence), 1.0)),
                     "source": source,
                 }
@@ -1133,6 +1176,13 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "ttchung_shdon",
                         "shdon",
                     ]),
+                    "issue_date": pick_first_path(path_values, [
+                        "hdon_dlhdon_ttchung_nlap",
+                        "dlhdon_ttchung_nlap",
+                        "ttchung_nlap",
+                        "nlap",
+                        "ngayhoadon",
+                    ]),
                     "seller_tax_code": pick_first_path(path_values, [
                         "hdon_dlhdon_ndhdon_nban_mst",
                         "dlhdon_ndhdon_nban_mst",
@@ -1176,6 +1226,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "supplier": pick_first_path(path_values, ["sellername", "supplier", "counterparty_name"]),
                     "service": pick_first_path(path_values, ["description", "itemname", "tendichvu"]),
                     "invoice": pick_first_path(path_values, ["invoiceno", "invoice_no", "invoice"]),
+                    "issue_date": pick_first_path(path_values, ["invoicedate", "issue_date", "ngayhoadon", "ngaylap"]),
                     "seller_tax_code": pick_first_path(path_values, ["sellertaxcode", "mst", "taxcode"]),
                     "subtotal_candidates": pick_all_amounts(path_values, ["untaxedamount", "amount_untaxed", "subtotal"]),
                     "vat_candidates": pick_all_amounts(path_values, ["vatamount", "taxamount"]),
@@ -1188,6 +1239,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "supplier": pick_first_path(path_values, ["supplier", "sellername", "counterparty_name", "tennguoiban", "nban_ten"]),
                 "service": pick_first_path(path_values, ["description", "itemname", "thhdvu", "diengiai"]),
                 "invoice": pick_first_path(path_values, ["invoiceno", "invoice_no", "invoice", "shdon"]),
+                "issue_date": pick_first_path(path_values, ["invoicedate", "issue_date", "ngayhoadon", "ngaylap", "nlap"]),
                 "seller_tax_code": pick_first_path(path_values, ["sellertaxcode", "mst", "taxcode", "nban_mst"]),
                 "subtotal_candidates": pick_all_amounts(path_values, ["untaxedamount", "subtotal", "tgtcthue", "amount_untaxed"]),
                 "vat_candidates": pick_all_amounts(path_values, ["vatamount", "taxamount", "tgtthue"]),
@@ -1244,6 +1296,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     add_text_candidate("supplier_name", str(mapped.get("supplier") or ""), 0.95, f"{invoice_type}:supplier")
                     add_text_candidate("service_name", str(mapped.get("service") or ""), 0.9, f"{invoice_type}:service")
                     add_text_candidate("invoice_number", str(mapped.get("invoice") or ""), 0.95, f"{invoice_type}:invoice")
+                    add_date_source(str(mapped.get("issue_date") or ""), 0.92, f"{invoice_type}:issue_date")
 
                     seller_tax_code = clean_extracted_value(str(mapped.get("seller_tax_code") or ""), max_len=30)
                     if seller_tax_code and not re.fullmatch(r"\d{10}(?:-\d{3})?", seller_tax_code):
@@ -1281,6 +1334,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 if invoice_match:
                     add_text_candidate("invoice_number", invoice_match.group(2), 0.65, "text:regex_invoice")
 
+                date_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", plain_text)
+                if date_match:
+                    add_date_source(date_match.group(1), 0.6, "text:regex_date")
+
                 for money in parse_money_mentions(plain_text):
                     add_amount_source(float(money), 0.55, "text:money_mention")
 
@@ -1291,6 +1348,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         details["supplier_name"] = supplier_best["value"]
         details["service_name"] = service_best["value"]
         details["invoice_number"] = invoice_best["value"]
+
+        if date_sources:
+            best_date = sorted(date_sources, key=lambda item: item["confidence"], reverse=True)[0]
+            details["invoice_date"] = str(best_date["value"])
 
         subtotal_value = max(schema_subtotals) if schema_subtotals else 0.0
         vat_value = max(schema_vat_values) if schema_vat_values else 0.0
@@ -1384,6 +1445,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         lowered = command_text.lower()
         joined_files = " ".join(file_names).lower()
         today = datetime.utcnow().date().isoformat()
+        inferred_date = str(details.get("invoice_date") or today)
         detected_amount = detect_amount_from_text(command_text)
         supplier_name = str(details.get("supplier_name") or "Nhà cung cấp từ hồ sơ đính kèm")
         service_name = str(details.get("service_name") or "Mua dịch vụ từ hồ sơ đính kèm")
@@ -1397,7 +1459,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "event": {
                     "source_id": "bank_statement",
                     "event_type": "gop_von",
-                    "statement_date": today,
+                    "statement_date": inferred_date,
                     "counterparty_name": supplier_name,
                     "description": service_name,
                     "amount": amount,
@@ -1413,7 +1475,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "event": {
                     "source_id": "bank_statement",
                     "event_type": "nop_thue",
-                    "statement_date": today,
+                    "statement_date": inferred_date,
                     "counterparty_name": supplier_name,
                     "description": service_name,
                     "amount": amount,
@@ -1433,7 +1495,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "source_id": "sales_invoice_xml",
                     "event_type": "ban_hang_dich_vu",
                     "invoice_no": invoice_number,
-                    "issue_date": today,
+                    "issue_date": inferred_date,
                     "buyer_tax_code": "0310001111",
                     "counterparty_name": supplier_name,
                     "description": service_name,
@@ -1455,7 +1517,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "source_id": "purchase_invoice_xml",
                 "event_type": "mua_dich_vu",
             "invoice_no": invoice_number,
-                "issue_date": today,
+                "issue_date": inferred_date,
                 "seller_tax_code": "0109999999",
             "counterparty_name": supplier_name,
             "description": service_name,
