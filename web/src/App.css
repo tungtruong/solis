@@ -1639,6 +1639,31 @@
   white-space: pre-wrap;
 }
 
+.chat-inline-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.79rem;
+}
+
+.chat-inline-table th,
+.chat-inline-table td {
+  text-align: left;
+  padding: 6px 7px;
+  border-bottom: 1px solid #e4edf8;
+  vertical-align: top;
+}
+
+.chat-inline-table th {
+  color: #355a7d;
+  font-weight: 700;
+  background: #f5f9ff;
+}
+
+.chat-inline-table td {
+  color: #375a7c;
+}
+
 .chat-bubble-top time {
   font-size: 0.76rem;
   color: #5f7fa0;

@@ -1345,8 +1345,21 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         }
 
     if payload.action == "case_command":
+        reject_tokens = [
+            "không đồng ý",
+            "khong dong y",
+            "không post",
+            "khong post",
+            "hủy post",
+            "huy post",
+            "sửa lại",
+            "sua lai",
+        ]
+
         def is_confirm_command(command_text: str) -> bool:
             lowered_cmd = str(command_text or "").lower()
+            if any(token in lowered_cmd for token in reject_tokens):
+                return False
             tokens = [
                 "xác nhận",
                 "xac nhan",
@@ -1362,17 +1375,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         def is_reject_command(command_text: str) -> bool:
             lowered_cmd = str(command_text or "").lower()
-            tokens = [
-                "không đồng ý",
-                "khong dong y",
-                "không post",
-                "khong post",
-                "hủy post",
-                "huy post",
-                "sửa lại",
-                "sua lai",
-            ]
-            return any(token in lowered_cmd for token in tokens)
+            return any(token in lowered_cmd for token in reject_tokens)
 
         case_id = payload.case_id or "CASE"
         case_items = storage.list_case_items(normalized_email)
@@ -1384,6 +1387,54 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     break
 
         pending_posting = current_item.get("pending_posting") if isinstance(current_item, dict) and isinstance(current_item.get("pending_posting"), dict) else None
+
+        if pending_posting and is_reject_command(text):
+            timeline_entries = [
+                {
+                    "id": f"{case_id}-user-reject-{uuid.uuid4().hex[:6]}",
+                    "kind": "user",
+                    "role": "user",
+                    "title": "Bạn",
+                    "body": text or "Chưa đồng ý post",
+                    "time": datetime.utcnow().strftime("%H:%M"),
+                },
+                {
+                    "id": f"{case_id}-reject-{uuid.uuid4().hex[:6]}",
+                    "kind": "analysis",
+                    "role": "system",
+                    "title": "Yêu cầu cập nhật hồ sơ",
+                    "body": "Đã ghi nhận yêu cầu chưa đồng ý post. Vui lòng cập nhật thông tin để hệ thống xử lý lại.",
+                    "time": datetime.utcnow().strftime("%H:%M"),
+                }
+            ]
+            if payload.case_id and current_item:
+                next_items = []
+                for item in case_items:
+                    if str(item.get("id") or "") != payload.case_id:
+                        next_items.append(item)
+                        continue
+                    current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
+                    current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
+                    updated_item = {
+                        **item,
+                        "timeline": [*current_timeline, *timeline_entries],
+                        "reasoning": ["Khách hàng chưa đồng ý post. Cần chỉnh sửa hoặc bổ sung hồ sơ.", *current_reasoning],
+                        "status": "dang_xu_ly",
+                        "statusLabel": "Đang xử lý",
+                        "pending_posting": None,
+                        "updatedAt": datetime.utcnow().date().isoformat(),
+                    }
+                    next_items.append(updated_item)
+                storage.replace_case_items(normalized_email, next_items, now)
+
+            return {
+                "ok": True,
+                "message": "Đã ghi nhận yêu cầu chưa đồng ý post. Vui lòng cập nhật thông tin hồ sơ để xử lý lại.",
+                "timeline_entries": timeline_entries,
+                "posting_accepted": False,
+                "requires_confirmation": False,
+                "updated_at": now,
+            }
 
         if pending_posting and is_confirm_command(text):
             pending_event = pending_posting.get("event") if isinstance(pending_posting.get("event"), dict) else {}
@@ -1470,54 +1521,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "updated_at": now,
             }
 
-        if pending_posting and is_reject_command(text):
-            timeline_entries = [
-                {
-                    "id": f"{case_id}-user-reject-{uuid.uuid4().hex[:6]}",
-                    "kind": "user",
-                    "role": "user",
-                    "title": "Bạn",
-                    "body": text or "Chưa đồng ý post",
-                    "time": datetime.utcnow().strftime("%H:%M"),
-                },
-                {
-                    "id": f"{case_id}-reject-{uuid.uuid4().hex[:6]}",
-                    "kind": "analysis",
-                    "role": "system",
-                    "title": "Yêu cầu cập nhật hồ sơ",
-                    "body": "Đã ghi nhận yêu cầu chưa đồng ý post. Vui lòng cập nhật thông tin để hệ thống xử lý lại.",
-                    "time": datetime.utcnow().strftime("%H:%M"),
-                }
-            ]
-            if payload.case_id and current_item:
-                next_items = []
-                for item in case_items:
-                    if str(item.get("id") or "") != payload.case_id:
-                        next_items.append(item)
-                        continue
-                    current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
-                    current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
-                    updated_item = {
-                        **item,
-                        "timeline": [*current_timeline, *timeline_entries],
-                        "reasoning": ["Khách hàng chưa đồng ý post. Cần chỉnh sửa hoặc bổ sung hồ sơ.", *current_reasoning],
-                        "status": "dang_xu_ly",
-                        "statusLabel": "Đang xử lý",
-                        "pending_posting": None,
-                        "updatedAt": datetime.utcnow().date().isoformat(),
-                    }
-                    next_items.append(updated_item)
-                storage.replace_case_items(normalized_email, next_items, now)
-
-            return {
-                "ok": True,
-                "message": "Đã ghi nhận yêu cầu chưa đồng ý post. Vui lòng cập nhật thông tin hồ sơ để xử lý lại.",
-                "timeline_entries": timeline_entries,
-                "posting_accepted": False,
-                "requires_confirmation": False,
-                "updated_at": now,
-            }
-
         attachment_count = len(payload.attachments)
         stored_attachment_names = save_case_attachments(case_id, payload.attachments)
         attachment_details = parse_attachment_details(payload.attachments, stored_attachment_names)
@@ -1535,8 +1538,22 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         service_name = str(attachment_details.get("service_name") or inferred_event.get("description") or "dịch vụ")
         parsed_amount = float(attachment_details.get("amount") or inferred_event.get("amount_total") or inferred_event.get("amount") or 0)
         invoice_no = str(attachment_details.get("invoice_number") or inferred_event.get("invoice_no") or "N/A")
+        invoice_date = str(
+            inferred_event.get("issue_date")
+            or inferred_event.get("statement_date")
+            or inferred_event.get("event_date")
+            or ""
+        )
         invoice_excerpt = str(attachment_details.get("invoice_content") or "")
         amount_text = f"{parsed_amount:,.0f}"
+
+        parse_table_rows = [
+            {"label": "Nhà cung cấp", "value": supplier_name},
+            {"label": "Nội dung", "value": service_name},
+            {"label": "Số hóa đơn", "value": invoice_no},
+            {"label": "Ngày hóa đơn", "value": invoice_date or "-"},
+            {"label": "Số tiền", "value": f"{amount_text} đồng"},
+        ]
 
         extract_body = (
             f"Đã tiếp nhận hồ sơ: {', '.join(stored_attachment_names)}"
@@ -1565,6 +1582,15 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "role": "system",
                 "title": "Tiếp nhận hồ sơ",
                 "body": extract_body,
+                "time": datetime.utcnow().strftime("%H:%M"),
+            },
+            {
+                "id": f"{case_id}-parse-table-{uuid.uuid4().hex[:6]}",
+                "kind": "analysis",
+                "role": "system",
+                "title": "Thông tin parse hồ sơ",
+                "body": "Hệ thống đã trích xuất các trường thông tin chính từ hồ sơ đính kèm.",
+                "table_rows": parse_table_rows,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
             {
@@ -1610,6 +1636,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "pending_posting": {
                         "event_type": inferred["event_type"],
                         "event": inferred_event,
+                        "parse_rows": parse_table_rows,
                         "parse_meta": attachment_details.get("parse_meta", {}),
                         "received_attachments": stored_attachment_names,
                     },
@@ -1635,6 +1662,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "invoice_number": invoice_no,
                 "amount": parsed_amount,
                 "attachment_count": attachment_count,
+                "parse_rows": parse_table_rows,
                 "parse_meta": attachment_details.get("parse_meta", {}),
             },
             "updated_at": now,

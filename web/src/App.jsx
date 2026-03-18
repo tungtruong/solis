@@ -442,13 +442,16 @@ function App() {
   const reasoning = Array.isArray(activeCase?.reasoning) ? activeCase.reasoning : []
   const pendingPosting = activeCase?.pendingPosting && typeof activeCase.pendingPosting === 'object' ? activeCase.pendingPosting : null
   const pendingEvent = pendingPosting?.event && typeof pendingPosting.event === 'object' ? pendingPosting.event : null
+  const pendingParseRowsFromServer = Array.isArray(pendingPosting?.parse_rows) ? pendingPosting.parse_rows : []
   const pendingInvoiceDate = String(
     pendingEvent?.issue_date || pendingEvent?.statement_date || pendingEvent?.event_date || '',
   ).trim()
   const pendingAmount = Number(
     pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || pendingEvent?.untaxed_amount || 0,
   )
-  const pendingParseRows = pendingEvent
+  const pendingParseRows = pendingParseRowsFromServer.length
+    ? pendingParseRowsFromServer
+    : pendingEvent
     ? [
         { label: 'Nhà cung cấp', value: String(pendingEvent.counterparty_name || pendingEvent.seller_name || '-') },
         { label: 'Nội dung', value: String(pendingEvent.description || pendingEvent.goods_service_type || '-') },
@@ -1530,6 +1533,24 @@ function App() {
                           }}
                         />
                       </p>
+                      {Array.isArray(event.table_rows) && event.table_rows.length ? (
+                        <table className="chat-inline-table">
+                          <thead>
+                            <tr>
+                              <th>Trường dữ liệu</th>
+                              <th>Giá trị</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {event.table_rows.map((row) => (
+                              <tr key={`${event.id}-${row.label}`}>
+                                <td>{row.label}</td>
+                                <td>{row.value}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      ) : null}
                     </div>
                   </article>
                 ))}
