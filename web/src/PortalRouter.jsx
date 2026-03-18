@@ -236,6 +236,27 @@ function OnboardPage({ onNavigate, session, setSession }) {
         const items = Array.isArray(payload.items) ? payload.items : []
         if (!ignore) {
           setCompanies(items)
+          const defaultCompanyId = String(payload.default_company_id || '')
+          const currentSessionCompanyId = String(session.companyId || '')
+          const resolvedCompany =
+            items.find((item) => String(item.company_id || '') === currentSessionCompanyId) ||
+            items.find((item) => String(item.company_id || '') === defaultCompanyId) ||
+            items[0] ||
+            null
+
+          if (resolvedCompany) {
+            const resolvedCompanyId = String(resolvedCompany.company_id || '')
+            const resolvedCompanyName = String(resolvedCompany.company_name || '')
+            if (resolvedCompanyId !== currentSessionCompanyId || resolvedCompanyName !== String(session.companyName || '')) {
+              const nextSession = {
+                ...session,
+                companyId: resolvedCompanyId,
+                companyName: resolvedCompanyName,
+              }
+              setSession(nextSession)
+              writeSession(nextSession)
+            }
+          }
           if (!items.length) {
             setCreateMode(true)
           }
@@ -250,7 +271,7 @@ function OnboardPage({ onNavigate, session, setSession }) {
     return () => {
       ignore = true
     }
-  }, [session.token])
+  }, [session.token, session.companyId, session.companyName])
 
   function updateField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }))

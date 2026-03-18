@@ -473,6 +473,8 @@ function App() {
       const response = await fetch(`/api/demo/cases?${params.toString()}`)
       if (!response.ok) return
       const payload = await response.json()
+      const sessionCompanyId = String(window.sessionStorage.getItem(STORAGE_COMPANY_ID_KEY) || '')
+      const sessionCompanyName = String(window.sessionStorage.getItem(STORAGE_COMPANY_NAME_KEY) || '')
       const items = Array.isArray(payload?.items) ? payload.items : []
       const normalized = items
         .map((item, idx) => normalizeCaseItem(item, idx))
@@ -499,8 +501,8 @@ function App() {
         setDashboardMeta(nextDashboardMeta)
         setServerPanels(nextServerPanels)
         setCurrentEmail(String(payload?.email || ''))
-        const payloadCompanyId = String(payload?.company?.company_id || currentCompanyId || '')
-        const payloadCompanyName = String(payload?.company?.company_name || currentCompanyName || '')
+        const payloadCompanyId = String(payload?.company?.company_id || sessionCompanyId || currentCompanyId || '')
+        const payloadCompanyName = String(payload?.company?.company_name || sessionCompanyName || currentCompanyName || '')
         if (payloadCompanyId) {
           setCurrentCompanyId(payloadCompanyId)
           window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, payloadCompanyId)

@@ -494,6 +494,7 @@ def resolve_company_id_for_user(email: str, requested_company_id: str = "") -> s
         onboard_company = storage.get_onboarding_company(normalized_email, requested)
         if onboard_company and str(onboard_company.get("company_id") or "").strip():
             return str(onboard_company.get("company_id"))
+        raise HTTPException(status_code=403, detail="COMPANY_ACCESS_DENIED")
 
     default_membership = storage.get_default_company_id(normalized_email)
     if default_membership:
@@ -507,9 +508,6 @@ def resolve_company_id_for_user(email: str, requested_company_id: str = "") -> s
     default_onboard = storage.get_default_onboarding_company(normalized_email)
     if default_onboard and str(default_onboard.get("company_id") or "").strip():
         return str(default_onboard.get("company_id"))
-
-    if requested:
-        return requested
 
     return "COMP-DEFAULT"
 
@@ -545,8 +543,6 @@ def _build_accessible_company_items(email: str) -> tuple[list[dict[str, Any]], s
         if not company_id:
             continue
         if company_id in combined:
-            if bool(onboarding.get("is_default")):
-                combined[company_id]["is_default"] = True
             continue
         fallback = dict(onboarding)
         fallback["company_id"] = company_id
@@ -2667,7 +2663,8 @@ def create_or_update_onboard_company(payload: CompanyProfilePayload, email: str 
                 existing_company = company
                 break
 
-    company_id = str(existing_company.get("company_id") or requested_company_id or f"COMP-{normalized_tax}").strip()
+    existing_company_id = str((existing_company or {}).get("company_id") or "").strip()
+    company_id = str(existing_company_id or requested_company_id or f"COMP-{normalized_tax}").strip()
 
     existing_tax_code = _normalize_tax_code(str(existing_company.get("tax_code") or "")) if existing_company else ""
     if existing_tax_code and existing_tax_code != normalized_tax:
