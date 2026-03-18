@@ -7,7 +7,6 @@ import {
   Cpu,
   FileCheck2,
   FileText,
-  HelpCircle,
   LayoutDashboard,
   MessageSquare,
   Paperclip,
@@ -1522,9 +1521,6 @@ function App() {
               )}
             </div>
           ) : null}
-          <button type="button" className="icon-action" aria-label="Trợ giúp" onClick={() => setActiveSection('settings')}>
-            <HelpCircle size={17} />
-          </button>
           <div className="user-menu-wrap" ref={userMenuRef}>
             <button type="button" className="user-chip" onClick={() => setIsUserMenuOpen((prev) => !prev)}>
               <UserCircle2 size={18} />
