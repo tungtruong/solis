@@ -1582,77 +1582,64 @@
   grid-auto-rows: max-content;
 }
 
-.timeline-card {
-  display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 8px;
-  align-items: start;
+.chat-row {
+  display: flex;
+  width: 100%;
 }
 
-.line-col {
-  display: grid;
-  justify-items: center;
-  grid-template-rows: auto 1fr;
+.chat-row-user {
+  justify-content: flex-end;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #0fa08b;
-  margin-top: 8px;
+.chat-row-system {
+  justify-content: flex-start;
 }
 
-.line {
-  width: 2px;
-  background: #cedcf0;
-  min-height: 40px;
-  margin-top: 3px;
+.chat-bubble {
+  width: min(82%, 760px);
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid #d7e6f8;
+  background: #ffffff;
 }
 
-.card-body {
-  border: 0;
-  background: transparent;
-  border-radius: 12px;
-  padding: 10px;
-  transition: background-color 0.18s ease;
+.chat-row-user .chat-bubble {
+  background: #e8f2ff;
+  border-color: #bfd7f4;
 }
 
-.timeline-card.analysis .card-body {
-  background: transparent;
+.chat-row-system .chat-bubble {
+  background: #ffffff;
+  border-color: #d9e7f7;
 }
 
-.timeline-card:hover .card-body,
-.timeline-card.analysis:hover .card-body {
-  background: #edf5ff;
-}
-
-.card-top {
+.chat-bubble-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-.card-title {
+.chat-bubble-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.card-title h3 {
+.chat-bubble-title h3 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
 }
 
-.card-body p {
+.chat-bubble-body {
   margin: 7px 0 0;
   color: #35587a;
   font-size: 0.86rem;
   line-height: 1.4;
+  white-space: pre-wrap;
 }
 
-.card-top time {
+.chat-bubble-top time {
   font-size: 0.76rem;
   color: #5f7fa0;
 }

@@ -1493,20 +1493,23 @@ function App() {
 
               <div className="timeline-stream scrollable-pane">
                 {timeline.slice(0, timelineVisibleCount).map((event, index) => (
-                  <article key={event.id} className={event.kind === 'analysis' ? 'timeline-card analysis' : 'timeline-card'}>
-                    <div className="line-col">
-                      <span className="dot" />
-                      {index < timelineVisibleCount - 1 ? <span className="line" /> : null}
-                    </div>
-                    <div className="card-body">
-                      <div className="card-top">
-                        <div className="card-title">
-                          {event.kind === 'analysis' ? <Bot size={16} /> : <MessageSquare size={16} />}
+                  <article
+                    key={event.id}
+                    className={
+                      event.role === 'user' || event.kind === 'user'
+                        ? 'chat-row chat-row-user'
+                        : 'chat-row chat-row-system'
+                    }
+                  >
+                    <div className="chat-bubble">
+                      <div className="chat-bubble-top">
+                        <div className="chat-bubble-title">
+                          {event.role === 'user' || event.kind === 'user' ? <MessageSquare size={16} /> : <Bot size={16} />}
                           <h3>{event.title}</h3>
                         </div>
                         <time>{event.time}</time>
                       </div>
-                      <p>
+                      <p className="chat-bubble-body">
                         <TypingText
                           text={event.body}
                           speed={8}

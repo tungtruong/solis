@@ -1409,15 +1409,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
             timeline_entries = [
                 {
-                    "id": f"{case_id}-confirm-{uuid.uuid4().hex[:6]}",
-                    "kind": "analysis",
-                    "title": "Khách hàng xác nhận",
-                    "body": "Khách hàng đã xác nhận thông tin hồ sơ và đồng ý thực hiện post bút toán.",
+                    "id": f"{case_id}-user-confirm-{uuid.uuid4().hex[:6]}",
+                    "kind": "user",
+                    "role": "user",
+                    "title": "Bạn",
+                    "body": text or "Xác nhận và đồng ý post",
                     "time": datetime.utcnow().strftime("%H:%M"),
                 },
                 {
                     "id": f"{case_id}-result-{uuid.uuid4().hex[:6]}",
                     "kind": "analysis",
+                    "role": "system",
                     "title": "Kết quả hạch toán",
                     "body": result_body,
                     "time": datetime.utcnow().strftime("%H:%M"),
@@ -1467,10 +1469,19 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         if pending_posting and is_reject_command(text):
             timeline_entries = [
                 {
+                    "id": f"{case_id}-user-reject-{uuid.uuid4().hex[:6]}",
+                    "kind": "user",
+                    "role": "user",
+                    "title": "Bạn",
+                    "body": text or "Chưa đồng ý post",
+                    "time": datetime.utcnow().strftime("%H:%M"),
+                },
+                {
                     "id": f"{case_id}-reject-{uuid.uuid4().hex[:6]}",
                     "kind": "analysis",
-                    "title": "Khách hàng chưa đồng ý post",
-                    "body": "Khách hàng yêu cầu rà soát lại thông tin trước khi hạch toán.",
+                    "role": "system",
+                    "title": "Yêu cầu cập nhật hồ sơ",
+                    "body": "Đã ghi nhận yêu cầu chưa đồng ý post. Vui lòng cập nhật thông tin để hệ thống xử lý lại.",
                     "time": datetime.utcnow().strftime("%H:%M"),
                 }
             ]
@@ -1528,6 +1539,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             if attachment_count
             else "Đã tiếp nhận yêu cầu xử lý hồ sơ không kèm tệp đính kèm."
         )
+
+        user_message = text or "Gửi hồ sơ đính kèm"
+        if stored_attachment_names:
+            user_message += f"\nĐính kèm: {', '.join(stored_attachment_names)}"
+
         if attachment_count:
             extract_body = (
                 f"Đã nhận hồ sơ: Nhà cung cấp {supplier_name}, dịch vụ {service_name}, số hóa đơn {invoice_no}, số tiền {amount_text} đồng."
@@ -1539,8 +1555,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         timeline_entries = [
             {
+                "id": f"{case_id}-user-input-{uuid.uuid4().hex[:6]}",
+                "kind": "user",
+                "role": "user",
+                "title": "Bạn",
+                "body": user_message,
+                "time": datetime.utcnow().strftime("%H:%M"),
+            },
+            {
                 "id": f"{case_id}-extract-{uuid.uuid4().hex[:6]}",
                 "kind": "analysis",
+                "role": "system",
                 "title": "Tiếp nhận hồ sơ",
                 "body": extract_body,
                 "time": datetime.utcnow().strftime("%H:%M"),
@@ -1548,6 +1573,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             {
                 "id": f"{case_id}-confirm-{uuid.uuid4().hex[:6]}",
                 "kind": "analysis",
+                "role": "system",
                 "title": "Yêu cầu xác nhận",
                 "body": confirm_body,
                 "time": datetime.utcnow().strftime("%H:%M"),
