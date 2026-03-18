@@ -1212,7 +1212,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             if invoice_excerpt:
                 extract_body += f" Nội dung hóa đơn: {invoice_excerpt[:180]}"
 
-        classify_body = f"AI phân loại nghiệp vụ dự kiến: {inferred['event_type']}."
         confirm_body = "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
 
         timeline_entries = [
@@ -1221,13 +1220,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "kind": "analysis",
                 "title": "Tiếp nhận hồ sơ",
                 "body": extract_body,
-                "time": datetime.utcnow().strftime("%H:%M"),
-            },
-            {
-                "id": f"{case_id}-route-{uuid.uuid4().hex[:6]}",
-                "kind": "analysis",
-                "title": "Phân loại & định tuyến",
-                "body": classify_body,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
             {
@@ -1261,7 +1253,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "evidence": merged_evidence,
                     "reasoning": [
                         f"Đã phân tích hồ sơ với {len(stored_attachment_names)} tệp đính kèm.",
-                        f"Nghiệp vụ dự kiến: {inferred['event_type']}.",
                         "Đang chờ khách hàng xác nhận trước khi post bút toán.",
                         *current_reasoning,
                     ],

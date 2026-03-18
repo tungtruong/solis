@@ -224,6 +224,7 @@ function normalizeCaseItem(raw, fallbackIndex = 0) {
   const statusLabelMap = {
     moi: 'Mới',
     dang_xu_ly: 'Đang xử lý',
+    cho_xac_nhan: 'Chờ khách hàng xác nhận',
     cho_duyet: 'Chờ duyệt',
     hoan_tat: 'Hoàn tất',
   }
@@ -240,6 +241,12 @@ function normalizeCaseItem(raw, fallbackIndex = 0) {
     timeline: Array.isArray(raw.timeline) ? raw.timeline : [],
     evidence: Array.isArray(raw.evidence) ? raw.evidence : [],
     reasoning: Array.isArray(raw.reasoning) ? raw.reasoning : [],
+    pendingPosting:
+      raw.pendingPosting && typeof raw.pendingPosting === 'object'
+        ? raw.pendingPosting
+        : raw.pending_posting && typeof raw.pending_posting === 'object'
+          ? raw.pending_posting
+          : null,
   }
 }
 
@@ -389,6 +396,20 @@ function App() {
   const timeline = Array.isArray(activeCase?.timeline) ? activeCase.timeline : []
   const evidence = Array.isArray(activeCase?.evidence) ? activeCase.evidence : []
   const reasoning = Array.isArray(activeCase?.reasoning) ? activeCase.reasoning : []
+  const pendingPosting = activeCase?.pendingPosting && typeof activeCase.pendingPosting === 'object' ? activeCase.pendingPosting : null
+  const pendingEvent = pendingPosting?.event && typeof pendingPosting.event === 'object' ? pendingPosting.event : null
+  const pendingAmount = Number(
+    pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || pendingEvent?.untaxed_amount || 0,
+  )
+  const pendingParseRows = pendingEvent
+    ? [
+        { label: 'Nhà cung cấp', value: String(pendingEvent.counterparty_name || pendingEvent.seller_name || '-') },
+        { label: 'Nội dung', value: String(pendingEvent.description || pendingEvent.goods_service_type || '-') },
+        { label: 'Số hóa đơn', value: String(pendingEvent.invoice_no || pendingEvent.reference_no || '-') },
+        { label: 'Số tiền', value: pendingAmount > 0 ? formatCurrency(pendingAmount) : '-' },
+        { label: 'Nghiệp vụ', value: String(pendingPosting.event_type || pendingEvent.event_type || '-') },
+      ]
+    : []
   const unfinishedCases = useMemo(() => cases.filter((item) => item.status !== 'hoan_tat'), [cases])
   const previewFileUrl = previewFileName ? `/evidence/${previewFileName}` : ''
   const isPdfPreview = /\.pdf$/i.test(previewFileName)
@@ -914,6 +935,21 @@ function App() {
     }
   }
 
+  async function handlePostingConfirmation(agree) {
+    if (!activeCaseId || isSendingCaseCommand) return
+    setIsSendingCaseCommand(true)
+    try {
+      const commandText = agree ? 'Xác nhận và đồng ý post' : 'Không đồng ý post'
+      const payload = await runUiAction('case_command', commandText, activeCaseId)
+      await reloadDemoCases(activeCaseId)
+      setCaseActionNotice(payload?.message || (agree ? 'Đã xác nhận post' : 'Đã từ chối post'))
+    } catch (error) {
+      setCaseActionNotice(error.message || 'Không xử lý được xác nhận')
+    } finally {
+      setIsSendingCaseCommand(false)
+    }
+  }
+
   async function handleDashboardAnalyze() {
     const text = dashboardQuery.trim()
     if (!text) {
@@ -1409,6 +1445,50 @@ function App() {
               </div>
 
               <div className="command-box">
+                {pendingParseRows.length ? (
+                  <section className="parse-summary-box">
+                    <div className="parse-summary-head">
+                      <h4>Thông tin parse hồ sơ</h4>
+                      <span>Vui lòng khách hàng xác nhận trước khi post</span>
+                    </div>
+                    <table className="parse-summary-table">
+                      <thead>
+                        <tr>
+                          <th>Trường dữ liệu</th>
+                          <th>Giá trị</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {pendingParseRows.map((row) => (
+                          <tr key={row.label}>
+                            <td>{row.label}</td>
+                            <td><TypingText text={row.value} speed={6} /></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    <div className="confirm-post-actions">
+                      <button
+                        type="button"
+                        className="confirm-post-btn"
+                        onClick={() => handlePostingConfirmation(true)}
+                        disabled={isSendingCaseCommand}
+                      >
+                        Xác nhận và đồng ý post
+                      </button>
+                      <button
+                        type="button"
+                        className="confirm-post-btn secondary"
+                        onClick={() => handlePostingConfirmation(false)}
+                        disabled={isSendingCaseCommand}
+                      >
+                        Chưa đồng ý post
+                      </button>
+                    </div>
+                  </section>
+                ) : null}
+
                 {attachedFiles.length ? (
                   <div className="attached-files-row">
                     {attachedFiles.map((file) => (
