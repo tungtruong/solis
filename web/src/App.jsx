@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Bell,
   Bot,
@@ -192,29 +192,51 @@ function parseDocRtfToSections(rawText) {
   ]
 }
 
-function TypingText({ text, speed = 8, onComplete }) {
+function TypingText({ text, speed = 8, onComplete, animate = true }) {
   const [visibleText, setVisibleText] = useState('')
+  const completedRef = useRef(false)
+  const onCompleteRef = useRef(onComplete)
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  }, [onComplete])
 
   useEffect(() => {
     const source = String(text || '')
-    setVisibleText('')
     if (!source) {
-      if (typeof onComplete === 'function') {
-        onComplete()
+      setVisibleText('')
+      if (!completedRef.current && typeof onCompleteRef.current === 'function') {
+        completedRef.current = true
+        onCompleteRef.current()
       }
       return undefined
     }
 
+    if (!animate) {
+      setVisibleText(source)
+      if (!completedRef.current && typeof onCompleteRef.current === 'function') {
+        completedRef.current = true
+        onCompleteRef.current()
+      }
+      return undefined
+    }
+
+    if (completedRef.current) {
+      setVisibleText(source)
+      return undefined
+    }
+
+    setVisibleText('')
+
     let index = 0
-    let done = false
     const timer = window.setInterval(() => {
       index += 1
       setVisibleText(source.slice(0, index))
       if (index >= source.length) {
         window.clearInterval(timer)
-        if (!done && typeof onComplete === 'function') {
-          done = true
-          onComplete()
+        if (!completedRef.current && typeof onCompleteRef.current === 'function') {
+          completedRef.current = true
+          onCompleteRef.current()
         }
       }
     }, speed)
@@ -222,7 +244,7 @@ function TypingText({ text, speed = 8, onComplete }) {
     return () => {
       window.clearInterval(timer)
     }
-  }, [text, speed, onComplete])
+  }, [text, speed, animate])
 
   return <span>{visibleText}</span>
 }
@@ -338,6 +360,17 @@ function App() {
   const [caseActionNotice, setCaseActionNotice] = useState('')
   const [isSendingCaseCommand, setIsSendingCaseCommand] = useState(false)
   const [timelineVisibleCount, setTimelineVisibleCount] = useState(0)
+  const typedMessageKeysRef = useRef(new Set())
+
+  const hasTypedKey = useCallback((key) => {
+    if (!key) return false
+    return typedMessageKeysRef.current.has(String(key))
+  }, [])
+
+  const markTypedKey = useCallback((key) => {
+    if (!key) return
+    typedMessageKeysRef.current.add(String(key))
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -428,8 +461,23 @@ function App() {
   )
 
   useEffect(() => {
-    setTimelineVisibleCount(timeline.length ? 1 : 0)
-  }, [activeCaseId, timeline.length, timelineSignature])
+    if (!timeline.length) {
+      setTimelineVisibleCount(0)
+      return
+    }
+
+    const firstUntypedIndex = timeline.findIndex((event) => {
+      const eventKey = `timeline:${activeCaseId || 'no_case'}:${String(event?.id || '')}`
+      return !hasTypedKey(eventKey)
+    })
+
+    if (firstUntypedIndex === -1) {
+      setTimelineVisibleCount(timeline.length)
+      return
+    }
+
+    setTimelineVisibleCount(firstUntypedIndex + 1)
+  }, [activeCaseId, timeline.length, timelineSignature, hasTypedKey])
   const unfinishedCases = useMemo(() => cases.filter((item) => item.status !== 'hoan_tat'), [cases])
   const previewFileUrl = previewFileName ? `/evidence/${previewFileName}` : ''
   const isPdfPreview = /\.pdf$/i.test(previewFileName)
@@ -1462,7 +1510,10 @@ function App() {
                         <TypingText
                           text={event.body}
                           speed={8}
+                          animate={!hasTypedKey(`timeline:${activeCaseId || 'no_case'}:${event.id}`)}
                           onComplete={() => {
+                            const eventKey = `timeline:${activeCaseId || 'no_case'}:${event.id}`
+                            markTypedKey(eventKey)
                             setTimelineVisibleCount((prev) => {
                               if (prev >= timeline.length) return prev
                               if (index !== prev - 1) return prev
@@ -1494,7 +1545,14 @@ function App() {
                         {pendingParseRows.map((row) => (
                           <tr key={row.label}>
                             <td>{row.label}</td>
-                            <td><TypingText text={row.value} speed={6} /></td>
+                            <td>
+                              <TypingText
+                                text={row.value}
+                                speed={6}
+                                animate={!hasTypedKey(`parse:${activeCaseId || 'no_case'}:${row.label}:${row.value}`)}
+                                onComplete={() => markTypedKey(`parse:${activeCaseId || 'no_case'}:${row.label}:${row.value}`)}
+                              />
+                            </td>
                           </tr>
                         ))}
                       </tbody>
