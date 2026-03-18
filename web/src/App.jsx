@@ -331,6 +331,13 @@ function formatCurrency(value) {
   return `${amount.toLocaleString('vi-VN')} VND`
 }
 
+function cleanNarrationText(value) {
+  return String(value || '')
+    .replace(/(^|\s)vừa(?=\s|$)/gi, '$1')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+}
+
 function downloadBase64File(fileName, mimeType, contentBase64) {
   const binary = window.atob(String(contentBase64 || ''))
   const bytes = new Uint8Array(binary.length)
@@ -389,6 +396,7 @@ function App() {
   const [reportEntity, setReportEntity] = useState('toan_bo')
   const [reportTxnFilter, setReportTxnFilter] = useState('tat_ca')
   const [reportDrillTab, setReportDrillTab] = useState('giao_dich')
+  const [reportDrillFirstColPct, setReportDrillFirstColPct] = useState(34)
   const [dashboardQuery, setDashboardQuery] = useState('')
   const [compliancePeriod, setCompliancePeriod] = useState('2026-03')
   const [complianceReportId, setComplianceReportId] = useState('gtgt')
@@ -2056,33 +2064,47 @@ function App() {
                         </button>
                       ))}
                     </div>
+                    <div className="report-column-control" role="group" aria-label="Điều chỉnh độ rộng cột bảng giao dịch">
+                      <label htmlFor="report-drill-col-width">Độ rộng cột đầu</label>
+                      <input
+                        id="report-drill-col-width"
+                        type="range"
+                        min="24"
+                        max="60"
+                        value={reportDrillFirstColPct}
+                        onChange={(event) => setReportDrillFirstColPct(Number(event.target.value))}
+                      />
+                      <span>{reportDrillFirstColPct}% / {100 - reportDrillFirstColPct}%</span>
+                    </div>
                     <div className="report-table-wrap">
                       <table className="report-table report-table-compact">
+                        <colgroup>
+                          <col style={{ width: `${reportDrillFirstColPct}%` }} />
+                          <col style={{ width: `${100 - reportDrillFirstColPct}%` }} />
+                        </colgroup>
                         <thead>
                           <tr>
                             <th>{reportDrillTab === 'giao_dich' ? 'Ngày hồ sơ' : 'Nhóm'}</th>
                             <th>Diễn giải</th>
-                            <th>Giá trị</th>
                           </tr>
                         </thead>
                         <tbody>
                           {reportDrillTab === 'giao_dich' ? (reportDetail?.gl?.items || []).slice(-8).map((item) => (
                             <tr key={item.entry_id}>
                               <td>{item.event_date || item.meta?.event_date || '-'}</td>
-                              <td>{item.narration || item.entry_id}</td>
-                              <td>{formatCurrency(item.debit_total)}</td>
+                              <td>{cleanNarrationText(item.narration || item.entry_id)}</td>
                             </tr>
                           )) : null}
                           {reportDrillTab === 'cong_no' ? (
                             <>
-                              <tr><td>Công nợ</td><td>Phải trả</td><td>{formatCurrency(payableValue)}</td></tr>
-                              <tr><td>Công nợ</td><td>Phải thu</td><td>{formatCurrency(receivableValue)}</td></tr>
+                              <tr><td>Công nợ</td><td>Phải trả: {formatCurrency(payableValue)}</td></tr>
+                              <tr><td>Công nợ</td><td>Phải thu: {formatCurrency(receivableValue)}</td></tr>
                             </>
                           ) : null}
                           {reportDrillTab === 'chi_phi' ? (
                             <>
-                              <tr><td>Chi phí</td><td>Tổng chi phí kỳ</td><td>{formatCurrency(reportCost)}</td></tr>
-                              <tr><td>Chi phí</td><td>Tỷ trọng chi phí / doanh thu</td><td>{reportCostRatioPct.toFixed(1)}%</td></tr>
+                              <tr><td>Chi phí</td><td>Tổng chi phí kỳ: {formatCurrency(reportCost)}</td></tr>
+                              <tr><td>Chi phí</td><td>Tỷ trọng chi phí / doanh thu: {reportCostRatioPct.toFixed(1)}%</td></tr>
                             </>
                           ) : null}
                         </tbody>
