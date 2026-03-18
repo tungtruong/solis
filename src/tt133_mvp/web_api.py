@@ -75,6 +75,7 @@ MOCK_USERS = [
         "phone": "0901000003",
     },
 ]
+MOCK_USER_EMAILS = {str(item.get("email") or "").lower().strip() for item in MOCK_USERS}
 
 
 def seed_mock_identity_data() -> None:
@@ -482,9 +483,14 @@ def build_ui_hints(has_company_profile: bool, last_action: str) -> Dict[str, Any
 def resolve_company_id_for_user(email: str, requested_company_id: str = "") -> str:
     normalized_email = email.lower().strip()
     requested = str(requested_company_id or "").strip()
+    include_mock_company = normalized_email in MOCK_USER_EMAILS
 
     memberships = storage.list_user_memberships(normalized_email)
-    membership_ids = {str(item.get("company_id") or "").strip() for item in memberships}
+    membership_ids = {
+        str(item.get("company_id") or "").strip()
+        for item in memberships
+        if include_mock_company or str(item.get("company_id") or "").strip() != MOCK_COMPANY_ID
+    }
     membership_ids.discard("")
 
     if requested and requested in membership_ids:
@@ -497,11 +503,19 @@ def resolve_company_id_for_user(email: str, requested_company_id: str = "") -> s
         raise HTTPException(status_code=403, detail="COMPANY_ACCESS_DENIED")
 
     default_membership = storage.get_default_company_id(normalized_email)
-    if default_membership:
+    if default_membership and (include_mock_company or str(default_membership).strip() != MOCK_COMPANY_ID):
         return str(default_membership)
 
     if memberships:
-        first_membership_company_id = str(memberships[0].get("company_id") or "").strip()
+        first_membership_company_id = next(
+            (
+                str(item.get("company_id") or "").strip()
+                for item in memberships
+                if str(item.get("company_id") or "").strip()
+                and (include_mock_company or str(item.get("company_id") or "").strip() != MOCK_COMPANY_ID)
+            ),
+            "",
+        )
         if first_membership_company_id:
             return first_membership_company_id
 
@@ -519,6 +533,7 @@ def company_scope_key(company_id: str) -> str:
 
 def _build_accessible_company_items(email: str) -> tuple[list[dict[str, Any]], str]:
     normalized_email = email.lower().strip()
+    include_mock_company = normalized_email in MOCK_USER_EMAILS
     memberships = storage.list_user_memberships(normalized_email)
     onboarding_companies = storage.list_onboarding_companies(normalized_email)
 
@@ -527,6 +542,8 @@ def _build_accessible_company_items(email: str) -> tuple[list[dict[str, Any]], s
     for membership in memberships:
         company_id = str(membership.get("company_id") or "").strip()
         if not company_id:
+            continue
+        if not include_mock_company and company_id == MOCK_COMPANY_ID:
             continue
         company_payload = storage.get_company(company_id) or {}
         merged = {**company_payload, **membership}
@@ -541,6 +558,8 @@ def _build_accessible_company_items(email: str) -> tuple[list[dict[str, Any]], s
     for onboarding in onboarding_companies:
         company_id = str(onboarding.get("company_id") or "").strip()
         if not company_id:
+            continue
+        if not include_mock_company and company_id == MOCK_COMPANY_ID:
             continue
         if company_id in combined:
             continue
@@ -2474,6 +2493,7 @@ def login_demo(payload: LoginPayload, request: Request) -> Dict[str, Any]:
     token = str(uuid.uuid4())
     now = datetime.utcnow().isoformat() + "Z"
     if not storage.get_user(normalized_email):
+        is_mock_user = normalized_email in MOCK_USER_EMAILS
         storage.upsert_user(
             normalized_email,
             {
@@ -2481,19 +2501,20 @@ def login_demo(payload: LoginPayload, request: Request) -> Dict[str, Any]:
                 "full_name": normalized_email.split("@")[0],
                 "role": "staff",
                 "status": "active",
-                "company_id": MOCK_COMPANY_ID,
+                "company_id": MOCK_COMPANY_ID if is_mock_user else "",
             },
             now,
             now,
         )
-        storage.upsert_user_company_membership(
-            email=normalized_email,
-            company_id=MOCK_COMPANY_ID,
-            role="staff",
-            is_default=True,
-            payload={"company_name": MOCK_COMPANY_PROFILE["company_name"], "scope": "accounting"},
-            updated_at=now,
-        )
+        if is_mock_user:
+            storage.upsert_user_company_membership(
+                email=normalized_email,
+                company_id=MOCK_COMPANY_ID,
+                role="staff",
+                is_default=True,
+                payload={"company_name": MOCK_COMPANY_PROFILE["company_name"], "scope": "accounting"},
+                updated_at=now,
+            )
 
     storage.save_session(token, normalized_email, now)
     _clear_login_rate_limit(normalized_email, request)
