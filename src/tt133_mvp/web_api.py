@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import binascii
+from collections import Counter
 import re
 import uuid
 from datetime import datetime
@@ -824,16 +825,262 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "invoice_content": "",
             "amount": 0.0,
             "files": stored_names,
+            "parse_meta": {
+                "invoice_type": "unknown",
+                "schema_version": "",
+                "status": "needs_review",
+                "confidence": {
+                    "supplier_name": 0.0,
+                    "service_name": 0.0,
+                    "invoice_number": 0.0,
+                    "amount": 0.0,
+                    "overall": 0.0,
+                },
+                "issues": [],
+                "reconcile": {},
+            },
         }
 
-        field_values: Dict[str, str] = {}
-        amount_candidates: List[float] = []
+        issues: List[str] = []
+        xml_schema_counter: Counter[str] = Counter()
+        xml_versions: List[str] = []
+
+        text_candidates: Dict[str, List[Dict[str, Any]]] = {
+            "supplier_name": [],
+            "service_name": [],
+            "invoice_number": [],
+        }
+        amount_sources: List[Dict[str, Any]] = []
+        schema_totals: List[float] = []
+        schema_subtotals: List[float] = []
+        schema_vat_values: List[float] = []
+        line_totals: List[float] = []
+        tax_rates: List[float] = []
 
         def clean_extracted_value(value: str, max_len: int = 180) -> str:
-            # Remove XML/HTML tags and collapse whitespace before storing extracted business fields.
             cleaned = re.sub(r"<[^>]+>", " ", str(value or ""))
             cleaned = re.sub(r"\s+", " ", cleaned).strip(" \t\r\n:;,-")
             return cleaned[:max_len]
+
+        def local_tag(tag: str) -> str:
+            raw = str(tag or "")
+            if "}" in raw:
+                raw = raw.rsplit("}", 1)[1]
+            return raw.strip().lower()
+
+        def to_amount(value: Any) -> float:
+            text_value = clean_extracted_value(str(value or ""), max_len=120)
+            if not text_value:
+                return 0.0
+            mentions = parse_money_mentions(text_value)
+            if mentions:
+                return float(max(mentions))
+            token = re.sub(r"[^\d\.,-]", "", text_value)
+            if not token:
+                return 0.0
+            return max(parse_number_token(token), 0.0)
+
+        def add_text_candidate(field: str, value: str, confidence: float, source: str) -> None:
+            cleaned = clean_extracted_value(value)
+            if not cleaned:
+                return
+            text_candidates[field].append(
+                {
+                    "value": cleaned,
+                    "confidence": max(0.0, min(float(confidence), 1.0)),
+                    "source": source,
+                }
+            )
+
+        def add_amount_source(value: float, confidence: float, source: str) -> None:
+            if value <= 0:
+                return
+            amount_sources.append(
+                {
+                    "value": float(value),
+                    "confidence": max(0.0, min(float(confidence), 1.0)),
+                    "source": source,
+                }
+            )
+
+        def collect_path_values(root: ET.Element) -> Dict[str, List[str]]:
+            path_values: Dict[str, List[str]] = {}
+
+            def walk(node: ET.Element, path: str = "") -> None:
+                tag = local_tag(node.tag)
+                if not tag:
+                    return
+                current_path = f"{path}_{tag}" if path else tag
+                value = clean_extracted_value(str(node.text or ""))
+                if value:
+                    path_values.setdefault(current_path, []).append(value)
+                    path_values.setdefault(tag, []).append(value)
+                for child in list(node):
+                    walk(child, current_path)
+
+            walk(root)
+            return path_values
+
+        def pick_first_path(path_values: Dict[str, List[str]], keys: List[str]) -> str:
+            for key in keys:
+                values = path_values.get(str(key).lower(), [])
+                for value in values:
+                    if value:
+                        return value
+            return ""
+
+        def pick_all_amounts(path_values: Dict[str, List[str]], keys: List[str]) -> List[float]:
+            collected: List[float] = []
+            for key in keys:
+                values = path_values.get(str(key).lower(), [])
+                for value in values:
+                    amount = to_amount(value)
+                    if amount > 0:
+                        collected.append(amount)
+            return collected
+
+        def detect_schema(root: ET.Element, xml_text: str, path_values: Dict[str, List[str]]) -> Dict[str, str]:
+            xml_lower = str(xml_text or "").lower()
+            root_name = local_tag(root.tag)
+            namespace = ""
+            root_tag = str(root.tag or "")
+            if root_tag.startswith("{") and "}" in root_tag:
+                namespace = root_tag[1:].split("}", 1)[0]
+
+            version = ""
+            for candidate in ["pban", "version", "schema_version"]:
+                value = pick_first_path(path_values, [candidate])
+                if value:
+                    version = value
+                    break
+
+            has_signature = bool(re.search(r"<\s*signature\b|<\s*dscks\b|signedinfo", xml_lower, flags=re.IGNORECASE))
+
+            invoice_type = "unknown"
+            if "misa" in xml_lower or "amis" in xml_lower:
+                invoice_type = "misa_custom"
+            elif (
+                root_name in {"hdon", "hoadon"}
+                and pick_first_path(path_values, ["ttchung_shdon", "dlhdon_ttchung_shdon"])
+                and pick_first_path(path_values, ["ndhdon_nban_ten", "dlhdon_ndhdon_nban_ten"])
+            ):
+                invoice_type = "viettel_variant"
+            elif namespace or pick_first_path(path_values, ["invoice", "invoiceno", "amounttotal"]):
+                invoice_type = "gdt_standard"
+
+            if invoice_type == "unknown" and has_signature and root_name in {"hdon", "hoadon"}:
+                invoice_type = "viettel_variant"
+
+            return {
+                "invoice_type": invoice_type,
+                "version": version,
+                "root_tag": root_name,
+                "namespace": namespace,
+            }
+
+        def parse_by_schema(invoice_type: str, path_values: Dict[str, List[str]]) -> Dict[str, Any]:
+            if invoice_type == "viettel_variant":
+                return {
+                    "supplier": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nban_ten",
+                        "dlhdon_ndhdon_nban_ten",
+                        "ndhdon_nban_ten",
+                        "nban_ten",
+                    ]),
+                    "service": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_dshhdvu_hhdvu_thhdvu",
+                        "dlhdon_ndhdon_dshhdvu_hhdvu_thhdvu",
+                        "ndhdon_dshhdvu_hhdvu_thhdvu",
+                        "thhdvu",
+                    ]),
+                    "invoice": pick_first_path(path_values, [
+                        "hdon_dlhdon_ttchung_shdon",
+                        "dlhdon_ttchung_shdon",
+                        "ttchung_shdon",
+                        "shdon",
+                    ]),
+                    "seller_tax_code": pick_first_path(path_values, [
+                        "hdon_dlhdon_ndhdon_nban_mst",
+                        "dlhdon_ndhdon_nban_mst",
+                        "ndhdon_nban_mst",
+                        "nban_mst",
+                    ]),
+                    "subtotal_candidates": pick_all_amounts(path_values, [
+                        "hdon_dlhdon_ndhdon_ttoan_tgtcthue",
+                        "dlhdon_ndhdon_ttoan_tgtcthue",
+                        "ndhdon_ttoan_tgtcthue",
+                        "tgtcthue",
+                    ]),
+                    "vat_candidates": pick_all_amounts(path_values, [
+                        "hdon_dlhdon_ndhdon_ttoan_tgtthue",
+                        "dlhdon_ndhdon_ttoan_tgtthue",
+                        "ndhdon_ttoan_tgtthue",
+                        "tgtthue",
+                    ]),
+                    "total_candidates": pick_all_amounts(path_values, [
+                        "hdon_dlhdon_ndhdon_ttoan_tgtttbso",
+                        "dlhdon_ndhdon_ttoan_tgtttbso",
+                        "ndhdon_ttoan_tgtttbso",
+                        "tgtttbso",
+                    ]),
+                    "line_amounts": pick_all_amounts(path_values, [
+                        "hdon_dlhdon_ndhdon_dshhdvu_hhdvu_thtien",
+                        "dlhdon_ndhdon_dshhdvu_hhdvu_thtien",
+                        "ndhdon_dshhdvu_hhdvu_thtien",
+                        "thtien",
+                    ]),
+                    "tax_rates": pick_all_amounts(path_values, [
+                        "hdon_dlhdon_ndhdon_dshhdvu_hhdvu_tsuat",
+                        "dlhdon_ndhdon_dshhdvu_hhdvu_tsuat",
+                        "ndhdon_dshhdvu_hhdvu_tsuat",
+                        "tsuat",
+                    ]),
+                }
+
+            if invoice_type == "misa_custom":
+                return {
+                    "supplier": pick_first_path(path_values, ["sellername", "supplier", "counterparty_name"]),
+                    "service": pick_first_path(path_values, ["description", "itemname", "tendichvu"]),
+                    "invoice": pick_first_path(path_values, ["invoiceno", "invoice_no", "invoice"]),
+                    "seller_tax_code": pick_first_path(path_values, ["sellertaxcode", "mst", "taxcode"]),
+                    "subtotal_candidates": pick_all_amounts(path_values, ["untaxedamount", "amount_untaxed", "subtotal"]),
+                    "vat_candidates": pick_all_amounts(path_values, ["vatamount", "taxamount"]),
+                    "total_candidates": pick_all_amounts(path_values, ["amounttotal", "totalamount", "amount_total"]),
+                    "line_amounts": pick_all_amounts(path_values, ["lineamount", "thtien"]),
+                    "tax_rates": pick_all_amounts(path_values, ["taxrate", "tsuat"]),
+                }
+
+            return {
+                "supplier": pick_first_path(path_values, ["supplier", "sellername", "counterparty_name", "tennguoiban", "nban_ten"]),
+                "service": pick_first_path(path_values, ["description", "itemname", "thhdvu", "diengiai"]),
+                "invoice": pick_first_path(path_values, ["invoiceno", "invoice_no", "invoice", "shdon"]),
+                "seller_tax_code": pick_first_path(path_values, ["sellertaxcode", "mst", "taxcode", "nban_mst"]),
+                "subtotal_candidates": pick_all_amounts(path_values, ["untaxedamount", "subtotal", "tgtcthue", "amount_untaxed"]),
+                "vat_candidates": pick_all_amounts(path_values, ["vatamount", "taxamount", "tgtthue"]),
+                "total_candidates": pick_all_amounts(path_values, ["amounttotal", "totalamount", "tgtttbso", "amount_total"]),
+                "line_amounts": pick_all_amounts(path_values, ["lineamount", "thtien"]),
+                "tax_rates": pick_all_amounts(path_values, ["taxrate", "tsuat"]),
+            }
+
+        def pick_best_text(field: str) -> Dict[str, Any]:
+            candidates = text_candidates[field]
+            if not candidates:
+                return {"value": "", "confidence": 0.0}
+            sorted_candidates = sorted(candidates, key=lambda item: (item["confidence"], len(str(item["value"]))), reverse=True)
+            return {"value": str(sorted_candidates[0]["value"]), "confidence": float(sorted_candidates[0]["confidence"])}
+
+        def majority_vote_numeric(values: List[float]) -> Dict[str, Any]:
+            positive_values = [float(v) for v in values if float(v) > 0]
+            if not positive_values:
+                return {"value": 0.0, "count": 0, "size": 0}
+            rounded = [int(round(v)) for v in positive_values]
+            counts = Counter(rounded)
+            winner, count = counts.most_common(1)[0]
+            return {
+                "value": float(winner),
+                "count": int(count),
+                "size": len(rounded),
+            }
 
         for item in attachments:
             text = extract_attachment_text(item)
@@ -842,123 +1089,160 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
             ext = Path(str(item.name or "")).suffix.lower()
             plain_text = text
-
             if ext == ".xml":
                 plain_text = re.sub(r"<[^>]+>", " ", text)
                 plain_text = re.sub(r"\s+", " ", plain_text).strip()
 
             if not details["invoice_content"]:
-                compact = " ".join(plain_text.split())
-                details["invoice_content"] = compact[:260]
+                details["invoice_content"] = " ".join(plain_text.split())[:260]
 
             if ext == ".xml":
                 try:
                     root = ET.fromstring(text)
-                    def collect_xml_fields(node: ET.Element, path: str = "") -> None:
-                        tag = str(node.tag)
-                        if "}" in tag:
-                            tag = tag.rsplit("}", 1)[1]
-                        current_tag = tag.strip().lower()
-                        current_path = f"{path}_{current_tag}" if path else current_tag
-                        value = clean_extracted_value(str(node.text or ""))
-                        if value:
-                            if current_tag not in field_values:
-                                field_values[current_tag] = value
-                            if current_path not in field_values:
-                                field_values[current_path] = value
-                        for child in list(node):
-                            collect_xml_fields(child, current_path)
+                    path_values = collect_path_values(root)
+                    schema = detect_schema(root, text, path_values)
+                    invoice_type = schema["invoice_type"]
+                    xml_schema_counter[invoice_type] += 1
+                    if schema.get("version"):
+                        xml_versions.append(schema["version"])
 
-                    collect_xml_fields(root)
-                    for node in root.iter():
-                        tag = str(node.tag)
-                        if "}" in tag:
-                            tag = tag.rsplit("}", 1)[1]
-                        key = tag.strip().lower()
-                        value = str(node.text or "").strip()
-                        if key and value and key not in field_values:
-                            field_values[key] = clean_extracted_value(value)
+                    mapped = parse_by_schema(invoice_type, path_values)
+                    add_text_candidate("supplier_name", str(mapped.get("supplier") or ""), 0.95, f"{invoice_type}:supplier")
+                    add_text_candidate("service_name", str(mapped.get("service") or ""), 0.9, f"{invoice_type}:service")
+                    add_text_candidate("invoice_number", str(mapped.get("invoice") or ""), 0.95, f"{invoice_type}:invoice")
+
+                    seller_tax_code = clean_extracted_value(str(mapped.get("seller_tax_code") or ""), max_len=30)
+                    if seller_tax_code and not re.fullmatch(r"\d{10}(?:-\d{3})?", seller_tax_code):
+                        issues.append(f"Mã số thuế người bán không đúng định dạng: {seller_tax_code}")
+
+                    mapped_subtotals = [float(v) for v in mapped.get("subtotal_candidates", []) if float(v) > 0]
+                    mapped_vats = [float(v) for v in mapped.get("vat_candidates", []) if float(v) > 0]
+                    mapped_totals = [float(v) for v in mapped.get("total_candidates", []) if float(v) > 0]
+                    mapped_lines = [float(v) for v in mapped.get("line_amounts", []) if float(v) > 0]
+                    mapped_rates = [float(v) for v in mapped.get("tax_rates", []) if float(v) > 0]
+
+                    schema_subtotals.extend(mapped_subtotals)
+                    schema_vat_values.extend(mapped_vats)
+                    schema_totals.extend(mapped_totals)
+                    line_totals.extend(mapped_lines)
+                    tax_rates.extend(mapped_rates)
+
+                    for value in mapped_totals:
+                        add_amount_source(float(value), 0.95, f"{invoice_type}:total_tag")
+                    for value in mapped_subtotals:
+                        add_amount_source(float(value), 0.75, f"{invoice_type}:subtotal_tag")
                 except ET.ParseError:
-                    pass
+                    issues.append(f"Không parse được XML của tệp {item.name}")
+                    add_amount_source(detect_amount_from_text(plain_text), 0.4, "xml:plain_text_fallback")
+            else:
+                supplier_match = re.search(r"(nhà\s*cung\s*cấp|supplier|vendor|seller)\s*[:\-]?\s*([^\n\r;]{3,120})", plain_text, flags=re.IGNORECASE)
+                if supplier_match:
+                    add_text_candidate("supplier_name", supplier_match.group(2), 0.6, "text:regex_supplier")
 
-            if ext != ".xml":
-                amount_candidates.extend(parse_money_mentions(plain_text))
+                service_match = re.search(r"(dịch\s*vụ|service|hàng\s*hóa|description|nội\s*dung)\s*[:\-]?\s*([^\n\r;]{3,160})", plain_text, flags=re.IGNORECASE)
+                if service_match:
+                    add_text_candidate("service_name", service_match.group(2), 0.6, "text:regex_service")
 
-            supplier_match = re.search(r"(nhà\s*cung\s*cấp|supplier|vendor|seller)\s*[:\-]?\s*([^\n\r;]{3,120})", plain_text, flags=re.IGNORECASE)
-            if supplier_match and not details["supplier_name"]:
-                details["supplier_name"] = clean_extracted_value(supplier_match.group(2), max_len=120)
+                invoice_match = re.search(r"(số\s*hóa\s*đơn|invoice\s*no|invoice|sohd)\s*[:\-]?\s*([A-Za-z0-9\-_/]{4,40})", plain_text, flags=re.IGNORECASE)
+                if invoice_match:
+                    add_text_candidate("invoice_number", invoice_match.group(2), 0.65, "text:regex_invoice")
 
-            service_match = re.search(r"(dịch\s*vụ|service|hàng\s*hóa|description|nội\s*dung)\s*[:\-]?\s*([^\n\r;]{3,160})", plain_text, flags=re.IGNORECASE)
-            if service_match and not details["service_name"]:
-                details["service_name"] = clean_extracted_value(service_match.group(2), max_len=160)
+                for money in parse_money_mentions(plain_text):
+                    add_amount_source(float(money), 0.55, "text:money_mention")
 
-            invoice_match = re.search(r"(số\s*hóa\s*đơn|invoice\s*no|invoice|sohd)\s*[:\-]?\s*([A-Za-z0-9\-_/]{4,40})", plain_text, flags=re.IGNORECASE)
-            if invoice_match and not details["invoice_number"]:
-                details["invoice_number"] = clean_extracted_value(invoice_match.group(2), max_len=40)
+        supplier_best = pick_best_text("supplier_name")
+        service_best = pick_best_text("service_name")
+        invoice_best = pick_best_text("invoice_number")
 
-        def pick_first(keys: List[str]) -> str:
-            for key in keys:
-                value = field_values.get(key)
-                if value:
-                    return value
-            return ""
+        details["supplier_name"] = supplier_best["value"]
+        details["service_name"] = service_best["value"]
+        details["invoice_number"] = invoice_best["value"]
+
+        subtotal_value = max(schema_subtotals) if schema_subtotals else 0.0
+        vat_value = max(schema_vat_values) if schema_vat_values else 0.0
+        total_tag_value = max(schema_totals) if schema_totals else 0.0
+        lines_sum = sum(line_totals) if line_totals else 0.0
+        computed_total = (subtotal_value + vat_value) if subtotal_value > 0 and vat_value >= 0 else 0.0
+        lines_plus_vat = (lines_sum + vat_value) if lines_sum > 0 and vat_value >= 0 else 0.0
+
+        vote_candidates = [value for value in [total_tag_value, computed_total, lines_plus_vat] if value > 0]
+        vote = majority_vote_numeric(vote_candidates)
+
+        final_amount = 0.0
+        amount_confidence = 0.0
+        if vote["count"] >= 2:
+            final_amount = float(vote["value"])
+            amount_confidence = 0.95
+        elif total_tag_value > 0:
+            final_amount = float(round(total_tag_value))
+            amount_confidence = 0.88
+        elif amount_sources:
+            strongest = sorted(amount_sources, key=lambda item: (item["confidence"], item["value"]), reverse=True)[0]
+            final_amount = float(round(float(strongest["value"])))
+            amount_confidence = float(strongest["confidence"])
+
+        details["amount"] = final_amount
+
+        reconcile: Dict[str, Any] = {
+            "total_tag": total_tag_value,
+            "subtotal": subtotal_value,
+            "vat": vat_value,
+            "sum_line_items": lines_sum,
+            "subtotal_plus_vat": computed_total,
+            "sum_line_items_plus_vat": lines_plus_vat,
+            "vote_count": vote["count"],
+            "vote_size": vote["size"],
+        }
+
+        if total_tag_value > 0 and computed_total > 0 and abs(total_tag_value - computed_total) > 2:
+            issues.append("Đối chiếu thất bại: tổng tiền khác subtotal + VAT")
+        if total_tag_value > 0 and lines_sum > 0 and abs(total_tag_value - lines_sum - vat_value) > 3:
+            issues.append("Đối chiếu thất bại: tổng tiền khác tổng dòng hàng + VAT")
+
+        if final_amount <= 0:
+            issues.append("Tổng tiền hóa đơn bằng 0 hoặc không xác định")
+        if subtotal_value > 0 and vat_value > subtotal_value * 0.5:
+            issues.append("VAT vượt ngưỡng bất thường (>50% subtotal)")
+        if any(value < 0 for value in [total_tag_value, subtotal_value, vat_value, lines_sum]):
+            issues.append("Phát hiện giá trị âm bất thường trong hóa đơn")
 
         if not details["supplier_name"]:
-            details["supplier_name"] = clean_extracted_value(pick_first([
-                "hdon_dlhdon_ndhdon_nban_ten",
-                "ndhdon_nban_ten",
-                "dlhdon_ndhdon_nban_ten",
-                "nban_ten",
-                "tennguoiban",
-                "nguoiban",
-                "tenban",
-                "supplier",
-                "sellername",
-                "vendorname",
-                "counterparty_name",
-            ]), max_len=120)
-        if not details["service_name"]:
-            details["service_name"] = clean_extracted_value(pick_first([
-                "ndhdon_dshhdvu_hhdvu_thhdvu",
-                "dlhdon_ndhdon_dshhdvu_hhdvu_thhdvu",
-                "thhdvu",
-                "tendichvu",
-                "tenhanghoa",
-                "diengiai",
-                "description",
-                "itemname",
-                "ten_hang_hoa",
-            ]), max_len=160)
+            issues.append("Không xác định được nhà cung cấp")
         if not details["invoice_number"]:
-            details["invoice_number"] = clean_extracted_value(pick_first([
-                "dlhdon_ttchung_shdon",
-                "ttchung_shdon",
-                "shdon",
-                "sohoadon",
-                "invoice",
-                "invoiceno",
-                "mahoadon",
-                "invoice_no",
-            ]), max_len=40)
+            issues.append("Không xác định được số hóa đơn")
 
-        xml_amount_text = pick_first([
-            "dlhdon_ndhdon_ttoan_tgtttbso",
-            "ndhdon_ttoan_tgtttbso",
-            "tgtttbso",
-            "dlhdon_ndhdon_ttoan_tgtcthue",
-            "ndhdon_ttoan_tgtcthue",
-            "tgtcthue",
-            "tongtienthanhtoan",
-            "tongthanhtoan",
-            "amounttotal",
-            "amount_total",
-            "thanhtien",
-        ])
-        if xml_amount_text:
-            amount_candidates.extend(parse_money_mentions(xml_amount_text))
+        if xml_schema_counter:
+            dominant_schema = xml_schema_counter.most_common(1)[0][0]
+        else:
+            dominant_schema = "unknown"
 
-        if amount_candidates:
-            details["amount"] = max(amount_candidates)
+        overall_confidence = (
+            supplier_best["confidence"]
+            + service_best["confidence"]
+            + invoice_best["confidence"]
+            + amount_confidence
+        ) / 4
+
+        status = "ok"
+        if any("bất thường" in item.lower() for item in issues):
+            status = "suspicious"
+        elif issues or overall_confidence < 0.75 or dominant_schema == "unknown":
+            status = "needs_review"
+
+        details["parse_meta"] = {
+            "invoice_type": dominant_schema,
+            "schema_version": max(xml_versions) if xml_versions else "",
+            "status": status,
+            "confidence": {
+                "supplier_name": round(float(supplier_best["confidence"]), 3),
+                "service_name": round(float(service_best["confidence"]), 3),
+                "invoice_number": round(float(invoice_best["confidence"]), 3),
+                "amount": round(float(amount_confidence), 3),
+                "overall": round(float(overall_confidence), 3),
+            },
+            "issues": issues,
+            "reconcile": reconcile,
+        }
 
         return details
 
@@ -1303,6 +1587,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "pending_posting": {
                         "event_type": inferred["event_type"],
                         "event": inferred_event,
+                        "parse_meta": attachment_details.get("parse_meta", {}),
                         "received_attachments": stored_attachment_names,
                     },
                     "updatedAt": datetime.utcnow().date().isoformat(),
@@ -1327,6 +1612,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "invoice_number": invoice_no,
                 "amount": parsed_amount,
                 "attachment_count": attachment_count,
+                "parse_meta": attachment_details.get("parse_meta", {}),
             },
             "updated_at": now,
         }
