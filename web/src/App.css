@@ -2006,6 +2006,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.82rem;
+  table-layout: fixed;
 }
 
 .structured-table th,
@@ -2024,6 +2025,19 @@
 
 .structured-table td {
   color: #3d5f82;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.structured-table th:first-child,
+.structured-table td:first-child {
+  width: 34%;
+}
+
+.structured-table th:last-child,
+.structured-table td:last-child {
+  width: 66%;
 }
 
 .docx-preview-wrap {
