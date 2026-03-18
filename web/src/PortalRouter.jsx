@@ -23,32 +23,29 @@ function pushPath(pathname) {
 }
 
 function readSession() {
-  if (typeof window === 'undefined') {
-    return { token: '', email: '', hasCompanyProfile: false }
-  }
+  if (typeof window === 'undefined') return { token: '', email: '', hasCompanyProfile: false }
   return {
-    token: String(window.localStorage.getItem(STORAGE_TOKEN_KEY) || ''),
-    email: String(window.localStorage.getItem(STORAGE_EMAIL_KEY) || ''),
-    hasCompanyProfile: window.localStorage.getItem(STORAGE_HAS_PROFILE_KEY) === 'true',
+    token: String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || ''),
+    email: String(window.sessionStorage.getItem(STORAGE_EMAIL_KEY) || ''),
+    hasCompanyProfile: window.sessionStorage.getItem(STORAGE_HAS_PROFILE_KEY) === 'true',
   }
 }
 
 function writeSession(session) {
-  window.localStorage.setItem(STORAGE_TOKEN_KEY, String(session.token || ''))
-  window.localStorage.setItem(STORAGE_EMAIL_KEY, String(session.email || ''))
-  window.localStorage.setItem(STORAGE_HAS_PROFILE_KEY, String(Boolean(session.hasCompanyProfile)))
+  window.sessionStorage.setItem(STORAGE_TOKEN_KEY, String(session.token || ''))
+  window.sessionStorage.setItem(STORAGE_EMAIL_KEY, String(session.email || ''))
+  window.sessionStorage.setItem(STORAGE_HAS_PROFILE_KEY, String(Boolean(session.hasCompanyProfile)))
 }
 
 function clearSession() {
-  window.localStorage.removeItem(STORAGE_TOKEN_KEY)
-  window.localStorage.removeItem(STORAGE_EMAIL_KEY)
-  window.localStorage.removeItem(STORAGE_HAS_PROFILE_KEY)
+  window.sessionStorage.removeItem(STORAGE_TOKEN_KEY)
+  window.sessionStorage.removeItem(STORAGE_EMAIL_KEY)
+  window.sessionStorage.removeItem(STORAGE_HAS_PROFILE_KEY)
 }
 
 function parseErrorMessage(payload, fallback) {
   if (!payload) return fallback
-  if (typeof payload.detail === 'string' && payload.detail.trim()) return payload.detail
-  if (typeof payload.message === 'string' && payload.message.trim()) return payload.message
+  if (typeof payload.code === 'string' && payload.code.trim()) return `${fallback} (${payload.code})`
   return fallback
 }
 
@@ -58,6 +55,9 @@ function isProfileComplete(profile) {
     'company_name',
     'tax_code',
     'address',
+    'legal_representative',
+    'established_date',
+    'accounting_software_start_date',
     'fiscal_year_start',
     'tax_declaration_cycle',
     'default_bank_account',
@@ -77,7 +77,7 @@ function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding =
           <span className="brand-text">Solis</span>
         </button>
         <nav className="public-nav" aria-label="Điều hướng công khai">
-          <button type="button" onClick={() => onNavigate('/login')}>Đăng nhập</button>
+          <button type="button" className="nav-primary" onClick={() => onNavigate('/login')}>Đăng nhập</button>
         </nav>
       </header>
       <main className="public-main">
@@ -110,7 +110,6 @@ function LandingPage({ onNavigate }) {
           <button type="button" className="nav-primary" onClick={() => onNavigate('/login')}>Đăng nhập</button>
         </nav>
       </header>
-
       <main className="landing-main">
         <section className="landing-hero">
           <p className="public-eyebrow">Hệ sinh thái tài chính AI cho doanh nghiệp</p>
@@ -119,29 +118,14 @@ function LandingPage({ onNavigate }) {
             <span> Solis</span>
           </h1>
           <p>
-            Đây là landing page của website chính. Sau khi đăng nhập, hệ thống sẽ đưa bạn đến Onboard.
-            Khi thông tin doanh nghiệp đã đầy đủ, bạn sẽ được chuyển vào trang SolisAcc.
+            Sau khi đăng nhập, hệ thống sẽ chuyển bạn vào Onboard. Bạn có thể chọn công ty đã có hoặc tạo công ty mới.
+            Khi thông tin đầy đủ, hệ thống mới vào SolisAcc.
           </p>
           <div className="landing-actions">
             <button type="button" className="cta-main" onClick={() => onNavigate('/login')}>
               Bắt đầu với Đăng nhập
             </button>
           </div>
-        </section>
-
-        <section className="landing-cards" aria-label="Giá trị nổi bật">
-          <article>
-            <h2>Auto posting có kiểm soát</h2>
-            <p>Phân tích hóa đơn, map tài khoản theo TT133 và sinh bút toán để bạn phê duyệt nhanh.</p>
-          </article>
-          <article>
-            <h2>Bảng điều khiển vận hành</h2>
-            <p>Theo dõi case, chứng từ, báo cáo và trạng thái xử lý trên một giao diện thống nhất.</p>
-          </article>
-          <article>
-            <h2>Sẵn sàng kết nối</h2>
-            <p>Thống nhất login, onboard và workspace kế toán trên các route riêng để mở rộng về sau.</p>
-          </article>
         </section>
       </main>
     </div>
@@ -166,7 +150,7 @@ function LoginPage({ onNavigate, session, setSession }) {
       })
       const payload = await response.json().catch(() => ({}))
       if (!response.ok) {
-        throw new Error(parseErrorMessage(payload, 'Đăng nhập thất bại'))
+        throw new Error(parseErrorMessage(payload, 'Đăng nhập không thành công. Vui lòng thử lại.'))
       }
       const nextSession = {
         token: String(payload.token || ''),
@@ -177,26 +161,26 @@ function LoginPage({ onNavigate, session, setSession }) {
       writeSession(nextSession)
       onNavigate('/onboard')
     } catch (submitError) {
-      setError(submitError.message || 'Đăng nhập thất bại')
+      setError(submitError.message || 'Đăng nhập không thành công. Vui lòng thử lại.')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <PublicShell title="Đăng nhập Solis" eyebrow="Route /login" onNavigate={onNavigate}>
-      <form className="public-form" onSubmit={handleSubmit}>
+    <PublicShell title="Đăng nhập Solis" eyebrow="Bảo mật cao" onNavigate={onNavigate}>
+      <form className="public-form" onSubmit={handleSubmit} autoComplete="off">
         <label>
           Email
-          <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+          <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoComplete="username" />
         </label>
         <label>
           Mật khẩu
-          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required minLength={3} />
+          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required minLength={3} autoComplete="current-password" />
         </label>
         {error ? <p className="form-error">{error}</p> : null}
         <button type="submit" className="cta-main" disabled={loading}>
-          {loading ? 'Đang xử lý...' : 'Đăng nhập'}
+          {loading ? 'Đang xác thực...' : 'Đăng nhập'}
         </button>
       </form>
     </PublicShell>
@@ -204,15 +188,22 @@ function LoginPage({ onNavigate, session, setSession }) {
 }
 
 function OnboardPage({ onNavigate, session, setSession }) {
-  const [loadingProfile, setLoadingProfile] = useState(false)
+  const [companies, setCompanies] = useState([])
+  const [loadingCompanies, setLoadingCompanies] = useState(false)
+  const [lookingUpTax, setLookingUpTax] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [createMode, setCreateMode] = useState(false)
   const [form, setForm] = useState({
-    company_name: '',
+    company_id: '',
     tax_code: '',
+    company_name: '',
     address: '',
-    fiscal_year_start: '2026-01-01',
+    legal_representative: '',
+    established_date: '',
+    accounting_software_start_date: new Date().toISOString().slice(0, 10),
+    fiscal_year_start: new Date().toISOString().slice(0, 10),
     tax_declaration_cycle: 'thang',
     default_bank_account: '',
     accountant_email: session.email || '',
@@ -221,41 +212,115 @@ function OnboardPage({ onNavigate, session, setSession }) {
   useEffect(() => {
     if (!session.token) return
     let ignore = false
-    async function loadProfile() {
-      setLoadingProfile(true)
+    async function loadCompanies() {
+      setLoadingCompanies(true)
       setError('')
       try {
-        const response = await fetch('/api/company/profile', {
+        const response = await fetch('/api/onboard/companies', {
           headers: { Authorization: `Bearer ${session.token}` },
         })
         const payload = await response.json().catch(() => ({}))
         if (!response.ok) {
-          throw new Error(parseErrorMessage(payload, 'Không tải được hồ sơ công ty'))
+          throw new Error(parseErrorMessage(payload, 'Không tải được danh sách công ty'))
         }
-        if (!ignore && payload.exists && payload.profile) {
-          const profile = payload.profile
-          setForm((prev) => ({ ...prev, ...profile }))
-          if (isProfileComplete(profile)) {
-            const nextSession = { ...session, hasCompanyProfile: true }
-            setSession(nextSession)
-            writeSession(nextSession)
-            onNavigate('/SolisAcc')
+        const items = Array.isArray(payload.items) ? payload.items : []
+        if (!ignore) {
+          setCompanies(items)
+          if (!items.length) {
+            setCreateMode(true)
           }
         }
       } catch (loadError) {
-        if (!ignore) setError(loadError.message || 'Không tải được hồ sơ công ty')
+        if (!ignore) setError(loadError.message || 'Không tải được danh sách công ty')
       } finally {
-        if (!ignore) setLoadingProfile(false)
+        if (!ignore) setLoadingCompanies(false)
       }
     }
-    loadProfile()
+    loadCompanies()
     return () => {
       ignore = true
     }
-  }, [onNavigate, session, session.token, setSession])
+  }, [session.token])
 
   function updateField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }))
+  }
+
+  async function selectExistingCompany(companyId) {
+    if (!session.token) return
+    setError('')
+    setSuccess('')
+    try {
+      const response = await fetch('/api/onboard/select-company', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.token}`,
+        },
+        body: JSON.stringify({ company_id: companyId }),
+      })
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(parseErrorMessage(payload, 'Không thể chọn công ty'))
+      }
+      if (payload.profile && typeof payload.profile === 'object') {
+        setForm((prev) => ({ ...prev, ...payload.profile }))
+      }
+      if (payload.is_complete) {
+        const nextSession = { ...session, hasCompanyProfile: true }
+        setSession(nextSession)
+        writeSession(nextSession)
+        onNavigate('/SolisAcc')
+        return
+      }
+      setCreateMode(true)
+      setSuccess('Đã chọn công ty. Vui lòng bổ sung thông tin còn thiếu để tiếp tục.')
+    } catch (selectError) {
+      setError(selectError.message || 'Không thể chọn công ty')
+    }
+  }
+
+  async function lookupByTaxCode() {
+    const tax = String(form.tax_code || '').trim()
+    if (!tax) {
+      setError('Vui lòng nhập mã số thuế trước khi tra cứu.')
+      return
+    }
+    if (!session.token) {
+      setError('Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại.')
+      return
+    }
+    setLookingUpTax(true)
+    setError('')
+    try {
+      const query = new URLSearchParams({ tax_code: tax })
+      const response = await fetch(`/api/onboard/company-lookup?${query.toString()}`, {
+        headers: { Authorization: `Bearer ${session.token}` },
+      })
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(parseErrorMessage(payload, 'Không tra cứu được mã số thuế'))
+      }
+      const profile = payload.profile && typeof payload.profile === 'object' ? payload.profile : null
+      if (!profile) {
+        setSuccess('Không có dữ liệu tự động. Bạn có thể nhập thủ công.')
+        return
+      }
+      setForm((prev) => ({
+        ...prev,
+        tax_code: String(profile.tax_code || prev.tax_code || ''),
+        company_name: String(profile.company_name || prev.company_name || ''),
+        address: String(profile.address || prev.address || ''),
+        legal_representative: String(profile.legal_representative || prev.legal_representative || ''),
+        established_date: String(profile.established_date || prev.established_date || ''),
+        company_id: String(profile.company_id || prev.company_id || ''),
+      }))
+      setSuccess('Đã điền thông tin doanh nghiệp từ dữ liệu tra cứu.')
+    } catch (lookupError) {
+      setError(lookupError.message || 'Không tra cứu được mã số thuế')
+    } finally {
+      setLookingUpTax(false)
+    }
   }
 
   async function handleSubmit(event) {
@@ -268,7 +333,7 @@ function OnboardPage({ onNavigate, session, setSession }) {
     setError('')
     setSuccess('')
     try {
-      const response = await fetch('/api/company/profile', {
+      const response = await fetch('/api/onboard/companies', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -280,11 +345,16 @@ function OnboardPage({ onNavigate, session, setSession }) {
       if (!response.ok) {
         throw new Error(parseErrorMessage(payload, 'Lưu thông tin thất bại'))
       }
-      const nextSession = { ...session, hasCompanyProfile: true }
+      const completed = Boolean(payload.is_complete) && isProfileComplete(payload.profile)
+      const nextSession = { ...session, hasCompanyProfile: completed }
       setSession(nextSession)
       writeSession(nextSession)
-      setSuccess('Đã lưu hồ sơ công ty thành công')
-      setTimeout(() => onNavigate('/SolisAcc'), 450)
+      if (completed) {
+        setSuccess('Đã lưu thông tin công ty. Đang chuyển vào SolisAcc...')
+        setTimeout(() => onNavigate('/SolisAcc'), 400)
+        return
+      }
+      setSuccess('Đã lưu nháp. Vui lòng hoàn thiện đầy đủ thông tin để vào SolisAcc.')
     } catch (submitError) {
       setError(submitError.message || 'Lưu thông tin thất bại')
     } finally {
@@ -293,46 +363,93 @@ function OnboardPage({ onNavigate, session, setSession }) {
   }
 
   return (
-    <PublicShell title="Onboard doanh nghiệp" eyebrow="Route /onboard" onNavigate={onNavigate}>
-      <form className="public-form" onSubmit={handleSubmit}>
-        <label>
-          Tên công ty
-          <input value={form.company_name} onChange={(event) => updateField('company_name', event.target.value)} required />
-        </label>
-        <label>
-          Mã số thuế
-          <input value={form.tax_code} onChange={(event) => updateField('tax_code', event.target.value)} required />
-        </label>
-        <label>
-          Địa chỉ
-          <input value={form.address} onChange={(event) => updateField('address', event.target.value)} required />
-        </label>
-        <label>
-          Ngày bắt đầu năm tài chính
-          <input type="date" value={form.fiscal_year_start} onChange={(event) => updateField('fiscal_year_start', event.target.value)} required />
-        </label>
-        <label>
-          Chu kỳ kê khai
-          <select value={form.tax_declaration_cycle} onChange={(event) => updateField('tax_declaration_cycle', event.target.value)}>
-            <option value="thang">Tháng</option>
-            <option value="quy">Quý</option>
-          </select>
-        </label>
-        <label>
-          Tài khoản ngân hàng mặc định
-          <input value={form.default_bank_account} onChange={(event) => updateField('default_bank_account', event.target.value)} required />
-        </label>
-        <label>
-          Email kế toán
-          <input type="email" value={form.accountant_email} onChange={(event) => updateField('accountant_email', event.target.value)} required />
-        </label>
-        {loadingProfile ? <p className="form-note">Đang tải hồ sơ hiện có...</p> : null}
-        {error ? <p className="form-error">{error}</p> : null}
-        {success ? <p className="form-success">{success}</p> : null}
-        <button type="submit" className="cta-main" disabled={submitting}>
-          {submitting ? 'Đang lưu...' : 'Lưu và vào SolisAcc'}
-        </button>
-      </form>
+    <PublicShell title="Onboard doanh nghiệp" eyebrow="Bảo mật cao" onNavigate={onNavigate}>
+      <p className="form-note">Bắt đầu từ mã số thuế để tra cứu thông tin pháp lý tự động.</p>
+
+      {!createMode && companies.length > 0 ? (
+        <div className="company-list-wrap">
+          <h2 className="company-list-title">Chọn công ty đã có</h2>
+          <div className="company-list">
+            {companies.map((item) => (
+              <article key={item.company_id} className="company-card">
+                <p className="company-name">{item.company_name || 'Chưa có tên công ty'}</p>
+                <p className="company-meta">MST: {item.tax_code || '-'}</p>
+                <p className="company-meta">{item.address || 'Chưa có địa chỉ'}</p>
+                <button type="button" className="cta-main" onClick={() => selectExistingCompany(item.company_id)}>
+                  Dùng công ty này
+                </button>
+              </article>
+            ))}
+          </div>
+          <button type="button" className="cta-sub cta-sub-solid" onClick={() => setCreateMode(true)}>
+            Tạo công ty mới
+          </button>
+        </div>
+      ) : null}
+
+      {createMode ? (
+        <form className="public-form" onSubmit={handleSubmit} autoComplete="off">
+          <label>
+            Mã số thuế
+            <div className="inline-row">
+              <input value={form.tax_code} onChange={(event) => updateField('tax_code', event.target.value)} required />
+              <button type="button" className="cta-sub cta-sub-solid" onClick={lookupByTaxCode} disabled={lookingUpTax}>
+                {lookingUpTax ? 'Đang tra cứu...' : 'Tra cứu MST'}
+              </button>
+            </div>
+          </label>
+          <label>
+            Tên doanh nghiệp
+            <input value={form.company_name} onChange={(event) => updateField('company_name', event.target.value)} required />
+          </label>
+          <label>
+            Địa chỉ
+            <input value={form.address} onChange={(event) => updateField('address', event.target.value)} required />
+          </label>
+          <label>
+            Người đại diện pháp luật
+            <input value={form.legal_representative} onChange={(event) => updateField('legal_representative', event.target.value)} required />
+          </label>
+          <label>
+            Ngày thành lập
+            <input type="date" value={form.established_date} onChange={(event) => updateField('established_date', event.target.value)} required />
+          </label>
+          <label>
+            Ngày bắt đầu phần mềm kế toán
+            <input type="date" value={form.accounting_software_start_date} onChange={(event) => updateField('accounting_software_start_date', event.target.value)} required />
+          </label>
+          <label>
+            Ngày bắt đầu năm tài chính
+            <input type="date" value={form.fiscal_year_start} onChange={(event) => updateField('fiscal_year_start', event.target.value)} required />
+          </label>
+          <label>
+            Chu kỳ kê khai
+            <select value={form.tax_declaration_cycle} onChange={(event) => updateField('tax_declaration_cycle', event.target.value)}>
+              <option value="thang">Tháng</option>
+              <option value="quy">Quý</option>
+            </select>
+          </label>
+          <label>
+            Tài khoản ngân hàng mặc định
+            <input value={form.default_bank_account} onChange={(event) => updateField('default_bank_account', event.target.value)} required />
+          </label>
+          <label>
+            Email kế toán
+            <input type="email" value={form.accountant_email} onChange={(event) => updateField('accountant_email', event.target.value)} required />
+          </label>
+          {loadingCompanies ? <p className="form-note">Đang tải danh sách công ty...</p> : null}
+          {error ? <p className="form-error">{error}</p> : null}
+          {success ? <p className="form-success">{success}</p> : null}
+          <button type="submit" className="cta-main" disabled={submitting}>
+            {submitting ? 'Đang lưu...' : 'Lưu thông tin và tiếp tục'}
+          </button>
+          {companies.length > 0 ? (
+            <button type="button" className="cta-sub cta-sub-solid" onClick={() => setCreateMode(false)}>
+              Quay lại danh sách công ty
+            </button>
+          ) : null}
+        </form>
+      ) : null}
     </PublicShell>
   )
 }
@@ -350,7 +467,7 @@ export default function PortalRouter() {
   useEffect(() => {
     const titleByPath = {
       '/': 'Solis',
-      '/login': 'Solis | Login',
+      '/login': 'Solis | Đăng nhập',
       '/onboard': 'Solis | Onboard',
     }
     const normalized = path.startsWith('/SolisAcc') ? '/SolisAcc' : path
@@ -364,12 +481,6 @@ export default function PortalRouter() {
     },
     [],
   )
-
-  function handleLogout() {
-    clearSession()
-    setSession({ token: '', email: '', hasCompanyProfile: false })
-    navigate('/login')
-  }
 
   if (path === '/SolisAcc' || path.startsWith('/SolisAcc/')) {
     if (!session.token) {
@@ -388,7 +499,7 @@ export default function PortalRouter() {
   if (path === '/onboard') {
     if (!session.token) {
       return (
-        <PublicShell title="Bạn chưa đăng nhập" eyebrow="Route /onboard" onNavigate={navigate}>
+        <PublicShell title="Bạn chưa đăng nhập" eyebrow="Bảo mật cao" onNavigate={navigate}>
           <p>Vui lòng đăng nhập trước khi khai báo thông tin doanh nghiệp.</p>
           <div className="landing-actions">
             <button type="button" className="cta-main" onClick={() => navigate('/login')}>
@@ -401,5 +512,5 @@ export default function PortalRouter() {
     return <OnboardPage onNavigate={navigate} session={session} setSession={setSession} />
   }
 
-  return <LandingPage onNavigate={navigate} onLogout={handleLogout} />
+  return <LandingPage onNavigate={navigate} />
 }

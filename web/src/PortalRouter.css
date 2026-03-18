@@ -203,6 +203,12 @@
   border: 1px solid rgba(255, 255, 255, 0.44);
 }
 
+.cta-sub-solid {
+  background: #ffffff;
+  color: #144070;
+  border: 1px solid #9fbbe0;
+}
+
 .landing-cards {
   margin-top: 20px;
   display: grid;
@@ -264,6 +270,55 @@
   margin-top: 2px;
   width: fit-content;
   min-width: 180px;
+}
+
+.inline-row {
+  display: flex;
+  gap: 8px;
+}
+
+.inline-row input {
+  flex: 1;
+}
+
+.inline-row .cta-sub {
+  white-space: nowrap;
+}
+
+.company-list-wrap {
+  display: grid;
+  gap: 12px;
+}
+
+.company-list-title {
+  margin: 8px 0 0;
+  color: #113258;
+  font-size: 20px;
+}
+
+.company-list {
+  display: grid;
+  gap: 10px;
+}
+
+.company-card {
+  border: 1px solid #ccdaed;
+  border-radius: 14px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(15, 41, 77, 0.08);
+}
+
+.company-name {
+  margin: 0;
+  font-weight: 700;
+  color: #13365f;
+}
+
+.company-meta {
+  margin: 4px 0;
+  color: #3a5678;
+  font-size: 14px;
 }
 
 .form-note,

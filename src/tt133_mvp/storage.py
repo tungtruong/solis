@@ -80,6 +80,20 @@ class AppStorage:
                 )
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS onboarding_companies (
+                    email TEXT NOT NULL,
+                    company_id TEXT NOT NULL,
+                    tax_code TEXT NOT NULL,
+                    payload_json TEXT NOT NULL,
+                    is_default INTEGER NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    PRIMARY KEY (email, company_id)
+                )
+                """
+            )
             self._ensure_column(conn, "users", "status", "TEXT NOT NULL DEFAULT 'active'")
             conn.execute(
                 """
@@ -335,12 +349,154 @@ class AppStorage:
                 (email, json.dumps(payload, ensure_ascii=False), updated_at),
             )
 
-    def get_company_profile(self, email: str) -> Optional[Dict[str, Any]]:
+    def upsert_onboarding_company(
+        self,
+        email: str,
+        company_id: str,
+        tax_code: str,
+        payload: Dict[str, Any],
+        is_default: bool,
+        updated_at: str,
+    ) -> None:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+        normalized_tax_code = str(tax_code or "").strip()
+        with self.connect() as conn:
+            created_row = conn.execute(
+                "SELECT created_at FROM onboarding_companies WHERE email = ? AND company_id = ?",
+                (normalized_email, normalized_company_id),
+            ).fetchone()
+            created_at = str(created_row["created_at"]) if created_row else updated_at
+            if is_default:
+                conn.execute("UPDATE onboarding_companies SET is_default = 0 WHERE email = ?", (normalized_email,))
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO onboarding_companies(
+                    email, company_id, tax_code, payload_json, is_default, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    normalized_email,
+                    normalized_company_id,
+                    normalized_tax_code,
+                    json.dumps(payload, ensure_ascii=False),
+                    1 if is_default else 0,
+                    created_at,
+                    updated_at,
+                ),
+            )
+
+    def list_onboarding_companies(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        with self.connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT company_id, tax_code, payload_json, is_default, created_at, updated_at
+                FROM onboarding_companies
+                WHERE email = ?
+                ORDER BY is_default DESC, updated_at DESC
+                """,
+                (normalized_email,),
+            ).fetchall()
+            items: List[Dict[str, Any]] = []
+            for row in rows:
+                payload = json.loads(str(row["payload_json"]))
+                payload["company_id"] = str(row["company_id"])
+                payload["tax_code"] = str(row["tax_code"])
+                payload["is_default"] = bool(row["is_default"])
+                payload["created_at"] = str(row["created_at"])
+                payload["updated_at"] = str(row["updated_at"])
+                items.append(payload)
+            return items
+
+    def get_default_onboarding_company(self, email: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
         with self.connect() as conn:
             row = conn.execute(
-                "SELECT payload_json FROM company_profiles WHERE email = ?",
-                (email,),
+                """
+                SELECT company_id, tax_code, payload_json, is_default, created_at, updated_at
+                FROM onboarding_companies
+                WHERE email = ? AND is_default = 1
+                LIMIT 1
+                """,
+                (normalized_email,),
             ).fetchone()
+            if not row:
+                return None
+            payload = json.loads(str(row["payload_json"]))
+            payload["company_id"] = str(row["company_id"])
+            payload["tax_code"] = str(row["tax_code"])
+            payload["is_default"] = bool(row["is_default"])
+            payload["created_at"] = str(row["created_at"])
+            payload["updated_at"] = str(row["updated_at"])
+            return payload
+
+    def get_onboarding_company(self, email: str, company_id: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+        with self.connect() as conn:
+            row = conn.execute(
+                """
+                SELECT company_id, tax_code, payload_json, is_default, created_at, updated_at
+                FROM onboarding_companies
+                WHERE email = ? AND company_id = ?
+                LIMIT 1
+                """,
+                (normalized_email, normalized_company_id),
+            ).fetchone()
+            if not row:
+                return None
+            payload = json.loads(str(row["payload_json"]))
+            payload["company_id"] = str(row["company_id"])
+            payload["tax_code"] = str(row["tax_code"])
+            payload["is_default"] = bool(row["is_default"])
+            payload["created_at"] = str(row["created_at"])
+            payload["updated_at"] = str(row["updated_at"])
+            return payload
+
+    def find_onboarding_company_by_tax_code(self, email: str, tax_code: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        normalized_tax_code = str(tax_code or "").strip()
+        with self.connect() as conn:
+            row = conn.execute(
+                """
+                SELECT company_id, tax_code, payload_json, is_default, created_at, updated_at
+                FROM onboarding_companies
+                WHERE email = ? AND tax_code = ?
+                LIMIT 1
+                """,
+                (normalized_email, normalized_tax_code),
+            ).fetchone()
+            if not row:
+                return None
+            payload = json.loads(str(row["payload_json"]))
+            payload["company_id"] = str(row["company_id"])
+            payload["tax_code"] = str(row["tax_code"])
+            payload["is_default"] = bool(row["is_default"])
+            payload["created_at"] = str(row["created_at"])
+            payload["updated_at"] = str(row["updated_at"])
+            return payload
+
+    def set_default_onboarding_company(self, email: str, company_id: str, updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+        with self.connect() as conn:
+            conn.execute("UPDATE onboarding_companies SET is_default = 0 WHERE email = ?", (normalized_email,))
+            conn.execute(
+                """
+                UPDATE onboarding_companies
+                SET is_default = 1, updated_at = ?
+                WHERE email = ? AND company_id = ?
+                """,
+                (updated_at, normalized_email, normalized_company_id),
+            )
+
+    def get_company_profile(self, email: str) -> Optional[Dict[str, Any]]:
+        default_profile = self.get_default_onboarding_company(email)
+        if default_profile:
+            return default_profile
+        with self.connect() as conn:
+            row = conn.execute("SELECT payload_json FROM company_profiles WHERE email = ?", (email,)).fetchone()
             if not row:
                 return None
             return json.loads(str(row["payload_json"]))

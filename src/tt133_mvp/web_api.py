@@ -3,16 +3,22 @@ from __future__ import annotations
 import base64
 import binascii
 from collections import Counter
+import json
 import mimetypes
+import os
 import re
 import shutil
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
 import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from xml.etree import ElementTree as ET
 
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -100,27 +106,62 @@ def seed_mock_identity_data() -> None:
             "company_name": MOCK_COMPANY_PROFILE["company_name"],
             "tax_code": MOCK_COMPANY_PROFILE["tax_code"],
             "address": MOCK_COMPANY_PROFILE["address"],
+            "legal_representative": MOCK_COMPANY_PROFILE["legal_representative"],
+            "established_date": "2017-04-01",
             "fiscal_year_start": MOCK_COMPANY_PROFILE["fiscal_year_start"],
             "tax_declaration_cycle": MOCK_COMPANY_PROFILE["tax_declaration_cycle"],
             "default_bank_account": MOCK_COMPANY_PROFILE["default_bank_account"],
             "accountant_email": "accountant@wssmeas.local",
+            "accounting_software_start_date": "2026-01-01",
             "company_id": MOCK_COMPANY_ID,
             "user_role": user.get("role"),
         }
         storage.upsert_company_profile(email, profile_payload, now)
+        storage.upsert_onboarding_company(
+            email=email,
+            company_id=MOCK_COMPANY_ID,
+            tax_code=MOCK_COMPANY_PROFILE["tax_code"],
+            payload=profile_payload,
+            is_default=True,
+            updated_at=now,
+        )
         storage.upsert_opening_balances(email, {"lines": []}, now)
 
 
 seed_mock_identity_data()
 
 app = FastAPI(title="TT133 MVP Web API", version="0.1.0")
+allowed_origins_raw = os.getenv("SOLIS_ALLOWED_ORIGINS", "http://127.0.0.1:5173,http://localhost:5173")
+allowed_origins = [origin.strip() for origin in allowed_origins_raw.split(",") if origin.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
+
+AUTH_ONBOARD_NO_STORE_PATHS = (
+    "/api/auth/",
+    "/api/company/",
+    "/api/onboard/",
+)
+
+
+@app.middleware("http")
+async def apply_sensitive_no_store_headers(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.startswith(AUTH_ONBOARD_NO_STORE_PATHS):
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
+    return response
+
+
+LOGIN_ATTEMPTS: Dict[str, List[float]] = {}
+LOGIN_RATE_WINDOW_SECONDS = 300
+LOGIN_RATE_MAX_ATTEMPTS = 6
 
 UPLOADS_ROOT = Path(WORKSPACE_ROOT) / "data" / "uploads"
 STAGING_UPLOADS_ROOT = Path(WORKSPACE_ROOT) / "data" / "uploads_staging"
@@ -252,10 +293,18 @@ class CompanyProfilePayload(BaseModel):
     company_name: str
     tax_code: str
     address: str
+    legal_representative: str = ""
+    established_date: str = ""
     fiscal_year_start: str
     tax_declaration_cycle: str
     default_bank_account: str
     accountant_email: str
+    accounting_software_start_date: str = ""
+    company_id: str = ""
+
+
+class SelectCompanyPayload(BaseModel):
+    company_id: str
 
 
 class EventPayload(BaseModel):
@@ -312,6 +361,101 @@ def get_current_email(authorization: Optional[str] = Header(default=None)) -> st
     if not email:
         raise HTTPException(status_code=401, detail="INVALID_TOKEN")
     return email
+
+
+def _normalize_tax_code(tax_code: str) -> str:
+    return re.sub(r"[^0-9A-Za-z-]", "", str(tax_code or "")).strip().upper()
+
+
+def _profile_complete(profile: Dict[str, Any]) -> bool:
+    required_fields = [
+        "company_name",
+        "tax_code",
+        "address",
+        "legal_representative",
+        "established_date",
+        "accounting_software_start_date",
+        "fiscal_year_start",
+        "tax_declaration_cycle",
+        "default_bank_account",
+        "accountant_email",
+    ]
+    return all(str(profile.get(field) or "").strip() for field in required_fields)
+
+
+def _check_login_rate_limit(email: str, request: Request) -> None:
+    ip = str(request.client.host if request.client else "unknown")
+    key = f"{email.lower().strip()}::{ip}"
+    now_ts = time.time()
+    recent = [stamp for stamp in LOGIN_ATTEMPTS.get(key, []) if now_ts - stamp <= LOGIN_RATE_WINDOW_SECONDS]
+    if len(recent) >= LOGIN_RATE_MAX_ATTEMPTS:
+        raise HTTPException(status_code=429, detail="TOO_MANY_ATTEMPTS")
+    recent.append(now_ts)
+    LOGIN_ATTEMPTS[key] = recent
+
+
+def _clear_login_rate_limit(email: str, request: Request) -> None:
+    ip = str(request.client.host if request.client else "unknown")
+    key = f"{email.lower().strip()}::{ip}"
+    if key in LOGIN_ATTEMPTS:
+        del LOGIN_ATTEMPTS[key]
+
+
+def _safe_fetch_json(url: str) -> Optional[Dict[str, Any]]:
+    try:
+        req = urllib.request.Request(url=url, method="GET", headers={"Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=8) as response:
+            content = response.read().decode("utf-8", errors="ignore")
+            payload = json.loads(content)
+            return payload if isinstance(payload, dict) else None
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError):
+        return None
+
+
+def _lookup_company_by_tax_code_external(tax_code: str) -> Dict[str, Any]:
+    normalized_tax = _normalize_tax_code(tax_code)
+    if not normalized_tax:
+        return {"found": False, "source": "none", "profile": None}
+
+    vietqr_url = f"https://api.vietqr.io/v2/business/{urllib.parse.quote(normalized_tax)}"
+    vietqr_payload = _safe_fetch_json(vietqr_url)
+    if vietqr_payload and str(vietqr_payload.get("code") or "") == "00":
+        data = vietqr_payload.get("data") if isinstance(vietqr_payload.get("data"), dict) else {}
+        profile = {
+            "tax_code": normalized_tax,
+            "company_name": str(data.get("name") or "").strip(),
+            "address": str(data.get("address") or "").strip(),
+            "legal_representative": str(data.get("representative") or "").strip(),
+            "established_date": str(data.get("issueDate") or "").strip(),
+        }
+        if profile["company_name"]:
+            return {"found": True, "source": "vietqr", "profile": profile}
+
+    esgoo_url = f"https://esgoo.net/api-mst/{urllib.parse.quote(normalized_tax)}.htm"
+    esgoo_payload = _safe_fetch_json(esgoo_url)
+    if esgoo_payload and int(esgoo_payload.get("error", 1) or 1) == 0:
+        data = esgoo_payload.get("data") if isinstance(esgoo_payload.get("data"), dict) else {}
+        profile = {
+            "tax_code": normalized_tax,
+            "company_name": str(data.get("ten") or data.get("company_name") or "").strip(),
+            "address": str(data.get("diachi") or data.get("address") or "").strip(),
+            "legal_representative": str(data.get("daidienphapluat") or data.get("legal_representative") or "").strip(),
+            "established_date": str(data.get("ngaycap") or data.get("established_date") or "").strip(),
+        }
+        if profile["company_name"]:
+            return {"found": True, "source": "esgoo", "profile": profile}
+
+    return {
+        "found": False,
+        "source": "fallback",
+        "profile": {
+            "tax_code": normalized_tax,
+            "company_name": "",
+            "address": "",
+            "legal_representative": "",
+            "established_date": "",
+        },
+    }
 
 
 def build_ui_hints(has_company_profile: bool, last_action: str) -> Dict[str, Any]:
@@ -2221,10 +2365,11 @@ def get_demo_detailed_reports(
 
 
 @app.post("/api/auth/login-demo")
-def login_demo(payload: LoginPayload) -> Dict[str, Any]:
+def login_demo(payload: LoginPayload, request: Request) -> Dict[str, Any]:
+    normalized_email = payload.email.lower().strip()
+    _check_login_rate_limit(normalized_email, request)
     token = str(uuid.uuid4())
     now = datetime.utcnow().isoformat() + "Z"
-    normalized_email = payload.email.lower().strip()
     if not storage.get_user(normalized_email):
         storage.upsert_user(
             normalized_email,
@@ -2248,7 +2393,9 @@ def login_demo(payload: LoginPayload) -> Dict[str, Any]:
         )
 
     storage.save_session(token, normalized_email, now)
-    has_company = storage.get_company_profile(normalized_email) is not None
+    _clear_login_rate_limit(normalized_email, request)
+    default_company = storage.get_default_onboarding_company(normalized_email)
+    has_company = bool(default_company and _profile_complete(default_company))
     return {
         "token": token,
         "email": normalized_email,
@@ -2259,7 +2406,7 @@ def login_demo(payload: LoginPayload) -> Dict[str, Any]:
 
 @app.get("/api/company/profile")
 def get_company_profile(email: str = Depends(get_current_email)) -> Dict[str, Any]:
-    profile = storage.get_company_profile(email)
+    profile = storage.get_default_onboarding_company(email) or storage.get_company_profile(email)
     if not profile:
         return {
             "exists": False,
@@ -2276,11 +2423,147 @@ def get_company_profile(email: str = Depends(get_current_email)) -> Dict[str, An
 @app.post("/api/company/profile")
 def upsert_company_profile(payload: CompanyProfilePayload, email: str = Depends(get_current_email)) -> Dict[str, Any]:
     now = datetime.utcnow().isoformat() + "Z"
-    storage.upsert_company_profile(email, payload.model_dump(), now)
+    profile_data = payload.model_dump()
+    normalized_tax = _normalize_tax_code(profile_data.get("tax_code") or "")
+    company_id = str(profile_data.get("company_id") or f"COMP-{normalized_tax or uuid.uuid4().hex[:8].upper()}").strip()
+    profile_data["company_id"] = company_id
+    profile_data["tax_code"] = normalized_tax
+
+    storage.upsert_company_profile(email, profile_data, now)
+    storage.upsert_onboarding_company(
+        email=email,
+        company_id=company_id,
+        tax_code=normalized_tax,
+        payload=profile_data,
+        is_default=True,
+        updated_at=now,
+    )
+    storage.upsert_company(
+        company_id,
+        {
+            "company_id": company_id,
+            "company_name": profile_data.get("company_name"),
+            "tax_code": normalized_tax,
+            "address": profile_data.get("address"),
+            "legal_representative": profile_data.get("legal_representative"),
+        },
+        now,
+        now,
+    )
+    storage.upsert_user_company_membership(
+        email=email,
+        company_id=company_id,
+        role="owner",
+        is_default=True,
+        payload={
+            "company_name": profile_data.get("company_name"),
+            "tax_code": normalized_tax,
+            "scope": "accounting",
+        },
+        updated_at=now,
+    )
     return {
         "saved": True,
-        "profile": payload.model_dump(),
-        "ui_hints": build_ui_hints(True, "upsert_company_profile"),
+        "profile": profile_data,
+        "ui_hints": build_ui_hints(_profile_complete(profile_data), "upsert_company_profile"),
+    }
+
+
+@app.get("/api/onboard/company-lookup")
+def lookup_company_by_tax_code(tax_code: str, email: str = Depends(get_current_email)) -> Dict[str, Any]:
+    normalized_tax = _normalize_tax_code(tax_code)
+    if not normalized_tax or len(normalized_tax) < 8:
+        raise HTTPException(status_code=400, detail="INVALID_TAX_CODE")
+
+    existing = storage.find_onboarding_company_by_tax_code(email, normalized_tax)
+    if existing:
+        return {
+            "found": True,
+            "source": "local_db",
+            "profile": existing,
+        }
+
+    external = _lookup_company_by_tax_code_external(normalized_tax)
+    return external
+
+
+@app.get("/api/onboard/companies")
+def list_onboard_companies(email: str = Depends(get_current_email)) -> Dict[str, Any]:
+    companies = storage.list_onboarding_companies(email)
+    default_company = next((item for item in companies if bool(item.get("is_default"))), None)
+    return {
+        "items": companies,
+        "default_company_id": str(default_company.get("company_id")) if default_company else "",
+    }
+
+
+@app.post("/api/onboard/select-company")
+def select_onboard_company(payload: SelectCompanyPayload, email: str = Depends(get_current_email)) -> Dict[str, Any]:
+    company = storage.get_onboarding_company(email, payload.company_id)
+    if not company:
+        raise HTTPException(status_code=404, detail="COMPANY_NOT_FOUND")
+    now = datetime.utcnow().isoformat() + "Z"
+    storage.set_default_onboarding_company(email, payload.company_id, now)
+    return {
+        "selected": True,
+        "company_id": payload.company_id,
+        "profile": company,
+        "is_complete": _profile_complete(company),
+    }
+
+
+@app.post("/api/onboard/companies")
+def create_or_update_onboard_company(payload: CompanyProfilePayload, email: str = Depends(get_current_email)) -> Dict[str, Any]:
+    now = datetime.utcnow().isoformat() + "Z"
+    profile_data = payload.model_dump()
+    normalized_tax = _normalize_tax_code(profile_data.get("tax_code") or "")
+    if not normalized_tax:
+        raise HTTPException(status_code=400, detail="INVALID_TAX_CODE")
+
+    company_id = str(profile_data.get("company_id") or f"COMP-{normalized_tax}").strip()
+    profile_data["company_id"] = company_id
+    profile_data["tax_code"] = normalized_tax
+
+    storage.upsert_onboarding_company(
+        email=email,
+        company_id=company_id,
+        tax_code=normalized_tax,
+        payload=profile_data,
+        is_default=True,
+        updated_at=now,
+    )
+    storage.upsert_company_profile(email, profile_data, now)
+    storage.upsert_company(
+        company_id,
+        {
+            "company_id": company_id,
+            "company_name": profile_data.get("company_name"),
+            "tax_code": normalized_tax,
+            "address": profile_data.get("address"),
+            "legal_representative": profile_data.get("legal_representative"),
+            "established_date": profile_data.get("established_date"),
+        },
+        now,
+        now,
+    )
+    storage.upsert_user_company_membership(
+        email=email,
+        company_id=company_id,
+        role="owner",
+        is_default=True,
+        payload={
+            "company_name": profile_data.get("company_name"),
+            "tax_code": normalized_tax,
+            "scope": "accounting",
+        },
+        updated_at=now,
+    )
+
+    return {
+        "saved": True,
+        "profile": profile_data,
+        "is_complete": _profile_complete(profile_data),
+        "ui_hints": build_ui_hints(_profile_complete(profile_data), "upsert_onboarding_company"),
     }
 
 
