@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chunk toan bo Thong tu 99 theo Cau truc Dieu/Khoan/Diem cho Hierarchical RAG.
+"""Chunk toan bo Thong tu 99 theo Cau truc Dieu/Khoan/Tieu khoan/Diem cho Hierarchical RAG.
 
 Dau ra:
 1) JSONL node phang de index vector
@@ -29,6 +29,7 @@ from qdrant_client.models import Distance, PointStruct, VectorParams
 CHAPTER_RE = re.compile(r"^\s*Chương\s+([IVXLC]+)\s*$", re.IGNORECASE)
 ARTICLE_RE = re.compile(r"^\s*Điều\s+(\d+[A-Za-z]?)\.\s*(.+?)\s*$", re.IGNORECASE)
 CLAUSE_RE = re.compile(r"^\s*(\d+)\.\s+(.+?)\s*$")
+SUBCLAUSE_RE = re.compile(r"^\s*(\d+\.\d+)\.?\s+(.+?)\s*$")
 POINT_RE = re.compile(r"^\s*([a-zđ])\)\s+(.+?)\s*$", re.IGNORECASE)
 APPENDIX_START_RE = re.compile(r"^\s*(Phụ\s*lục|Phu\s*luc)\s+I\s*$", re.IGNORECASE)
 TOKEN_RE = re.compile(r"\w+", re.UNICODE)
@@ -42,6 +43,15 @@ class Point:
 
 @dataclass
 class Clause:
+    number: str
+    head: str
+    text_lines: List[str] = field(default_factory=list)
+    subclauses: List["SubClause"] = field(default_factory=list)
+    points: List[Point] = field(default_factory=list)
+
+
+@dataclass
+class SubClause:
     number: str
     head: str
     text_lines: List[str] = field(default_factory=list)
@@ -152,11 +162,25 @@ def split_article_into_clauses(article_lines: List[str]) -> List[Clause]:
 
 
 def split_clause_into_points(clause: Clause) -> Clause:
+    remaining_text, points = split_lines_into_points(clause.text_lines)
+    clause.text_lines = remaining_text
+    clause.points = points
+    return clause
+
+
+def split_subclause_into_points(subclause: SubClause) -> SubClause:
+    remaining_text, points = split_lines_into_points(subclause.text_lines)
+    subclause.text_lines = remaining_text
+    subclause.points = points
+    return subclause
+
+
+def split_lines_into_points(lines: List[str]) -> tuple[List[str], List[Point]]:
     points: List[Point] = []
     current_point: Optional[Point] = None
     remaining_text: List[str] = []
 
-    for line in clause.text_lines:
+    for line in lines:
         m_point = POINT_RE.match(line)
         if m_point:
             if current_point is not None:
@@ -172,8 +196,32 @@ def split_clause_into_points(clause: Clause) -> Clause:
     if current_point is not None:
         points.append(current_point)
 
+    return remaining_text, points
+
+
+def split_clause_into_subclauses(clause: Clause) -> Clause:
+    subclauses: List[SubClause] = []
+    current_subclause: Optional[SubClause] = None
+    remaining_text: List[str] = []
+
+    for line in clause.text_lines:
+        m_sub = SUBCLAUSE_RE.match(line)
+        if m_sub:
+            if current_subclause is not None:
+                subclauses.append(current_subclause)
+            current_subclause = SubClause(number=m_sub.group(1), head=normalize_space(m_sub.group(2)))
+            continue
+
+        if current_subclause is not None:
+            current_subclause.text_lines.append(line)
+        else:
+            remaining_text.append(line)
+
+    if current_subclause is not None:
+        subclauses.append(current_subclause)
+
     clause.text_lines = remaining_text
-    clause.points = points
+    clause.subclauses = subclauses
     return clause
 
 
@@ -190,12 +238,21 @@ def build_text_clause(article: Article, clause: Clause) -> str:
     return normalize_space(f"{head} {clause_head} {body}")
 
 
-def build_text_point(article: Article, clause: Clause, point: Point) -> str:
+def build_text_subclause(article: Article, clause: Clause, subclause: SubClause) -> str:
     head = f"Điều {article.number}. {article.title}"
     clause_head = f"Khoản {clause.number}. {clause.head}"
+    subclause_head = f"Tiểu khoản {subclause.number}. {subclause.head}"
+    body = normalize_space(" ".join(subclause.text_lines))
+    return normalize_space(f"{head} {clause_head} {subclause_head} {body}")
+
+
+def build_text_point(article: Article, clause: Clause, point: Point, subclause: Optional[SubClause] = None) -> str:
+    head = f"Điều {article.number}. {article.title}"
+    clause_head = f"Khoản {clause.number}. {clause.head}"
+    subclause_head = f"Tiểu khoản {subclause.number}. {subclause.head}" if subclause else ""
     point_head = f"Điểm {point.label}"
     body = normalize_space(" ".join(point.text_lines))
-    return normalize_space(f"{head} {clause_head} {point_head}. {body}")
+    return normalize_space(f"{head} {clause_head} {subclause_head} {point_head}. {body}")
 
 
 def attach_parent(node: TextNode, parent_id: Optional[str]) -> None:
@@ -233,6 +290,7 @@ def upsert_nodes_to_qdrant(
     qdrant_path: Optional[str],
     qdrant_url: Optional[str],
     qdrant_api_key: Optional[str],
+    keep_existing_collection: bool,
 ) -> str:
     if qdrant_path:
         client = QdrantClient(path=qdrant_path)
@@ -240,6 +298,9 @@ def upsert_nodes_to_qdrant(
     else:
         client = QdrantClient(url=qdrant_url or "http://localhost:6333", api_key=qdrant_api_key)
         destination = qdrant_url or "http://localhost:6333"
+
+    if client.collection_exists(collection_name) and not keep_existing_collection:
+        client.delete_collection(collection_name)
 
     if not client.collection_exists(collection_name):
         client.create_collection(
@@ -262,6 +323,7 @@ def upsert_nodes_to_qdrant(
             "level": node.metadata.get("level"),
             "article": node.metadata.get("article"),
             "clause": node.metadata.get("clause"),
+            "subclause": node.metadata.get("subclause"),
             "point": node.metadata.get("point"),
             "chapter": node.metadata.get("chapter"),
         }
@@ -334,6 +396,11 @@ def main() -> None:
         action="store_true",
         help="Không upsert vào Qdrant",
     )
+    parser.add_argument(
+        "--keep-existing-qdrant-collection",
+        action="store_true",
+        help="Giữ collection Qdrant hiện tại và chỉ upsert (mặc định là recreate để tránh dữ liệu cũ)",
+    )
     args = parser.parse_args()
 
     input_path = Path(args.input)
@@ -359,7 +426,7 @@ def main() -> None:
     hierarchy: Dict[str, object] = {
         "document": "Thông tư 99/2025/TT-BTC",
         "source_file": str(input_path).replace("\\", "/"),
-        "levels": ["article", "clause", "point"],
+        "levels": ["article", "clause", "subclause", "point"],
         "articles": [],
     }
 
@@ -377,7 +444,7 @@ def main() -> None:
         article_node = make_node(article_id, article_text, article_meta, parent_id=None)
         nodes.append(article_node)
 
-        clause_list = [split_clause_into_points(c) for c in split_article_into_clauses(article.lines)]
+        clause_list = [split_clause_into_points(split_clause_into_subclauses(c)) for c in split_article_into_clauses(article.lines)]
         article_item = {
             "article_id": article_id,
             "article": article.number,
@@ -407,8 +474,58 @@ def main() -> None:
                 "clause_id": clause_id,
                 "clause": clause.number,
                 "clause_head": clause.head,
+                "subclauses": [],
                 "points": [],
             }
+
+            subclause_list = [split_subclause_into_points(sc) for sc in clause.subclauses]
+            for subclause in subclause_list:
+                subclause_safe = subclause.number.replace(".", "_")
+                subclause_id = f"{clause_id}_tieukhoan_{subclause_safe}"
+                subclause_text = build_text_subclause(article, clause, subclause)
+                subclause_meta = {
+                    "document": "TT99/2025/TT-BTC",
+                    "level": "subclause",
+                    "article": article.number,
+                    "article_title": article.title,
+                    "clause": clause.number,
+                    "clause_head": clause.head,
+                    "subclause": subclause.number,
+                    "subclause_head": subclause.head,
+                    "chapter": article.chapter_code or "",
+                    "chapter_title": article.chapter_title or "",
+                }
+                subclause_node = make_node(subclause_id, subclause_text, subclause_meta, parent_id=clause_id)
+                nodes.append(subclause_node)
+
+                subclause_item = {
+                    "subclause_id": subclause_id,
+                    "subclause": subclause.number,
+                    "subclause_head": subclause.head,
+                    "points": [],
+                }
+
+                for point in subclause.points:
+                    point_id = f"{subclause_id}_diem_{point.label}"
+                    point_text = build_text_point(article, clause, point, subclause=subclause)
+                    point_meta = {
+                        "document": "TT99/2025/TT-BTC",
+                        "level": "point",
+                        "article": article.number,
+                        "article_title": article.title,
+                        "clause": clause.number,
+                        "clause_head": clause.head,
+                        "subclause": subclause.number,
+                        "subclause_head": subclause.head,
+                        "point": point.label,
+                        "chapter": article.chapter_code or "",
+                        "chapter_title": article.chapter_title or "",
+                    }
+                    point_node = make_node(point_id, point_text, point_meta, parent_id=subclause_id)
+                    nodes.append(point_node)
+                    subclause_item["points"].append({"point_id": point_id, "point": point.label})
+
+                clause_item["subclauses"].append(subclause_item)
 
             for point in clause.points:
                 point_id = f"{clause_id}_diem_{point.label}"
@@ -448,6 +565,7 @@ def main() -> None:
     hierarchy["stats"] = {
         "total_articles": len([n for n in nodes if n.metadata.get("level") == "article"]),
         "total_clauses": len([n for n in nodes if n.metadata.get("level") == "clause"]),
+        "total_subclauses": len([n for n in nodes if n.metadata.get("level") == "subclause"]),
         "total_points": len([n for n in nodes if n.metadata.get("level") == "point"]),
         "total_nodes": len(nodes),
     }
@@ -464,6 +582,7 @@ def main() -> None:
             qdrant_path=args.qdrant_path.strip() or None,
             qdrant_url=args.qdrant_url.strip() or None,
             qdrant_api_key=args.qdrant_api_key.strip() or None,
+            keep_existing_collection=args.keep_existing_qdrant_collection,
         )
 
     print("Hoàn tất chunk TT99 cho Hierarchical RAG")

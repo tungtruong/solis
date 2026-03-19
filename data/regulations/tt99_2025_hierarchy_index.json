@@ -4,6 +4,7 @@
   "levels": [
     "article",
     "clause",
+    "subclause",
     "point"
   ],
   "articles": [
@@ -18,6 +19,7 @@
           "clause_id": "tt99_dieu_1_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -33,12 +35,14 @@
           "clause_id": "tt99_dieu_2_khoan_1",
           "clause": "1",
           "clause_head": "Thông tư này hướng dẫn kế toán áp dụng cho các doanh nghiệp thuộc mọi",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_2_khoan_2",
           "clause": "2",
           "clause_head": "Các tổ chức tín dụng, chi nhá nh ngân hàng nước ngoài thực hi ện chế độ kế",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -54,12 +58,14 @@
           "clause_id": "tt99_dieu_3_khoan_1",
           "clause": "1",
           "clause_head": "Việc tạo lập, thực hiện, quản lý và kiểm soát các giao dịch kinh tế phát",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_3_khoan_2",
           "clause": "2",
           "clause_head": "Doanh nghiệp có trách nhiệm tự xây dựng quy chế quản trị nội bộ (hoặc các",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -75,12 +81,14 @@
           "clause_id": "tt99_dieu_4_khoan_1",
           "clause": "1",
           "clause_head": "“Đơn vị tiền tệ trong kế toá n” là Đồng Việt Nam (ký hiệu quố c gia là “đ”;",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_4_khoan_2",
           "clause": "2",
           "clause_head": "Doanh nghiệp căn cứ vào các yếu tố sau đây để xác định đơn v ị tiền tệ trong",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_4_khoan_2_diem_a",
@@ -96,6 +104,7 @@
           "clause_id": "tt99_dieu_4_khoan_3",
           "clause": "3",
           "clause_head": "Trường hợp căn cứ vào các yếu tố tại khoản 2 Điều này mà doa nh nghiệp",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_4_khoan_3_diem_a",
@@ -111,6 +120,7 @@
           "clause_id": "tt99_dieu_4_khoan_4",
           "clause": "4",
           "clause_head": "Đơn vị tiền tệ trong kế toán phản ánh các giao dịch, sự kiện , điều kiện liên",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -126,12 +136,14 @@
           "clause_id": "tt99_dieu_5_khoan_1",
           "clause": "1",
           "clause_head": "Nguyên tắc khi thay đổi đơn vị tiền tệ trong kế toán",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_5_khoan_2",
           "clause": "2",
           "clause_head": "Nguyên tắc lập Báo cáo tài chính khi thay đổi đơn vị tiền tệ trong kế toán",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_5_khoan_2_diem_a",
@@ -160,24 +172,28 @@
           "clause_id": "tt99_dieu_6_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_6_khoan_1",
           "clause": "1",
           "clause_head": "Báo cáo tài chính mang tính pháp lý để doanh nghiệp công bố ra công chúng",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_6_khoan_2",
           "clause": "2",
           "clause_head": "Trường hợp pháp luật quy định Báo cáo tài chính của doanh ng hiệp phải",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_6_khoan_3",
           "clause": "3",
           "clause_head": "Phương pháp chuyển đổi Báo cáo tài chính lập bằng ngoại tệ s ang Đồng",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_6_khoan_3_diem_a",
@@ -206,24 +222,28 @@
           "clause_id": "tt99_dieu_7_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_7_khoan_1",
           "clause": "1",
           "clause_head": "Đơn vị trực thuộc là đơn vị phụ thuộc theo quy định của pháp luật doanh nghiệp.",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_7_khoan_2",
           "clause": "2",
           "clause_head": "Doanh nghiệp có trách nhiệm tổ chức bộ máy kế toán và được q uyết định",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_7_khoan_3",
           "clause": "3",
           "clause_head": "Việc tổ chức bộ máy kế toán và công tác hạch toán kế toán tạ i đơn vị trực",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_7_khoan_3_diem_a",
@@ -248,6 +268,7 @@
           "clause_id": "tt99_dieu_8_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -263,18 +284,21 @@
           "clause_id": "tt99_dieu_9_khoan_1",
           "clause": "1",
           "clause_head": "Doanh nghiệp tham khảo để áp dụng biểu mẫu hệ thống chứng từ kế toán tại",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_9_khoan_2",
           "clause": "2",
           "clause_head": "Trường hợp để phù hợp với đ ặc điểm hoạt động sản xuất kinh d oanh và yêu",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_9_khoan_3",
           "clause": "3",
           "clause_head": "Doanh nghiệp có phát sinh các chứng từ thuộc đối tượng điều chỉnh của",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -290,24 +314,28 @@
           "clause_id": "tt99_dieu_10_khoan_1",
           "clause": "1",
           "clause_head": "Mọi nghiệp vụ kinh tế, tài chính phát sinh liên quan đến hoạ t động của",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_10_khoan_2",
           "clause": "2",
           "clause_head": "Việc lập và ký chứng từ kế toán được thực hiện theo quy định của Luật Kế",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_10_khoan_3",
           "clause": "3",
           "clause_head": "Việc phân cấp ký trên chứng từ kế toán của doanh nghiệp phải phù hợp với",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_10_khoan_4",
           "clause": "4",
           "clause_head": "Kế toán trưởng (hoặc người đ ược kế toán trưởng ủy quyền) khô ng được ký",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -323,18 +351,21 @@
           "clause_id": "tt99_dieu_11_khoan_1",
           "clause": "1",
           "clause_head": "Doanh nghiệp áp dụng hệ thống tài khoản kế toán tại Phụ lục II ban hành",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_11_khoan_2",
           "clause": "2",
           "clause_head": "Trường hợp để phù hợp với đặc điểm hoạt động sản xuất, kinh doanh và yêu",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_11_khoan_3",
           "clause": "3",
           "clause_head": "Thông tư này chỉ hướng dẫn về nội dung và phương pháp kế toá n một số",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -350,12 +381,14 @@
           "clause_id": "tt99_dieu_12_khoan_1",
           "clause": "1",
           "clause_head": "Sổ kế toán của doanh nghiệp phải được thực hiện theo đúng qu y định của",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_12_khoan_2",
           "clause": "2",
           "clause_head": "Doanh nghiệp tham khảo để áp dụng biểu mẫu sổ kế toán tại Ph ụ lục III ban",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -371,18 +404,21 @@
           "clause_id": "tt99_dieu_13_khoan_1",
           "clause": "1",
           "clause_head": "Mở sổ: Sổ kế toán phải được mở vào đầu kỳ kế toán năm. Đối v ới doanh",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_13_khoan_2",
           "clause": "2",
           "clause_head": "Ghi sổ: Doanh nghiệp phải căn cứ vào chứng từ kế toán để ghi sổ kế toán theo",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_13_khoan_3",
           "clause": "3",
           "clause_head": "Khóa sổ: Doanh nghiệp phải khóa sổ kế toán tại thời điểm kết thúc kỳ kế toán",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -398,6 +434,7 @@
           "clause_id": "tt99_dieu_14_khoan_1",
           "clause": "1",
           "clause_head": "Báo cáo tài chính dùng để cung cấp thông tin về tình hình tà i chính, kết quả",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_14_khoan_1_diem_a",
@@ -429,6 +466,7 @@
           "clause_id": "tt99_dieu_14_khoan_2",
           "clause": "2",
           "clause_head": "Ngoài các thông tin tại khoản 1 Điều này, doanh nghiệp còn p hải cung cấp",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -444,18 +482,21 @@
           "clause_id": "tt99_dieu_15_khoan_1",
           "clause": "1",
           "clause_head": "Kỳ lập Báo cáo tài chính năm: Các doanh nghiệp phải lập Báo cáo tài chính",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_15_khoan_2",
           "clause": "2",
           "clause_head": "Kỳ lập Báo cáo tài chính giữa niên độ: Báo cáo tài chính giữ a niên độ gồm",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_15_khoan_3",
           "clause": "3",
           "clause_head": "Kỳ lập Báo cáo tài chính khác",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_15_khoan_3_diem_a",
@@ -480,24 +521,28 @@
           "clause_id": "tt99_dieu_16_khoan_1",
           "clause": "1",
           "clause_head": "Đối tượng lập Báo cáo tài chính",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_16_khoan_2",
           "clause": "2",
           "clause_head": "Doanh nghiệp có các đơn vị trực thuộc phải tổng hợp cả thông tin tài chính",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_16_khoan_3",
           "clause": "3",
           "clause_head": "Việc lập, trình bày Báo cáo tà i chính hợp nhất năm và Báo cá o tài chính",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_16_khoan_4",
           "clause": "4",
           "clause_head": "Việc lập và ký Báo cáo tài ch ính được thực hiện theo quy địn h của Luật Kế",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -513,12 +558,14 @@
           "clause_id": "tt99_dieu_17_khoan_1",
           "clause": "1",
           "clause_head": "Hệ thống Báo cáo tài chính gồm:",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_17_khoan_2",
           "clause": "2",
           "clause_head": "Báo cáo tài chính năm:",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_17_khoan_2_diem_a",
@@ -534,6 +581,7 @@
           "clause_id": "tt99_dieu_17_khoan_3",
           "clause": "3",
           "clause_head": "Báo cáo tài chính giữa niên độ gồm:",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_17_khoan_3_diem_a",
@@ -549,6 +597,7 @@
           "clause_id": "tt99_dieu_17_khoan_4",
           "clause": "4",
           "clause_head": "Biểu mẫu Báo cáo tài chính năm, Báo cáo tài chính giữa niên độ (dạng đầy",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -564,12 +613,14 @@
           "clause_id": "tt99_dieu_18_khoan_1",
           "clause": "1",
           "clause_head": "Doanh nghiệp áp dụng hệ thống Báo cáo tài chính tại Phụ lục IV ban hành",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_18_khoan_2",
           "clause": "2",
           "clause_head": "Trường hợp doanh nghiệp có đ ặc thù dẫn đến không thể bổ sung thêm hoặc",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -585,30 +636,35 @@
           "clause_id": "tt99_dieu_19_khoan_1",
           "clause": "1",
           "clause_head": "Thông tin trình bày trên Báo cáo tài chính phải phản ánh tru ng thực, hợp lý",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_19_khoan_2",
           "clause": "2",
           "clause_head": "Thông tin tài chính phải thích hợp để giúp người sử dụng Báo cáo tài chính",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_19_khoan_3",
           "clause": "3",
           "clause_head": "Thông tin tài chính phải được trình bày đầy đủ trên mọi khía cạnh trọng yếu.",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_19_khoan_4",
           "clause": "4",
           "clause_head": "Thông tin phải đảm bảo có thể kiểm chứng, kịp thời và dễ hiểu.",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_19_khoan_5",
           "clause": "5",
           "clause_head": "Thông tin tài chính phải được trình bày nhất quán, có thể so sánh giữa các kỳ",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -624,30 +680,35 @@
           "clause_id": "tt99_dieu_20_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_20_khoan_1",
           "clause": "1",
           "clause_head": "Việc lập và trình bày Báo cáo tài chính phải tuân thủ các qu y định tại Chuẩn",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_20_khoan_2",
           "clause": "2",
           "clause_head": "Báo cáo tài chính phải phản ánh đúng bản chất kinh tế của cá c giao dịch và",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_20_khoan_3",
           "clause": "3",
           "clause_head": "Tài sản không được ghi nhận cao hơn giá trị có thể thu hồi; Nợ phải trả",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_20_khoan_4",
           "clause": "4",
           "clause_head": "Phân loại tài sản và nợ phải trả: Tài sản và nợ phải trả trên Báo cáo tình hình",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_20_khoan_4_diem_a",
@@ -671,18 +732,21 @@
           "clause_id": "tt99_dieu_20_khoan_5",
           "clause": "5",
           "clause_head": "Tài sản và nợ phải trả phải được trình bày riêng biệt. Doanh nghiệp chỉ được",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_20_khoan_6",
           "clause": "6",
           "clause_head": "Các khoản mục doanh thu, thu nhập và các chi phí liên quan t rực tiếp tới",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_20_khoan_7",
           "clause": "7",
           "clause_head": "Trường hợp doanh nghiệp có các đơn vị trực thuộc thì Báo cáo tài chính của",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -698,30 +762,35 @@
           "clause_id": "tt99_dieu_21_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_21_khoan_1",
           "clause": "1",
           "clause_head": "Việc thay đổi kỳ kế toán phải tuân thủ theo quy định của Luật K ế toán. Khi",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_21_khoan_2",
           "clause": "2",
           "clause_head": "Đối với Báo cáo tình hình tài chính: Toàn bộ số dư tài sản, nợ phải trả và vốn",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_21_khoan_3",
           "clause": "3",
           "clause_head": "Đối với Báo cáo kết quả hoạt động kinh doanh và Báo cáo lưu chuyển tiền",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_21_khoan_4",
           "clause": "4",
           "clause_head": "Doanh nghiệp phải thuyết minh rõ:",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_21_khoan_4_diem_a",
@@ -746,24 +815,28 @@
           "clause_id": "tt99_dieu_22_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_22_khoan_1",
           "clause": "1",
           "clause_head": "Đối với sổ kế toán phản ánh tài sản, nợ phải trả và vốn chủ sở hữu: Toàn bộ",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_22_khoan_2",
           "clause": "2",
           "clause_head": "Đối với Báo cáo tình hình tài chính: Toàn bộ số dư tài sản, nợ phải trả và",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_22_khoan_3",
           "clause": "3",
           "clause_head": "Đối với Báo cáo kết quả hoạt động kinh doanh và Báo cáo lưu chuyển tiền",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -779,12 +852,14 @@
           "clause_id": "tt99_dieu_23_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_23_khoan_1",
           "clause": "1",
           "clause_head": "Nguyên tắc chung",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_23_khoan_1_diem_a",
@@ -804,6 +879,7 @@
           "clause_id": "tt99_dieu_23_khoan_2",
           "clause": "2",
           "clause_head": "Việc ghi sổ kế toán và lập Báo cáo tài chính của các doanh n ghiệp liên quan",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_23_khoan_2_diem_a",
@@ -832,36 +908,42 @@
           "clause_id": "tt99_dieu_24_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_24_khoan_1",
           "clause": "1",
           "clause_head": "Khi lập và trình bày Báo cáo tài chính, doanh nghiệp phải xem x ét các dấu",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_24_khoan_2",
           "clause": "2",
           "clause_head": "Trong một số trường hợp sau, doanh nghiệp vẫn được coi là ho ạt động liên",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_24_khoan_3",
           "clause": "3",
           "clause_head": "Khi không đáp ứng giả định hoạt động liên tục, doanh nghiệp vẫn phải lập",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_24_khoan_4",
           "clause": "4",
           "clause_head": "Trường hợp giả định về sự hoạt động liên tục không còn phù h ợp tại thời",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_24_khoan_5",
           "clause": "5",
           "clause_head": "Doanh nghiệp không phải đánh gi á lại tài sản, nợ phải trả nế u bên thứ ba kế",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_24_khoan_5_diem_a",
@@ -877,6 +959,7 @@
           "clause_id": "tt99_dieu_24_khoan_6",
           "clause": "6",
           "clause_head": "Việc đánh giá lại được thực hiện đối với từng loại tài sản v à nợ phải trả tại",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_24_khoan_6_diem_a",
@@ -896,6 +979,7 @@
           "clause_id": "tt99_dieu_24_khoan_7",
           "clause": "7",
           "clause_head": "Phương pháp kế toán một số khoản mục tài sản khi doanh nghiệp không đáp",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_24_khoan_7_diem_a",
@@ -911,12 +995,14 @@
           "clause_id": "tt99_dieu_24_khoan_8",
           "clause": "8",
           "clause_head": "Khi giả định hoạt động liên tục không còn phù hợp, doanh ngh iệp phải xử lý",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_24_khoan_9",
           "clause": "9",
           "clause_head": "Khi lập Báo cáo tài chính, trường hợp giả định về sự hoạt độ ng liên tục",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -932,6 +1018,7 @@
           "clause_id": "tt99_dieu_25_khoan_0",
           "clause": "0",
           "clause_head": "Nội dung điều",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -947,18 +1034,21 @@
           "clause_id": "tt99_dieu_26_khoan_1",
           "clause": "1",
           "clause_head": "Việc nộp Báo cáo tài chính của doanh nghiệp cho cơ quan có t hẩm quyền",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_26_khoan_2",
           "clause": "2",
           "clause_head": "Đối với các doanh nghiệp mà pháp luật quy định phải kiểm toá n Báo cáo tài",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_26_khoan_3",
           "clause": "3",
           "clause_head": "Trường hợp khi Báo cáo tài chính của doanh nghiệp được lưu g iữ tại Hệ",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -974,30 +1064,35 @@
           "clause_id": "tt99_dieu_27_khoan_1",
           "clause": "1",
           "clause_head": "Công khai Báo cáo tài chính là việc doanh nghiệp công bố thông tin về Báo",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_27_khoan_2",
           "clause": "2",
           "clause_head": "Đối tượng được công khai",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_27_khoan_3",
           "clause": "3",
           "clause_head": "Hình thức công khai",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_27_khoan_4",
           "clause": "4",
           "clause_head": "Nội dung, thời hạn công khai Báo cáo tài chính thực hiện the o quy định của",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_27_khoan_5",
           "clause": "5",
           "clause_head": "Đối với các doanh nghiệp mà pháp luật quy định phải kiểm toá n Báo cáo tài",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -1013,6 +1108,7 @@
           "clause_id": "tt99_dieu_28_khoan_1",
           "clause": "1",
           "clause_head": "Doanh nghiệp có thể sử dụng các phần mềm kế toán để thực hiệ n công tác",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_28_khoan_1_diem_a",
@@ -1044,6 +1140,7 @@
           "clause_id": "tt99_dieu_28_khoan_2",
           "clause": "2",
           "clause_head": "Người quản lý điều hành doanh nghiệp, kế toán trưởng/phụ trá ch kế toán và",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -1059,12 +1156,14 @@
           "clause_id": "tt99_dieu_29_khoan_1",
           "clause": "1",
           "clause_head": "Doanh nghiệp thực hiện chuyển đổi số dư các tài khoản sau:",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_29_khoan_2",
           "clause": "2",
           "clause_head": "Các nội dung khác đang phản ánh chi tiết trên các tài khoản có liên quan nếu",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -1080,6 +1179,7 @@
           "clause_id": "tt99_dieu_30_khoan_1",
           "clause": "1",
           "clause_head": "Doanh nghiệp áp dụng các nguyên tắc sau đây khi có sự thay đ ổi trong",
+          "subclauses": [],
           "points": [
             {
               "point_id": "tt99_dieu_30_khoan_1_diem_a",
@@ -1099,18 +1199,21 @@
           "clause_id": "tt99_dieu_30_khoan_2",
           "clause": "2",
           "clause_head": "Các doanh nghiệp là nhà đầu tư mua trái phiếu có phát sinh c ác khoản chiết",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_30_khoan_3",
           "clause": "3",
           "clause_head": "Trường hợp doanh nghiệp có ch ênh lệch tỷ giá hối đoái phát s inh khi",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_30_khoan_4",
           "clause": "4",
           "clause_head": "Trường hợp doanh nghiệp đang th ực hiện trích trước chi phí s ửa chữa lớn",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -1126,24 +1229,28 @@
           "clause_id": "tt99_dieu_31_khoan_1",
           "clause": "1",
           "clause_head": "Thông tư này có hiệu lực thi hành kể từ ngày 01/01/2026 và á p dụng cho",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_31_khoan_2",
           "clause": "2",
           "clause_head": "Các nội dung liên quan đến kế t oán cổ phần hóa doanh nghiệp Nhà nước",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_31_khoan_3",
           "clause": "3",
           "clause_head": "Các doanh nghiệp vừa và nhỏ, cơ sở ngoài công lập, các đơn vị kế toán khác",
+          "subclauses": [],
           "points": []
         },
         {
           "clause_id": "tt99_dieu_31_khoan_4",
           "clause": "4",
           "clause_head": "Các Bộ, ngành, Ủy ban nhân dâ n, Sở Tài chính, Thuế các Tỉnh, Thành phố",
+          "subclauses": [],
           "points": []
         }
       ]
@@ -1152,6 +1259,7 @@
   "stats": {
     "total_articles": 31,
     "total_clauses": 106,
+    "total_subclauses": 0,
     "total_points": 52,
     "total_nodes": 189
   }
