@@ -784,7 +784,20 @@ class FirestoreAppStorage:
     @classmethod
     def from_workspace(cls, workspace_root: str) -> "FirestoreAppStorage":
         del workspace_root
-        project_id = str(os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GCLOUD_PROJECT") or "").strip()
+        project_id = str(
+            os.getenv("GOOGLE_CLOUD_PROJECT")
+            or os.getenv("GCLOUD_PROJECT")
+            or os.getenv("GCP_PROJECT")
+            or os.getenv("PROJECT_ID")
+            or ""
+        ).strip()
+        if not project_id:
+            try:
+                import google.auth
+                _, detected_project = google.auth.default()
+                project_id = str(detected_project or "").strip()
+            except Exception:
+                project_id = ""
         namespace = str(os.getenv("SOLIS_FIRESTORE_NAMESPACE", "prod") or "prod").strip()
         database = str(os.getenv("SOLIS_FIRESTORE_DATABASE", "(default)") or "(default)").strip()
         if not project_id:
