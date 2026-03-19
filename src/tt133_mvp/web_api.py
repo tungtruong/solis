@@ -860,6 +860,63 @@ def _build_period_options(cycle: str, reference_date: datetime) -> List[Dict[str
     return options
 
 
+def _to_ascii_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", str(value or ""))
+    return normalized.encode("ascii", "ignore").decode("ascii")
+
+
+def _build_simple_pdf_bytes(text_content: str) -> bytes:
+    lines = [line.strip() for line in str(text_content or "").splitlines() if line.strip()]
+    if not lines:
+        lines = ["TO KHAI THUE"]
+    lines = [_to_ascii_text(line) for line in lines[:40]]
+
+    def _escape_pdf_text(line: str) -> str:
+        return line.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+
+    stream_lines = ["BT", "/F1 10 Tf", "50 790 Td", "14 TL"]
+    for idx, line in enumerate(lines):
+        escaped = _escape_pdf_text(line)
+        if idx == 0:
+            stream_lines.append(f"({escaped}) Tj")
+        else:
+            stream_lines.append("T*")
+            stream_lines.append(f"({escaped}) Tj")
+    stream_lines.append("ET")
+    stream_data = ("\n".join(stream_lines) + "\n").encode("latin-1", "ignore")
+
+    objects: List[bytes] = []
+    objects.append(b"1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n")
+    objects.append(b"2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n")
+    objects.append(
+        b"3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>\nendobj\n"
+    )
+    objects.append(b"4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n")
+    objects.append(
+        b"5 0 obj\n<< /Length " + str(len(stream_data)).encode("ascii") + b" >>\nstream\n" + stream_data + b"endstream\nendobj\n"
+    )
+
+    pdf_parts: List[bytes] = [b"%PDF-1.4\n%\xe2\xe3\xcf\xd3\n"]
+    offsets = [0]
+    current_len = len(pdf_parts[0])
+    for obj in objects:
+        offsets.append(current_len)
+        pdf_parts.append(obj)
+        current_len += len(obj)
+
+    xref_start = current_len
+    xref_lines = [f"xref\n0 {len(offsets)}\n", "0000000000 65535 f \n"]
+    for offset in offsets[1:]:
+        xref_lines.append(f"{offset:010d} 00000 n \n")
+    trailer = (
+        f"trailer\n<< /Size {len(offsets)} /Root 1 0 R >>\n"
+        f"startxref\n{xref_start}\n%%EOF\n"
+    )
+    pdf_parts.append("".join(xref_lines).encode("ascii"))
+    pdf_parts.append(trailer.encode("ascii"))
+    return b"".join(pdf_parts)
+
+
 def _build_vat_declaration_tt80(
     company_profile: Dict[str, Any],
     period: str,
@@ -888,17 +945,23 @@ def _build_vat_declaration_tt80(
     tax_code = _normalize_tax_code(str(company_profile.get("tax_code") or ""))
 
     xml_text = (
-        f"<ToKhaiThueGTGT form=\"01/GTGT\" legal_basis=\"TT80/2021/TT-BTC\" cycle=\"{cycle}\" period=\"{xml_escape(period)}\">\n"
-        f"  <NguoiNopThue ten=\"{xml_escape(company_name)}\" ma_so_thue=\"{xml_escape(tax_code)}\"/>\n"
-        f"  <KyKeKhai>{xml_escape(period_label)}</KyKeKhai>\n"
-        f"  <ChiTieu ma=\"23\">0</ChiTieu>\n"
-        f"  <ChiTieu ma=\"24\">{int(round(vat_input))}</ChiTieu>\n"
-        f"  <ChiTieu ma=\"25\">{int(round(vat_input))}</ChiTieu>\n"
-        f"  <ChiTieu ma=\"32\">{int(round(doanh_thu_chiu_thue))}</ChiTieu>\n"
-        f"  <ChiTieu ma=\"33\">{int(round(vat_output))}</ChiTieu>\n"
-        f"  <ChiTieu ma=\"40a\">{int(round(vat_payable))}</ChiTieu>\n"
-        f"  <ChiTieu ma=\"40b\">{int(round(vat_carry_forward))}</ChiTieu>\n"
-        "</ToKhaiThueGTGT>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        f"<ToKhaiGTGT01 form_code=\"01/GTGT\" legal_basis=\"TT80/2021/TT-BTC\" cycle=\"{cycle}\" period=\"{xml_escape(period)}\">\n"
+        "  <ThongTinChung>\n"
+        f"    <KyKeKhai>{xml_escape(period_label)}</KyKeKhai>\n"
+        f"    <NguoiNopThue ten=\"{xml_escape(company_name)}\" ma_so_thue=\"{xml_escape(tax_code)}\"/>\n"
+        f"    <HanNop>{xml_escape(_vat_due_date_for_period(period, cycle))}</HanNop>\n"
+        "  </ThongTinChung>\n"
+        "  <ChiTieu>\n"
+        f"    <Ct ma=\"23\">0</Ct>\n"
+        f"    <Ct ma=\"24\">{int(round(vat_input))}</Ct>\n"
+        f"    <Ct ma=\"25\">{int(round(vat_input))}</Ct>\n"
+        f"    <Ct ma=\"32\">{int(round(doanh_thu_chiu_thue))}</Ct>\n"
+        f"    <Ct ma=\"33\">{int(round(vat_output))}</Ct>\n"
+        f"    <Ct ma=\"40a\">{int(round(vat_payable))}</Ct>\n"
+        f"    <Ct ma=\"40b\">{int(round(vat_carry_forward))}</Ct>\n"
+        "  </ChiTieu>\n"
+        "</ToKhaiGTGT01>"
     )
 
     pdf_text = (
@@ -1741,7 +1804,7 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
         return {
             "file_name": f"tokhai_gtgt_01gtgt_{period_token}.pdf",
             "mime_type": "application/pdf",
-            "content_base64": base64.b64encode(str(declaration.get("pdf_text") or "").encode("utf-8")).decode("ascii"),
+            "content_base64": base64.b64encode(_build_simple_pdf_bytes(str(declaration.get("pdf_text") or ""))).decode("ascii"),
         }
 
     text_content = (
@@ -1753,7 +1816,7 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
     return {
         "file_name": f"{payload.report_id}_{payload.period}.pdf",
         "mime_type": "application/pdf",
-        "content_base64": base64.b64encode(text_content.encode("utf-8")).decode("ascii"),
+        "content_base64": base64.b64encode(_build_simple_pdf_bytes(text_content)).decode("ascii"),
     }
 
 
