@@ -3163,6 +3163,26 @@ def get_demo_detailed_reports(
     email: str = "demo@wssmeas.local",
     company_id: str = "",
 ) -> Dict[str, Any]:
+    def format_date_for_display(value: str) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return ""
+        token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
+        if not token_match:
+            return raw
+        token = token_match.group(1).replace("/", "-")
+        if re.fullmatch(r"\d{8}", token):
+            try:
+                return datetime.strptime(token, "%Y%m%d").strftime("%d/%m/%Y")
+            except ValueError:
+                return raw
+        for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
+            try:
+                return datetime.strptime(token, fmt).strftime("%d/%m/%Y")
+            except ValueError:
+                continue
+        return raw
+
     normalized_email = email.lower().strip()
     resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
     entries = _derive_journal_entries_from_truth(company_scope_key(resolved_company_id), as_of_date)
@@ -3212,12 +3232,14 @@ def get_demo_detailed_reports(
             gl_posting_lines.append(posting)
 
         meta = entry.get("meta", {}) if isinstance(entry, dict) else {}
+        event_date_raw = str(meta.get("event_date") or derived_as_of_date)
         gl_items.append(
             {
                 "stt": idx,
                 "entry_id": entry.get("entry_id"),
                 "event_type": entry.get("event_type"),
-                "event_date": meta.get("event_date") or derived_as_of_date,
+            "event_date": format_date_for_display(event_date_raw),
+            "event_date_iso": event_date_raw,
                 "narration": entry.get("normal_narration") or "",
                 "debit_total": debit_total,
                 "credit_total": credit_total,
@@ -3402,7 +3424,8 @@ def get_demo_detailed_reports(
     return {
         "email": normalized_email,
         "company_id": resolved_company_id,
-        "as_of_date": derived_as_of_date,
+        "as_of_date": format_date_for_display(derived_as_of_date),
+        "as_of_date_iso": derived_as_of_date,
         "gl": {
             "items": gl_items,
             "total": len(gl_items),
