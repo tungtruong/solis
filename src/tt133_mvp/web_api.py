@@ -727,6 +727,37 @@ def _normalize_tax_declaration_cycle(value: str) -> str:
     return "month"
 
 
+def _resolve_company_profile_for_scope(email: str, company_id: str) -> Dict[str, Any]:
+    normalized_email = str(email or "").strip().lower()
+    resolved_company_id = str(company_id or "").strip()
+
+    company_payload = storage.get_company(resolved_company_id) or {}
+    onboarding_payload = storage.get_onboarding_company(normalized_email, resolved_company_id) or {}
+    if not onboarding_payload:
+        default_onboarding = storage.get_default_onboarding_company(normalized_email) or {}
+        if str(default_onboarding.get("company_id") or "").strip() in {"", resolved_company_id}:
+            onboarding_payload = default_onboarding
+
+    profile_payload = storage.get_company_profile(normalized_email) or {}
+    if str(profile_payload.get("company_id") or "").strip() not in {"", resolved_company_id}:
+        profile_payload = {}
+
+    merged: Dict[str, Any] = {}
+    for source in (profile_payload, onboarding_payload, company_payload):
+        if not isinstance(source, dict):
+            continue
+        for key, value in source.items():
+            if value is None:
+                continue
+            if isinstance(value, str) and not value.strip():
+                continue
+            merged[key] = value
+
+    if resolved_company_id:
+        merged["company_id"] = resolved_company_id
+    return merged
+
+
 def _derive_period_for_cycle(cycle: str, reference_date: datetime) -> str:
     if cycle == "quarter":
         quarter = ((reference_date.month - 1) // 3) + 1
@@ -1550,7 +1581,7 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
     normalized_email = email.lower().strip()
     resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
     scoped_data_key = company_scope_key(resolved_company_id)
-    company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    company_profile = _resolve_company_profile_for_scope(normalized_email, resolved_company_id)
     declaration_cycle = _normalize_tax_declaration_cycle(str(company_profile.get("tax_declaration_cycle") or ""))
     reference_date = datetime.utcnow().date()
     period_options = _build_period_options(declaration_cycle, reference_date)
@@ -1661,7 +1692,7 @@ def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, An
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
 
     scoped_data_key = company_scope_key(resolved_company_id)
-    company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    company_profile = _resolve_company_profile_for_scope(normalized_email, resolved_company_id)
     declaration_cycle = _normalize_tax_declaration_cycle(str(company_profile.get("tax_declaration_cycle") or ""))
     if str(payload.report_id) == "gtgt":
         if not _is_valid_period_for_cycle(payload.period, declaration_cycle):
@@ -1698,7 +1729,7 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
 
     scoped_data_key = company_scope_key(resolved_company_id)
-    company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    company_profile = _resolve_company_profile_for_scope(normalized_email, resolved_company_id)
     declaration_cycle = _normalize_tax_declaration_cycle(str(company_profile.get("tax_declaration_cycle") or ""))
     if str(payload.report_id) == "gtgt":
         if not _is_valid_period_for_cycle(payload.period, declaration_cycle):
@@ -1777,7 +1808,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
     scoped_data_key = company_scope_key(resolved_company_id)
     now = datetime.utcnow().isoformat() + "Z"
     text = payload.text.strip()
-    selected_company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    selected_company_profile = _resolve_company_profile_for_scope(normalized_email, resolved_company_id)
     selected_company_tax_code = _normalize_tax_code(str(selected_company_profile.get("tax_code") or ""))
     selected_company_name = str(selected_company_profile.get("company_name") or "").strip()
     selected_company_address = str(selected_company_profile.get("address") or "").strip()
