@@ -213,6 +213,9 @@ class PostingEngine:
                 template = "Công ty vừa ghi nhận hóa đơn mua {purpose} từ {counterparty}, công nợ phải trả nhà cung cấp."
             elif event_type == "mua_tscd":
                 template = "Công ty vừa ghi nhận mua tài sản cố định từ {counterparty}, công nợ phải trả nhà cung cấp."
+
+        if event_type in {"ban_hang_dich_vu", "mua_dich_vu", "mua_hang_dung_noi_bo", "mua_tscd"}:
+            template = "{purpose} cho {counterparty}"
         fallbacks = rule.get("fallbacks", {})
 
         amount = self._resolve_amount("total_amount", event)
