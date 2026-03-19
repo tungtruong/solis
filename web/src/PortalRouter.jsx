@@ -90,8 +90,8 @@ function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding =
       </header>
       <main className="public-main">
         <section className="public-panel">
-          <p className="public-eyebrow">{eyebrow}</p>
-          <h1>{title}</h1>
+          {eyebrow ? <p className="public-eyebrow">{eyebrow}</p> : null}
+          {title ? <h1>{title}</h1> : null}
           {showBackToLanding ? (
             <button type="button" className="public-link" onClick={() => onNavigate('/')}>
               Về trang chủ
@@ -404,8 +404,26 @@ function OnboardPage({ onNavigate, session, setSession }) {
   }
 
   return (
-    <PublicShell title="Onboard doanh nghiệp" eyebrow="Bảo mật cao" onNavigate={onNavigate}>
-      <p className="form-note">Bắt đầu từ mã số thuế để tra cứu thông tin pháp lý tự động.</p>
+    <PublicShell title="" eyebrow="" onNavigate={onNavigate} showBackToLanding={false}>
+      <div className="onboard-actions-inline">
+        <button
+          type="button"
+          className="cta-sub cta-sub-solid"
+          onClick={() => {
+            clearSession()
+            setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
+            onNavigate('/login')
+          }}
+        >
+          Logout tài khoản
+        </button>
+      </div>
+
+      {!createMode ? (
+        <button type="button" className="cta-main" onClick={() => setCreateMode(true)}>
+          Tạo công ty mới
+        </button>
+      ) : null}
 
       {!createMode && companies.length > 0 ? (
         <div className="company-list-wrap">
@@ -421,25 +439,6 @@ function OnboardPage({ onNavigate, session, setSession }) {
                 </button>
               </article>
             ))}
-          </div>
-          <button type="button" className="cta-sub cta-sub-solid" onClick={() => setCreateMode(true)}>
-            Tạo công ty mới
-          </button>
-          <div className="onboard-actions-inline">
-            <button type="button" className="cta-sub cta-sub-solid" onClick={() => onNavigate('/')}>
-              Exit
-            </button>
-            <button
-              type="button"
-              className="cta-sub cta-sub-solid"
-              onClick={() => {
-                clearSession()
-                setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
-                onNavigate('/login')
-              }}
-            >
-              Logout tài khoản
-            </button>
           </div>
         </div>
       ) : null}
@@ -505,22 +504,6 @@ function OnboardPage({ onNavigate, session, setSession }) {
               Quay lại danh sách công ty
             </button>
           ) : null}
-          <div className="onboard-actions-inline">
-            <button type="button" className="cta-sub cta-sub-solid" onClick={() => onNavigate('/')}>
-              Exit
-            </button>
-            <button
-              type="button"
-              className="cta-sub cta-sub-solid"
-              onClick={() => {
-                clearSession()
-                setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
-                onNavigate('/login')
-              }}
-            >
-              Logout tài khoản
-            </button>
-          </div>
         </form>
       ) : null}
     </PublicShell>
