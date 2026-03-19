@@ -882,7 +882,7 @@ def _build_simple_pdf_bytes(text_content: str) -> bytes:
     lines = [line.strip() for line in str(text_content or "").splitlines() if line.strip()]
     if not lines:
         lines = ["TO KHAI THUE"]
-    lines = [_to_ascii_text(line) for line in lines[:40]]
+    lines = [_to_ascii_text(line) for line in lines[:120]]
 
     def _escape_pdf_text(line: str) -> str:
         return line.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
@@ -928,6 +928,40 @@ def _build_simple_pdf_bytes(text_content: str) -> bytes:
     pdf_parts.append("".join(xref_lines).encode("ascii"))
     pdf_parts.append(trailer.encode("ascii"))
     return b"".join(pdf_parts)
+
+
+def _strip_xml_ns(tag: str) -> str:
+    token = str(tag or "")
+    if "}" in token:
+        return token.split("}", 1)[1]
+    return token
+
+
+def _build_pdf_from_xml(xml_text: str, title: str = "TO KHAI THUE") -> bytes:
+    lines: List[str] = [str(title or "TO KHAI THUE").strip()]
+    payload = str(xml_text or "").strip()
+    if not payload:
+        return _build_simple_pdf_bytes("\n".join(lines))
+
+    try:
+        root = ET.fromstring(payload)
+    except ET.ParseError:
+        # Fallback to raw XML lines when parser cannot parse malformed content.
+        return _build_simple_pdf_bytes("\n".join([*lines, *payload.splitlines()]))
+
+    def walk(node: ET.Element, path_tokens: List[str]) -> None:
+        current_tag = _strip_xml_ns(node.tag)
+        current_path = [*path_tokens, current_tag]
+        text_value = str(node.text or "").strip()
+        if text_value:
+            lines.append(f"{'/'.join(current_path)}: {text_value}")
+        for attr_key, attr_val in (node.attrib or {}).items():
+            lines.append(f"{'/'.join(current_path)}@{_strip_xml_ns(attr_key)}: {str(attr_val).strip()}")
+        for child in list(node):
+            walk(child, current_path)
+
+    walk(root, [])
+    return _build_simple_pdf_bytes("\n".join(lines))
 
 
 def _build_vat_declaration_tt80(
@@ -1945,22 +1979,25 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
         entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
         declaration = _build_vat_declaration_tt80(company_profile, payload.period, declaration_cycle, entries)
         period_token = re.sub(r"[^0-9Q-]", "", str(payload.period or ""))
+        xml_text = str(declaration.get("xml_text") or "")
         return {
             "file_name": f"tokhai_gtgt_01gtgt_{period_token}.pdf",
             "mime_type": "application/pdf",
-            "content_base64": base64.b64encode(_build_simple_pdf_bytes(str(declaration.get("pdf_text") or ""))).decode("ascii"),
+            "content_base64": base64.b64encode(_build_pdf_from_xml(xml_text, "TO KHAI GTGT 01/GTGT")).decode("ascii"),
         }
 
-    text_content = (
-        f"BAO CAO {filing.get('name', payload.report_id)}\n"
-        f"Ky: {payload.period}\n"
-        f"So tam tinh: {int(float(filing.get('amount', 0) or 0))} VND\n"
-        "Nguon du lieu: reports.v1\n"
+    xml_text = (
+        f"<ToKhai ky=\"{payload.period}\" loai=\"{payload.report_id}\">\n"
+        f"  <SoTien>{int(float(filing.get('amount', 0) or 0))}</SoTien>\n"
+        "  <NguonDuLieu>reports.v1</NguonDuLieu>\n"
+        "</ToKhai>"
     )
     return {
         "file_name": f"{payload.report_id}_{payload.period}.pdf",
         "mime_type": "application/pdf",
-        "content_base64": base64.b64encode(_build_simple_pdf_bytes(text_content)).decode("ascii"),
+        "content_base64": base64.b64encode(
+            _build_pdf_from_xml(xml_text, f"BAO CAO {str(filing.get('name') or payload.report_id)}")
+        ).decode("ascii"),
     }
 
 
