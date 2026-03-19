@@ -882,7 +882,7 @@ def _build_simple_pdf_bytes(text_content: str) -> bytes:
     lines = [line.strip() for line in str(text_content or "").splitlines() if line.strip()]
     if not lines:
         lines = ["TO KHAI THUE"]
-    lines = [_to_ascii_text(line) for line in lines[:120]]
+    lines = [_to_ascii_text(line) for line in lines[:220]]
 
     def _escape_pdf_text(line: str) -> str:
         return line.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
@@ -948,6 +948,119 @@ def _build_pdf_from_xml(xml_text: str, title: str = "TO KHAI THUE") -> bytes:
     except ET.ParseError:
         # Fallback to raw XML lines when parser cannot parse malformed content.
         return _build_simple_pdf_bytes("\n".join([*lines, *payload.splitlines()]))
+
+    def find_child(node: Optional[ET.Element], child_tag: str) -> Optional[ET.Element]:
+        if node is None:
+            return None
+        for child in list(node):
+            if _strip_xml_ns(child.tag) == child_tag:
+                return child
+        return None
+
+    def find_path(node: Optional[ET.Element], *parts: str) -> Optional[ET.Element]:
+        cursor = node
+        for part in parts:
+            cursor = find_child(cursor, part)
+            if cursor is None:
+                return None
+        return cursor
+
+    def text_of(node: Optional[ET.Element]) -> str:
+        if node is None:
+            return ""
+        return str(node.text or "").strip()
+
+    def text_at(node: Optional[ET.Element], *parts: str) -> str:
+        return text_of(find_path(node, *parts))
+
+    def collect_ct_values(node: Optional[ET.Element]) -> Dict[str, str]:
+        values: Dict[str, str] = {}
+        if node is None:
+            return values
+        for element in node.iter():
+            tag = _strip_xml_ns(element.tag)
+            if re.fullmatch(r"ct\d+[ab]?", tag):
+                val = str(element.text or "").strip() or "0"
+                values[tag] = val
+        return values
+
+    if _strip_xml_ns(root.tag) == "HSoThueDTu":
+        hoso = find_child(root, "HSoKhaiThue")
+        tkhai = find_path(hoso, "TTinChung", "TTinTKhaiThue", "TKhaiThue")
+        nnt = find_path(hoso, "TTinChung", "TTinTKhaiThue", "NNT")
+        ctieu = find_child(hoso, "CTieuTKhaiChinh")
+        ct_values = collect_ct_values(ctieu)
+
+        indicator_labels: Dict[str, str] = {
+            "ct21": "Khong phat sinh hoat dong mua, ban trong ky",
+            "ct22": "Thue GTGT con duoc khau tru ky truoc",
+            "ct23": "Gia tri HHDV mua vao",
+            "ct24": "Thue GTGT cua HHDV mua vao",
+            "ct23a": "Gia tri HHDV nhap khau",
+            "ct24a": "Thue GTGT HHDV nhap khau",
+            "ct25": "Tong thue GTGT duoc khau tru ky nay",
+            "ct26": "Doanh thu khong chiu thue GTGT",
+            "ct27": "Doanh thu thue suat 0%",
+            "ct28": "Thue GTGT cua HHDV thue suat 0%",
+            "ct29": "Doanh thu khong phai ke khai tinh nop",
+            "ct30": "Doanh thu thue suat 5%",
+            "ct31": "Thue GTGT cua HHDV thue suat 5%",
+            "ct32": "Doanh thu thue suat 10%",
+            "ct33": "Thue GTGT cua HHDV thue suat 10%",
+            "ct32a": "Doanh thu khong tinh thue theo TT80",
+            "ct34": "Tong doanh thu HHDV ban ra",
+            "ct35": "Tong thue GTGT cua HHDV ban ra",
+            "ct36": "Thue GTGT phat sinh ky nay",
+            "ct37": "Dieu chinh giam",
+            "ct38": "Dieu chinh tang",
+            "ct39a": "Thue GTGT da nop o dia phuong khac",
+            "ct40a": "Thue GTGT con phai nop",
+            "ct40b": "Thue GTGT con duoc khau tru chuyen ky sau",
+            "ct40": "Thue GTGT phai nop",
+            "ct41": "Thue GTGT chua khau tru het ky nay",
+            "ct42": "Thue GTGT de nghi hoan",
+            "ct43": "Thue GTGT con duoc khau tru chuyen ky sau",
+        }
+        preferred_order = [
+            "ct21", "ct22", "ct23", "ct24", "ct23a", "ct24a", "ct25", "ct26", "ct27", "ct28", "ct29", "ct30", "ct31",
+            "ct32", "ct33", "ct32a", "ct34", "ct35", "ct36", "ct37", "ct38", "ct39a", "ct40a", "ct40b", "ct40", "ct41",
+            "ct42", "ct43",
+        ]
+
+        def format_amount(raw: str) -> str:
+            token = str(raw or "").strip()
+            if not token:
+                return "0"
+            try:
+                return f"{int(round(float(token))):,}"
+            except ValueError:
+                return token
+
+        lines = [
+            "TO KHAI THUE GIA TRI GIA TANG - MAU 01/GTGT",
+            "(Ban in tu file XML ke khai)",
+            "",
+            f"MST: {text_at(nnt, 'mst')}",
+            f"Ten NNT: {text_at(nnt, 'tenNNT')}",
+            f"Dia chi: {text_at(nnt, 'dchiNNT')}",
+            f"Ky ke khai: {text_at(tkhai, 'KyKKhaiThue', 'kyKKhai')} ({text_at(tkhai, 'KyKKhaiThue', 'kieuKy')})",
+            f"Tu ngay - Den ngay: {text_at(tkhai, 'KyKKhaiThue', 'kyKKhaiTuNgay')} - {text_at(tkhai, 'KyKKhaiThue', 'kyKKhaiDenNgay')}",
+            f"Co quan thue: {text_at(tkhai, 'maCQTNoiNop')} - {text_at(tkhai, 'tenCQTNoiNop')}",
+            f"Ngay lap: {text_at(tkhai, 'ngayLapTKhai')}    Nguoi ky: {text_at(tkhai, 'nguoiKy')}",
+            "",
+            "CHI TIEU CHINH",
+            "---------------------------------------------------------------",
+            "Ma    Noi dung                                               Gia tri",
+            "---------------------------------------------------------------",
+        ]
+
+        for code in preferred_order:
+            value_raw = ct_values.get(code, "0")
+            label = indicator_labels.get(code, code)
+            lines.append(f"[{code[2:]:<4}] {label:<54} {format_amount(value_raw):>14}")
+
+        lines.append("---------------------------------------------------------------")
+        return _build_simple_pdf_bytes("\n".join(lines))
 
     def walk(node: ET.Element, path_tokens: List[str]) -> None:
         current_tag = _strip_xml_ns(node.tag)
