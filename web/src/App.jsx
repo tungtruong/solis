@@ -776,7 +776,15 @@ function App() {
   )
 
   const activeCase = filteredCases.find((item) => item.id === activeCaseId) || cases.find((item) => item.id === activeCaseId)
-  const timeline = Array.isArray(activeCase?.timeline) ? activeCase.timeline : []
+  const rawTimeline = Array.isArray(activeCase?.timeline) ? activeCase.timeline : []
+  const timeline = rawTimeline.filter((event) => {
+    const title = String(event?.title || '').trim().toLowerCase()
+    const eventId = String(event?.id || '').trim().toLowerCase()
+    const isLegacyParseEntry = title === 'thông tin parse hồ sơ' || title === 'thong tin parse ho so'
+    const isExtractionEntry = title === 'thông tin trích xuất hồ sơ' || title === 'thong tin trich xuat ho so'
+    const isParseTableId = eventId.includes('-parse-table-')
+    return !(isLegacyParseEntry || isExtractionEntry || isParseTableId)
+  })
   const evidence = Array.isArray(activeCase?.evidence) ? activeCase.evidence : []
   const reasoning = Array.isArray(activeCase?.reasoning) ? activeCase.reasoning : []
   const pendingPosting = activeCase?.pendingPosting && typeof activeCase.pendingPosting === 'object' ? activeCase.pendingPosting : null
