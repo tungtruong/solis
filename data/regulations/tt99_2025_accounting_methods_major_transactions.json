@@ -1,0 +1,472 @@
+{
+  "document": {
+    "name": "Thong tu 99/2025/TT-BTC",
+    "focus": "tach phuong phap ke toan va giao dich chu yeu",
+    "source_file": "data/regulations/raw_tt99_full.txt",
+    "citation_basis": "Phu luc II - Noi dung va phuong phap ke toan cac tai khoan"
+  },
+  "schema_version": "1.0",
+  "entries": [
+    {
+      "account_code": "111",
+      "account_name": "Tien mat",
+      "conditions": [
+        "Ghi nhan khi phat sinh thu/chi tien mat tai quy va co chung tu hop le.",
+        "Truong hop thue gian thu khong tach ngay tai thoi diem giao dich thi ghi doanh thu gom thue, dinh ky ghi giam doanh thu de phan anh nghia vu thue."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Ban hang thu ngay bang tien mat (tach thue ngay)",
+          "recognition_by_account": [
+            {
+              "debit": ["111"],
+              "credit": ["511", "333"]
+            }
+          ]
+        },
+        {
+          "scenario": "Thu hoi cong no, tam ung, ky quy, ky cuoc bang tien mat",
+          "recognition_by_account": [
+            {
+              "debit": ["111"],
+              "credit": ["128", "131", "136", "138", "141", "244", "344"]
+            }
+          ]
+        },
+        {
+          "scenario": "Chi tien mat mua hang ton kho, TSCĐ, XDCB",
+          "recognition_by_account": [
+            {
+              "debit": ["151", "152", "153", "156", "211", "213", "241", "133"],
+              "credit": ["111"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Phai theo doi so quy, kiem ke va doi chieu giua thu quy va ke toan.",
+        "Giao dich tien mat phai tuan thu quy dinh phap luat lien quan (vd: giao dich gop von/chuyen nhuong von)."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 111 - Muc 1 (nguyen tac), Muc 3.1, 3.5, 3.10"
+      ]
+    },
+    {
+      "account_code": "131",
+      "account_name": "Phai thu cua khach hang",
+      "conditions": [
+        "Ghi nhan khoan phai thu khi da phat sinh nghia vu thanh toan cua khach hang theo giao dich ban hang/dich vu.",
+        "Theo doi chi tiet theo tung doi tuong khach hang, hop dong va han thanh toan."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Ghi nhan phai thu khi ban hang, cung cap dich vu",
+          "recognition_by_account": [
+            {
+              "debit": ["131"],
+              "credit": ["511", "333"]
+            }
+          ]
+        },
+        {
+          "scenario": "Khach hang thanh toan cong no",
+          "recognition_by_account": [
+            {
+              "debit": ["111", "112"],
+              "credit": ["131"]
+            }
+          ]
+        },
+        {
+          "scenario": "Hang ban bi tra lai/chiet khau giam gia giam tru cong no",
+          "recognition_by_account": [
+            {
+              "debit": ["521", "333"],
+              "credit": ["131"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Co the phat sinh so du Co theo tung doi tuong (nhan tien truoc/tra vuot).",
+        "Khi lap BCTC phai phan loai so du chi tiet de trinh bay dung ben Tai san/Nguon von."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 131 - Muc 2, Muc 3"
+      ]
+    },
+    {
+      "account_code": "152",
+      "account_name": "Nguyen lieu, vat lieu",
+      "conditions": [
+        "Ghi nhan theo gia goc (gia mua + thue khong duoc hoan + chi phi lien quan truc tiep).",
+        "Mo chi tiet theo kho, nhom, thu nguyen lieu vat lieu."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Mua nguyen lieu vat lieu nhap kho",
+          "recognition_by_account": [
+            {
+              "debit": ["152", "133"],
+              "credit": ["111", "112", "141", "331"]
+            }
+          ]
+        },
+        {
+          "scenario": "Xuat nguyen lieu vat lieu cho san xuat kinh doanh",
+          "recognition_by_account": [
+            {
+              "debit": ["621", "623", "627", "641", "642"],
+              "credit": ["152"]
+            }
+          ]
+        },
+        {
+          "scenario": "Nhap khau nguyen lieu vat lieu",
+          "recognition_by_account": [
+            {
+              "debit": ["152", "133"],
+              "credit": ["331", "3331", "3332", "3333", "33381"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Chi tiet hoa nguyen lieu, vat lieu nhan giu ho/nhan gia cong khong ghi vao 152 ma theo doi ngoai bang thuyet minh.",
+        "Neu dung gia tam tinh thi cuoi ky phai quy doi ve gia thuc te bang he so chenh lech."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 152 - Muc 1, Muc 3.1, 3.5, 3.9"
+      ]
+    },
+    {
+      "account_code": "211",
+      "account_name": "TSCĐ huu hinh",
+      "conditions": [
+        "Tai san du tieu chuan ghi nhan TSCĐ huu hinh va thoa man loi ich kinh te tuong lai + xac dinh duoc nguyen gia.",
+        "Gia tri ghi nhan theo nguyen gia; phai theo doi chi tiet tung TSCĐ."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Mua sam TSCĐ dua vao su dung ngay",
+          "recognition_by_account": [
+            {
+              "debit": ["211", "133"],
+              "credit": ["111", "112", "331", "341", "352"]
+            }
+          ]
+        },
+        {
+          "scenario": "Nhan von gop bang TSCĐ",
+          "recognition_by_account": [
+            {
+              "debit": ["211"],
+              "credit": ["411"]
+            }
+          ]
+        },
+        {
+          "scenario": "Tang TSCĐ do dau tu XDCB hoan thanh",
+          "recognition_by_account": [
+            {
+              "debit": ["211"],
+              "credit": ["241"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Mua nha dat phai tach gia tri quyen su dung dat va tai san tren dat.",
+        "Duoc dung gia tam tinh khi chua duyet quyet toan XDCB, sau do dieu chinh theo gia quyet toan."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 211 - Muc 1; Muc 3.1 (a,b,h)"
+      ]
+    },
+    {
+      "account_code": "331",
+      "account_name": "Phai tra cho nguoi ban",
+      "conditions": [
+        "Ghi nhan nghia vu phai tra khi mua vat tu, hang hoa, TSCĐ, dich vu chua thanh toan.",
+        "Theo doi chi tiet theo tung nha cung cap, hop dong, dong tien."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Mua trong nuoc chua tra tien",
+          "recognition_by_account": [
+            {
+              "debit": ["152", "153", "156", "157", "211", "213", "133"],
+              "credit": ["331"]
+            }
+          ]
+        },
+        {
+          "scenario": "Ung truoc/thanh toan tien cho nguoi ban",
+          "recognition_by_account": [
+            {
+              "debit": ["331"],
+              "credit": ["111", "112", "341"]
+            }
+          ]
+        },
+        {
+          "scenario": "Tra lai hang hoac duoc giam gia tru vao cong no",
+          "recognition_by_account": [
+            {
+              "debit": ["331"],
+              "credit": ["133", "152", "153", "156"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Tai khoan co the co so du No theo tung doi tuong (ung truoc/tra thua).",
+        "Cuoi ky phai danh gia lai khoan phai tra bang ngoai te theo quy dinh."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 331 - Muc 2, Muc 3.1, 3.3, 3.7"
+      ]
+    },
+    {
+      "account_code": "333",
+      "account_name": "Thue va cac khoan phai nop Nha nuoc",
+      "conditions": [
+        "Ghi nhan nghia vu thue, phi, le phi phai nop theo tung sac thue tai cac tai khoan cap 2/cap 3.",
+        "Thue GTGT dau ra phai tach/hoac dinh ky xac dinh khi khong tach ngay duoc."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Xuat hoa don GTGT theo phuong phap khau tru",
+          "recognition_by_account": [
+            {
+              "debit": ["111", "112", "131"],
+              "credit": ["511", "515", "711", "3331"]
+            }
+          ]
+        },
+        {
+          "scenario": "Khau tru thue GTGT dau vao voi dau ra",
+          "recognition_by_account": [
+            {
+              "debit": ["3331"],
+              "credit": ["133"]
+            }
+          ]
+        },
+        {
+          "scenario": "Nop thue vao NSNN",
+          "recognition_by_account": [
+            {
+              "debit": ["3331"],
+              "credit": ["111", "112"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Co the co so du No trong truong hop nop thua/duoc mien giam/hoan thue chua xu ly.",
+        "Phan loai chi tiet theo 3331..3339 va cap 3 de phuc vu khai thue."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 333 - Muc 2; Muc 3.1.1, 3.1.2, 3.1.3"
+      ]
+    },
+    {
+      "account_code": "341",
+      "account_name": "Vay va no thue tai chinh",
+      "conditions": [
+        "Phan loai ngan han/dai han theo ky han con lai va quyen tu choi nghia vu chi tra trong 12 thang.",
+        "Chi phi di vay lien quan truc tiep duoc phan bo dan; von hoa theo VAS 16 khi du dieu kien."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Nhan tien vay",
+          "recognition_by_account": [
+            {
+              "debit": ["111", "112"],
+              "credit": ["341"]
+            }
+          ]
+        },
+        {
+          "scenario": "Phat sinh va phan bo chi phi di vay ngoai lai vay",
+          "recognition_by_account": [
+            {
+              "debit": ["341"],
+              "credit": ["111", "112", "331"]
+            },
+            {
+              "debit": ["627", "241", "635"],
+              "credit": ["341"]
+            }
+          ]
+        },
+        {
+          "scenario": "Tra no goc vay",
+          "recognition_by_account": [
+            {
+              "debit": ["341"],
+              "credit": ["112", "131"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Theo doi chi tiet tung khan uoc, doi tuong cho vay, ky han va dong tien.",
+        "Danh gia lai so du vay bang ngoai te cuoi ky theo quy dinh chenhlech ty gia."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 341 - Muc 1 (a,b,c), Muc 3 (a,b,e,g)"
+      ]
+    },
+    {
+      "account_code": "511",
+      "account_name": "Doanh thu ban hang va cung cap dich vu",
+      "conditions": [
+        "Ban hang: chi ghi nhan khi dong thoi thoa man dieu kien chuyen giao rui ro-loi ich, khong con quyen quan ly, doanh thu xac dinh tuong doi chac chan, thu duoc loi ich kinh te, xac dinh duoc chi phi lien quan.",
+        "Cung cap dich vu: chi ghi nhan khi doanh thu tuong doi chac chan, thu duoc loi ich kinh te, xac dinh duoc muc do hoan thanh va chi phi lien quan.",
+        "Doanh thu khong bao gom thue gian thu; neu khong tach ngay duoc thi dinh ky ghi giam doanh thu ung voi thue phai nop."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Ghi nhan doanh thu hang hoa/dich vu da ban",
+          "recognition_by_account": [
+            {
+              "debit": ["111", "112", "131"],
+              "credit": ["511", "333"]
+            }
+          ]
+        },
+        {
+          "scenario": "Ban hang tra cham tra gop",
+          "recognition_by_account": [
+            {
+              "debit": ["131"],
+              "credit": ["511", "333"]
+            },
+            {
+              "debit": ["131"],
+              "credit": ["515"]
+            }
+          ]
+        },
+        {
+          "scenario": "Chuong trinh khach hang truyen thong",
+          "recognition_by_account": [
+            {
+              "debit": ["111", "112", "131"],
+              "credit": ["511", "3387", "333"]
+            },
+            {
+              "debit": ["3387"],
+              "credit": ["511"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Phai tach cac giao dich hop dong da cau phan (ban + dich vu + uu dai) de ghi nhan dung ban chat.",
+        "Cac truong hop khong ghi nhan doanh thu gom hang gui dai ly chua xac dinh da ban, vat tu dua di gia cong, thu ban san pham san xuat thu, ..."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 511 - Diem a Khoan 1.2, Diem b Khoan 1.2, Khoan 1.5.1, Muc 3.1, 3.3, 3.5"
+      ]
+    },
+    {
+      "account_code": "632",
+      "account_name": "Gia von hang ban",
+      "conditions": [
+        "Phan anh tri gia von cua san pham/hang hoa/dich vu da ban va chi phi lien quan theo quy dinh.",
+        "Chi phi bat thuong (hao hut, mat mat, CP SXC co dinh khong phan bo, NVL/NC vuot muc binh thuong) duoc ghi ngay vao gia von theo dieu kien huong dan."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Xuat ban hang hoa, san pham, dich vu",
+          "recognition_by_account": [
+            {
+              "debit": ["632"],
+              "credit": ["154", "155", "156", "157", "215"]
+            }
+          ]
+        },
+        {
+          "scenario": "Trich lap/hoan nhap du phong giam gia HTK",
+          "recognition_by_account": [
+            {
+              "debit": ["632"],
+              "credit": ["229"]
+            },
+            {
+              "debit": ["229"],
+              "credit": ["632"]
+            }
+          ]
+        },
+        {
+          "scenario": "Ket chuyen gia von cuoi ky",
+          "recognition_by_account": [
+            {
+              "debit": ["911"],
+              "credit": ["632"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Tai khoan 632 khong co so du cuoi ky.",
+        "Khoan thue nhap khau/TTĐB/BVMT da tinh vao gia mua neu duoc hoan thi ghi giam gia von."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 632 - Muc 1 (a,b,d,đ), Muc 3 (a,c,i)"
+      ]
+    },
+    {
+      "account_code": "911",
+      "account_name": "Xac dinh ket qua kinh doanh",
+      "conditions": [
+        "Ket chuyen day du doanh thu thuan, thu nhap thuan va toan bo chi phi lien quan de xac dinh ket qua ky.",
+        "Co the chi tiet theo loai hoat dong/san pham/nganh hang theo nhu cau quan tri."
+      ],
+      "major_transactions": [
+        {
+          "scenario": "Ket chuyen doanh thu thuan",
+          "recognition_by_account": [
+            {
+              "debit": ["511"],
+              "credit": ["911"]
+            }
+          ]
+        },
+        {
+          "scenario": "Ket chuyen gia von va chi phi",
+          "recognition_by_account": [
+            {
+              "debit": ["911"],
+              "credit": ["632", "641", "642", "635", "811", "8211", "8212"]
+            }
+          ]
+        },
+        {
+          "scenario": "Ket chuyen ket qua sang loi nhuan chua phan phoi",
+          "recognition_by_account": [
+            {
+              "debit": ["911"],
+              "credit": ["421"]
+            },
+            {
+              "debit": ["421"],
+              "credit": ["911"]
+            }
+          ]
+        }
+      ],
+      "other_requirements": [
+        "Tai khoan 911 khong co so du cuoi ky.",
+        "Doanh thu/thu nhap ket chuyen vao 911 la gia tri thuan sau giam tru theo quy dinh."
+      ],
+      "citations": [
+        "Phu luc II - Tai khoan 911 - Muc 1 (a,b,c), Muc 3 (a,b,c,d,đ,e,g,h,i)"
+      ]
+    }
+  ]
+}
