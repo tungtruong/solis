@@ -2261,6 +2261,75 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             if posting_accepted:
                 storage.upsert_case_event(scoped_data_key, case_id, pending_event, now)
 
+            def format_date_for_summary(value: str) -> str:
+                raw = str(value or "").strip()
+                if not raw:
+                    return "-"
+                token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
+                if not token_match:
+                    return raw
+                token = token_match.group(1).replace("/", "-")
+                if re.fullmatch(r"\d{8}", token):
+                    try:
+                        return datetime.strptime(token, "%Y%m%d").strftime("%d/%m/%Y")
+                    except ValueError:
+                        return raw
+                for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
+                    try:
+                        return datetime.strptime(token, fmt).strftime("%d/%m/%Y")
+                    except ValueError:
+                        continue
+                return raw
+
+            raw_parse_rows = pending_posting.get("parse_rows") if isinstance(pending_posting.get("parse_rows"), list) else []
+            allowed_labels = ["Đối tác", "Nội dung", "MST đối tác", "Số hóa đơn", "Ngày hóa đơn", "Số tiền"]
+            posted_summary_rows: List[Dict[str, str]] = []
+            posted_by_label: Dict[str, str] = {}
+
+            for row in raw_parse_rows:
+                if not isinstance(row, dict):
+                    continue
+                label = str(row.get("label") or "").strip()
+                value = str(row.get("value") or "").strip()
+                if label == "Nhà cung cấp":
+                    label = "Đối tác"
+                if label in {"MST người bán", "MST người mua", "Vai trò hóa đơn"}:
+                    continue
+                if label not in allowed_labels:
+                    continue
+                if label == "MST đối tác" and (not value or value == "-"):
+                    continue
+                if label == "Ngày hóa đơn":
+                    value = format_date_for_summary(value)
+                posted_by_label[label] = value or "-"
+
+            if not posted_by_label:
+                fallback_date = str(
+                    pending_event.get("issue_date")
+                    or pending_event.get("statement_date")
+                    or pending_event.get("event_date")
+                    or ""
+                )
+                fallback_amount = float(
+                    pending_event.get("amount_total")
+                    or pending_event.get("total_amount")
+                    or pending_event.get("amount")
+                    or pending_event.get("untaxed_amount")
+                    or 0
+                )
+                posted_by_label = {
+                    "Đối tác": str(pending_event.get("counterparty_name") or "Đối tác"),
+                    "Nội dung": str(pending_event.get("description") or pending_event.get("goods_service_type") or "-"),
+                    "Số hóa đơn": str(pending_event.get("invoice_no") or pending_event.get("reference_no") or "-"),
+                    "Ngày hóa đơn": format_date_for_summary(fallback_date),
+                    "Số tiền": f"{fallback_amount:,.0f} đồng" if fallback_amount > 0 else "-",
+                }
+
+            for label in allowed_labels:
+                if label not in posted_by_label:
+                    continue
+                posted_summary_rows.append({"label": label, "value": str(posted_by_label.get(label) or "-")})
+
             result_body = (
                 "Đã tạo bút toán tự động thành công."
                 if posting_accepted and posting_result.journal_entry
@@ -2276,6 +2345,22 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "body": text or "Xác nhận và đồng ý post",
                     "time": datetime.utcnow().strftime("%H:%M"),
                 },
+            ]
+
+            if posting_accepted and posted_summary_rows:
+                timeline_entries.append(
+                    {
+                        "id": f"{case_id}-posted-summary-{uuid.uuid4().hex[:6]}",
+                        "kind": "analysis",
+                        "role": "system",
+                        "title": "Thông tin đã post",
+                        "body": "Hệ thống đã thực hiện post với các thông tin cơ bản sau:",
+                        "table_rows": posted_summary_rows,
+                        "time": datetime.utcnow().strftime("%H:%M"),
+                    }
+                )
+
+            timeline_entries.append(
                 {
                     "id": f"{case_id}-result-{uuid.uuid4().hex[:6]}",
                     "kind": "analysis",
@@ -2283,8 +2368,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "title": "Kết quả hạch toán",
                     "body": result_body,
                     "time": datetime.utcnow().strftime("%H:%M"),
-                },
-            ]
+                }
+            )
 
             if payload.case_id and current_item:
                 next_items = []
