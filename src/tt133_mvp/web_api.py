@@ -829,6 +829,62 @@ def _normalize_event_from_case_item(item: Dict[str, Any]) -> Optional[Dict[str, 
     description = str(item.get("title") or item.get("description") or "Hồ sơ nghiệp vụ")
     partner = str(item.get("partner") or item.get("counterparty_name") or "Đối tác")
 
+    def _parse_currency_text(raw: Any) -> float:
+        return _parse_amount_value(raw)
+
+    def _extract_split_amounts() -> Tuple[float, float, float]:
+        top_untaxed = _parse_currency_text(item.get("amount_untaxed") or item.get("untaxed_amount"))
+        top_vat = _parse_currency_text(item.get("vat_amount"))
+        top_total = _parse_currency_text(item.get("amount_total") or item.get("total_amount"))
+
+        pending = item.get("pending_posting") if isinstance(item.get("pending_posting"), dict) else {}
+        pending_event = pending.get("event") if isinstance(pending.get("event"), dict) else {}
+        if pending_event:
+            top_untaxed = top_untaxed or _parse_currency_text(pending_event.get("amount_untaxed") or pending_event.get("untaxed_amount"))
+            top_vat = top_vat or _parse_currency_text(pending_event.get("vat_amount"))
+            top_total = top_total or _parse_currency_text(pending_event.get("amount_total") or pending_event.get("total_amount") or pending_event.get("amount"))
+
+        timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
+        latest_posted_entry: Dict[str, Any] = {}
+        for entry in reversed(timeline):
+            if not isinstance(entry, dict):
+                continue
+            title = str(entry.get("title") or "").strip().lower()
+            if title == "thông tin đã post":
+                latest_posted_entry = entry
+                break
+
+        if latest_posted_entry:
+            rows = latest_posted_entry.get("table_rows") if isinstance(latest_posted_entry.get("table_rows"), list) else []
+            by_label: Dict[str, str] = {}
+            for row in rows:
+                if not isinstance(row, dict):
+                    continue
+                label = str(row.get("label") or "").strip()
+                value = str(row.get("value") or "").strip()
+                if label:
+                    by_label[label] = value
+            top_untaxed = top_untaxed or _parse_currency_text(by_label.get("Số tiền trước thuế"))
+            top_vat = top_vat or _parse_currency_text(by_label.get("Thuế VAT"))
+            top_total = top_total or _parse_currency_text(by_label.get("Số tiền sau thuế") or by_label.get("Số tiền"))
+
+        if top_total <= 0:
+            top_total = amount
+
+        if top_untaxed <= 0 and top_total > 0 and top_vat > 0 and top_total >= top_vat:
+            top_untaxed = top_total - top_vat
+        if top_vat <= 0 and top_total > 0 and top_untaxed > 0 and top_total >= top_untaxed:
+            top_vat = top_total - top_untaxed
+
+        if top_untaxed <= 0 and top_total > 0:
+            # Legacy records may only have gross amount; assume common VAT 10% for fallback sync.
+            top_untaxed = top_total / 1.1
+            top_vat = top_total - top_untaxed
+
+        return float(round(top_untaxed)), float(round(top_vat)), float(round(top_total))
+
+    untaxed_amount, vat_amount, total_amount = _extract_split_amounts()
+
     if event_type == "gop_von":
         return {
             "case_id": case_id,
@@ -856,8 +912,9 @@ def _normalize_event_from_case_item(item: Dict[str, Any]) -> Optional[Dict[str, 
             "payment_channel": "bank",
         }
     if event_type == "ban_hang_dich_vu":
-        untaxed = amount or 10000000.0
-        vat = round(untaxed * 0.1)
+        untaxed = untaxed_amount or 10000000.0
+        vat = vat_amount if total_amount > 0 else round(untaxed * 0.1)
+        total = total_amount if total_amount > 0 else (untaxed + vat)
         return {
             "case_id": case_id,
             "source_id": "sales_invoice_xml",
@@ -869,15 +926,16 @@ def _normalize_event_from_case_item(item: Dict[str, Any]) -> Optional[Dict[str, 
             "description": description,
             "amount_untaxed": untaxed,
             "vat_amount": vat,
-            "amount_total": untaxed + vat,
-            "total_amount": untaxed + vat,
+            "amount_total": total,
+            "total_amount": total,
             "untaxed_amount": untaxed,
             "has_vat": True,
             "payment_status": "unpaid",
         }
 
-    untaxed = amount or 6000000.0
-    vat = round(untaxed * 0.1)
+    untaxed = untaxed_amount or 6000000.0
+    vat = vat_amount if total_amount > 0 else round(untaxed * 0.1)
+    total = total_amount if total_amount > 0 else (untaxed + vat)
     return {
         "case_id": case_id,
         "source_id": "purchase_invoice_xml",
@@ -890,8 +948,8 @@ def _normalize_event_from_case_item(item: Dict[str, Any]) -> Optional[Dict[str, 
         "goods_service_type": "service",
         "amount_untaxed": untaxed,
         "vat_amount": vat,
-        "amount_total": untaxed + vat,
-        "total_amount": untaxed + vat,
+        "amount_total": total,
+        "total_amount": total,
         "untaxed_amount": untaxed,
         "service_term_months": 1,
         "payment_account": "331",
@@ -907,6 +965,8 @@ def _derive_events_from_truth(email: str) -> List[Dict[str, Any]]:
     case_items = storage.list_case_items(email)
     derived: List[Dict[str, Any]] = []
     for item in case_items:
+        if str(item.get("status") or "").strip() != "hoan_tat":
+            continue
         normalized = _normalize_event_from_case_item(item)
         if normalized:
             derived.append(normalized)
