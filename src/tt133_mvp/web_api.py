@@ -2254,16 +2254,34 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         invoice_excerpt = str(attachment_details.get("invoice_content") or "")
         amount_text = f"{parsed_amount:,.0f}"
 
+        invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
+        seller_name = str(attachment_details.get("seller_name") or "").strip()
+        buyer_name = str(attachment_details.get("buyer_name") or "").strip()
+        seller_tax_code = str(attachment_details.get("seller_tax_code") or "").strip()
+        buyer_tax_code = str(attachment_details.get("buyer_tax_code") or "").strip()
+
+        if invoice_role == "outbound":
+            partner_name = buyer_name or inferred_event.get("counterparty_name") or supplier_name
+            partner_tax_code = buyer_tax_code
+        elif invoice_role == "inbound":
+            partner_name = seller_name or inferred_event.get("counterparty_name") or supplier_name
+            partner_tax_code = seller_tax_code
+        else:
+            partner_name = inferred_event.get("counterparty_name") or supplier_name or seller_name or buyer_name or "Đối tác"
+            partner_tax_code = seller_tax_code or buyer_tax_code
+
+        partner_name = str(partner_name or "Đối tác")
+        partner_tax_code = str(partner_tax_code or "").strip()
+
         parse_table_rows = [
-            {"label": "Nhà cung cấp", "value": supplier_name},
+            {"label": "Đối tác", "value": partner_name},
             {"label": "Nội dung", "value": service_name},
             {"label": "Số hóa đơn", "value": invoice_no},
             {"label": "Ngày hóa đơn", "value": invoice_date_display or "-"},
             {"label": "Số tiền", "value": f"{amount_text} đồng"},
-            {"label": "MST người bán", "value": str(attachment_details.get("seller_tax_code") or "-")},
-            {"label": "MST người mua", "value": str(attachment_details.get("buyer_tax_code") or "-")},
-            {"label": "Vai trò hóa đơn", "value": "Đầu ra" if str(company_validation.get("invoice_role") or "") == "outbound" else "Đầu vào"},
         ]
+        if partner_tax_code:
+            parse_table_rows.insert(2, {"label": "MST đối tác", "value": partner_tax_code})
 
         extract_body = (
             f"Đã tiếp nhận hồ sơ: {', '.join(staged_attachment_names)}"
@@ -2354,7 +2372,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         *current_reasoning,
                     ],
                     "amount": f"{parsed_amount:,.0f} VND" if parsed_amount > 0 else item.get("amount", "0 VND"),
-                    "partner": str(supplier_name or item.get("partner") or "Đối tác"),
+                    "partner": str(partner_name or item.get("partner") or "Đối tác"),
                     "title": str(service_name or item.get("title") or "Hồ sơ kế toán"),
                     "status": "cho_xac_nhan",
                     "statusLabel": "Chờ khách hàng xác nhận",

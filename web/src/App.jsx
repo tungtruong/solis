@@ -333,6 +333,69 @@ function formatCurrency(value) {
   return `${amount.toLocaleString('vi-VN')} VND`
 }
 
+function formatDateByRule(dateValue) {
+  const raw = String(dateValue || '').trim()
+  if (!raw || raw === '-') return raw
+  const tokenMatch = raw.match(/(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})/)
+  if (!tokenMatch) return raw
+  const token = tokenMatch[1].replace(/\//g, '-')
+
+  if (/^\d{8}$/.test(token)) {
+    const yyyy = token.slice(0, 4)
+    const mm = token.slice(4, 6)
+    const dd = token.slice(6, 8)
+    return `${dd}/${mm}/${yyyy}`
+  }
+
+  const parts = token.split('-')
+  if (parts.length !== 3) return raw
+
+  if (parts[0].length === 4) {
+    const [yyyy, mm, dd] = parts
+    return `${String(dd).padStart(2, '0')}/${String(mm).padStart(2, '0')}/${yyyy}`
+  }
+
+  const [dd, mm, yyyy] = parts
+  return `${String(dd).padStart(2, '0')}/${String(mm).padStart(2, '0')}/${yyyy}`
+}
+
+function normalizeParseSummaryRows(rows) {
+  if (!Array.isArray(rows) || !rows.length) return []
+
+  const deniedLabels = new Set(['MST người bán', 'MST người mua', 'Vai trò hóa đơn'])
+  const allowedOrder = ['Đối tác', 'Nội dung', 'MST đối tác', 'Số hóa đơn', 'Ngày hóa đơn', 'Số tiền']
+  const normalizedByLabel = new Map()
+
+  rows.forEach((row) => {
+    const rawLabel = String(row?.label || '').trim()
+    const rawValue = String(row?.value || '').trim()
+    if (!rawLabel || deniedLabels.has(rawLabel)) return
+
+    let normalizedLabel = rawLabel
+    if (rawLabel === 'Nhà cung cấp') {
+      normalizedLabel = 'Đối tác'
+    } else if (rawLabel === 'Mã số thuế' || rawLabel === 'MST') {
+      normalizedLabel = 'MST đối tác'
+    }
+
+    if (!allowedOrder.includes(normalizedLabel)) return
+    if (normalizedLabel === 'MST đối tác' && (!rawValue || rawValue === '-')) return
+
+    const normalizedValue = normalizedLabel === 'Ngày hóa đơn'
+      ? (formatDateByRule(rawValue) || '-')
+      : (rawValue || '-')
+
+    const existing = normalizedByLabel.get(normalizedLabel)
+    if (!existing || (existing === '-' && normalizedValue !== '-')) {
+      normalizedByLabel.set(normalizedLabel, normalizedValue)
+    }
+  })
+
+  return allowedOrder
+    .filter((label) => normalizedByLabel.has(label))
+    .map((label) => ({ label, value: normalizedByLabel.get(label) }))
+}
+
 function formatReportNarration(value, fallback = '') {
   let text = String(value || '').trim()
   if (!text) {
@@ -689,16 +752,15 @@ function App() {
     pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || pendingEvent?.untaxed_amount || 0,
   )
   const pendingParseRows = pendingParseRowsFromServer.length
-    ? pendingParseRowsFromServer
+    ? normalizeParseSummaryRows(pendingParseRowsFromServer)
     : pendingEvent
-    ? [
-        { label: 'Nhà cung cấp', value: String(pendingEvent.counterparty_name || pendingEvent.seller_name || '-') },
+    ? normalizeParseSummaryRows([
+        { label: 'Đối tác', value: String(pendingEvent.counterparty_name || pendingEvent.seller_name || '-') },
         { label: 'Nội dung', value: String(pendingEvent.description || pendingEvent.goods_service_type || '-') },
         { label: 'Số hóa đơn', value: String(pendingEvent.invoice_no || pendingEvent.reference_no || '-') },
-        { label: 'Ngày hóa đơn', value: pendingInvoiceDate || '-' },
+        { label: 'Ngày hóa đơn', value: formatDateByRule(pendingInvoiceDate || '-') || '-' },
         { label: 'Số tiền', value: pendingAmount > 0 ? formatCurrency(pendingAmount) : '-' },
-        { label: 'Nghiệp vụ', value: String(pendingPosting.event_type || pendingEvent.event_type || '-') },
-      ]
+      ])
     : []
   const shouldShowParseSummary = pendingParseRows.length > 0 && timelineVisibleCount >= timeline.length
 
