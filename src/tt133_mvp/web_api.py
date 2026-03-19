@@ -860,6 +860,15 @@ def _build_period_options(cycle: str, reference_date: datetime) -> List[Dict[str
     return options
 
 
+def _format_ddmmyyyy(date_iso: str) -> str:
+    token = str(date_iso or "").strip()
+    try:
+        dt = datetime.fromisoformat(token)
+        return f"{dt.day:02d}/{dt.month:02d}/{dt.year:04d}"
+    except ValueError:
+        return ""
+
+
 def _to_ascii_text(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", str(value or ""))
     return normalized.encode("ascii", "ignore").decode("ascii")
@@ -943,25 +952,156 @@ def _build_vat_declaration_tt80(
     cycle_label = "theo tháng" if cycle == "month" else "theo quý"
     company_name = str(company_profile.get("company_name") or "").strip()
     tax_code = _normalize_tax_code(str(company_profile.get("tax_code") or ""))
+    ma_cqt = str(company_profile.get("tax_office_code") or "10101").strip()
+    ten_cqt = str(company_profile.get("tax_office_name") or "Cơ quan thuế quản lý").strip()
+    legal_representative = str(company_profile.get("legal_representative") or "").strip()
+    full_address = str(company_profile.get("address") or "").strip()
+    province_code = str(company_profile.get("province_code") or "").strip()
+    province_name = str(company_profile.get("province_name") or "").strip()
+
+    period_start = _period_end_date(period, cycle)
+    try:
+        end_date_dt = datetime.fromisoformat(period_start)
+        if cycle == "quarter":
+            quarter = ((end_date_dt.month - 1) // 3) + 1
+            start_month = (quarter - 1) * 3 + 1
+            start_date_iso = f"{end_date_dt.year:04d}-{start_month:02d}-01"
+            ky_kkhai = f"{quarter}/{end_date_dt.year:04d}"
+            kieu_ky = "Q"
+        else:
+            start_date_iso = f"{end_date_dt.year:04d}-{end_date_dt.month:02d}-01"
+            ky_kkhai = f"{end_date_dt.month}/{end_date_dt.year:04d}"
+            kieu_ky = "M"
+    except ValueError:
+        start_date_iso = datetime.utcnow().date().isoformat()
+        period_start = start_date_iso
+        ky_kkhai = period
+        kieu_ky = "Q" if cycle == "quarter" else "M"
+
+    ct23 = int(round(0))
+    ct24 = int(round(vat_input))
+    ct25 = int(round(vat_input))
+    ct32 = int(round(doanh_thu_chiu_thue))
+    ct33 = int(round(vat_output))
+    ct34 = int(round(ct32))
+    ct35 = int(round(ct33))
+    ct40a = int(round(vat_payable))
+    ct40b = int(round(vat_carry_forward))
+    ct40 = int(round(ct40a))
+    today_iso = datetime.utcnow().date().isoformat()
 
     xml_text = (
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-        f"<ToKhaiGTGT01 form_code=\"01/GTGT\" legal_basis=\"TT80/2021/TT-BTC\" cycle=\"{cycle}\" period=\"{xml_escape(period)}\">\n"
-        "  <ThongTinChung>\n"
-        f"    <KyKeKhai>{xml_escape(period_label)}</KyKeKhai>\n"
-        f"    <NguoiNopThue ten=\"{xml_escape(company_name)}\" ma_so_thue=\"{xml_escape(tax_code)}\"/>\n"
-        f"    <HanNop>{xml_escape(_vat_due_date_for_period(period, cycle))}</HanNop>\n"
-        "  </ThongTinChung>\n"
-        "  <ChiTieu>\n"
-        f"    <Ct ma=\"23\">0</Ct>\n"
-        f"    <Ct ma=\"24\">{int(round(vat_input))}</Ct>\n"
-        f"    <Ct ma=\"25\">{int(round(vat_input))}</Ct>\n"
-        f"    <Ct ma=\"32\">{int(round(doanh_thu_chiu_thue))}</Ct>\n"
-        f"    <Ct ma=\"33\">{int(round(vat_output))}</Ct>\n"
-        f"    <Ct ma=\"40a\">{int(round(vat_payable))}</Ct>\n"
-        f"    <Ct ma=\"40b\">{int(round(vat_carry_forward))}</Ct>\n"
-        "  </ChiTieu>\n"
-        "</ToKhaiGTGT01>"
+        "<HSoThueDTu xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://kekhaithue.gdt.gov.vn/TKhaiThue\">\n"
+        "  <HSoKhaiThue id=\"ID_1\">\n"
+        "    <TTinChung>\n"
+        "      <TTinDVu>\n"
+        "        <maDVu>HTKK</maDVu>\n"
+        "        <tenDVu>HỖ TRỢ KÊ KHAI THUẾ</tenDVu>\n"
+        "        <pbanDVu>5.6.1</pbanDVu>\n"
+        "        <ttinNhaCCapDVu>D5CE995C9CD5C420614C8FE28EFFE163</ttinNhaCCapDVu>\n"
+        "      </TTinDVu>\n"
+        "      <TTinTKhaiThue>\n"
+        "        <TKhaiThue>\n"
+        "          <maTKhai>842</maTKhai>\n"
+        "          <tenTKhai>TỜ KHAI THUẾ GIÁ TRỊ GIA TĂNG (Mẫu số 01/GTGT)</tenTKhai>\n"
+        "          <moTaBMau>(Ban hành kèm theo Thông tư số 80/2021/TT-BTC ngày 29 tháng 9 năm 2021 của Bộ trưởng Bộ Tài chính)</moTaBMau>\n"
+        "          <pbanTKhaiXML>2.8.3</pbanTKhaiXML>\n"
+        "          <loaiTKhai>C</loaiTKhai>\n"
+        "          <soLan>0</soLan>\n"
+        "          <KyKKhaiThue>\n"
+        f"            <kieuKy>{kieu_ky}</kieuKy>\n"
+        f"            <kyKKhai>{xml_escape(ky_kkhai)}</kyKKhai>\n"
+        f"            <kyKKhaiTuNgay>{_format_ddmmyyyy(start_date_iso)}</kyKKhaiTuNgay>\n"
+        f"            <kyKKhaiDenNgay>{_format_ddmmyyyy(period_start)}</kyKKhaiDenNgay>\n"
+        "            <kyKKhaiTuThang />\n"
+        "            <kyKKhaiDenThang />\n"
+        "          </KyKKhaiThue>\n"
+        f"          <maCQTNoiNop>{xml_escape(ma_cqt)}</maCQTNoiNop>\n"
+        f"          <tenCQTNoiNop>{xml_escape(ten_cqt)}</tenCQTNoiNop>\n"
+        f"          <ngayLapTKhai>{today_iso}</ngayLapTKhai>\n"
+        "          <GiaHan>\n"
+        "            <maLyDoGiaHan />\n"
+        "            <lyDoGiaHan />\n"
+        "          </GiaHan>\n"
+        f"          <nguoiKy>{xml_escape(legal_representative)}</nguoiKy>\n"
+        f"          <ngayKy>{today_iso}</ngayKy>\n"
+        "          <nganhNgheKD />\n"
+        "        </TKhaiThue>\n"
+        "        <NNT>\n"
+        f"          <mst>{xml_escape(tax_code)}</mst>\n"
+        f"          <tenNNT>{xml_escape(company_name)}</tenNNT>\n"
+        f"          <dchiNNT>{xml_escape(full_address)}</dchiNNT>\n"
+        "          <phuongXa />\n"
+        "          <maHuyenNNT />\n"
+        "          <tenHuyenNNT />\n"
+        f"          <maTinhNNT>{xml_escape(province_code)}</maTinhNNT>\n"
+        f"          <tenTinhNNT>{xml_escape(province_name)}</tenTinhNNT>\n"
+        "          <dthoaiNNT />\n"
+        "          <faxNNT />\n"
+        "          <emailNNT />\n"
+        "        </NNT>\n"
+        "      </TTinTKhaiThue>\n"
+        "    </TTinChung>\n"
+        "    <CTieuTKhaiChinh>\n"
+        "      <ma_NganhNghe>00</ma_NganhNghe>\n"
+        "      <ten_NganhNghe>Hoạt động sản xuất kinh doanh thông thường</ten_NganhNghe>\n"
+        "      <tieuMucHachToan>1701</tieuMucHachToan>\n"
+        "      <Header>\n"
+        "        <ct09 />\n"
+        "        <ct10 />\n"
+        "        <DiaChiHDSXKDKhacTinhNDTSC>\n"
+        "          <ct11a_phuongXa_ma />\n"
+        "          <ct11a_phuongXa_ten />\n"
+        "          <ct11b_quanHuyen_ma />\n"
+        "          <ct11b_quanHuyen_ten />\n"
+        "          <ct11c_tinhTP_ma />\n"
+        "          <ct11c_tinhTP_ten />\n"
+        "        </DiaChiHDSXKDKhacTinhNDTSC>\n"
+        "      </Header>\n"
+        "      <ct21>0</ct21>\n"
+        "      <ct22>0</ct22>\n"
+        "      <GiaTriVaThueGTGTHHDVMuaVao>\n"
+        f"        <ct23>{ct23}</ct23>\n"
+        f"        <ct24>{ct24}</ct24>\n"
+        "      </GiaTriVaThueGTGTHHDVMuaVao>\n"
+        "      <HangHoaDichVuNhapKhau>\n"
+        "        <ct23a>0</ct23a>\n"
+        "        <ct24a>0</ct24a>\n"
+        "      </HangHoaDichVuNhapKhau>\n"
+        f"      <ct25>{ct25}</ct25>\n"
+        "      <ct26>0</ct26>\n"
+        "      <HHDVBRaChiuThueGTGT>\n"
+        "        <ct27>0</ct27>\n"
+        "        <ct28>0</ct28>\n"
+        "      </HHDVBRaChiuThueGTGT>\n"
+        "      <ct29>0</ct29>\n"
+        "      <HHDVBRaChiuTSuat5>\n"
+        "        <ct30>0</ct30>\n"
+        "        <ct31>0</ct31>\n"
+        "      </HHDVBRaChiuTSuat5>\n"
+        "      <HHDVBRaChiuTSuat10>\n"
+        f"        <ct32>{ct32}</ct32>\n"
+        f"        <ct33>{ct33}</ct33>\n"
+        "      </HHDVBRaChiuTSuat10>\n"
+        "      <ct32a>0</ct32a>\n"
+        "      <TongDThuVaThueGTGTHHDVBRa>\n"
+        f"        <ct34>{ct34}</ct34>\n"
+        f"        <ct35>{ct35}</ct35>\n"
+        "      </TongDThuVaThueGTGTHHDVBRa>\n"
+        "      <ct36>0</ct36>\n"
+        "      <ct37>0</ct37>\n"
+        "      <ct38>0</ct38>\n"
+        "      <ct39a>0</ct39a>\n"
+        f"      <ct40a>{ct40a}</ct40a>\n"
+        f"      <ct40b>{ct40b}</ct40b>\n"
+        f"      <ct40>{ct40}</ct40>\n"
+        "      <ct41>0</ct41>\n"
+        "      <ct42>0</ct42>\n"
+        "      <ct43>0</ct43>\n"
+        "    </CTieuTKhaiChinh>\n"
+        "  </HSoKhaiThue>\n"
+        "</HSoThueDTu>"
     )
 
     pdf_text = (
