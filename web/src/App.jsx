@@ -378,7 +378,17 @@ function normalizeParseSummaryRows(rows, options = {}) {
   const companyNameNorm = normalizeComparableText(companyName)
 
   const deniedLabels = new Set(['MST người bán', 'MST người mua', 'Vai trò hóa đơn'])
-  const allowedOrder = ['Đối tác', 'Nội dung', 'MST đối tác', 'Số hóa đơn', 'Ngày hóa đơn', 'Số tiền']
+  const allowedOrder = [
+    'Đối tác',
+    'Nội dung',
+    'MST đối tác',
+    'Số hóa đơn',
+    'Ngày hóa đơn',
+    'Số tiền trước thuế',
+    'Thuế VAT',
+    'Số tiền sau thuế',
+    'Số tiền',
+  ]
   const normalizedByLabel = new Map()
 
   rows.forEach((row) => {
@@ -391,6 +401,8 @@ function normalizeParseSummaryRows(rows, options = {}) {
       normalizedLabel = 'Đối tác'
     } else if (rawLabel === 'Mã số thuế' || rawLabel === 'MST') {
       normalizedLabel = 'MST đối tác'
+    } else if (rawLabel === 'Số tiền') {
+      normalizedLabel = 'Số tiền sau thuế'
     }
 
     if (!allowedOrder.includes(normalizedLabel)) return
@@ -793,9 +805,19 @@ function App() {
   const pendingInvoiceDate = String(
     pendingEvent?.issue_date || pendingEvent?.statement_date || pendingEvent?.event_date || '',
   ).trim()
-  const pendingAmount = Number(
-    pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || pendingEvent?.untaxed_amount || 0,
+  const pendingTotalAmount = Number(
+    pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || 0,
   )
+  let pendingUntaxedAmount = Number(
+    pendingEvent?.amount_untaxed || pendingEvent?.untaxed_amount || 0,
+  )
+  let pendingVatAmount = Number(pendingEvent?.vat_amount || 0)
+  if (pendingUntaxedAmount <= 0 && pendingTotalAmount > 0 && pendingVatAmount > 0 && pendingTotalAmount >= pendingVatAmount) {
+    pendingUntaxedAmount = pendingTotalAmount - pendingVatAmount
+  }
+  if (pendingVatAmount <= 0 && pendingTotalAmount > 0 && pendingUntaxedAmount > 0 && pendingTotalAmount >= pendingUntaxedAmount) {
+    pendingVatAmount = pendingTotalAmount - pendingUntaxedAmount
+  }
   const pendingParseRows = pendingParseRowsFromServer.length
     ? normalizeParseSummaryRows(pendingParseRowsFromServer, {
         currentCompanyName,
@@ -812,7 +834,9 @@ function App() {
         { label: 'Nội dung', value: String(pendingEvent.description || pendingEvent.goods_service_type || '-') },
         { label: 'Số hóa đơn', value: String(pendingEvent.invoice_no || pendingEvent.reference_no || '-') },
         { label: 'Ngày hóa đơn', value: formatDateByRule(pendingInvoiceDate || '-') || '-' },
-        { label: 'Số tiền', value: pendingAmount > 0 ? formatCurrency(pendingAmount) : '-' },
+        { label: 'Số tiền trước thuế', value: pendingUntaxedAmount > 0 ? formatCurrency(pendingUntaxedAmount) : '-' },
+        { label: 'Thuế VAT', value: pendingVatAmount > 0 ? formatCurrency(pendingVatAmount) : '-' },
+        { label: 'Số tiền sau thuế', value: pendingTotalAmount > 0 ? formatCurrency(pendingTotalAmount) : '-' },
       ], {
         currentCompanyName,
         fallbackPartnerCandidates: [

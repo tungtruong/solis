@@ -4,6 +4,7 @@ import base64
 import binascii
 from collections import Counter
 import json
+import math
 import mimetypes
 import os
 import re
@@ -1145,15 +1146,25 @@ def get_demo_cases(email: str = "demo@wssmeas.local", company_id: str = "") -> D
         description = str(item.get("title") or event.get("description") or event.get("goods_service_type") or "-").strip() or "-"
         invoice_no = str(event.get("invoice_no") or event.get("reference_no") or "-").strip() or "-"
         invoice_date = format_date_for_display(str(event.get("issue_date") or event.get("statement_date") or event.get("event_date") or ""))
-        amount_value = float(event.get("amount_total") or event.get("total_amount") or event.get("amount") or event.get("untaxed_amount") or 0)
-        amount_text = f"{amount_value:,.0f} đồng" if amount_value > 0 else "-"
+        total_value = float(event.get("amount_total") or event.get("total_amount") or event.get("amount") or 0)
+        untaxed_value = float(event.get("amount_untaxed") or event.get("untaxed_amount") or 0)
+        vat_value = float(event.get("vat_amount") or 0)
+        if untaxed_value <= 0 and total_value > 0 and vat_value > 0 and total_value >= vat_value:
+            untaxed_value = total_value - vat_value
+        if vat_value <= 0 and total_value > 0 and untaxed_value > 0 and total_value >= untaxed_value:
+            vat_value = total_value - untaxed_value
+        untaxed_text = f"{untaxed_value:,.0f} đồng" if untaxed_value > 0 else "-"
+        vat_text = f"{vat_value:,.0f} đồng" if vat_value > 0 else "-"
+        total_text = f"{total_value:,.0f} đồng" if total_value > 0 else "-"
 
         summary_rows = [
             {"label": "Đối tác", "value": partner_name},
             {"label": "Nội dung", "value": description},
             {"label": "Số hóa đơn", "value": invoice_no},
             {"label": "Ngày hóa đơn", "value": invoice_date},
-            {"label": "Số tiền", "value": amount_text},
+            {"label": "Số tiền trước thuế", "value": untaxed_text},
+            {"label": "Thuế VAT", "value": vat_text},
+            {"label": "Số tiền sau thuế", "value": total_text},
         ]
 
         synthetic_summary = {
@@ -1551,6 +1562,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "buyer_address": "",
             "seller_tax_code": "",
             "buyer_tax_code": "",
+            "amount_untaxed": 0.0,
+            "vat_amount": 0.0,
+            "amount_total": 0.0,
+            "vat_rate": 0.0,
             "amount": 0.0,
             "files": attachment_names,
             "parse_meta": {
@@ -2078,6 +2093,20 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             amount_confidence = float(strongest["confidence"])
 
         details["amount"] = final_amount
+        details["amount_total"] = final_amount
+        details["vat_amount"] = float(round(vat_value)) if vat_value > 0 else 0.0
+        if subtotal_value > 0:
+            details["amount_untaxed"] = float(round(subtotal_value))
+        elif final_amount > 0 and vat_value > 0 and final_amount >= vat_value:
+            details["amount_untaxed"] = float(round(final_amount - vat_value))
+        else:
+            details["amount_untaxed"] = 0.0
+
+        if subtotal_value > 0 and vat_value >= 0:
+            details["vat_rate"] = round((vat_value / subtotal_value) * 100.0, 4)
+        else:
+            explicit_rates = [float(rate) for rate in tax_rates if float(rate) > 0]
+            details["vat_rate"] = round(max(explicit_rates), 4) if explicit_rates else 0.0
 
         reconcile: Dict[str, Any] = {
             "total_tag": total_tag_value,
@@ -2191,6 +2220,15 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             lowered = str(value or "").lower()
             return re.sub(r"[^a-z0-9]", "", lowered)
 
+        def _to_money(value: Any) -> float:
+            try:
+                amount = float(value)
+            except (TypeError, ValueError):
+                return 0.0
+            if not math.isfinite(amount):
+                return 0.0
+            return max(amount, 0.0)
+
         lowered = command_text.lower()
         joined_files = " ".join(file_names).lower()
         today = datetime.utcnow().date().isoformat()
@@ -2199,10 +2237,16 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         supplier_name = str(details.get("supplier_name") or "Đối tác từ hồ sơ đính kèm")
         service_name = str(details.get("service_name") or "Mua dịch vụ từ hồ sơ đính kèm")
         invoice_number = str(details.get("invoice_number") or f"AUTO-IN-{datetime.utcnow().strftime('%H%M%S')}")
-        amount_from_attachment = float(details.get("amount") or 0)
+        amount_from_attachment = _to_money(details.get("amount"))
         parse_meta = details.get("parse_meta") if isinstance(details.get("parse_meta"), dict) else {}
+        reconcile = parse_meta.get("reconcile") if isinstance(parse_meta.get("reconcile"), dict) else {}
         company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
         invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
+
+        parsed_untaxed = _to_money(details.get("amount_untaxed") or reconcile.get("subtotal"))
+        parsed_vat = _to_money(details.get("vat_amount") or reconcile.get("vat"))
+        parsed_total = _to_money(details.get("amount_total") or reconcile.get("total_tag") or amount_from_attachment)
+        parsed_vat_rate = _to_money(details.get("vat_rate"))
 
         normalized_company_tax = _normalize_tax_code(selected_company_tax_code)
         normalized_company_name = _normalize_compare_text(selected_company_name)
@@ -2253,10 +2297,45 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 return supplier_name
             return "Đối tác"
 
+        def _derive_invoice_amounts() -> Tuple[float, float, float]:
+            untaxed_amount = parsed_untaxed
+            vat_amount = parsed_vat
+            total_amount = parsed_total
+
+            if detected_amount > 0 and total_amount <= 0:
+                total_amount = detected_amount
+
+            if total_amount <= 0 and untaxed_amount > 0:
+                total_amount = untaxed_amount + vat_amount
+
+            if untaxed_amount <= 0 and total_amount > 0 and vat_amount > 0 and total_amount >= vat_amount:
+                untaxed_amount = total_amount - vat_amount
+
+            if vat_amount <= 0 and total_amount > 0 and untaxed_amount > 0 and total_amount >= untaxed_amount:
+                vat_amount = total_amount - untaxed_amount
+
+            if total_amount > 0 and untaxed_amount <= 0:
+                applied_rate = parsed_vat_rate / 100.0 if parsed_vat_rate > 0 else 0.1
+                if applied_rate > 0:
+                    untaxed_amount = total_amount / (1.0 + applied_rate)
+                    vat_amount = total_amount - untaxed_amount
+
+            if total_amount <= 0 and untaxed_amount > 0:
+                applied_rate = parsed_vat_rate / 100.0 if parsed_vat_rate > 0 else 0.1
+                vat_amount = untaxed_amount * applied_rate
+                total_amount = untaxed_amount + vat_amount
+
+            return (
+                float(round(untaxed_amount)),
+                float(round(vat_amount)),
+                float(round(total_amount)),
+            )
+
         counterparty_name = _pick_counterparty_name()
+        inferred_untaxed, inferred_vat, inferred_total = _derive_invoice_amounts()
 
         if "góp vốn" in lowered or "von" in lowered:
-            amount = detected_amount or amount_from_attachment or 100000000.0
+            amount = detected_amount or inferred_total or amount_from_attachment or 100000000.0
             return {
                 "event_type": "gop_von",
                 "event": {
@@ -2272,7 +2351,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         if "thuế" in lowered or "gtgt" in lowered or "vat" in lowered or "tax" in joined_files:
-            amount = detected_amount or amount_from_attachment or 3000000.0
+            amount = detected_amount or inferred_vat or inferred_total or amount_from_attachment or 3000000.0
             return {
                 "event_type": "nop_thue",
                 "event": {
@@ -2290,8 +2369,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         if invoice_role == "outbound" or "bán" in lowered or "sales" in joined_files or "out-" in joined_files:
-            untaxed = detected_amount or amount_from_attachment or 15000000.0
-            vat_amount = round(untaxed * 0.1)
+            untaxed = inferred_untaxed or 15000000.0
+            vat_amount = inferred_vat if inferred_total > 0 else round(untaxed * 0.1)
+            total_amount = inferred_total if inferred_total > 0 else (untaxed + vat_amount)
             return {
                 "event_type": "ban_hang_dich_vu",
                 "event": {
@@ -2304,8 +2384,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "description": service_name,
                     "amount_untaxed": untaxed,
                     "vat_amount": vat_amount,
-                    "amount_total": untaxed + vat_amount,
-                    "total_amount": untaxed + vat_amount,
+                    "amount_total": total_amount,
+                    "total_amount": total_amount,
                     "untaxed_amount": untaxed,
                     "has_vat": True,
                     "payment_status": "unpaid",
@@ -2315,23 +2395,24 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         if invoice_role and invoice_role != "inbound":
             invoice_role = "inbound"
 
-        untaxed = detected_amount or amount_from_attachment or 6000000.0
-        vat_amount = round(untaxed * 0.1)
+        untaxed = inferred_untaxed or 6000000.0
+        vat_amount = inferred_vat if inferred_total > 0 else round(untaxed * 0.1)
+        total_amount = inferred_total if inferred_total > 0 else (untaxed + vat_amount)
         return {
             "event_type": "mua_dich_vu",
             "event": {
                 "source_id": "purchase_invoice_xml",
                 "event_type": "mua_dich_vu",
-            "invoice_no": invoice_number,
+                "invoice_no": invoice_number,
                 "issue_date": inferred_date,
                 "seller_tax_code": "0109999999",
-            "counterparty_name": counterparty_name,
-            "description": service_name,
+                "counterparty_name": counterparty_name,
+                "description": service_name,
                 "goods_service_type": "service",
                 "amount_untaxed": untaxed,
                 "vat_amount": vat_amount,
-                "amount_total": untaxed + vat_amount,
-                "total_amount": untaxed + vat_amount,
+                "amount_total": total_amount,
+                "total_amount": total_amount,
                 "untaxed_amount": untaxed,
                 "service_term_months": 1,
                 "payment_account": "331",
@@ -2486,7 +2567,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 return raw
 
             raw_parse_rows = pending_posting.get("parse_rows") if isinstance(pending_posting.get("parse_rows"), list) else []
-            allowed_labels = ["Đối tác", "Nội dung", "MST đối tác", "Số hóa đơn", "Ngày hóa đơn", "Số tiền"]
+            allowed_labels = [
+                "Đối tác",
+                "Nội dung",
+                "MST đối tác",
+                "Số hóa đơn",
+                "Ngày hóa đơn",
+                "Số tiền trước thuế",
+                "Thuế VAT",
+                "Số tiền sau thuế",
+                "Số tiền",
+            ]
             posted_summary_rows: List[Dict[str, str]] = []
             posted_by_label: Dict[str, str] = {}
 
@@ -2499,6 +2590,8 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     label = "Đối tác"
                 if label in {"MST người bán", "MST người mua", "Vai trò hóa đơn"}:
                     continue
+                if label == "Số tiền":
+                    label = "Số tiền sau thuế"
                 if label not in allowed_labels:
                     continue
                 if label == "MST đối tác" and (not value or value == "-"):
@@ -2514,19 +2607,21 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     or pending_event.get("event_date")
                     or ""
                 )
-                fallback_amount = float(
-                    pending_event.get("amount_total")
-                    or pending_event.get("total_amount")
-                    or pending_event.get("amount")
-                    or pending_event.get("untaxed_amount")
-                    or 0
-                )
+                fallback_total = float(pending_event.get("amount_total") or pending_event.get("total_amount") or pending_event.get("amount") or 0)
+                fallback_untaxed = float(pending_event.get("amount_untaxed") or pending_event.get("untaxed_amount") or 0)
+                fallback_vat = float(pending_event.get("vat_amount") or 0)
+                if fallback_untaxed <= 0 and fallback_total > 0 and fallback_vat > 0 and fallback_total >= fallback_vat:
+                    fallback_untaxed = fallback_total - fallback_vat
+                if fallback_vat <= 0 and fallback_total > 0 and fallback_untaxed > 0 and fallback_total >= fallback_untaxed:
+                    fallback_vat = fallback_total - fallback_untaxed
                 posted_by_label = {
                     "Đối tác": str(pending_event.get("counterparty_name") or "Đối tác"),
                     "Nội dung": str(pending_event.get("description") or pending_event.get("goods_service_type") or "-"),
                     "Số hóa đơn": str(pending_event.get("invoice_no") or pending_event.get("reference_no") or "-"),
                     "Ngày hóa đơn": format_date_for_summary(fallback_date),
-                    "Số tiền": f"{fallback_amount:,.0f} đồng" if fallback_amount > 0 else "-",
+                    "Số tiền trước thuế": f"{fallback_untaxed:,.0f} đồng" if fallback_untaxed > 0 else "-",
+                    "Thuế VAT": f"{fallback_vat:,.0f} đồng" if fallback_vat > 0 else "-",
+                    "Số tiền sau thuế": f"{fallback_total:,.0f} đồng" if fallback_total > 0 else "-",
                 }
 
             for label in allowed_labels:
@@ -2727,7 +2822,16 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         supplier_name = str(attachment_details.get("supplier_name") or inferred_event.get("counterparty_name") or "Đối tác")
         service_name = str(attachment_details.get("service_name") or inferred_event.get("description") or "dịch vụ")
-        parsed_amount = float(attachment_details.get("amount") or inferred_event.get("amount_total") or inferred_event.get("amount") or 0)
+        parsed_total = float(attachment_details.get("amount_total") or attachment_details.get("amount") or inferred_event.get("amount_total") or inferred_event.get("amount") or 0)
+        parsed_untaxed = float(attachment_details.get("amount_untaxed") or inferred_event.get("amount_untaxed") or inferred_event.get("untaxed_amount") or 0)
+        parsed_vat = float(attachment_details.get("vat_amount") or inferred_event.get("vat_amount") or 0)
+        if parsed_untaxed <= 0 and parsed_total > 0 and parsed_vat > 0 and parsed_total >= parsed_vat:
+            parsed_untaxed = parsed_total - parsed_vat
+        if parsed_vat <= 0 and parsed_total > 0 and parsed_untaxed > 0 and parsed_total >= parsed_untaxed:
+            parsed_vat = parsed_total - parsed_untaxed
+        amount_text_untaxed = f"{parsed_untaxed:,.0f}" if parsed_untaxed > 0 else "-"
+        amount_text_vat = f"{parsed_vat:,.0f}" if parsed_vat > 0 else "-"
+        amount_text_total = f"{parsed_total:,.0f}" if parsed_total > 0 else "-"
         invoice_no = str(attachment_details.get("invoice_number") or inferred_event.get("invoice_no") or "N/A")
         invoice_date = str(
             inferred_event.get("issue_date")
@@ -2737,8 +2841,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         )
         invoice_date_display = format_date_for_display(invoice_date)
         invoice_excerpt = str(attachment_details.get("invoice_content") or "")
-        amount_text = f"{parsed_amount:,.0f}"
-
         invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
         seller_name = str(attachment_details.get("seller_name") or "").strip()
         buyer_name = str(attachment_details.get("buyer_name") or "").strip()
@@ -2807,7 +2909,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             {"label": "Nội dung", "value": service_name},
             {"label": "Số hóa đơn", "value": invoice_no},
             {"label": "Ngày hóa đơn", "value": invoice_date_display or "-"},
-            {"label": "Số tiền", "value": f"{amount_text} đồng"},
+            {"label": "Số tiền trước thuế", "value": f"{amount_text_untaxed} đồng" if amount_text_untaxed != "-" else "-"},
+            {"label": "Thuế VAT", "value": f"{amount_text_vat} đồng" if amount_text_vat != "-" else "-"},
+            {"label": "Số tiền sau thuế", "value": f"{amount_text_total} đồng" if amount_text_total != "-" else "-"},
         ]
         if partner_tax_code:
             parse_table_rows.insert(2, {"label": "MST đối tác", "value": partner_tax_code})
@@ -2891,7 +2995,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "Đang chờ khách hàng xác nhận trước khi post bút toán.",
                         *current_reasoning,
                     ],
-                    "amount": f"{parsed_amount:,.0f} VND" if parsed_amount > 0 else item.get("amount", "0 VND"),
+                    "amount": f"{parsed_total:,.0f} VND" if parsed_total > 0 else item.get("amount", "0 VND"),
                     "partner": str(partner_name or item.get("partner") or "Đối tác"),
                     "title": str(service_name or item.get("title") or "Hồ sơ kế toán"),
                     "status": "cho_xac_nhan",
@@ -2924,7 +3028,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "supplier_name": supplier_name,
                 "service_name": service_name,
                 "invoice_number": invoice_no,
-                "amount": parsed_amount,
+                "amount": parsed_total,
                 "attachment_count": attachment_count,
                 "staged_attachments": staged_attachments,
                 "parse_rows": parse_table_rows,
