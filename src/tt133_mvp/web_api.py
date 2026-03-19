@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import binascii
+import calendar
 from collections import Counter
 import json
 import math
@@ -19,6 +20,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from xml.etree import ElementTree as ET
+from xml.sax.saxutils import escape as xml_escape
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse, Response
@@ -718,7 +720,196 @@ def build_demo_dashboard_meta() -> Dict[str, Any]:
     }
 
 
-def _compute_compliance_seed(entries: list[dict[str, Any]], as_of_date: str) -> list[dict[str, Any]]:
+def _normalize_tax_declaration_cycle(value: str) -> str:
+    token = str(value or "").strip().lower()
+    if token in {"quarter", "quarterly", "quy", "q", "quý"}:
+        return "quarter"
+    return "month"
+
+
+def _derive_period_for_cycle(cycle: str, reference_date: datetime) -> str:
+    if cycle == "quarter":
+        quarter = ((reference_date.month - 1) // 3) + 1
+        return f"{reference_date.year}-Q{quarter}"
+    return f"{reference_date.year}-{reference_date.month:02d}"
+
+
+def _is_valid_period_for_cycle(period: str, cycle: str) -> bool:
+    token = str(period or "").strip()
+    if cycle == "quarter":
+        return bool(re.fullmatch(r"\d{4}-Q[1-4]", token))
+    return bool(re.fullmatch(r"\d{4}-\d{2}", token))
+
+
+def _format_period_label(period: str, cycle: str) -> str:
+    token = str(period or "").strip()
+    if cycle == "quarter":
+        match = re.fullmatch(r"(\d{4})-Q([1-4])", token)
+        if not match:
+            return token
+        return f"Quý {int(match.group(2))}/{match.group(1)}"
+    match = re.fullmatch(r"(\d{4})-(\d{2})", token)
+    if not match:
+        return token
+    return f"Tháng {int(match.group(2))}/{match.group(1)}"
+
+
+def _period_end_date(period: str, cycle: str) -> str:
+    token = str(period or "").strip()
+    if cycle == "quarter":
+        match = re.fullmatch(r"(\d{4})-Q([1-4])", token)
+        if match:
+            year = int(match.group(1))
+            quarter = int(match.group(2))
+            month = quarter * 3
+            day = calendar.monthrange(year, month)[1]
+            return f"{year:04d}-{month:02d}-{day:02d}"
+        return datetime.utcnow().date().isoformat()
+
+    match = re.fullmatch(r"(\d{4})-(\d{2})", token)
+    if match:
+        year = int(match.group(1))
+        month = int(match.group(2))
+        month = min(max(month, 1), 12)
+        day = calendar.monthrange(year, month)[1]
+        return f"{year:04d}-{month:02d}-{day:02d}"
+    return datetime.utcnow().date().isoformat()
+
+
+def _vat_due_date_for_period(period: str, cycle: str) -> str:
+    token = str(period or "").strip()
+    if cycle == "quarter":
+        match = re.fullmatch(r"(\d{4})-Q([1-4])", token)
+        if match:
+            year = int(match.group(1))
+            quarter = int(match.group(2))
+            end_month = quarter * 3
+            due_month = end_month + 1
+            due_year = year
+            if due_month > 12:
+                due_month -= 12
+                due_year += 1
+            due_day = calendar.monthrange(due_year, due_month)[1]
+            return f"{due_year:04d}-{due_month:02d}-{due_day:02d}"
+        return datetime.utcnow().date().isoformat()
+
+    match = re.fullmatch(r"(\d{4})-(\d{2})", token)
+    if match:
+        year = int(match.group(1))
+        month = int(match.group(2))
+        due_month = month + 1
+        due_year = year
+        if due_month > 12:
+            due_month = 1
+            due_year += 1
+        return f"{due_year:04d}-{due_month:02d}-20"
+    return datetime.utcnow().date().isoformat()
+
+
+def _build_period_options(cycle: str, reference_date: datetime) -> List[Dict[str, str]]:
+    options: List[Dict[str, str]] = []
+    if cycle == "quarter":
+        current_quarter = ((reference_date.month - 1) // 3) + 1
+        period_index = reference_date.year * 4 + (current_quarter - 1)
+        for offset in range(0, 8):
+            idx = period_index - offset
+            year = idx // 4
+            quarter = (idx % 4) + 1
+            value = f"{year:04d}-Q{quarter}"
+            options.append({"value": value, "label": f"Quý {quarter}/{year}"})
+        return options
+
+    total_month_index = reference_date.year * 12 + (reference_date.month - 1)
+    for offset in range(0, 12):
+        idx = total_month_index - offset
+        year = idx // 12
+        month = (idx % 12) + 1
+        value = f"{year:04d}-{month:02d}"
+        options.append({"value": value, "label": f"Tháng {month}/{year}"})
+    return options
+
+
+def _build_vat_declaration_tt80(
+    company_profile: Dict[str, Any],
+    period: str,
+    cycle: str,
+    entries: List[Dict[str, Any]],
+) -> Dict[str, Any]:
+    tax_report = report_service.generate_tax_reports(entries, _period_end_date(period, cycle))
+    account_summary = report_service.summarize_accounts(entries)
+
+    doanh_thu_chiu_thue = 0.0
+    for account_code, values in account_summary.items():
+        if str(account_code).startswith("511"):
+            credit = float(values.get("credit", 0) or 0)
+            debit = float(values.get("debit", 0) or 0)
+            doanh_thu_chiu_thue += max(credit - debit, 0.0)
+
+    vat_output = max(float(tax_report.get("thue_gtgt", {}).get("thue_dau_ra", 0) or 0), 0.0)
+    vat_input = max(float(tax_report.get("thue_gtgt", {}).get("thue_dau_vao_duoc_khau_tru", 0) or 0), 0.0)
+    vat_net = float(tax_report.get("thue_gtgt", {}).get("thue_gtgt_thuan", 0) or 0)
+    vat_payable = max(vat_net, 0.0)
+    vat_carry_forward = max(-vat_net, 0.0)
+
+    period_label = _format_period_label(period, cycle)
+    cycle_label = "theo tháng" if cycle == "month" else "theo quý"
+    company_name = str(company_profile.get("company_name") or "").strip()
+    tax_code = _normalize_tax_code(str(company_profile.get("tax_code") or ""))
+
+    xml_text = (
+        f"<ToKhaiThueGTGT form=\"01/GTGT\" legal_basis=\"TT80/2021/TT-BTC\" cycle=\"{cycle}\" period=\"{xml_escape(period)}\">\n"
+        f"  <NguoiNopThue ten=\"{xml_escape(company_name)}\" ma_so_thue=\"{xml_escape(tax_code)}\"/>\n"
+        f"  <KyKeKhai>{xml_escape(period_label)}</KyKeKhai>\n"
+        f"  <ChiTieu ma=\"23\">0</ChiTieu>\n"
+        f"  <ChiTieu ma=\"24\">{int(round(vat_input))}</ChiTieu>\n"
+        f"  <ChiTieu ma=\"25\">{int(round(vat_input))}</ChiTieu>\n"
+        f"  <ChiTieu ma=\"32\">{int(round(doanh_thu_chiu_thue))}</ChiTieu>\n"
+        f"  <ChiTieu ma=\"33\">{int(round(vat_output))}</ChiTieu>\n"
+        f"  <ChiTieu ma=\"40a\">{int(round(vat_payable))}</ChiTieu>\n"
+        f"  <ChiTieu ma=\"40b\">{int(round(vat_carry_forward))}</ChiTieu>\n"
+        "</ToKhaiThueGTGT>"
+    )
+
+    pdf_text = (
+        "TO KHAI THUE GTGT MAU 01/GTGT (TT80/2021/TT-BTC)\n"
+        f"Ky ke khai: {period_label} ({cycle_label})\n"
+        f"Nguoi nop thue: {company_name} - MST: {tax_code}\n"
+        f"[24] Thue GTGT dau vao: {int(round(vat_input))} VND\n"
+        f"[32] Doanh thu chiu thue: {int(round(doanh_thu_chiu_thue))} VND\n"
+        f"[33] Thue GTGT dau ra: {int(round(vat_output))} VND\n"
+        f"[40a] GTGT con phai nop: {int(round(vat_payable))} VND\n"
+        f"[40b] GTGT con duoc khau tru chuyen ky sau: {int(round(vat_carry_forward))} VND\n"
+    )
+
+    return {
+        "form_code": "01/GTGT",
+        "legal_basis": "Thông tư 80/2021/TT-BTC",
+        "period": period,
+        "period_label": period_label,
+        "cycle": cycle,
+        "cycle_label": cycle_label,
+        "due_date": _vat_due_date_for_period(period, cycle),
+        "indicators": {
+            "23_prev_input_carry": 0,
+            "24_input_vat_in_period": int(round(vat_input)),
+            "25_input_vat_deducted": int(round(vat_input)),
+            "32_taxable_revenue": int(round(doanh_thu_chiu_thue)),
+            "33_output_vat": int(round(vat_output)),
+            "40a_vat_payable": int(round(vat_payable)),
+            "40b_vat_carry_forward": int(round(vat_carry_forward)),
+        },
+        "xml_text": xml_text,
+        "pdf_text": pdf_text,
+    }
+
+
+def _compute_compliance_seed(
+    entries: list[dict[str, Any]],
+    as_of_date: str,
+    period: str,
+    cycle: str,
+    vat_declaration: Optional[Dict[str, Any]] = None,
+) -> list[dict[str, Any]]:
     report = report_service.generate_financial_statements(entries, as_of_date)
     pl = report.get("ket_qua_hoat_dong_kinh_doanh", {})
     doanh_thu = float(pl.get("doanh_thu", 0) or 0)
@@ -727,15 +918,24 @@ def _compute_compliance_seed(entries: list[dict[str, Any]], as_of_date: str) -> 
     vat_estimate = max(round(doanh_thu * 0.1), 0)
     pit_estimate = max(round(doanh_thu * 0.02), 0)
     cit_estimate = max(round(loi_nhuan * 0.2), 0)
+    vat_amount = vat_estimate
+    vat_due_date = _vat_due_date_for_period(period, cycle)
+    vat_name = f"Tờ khai thuế GTGT mẫu 01/GTGT ({_format_period_label(period, cycle)})"
+    if isinstance(vat_declaration, dict):
+        vat_amount = int(vat_declaration.get("indicators", {}).get("40a_vat_payable", vat_amount) or vat_amount)
+        vat_due_date = str(vat_declaration.get("due_date") or vat_due_date)
 
     return [
         {
             "report_id": "gtgt",
-            "name": "Thuế GTGT (VAT)",
+            "name": vat_name,
             "status": "chua_nop",
-            "due_date": "2026-04-20",
-            "amount": vat_estimate,
+            "due_date": vat_due_date,
+            "amount": vat_amount,
             "category": "tax_periodic",
+            "cycle": cycle,
+            "form_code": "01/GTGT",
+            "legal_basis": "Thông tư 80/2021/TT-BTC",
         },
         {
             "report_id": "tncn",
@@ -764,13 +964,19 @@ def _compute_compliance_seed(entries: list[dict[str, Any]], as_of_date: str) -> 
     ]
 
 
-def ensure_compliance_seed(email: str, period: str) -> list[dict[str, Any]]:
+def ensure_compliance_seed(
+    email: str,
+    period: str,
+    cycle: str,
+    company_profile: Optional[Dict[str, Any]] = None,
+) -> list[dict[str, Any]]:
     normalized_email = email.lower().strip()
     existing = storage.list_compliance_filings(normalized_email, period)
     existing_by_id = {str(item.get("report_id")): item for item in existing}
-    entries = _derive_journal_entries_from_truth(normalized_email)
-    as_of_date = datetime.utcnow().date().isoformat()
-    seeds = _compute_compliance_seed(entries, as_of_date)
+    as_of_date = _period_end_date(period, cycle)
+    entries = _derive_journal_entries_from_truth(normalized_email, as_of_date)
+    vat_declaration = _build_vat_declaration_tt80(company_profile or {}, period, cycle, entries)
+    seeds = _compute_compliance_seed(entries, as_of_date, period, cycle, vat_declaration)
     now = datetime.utcnow().isoformat() + "Z"
     for item in seeds:
         report_id = str(item["report_id"])
@@ -1344,15 +1550,49 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
     normalized_email = email.lower().strip()
     resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
     scoped_data_key = company_scope_key(resolved_company_id)
-    filings = ensure_compliance_seed(scoped_data_key, period)
+    company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    declaration_cycle = _normalize_tax_declaration_cycle(str(company_profile.get("tax_declaration_cycle") or ""))
+    reference_date = datetime.utcnow().date()
+    period_options = _build_period_options(declaration_cycle, reference_date)
+    effective_period = str(period or "").strip()
+    if not _is_valid_period_for_cycle(effective_period, declaration_cycle):
+        effective_period = str(period_options[0].get("value") if period_options else _derive_period_for_cycle(declaration_cycle, reference_date))
+
+    filings = ensure_compliance_seed(scoped_data_key, effective_period, declaration_cycle, company_profile)
     filings = _apply_late_status(filings)
 
     report_by_id = {str(item.get("report_id")): item for item in filings}
     gtgt_amount = float(report_by_id.get("gtgt", {}).get("amount", 0) or 0)
-    entries = _derive_journal_entries_from_truth(scoped_data_key)
-    financial = report_service.generate_financial_statements(entries, datetime.utcnow().date().isoformat())
+    period_end_date = _period_end_date(effective_period, declaration_cycle)
+    entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
+    financial = report_service.generate_financial_statements(entries, period_end_date)
     doanh_thu = float(financial.get("ket_qua_hoat_dong_kinh_doanh", {}).get("doanh_thu", 0) or 0)
     expected_vat = max(round(doanh_thu * 0.1), 0)
+    vat_declaration = _build_vat_declaration_tt80(company_profile, effective_period, declaration_cycle, entries)
+
+    gtgt_filing = report_by_id.get("gtgt") if isinstance(report_by_id.get("gtgt"), dict) else None
+    if gtgt_filing is not None:
+        normalized_gtgt = {
+            **gtgt_filing,
+            "name": f"Tờ khai thuế GTGT mẫu 01/GTGT ({vat_declaration.get('period_label')})",
+            "amount": float(vat_declaration.get("indicators", {}).get("40a_vat_payable", 0) or 0),
+            "due_date": str(vat_declaration.get("due_date") or gtgt_filing.get("due_date") or ""),
+            "cycle": declaration_cycle,
+            "form_code": "01/GTGT",
+            "legal_basis": "Thông tư 80/2021/TT-BTC",
+        }
+        storage.upsert_compliance_filing(
+            email=scoped_data_key,
+            period=effective_period,
+            report_id="gtgt",
+            status=str(normalized_gtgt.get("status") or "chua_nop"),
+            due_date=str(normalized_gtgt.get("due_date") or ""),
+            payload=normalized_gtgt,
+            updated_at=datetime.utcnow().isoformat() + "Z",
+        )
+        filings = [normalized_gtgt if str(item.get("report_id") or "") == "gtgt" else item for item in filings]
+        report_by_id["gtgt"] = normalized_gtgt
+        gtgt_amount = float(normalized_gtgt.get("amount", 0) or 0)
 
     issues = []
     if gtgt_amount <= 0:
@@ -1362,12 +1602,14 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
     if not issues:
         issues.append("Không phát hiện sai lệch trọng yếu trước khi nộp.")
 
-    history = storage.list_compliance_submission_history(scoped_data_key, period)
+    history = storage.list_compliance_submission_history(scoped_data_key, effective_period)
     active_report = filings[0] if filings else None
     xml_preview = ""
-    if active_report:
+    if active_report and str(active_report.get("report_id") or "") == "gtgt":
+        xml_preview = str(vat_declaration.get("xml_text") or "")
+    elif active_report:
         xml_preview = (
-            f"<ToKhai ky=\"{period}\" loai=\"{active_report.get('report_id')}\">\n"
+            f"<ToKhai ky=\"{effective_period}\" loai=\"{active_report.get('report_id')}\">\n"
             f"  <SoTien>{int(float(active_report.get('amount', 0) or 0))}</SoTien>\n"
             "  <NguonDuLieu>reports.v1</NguonDuLieu>\n"
             "</ToKhai>"
@@ -1376,16 +1618,15 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
     return {
         "email": normalized_email,
         "company_id": resolved_company_id,
-        "period": period,
-        "period_options": [
-            {"value": "2026-03", "label": "Tháng 3/2026"},
-            {"value": "2026-02", "label": "Tháng 2/2026"},
-            {"value": "2026-Q1", "label": "Quý 1/2026"},
-        ],
+        "period": effective_period,
+        "period_options": period_options,
+        "declaration_cycle": declaration_cycle,
+        "declaration_cycle_label": "Tháng" if declaration_cycle == "month" else "Quý",
         "reports": filings,
         "issues": issues,
         "history": history,
         "xml_preview": xml_preview,
+        "vat_declaration": vat_declaration,
     }
 
 
@@ -1419,6 +1660,22 @@ def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, An
     if not filing:
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
 
+    scoped_data_key = company_scope_key(resolved_company_id)
+    company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    declaration_cycle = _normalize_tax_declaration_cycle(str(company_profile.get("tax_declaration_cycle") or ""))
+    if str(payload.report_id) == "gtgt":
+        if not _is_valid_period_for_cycle(payload.period, declaration_cycle):
+            raise HTTPException(status_code=400, detail="INVALID_PERIOD_FOR_DECLARATION_CYCLE")
+        period_end_date = _period_end_date(payload.period, declaration_cycle)
+        entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
+        declaration = _build_vat_declaration_tt80(company_profile, payload.period, declaration_cycle, entries)
+        period_token = re.sub(r"[^0-9Q-]", "", str(payload.period or ""))
+        return {
+            "file_name": f"tokhai_gtgt_01gtgt_{period_token}.xml",
+            "mime_type": "application/xml",
+            "content_base64": base64.b64encode(str(declaration.get("xml_text") or "").encode("utf-8")).decode("ascii"),
+        }
+
     xml_text = (
         f"<ToKhai ky=\"{payload.period}\" loai=\"{payload.report_id}\">\n"
         f"  <SoTien>{int(float(filing.get('amount', 0) or 0))}</SoTien>\n"
@@ -1439,6 +1696,22 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
     filing = storage.get_compliance_filing(company_scope_key(resolved_company_id), payload.period, payload.report_id)
     if not filing:
         raise HTTPException(status_code=404, detail="COMPLIANCE_REPORT_NOT_FOUND")
+
+    scoped_data_key = company_scope_key(resolved_company_id)
+    company_profile = storage.get_company(resolved_company_id) or storage.get_default_onboarding_company(normalized_email) or {}
+    declaration_cycle = _normalize_tax_declaration_cycle(str(company_profile.get("tax_declaration_cycle") or ""))
+    if str(payload.report_id) == "gtgt":
+        if not _is_valid_period_for_cycle(payload.period, declaration_cycle):
+            raise HTTPException(status_code=400, detail="INVALID_PERIOD_FOR_DECLARATION_CYCLE")
+        period_end_date = _period_end_date(payload.period, declaration_cycle)
+        entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
+        declaration = _build_vat_declaration_tt80(company_profile, payload.period, declaration_cycle, entries)
+        period_token = re.sub(r"[^0-9Q-]", "", str(payload.period or ""))
+        return {
+            "file_name": f"tokhai_gtgt_01gtgt_{period_token}.pdf",
+            "mime_type": "application/pdf",
+            "content_base64": base64.b64encode(str(declaration.get("pdf_text") or "").encode("utf-8")).decode("ascii"),
+        }
 
     text_content = (
         f"BAO CAO {filing.get('name', payload.report_id)}\n"
@@ -1479,7 +1752,11 @@ def submit_demo_compliance(payload: ComplianceActionPayload) -> Dict[str, Any]:
         "report": str(filing.get("name") or payload.report_id),
         "submittedBy": submitted_by,
         "submittedAt": now,
-        "fileName": f"{payload.report_id}_{payload.period}.xml",
+        "fileName": (
+            f"tokhai_gtgt_01gtgt_{re.sub(r'[^0-9Q-]', '', str(payload.period or ''))}.xml"
+            if str(payload.report_id) == "gtgt"
+            else f"{payload.report_id}_{payload.period}.xml"
+        ),
     }
     storage.add_compliance_submission_history(
         history_id=f"HIS-{uuid.uuid4().hex[:8].upper()}",

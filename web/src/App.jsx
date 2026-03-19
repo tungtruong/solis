@@ -1293,6 +1293,10 @@ function App() {
       .then((payload) => {
         if (cancelled) return
         setComplianceData(payload)
+        const effectivePeriod = String(payload?.period || '').trim()
+        if (effectivePeriod && effectivePeriod !== compliancePeriod) {
+          setCompliancePeriod(effectivePeriod)
+        }
         const reports = Array.isArray(payload?.reports) ? payload.reports : []
         if (reports.length && !reports.some((item) => String(item.report_id) === complianceReportId)) {
           setComplianceReportId(String(reports[0].report_id))
@@ -2596,6 +2600,8 @@ function App() {
                     {complianceDetailTab === 'preview' ? (
                       <div className="compliance-preview-box">
                         <p><strong>Biểu mẫu:</strong> {complianceActiveReport?.name || 'Báo cáo thuế'}</p>
+                        <p><strong>Căn cứ pháp lý:</strong> {complianceActiveReport?.legal_basis || complianceData?.vat_declaration?.legal_basis || '-'}</p>
+                        <p><strong>Chu kỳ kê khai:</strong> {complianceData?.declaration_cycle_label || '-'}</p>
                         <p><strong>Số liệu nguồn từ Reports:</strong> Doanh thu {formatCurrency(reportRevenue)} | Lợi nhuận {formatCurrency(reportProfit)}</p>
                         <p><strong>Số tạm tính:</strong> {formatCurrency(complianceActiveReport?.amount || 0)}</p>
                       </div>
