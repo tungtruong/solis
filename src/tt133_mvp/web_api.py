@@ -974,6 +974,82 @@ def get_demo_cases(email: str = "demo@wssmeas.local", company_id: str = "") -> D
             partner_row["value"] = resolved_partner
             item["partner"] = resolved_partner
 
+    case_events = storage.list_case_events(scoped_data_key)
+    event_by_case_id: Dict[str, Dict[str, Any]] = {}
+    for event in case_events:
+        if not isinstance(event, dict):
+            continue
+        event_case_id = str(event.get("case_id") or "").strip()
+        if not event_case_id:
+            continue
+        event_by_case_id[event_case_id] = event
+
+    def format_date_for_display(value: str) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return "-"
+        token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
+        if not token_match:
+            return raw
+        token = token_match.group(1).replace("/", "-")
+        if re.fullmatch(r"\d{8}", token):
+            try:
+                return datetime.strptime(token, "%Y%m%d").strftime("%d/%m/%Y")
+            except ValueError:
+                return raw
+        for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
+            try:
+                return datetime.strptime(token, fmt).strftime("%d/%m/%Y")
+            except ValueError:
+                continue
+        return raw
+
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("status") or "") != "hoan_tat":
+            continue
+
+        timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
+        has_posted_summary = any(
+            isinstance(entry, dict) and str(entry.get("title") or "").strip().lower() == "thông tin đã post"
+            for entry in timeline
+        )
+        if has_posted_summary:
+            continue
+
+        case_id_value = str(item.get("id") or "").strip()
+        event = event_by_case_id.get(case_id_value, {})
+        if not isinstance(event, dict):
+            event = {}
+
+        partner_name = str(item.get("partner") or event.get("counterparty_name") or "Đối tác").strip() or "Đối tác"
+        description = str(item.get("title") or event.get("description") or event.get("goods_service_type") or "-").strip() or "-"
+        invoice_no = str(event.get("invoice_no") or event.get("reference_no") or "-").strip() or "-"
+        invoice_date = format_date_for_display(str(event.get("issue_date") or event.get("statement_date") or event.get("event_date") or ""))
+        amount_value = float(event.get("amount_total") or event.get("total_amount") or event.get("amount") or event.get("untaxed_amount") or 0)
+        amount_text = f"{amount_value:,.0f} đồng" if amount_value > 0 else "-"
+
+        summary_rows = [
+            {"label": "Đối tác", "value": partner_name},
+            {"label": "Nội dung", "value": description},
+            {"label": "Số hóa đơn", "value": invoice_no},
+            {"label": "Ngày hóa đơn", "value": invoice_date},
+            {"label": "Số tiền", "value": amount_text},
+        ]
+
+        synthetic_summary = {
+            "id": f"{case_id_value}-posted-summary-backfill",
+            "kind": "analysis",
+            "role": "system",
+            "title": "Thông tin đã post",
+            "body": "Hệ thống đã thực hiện post với các thông tin cơ bản sau:",
+            "table_rows": summary_rows,
+            "time": datetime.utcnow().strftime("%H:%M"),
+        }
+
+        item["timeline"] = [*timeline, synthetic_summary]
+
     def prefix_balance(prefixes: list[str]) -> float:
         total = 0.0
         for account, values in trial_balance.items():
