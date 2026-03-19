@@ -13,19 +13,25 @@ Su dung:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import math
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from llama_index.core.schema import NodeRelationship, RelatedNodeInfo, TextNode
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, PointStruct, VectorParams
 
 
 CHAPTER_RE = re.compile(r"^\s*Chương\s+([IVXLC]+)\s*$", re.IGNORECASE)
 ARTICLE_RE = re.compile(r"^\s*Điều\s+(\d+[A-Za-z]?)\.\s*(.+?)\s*$", re.IGNORECASE)
 CLAUSE_RE = re.compile(r"^\s*(\d+)\.\s+(.+?)\s*$")
 POINT_RE = re.compile(r"^\s*([a-zđ])\)\s+(.+?)\s*$", re.IGNORECASE)
+APPENDIX_START_RE = re.compile(r"^\s*(Phụ\s*lục|Phu\s*luc)\s+I\s*$", re.IGNORECASE)
+TOKEN_RE = re.compile(r"\w+", re.UNICODE)
 
 
 @dataclass
@@ -103,6 +109,22 @@ def parse_articles(lines: Iterable[str]) -> List[Article]:
         articles.append(current_article)
 
     return articles
+
+
+def trim_before_appendix(lines: List[str]) -> List[str]:
+    """Lay phan than Thong tu, bo phan phu luc phia sau Dieu 31."""
+    dieu_31_idx = -1
+    for i, raw in enumerate(lines):
+        if re.match(r"^\s*Điều\s+31\.\s*", clean_line(raw), re.IGNORECASE):
+            dieu_31_idx = i
+            break
+
+    start_search = dieu_31_idx + 1 if dieu_31_idx >= 0 else 0
+    for i in range(start_search, len(lines)):
+        if APPENDIX_START_RE.match(clean_line(lines[i])):
+            return lines[:i]
+
+    return lines
 
 
 def split_article_into_clauses(article_lines: List[str]) -> List[Clause]:
@@ -188,6 +210,71 @@ def make_node(node_id: str, text: str, metadata: Dict[str, str], parent_id: Opti
     return node
 
 
+def hash_embedding(text: str, dim: int) -> List[float]:
+    """Tao embedding co dinh tu van ban de upsert Qdrant khong phu thuoc model ngoai."""
+    vec = [0.0] * dim
+    for tok in TOKEN_RE.findall(text.lower()):
+        digest = hashlib.md5(tok.encode("utf-8")).digest()
+        idx = int.from_bytes(digest[:4], "little") % dim
+        sign = 1.0 if (digest[4] & 1) == 0 else -1.0
+        vec[idx] += sign
+
+    norm = math.sqrt(sum(v * v for v in vec))
+    if norm > 0:
+        vec = [v / norm for v in vec]
+    return vec
+
+
+def upsert_nodes_to_qdrant(
+    nodes: List[TextNode],
+    collection_name: str,
+    dim: int,
+    batch_size: int,
+    qdrant_path: Optional[str],
+    qdrant_url: Optional[str],
+    qdrant_api_key: Optional[str],
+) -> str:
+    if qdrant_path:
+        client = QdrantClient(path=qdrant_path)
+        destination = f"local:{qdrant_path}"
+    else:
+        client = QdrantClient(url=qdrant_url or "http://localhost:6333", api_key=qdrant_api_key)
+        destination = qdrant_url or "http://localhost:6333"
+
+    if not client.collection_exists(collection_name):
+        client.create_collection(
+            collection_name=collection_name,
+            vectors_config=VectorParams(size=dim, distance=Distance.COSINE),
+        )
+
+    points: List[PointStruct] = []
+    for node in nodes:
+        parent_id = (
+            node.relationships.get(NodeRelationship.PARENT).node_id
+            if NodeRelationship.PARENT in node.relationships
+            else None
+        )
+        payload = {
+            "node_id": node.node_id,
+            "text": node.get_content(),
+            "parent_id": parent_id,
+            "metadata": node.metadata,
+            "level": node.metadata.get("level"),
+            "article": node.metadata.get("article"),
+            "clause": node.metadata.get("clause"),
+            "point": node.metadata.get("point"),
+            "chapter": node.metadata.get("chapter"),
+        }
+        vector = hash_embedding(payload["text"], dim=dim)
+        point_id = int.from_bytes(hashlib.md5(node.node_id.encode("utf-8")).digest()[:8], "little") & ((1 << 63) - 1)
+        points.append(PointStruct(id=point_id, vector=vector, payload=payload))
+
+    for i in range(0, len(points), batch_size):
+        client.upsert(collection_name=collection_name, points=points[i : i + batch_size], wait=True)
+
+    return destination
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Chunk TT99 theo Điều/Khoản/Điểm bằng LlamaIndex")
     parser.add_argument(
@@ -205,6 +292,48 @@ def main() -> None:
         default="data/regulations/tt99_2025_hierarchy_index.json",
         help="Đường dẫn file JSON cây chỉ mục đầu ra",
     )
+    parser.add_argument(
+        "--keep-appendix",
+        action="store_true",
+        help="Giữ lại phần phụ lục thay vì cắt sau Điều 31",
+    )
+    parser.add_argument(
+        "--qdrant-collection",
+        default="tt99_2025_hierarchical_rag",
+        help="Tên collection Qdrant để upsert node",
+    )
+    parser.add_argument(
+        "--qdrant-path",
+        default="data/qdrant",
+        help="Path Qdrant local mode (ưu tiên nếu có)",
+    )
+    parser.add_argument(
+        "--qdrant-url",
+        default="",
+        help="URL Qdrant server nếu không dùng local mode, ví dụ http://localhost:6333",
+    )
+    parser.add_argument(
+        "--qdrant-api-key",
+        default="",
+        help="API key Qdrant (nếu dùng server có xác thực)",
+    )
+    parser.add_argument(
+        "--vector-size",
+        type=int,
+        default=384,
+        help="Kích thước vector upsert vào Qdrant",
+    )
+    parser.add_argument(
+        "--qdrant-batch-size",
+        type=int,
+        default=128,
+        help="Kích thước batch upsert Qdrant",
+    )
+    parser.add_argument(
+        "--skip-qdrant",
+        action="store_true",
+        help="Không upsert vào Qdrant",
+    )
     args = parser.parse_args()
 
     input_path = Path(args.input)
@@ -216,6 +345,8 @@ def main() -> None:
 
     raw_text = input_path.read_text(encoding="utf-8", errors="ignore")
     lines = raw_text.splitlines()
+    if not args.keep_appendix:
+        lines = trim_before_appendix(lines)
 
     articles = parse_articles(lines)
     if not articles:
@@ -323,11 +454,26 @@ def main() -> None:
 
     out_index_path.write_text(json.dumps(hierarchy, ensure_ascii=False, indent=2), encoding="utf-8")
 
+    qdrant_destination = None
+    if not args.skip_qdrant:
+        qdrant_destination = upsert_nodes_to_qdrant(
+            nodes=nodes,
+            collection_name=args.qdrant_collection,
+            dim=args.vector_size,
+            batch_size=args.qdrant_batch_size,
+            qdrant_path=args.qdrant_path.strip() or None,
+            qdrant_url=args.qdrant_url.strip() or None,
+            qdrant_api_key=args.qdrant_api_key.strip() or None,
+        )
+
     print("Hoàn tất chunk TT99 cho Hierarchical RAG")
     print(f"- Input: {input_path}")
     print(f"- JSONL nodes: {out_jsonl_path}")
     print(f"- Hierarchy index: {out_index_path}")
     print(f"- Tổng node: {hierarchy['stats']['total_nodes']}")
+    if qdrant_destination:
+        print(f"- Qdrant destination: {qdrant_destination}")
+        print(f"- Qdrant collection: {args.qdrant_collection}")
 
 
 if __name__ == "__main__":

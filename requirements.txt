@@ -4,3 +4,4 @@ python-multipart==0.0.20
 google-cloud-firestore==2.21.0
 google-cloud-storage==3.3.0
 llama-index-core>=0.11,<0.12
+qdrant-client>=1.9,<2.0
