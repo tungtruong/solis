@@ -855,6 +855,125 @@ def get_demo_cases(email: str = "demo@wssmeas.local", company_id: str = "") -> D
 
     trial_balance = report_service.summarize_accounts(entries)
 
+    def normalize_compare_text(value: str) -> str:
+        lowered = str(value or "").lower()
+        lowered = unicodedata.normalize("NFD", lowered)
+        lowered = "".join(ch for ch in lowered if unicodedata.category(ch) != "Mn")
+        return re.sub(r"[^a-z0-9]", "", lowered)
+
+    company_tax = _normalize_tax_code(str(default_company.get("tax_code") if isinstance(default_company, dict) else ""))
+    company_name_norm = normalize_compare_text(str(default_company.get("company_name") if isinstance(default_company, dict) else ""))
+
+    def is_same_company(name_value: str, tax_value: str) -> bool:
+        normalized_tax = _normalize_tax_code(str(tax_value or ""))
+        if company_tax and normalized_tax and normalized_tax == company_tax:
+            return True
+        candidate_norm = normalize_compare_text(name_value)
+        if company_name_norm and candidate_norm:
+            return company_name_norm in candidate_norm or candidate_norm in company_name_norm
+        return False
+
+    def is_generic_partner(name_value: str) -> bool:
+        value = str(name_value or "").strip().lower()
+        return value in {"", "-", "đối tác", "doi tac", "n/a"}
+
+    def extract_partner_from_pending_xml(case_id_value: str, pending_posting: Dict[str, Any]) -> str:
+        attachments = pending_posting.get("received_attachments") if isinstance(pending_posting, dict) else []
+        if not isinstance(attachments, list):
+            return ""
+
+        email_fragment = _safe_email_fragment(normalized_email)
+        candidate_paths: List[Path] = []
+        for attachment in attachments:
+            if not isinstance(attachment, dict):
+                continue
+            preview_ref = str(attachment.get("preview_ref") or attachment.get("name") or "").strip()
+            if not preview_ref:
+                continue
+            candidate_paths.extend(
+                [
+                    STAGING_UPLOADS_ROOT / email_fragment / str(case_id_value) / preview_ref,
+                    UPLOADS_ROOT / email_fragment / str(case_id_value) / preview_ref,
+                ]
+            )
+
+        for path in candidate_paths:
+            if not path.exists() or path.suffix.lower() != ".xml":
+                continue
+            try:
+                text = path.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
+
+            seller_name_match = re.search(r"<NBan>.*?<Ten>([^<]+)</Ten>", text, flags=re.IGNORECASE | re.DOTALL)
+            seller_tax_match = re.search(r"<NBan>.*?<MST>([^<]+)</MST>", text, flags=re.IGNORECASE | re.DOTALL)
+            buyer_name_match = re.search(r"<NMua>.*?<(?:Ten|HVTNMHang)>([^<]+)</(?:Ten|HVTNMHang)>", text, flags=re.IGNORECASE | re.DOTALL)
+            buyer_tax_match = re.search(r"<NMua>.*?<MST>([^<]+)</MST>", text, flags=re.IGNORECASE | re.DOTALL)
+
+            seller_name = re.sub(r"\s+", " ", str(seller_name_match.group(1) if seller_name_match else "")).strip(" \t\r\n:;,-")[:180]
+            seller_tax = _normalize_tax_code(seller_tax_match.group(1) if seller_tax_match else "")
+            buyer_name = re.sub(r"\s+", " ", str(buyer_name_match.group(1) if buyer_name_match else "")).strip(" \t\r\n:;,-")[:180]
+            buyer_tax = _normalize_tax_code(buyer_tax_match.group(1) if buyer_tax_match else "")
+
+            if buyer_name and not is_same_company(buyer_name, buyer_tax):
+                return buyer_name
+            if seller_name and not is_same_company(seller_name, seller_tax):
+                return seller_name
+
+        return ""
+
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        pending_posting = item.get("pending_posting") if isinstance(item.get("pending_posting"), dict) else None
+        if not pending_posting:
+            continue
+
+        parse_rows = pending_posting.get("parse_rows") if isinstance(pending_posting.get("parse_rows"), list) else []
+        if not parse_rows:
+            continue
+
+        partner_row = None
+        for row in parse_rows:
+            if not isinstance(row, dict):
+                continue
+            label = str(row.get("label") or "").strip().lower()
+            if label in {"đối tác", "doi tac", "nhà cung cấp", "nha cung cap"}:
+                partner_row = row
+                break
+
+        if not partner_row:
+            continue
+
+        current_partner = str(partner_row.get("value") or "").strip()
+        if current_partner and not is_generic_partner(current_partner) and not is_same_company(current_partner, ""):
+            continue
+
+        pending_event = pending_posting.get("event") if isinstance(pending_posting.get("event"), dict) else {}
+        candidate_names = [
+            str(pending_event.get("counterparty_name") or "").strip(),
+            str(pending_event.get("buyer_name") or "").strip(),
+            str(pending_event.get("seller_name") or "").strip(),
+            str(item.get("partner") or "").strip(),
+        ]
+
+        resolved_partner = ""
+        for candidate in candidate_names:
+            if is_generic_partner(candidate):
+                continue
+            if is_same_company(candidate, ""):
+                continue
+            resolved_partner = candidate
+            break
+
+        if not resolved_partner:
+            resolved_partner = extract_partner_from_pending_xml(str(item.get("id") or ""), pending_posting)
+
+        if resolved_partner:
+            partner_row["label"] = "Đối tác"
+            partner_row["value"] = resolved_partner
+            item["partner"] = resolved_partner
+
     def prefix_balance(prefixes: list[str]) -> float:
         total = 0.0
         for account, values in trial_balance.items():
