@@ -424,6 +424,10 @@ class CompanyProfilePayload(BaseModel):
     default_bank_account: str
     accountant_email: str
     accounting_software_start_date: str = ""
+    tax_office_code: str = ""
+    tax_office_name: str = ""
+    province_code: str = ""
+    province_name: str = ""
     company_id: str = ""
 
 
@@ -4048,6 +4052,10 @@ def upsert_company_profile(payload: CompanyProfilePayload, email: str = Depends(
             "tax_code": normalized_tax,
             "address": profile_data.get("address"),
             "legal_representative": profile_data.get("legal_representative"),
+            "tax_office_code": profile_data.get("tax_office_code"),
+            "tax_office_name": profile_data.get("tax_office_name"),
+            "province_code": profile_data.get("province_code"),
+            "province_name": profile_data.get("province_name"),
         },
         now,
         now,
