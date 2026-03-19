@@ -2187,6 +2187,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         return details
 
     def infer_event_from_input(command_text: str, file_names: List[str], details: Dict[str, Any]) -> Dict[str, Any]:
+        def _normalize_compare_text(value: str) -> str:
+            lowered = str(value or "").lower()
+            return re.sub(r"[^a-z0-9]", "", lowered)
+
         lowered = command_text.lower()
         joined_files = " ".join(file_names).lower()
         today = datetime.utcnow().date().isoformat()
@@ -2201,7 +2205,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
 
         normalized_company_tax = _normalize_tax_code(selected_company_tax_code)
-        normalized_company_name = normalize_text_field(selected_company_name)
+        normalized_company_name = _normalize_compare_text(selected_company_name)
 
         seller_name = str(details.get("seller_name") or "").strip()
         buyer_name = str(details.get("buyer_name") or "").strip()
@@ -2209,7 +2213,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         buyer_tax_code = _normalize_tax_code(str(details.get("buyer_tax_code") or ""))
 
         def _is_own_company(name_value: str, tax_value: str) -> bool:
-            normalized_name = normalize_text_field(name_value)
+            normalized_name = _normalize_compare_text(name_value)
             normalized_tax = _normalize_tax_code(tax_value)
             if normalized_company_tax and normalized_tax and normalized_tax == normalized_company_tax:
                 return True
