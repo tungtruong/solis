@@ -1952,7 +1952,7 @@ function App() {
                 {shouldShowParseSummary ? (
                   <section className="parse-summary-box">
                     <div className="parse-summary-head">
-                      <h4>Thông tin parse hồ sơ</h4>
+                      <h4>Thông tin trích xuất hồ sơ</h4>
                       <span>Vui lòng khách hàng xác nhận trước khi post</span>
                     </div>
                     <table className="parse-summary-table">

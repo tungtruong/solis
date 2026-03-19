@@ -1854,13 +1854,53 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         today = datetime.utcnow().date().isoformat()
         inferred_date = str(details.get("invoice_date") or today)
         detected_amount = detect_amount_from_text(command_text)
-        supplier_name = str(details.get("supplier_name") or "Nhà cung cấp từ hồ sơ đính kèm")
+        supplier_name = str(details.get("supplier_name") or "Đối tác từ hồ sơ đính kèm")
         service_name = str(details.get("service_name") or "Mua dịch vụ từ hồ sơ đính kèm")
         invoice_number = str(details.get("invoice_number") or f"AUTO-IN-{datetime.utcnow().strftime('%H%M%S')}")
         amount_from_attachment = float(details.get("amount") or 0)
         parse_meta = details.get("parse_meta") if isinstance(details.get("parse_meta"), dict) else {}
         company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
         invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
+
+        normalized_company_tax = _normalize_tax_code(selected_company_tax_code)
+        normalized_company_name = normalize_text_field(selected_company_name)
+
+        seller_name = str(details.get("seller_name") or "").strip()
+        buyer_name = str(details.get("buyer_name") or "").strip()
+        seller_tax_code = _normalize_tax_code(str(details.get("seller_tax_code") or ""))
+        buyer_tax_code = _normalize_tax_code(str(details.get("buyer_tax_code") or ""))
+
+        def _is_own_company(name_value: str, tax_value: str) -> bool:
+            normalized_name = normalize_text_field(name_value)
+            normalized_tax = _normalize_tax_code(tax_value)
+            if normalized_company_tax and normalized_tax and normalized_tax == normalized_company_tax:
+                return True
+            if normalized_company_name and normalized_name:
+                return normalized_company_name in normalized_name or normalized_name in normalized_company_name
+            return False
+
+        def _pick_counterparty_name() -> str:
+            if invoice_role == "outbound":
+                return buyer_name or supplier_name
+            if invoice_role == "inbound":
+                return seller_name or supplier_name
+
+            candidates = [
+                (buyer_name, buyer_tax_code),
+                (seller_name, seller_tax_code),
+            ]
+            for name_value, tax_value in candidates:
+                if not str(name_value or "").strip():
+                    continue
+                if _is_own_company(str(name_value), str(tax_value)):
+                    continue
+                return str(name_value)
+
+            if not _is_own_company(supplier_name, ""):
+                return supplier_name
+            return "Đối tác"
+
+        counterparty_name = _pick_counterparty_name()
 
         if "góp vốn" in lowered or "von" in lowered:
             amount = detected_amount or amount_from_attachment or 100000000.0
@@ -1870,7 +1910,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "source_id": "bank_statement",
                     "event_type": "gop_von",
                     "statement_date": inferred_date,
-                    "counterparty_name": supplier_name,
+                    "counterparty_name": counterparty_name,
                     "description": service_name,
                     "amount": amount,
                     "reference_no": f"AUTO-CAP-{datetime.utcnow().strftime('%H%M%S')}",
@@ -1886,7 +1926,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "source_id": "bank_statement",
                     "event_type": "nop_thue",
                     "statement_date": inferred_date,
-                    "counterparty_name": supplier_name,
+                    "counterparty_name": counterparty_name,
                     "description": service_name,
                     "amount": amount,
                     "reference_no": f"AUTO-TAX-{datetime.utcnow().strftime('%H%M%S')}",
@@ -1907,7 +1947,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "invoice_no": invoice_number,
                     "issue_date": inferred_date,
                     "buyer_tax_code": "0310001111",
-                    "counterparty_name": supplier_name,
+                    "counterparty_name": counterparty_name,
                     "description": service_name,
                     "amount_untaxed": untaxed,
                     "vat_amount": vat_amount,
@@ -1932,7 +1972,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "invoice_no": invoice_number,
                 "issue_date": inferred_date,
                 "seller_tax_code": "0109999999",
-            "counterparty_name": supplier_name,
+            "counterparty_name": counterparty_name,
             "description": service_name,
                 "goods_service_type": "service",
                 "amount_untaxed": untaxed,
@@ -2316,7 +2356,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "id": f"{case_id}-parse-table-{uuid.uuid4().hex[:6]}",
                 "kind": "analysis",
                 "role": "system",
-                "title": "Thông tin parse hồ sơ",
+                "title": "Thông tin trích xuất hồ sơ",
                 "body": "Hệ thống đã trích xuất các trường thông tin chính từ hồ sơ đính kèm.",
                 "table_rows": parse_table_rows,
                 "time": datetime.utcnow().strftime("%H:%M"),
