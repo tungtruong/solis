@@ -9,13 +9,14 @@ import os
 import re
 import shutil
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from xml.etree import ElementTree as ET
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
@@ -1880,10 +1881,21 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             return False
 
         def _pick_counterparty_name() -> str:
+            def _pick_non_own(*candidates: Tuple[str, str]) -> str:
+                for name_value, tax_value in candidates:
+                    if not str(name_value or "").strip():
+                        continue
+                    if _is_own_company(str(name_value), str(tax_value)):
+                        continue
+                    return str(name_value)
+                return ""
+
             if invoice_role == "outbound":
-                return buyer_name or supplier_name
+                picked = _pick_non_own((buyer_name, buyer_tax_code), (seller_name, seller_tax_code), (supplier_name, ""))
+                return picked or "Đối tác"
             if invoice_role == "inbound":
-                return seller_name or supplier_name
+                picked = _pick_non_own((seller_name, seller_tax_code), (buyer_name, buyer_tax_code), (supplier_name, ""))
+                return picked or "Đối tác"
 
             candidates = [
                 (buyer_name, buyer_tax_code),
@@ -2280,7 +2292,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     continue
             return raw
 
-        supplier_name = str(attachment_details.get("supplier_name") or inferred_event.get("counterparty_name") or "Nhà cung cấp")
+        def normalize_compare_text(value: str) -> str:
+            lowered = str(value or "").lower()
+            lowered = unicodedata.normalize("NFD", lowered)
+            lowered = "".join(ch for ch in lowered if unicodedata.category(ch) != "Mn")
+            lowered = re.sub(r"[^a-z0-9]", "", lowered)
+            return lowered
+
+        supplier_name = str(attachment_details.get("supplier_name") or inferred_event.get("counterparty_name") or "Đối tác")
         service_name = str(attachment_details.get("service_name") or inferred_event.get("description") or "dịch vụ")
         parsed_amount = float(attachment_details.get("amount") or inferred_event.get("amount_total") or inferred_event.get("amount") or 0)
         invoice_no = str(attachment_details.get("invoice_number") or inferred_event.get("invoice_no") or "N/A")
@@ -2297,21 +2316,65 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         invoice_role = str(company_validation.get("invoice_role") or "").strip().lower()
         seller_name = str(attachment_details.get("seller_name") or "").strip()
         buyer_name = str(attachment_details.get("buyer_name") or "").strip()
-        seller_tax_code = str(attachment_details.get("seller_tax_code") or "").strip()
-        buyer_tax_code = str(attachment_details.get("buyer_tax_code") or "").strip()
+        seller_tax_code = _normalize_tax_code(str(attachment_details.get("seller_tax_code") or "").strip())
+        buyer_tax_code = _normalize_tax_code(str(attachment_details.get("buyer_tax_code") or "").strip())
+        current_company_tax_code = _normalize_tax_code(str(selected_company_tax_code or ""))
+        current_company_name_norm = normalize_compare_text(str(selected_company_name or ""))
+
+        def is_current_company(name_value: str, tax_value: str) -> bool:
+            normalized_tax = _normalize_tax_code(str(tax_value or ""))
+            if current_company_tax_code and normalized_tax and normalized_tax == current_company_tax_code:
+                return True
+            normalized_name = normalize_compare_text(str(name_value or ""))
+            if current_company_name_norm and normalized_name:
+                return current_company_name_norm in normalized_name or normalized_name in current_company_name_norm
+            return False
+
+        def pick_partner(preferred: List[Tuple[str, str]], fallback_name: str) -> Tuple[str, str]:
+            for name_value, tax_value in preferred:
+                candidate_name = str(name_value or "").strip()
+                if not candidate_name:
+                    continue
+                if is_current_company(candidate_name, tax_value):
+                    continue
+                return candidate_name, _normalize_tax_code(str(tax_value or ""))
+            if fallback_name and not is_current_company(fallback_name, ""):
+                return str(fallback_name), ""
+            return "Đối tác", ""
 
         if invoice_role == "outbound":
-            partner_name = buyer_name or inferred_event.get("counterparty_name") or supplier_name
-            partner_tax_code = buyer_tax_code
+            partner_name, partner_tax_code = pick_partner(
+                [
+                    (buyer_name, buyer_tax_code),
+                    (str(inferred_event.get("counterparty_name") or ""), ""),
+                    (seller_name, seller_tax_code),
+                    (supplier_name, ""),
+                ],
+                supplier_name,
+            )
         elif invoice_role == "inbound":
-            partner_name = seller_name or inferred_event.get("counterparty_name") or supplier_name
-            partner_tax_code = seller_tax_code
+            partner_name, partner_tax_code = pick_partner(
+                [
+                    (seller_name, seller_tax_code),
+                    (str(inferred_event.get("counterparty_name") or ""), ""),
+                    (buyer_name, buyer_tax_code),
+                    (supplier_name, ""),
+                ],
+                supplier_name,
+            )
         else:
-            partner_name = inferred_event.get("counterparty_name") or supplier_name or seller_name or buyer_name or "Đối tác"
-            partner_tax_code = seller_tax_code or buyer_tax_code
+            partner_name, partner_tax_code = pick_partner(
+                [
+                    (str(inferred_event.get("counterparty_name") or ""), ""),
+                    (seller_name, seller_tax_code),
+                    (buyer_name, buyer_tax_code),
+                    (supplier_name, ""),
+                ],
+                supplier_name,
+            )
 
         partner_name = str(partner_name or "Đối tác")
-        partner_tax_code = str(partner_tax_code or "").strip()
+        partner_tax_code = _normalize_tax_code(str(partner_tax_code or "").strip())
 
         parse_table_rows = [
             {"label": "Đối tác", "value": partner_name},

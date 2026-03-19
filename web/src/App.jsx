@@ -359,8 +359,23 @@ function formatDateByRule(dateValue) {
   return `${String(dd).padStart(2, '0')}/${String(mm).padStart(2, '0')}/${yyyy}`
 }
 
-function normalizeParseSummaryRows(rows) {
+function normalizeComparableText(value) {
+  const raw = String(value || '').trim().toLowerCase()
+  if (!raw) return ''
+  return raw
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]/g, '')
+}
+
+function normalizeParseSummaryRows(rows, options = {}) {
   if (!Array.isArray(rows) || !rows.length) return []
+
+  const companyName = String(options.currentCompanyName || '').trim()
+  const fallbackPartnerCandidates = Array.isArray(options.fallbackPartnerCandidates)
+    ? options.fallbackPartnerCandidates
+    : []
+  const companyNameNorm = normalizeComparableText(companyName)
 
   const deniedLabels = new Set(['MST người bán', 'MST người mua', 'Vai trò hóa đơn'])
   const allowedOrder = ['Đối tác', 'Nội dung', 'MST đối tác', 'Số hóa đơn', 'Ngày hóa đơn', 'Số tiền']
@@ -394,6 +409,28 @@ function normalizeParseSummaryRows(rows) {
   return allowedOrder
     .filter((label) => normalizedByLabel.has(label))
     .map((label) => ({ label, value: normalizedByLabel.get(label) }))
+    .map((row) => {
+      if (row.label !== 'Đối tác') return row
+      const partnerNorm = normalizeComparableText(row.value)
+      const sameAsCompany = Boolean(companyNameNorm && partnerNorm && (
+        companyNameNorm.includes(partnerNorm) || partnerNorm.includes(companyNameNorm)
+      ))
+      if (!sameAsCompany) return row
+
+      const replacement = fallbackPartnerCandidates.find((candidate) => {
+        const candidateText = String(candidate || '').trim()
+        if (!candidateText) return false
+        const candidateNorm = normalizeComparableText(candidateText)
+        if (!candidateNorm) return false
+        if (!companyNameNorm) return true
+        return !(companyNameNorm.includes(candidateNorm) || candidateNorm.includes(companyNameNorm))
+      })
+
+      return {
+        ...row,
+        value: String(replacement || 'Đối tác'),
+      }
+    })
 }
 
 function formatReportNarration(value, fallback = '') {
@@ -752,7 +789,15 @@ function App() {
     pendingEvent?.amount_total || pendingEvent?.total_amount || pendingEvent?.amount || pendingEvent?.untaxed_amount || 0,
   )
   const pendingParseRows = pendingParseRowsFromServer.length
-    ? normalizeParseSummaryRows(pendingParseRowsFromServer)
+    ? normalizeParseSummaryRows(pendingParseRowsFromServer, {
+        currentCompanyName,
+        fallbackPartnerCandidates: [
+          pendingEvent?.counterparty_name,
+          pendingEvent?.seller_name,
+          pendingEvent?.buyer_name,
+          activeCase?.partner,
+        ],
+      })
     : pendingEvent
     ? normalizeParseSummaryRows([
         { label: 'Đối tác', value: String(pendingEvent.counterparty_name || pendingEvent.seller_name || '-') },
@@ -760,7 +805,15 @@ function App() {
         { label: 'Số hóa đơn', value: String(pendingEvent.invoice_no || pendingEvent.reference_no || '-') },
         { label: 'Ngày hóa đơn', value: formatDateByRule(pendingInvoiceDate || '-') || '-' },
         { label: 'Số tiền', value: pendingAmount > 0 ? formatCurrency(pendingAmount) : '-' },
-      ])
+      ], {
+        currentCompanyName,
+        fallbackPartnerCandidates: [
+          pendingEvent?.counterparty_name,
+          pendingEvent?.seller_name,
+          pendingEvent?.buyer_name,
+          activeCase?.partner,
+        ],
+      })
     : []
   const shouldShowParseSummary = pendingParseRows.length > 0 && timelineVisibleCount >= timeline.length
 
