@@ -1223,7 +1223,7 @@ function App() {
         return line?.side === 'Nợ' ? sum + amount : sum - amount
       }, 0)
       return {
-        label: String(item.event_date || idx + 1).slice(5),
+        label: formatDateByRule(item.event_date || '') || String(idx + 1),
         value: net,
       }
     })
@@ -1835,7 +1835,7 @@ function App() {
                 >
                   <div className="case-item-row">
                     <h3>{item.title}</h3>
-                    <time>{item.updatedAt}</time>
+                    <time>{formatDateByRule(item.updatedAt) || item.updatedAt}</time>
                   </div>
                   <p>{item.code} - {item.partner}</p>
                   <div className="case-item-footer">
@@ -2277,7 +2277,7 @@ function App() {
                       <section className="dashboard-compliance-callout">
                         <h3>Nhắc nộp báo cáo</h3>
                         <p>
-                          {dashboardComplianceAlert.status === 'qua_han' ? 'Quá hạn' : 'Sắp đến hạn'}: {dashboardComplianceAlert.name} - hạn {String(dashboardComplianceAlert.due_date || '').slice(8, 10)}/{String(dashboardComplianceAlert.due_date || '').slice(5, 7)}
+                          {dashboardComplianceAlert.status === 'qua_han' ? 'Quá hạn' : 'Sắp đến hạn'}: {dashboardComplianceAlert.name} - hạn {formatDateByRule(dashboardComplianceAlert.due_date || '-') || '-'}
                         </p>
                         <button
                           type="button"
@@ -2380,7 +2380,7 @@ function App() {
                     <div className="report-detail-head">
                       <h3>Bảng phân tích chính</h3>
                       <p>
-                        {reportDetail?.tt133?.basis || 'Thông tư 133/2016/TT-BTC'} | Dữ liệu đến ngày {reportDetail?.as_of_date || reportAsOfDate}
+                        {reportDetail?.tt133?.basis || 'Thông tư 133/2016/TT-BTC'} | Dữ liệu đến ngày {formatDateByRule(reportDetail?.as_of_date || reportAsOfDate) || '-'}
                       </p>
                     </div>
 
@@ -2511,7 +2511,7 @@ function App() {
                         <tbody>
                           {reportDrillTab === 'giao_dich' ? (reportDetail?.gl?.items || []).slice(-8).map((item) => (
                             <tr key={item.entry_id}>
-                              <td>{item.event_date || item.meta?.event_date || '-'}</td>
+                              <td>{formatDateByRule(item.event_date || item.meta?.event_date || '-') || '-'}</td>
                               <td>{formatReportNarration(item.narration, item.entry_id)}</td>
                               <td>{formatCurrency(item.debit_total)}</td>
                             </tr>
@@ -2567,7 +2567,7 @@ function App() {
                             <span className={item.status === 'da_nop' ? 'status-pill status-hoan_tat' : item.status === 'qua_han' ? 'status-pill status-cho_duyet' : 'status-pill status-dang_xu_ly'}>
                               {statusLabel}
                             </span>
-                            <span className="compliance-report-due">{item.status === 'da_nop' ? '✓ Đã nộp' : `Hạn: ${String(item.due_date || '').slice(8, 10)}/${String(item.due_date || '').slice(5, 7)}`}</span>
+                            <span className="compliance-report-due">{item.status === 'da_nop' ? '✓ Đã nộp' : `Hạn: ${formatDateByRule(item.due_date || '-') || '-'}`}</span>
                           </button>
                         )
                       })}
