@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import re
 import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
@@ -13,6 +15,9 @@ class AppStorage:
 
     @classmethod
     def from_workspace(cls, workspace_root: str) -> "AppStorage":
+        backend = str(os.getenv("SOLIS_STORAGE_BACKEND", "sqlite") or "sqlite").strip().lower()
+        if backend == "firestore":
+            return FirestoreAppStorage.from_workspace(workspace_root)
         data_dir = Path(workspace_root) / "data"
         data_dir.mkdir(parents=True, exist_ok=True)
         return cls(db_path=data_dir / "mvp_app.db")
@@ -768,3 +773,519 @@ class AppStorage:
                 payload["created_at"] = str(row["created_at"])
                 result.append(payload)
             return result
+
+
+@dataclass
+class FirestoreAppStorage:
+    project_id: str
+    namespace: str
+    database: str = "(default)"
+
+    @classmethod
+    def from_workspace(cls, workspace_root: str) -> "FirestoreAppStorage":
+        del workspace_root
+        project_id = str(os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GCLOUD_PROJECT") or "").strip()
+        namespace = str(os.getenv("SOLIS_FIRESTORE_NAMESPACE", "prod") or "prod").strip()
+        database = str(os.getenv("SOLIS_FIRESTORE_DATABASE", "(default)") or "(default)").strip()
+        if not project_id:
+            raise RuntimeError("GOOGLE_CLOUD_PROJECT is required when SOLIS_STORAGE_BACKEND=firestore")
+        return cls(project_id=project_id, namespace=namespace, database=database)
+
+    def _client(self):
+        from google.cloud import firestore
+        return firestore.Client(project=self.project_id, database=self.database)
+
+    def _root(self):
+        return self._client().collection("tt133_mvp").document(self.namespace)
+
+    def _col(self, name: str):
+        return self._root().collection(name)
+
+    def _doc_id(self, *parts: str) -> str:
+        cleaned = [re.sub(r"[^A-Za-z0-9._@-]", "_", str(part or "").strip()) for part in parts]
+        return "__".join([part for part in cleaned if part]) or "_"
+
+    def _all_docs(self, collection: str) -> List[Dict[str, Any]]:
+        return [doc.to_dict() or {} for doc in self._col(collection).stream()]
+
+    def init_db(self) -> None:
+        # Firestore is schemaless; collections/documents are created on first write.
+        return
+
+    def save_session(self, token: str, email: str, created_at: str) -> None:
+        self._col("sessions").document(self._doc_id(token)).set({
+            "token": token,
+            "email": email.lower().strip(),
+            "created_at": created_at,
+        })
+
+    def upsert_user(self, email: str, payload: Dict[str, Any], created_at: str, updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        doc_ref = self._col("users").document(self._doc_id(normalized_email))
+        existing = doc_ref.get().to_dict() if doc_ref.get().exists else {}
+        doc_ref.set({
+            "email": normalized_email,
+            "payload": payload,
+            "created_at": str(existing.get("created_at") or created_at),
+            "updated_at": updated_at,
+        })
+
+    def get_user(self, email: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        data = self._col("users").document(self._doc_id(normalized_email)).get()
+        if not data.exists:
+            return None
+        payload = (data.to_dict() or {}).get("payload")
+        return dict(payload) if isinstance(payload, dict) else None
+
+    def list_users(self) -> List[Dict[str, Any]]:
+        rows = []
+        for doc in self._col("users").stream():
+            payload = (doc.to_dict() or {}).get("payload")
+            if isinstance(payload, dict):
+                rows.append(payload)
+        return sorted(rows, key=lambda item: str(item.get("email") or ""))
+
+    def upsert_company(self, company_id: str, payload: Dict[str, Any], created_at: str, updated_at: str) -> None:
+        normalized_company_id = company_id.strip()
+        doc_ref = self._col("companies").document(self._doc_id(normalized_company_id))
+        existing = doc_ref.get().to_dict() if doc_ref.get().exists else {}
+        doc_ref.set({
+            "company_id": normalized_company_id,
+            "payload": payload,
+            "created_at": str(existing.get("created_at") or created_at),
+            "updated_at": updated_at,
+        })
+
+    def get_company(self, company_id: str) -> Optional[Dict[str, Any]]:
+        normalized_company_id = company_id.strip()
+        data = self._col("companies").document(self._doc_id(normalized_company_id)).get()
+        if not data.exists:
+            return None
+        payload = (data.to_dict() or {}).get("payload")
+        return dict(payload) if isinstance(payload, dict) else None
+
+    def list_companies(self) -> List[Dict[str, Any]]:
+        items: List[Dict[str, Any]] = []
+        for doc in self._col("companies").stream():
+            payload = (doc.to_dict() or {}).get("payload")
+            if isinstance(payload, dict):
+                items.append(payload)
+        return sorted(items, key=lambda item: str(item.get("company_name") or ""))
+
+    def upsert_user_company_membership(
+        self,
+        email: str,
+        company_id: str,
+        role: str,
+        is_default: bool,
+        payload: Dict[str, Any],
+        updated_at: str,
+    ) -> None:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+
+        if is_default:
+            for doc in self._col("user_companies").stream():
+                data = doc.to_dict() or {}
+                if str(data.get("email") or "") != normalized_email:
+                    continue
+                data["is_default"] = False
+                data["updated_at"] = updated_at
+                doc.reference.set(data)
+
+        self._col("user_companies").document(self._doc_id(normalized_email, normalized_company_id)).set({
+            "email": normalized_email,
+            "company_id": normalized_company_id,
+            "role": role,
+            "is_default": bool(is_default),
+            "payload": payload,
+            "updated_at": updated_at,
+        })
+
+    def list_user_memberships(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("user_companies").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            payload = dict(data.get("payload") or {})
+            payload["company_id"] = str(data.get("company_id") or "")
+            payload["role"] = str(data.get("role") or "staff")
+            payload["is_default"] = bool(data.get("is_default"))
+            payload["updated_at"] = str(data.get("updated_at") or "")
+            rows.append(payload)
+        return sorted(rows, key=lambda item: (not bool(item.get("is_default")), str(item.get("company_id") or "")))
+
+    def get_default_company_id(self, email: str) -> Optional[str]:
+        memberships = self.list_user_memberships(email)
+        for item in memberships:
+            if bool(item.get("is_default")):
+                company_id = str(item.get("company_id") or "")
+                return company_id or None
+        return None
+
+    def get_session_email(self, token: str) -> Optional[str]:
+        data = self._col("sessions").document(self._doc_id(token)).get()
+        if not data.exists:
+            return None
+        return str((data.to_dict() or {}).get("email") or "") or None
+
+    def upsert_company_profile(self, email: str, payload: Dict[str, Any], updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        self._col("company_profiles").document(self._doc_id(normalized_email)).set({
+            "email": normalized_email,
+            "payload": payload,
+            "updated_at": updated_at,
+        })
+
+    def upsert_onboarding_company(
+        self,
+        email: str,
+        company_id: str,
+        tax_code: str,
+        payload: Dict[str, Any],
+        is_default: bool,
+        updated_at: str,
+    ) -> None:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+        normalized_tax_code = str(tax_code or "").strip()
+        if is_default:
+            for doc in self._col("onboarding_companies").stream():
+                data = doc.to_dict() or {}
+                if str(data.get("email") or "") != normalized_email:
+                    continue
+                data["is_default"] = False
+                data["updated_at"] = updated_at
+                doc.reference.set(data)
+
+        doc_ref = self._col("onboarding_companies").document(self._doc_id(normalized_email, normalized_company_id))
+        existing = doc_ref.get().to_dict() if doc_ref.get().exists else {}
+        doc_ref.set({
+            "email": normalized_email,
+            "company_id": normalized_company_id,
+            "tax_code": normalized_tax_code,
+            "payload": payload,
+            "is_default": bool(is_default),
+            "created_at": str(existing.get("created_at") or updated_at),
+            "updated_at": updated_at,
+        })
+
+    def list_onboarding_companies(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("onboarding_companies").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            payload = dict(data.get("payload") or {})
+            payload["company_id"] = str(data.get("company_id") or "")
+            payload["tax_code"] = str(data.get("tax_code") or "")
+            payload["is_default"] = bool(data.get("is_default"))
+            payload["created_at"] = str(data.get("created_at") or "")
+            payload["updated_at"] = str(data.get("updated_at") or "")
+            rows.append(payload)
+        return sorted(rows, key=lambda item: (not bool(item.get("is_default")), str(item.get("updated_at") or "")), reverse=False)
+
+    def get_default_onboarding_company(self, email: str) -> Optional[Dict[str, Any]]:
+        rows = self.list_onboarding_companies(email)
+        for item in rows:
+            if bool(item.get("is_default")):
+                return item
+        return None
+
+    def get_onboarding_company(self, email: str, company_id: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+        data = self._col("onboarding_companies").document(self._doc_id(normalized_email, normalized_company_id)).get()
+        if not data.exists:
+            return None
+        row = data.to_dict() or {}
+        payload = dict(row.get("payload") or {})
+        payload["company_id"] = str(row.get("company_id") or "")
+        payload["tax_code"] = str(row.get("tax_code") or "")
+        payload["is_default"] = bool(row.get("is_default"))
+        payload["created_at"] = str(row.get("created_at") or "")
+        payload["updated_at"] = str(row.get("updated_at") or "")
+        return payload
+
+    def find_onboarding_company_by_tax_code(self, email: str, tax_code: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        normalized_tax_code = str(tax_code or "").strip()
+        for item in self.list_onboarding_companies(normalized_email):
+            if str(item.get("tax_code") or "") == normalized_tax_code:
+                return item
+        return None
+
+    def set_default_onboarding_company(self, email: str, company_id: str, updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        normalized_company_id = company_id.strip()
+        for doc in self._col("onboarding_companies").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            data["is_default"] = str(data.get("company_id") or "") == normalized_company_id
+            data["updated_at"] = updated_at
+            doc.reference.set(data)
+
+    def get_company_profile(self, email: str) -> Optional[Dict[str, Any]]:
+        default_profile = self.get_default_onboarding_company(email)
+        if default_profile:
+            return default_profile
+        normalized_email = email.lower().strip()
+        data = self._col("company_profiles").document(self._doc_id(normalized_email)).get()
+        if not data.exists:
+            return None
+        payload = (data.to_dict() or {}).get("payload")
+        return dict(payload) if isinstance(payload, dict) else None
+
+    def add_journal_entry(self, email: str, entry_id: str, event_type: str, payload: Dict[str, Any], created_at: str) -> None:
+        self._col("journal_entries").document(self._doc_id(entry_id)).set({
+            "entry_id": entry_id,
+            "email": email.lower().strip(),
+            "event_type": event_type,
+            "payload": payload,
+            "created_at": created_at,
+        })
+
+    def list_journal_entries(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("journal_entries").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            payload = data.get("payload")
+            if isinstance(payload, dict):
+                rows.append(payload)
+        rows.sort(key=lambda item: str(item.get("created_at") or ""))
+        return rows
+
+    def clear_journal_entries(self, email: str) -> None:
+        normalized_email = email.lower().strip()
+        for doc in self._col("journal_entries").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") == normalized_email:
+                doc.reference.delete()
+
+    def replace_case_items(self, email: str, items: List[Dict[str, Any]], created_at: str) -> None:
+        normalized_email = email.lower().strip()
+        for doc in self._col("case_items").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") == normalized_email:
+                doc.reference.delete()
+
+        for sort_order, item in enumerate(items, start=1):
+            case_id = str(item.get("id") or item.get("case_id") or f"CASE-{sort_order:04d}")
+            payload = dict(item)
+            payload["id"] = case_id
+            event_at = str(payload.get("updatedAt") or payload.get("event_date") or "")
+            self._col("case_items").document(self._doc_id(normalized_email, case_id)).set({
+                "email": normalized_email,
+                "case_id": case_id,
+                "sort_order": sort_order,
+                "event_at": event_at,
+                "payload": payload,
+                "created_at": created_at,
+            })
+
+    def list_case_items(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("case_items").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            payload = data.get("payload")
+            if isinstance(payload, dict):
+                rows.append(payload)
+        rows.sort(key=lambda item: (str(item.get("updatedAt") or item.get("event_date") or ""), str(item.get("id") or "")), reverse=True)
+        return rows
+
+    def replace_case_events(self, email: str, events: List[Dict[str, Any]], updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        for doc in self._col("case_events").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") == normalized_email:
+                doc.reference.delete()
+
+        for idx, event in enumerate(events, start=1):
+            case_id = str(event.get("case_id") or event.get("id") or f"CASE-{idx:04d}")
+            payload = dict(event)
+            payload["case_id"] = case_id
+            event_at = str(payload.get("event_date") or payload.get("statement_date") or payload.get("issue_date") or "")
+            self._col("case_events").document(self._doc_id(normalized_email, case_id)).set({
+                "email": normalized_email,
+                "case_id": case_id,
+                "event_at": event_at,
+                "payload": payload,
+                "updated_at": updated_at,
+            })
+
+    def upsert_case_event(self, email: str, case_id: str, event: Dict[str, Any], updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        normalized_case_id = case_id.strip()
+        payload = dict(event)
+        payload["case_id"] = normalized_case_id
+        event_at = str(payload.get("event_date") or payload.get("statement_date") or payload.get("issue_date") or "")
+        self._col("case_events").document(self._doc_id(normalized_email, normalized_case_id)).set({
+            "email": normalized_email,
+            "case_id": normalized_case_id,
+            "event_at": event_at,
+            "payload": payload,
+            "updated_at": updated_at,
+        })
+
+    def list_case_events(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("case_events").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            payload = data.get("payload")
+            if isinstance(payload, dict):
+                rows.append(payload)
+        rows.sort(key=lambda item: (str(item.get("event_date") or item.get("statement_date") or item.get("issue_date") or ""), str(item.get("case_id") or "")))
+        return rows
+
+    def upsert_opening_balances(self, email: str, payload: Dict[str, Any], updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        self._col("opening_balances").document(self._doc_id(normalized_email)).set({
+            "email": normalized_email,
+            "payload": payload,
+            "updated_at": updated_at,
+        })
+
+    def get_opening_balances(self, email: str) -> Dict[str, Any]:
+        normalized_email = email.lower().strip()
+        data = self._col("opening_balances").document(self._doc_id(normalized_email)).get()
+        if not data.exists:
+            return {"lines": []}
+        payload = (data.to_dict() or {}).get("payload")
+        return dict(payload) if isinstance(payload, dict) else {"lines": []}
+
+    def upsert_ui_content(self, email: str, content_key: str, payload: Dict[str, Any], updated_at: str) -> None:
+        normalized_email = email.lower().strip()
+        self._col("ui_content").document(self._doc_id(normalized_email, content_key)).set({
+            "email": normalized_email,
+            "content_key": content_key,
+            "payload": payload,
+            "updated_at": updated_at,
+        })
+
+    def get_ui_content(self, email: str, content_key: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        data = self._col("ui_content").document(self._doc_id(normalized_email, content_key)).get()
+        if not data.exists:
+            return None
+        payload = (data.to_dict() or {}).get("payload")
+        return dict(payload) if isinstance(payload, dict) else None
+
+    def add_adjustment_request(self, email: str, request_id: str, payload: Dict[str, Any], created_at: str) -> None:
+        self._col("adjustment_requests").document(self._doc_id(request_id)).set({
+            "request_id": request_id,
+            "email": email.lower().strip(),
+            "payload": payload,
+            "created_at": created_at,
+        })
+
+    def list_adjustment_requests(self, email: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("adjustment_requests").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            payload = data.get("payload")
+            if isinstance(payload, dict):
+                rows.append(payload)
+        rows.sort(key=lambda item: str(item.get("created_at") or ""), reverse=True)
+        return rows
+
+    def upsert_compliance_filing(
+        self,
+        email: str,
+        period: str,
+        report_id: str,
+        status: str,
+        due_date: str,
+        payload: Dict[str, Any],
+        updated_at: str,
+    ) -> None:
+        normalized_email = email.lower().strip()
+        self._col("compliance_filings").document(self._doc_id(normalized_email, period, report_id)).set({
+            "email": normalized_email,
+            "period": period,
+            "report_id": report_id,
+            "status": status,
+            "due_date": due_date,
+            "payload": payload,
+            "updated_at": updated_at,
+        })
+
+    def list_compliance_filings(self, email: str, period: str) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("compliance_filings").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email or str(data.get("period") or "") != period:
+                continue
+            payload = dict(data.get("payload") or {})
+            payload["report_id"] = str(data.get("report_id") or "")
+            payload["status"] = str(data.get("status") or "")
+            payload["due_date"] = str(data.get("due_date") or "")
+            payload["updated_at"] = str(data.get("updated_at") or "")
+            rows.append(payload)
+        return sorted(rows, key=lambda item: str(item.get("report_id") or ""))
+
+    def get_compliance_filing(self, email: str, period: str, report_id: str) -> Optional[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        data = self._col("compliance_filings").document(self._doc_id(normalized_email, period, report_id)).get()
+        if not data.exists:
+            return None
+        row = data.to_dict() or {}
+        payload = dict(row.get("payload") or {})
+        payload["report_id"] = report_id
+        payload["status"] = str(row.get("status") or "")
+        payload["due_date"] = str(row.get("due_date") or "")
+        payload["updated_at"] = str(row.get("updated_at") or "")
+        return payload
+
+    def add_compliance_submission_history(
+        self,
+        history_id: str,
+        email: str,
+        period: str,
+        report_id: str,
+        payload: Dict[str, Any],
+        created_at: str,
+    ) -> None:
+        normalized_email = email.lower().strip()
+        self._col("compliance_submission_history").document(self._doc_id(history_id)).set({
+            "history_id": history_id,
+            "email": normalized_email,
+            "period": period,
+            "report_id": report_id,
+            "payload": payload,
+            "created_at": created_at,
+        })
+
+    def list_compliance_submission_history(self, email: str, period: Optional[str] = None) -> List[Dict[str, Any]]:
+        normalized_email = email.lower().strip()
+        rows: List[Dict[str, Any]] = []
+        for doc in self._col("compliance_submission_history").stream():
+            data = doc.to_dict() or {}
+            if str(data.get("email") or "") != normalized_email:
+                continue
+            if period and str(data.get("period") or "") != period:
+                continue
+            payload = dict(data.get("payload") or {})
+            payload["history_id"] = str(data.get("history_id") or "")
+            payload["report_id"] = str(data.get("report_id") or "")
+            payload["period"] = str(data.get("period") or "")
+            payload["created_at"] = str(data.get("created_at") or "")
+            rows.append(payload)
+        return sorted(rows, key=lambda item: str(item.get("created_at") or ""), reverse=True)

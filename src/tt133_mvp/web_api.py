@@ -20,7 +20,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from xml.etree import ElementTree as ET
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -167,6 +167,29 @@ LOGIN_RATE_MAX_ATTEMPTS = 6
 
 UPLOADS_ROOT = Path(WORKSPACE_ROOT) / "data" / "uploads"
 STAGING_UPLOADS_ROOT = Path(WORKSPACE_ROOT) / "data" / "uploads_staging"
+ATTACHMENTS_BUCKET = str(os.getenv("SOLIS_ATTACHMENTS_BUCKET") or "").strip()
+ATTACHMENTS_PREFIX = str(os.getenv("SOLIS_ATTACHMENTS_PREFIX") or "tt133_mvp").strip("/")
+_GCS_CLIENT = None
+
+
+def _attachments_use_gcs() -> bool:
+    return bool(ATTACHMENTS_BUCKET)
+
+
+def _get_gcs_bucket():
+    global _GCS_CLIENT
+    if _GCS_CLIENT is None:
+        from google.cloud import storage as gcs_storage
+        _GCS_CLIENT = gcs_storage.Client()
+    return _GCS_CLIENT.bucket(ATTACHMENTS_BUCKET)
+
+
+def _gcs_key(*parts: str) -> str:
+    cleaned = [str(part or "").strip("/") for part in parts if str(part or "").strip("/")]
+    prefix = ATTACHMENTS_PREFIX.strip("/")
+    if prefix:
+        cleaned = [prefix, *cleaned]
+    return "/".join(cleaned)
 
 
 def _safe_email_fragment(email: str) -> str:
@@ -202,6 +225,106 @@ def _build_staged_attachment_path(email: str, case_id: str, session_id: str, fil
     )
 
 
+def _build_permanent_attachment_key(email: str, case_id: str, file_name: str) -> str:
+    return _gcs_key("uploads", _safe_email_fragment(email), _sanitize_case_id(case_id), _sanitize_file_name(file_name))
+
+
+def _build_staged_attachment_key(email: str, case_id: str, session_id: str, file_name: str) -> str:
+    return _gcs_key(
+        "uploads_staging",
+        _safe_email_fragment(email),
+        _sanitize_case_id(case_id),
+        _sanitize_session_id(session_id),
+        _sanitize_file_name(file_name),
+    )
+
+
+def _upload_attachment_bytes(key: str, content: bytes, mime_type: str = "application/octet-stream") -> None:
+    bucket = _get_gcs_bucket()
+    blob = bucket.blob(key)
+    blob.upload_from_string(content, content_type=mime_type)
+
+
+def _download_attachment_bytes(key: str) -> bytes:
+    bucket = _get_gcs_bucket()
+    blob = bucket.blob(key)
+    if not blob.exists():
+        return b""
+    return blob.download_as_bytes()
+
+
+def _delete_attachment_key(key: str) -> None:
+    bucket = _get_gcs_bucket()
+    blob = bucket.blob(key)
+    if blob.exists():
+        blob.delete()
+
+
+def _copy_attachment_key(source_key: str, target_key: str) -> None:
+    bucket = _get_gcs_bucket()
+    source = bucket.blob(source_key)
+    if not source.exists():
+        return
+    bucket.copy_blob(source, bucket, new_name=target_key)
+
+
+def _delete_case_attachment_tree(email: str, case_id: str) -> None:
+    normalized_email = _safe_email_fragment(email)
+    normalized_case_id = _sanitize_case_id(case_id)
+    if _attachments_use_gcs():
+        bucket = _get_gcs_bucket()
+        prefixes = [
+            _gcs_key("uploads", normalized_email, normalized_case_id),
+            _gcs_key("uploads_staging", normalized_email, normalized_case_id),
+        ]
+        for prefix in prefixes:
+            for blob in bucket.list_blobs(prefix=f"{prefix}/"):
+                blob.delete()
+        return
+
+    permanent_dir = UPLOADS_ROOT / normalized_email / normalized_case_id
+    staging_dir = STAGING_UPLOADS_ROOT / normalized_email / normalized_case_id
+    for candidate in [permanent_dir, staging_dir]:
+        try:
+            if candidate.exists():
+                shutil.rmtree(candidate)
+        except OSError:
+            pass
+
+
+def _load_attachment_bytes_by_ref(email: str, case_id: str, file_ref: str) -> Tuple[str, bytes]:
+    normalized_email = email.lower().strip()
+    normalized_case_id = _sanitize_case_id(case_id)
+    normalized_ref = str(file_ref or "").strip()
+
+    if normalized_ref.startswith("stg__"):
+        parts = normalized_ref.split("__", 2)
+        if len(parts) == 3:
+            session_id = _sanitize_session_id(parts[1])
+            staged_name = _sanitize_file_name(parts[2])
+            if _attachments_use_gcs():
+                key = _build_staged_attachment_key(normalized_email, normalized_case_id, session_id, staged_name)
+                return staged_name, _download_attachment_bytes(key)
+            path = _build_staged_attachment_path(normalized_email, normalized_case_id, session_id, staged_name)
+            if path.exists() and path.is_file():
+                return path.name, path.read_bytes()
+        return "", b""
+
+    if normalized_ref.startswith("perm__"):
+        file_name = _sanitize_file_name(normalized_ref.split("__", 1)[1])
+    else:
+        file_name = _sanitize_file_name(normalized_ref)
+
+    if _attachments_use_gcs():
+        key = _build_permanent_attachment_key(normalized_email, normalized_case_id, file_name)
+        return file_name, _download_attachment_bytes(key)
+
+    path = _build_permanent_attachment_path(normalized_email, normalized_case_id, file_name)
+    if path.exists() and path.is_file():
+        return path.name, path.read_bytes()
+    return "", b""
+
+
 def _delete_staged_attachments(email: str, case_id: str, staged_attachments: List[Any]) -> None:
     for item in staged_attachments:
         if not isinstance(item, dict):
@@ -210,12 +333,19 @@ def _delete_staged_attachments(email: str, case_id: str, staged_attachments: Lis
         stored_name = str(item.get("stored_name") or item.get("name") or "")
         if not session_id or not stored_name:
             continue
+        if _attachments_use_gcs():
+            staged_key = _build_staged_attachment_key(email, case_id, session_id, stored_name)
+            _delete_attachment_key(staged_key)
+            continue
         staged_path = _build_staged_attachment_path(email, case_id, session_id, stored_name)
         try:
             if staged_path.exists():
                 staged_path.unlink()
         except OSError:
             continue
+
+    if _attachments_use_gcs():
+        return
 
     case_staging_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(email) / _sanitize_case_id(case_id)
     try:
@@ -242,12 +372,18 @@ def _commit_staged_attachments(email: str, case_id: str, staged_attachments: Lis
         if not session_id or not stored_name:
             continue
 
-        staged_path = _build_staged_attachment_path(email, case_id, session_id, stored_name)
-        permanent_path = _build_permanent_attachment_path(email, case_id, stored_name)
-        permanent_path.parent.mkdir(parents=True, exist_ok=True)
+        if _attachments_use_gcs():
+            staged_key = _build_staged_attachment_key(email, case_id, session_id, stored_name)
+            permanent_key = _build_permanent_attachment_key(email, case_id, stored_name)
+            _copy_attachment_key(staged_key, permanent_key)
+            _delete_attachment_key(staged_key)
+        else:
+            staged_path = _build_staged_attachment_path(email, case_id, session_id, stored_name)
+            permanent_path = _build_permanent_attachment_path(email, case_id, stored_name)
+            permanent_path.parent.mkdir(parents=True, exist_ok=True)
 
-        if staged_path.exists():
-            shutil.move(str(staged_path), str(permanent_path))
+            if staged_path.exists():
+                shutil.move(str(staged_path), str(permanent_path))
 
         committed_names.append(stored_name)
 
@@ -260,30 +396,13 @@ def get_demo_evidence_file(
     case_id: str,
     file_ref: str,
     email: str = "demo@wssmeas.local",
-) -> FileResponse:
-    normalized_email = email.lower().strip()
-    normalized_case_id = _sanitize_case_id(case_id)
-    normalized_ref = str(file_ref or "").strip()
-
-    attachment_path: Optional[Path] = None
-
-    if normalized_ref.startswith("stg__"):
-        parts = normalized_ref.split("__", 2)
-        if len(parts) == 3:
-            session_id = _sanitize_session_id(parts[1])
-            staged_name = _sanitize_file_name(parts[2])
-            attachment_path = _build_staged_attachment_path(normalized_email, normalized_case_id, session_id, staged_name)
-    elif normalized_ref.startswith("perm__"):
-        file_name = _sanitize_file_name(normalized_ref.split("__", 1)[1])
-        attachment_path = _build_permanent_attachment_path(normalized_email, normalized_case_id, file_name)
-    else:
-        attachment_path = _build_permanent_attachment_path(normalized_email, normalized_case_id, normalized_ref)
-
-    if not attachment_path or not attachment_path.exists() or not attachment_path.is_file():
+) -> Response:
+    file_name, payload = _load_attachment_bytes_by_ref(email, case_id, file_ref)
+    if not payload:
         raise HTTPException(status_code=404, detail="EVIDENCE_FILE_NOT_FOUND")
 
-    media_type = mimetypes.guess_type(str(attachment_path.name))[0] or "application/octet-stream"
-    return FileResponse(str(attachment_path), media_type=media_type, filename=attachment_path.name)
+    media_type = mimetypes.guess_type(str(file_name or file_ref))[0] or "application/octet-stream"
+    return Response(content=payload, media_type=media_type)
 
 
 class LoginPayload(BaseModel):
@@ -882,27 +1001,26 @@ def get_demo_cases(email: str = "demo@wssmeas.local", company_id: str = "") -> D
         if not isinstance(attachments, list):
             return ""
 
-        email_fragment = _safe_email_fragment(normalized_email)
-        candidate_paths: List[Path] = []
+        candidate_refs: List[str] = []
         for attachment in attachments:
             if not isinstance(attachment, dict):
                 continue
-            preview_ref = str(attachment.get("preview_ref") or attachment.get("name") or "").strip()
+            preview_ref = str(attachment.get("preview_ref") or "").strip()
+            if not preview_ref:
+                stored_name = str(attachment.get("stored_name") or attachment.get("name") or "").strip()
+                if stored_name:
+                    preview_ref = f"perm__{stored_name}"
             if not preview_ref:
                 continue
-            candidate_paths.extend(
-                [
-                    STAGING_UPLOADS_ROOT / email_fragment / str(case_id_value) / preview_ref,
-                    UPLOADS_ROOT / email_fragment / str(case_id_value) / preview_ref,
-                ]
-            )
+            candidate_refs.append(preview_ref)
 
-        for path in candidate_paths:
-            if not path.exists() or path.suffix.lower() != ".xml":
+        for preview_ref in candidate_refs:
+            file_name, payload = _load_attachment_bytes_by_ref(normalized_email, str(case_id_value), preview_ref)
+            if not payload or Path(str(file_name or preview_ref)).suffix.lower() != ".xml":
                 continue
             try:
-                text = path.read_text(encoding="utf-8", errors="ignore")
-            except OSError:
+                text = payload.decode("utf-8", errors="ignore")
+            except UnicodeDecodeError:
                 continue
 
             seller_name_match = re.search(r"<NBan>.*?<Ten>([^<]+)</Ten>", text, flags=re.IGNORECASE | re.DOTALL)
@@ -1330,23 +1448,29 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             return []
         normalized_case_id = _sanitize_case_id(case_id)
         session_id = datetime.utcnow().strftime("%Y%m%d%H%M%S") + uuid.uuid4().hex[:6]
-        case_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id / _sanitize_session_id(session_id)
-        case_dir.mkdir(parents=True, exist_ok=True)
+        safe_session = _sanitize_session_id(session_id)
+        case_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id / safe_session
+        if not _attachments_use_gcs():
+            case_dir.mkdir(parents=True, exist_ok=True)
         staged_items: List[Dict[str, Any]] = []
         timestamp_prefix = datetime.utcnow().strftime("%Y%m%d%H%M%S")
 
         for idx, item in enumerate(attachments, start=1):
             original_name = Path(str(item.name or f"attachment_{idx}.bin")).name
             safe_name = f"{timestamp_prefix}_{idx:02d}_{original_name}"
-            file_path = case_dir / safe_name
             content = decode_attachment_content(str(item.content_base64 or ""))
-            file_path.write_bytes(content)
+            if _attachments_use_gcs():
+                staged_key = _build_staged_attachment_key(normalized_email, normalized_case_id, safe_session, safe_name)
+                _upload_attachment_bytes(staged_key, content, str(item.mime_type or "application/octet-stream"))
+            else:
+                file_path = case_dir / safe_name
+                file_path.write_bytes(content)
             staged_items.append(
                 {
                     "name": original_name,
                     "stored_name": safe_name,
-                    "preview_ref": f"stg__{_sanitize_session_id(session_id)}__{safe_name}",
-                    "session_id": _sanitize_session_id(session_id),
+                    "preview_ref": f"stg__{safe_session}__{safe_name}",
+                    "session_id": safe_session,
                     "storage": "staging",
                     "mime_type": str(item.mime_type or "application/octet-stream"),
                     "size": int(item.size or 0),
@@ -2831,14 +2955,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             return {"ok": False, "message": "Thiếu mã hồ sơ cần xóa."}
 
         normalized_case_id = _sanitize_case_id(target_case_id)
-        permanent_dir = UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id
-        staging_dir = STAGING_UPLOADS_ROOT / _safe_email_fragment(normalized_email) / normalized_case_id
-        for candidate in [permanent_dir, staging_dir]:
-            try:
-                if candidate.exists():
-                    shutil.rmtree(candidate)
-            except OSError:
-                pass
+        _delete_case_attachment_tree(normalized_email, normalized_case_id)
 
         current_items = storage.list_case_items(scoped_data_key)
         next_items = [item for item in current_items if str(item.get("id") or "") != target_case_id]
