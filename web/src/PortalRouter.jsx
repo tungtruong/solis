@@ -74,7 +74,23 @@ function isProfileComplete(profile) {
   return requiredFields.every((field) => String(profile[field] || '').trim().length > 0)
 }
 
-function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding = true }) {
+function PublicShell({
+  title,
+  eyebrow,
+  children,
+  onNavigate,
+  showBackToLanding = true,
+  topbarActionLabel = 'Đăng nhập',
+  onTopbarAction,
+}) {
+  const handleTopbarAction = () => {
+    if (typeof onTopbarAction === 'function') {
+      onTopbarAction()
+      return
+    }
+    onNavigate('/login')
+  }
+
   return (
     <div className="public-root">
       <div className="public-bg-orb public-bg-orb-a" aria-hidden="true" />
@@ -85,7 +101,7 @@ function PublicShell({ title, eyebrow, children, onNavigate, showBackToLanding =
           <span className="brand-text">Solis</span>
         </button>
         <nav className="public-nav" aria-label="Điều hướng công khai">
-          <button type="button" className="nav-primary" onClick={() => onNavigate('/login')}>Đăng nhập</button>
+          <button type="button" className="nav-primary" onClick={handleTopbarAction}>{topbarActionLabel}</button>
         </nav>
       </header>
       <main className="public-main">
@@ -277,6 +293,12 @@ function OnboardPage({ onNavigate, session, setSession }) {
     setForm((prev) => ({ ...prev, [key]: value }))
   }
 
+  function handleLogout() {
+    clearSession()
+    setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
+    onNavigate('/login')
+  }
+
   async function selectExistingCompany(companyId) {
     if (!session.token) return
     setError('')
@@ -404,25 +426,21 @@ function OnboardPage({ onNavigate, session, setSession }) {
   }
 
   return (
-    <PublicShell title="" eyebrow="" onNavigate={onNavigate} showBackToLanding={false}>
-      <div className="onboard-actions-inline">
-        <button
-          type="button"
-          className="cta-sub cta-sub-solid"
-          onClick={() => {
-            clearSession()
-            setSession({ token: '', email: '', hasCompanyProfile: false, companyId: '', companyName: '' })
-            onNavigate('/login')
-          }}
-        >
-          Logout tài khoản
-        </button>
-      </div>
+    <PublicShell
+      title=""
+      eyebrow=""
+      onNavigate={onNavigate}
+      showBackToLanding={false}
+      topbarActionLabel="Logout tài khoản"
+      onTopbarAction={handleLogout}
+    >
 
       {!createMode ? (
-        <button type="button" className="cta-main" onClick={() => setCreateMode(true)}>
-          Tạo công ty mới
-        </button>
+        <div className="onboard-create-row">
+          <button type="button" className="cta-main" onClick={() => setCreateMode(true)}>
+            Tạo công ty mới
+          </button>
+        </div>
       ) : null}
 
       {!createMode && companies.length > 0 ? (

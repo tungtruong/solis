@@ -327,6 +327,11 @@
   gap: 10px;
 }
 
+.onboard-create-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .form-note,
 .form-error,
 .form-success {
