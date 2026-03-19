@@ -2220,6 +2220,26 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         )
         inferred_event_date = str(inferred_event.get("event_date") or datetime.utcnow().date().isoformat())
 
+        def format_date_for_display(value: str) -> str:
+            raw = str(value or "").strip()
+            if not raw:
+                return ""
+            token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
+            if not token_match:
+                return raw
+            token = token_match.group(1).replace("/", "-")
+            if re.fullmatch(r"\d{8}", token):
+                try:
+                    return datetime.strptime(token, "%Y%m%d").strftime("%d/%m/%Y")
+                except ValueError:
+                    return raw
+            for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
+                try:
+                    return datetime.strptime(token, fmt).strftime("%d/%m/%Y")
+                except ValueError:
+                    continue
+            return raw
+
         supplier_name = str(attachment_details.get("supplier_name") or inferred_event.get("counterparty_name") or "Nhà cung cấp")
         service_name = str(attachment_details.get("service_name") or inferred_event.get("description") or "dịch vụ")
         parsed_amount = float(attachment_details.get("amount") or inferred_event.get("amount_total") or inferred_event.get("amount") or 0)
@@ -2230,6 +2250,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             or inferred_event.get("event_date")
             or ""
         )
+        invoice_date_display = format_date_for_display(invoice_date)
         invoice_excerpt = str(attachment_details.get("invoice_content") or "")
         amount_text = f"{parsed_amount:,.0f}"
 
@@ -2237,7 +2258,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             {"label": "Nhà cung cấp", "value": supplier_name},
             {"label": "Nội dung", "value": service_name},
             {"label": "Số hóa đơn", "value": invoice_no},
-            {"label": "Ngày hóa đơn", "value": invoice_date or "-"},
+            {"label": "Ngày hóa đơn", "value": invoice_date_display or "-"},
             {"label": "Số tiền", "value": f"{amount_text} đồng"},
             {"label": "MST người bán", "value": str(attachment_details.get("seller_tax_code") or "-")},
             {"label": "MST người mua", "value": str(attachment_details.get("buyer_tax_code") or "-")},

@@ -48,7 +48,8 @@
       "DD/MM/YYYY",
       "YYYYMMDD"
     ],
-    "output_pattern": "YYYY-MM-DD"
+    "normalized_storage_pattern": "YYYY-MM-DD",
+    "display_pattern": "DD/MM/YYYY"
   },
   "schema_detection": {
     "invoice_types": [
