@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phiếu thu (01-TT)</title>
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    body { margin: 0; background: #eef1f5; font-family: 'Times New Roman', serif; color: #111; }
+    .toolbar { position: sticky; top: 0; background: #101317; color: #fff; padding: 8px 12px; z-index: 10; }
+    .sheet { width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,0.15); box-sizing: border-box; padding: 10mm; overflow: hidden; }
+    h1 { margin: 0 0 2mm; text-align: center; font-size: 15pt; text-transform: uppercase; }
+    .meta { font-size: 10pt; margin-bottom: 3mm; }
+    h3 { margin: 3mm 0 1.5mm; font-size: 11pt; }
+    table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+    td, th { border: 1px solid #111; padding: 2.5mm 2mm; vertical-align: top; }
+    td.label { width: 38%; font-weight: 700; }
+    td.value { height: 8mm; }
+    .grid td { height: 7mm; }
+    .signatures { margin-top: 6mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+    .sig { text-align: center; min-height: 24mm; border-top: 1px dashed #888; padding-top: 2mm; font-weight: 700; }
+    .hint { margin-top: 2mm; font-weight: 400; font-size: 9pt; }
+    @media print { body { background: #fff; } .toolbar { display: none; } .sheet { margin: 0; box-shadow: none; } }
+  </style>
+</head>
+<body>
+    <div class="toolbar">01-TT - Phiếu thu | <button onclick="window.print()">In</button></div>
+  <main class="sheet">
+    <h1>Phiếu thu</h1>
+        <div class="meta"><b>Mã biểu mẫu:</b> 01-TT | <b>Thông tư:</b> 99/2025/TT-BTC</div>
+    <section>
+            <h3>Thông tin điền mẫu</h3>
+      <table><tbody><tr><td class="label">Ngày</td><td class="value"></td></tr>
+<tr><td class="label">Tháng</td><td class="value"></td></tr>
+<tr><td class="label">Năm</td><td class="value"></td></tr>
+<tr><td class="label">Quyển số</td><td class="value"></td></tr>
+<tr><td class="label">Số</td><td class="value"></td></tr>
+<tr><td class="label">Nợ</td><td class="value"></td></tr>
+<tr><td class="label">Có</td><td class="value"></td></tr>
+<tr><td class="label">Họ và tên người nộp tiền</td><td class="value"></td></tr>
+<tr><td class="label">Địa chỉ</td><td class="value"></td></tr>
+<tr><td class="label">Lý do nộp</td><td class="value"></td></tr>
+<tr><td class="label">Số tiền</td><td class="value"></td></tr>
+<tr><td class="label">(Viết bằng chữ)</td><td class="value"></td></tr>
+<tr><td class="label">Kèm theo</td><td class="value"></td></tr>
+<tr><td class="label">Chứng từ gốc</td><td class="value"></td></tr>
+<tr><td class="label">Đã nhận đủ số tiền (viết bằng chữ)</td><td class="value"></td></tr>
+<tr><td class="label">+ Tỷ giá ngoại tệ (vàng bạc, đá quý)</td><td class="value"></td></tr>
+<tr><td class="label">+ Số tiền quy đổi</td><td class="value"></td></tr></tbody></table>
+    </section>
+    
+    <section>
+      <h3>Chữ ký</h3>
+      <div class="signatures"><div class="sig">Giám đốc<div class="hint">(Ký, họ tên)</div></div><div class="sig">Kế toán trưởng<div class="hint">(Ký, họ tên)</div></div><div class="sig">Người nộp tiền<div class="hint">(Ký, họ tên)</div></div><div class="sig">Người lập phiếu<div class="hint">(Ký, họ tên)</div></div><div class="sig">Thủ quỹ<div class="hint">(Ký, họ tên)</div></div></div>
+    </section>
+  </main>
+</body>
+</html>
