@@ -78,14 +78,51 @@ def norm_text(value: str) -> str:
     return text.lower().strip()
 
 
+def clean_ocr_text(value: str) -> str:
+    text = re.sub(r"\s+", " ", value).strip()
+    # Targeted fixes for common OCR artifacts in this appendix.
+    replacements = {
+        "tiề n": "tiền",
+        "là m": "làm",
+        "khoả n": "khoản",
+        "ki ểm": "kiểm",
+        "vậ t": "vật",
+        "c ông": "công",
+        "đồ ng": "đồng",
+        "nhậ p": "nhập",
+        "xuấ t": "xuất",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text
+
+
+def sanitize_signatures(raw_sigs: List[str]) -> List[str]:
+    cleaned: List[str] = []
+    for raw in raw_sigs:
+        s = clean_ocr_text(str(raw).strip())
+        s = re.sub(r"\(.*?\)", "", s).strip(" -()")
+        if not s:
+            continue
+        s_norm = norm_text(s)
+        if "nhu cau nhap" in s_norm:
+            s = "Kế toán trưởng"
+        if len(s) < 3:
+            continue
+        if s not in cleaned:
+            cleaned.append(s)
+    return cleaned
+
+
 def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem]]:
     lines: List[LineItem] = []
     texts: List[TextItem] = []
 
     code = str(form.get("form_code", "N/A"))
-    title = cap_title(str(form.get("title", "BIỂU MẪU")))
+    title = cap_title(clean_ocr_text(str(form.get("title", "BIỂU MẪU"))))
     fields = form.get("fields", []) if isinstance(form.get("fields"), list) else []
     table_schema = form.get("table_schema", {}) if isinstance(form.get("table_schema"), dict) else {}
+    layout_text = str(form.get("layout_text", ""))
 
     texts.append(TextItem(8, 11, "Đơn vị: ........................................", 8.8, True))
     texts.append(TextItem(8, 16, "Địa chỉ/Bộ phận: ........................", 8.0))
@@ -100,7 +137,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
     cols = table_schema.get("table_columns", []) if isinstance(table_schema.get("table_columns"), list) else []
     is_tt_form = code.endswith("-TT")
 
-    labels = [str(f.get("label", "")).strip() for f in fields]
+    labels = [clean_ocr_text(str(f.get("label", "")).strip()) for f in fields]
 
     def pick(token: str) -> str:
         token_norm = norm_text(token)
@@ -164,7 +201,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
             y += 6.2
 
     sigs = form.get("signatures", []) if isinstance(form.get("signatures"), list) else []
-    sig_labels = [str(s) for s in sigs if str(s).strip()]
+    sig_labels = sanitize_signatures([str(s) for s in sigs if str(s).strip()])
     if not sig_labels:
         sig_labels = ["Giám đốc", "Kế toán trưởng", "Người lập phiếu", "Người nhận"]
     sig_labels = sig_labels[:5]
@@ -179,13 +216,22 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
     for idx, label in enumerate(sig_labels):
         cx = left + idx * col_w + col_w / 2
         texts.append(TextItem(cx, y, label, 8.8, True, "center"))
-        texts.append(TextItem(cx, y + 4.7, "(Ký, họ tên)", 7.5, False, "center"))
+        sig_note = "(Ký, họ tên)"
+        label_norm = norm_text(label)
+        if idx == 0 and "giam" in label_norm and (" doc" in label_norm or " đoc" in label_norm):
+            sig_note = "(Ký, họ tên, đóng dấu)"
+        texts.append(TextItem(cx, y + 4.7, sig_note, 7.5, False, "center"))
         lines.append(LineItem(cx - col_w * 0.33, y + 18.5, cx + col_w * 0.33, y + 18.5, 0.55))
 
     if is_tt_form:
         texts.append(TextItem(8, 118.2, f"{pick('Đã nhận đủ số tiền')}: .................................................", 8.1))
         texts.append(TextItem(8, 123.0, f"{pick('Tỷ giá ngoại tệ')}: ......................................................", 8.1))
         texts.append(TextItem(8, 127.8, f"{pick('Số tiền quy đổi')}: ........................................................", 8.1))
+        if "Liên gửi ra ngoài phải đóng dấu" in layout_text:
+            texts.append(TextItem(8, 132.4, "(Liên gửi ra ngoài phải đóng dấu)", 7.6))
+
+    if "Ghi chú" in layout_text:
+        texts.append(TextItem(8, 139.2, "Ghi chú: Biểu mẫu được xây dựng theo TT99/2025/TT-BTC.", 7.2))
 
     return lines, texts
 
