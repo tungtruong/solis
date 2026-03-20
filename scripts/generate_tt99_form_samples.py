@@ -164,6 +164,90 @@ def run_ocr(ocr: PaddleOCR, img: np.ndarray) -> List[Dict[str, object]]:
     return blocks
 
 
+def extract_pdf_text_blocks(page: fitz.Page, zoom: float) -> List[Dict[str, object]]:
+    text_dict = page.get_text("dict")
+    blocks: List[Dict[str, object]] = []
+
+    for block in text_dict.get("blocks", []):
+        if block.get("type") != 0:
+            continue
+
+        for line in block.get("lines", []):
+            spans = line.get("spans", [])
+            if not spans:
+                continue
+
+            text = "".join(str(span.get("text", "")) for span in spans).strip()
+            if not text:
+                continue
+
+            x0, y0, x1, y1 = line.get("bbox", [0.0, 0.0, 0.0, 0.0])
+            blocks.append(
+                {
+                    "text": text,
+                    "norm": normalize_for_match(text),
+                    "x": float(x0) * zoom,
+                    "y": float(y0) * zoom,
+                    "w": max(1.0, (float(x1) - float(x0)) * zoom),
+                    "h": max(1.0, (float(y1) - float(y0)) * zoom),
+                    "conf": 1.0,
+                }
+            )
+
+    return blocks
+
+
+def merge_ocr_with_pdf_text(
+    ocr_blocks: List[Dict[str, object]],
+    pdf_blocks: List[Dict[str, object]],
+) -> List[Dict[str, object]]:
+    if not pdf_blocks:
+        return ocr_blocks
+
+    merged: List[Dict[str, object]] = []
+    for ocr_b in ocr_blocks:
+        ox = float(ocr_b["x"])
+        oy = float(ocr_b["y"])
+        ow = float(ocr_b["w"])
+        oh = float(ocr_b["h"])
+        ocx = ox + ow / 2.0
+        ocy = oy + oh / 2.0
+
+        best: Optional[Dict[str, object]] = None
+        best_score = 1e18
+
+        for pdf_b in pdf_blocks:
+            px = float(pdf_b["x"])
+            py = float(pdf_b["y"])
+            pw = float(pdf_b["w"])
+            ph = float(pdf_b["h"])
+            pcx = px + pw / 2.0
+            pcy = py + ph / 2.0
+
+            dy = abs(ocy - pcy)
+            if dy > max(12.0, oh * 0.95):
+                continue
+
+            dx = abs(ocx - pcx)
+            score = dx + dy * 3.5 + abs(ow - pw) * 0.2
+            if score < best_score:
+                best_score = score
+                best = pdf_b
+
+        if best is not None:
+            new_text = str(best["text"]).strip()
+            if new_text:
+                updated = dict(ocr_b)
+                updated["text"] = new_text
+                updated["norm"] = normalize_for_match(new_text)
+                merged.append(updated)
+                continue
+
+        merged.append(ocr_b)
+
+    return merged
+
+
 def find_label_block(blocks: List[Dict[str, object]], label: str) -> Optional[Dict[str, object]]:
     candidates = [label, label.replace("(", "").replace(")", ""), label.lstrip("- ")]
     norms = [normalize_for_match(c) for c in candidates if c.strip()]
@@ -266,7 +350,8 @@ def render_page_html(
     ocr_text = "\n".join(
         (
             f"<div class=\"ocr\" style=\"left:{round(float(b['x']),1)}px;top:{round(float(b['y']),1)}px;"
-            f"font-size:{max(9, min(18, int(float(b['h']) * 0.85)))}px;\">"
+            f"width:{round(float(b['w']),1)}px;height:{round(float(b['h']),1)}px;"
+            f"font-size:{max(9, min(18, int(float(b['h']) * 0.82)))}px;\">"
             + html.escape(str(b["text"]))
             + "</div>"
         )
@@ -318,13 +403,15 @@ def render_sample_html(
             page = doc[page_num - 1]
             img, width_px, height_px = pix_to_ndarray(page, zoom)
             ocr_blocks = run_ocr(ocr, img)
+            pdf_blocks = extract_pdf_text_blocks(page, zoom)
+            layout_blocks = merge_ocr_with_pdf_text(ocr_blocks, pdf_blocks)
 
             overlays: List[Dict[str, object]] = []
             if page_num == start_page:
-                overlays.extend(build_field_overlays(ocr_blocks, fields, form_code, width_px))
-                overlays.extend(build_grid_overlays(ocr_blocks, table_schema, form_code, width_px))
+                overlays.extend(build_field_overlays(layout_blocks, fields, form_code, width_px))
+                overlays.extend(build_grid_overlays(layout_blocks, table_schema, form_code, width_px))
 
-            page_blocks.append(render_page_html(ocr_blocks, overlays, width_px, height_px))
+            page_blocks.append(render_page_html(layout_blocks, overlays, width_px, height_px))
     finally:
         doc.close()
 
@@ -336,13 +423,13 @@ def render_sample_html(
   <title>{html.escape(title)} ({html.escape(form_code)}) - OCR Layout</title>
   <style>
     :root {{ --paper-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }}
-    body {{ margin: 0; background: #e9edf2; font-family: 'Times New Roman', serif; }}
+    body {{ margin: 0; background: #e9edf2; font-family: 'Tahoma', 'Arial Unicode MS', 'Times New Roman', serif; }}
     .toolbar {{ position: sticky; top: 0; z-index: 10; background: #101317; color: #fff; padding: 10px 14px; }}
     .toolbar button {{ padding: 6px 10px; }}
     .container {{ padding: 14px 0 28px; }}
     .page {{ position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; overflow: hidden; }}
     .layer {{ position: absolute; inset: 0; }}
-    .ocr {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.08; }}
+    .ocr {{ position: absolute; color: #111; white-space: pre-wrap; overflow: hidden; line-height: 1.08; }}
     .fill {{ position: absolute; color: #0a56c2; font-weight: 600; white-space: nowrap; line-height: 1.08; }}
     @media print {{
       body {{ background: #fff; }}
