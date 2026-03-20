@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang='vi'>
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Bảng thanh toán tiề n lương - Bản điền thử</title>
+  <style>
+    @page { size: A4 portrait; margin: 16mm 14mm; }
+    body { font-family: 'Times New Roman', serif; margin: 0; color: #111; }
+    .page { width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 10mm 10mm; margin: 0 auto; }
+    h1 { font-size: 18px; margin: 0 0 2mm; text-transform: uppercase; }
+    .meta { font-size: 12px; margin-bottom: 4mm; }
+    h3 { font-size: 14px; margin: 3mm 0 2mm; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    td, th { border: 1px solid #111; padding: 4px 6px; }
+    td.label { width: 38%; font-weight: 600; }
+    .grid td { height: 20px; }
+    .actions { position: fixed; right: 12px; bottom: 12px; }
+    @media print { .actions { display: none; } .page { width: auto; min-height: auto; padding: 0; } }
+  </style>
+</head>
+<body>
+  <div class='actions'><button onclick='window.print()'>In thử</button></div>
+  <main class='page'>
+    <h1>Bảng thanh toán tiề n lương</h1>
+    <div class='meta'>Mã mẫu: <b>01-LĐTL</b> | Bản điền thử</div>
+    <h3>Thông tin đầu vào</h3>
+    <table><tbody><tr><td class='label'>Ngày</td><td class='value'>20</td></tr>
+<tr><td class='label'>Tháng</td><td class='value'>03</td></tr>
+<tr><td class='label'>Năm</td><td class='value'>2026</td></tr>
+<tr><td class='label'>Số</td><td class='value'>LDTL-0001</td></tr>
+<tr><td class='label'>Tổng số tiền (viết bằng chữ)</td><td class='value'>Một trăm hai mươi triệu đồng</td></tr></tbody></table>
+    <h3>Dữ liệu bảng (mẫu điền thử)</h3><table class='grid'><thead><tr><th>STT</th><th>Cột 2</th><th>Cột 3</th><th>Cột 4</th><th>Cột 5</th><th>Cột 6</th><th>Cột 7</th><th>Cột 8</th><th>Cột 9</th><th>Cột 10</th><th>Cột 11</th><th>Cột 12</th><th>Cột 13</th><th>Cột 14</th><th>Cột 15</th><th>Cột 16</th></tr></thead><tbody><tr><td>1</td><td>Nguyễn Văn A</td><td>Kế toán</td><td>3.0</td><td></td><td>26</td><td>24,000,000</td><td></td><td></td><td></td><td></td><td></td><td></td><td>0</td><td>24,000,000</td><td>A</td></tr><tr><td>2</td><td>Trần Thị B</td><td>Thủ quỹ</td><td>2.6</td><td></td><td>26</td><td>18,000,000</td><td></td><td></td><td></td><td></td><td></td><td></td><td>0</td><td>18,000,000</td><td>B</td></tr></tbody></table>
+  </main>
+</body>
+</html>
