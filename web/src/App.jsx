@@ -359,6 +359,122 @@ function formatDateByRule(dateValue) {
   return `${String(dd).padStart(2, '0')}/${String(mm).padStart(2, '0')}/${yyyy}`
 }
 
+function parseReportDateValue(value) {
+  const raw = String(value || '').trim()
+  if (!raw) return null
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    const parsed = Date.parse(`${raw}T00:00:00`)
+    return Number.isNaN(parsed) ? null : parsed
+  }
+
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(raw)) {
+    const [dd, mm, yyyy] = raw.split('/')
+    const parsed = Date.parse(`${yyyy}-${mm}-${dd}T00:00:00`)
+    return Number.isNaN(parsed) ? null : parsed
+  }
+
+  const parsed = Date.parse(raw)
+  return Number.isNaN(parsed) ? null : parsed
+}
+
+function buildReportPeriodRange(periodKey, asOfDate) {
+  const asOfTs = parseReportDateValue(asOfDate)
+  if (!asOfTs) return { from: null, to: null }
+
+  const asOf = new Date(asOfTs)
+  const to = asOf.getTime()
+  if (periodKey === '7_ngay') {
+    return { from: to - 6 * 24 * 60 * 60 * 1000, to }
+  }
+  if (periodKey === '30_ngay') {
+    return { from: to - 29 * 24 * 60 * 60 * 1000, to }
+  }
+  if (periodKey === 'quy_nay') {
+    const quarterStartMonth = Math.floor(asOf.getMonth() / 3) * 3
+    const from = new Date(asOf.getFullYear(), quarterStartMonth, 1).getTime()
+    return { from, to }
+  }
+  if (periodKey === 'nam_nay') {
+    const from = new Date(asOf.getFullYear(), 0, 1).getTime()
+    return { from, to }
+  }
+  return { from: null, to }
+}
+
+function computeFilteredReportSnapshot(glItems) {
+  const byAccount = new Map()
+  let cashNet = 0
+
+  glItems.forEach((item) => {
+    const postings = Array.isArray(item?.postings) ? item.postings : []
+    postings.forEach((line) => {
+      const account = String(line?.account || '').trim()
+      if (!account) return
+      const side = String(line?.side || '').trim()
+      const amount = Number(line?.amount || 0)
+      if (amount <= 0) return
+
+      const existing = byAccount.get(account) || { debit: 0, credit: 0, balance: 0 }
+      if (side === 'Nợ') {
+        existing.debit += amount
+        existing.balance += amount
+      } else {
+        existing.credit += amount
+        existing.balance -= amount
+      }
+      byAccount.set(account, existing)
+
+      if (account.startsWith('111') || account.startsWith('112')) {
+        cashNet += side === 'Nợ' ? amount : -amount
+      }
+    })
+  })
+
+  const sumByPrefixes = (prefixes, mode) => {
+    let total = 0
+    byAccount.forEach((vals, account) => {
+      if (!prefixes.some((prefix) => account.startsWith(prefix))) return
+      if (mode === 'revenue') {
+        total += Math.max(-(vals.balance || 0), 0)
+        return
+      }
+      if (mode === 'expense') {
+        total += Math.max(vals.balance || 0, 0)
+        return
+      }
+      if (mode === 'asset') {
+        total += Math.max(vals.balance || 0, 0)
+        return
+      }
+      if (mode === 'liability_or_equity') {
+        total += Math.max(-(vals.balance || 0), 0)
+      }
+    })
+    return total
+  }
+
+  const revenue = sumByPrefixes(['511', '515', '711'], 'revenue')
+  const cost = sumByPrefixes(['632', '635', '641', '642', '811'], 'expense')
+  const profit = revenue - cost
+  const assets = sumByPrefixes(
+    ['111', '112', '121', '128', '131', '133', '136', '138', '141', '151', '152', '153', '154', '155', '156', '157', '211', '212', '213', '214', '217', '228', '241', '242', '244'],
+    'asset',
+  )
+  const liabilities = sumByPrefixes(['311', '315', '331', '333', '334', '335', '336', '338', '341', '343', '344', '347'], 'liability_or_equity')
+  const equity = sumByPrefixes(['411', '414', '418', '421', '353', '356'], 'liability_or_equity')
+
+  return {
+    revenue,
+    cost,
+    profit,
+    cashNet,
+    assets,
+    liabilities,
+    equity,
+  }
+}
+
 function normalizeComparableText(value) {
   const raw = String(value || '').trim().toLowerCase()
   if (!raw) return ''
@@ -541,7 +657,7 @@ function App() {
   const [reportError, setReportError] = useState('')
   const [reportTab, setReportTab] = useState('hieu_qua_kinh_doanh')
   const [reportPeriod, setReportPeriod] = useState('30_ngay')
-  const [reportEntity, setReportEntity] = useState('toan_bo')
+  const [reportEntity, setReportEntity] = useState('cong_ty_hien_tai')
   const [reportTxnFilter, setReportTxnFilter] = useState('tat_ca')
   const [reportDrillTab, setReportDrillTab] = useState('giao_dich')
   const [dashboardQuery, setDashboardQuery] = useState('')
@@ -1204,16 +1320,52 @@ function App() {
     }
     return new Date().toISOString().slice(0, 10)
   }, [cases])
-  const reportRevenue = Number(reportDetail?.pl?.doanh_thu || 0)
-  const reportCost = Number(reportDetail?.pl?.chi_phi || 0)
-  const reportProfit = Number(reportDetail?.pl?.loi_nhuan_truoc_thue || 0)
-  const reportCashNet = Number(reportDetail?.cf?.luu_chuyen_thuan || 0)
-  const reportAssets = Number(reportDetail?.bs?.tong_tai_san || 0)
-  const reportLiabilities = Number(reportDetail?.bs?.tong_no_phai_tra || 0)
-  const reportEquity = Number(reportDetail?.bs?.von_chu_so_huu || 0)
+  const reportPeriodRange = useMemo(
+    () => buildReportPeriodRange(reportPeriod, reportAsOfDate),
+    [reportPeriod, reportAsOfDate],
+  )
+  const filteredReportItems = useMemo(() => {
+    const source = Array.isArray(reportDetail?.gl?.items) ? reportDetail.gl.items : []
+    if (!source.length) return []
+
+    const { from, to } = reportPeriodRange
+
+    return source.filter((item) => {
+      const eventTs = parseReportDateValue(item?.event_date_iso || item?.event_date || '')
+      if (from !== null && (eventTs === null || eventTs < from)) return false
+      if (to !== null && (eventTs === null || eventTs > to)) return false
+
+      if (reportTxnFilter === 'gia_tri_lon') {
+        return Number(item?.debit_total || 0) >= 20000000
+      }
+
+      if (reportTxnFilter === 'rui_ro') {
+        const postings = Array.isArray(item?.postings) ? item.postings : []
+        const hasVatTaxAccount = postings.some((line) => {
+          const account = String(line?.account || '')
+          return account.startsWith('133') || account.startsWith('333') || account.startsWith('138')
+        })
+        return hasVatTaxAccount || postings.length >= 4
+      }
+
+      return true
+    })
+  }, [reportDetail, reportPeriodRange, reportTxnFilter])
+  const filteredReportSnapshot = useMemo(
+    () => computeFilteredReportSnapshot(filteredReportItems),
+    [filteredReportItems],
+  )
+  const reportRevenue = Number(filteredReportSnapshot.revenue || 0)
+  const reportCost = Number(filteredReportSnapshot.cost || 0)
+  const reportProfit = Number(filteredReportSnapshot.profit || 0)
+  const reportCashNet = Number(filteredReportSnapshot.cashNet || 0)
+  const reportAssets = Number(filteredReportSnapshot.assets || 0)
+  const reportLiabilities = Number(filteredReportSnapshot.liabilities || 0)
+  const reportEquity = Number(filteredReportSnapshot.equity || 0)
+  const reportCompanyLabel = String(currentCompanyName || companyEditForm?.company_name || 'Công ty hiện tại')
   const reportCostRatioPct = reportRevenue > 0 ? (reportCost / reportRevenue) * 100 : 0
   const cashflowSeries = useMemo(() => {
-    const rows = (reportDetail?.gl?.items || []).slice(-6)
+    const rows = filteredReportItems.slice(-6)
     return rows.map((item, idx) => {
       const postings = Array.isArray(item.postings) ? item.postings : []
       const net = postings.reduce((sum, line) => {
@@ -1227,7 +1379,7 @@ function App() {
         value: net,
       }
     })
-  }, [reportDetail])
+  }, [filteredReportItems])
 
   useEffect(() => {
     if (!['reports', 'dashboard', 'compliance'].includes(activeSection)) return undefined
@@ -2313,10 +2465,8 @@ function App() {
                     </label>
                     <label>
                       Đơn vị
-                      <select value={reportEntity} onChange={(event) => setReportEntity(event.target.value)}>
-                        <option value="toan_bo">Toàn doanh nghiệp</option>
-                        <option value="chi_nhanh_bac">Chi nhánh Bắc</option>
-                        <option value="chi_nhanh_nam">Chi nhánh Nam</option>
+                      <select value={reportEntity} onChange={(event) => setReportEntity(event.target.value)} disabled>
+                        <option value="cong_ty_hien_tai">{reportCompanyLabel}</option>
                       </select>
                     </label>
                     <label>
@@ -2378,6 +2528,12 @@ function App() {
                     >
                       Mở Tuân thủ & Kê khai
                     </button>
+                  </article>
+
+                  <article className="detail-row">
+                    <p className="report-inline-note">
+                      Đang hiển thị {filteredReportItems.length} giao dịch sau lọc cho kỳ {reportPeriod.replace('_', ' ')} ({reportTxnFilter.replace('_', ' ')}).
+                    </p>
                   </article>
 
                   <article className="detail-row report-detail-card">
@@ -2513,7 +2669,7 @@ function App() {
                           </tr>
                         </thead>
                         <tbody>
-                          {reportDrillTab === 'giao_dich' ? (reportDetail?.gl?.items || []).slice(-8).map((item) => (
+                          {reportDrillTab === 'giao_dich' ? filteredReportItems.slice(-8).map((item) => (
                             <tr key={item.entry_id}>
                               <td>{formatDateByRule(item.event_date || item.meta?.event_date || '-') || '-'}</td>
                               <td>{formatReportNarration(item.narration, item.entry_id)}</td>
