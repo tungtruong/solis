@@ -1035,9 +1035,9 @@ function App() {
       const payload = await runUiAction('delete_case', '', activeCase.id)
       await reloadDemoCases('')
       setActiveSection('cases')
-      setCaseActionNotice(payload?.message || 'Đã xóa hồ sơ')
+      setCaseActionNotice(payload?.message || tr('Đã xóa hồ sơ', 'Case deleted'))
     } catch (error) {
-      setCaseActionNotice(error.message || 'Không xóa được hồ sơ')
+      setCaseActionNotice(error.message || tr('Không xóa được hồ sơ', 'Could not delete case'))
     } finally {
       setIsDeleteModalOpen(false)
     }
@@ -1408,9 +1408,9 @@ function App() {
       const payload = await runUiAction('new_case')
       await reloadDemoCases(payload?.case?.id || '')
       setActiveSection('cases')
-      setCaseActionNotice(payload?.message || 'Đã tạo hồ sơ mới')
+      setCaseActionNotice(payload?.message || tr('Đã tạo hồ sơ mới', 'New case created'))
     } catch (error) {
-      setCaseActionNotice(error.message || 'Không tạo được hồ sơ mới')
+      setCaseActionNotice(error.message || tr('Không tạo được hồ sơ mới', 'Could not create new case'))
     }
   }
 
@@ -1418,7 +1418,7 @@ function App() {
     if (isSendingCaseCommand) return
     const text = prompt.trim()
     if (!text && attachedFiles.length === 0) {
-      setCaseActionNotice('Vui lòng nhập nội dung hoặc đính kèm chứng từ trước khi gửi')
+      setCaseActionNotice(tr('Vui lòng nhập nội dung hoặc đính kèm chứng từ trước khi gửi', 'Please enter a message or attach a document before sending'))
       return
     }
     setIsSendingCaseCommand(true)
@@ -1429,7 +1429,7 @@ function App() {
         targetCaseId = String(created?.case?.id || '')
       }
       if (!targetCaseId) {
-        throw new Error('Không tạo được hồ sơ để nhận lệnh')
+        throw new Error(tr('Không tạo được hồ sơ để nhận lệnh', 'Could not create a case to receive the command'))
       }
 
       const payload = await runUiAction('case_command', text, targetCaseId)
@@ -1438,7 +1438,7 @@ function App() {
       setAttachedFiles([])
       setCaseActionNotice('')
     } catch (error) {
-      setCaseActionNotice(error.message || 'Không gửi được lệnh')
+      setCaseActionNotice(error.message || tr('Không gửi được lệnh', 'Could not send the command'))
     } finally {
       setIsSendingCaseCommand(false)
     }
@@ -1877,10 +1877,10 @@ function App() {
                 </button>
               ))
             ) : (
-              <div className="empty-cases">Không có hồ sơ phù hợp bộ lọc.</div>
+              <div className="empty-cases">{tr('Không có hồ sơ phù hợp bộ lọc.', 'No cases match the current filter.')}</div>
             )}
             {filteredCases.length > visibleCases.length ? (
-              <div className="case-list-more-hint">Cuộn xuống để tải thêm hồ sơ ({visibleCases.length}/{filteredCases.length})</div>
+              <div className="case-list-more-hint">{tr('Cuộn xuống để tải thêm hồ sơ', 'Scroll down to load more cases')} ({visibleCases.length}/{filteredCases.length})</div>
             ) : null}
           </div> : null}
 
@@ -2103,7 +2103,7 @@ function App() {
                         onClick={() => handlePostingConfirmation(true)}
                         disabled={isSendingCaseCommand}
                       >
-                        Xác nhận và đồng ý post
+                        {tr('Xác nhận và đồng ý post', 'Confirm and post')}
                       </button>
                       <button
                         type="button"
@@ -2111,7 +2111,7 @@ function App() {
                         onClick={() => handlePostingConfirmation(false)}
                         disabled={isSendingCaseCommand}
                       >
-                        Chưa đồng ý post
+                        {tr('Chưa đồng ý post', 'Reject posting')}
                       </button>
                     </div>
                   </section>
@@ -2126,7 +2126,7 @@ function App() {
                         <button
                           type="button"
                           className="attached-file-remove"
-                          aria-label={`Bỏ file ${file.name}`}
+                          aria-label={tr(`Bỏ file ${file.name}`, `Remove file ${file.name}`)}
                           onClick={() => removeAttachedFile(file)}
                         >
                           <X size={12} />
@@ -2140,8 +2140,8 @@ function App() {
                   <button
                     type="button"
                     className="attach-file-btn"
-                    aria-label="Đính kèm file"
-                    title="Đính kèm file"
+                    aria-label={tr('Đính kèm file', 'Attach files')}
+                    title={tr('Đính kèm file', 'Attach files')}
                     onClick={() => attachmentInputRef.current?.click()}
                   >
                     <Paperclip size={15} />
@@ -2157,8 +2157,8 @@ function App() {
                     type="text"
                     placeholder={
                       isAdvancedMode
-                        ? 'Lệnh nâng cao: "Tách bút toán 30/70, ghi nhận vào 242 và phân bổ 6 kỳ"'
-                        : 'Hỏi AI hoặc ra lệnh: "Hạch toán khoản này vào chi phí trả trước"'
+                        ? tr('Lệnh nâng cao: "Tách bút toán 30/70, ghi nhận vào 242 và phân bổ 6 kỳ"', 'Advanced command: "Split posting 30/70, book into 242 and amortize over 6 periods"')
+                        : tr('Hỏi AI hoặc ra lệnh: "Hạch toán khoản này vào chi phí trả trước"', 'Ask AI or command: "Book this into prepaid expenses"')
                     }
                     value={prompt}
                     onChange={(event) => setPrompt(event.target.value)}
@@ -2170,7 +2170,7 @@ function App() {
                     }}
                   />
                   <button type="button" onClick={handleSendCaseCommand} disabled={isSendingCaseCommand}>
-                    {isSendingCaseCommand ? 'Đang gửi...' : 'Gửi'}
+                    {isSendingCaseCommand ? tr('Đang gửi...', 'Sending...') : tr('Gửi', 'Send')}
                   </button>
                 </div>
                 {caseActionNotice ? <p className="report-inline-note">{caseActionNotice}</p> : null}
@@ -2965,7 +2965,7 @@ function App() {
           onClick={closePreview}
         >
           <div className="modal-card preview-modal-card" onClick={(event) => event.stopPropagation()}>
-            <h3 id="preview-modal-title">Xem nhanh chứng từ</h3>
+            <h3 id="preview-modal-title">{tr('Xem nhanh chứng từ', 'Quick document preview')}</h3>
             <p className="preview-file-name">{previewFileName}</p>
             <div className="preview-surface">
               {isPdfPreview ? (
@@ -2974,7 +2974,7 @@ function App() {
                     <FileText size={22} />
                     <div>
                       <strong>{previewFileName}</strong>
-                      <p>Trình duyệt không hỗ trợ PDF inline. Hãy mở ở tab mới.</p>
+                      <p>{tr('Trình duyệt không hỗ trợ PDF inline. Hãy mở ở tab mới.', 'Browser does not support inline PDF. Please open in a new tab.')}</p>
                     </div>
                   </div>
                 </object>
