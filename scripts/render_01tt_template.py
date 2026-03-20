@@ -10,9 +10,9 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, A5
 from reportlab.lib.utils import simpleSplit
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -85,72 +85,37 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     lines: List[LineItem] = []
     texts: List[TextItem] = []
 
+    # Compact A5 layout (148 x 210 mm), tuned for 2-copy printing.
+    page_w = 148.0
+
     # Header
-    texts.append(TextItem(18, 30, f"Đơn vị: {data['don_vi']}", 10.5))
-    texts.append(TextItem(18, 37, f"Địa chỉ: {data['dia_chi_don_vi']}", 10.5))
+    texts.append(TextItem(8, 12, f"Đơn vị: {data['don_vi']}", 8.8, True))
+    texts.append(TextItem(8, 17, f"Đ/c: {data['dia_chi_don_vi']}", 8.2))
 
-    texts.append(TextItem(192, 22, "Mẫu số: 01 - TT", 10.2, True, "right"))
-    texts.append(TextItem(192, 28.5, "(Kèm theo Thông tư số 99/2025/TT-BTC)", 8.8, False, "right"))
-    texts.append(TextItem(192, 34.2, "ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)", 8.8, False, "right"))
+    texts.append(TextItem(page_w - 8, 10, "Mẫu số 01 - TT", 8.8, True, "right"))
+    texts.append(TextItem(page_w - 8, 14.8, "(Thông tư 99/2025/TT-BTC)", 7.4, False, "right"))
+    texts.append(TextItem(page_w - 8, 19.2, "ngày 27/10/2025", 7.4, False, "right"))
 
-    texts.append(TextItem(105, 54, "PHIẾU THU", 16, True, "center"))
-
-    texts.append(
-        TextItem(
-            105,
-            61,
-            f"Ngày {data['ngay']} tháng {data['thang']} năm {data['nam']}",
-            10.5,
-            False,
-            "center",
-        )
-    )
+    texts.append(TextItem(page_w / 2, 28.5, "PHIẾU THU", 14, True, "center"))
+    texts.append(TextItem(page_w / 2, 34.5, f"Ngày {data['ngay']} tháng {data['thang']} năm {data['nam']}", 8.8, False, "center"))
 
     # Right info block
-    texts.append(TextItem(145, 67, f"Quyển số: {data['quyen_so']}", 10.5))
-    texts.append(TextItem(145, 74, f"Số: {data['so_phieu']}", 10.5))
-    texts.append(TextItem(145, 81, f"Nợ: {data['tai_khoan_no']}", 10.5))
-    texts.append(TextItem(145, 88, f"Có: {data['tai_khoan_co']}", 10.5))
+    texts.append(TextItem(104, 38, f"Số: {data['so_phieu']}", 8.8, True))
+    texts.append(TextItem(104, 43, f"Nợ: {data['tai_khoan_no']}", 8.8))
+    texts.append(TextItem(104, 48, f"Có: {data['tai_khoan_co']}", 8.8))
 
-    # Main body lines
-    texts.append(TextItem(18, 101, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 10.5))
-    texts.append(TextItem(18, 110, f"Địa chỉ: {data['dia_chi_nguoi_nop']}", 10.5))
-    texts.append(TextItem(18, 119, f"Lý do nộp: {data['ly_do']}", 10.5))
-    texts.append(
-        TextItem(
-            18,
-            128,
-            f"Số tiền: {data['so_tien']}   (Viết bằng chữ): {data['so_tien_chu']}",
-            10.5,
-        )
-    )
-    texts.append(TextItem(18, 137, f"Kèm theo: {data['chung_tu_goc']} chứng từ gốc.", 10.5))
+    # Main body
+    texts.append(TextItem(8, 58, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 8.8, True))
+    texts.append(TextItem(8, 65, f"Địa chỉ: {data['dia_chi_nguoi_nop']}", 8.5))
+    texts.append(TextItem(8, 72, f"Lý do nộp: {data['ly_do']}", 8.5))
+    texts.append(TextItem(8, 79, f"Số tiền: {data['so_tien']}   (Viết bằng chữ): {data['so_tien_chu']}", 8.5))
+    texts.append(TextItem(8, 86, f"Kèm theo: {data['chung_tu_goc']}    Chứng từ gốc: ........", 8.5))
 
-    # Signature panel frame
-    left = 36
-    right = 174
-    top = 146
-    bottom = 212
+    # Signature area (no table/grid lines)
+    left = 8.0
+    right = page_w - 8.0
     col_count = 5
     col_w = (right - left) / col_count
-
-    # Outer frame
-    lines.extend(
-        [
-            LineItem(left, top, right, top, 0.9),
-            LineItem(right, top, right, bottom, 0.9),
-            LineItem(right, bottom, left, bottom, 0.9),
-            LineItem(left, bottom, left, top, 0.9),
-        ]
-    )
-
-    # Vertical separators
-    for i in range(1, col_count):
-        x = left + col_w * i
-        lines.append(LineItem(x, top, x, bottom, 0.7))
-
-    # Title row separator
-    lines.append(LineItem(left, top + 14, right, top + 14, 0.7))
 
     titles = ["Giám đốc", "Kế toán trưởng", "Người nộp tiền", "Người lập phiếu", "Thủ quỹ"]
     subtitles = [
@@ -163,41 +128,46 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
 
     for idx, title in enumerate(titles):
         cx = left + col_w * idx + col_w / 2
-        texts.append(TextItem(cx, top + 9, title, 10, True, "center"))
-        texts.append(TextItem(cx, top + 18.5, subtitles[idx], 9, False, "center"))
+        texts.append(TextItem(cx, 104, title, 8.7, True, "center"))
+        texts.append(TextItem(cx, 109, subtitles[idx], 7.4, False, "center"))
+        lines.append(LineItem(cx - col_w * 0.40, 131, cx + col_w * 0.40, 131, 0.6))
 
     texts.append(
         TextItem(
-            145,
-            142,
+            page_w - 8,
+            97,
             f"Ngày {data['ngay_ky']} tháng {data['thang_ky']} năm {data['nam_ky']}",
-            10,
+            8.5,
+            False,
+            "right",
         )
     )
 
     # Footer notes
-    texts.append(TextItem(18, 224, "Đã nhận đủ số tiền (viết bằng chữ): ........................................................", 10))
-    texts.append(TextItem(18, 232, "+ Tỷ giá ngoại tệ (vàng, bạc, đá quý): ..................................................", 10))
-    texts.append(TextItem(18, 240, "+ Số tiền quy đổi: ........................................................................", 10))
-    texts.append(TextItem(18, 251, "(Liên gửi ra ngoài phải đóng dấu)", 9))
+    texts.append(TextItem(8, 143, "Đã nhận đủ số tiền (viết bằng chữ): .................................................", 8.5))
+    texts.append(TextItem(8, 149, "+ Tỷ giá ngoại tệ (vàng bạc, đá quý): ...............................................", 8.5))
+    texts.append(TextItem(8, 155, "+ Số tiền quy đổi: ...................................................................", 8.5))
+    texts.append(TextItem(8, 163, "(Liên gửi ra ngoài phải đóng dấu)", 7.8))
 
     texts.append(
         TextItem(
-            18,
-            266,
+            8,
+            173,
             "Ghi chú: Doanh nghiệp có thể tùy biến mẫu phù hợp đặc điểm hoạt động nhưng phải đủ nội dung bắt buộc.",
-            8.8,
+            7.3,
         )
     )
 
     return lines, texts
 
 
-def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem]) -> None:
-    page_w_pt, page_h_pt = A4
+def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem], paper: str) -> None:
+    page_size = A5 if paper.upper() == "A5" else A4
+    page_w_pt, page_h_pt = page_size
+    paper_w_mm = 148.0 if paper.upper() == "A5" else 210.0
     font_regular, font_bold = detect_font()
 
-    c = canvas.Canvas(str(output_pdf), pagesize=A4)
+    c = canvas.Canvas(str(output_pdf), pagesize=page_size)
 
     for ln in lines:
         c.setLineWidth(ln.width_pt)
@@ -212,7 +182,7 @@ def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem]) -> 
         x = mm(tx.x_mm)
         y = page_h_pt - mm(tx.y_mm)
         if tx.align == "left":
-            wrapped = simpleSplit(tx.text, font_bold if tx.bold else font_regular, tx.size_pt, mm(176))
+            wrapped = simpleSplit(tx.text, font_bold if tx.bold else font_regular, tx.size_pt, mm(paper_w_mm - 16.0))
             if len(wrapped) > 1:
                 line_gap = tx.size_pt * 1.2
                 for idx, line in enumerate(wrapped):
@@ -229,7 +199,10 @@ def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem]) -> 
     c.save()
 
 
-def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem]) -> None:
+def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem], paper: str) -> None:
+    paper_upper = paper.upper()
+    page_w_mm = 148 if paper_upper == "A5" else 210
+    page_h_mm = 210 if paper_upper == "A5" else 297
     line_svg = "\n".join(
         (
             f'<line x1="{ln.x1_mm:.3f}mm" y1="{ln.y1_mm:.3f}mm" '
@@ -254,10 +227,10 @@ def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem]) -
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <title>01-TT Template Engine</title>
   <style>
-    @page {{ size: A4; margin: 0; }}
+    @page {{ size: {paper_upper}; margin: 0; }}
     body {{ margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }}
     .toolbar {{ position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }}
-    .sheet {{ position: relative; width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }}
+    .sheet {{ position: relative; width: {page_w_mm}mm; height: {page_h_mm}mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }}
     .grid {{ position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }}
     .txt {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.12; transform: translateY(-0.85em); }}
     .txt.bold {{ font-weight: 700; }}
@@ -285,6 +258,7 @@ def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem]) -
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render TT99 form 01-TT from template definitions")
     parser.add_argument("--out-dir", default="data/regulations/tt99_2025_template_engine")
+    parser.add_argument("--paper", default="A5", choices=["A5", "A4"], help="Paper size")
     args = parser.parse_args()
 
     out_dir = Path(args.out_dir)
@@ -292,11 +266,12 @@ def main() -> None:
 
     lines, texts = layout_01tt(SAMPLE_01TT)
 
-    output_pdf = out_dir / "sample_01_TT_template.pdf"
-    output_html = out_dir / "sample_01_TT_template.html"
+    suffix = args.paper.lower()
+    output_pdf = out_dir / f"sample_01_TT_template_{suffix}.pdf"
+    output_html = out_dir / f"sample_01_TT_template_{suffix}.html"
 
-    draw_pdf(output_pdf, lines, texts)
-    draw_html(output_html, lines, texts)
+    draw_pdf(output_pdf, lines, texts, args.paper)
+    draw_html(output_html, lines, texts, args.paper)
 
     print(f"Generated: {output_pdf}")
     print(f"Generated: {output_html}")
