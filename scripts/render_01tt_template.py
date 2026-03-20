@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from reportlab.lib.pagesizes import A4, A5
+from reportlab.lib.pagesizes import A4, A5, landscape
 from reportlab.lib.utils import simpleSplit
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -161,8 +161,48 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     return lines, texts
 
 
+def to_a5_landscape_space(
+    lines: List[LineItem],
+    texts: List[TextItem],
+) -> Tuple[List[LineItem], List[TextItem]]:
+    """Map compact portrait A5 layout to landscape A5 page space."""
+    # Source logical space: 148 x 210 mm
+    # Target page space: 210 x 148 mm (A5 landscape)
+    sx = 1.32
+    sy = 0.72
+    ox = 8.0
+    oy = 6.0
+
+    mapped_lines: List[LineItem] = []
+    for ln in lines:
+        mapped_lines.append(
+            LineItem(
+                x1_mm=ln.x1_mm * sx + ox,
+                y1_mm=ln.y1_mm * sy + oy,
+                x2_mm=ln.x2_mm * sx + ox,
+                y2_mm=ln.y2_mm * sy + oy,
+                width_pt=max(0.5, ln.width_pt * 0.85),
+            )
+        )
+
+    mapped_texts: List[TextItem] = []
+    for tx in texts:
+        mapped_texts.append(
+            TextItem(
+                x_mm=tx.x_mm * sx + ox,
+                y_mm=tx.y_mm * sy + oy,
+                text=tx.text,
+                size_pt=max(6.6, tx.size_pt * 0.83),
+                bold=tx.bold,
+                align=tx.align,
+            )
+        )
+
+    return mapped_lines, mapped_texts
+
+
 def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem], paper: str) -> None:
-    page_size = A5 if paper.upper() == "A5" else A4
+    page_size = landscape(A5) if paper.upper() == "A5" else A4
     page_w_pt, page_h_pt = page_size
     paper_w_mm = 148.0 if paper.upper() == "A5" else 210.0
     font_regular, font_bold = detect_font()
@@ -201,8 +241,8 @@ def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem], pap
 
 def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem], paper: str) -> None:
     paper_upper = paper.upper()
-    page_w_mm = 148 if paper_upper == "A5" else 210
-    page_h_mm = 210 if paper_upper == "A5" else 297
+    page_w_mm = 210 if paper_upper == "A5" else 210
+    page_h_mm = 148 if paper_upper == "A5" else 297
     line_svg = "\n".join(
         (
             f'<line x1="{ln.x1_mm:.3f}mm" y1="{ln.y1_mm:.3f}mm" '
@@ -227,7 +267,7 @@ def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem], p
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <title>01-TT Template Engine</title>
   <style>
-    @page {{ size: {paper_upper}; margin: 0; }}
+    @page {{ size: {paper_upper} {'landscape' if paper_upper == 'A5' else 'portrait'}; margin: 0; }}
     body {{ margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }}
     .toolbar {{ position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }}
     .sheet {{ position: relative; width: {page_w_mm}mm; height: {page_h_mm}mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }}
@@ -265,6 +305,8 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     lines, texts = layout_01tt(SAMPLE_01TT)
+    if args.paper.upper() == "A5":
+        lines, texts = to_a5_landscape_space(lines, texts)
 
     suffix = args.paper.lower()
     output_pdf = out_dir / f"sample_01_TT_template_{suffix}.pdf"
