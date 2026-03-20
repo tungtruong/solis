@@ -147,16 +147,6 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     texts.append(TextItem(8, 143, "Đã nhận đủ số tiền (viết bằng chữ): .................................................", 8.5))
     texts.append(TextItem(8, 149, "+ Tỷ giá ngoại tệ (vàng bạc, đá quý): ...............................................", 8.5))
     texts.append(TextItem(8, 155, "+ Số tiền quy đổi: ...................................................................", 8.5))
-    texts.append(TextItem(8, 163, "(Liên gửi ra ngoài phải đóng dấu)", 7.8))
-
-    texts.append(
-        TextItem(
-            8,
-            173,
-            "Ghi chú: Doanh nghiệp có thể tùy biến mẫu phù hợp đặc điểm hoạt động nhưng phải đủ nội dung bắt buộc.",
-            7.3,
-        )
-    )
 
     return lines, texts
 
@@ -169,7 +159,7 @@ def to_a5_landscape_space(
     # Source logical space: 148 x 210 mm
     # Target page space: 210 x 148 mm (A5 landscape)
     sx = 1.32
-    sy = 0.72
+    sy = 0.76
     ox = 8.0
     oy = 6.0
 
@@ -192,7 +182,7 @@ def to_a5_landscape_space(
                 x_mm=tx.x_mm * sx + ox,
                 y_mm=tx.y_mm * sy + oy,
                 text=tx.text,
-                size_pt=max(6.6, tx.size_pt * 0.83),
+                size_pt=max(7.2, tx.size_pt * 0.92),
                 bold=tx.bold,
                 align=tx.align,
             )
@@ -309,6 +299,8 @@ def main() -> None:
         lines, texts = to_a5_landscape_space(lines, texts)
 
     suffix = args.paper.lower()
+    if args.paper.upper() == "A5":
+        suffix = "a5_landscape"
     output_pdf = out_dir / f"sample_01_TT_template_{suffix}.pdf"
     output_html = out_dir / f"sample_01_TT_template_{suffix}.html"
 
