@@ -67,17 +67,30 @@ def mm(v: float) -> float:
 
 
 def detect_font() -> Tuple[str, str]:
-    """Register a Unicode-capable font if available on Windows."""
-    font_candidates = [
-        ("FormSerif", Path("C:/Windows/Fonts/times.ttf")),
-        ("FormSerif", Path("C:/Windows/Fonts/timesbd.ttf")),
-        ("FormSerif", Path("C:/Windows/Fonts/tahoma.ttf")),
-        ("FormSerif", Path("C:/Windows/Fonts/arial.ttf")),
-    ]
-    for font_name, font_path in font_candidates:
-        if font_path.exists():
-            pdfmetrics.registerFont(TTFont(font_name, str(font_path)))
-            return font_name, font_name
+    """Register Unicode-capable regular/bold fonts on Windows when available."""
+    times_regular = Path("C:/Windows/Fonts/times.ttf")
+    times_bold = Path("C:/Windows/Fonts/timesbd.ttf")
+    arial_regular = Path("C:/Windows/Fonts/arial.ttf")
+    arial_bold = Path("C:/Windows/Fonts/arialbd.ttf")
+
+    if times_regular.exists() and times_bold.exists():
+        pdfmetrics.registerFont(TTFont("FormSerifRegular", str(times_regular)))
+        pdfmetrics.registerFont(TTFont("FormSerifBold", str(times_bold)))
+        return "FormSerifRegular", "FormSerifBold"
+
+    if arial_regular.exists() and arial_bold.exists():
+        pdfmetrics.registerFont(TTFont("FormSansRegular", str(arial_regular)))
+        pdfmetrics.registerFont(TTFont("FormSansBold", str(arial_bold)))
+        return "FormSansRegular", "FormSansBold"
+
+    if times_regular.exists():
+        pdfmetrics.registerFont(TTFont("FormFallback", str(times_regular)))
+        return "FormFallback", "Helvetica-Bold"
+
+    if arial_regular.exists():
+        pdfmetrics.registerFont(TTFont("FormFallback", str(arial_regular)))
+        return "FormFallback", "Helvetica-Bold"
+
     return "Helvetica", "Helvetica-Bold"
 
 
@@ -263,7 +276,7 @@ def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem], p
     .sheet {{ position: relative; width: {page_w_mm}mm; height: {page_h_mm}mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }}
     .grid {{ position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }}
     .txt {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.12; transform: translateY(-0.85em); }}
-    .txt.bold {{ font-weight: 700; }}
+    .txt.bold {{ font-weight: 800; }}
     .txt.center {{ transform: translate(-50%, -0.85em); text-align: center; }}
     .txt.right {{ transform: translate(-100%, -0.85em); text-align: right; }}
     @media print {{
