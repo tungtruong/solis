@@ -1473,6 +1473,8 @@ def _compute_compliance_seed(
             "due_date": "2026-03-31",
             "amount": loi_nhuan,
             "category": "year_end",
+            "form_code": "B01a-DNN",
+            "legal_basis": "Thông tư 133/2016/TT-BTC",
         },
     ]
 
