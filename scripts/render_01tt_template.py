@@ -86,6 +86,7 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     # Header
     texts.append(TextItem(18, 20, f"Đơn vị: {data['don_vi']}", 10.5))
     texts.append(TextItem(18, 27, f"Địa chỉ: {data['dia_chi_don_vi']}", 10.5))
+    texts.append(TextItem(192, 20, "Mẫu số: 01-TT", 10.5, True, "right"))
     texts.append(TextItem(105, 42, "PHIẾU THU", 16, True, "center"))
     texts.append(TextItem(105, 49, "(Ban hành theo Thông tư 99/2025/TT-BTC)", 9.5, False, "center"))
 
@@ -121,8 +122,8 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     texts.append(TextItem(18, 133, f"Kèm theo: {data['chung_tu_goc']} chứng từ gốc.", 10.5))
 
     # Signature panel frame
-    left = 18
-    right = 192
+    left = 30
+    right = 180
     top = 143
     bottom = 214
     col_count = 5
