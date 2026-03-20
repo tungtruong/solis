@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>01-LDTL Template Engine</title>
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    body { margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }
+    .sheet { position: relative; width: 297mm; height: 210mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }
+    .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .txt { position: absolute; color: #111; white-space: nowrap; line-height: 1.1; transform: translateY(-0.85em); }
+    .txt.bold { font-weight: 800; }
+    .txt.center { transform: translate(-50%, -0.85em); text-align: center; }
+    .txt.right { transform: translate(-100%, -0.85em); text-align: right; }
+    @media print { body { background: #fff; } .toolbar { display: none; } .sheet { margin: 0; box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar">Mau 01-LDTL (template dung tu dau) | <button onclick="window.print()">In</button></div>
+  <section class="sheet"><svg class="grid" xmlns="http://www.w3.org/2000/svg"><line x1="10.000mm" y1="40.000mm" x2="10.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="20.000mm" y1="40.000mm" x2="20.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="54.000mm" y1="40.000mm" x2="54.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="74.000mm" y1="40.000mm" x2="74.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="88.000mm" y1="40.000mm" x2="88.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="104.000mm" y1="40.000mm" x2="104.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="122.000mm" y1="40.000mm" x2="122.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="140.000mm" y1="40.000mm" x2="140.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="158.000mm" y1="40.000mm" x2="158.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="176.000mm" y1="40.000mm" x2="176.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="196.000mm" y1="40.000mm" x2="196.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="216.000mm" y1="40.000mm" x2="216.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="236.000mm" y1="40.000mm" x2="236.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="256.000mm" y1="40.000mm" x2="256.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="274.000mm" y1="40.000mm" x2="274.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="40.000mm" x2="274.000mm" y2="40.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="47.800mm" x2="274.000mm" y2="47.800mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="55.600mm" x2="274.000mm" y2="55.600mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="63.400mm" x2="274.000mm" y2="63.400mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="71.200mm" x2="274.000mm" y2="71.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="79.000mm" x2="274.000mm" y2="79.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="86.800mm" x2="274.000mm" y2="86.800mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="94.600mm" x2="274.000mm" y2="94.600mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="102.400mm" x2="274.000mm" y2="102.400mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="110.200mm" x2="274.000mm" y2="110.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="118.000mm" x2="274.000mm" y2="118.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="125.800mm" x2="274.000mm" y2="125.800mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="133.600mm" x2="274.000mm" y2="133.600mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="141.400mm" x2="274.000mm" y2="141.400mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="10.000mm" y1="149.200mm" x2="274.000mm" y2="149.200mm" stroke="#111" stroke-width="0.200mm" /></svg><div class="txt left bold" style="left:12.000mm;top:13.000mm;font-size:9.50pt;">Don vi: CONG TY TNHH ABC</div>
+<div class="txt left " style="left:12.000mm;top:18.000mm;font-size:8.80pt;">Bo phan: Khoi san xuat</div>
+<div class="txt right bold" style="left:285.000mm;top:13.000mm;font-size:9.00pt;">Mau so 01 - LDTL</div>
+<div class="txt right " style="left:285.000mm;top:17.500mm;font-size:7.80pt;">(Thong tu 99/2025/TT-BTC)</div>
+<div class="txt center bold" style="left:148.500mm;top:27.000mm;font-size:13.50pt;">BANG THANH TOAN TIEN LUONG</div>
+<div class="txt center " style="left:148.500mm;top:33.000mm;font-size:9.20pt;">Thang 03 nam 2026</div>
+<div class="txt left " style="left:20.000mm;top:33.000mm;font-size:9.00pt;">So: LDTL-0001</div>
+<div class="txt center bold" style="left:15.000mm;top:44.800mm;font-size:7.80pt;">STT</div>
+<div class="txt center bold" style="left:37.000mm;top:44.800mm;font-size:7.80pt;">Ho va ten</div>
+<div class="txt center bold" style="left:64.000mm;top:44.800mm;font-size:7.80pt;">Bac luong</div>
+<div class="txt center bold" style="left:81.000mm;top:44.800mm;font-size:7.80pt;">He so</div>
+<div class="txt center bold" style="left:96.000mm;top:44.800mm;font-size:7.80pt;">So cong</div>
+<div class="txt center bold" style="left:113.000mm;top:44.800mm;font-size:7.80pt;">Luong TG</div>
+<div class="txt center bold" style="left:131.000mm;top:44.800mm;font-size:7.80pt;">Luong SP</div>
+<div class="txt center bold" style="left:149.000mm;top:44.800mm;font-size:7.80pt;">Phu cap</div>
+<div class="txt center bold" style="left:167.000mm;top:44.800mm;font-size:7.80pt;">Khac</div>
+<div class="txt center bold" style="left:186.000mm;top:44.800mm;font-size:7.80pt;">Tong</div>
+<div class="txt center bold" style="left:206.000mm;top:44.800mm;font-size:7.80pt;">Tam ung</div>
+<div class="txt center bold" style="left:226.000mm;top:44.800mm;font-size:7.80pt;">Khau tru</div>
+<div class="txt center bold" style="left:246.000mm;top:44.800mm;font-size:7.80pt;">Ky II</div>
+<div class="txt center bold" style="left:265.000mm;top:44.800mm;font-size:7.80pt;">Ky nhan</div>
+<div class="txt center " style="left:15.000mm;top:52.870mm;font-size:7.80pt;">1</div>
+<div class="txt left " style="left:20.900mm;top:52.870mm;font-size:7.80pt;">Nguyen Van A</div>
+<div class="txt center " style="left:64.000mm;top:52.870mm;font-size:7.80pt;">3/7</div>
+<div class="txt center " style="left:81.000mm;top:52.870mm;font-size:7.80pt;">3.20</div>
+<div class="txt center " style="left:96.000mm;top:52.870mm;font-size:7.80pt;">26</div>
+<div class="txt center " style="left:113.000mm;top:52.870mm;font-size:7.80pt;">12,000,000</div>
+<div class="txt center " style="left:131.000mm;top:52.870mm;font-size:7.80pt;">0</div>
+<div class="txt center " style="left:149.000mm;top:52.870mm;font-size:7.80pt;">1,200,000</div>
+<div class="txt center " style="left:167.000mm;top:52.870mm;font-size:7.80pt;">500,000</div>
+<div class="txt center " style="left:186.000mm;top:52.870mm;font-size:7.80pt;">13,700,000</div>
+<div class="txt center " style="left:206.000mm;top:52.870mm;font-size:7.80pt;">2,000,000</div>
+<div class="txt center " style="left:226.000mm;top:52.870mm;font-size:7.80pt;">1,300,000</div>
+<div class="txt center " style="left:246.000mm;top:52.870mm;font-size:7.80pt;">10,400,000</div>
+<div class="txt center " style="left:265.000mm;top:52.870mm;font-size:7.80pt;">x</div>
+<div class="txt center " style="left:15.000mm;top:60.670mm;font-size:7.80pt;">2</div>
+<div class="txt left " style="left:20.900mm;top:60.670mm;font-size:7.80pt;">Tran Thi B</div>
+<div class="txt center " style="left:64.000mm;top:60.670mm;font-size:7.80pt;">2/7</div>
+<div class="txt center " style="left:81.000mm;top:60.670mm;font-size:7.80pt;">2.80</div>
+<div class="txt center " style="left:96.000mm;top:60.670mm;font-size:7.80pt;">25</div>
+<div class="txt center " style="left:113.000mm;top:60.670mm;font-size:7.80pt;">10,500,000</div>
+<div class="txt center " style="left:131.000mm;top:60.670mm;font-size:7.80pt;">0</div>
+<div class="txt center " style="left:149.000mm;top:60.670mm;font-size:7.80pt;">1,000,000</div>
+<div class="txt center " style="left:167.000mm;top:60.670mm;font-size:7.80pt;">400,000</div>
+<div class="txt center " style="left:186.000mm;top:60.670mm;font-size:7.80pt;">11,900,000</div>
+<div class="txt center " style="left:206.000mm;top:60.670mm;font-size:7.80pt;">1,500,000</div>
+<div class="txt center " style="left:226.000mm;top:60.670mm;font-size:7.80pt;">1,100,000</div>
+<div class="txt center " style="left:246.000mm;top:60.670mm;font-size:7.80pt;">9,300,000</div>
+<div class="txt center " style="left:265.000mm;top:60.670mm;font-size:7.80pt;">x</div>
+<div class="txt center " style="left:15.000mm;top:68.470mm;font-size:7.80pt;">3</div>
+<div class="txt left " style="left:20.900mm;top:68.470mm;font-size:7.80pt;">Le Van C</div>
+<div class="txt center " style="left:64.000mm;top:68.470mm;font-size:7.80pt;">4/7</div>
+<div class="txt center " style="left:81.000mm;top:68.470mm;font-size:7.80pt;">3.60</div>
+<div class="txt center " style="left:96.000mm;top:68.470mm;font-size:7.80pt;">27</div>
+<div class="txt center " style="left:113.000mm;top:68.470mm;font-size:7.80pt;">13,200,000</div>
+<div class="txt center " style="left:131.000mm;top:68.470mm;font-size:7.80pt;">0</div>
+<div class="txt center " style="left:149.000mm;top:68.470mm;font-size:7.80pt;">1,300,000</div>
+<div class="txt center " style="left:167.000mm;top:68.470mm;font-size:7.80pt;">650,000</div>
+<div class="txt center " style="left:186.000mm;top:68.470mm;font-size:7.80pt;">15,150,000</div>
+<div class="txt center " style="left:206.000mm;top:68.470mm;font-size:7.80pt;">2,200,000</div>
+<div class="txt center " style="left:226.000mm;top:68.470mm;font-size:7.80pt;">1,500,000</div>
+<div class="txt center " style="left:246.000mm;top:68.470mm;font-size:7.80pt;">11,450,000</div>
+<div class="txt center " style="left:265.000mm;top:68.470mm;font-size:7.80pt;">x</div>
+<div class="txt center bold" style="left:37.000mm;top:138.670mm;font-size:8.20pt;">Cong</div>
+<div class="txt center bold" style="left:113.000mm;top:138.670mm;font-size:7.80pt;">35,700,000</div>
+<div class="txt center bold" style="left:131.000mm;top:138.670mm;font-size:7.80pt;">0</div>
+<div class="txt center bold" style="left:149.000mm;top:138.670mm;font-size:7.80pt;">3,500,000</div>
+<div class="txt center bold" style="left:167.000mm;top:138.670mm;font-size:7.80pt;">1,550,000</div>
+<div class="txt center bold" style="left:186.000mm;top:138.670mm;font-size:7.80pt;">40,750,000</div>
+<div class="txt center bold" style="left:206.000mm;top:138.670mm;font-size:7.80pt;">5,700,000</div>
+<div class="txt center bold" style="left:226.000mm;top:138.670mm;font-size:7.80pt;">3,900,000</div>
+<div class="txt center bold" style="left:246.000mm;top:138.670mm;font-size:7.80pt;">31,150,000</div>
+<div class="txt left " style="left:12.000mm;top:154.000mm;font-size:9.00pt;">Tong so tien (viet bang chu): Mot tram hai muoi trieu dong</div>
+<div class="txt right " style="left:285.000mm;top:161.000mm;font-size:8.80pt;">Ngay 20 thang 03 nam 2026</div>
+<div class="txt center bold" style="left:190.000mm;top:170.000mm;font-size:9.00pt;">Nguoi lap bang</div>
+<div class="txt center " style="left:190.000mm;top:175.000mm;font-size:8.00pt;">(Ky, ho ten)</div>
+<div class="txt center bold" style="left:230.000mm;top:170.000mm;font-size:9.00pt;">Ke toan truong</div>
+<div class="txt center " style="left:230.000mm;top:175.000mm;font-size:8.00pt;">(Ky, ho ten)</div>
+<div class="txt center bold" style="left:270.000mm;top:170.000mm;font-size:9.00pt;">Giam doc</div>
+<div class="txt center " style="left:270.000mm;top:175.000mm;font-size:8.00pt;">(Ky, ho ten)</div></section>
+</body>
+</html>

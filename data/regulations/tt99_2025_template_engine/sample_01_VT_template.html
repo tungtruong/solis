@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="vi"> 
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>01-VT Template Engine</title>
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    body { margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }
+    .sheet { position: relative; width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }
+    .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .txt { position: absolute; color: #111; white-space: nowrap; line-height: 1.12; transform: translateY(-0.85em); }
+    .txt.bold { font-weight: 800; }
+    .txt.center { transform: translate(-50%, -0.85em); text-align: center; }
+    .txt.right { transform: translate(-100%, -0.85em); text-align: right; }
+    @media print { body { background: #fff; } .toolbar { display: none; } .sheet { margin: 0; box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar">Mau 01-VT (template dung tu dau) | <button onclick="window.print()">In</button></div>
+  <section class="sheet"><svg class="grid" xmlns="http://www.w3.org/2000/svg"><line x1="15.000mm" y1="76.000mm" x2="15.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="29.000mm" y1="76.000mm" x2="29.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="89.000mm" y1="76.000mm" x2="89.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="103.000mm" y1="76.000mm" x2="103.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="117.000mm" y1="76.000mm" x2="117.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="137.000mm" y1="76.000mm" x2="137.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="157.000mm" y1="76.000mm" x2="157.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="175.000mm" y1="76.000mm" x2="175.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="198.000mm" y1="76.000mm" x2="198.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="76.000mm" x2="198.000mm" y2="76.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="84.500mm" x2="198.000mm" y2="84.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="93.000mm" x2="198.000mm" y2="93.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="101.500mm" x2="198.000mm" y2="101.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="110.000mm" x2="198.000mm" y2="110.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="118.500mm" x2="198.000mm" y2="118.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="127.000mm" x2="198.000mm" y2="127.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="135.500mm" x2="198.000mm" y2="135.500mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="144.000mm" x2="198.000mm" y2="144.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="15.000mm" y1="152.500mm" x2="198.000mm" y2="152.500mm" stroke="#111" stroke-width="0.200mm" /></svg><div class="txt left bold" style="left:15.000mm;top:15.000mm;font-size:10.20pt;">Don vi: CONG TY TNHH ABC</div>
+<div class="txt left " style="left:15.000mm;top:20.000mm;font-size:9.20pt;">Bo phan: Kho thanh pham</div>
+<div class="txt right bold" style="left:198.000mm;top:13.000mm;font-size:9.20pt;">Mau so 01 - VT</div>
+<div class="txt right " style="left:198.000mm;top:17.500mm;font-size:8.00pt;">(Thong tu 99/2025/TT-BTC)</div>
+<div class="txt center bold" style="left:105.000mm;top:29.000mm;font-size:14.00pt;">PHIEU NHAP KHO</div>
+<div class="txt center " style="left:105.000mm;top:35.000mm;font-size:9.20pt;">Ngay 20 thang 03 nam 2026</div>
+<div class="txt left bold" style="left:146.000mm;top:39.000mm;font-size:9.50pt;">So: PNK-0012</div>
+<div class="txt left " style="left:146.000mm;top:44.000mm;font-size:9.00pt;">No: 1521</div>
+<div class="txt left " style="left:146.000mm;top:49.000mm;font-size:9.00pt;">Co: 3311</div>
+<div class="txt left " style="left:15.000mm;top:57.000mm;font-size:9.20pt;">- Ho va ten nguoi giao: Nguyen Van B</div>
+<div class="txt left " style="left:15.000mm;top:63.000mm;font-size:9.00pt;">- Theo Hoa don GTGT so 000125 ngay 20/03/2026 cua Cong ty TNHH Nha Cung Cap X</div>
+<div class="txt left " style="left:15.000mm;top:69.000mm;font-size:9.00pt;">Nhap tai kho: Kho A    dia diem: Ha Noi</div>
+<div class="txt center bold" style="left:22.000mm;top:81.500mm;font-size:8.20pt;">STT</div>
+<div class="txt center bold" style="left:59.000mm;top:81.500mm;font-size:8.20pt;">Ten, nhan hieu, quy cach</div>
+<div class="txt center bold" style="left:96.000mm;top:81.500mm;font-size:8.20pt;">Ma so</div>
+<div class="txt center bold" style="left:110.000mm;top:81.500mm;font-size:8.20pt;">DVT</div>
+<div class="txt center bold" style="left:127.000mm;top:81.500mm;font-size:8.20pt;">SL theo CT</div>
+<div class="txt center bold" style="left:147.000mm;top:81.500mm;font-size:8.20pt;">SL thuc nhap</div>
+<div class="txt center bold" style="left:166.000mm;top:81.500mm;font-size:8.20pt;">Don gia</div>
+<div class="txt center bold" style="left:186.500mm;top:81.500mm;font-size:8.20pt;">Thanh tien</div>
+<div class="txt center " style="left:22.000mm;top:89.600mm;font-size:8.50pt;">1</div>
+<div class="txt left " style="left:30.000mm;top:89.600mm;font-size:8.50pt;">Thep tam 2mm</div>
+<div class="txt center " style="left:96.000mm;top:89.600mm;font-size:8.50pt;">VT001</div>
+<div class="txt center " style="left:110.000mm;top:89.600mm;font-size:8.50pt;">Kg</div>
+<div class="txt center " style="left:127.000mm;top:89.600mm;font-size:8.50pt;">1200</div>
+<div class="txt center " style="left:147.000mm;top:89.600mm;font-size:8.50pt;">1200</div>
+<div class="txt center " style="left:166.000mm;top:89.600mm;font-size:8.50pt;">18,000</div>
+<div class="txt center " style="left:186.500mm;top:89.600mm;font-size:8.50pt;">21,600,000</div>
+<div class="txt center " style="left:22.000mm;top:98.100mm;font-size:8.50pt;">2</div>
+<div class="txt left " style="left:30.000mm;top:98.100mm;font-size:8.50pt;">Son lot ngoai that</div>
+<div class="txt center " style="left:96.000mm;top:98.100mm;font-size:8.50pt;">VT014</div>
+<div class="txt center " style="left:110.000mm;top:98.100mm;font-size:8.50pt;">Lon</div>
+<div class="txt center " style="left:127.000mm;top:98.100mm;font-size:8.50pt;">80</div>
+<div class="txt center " style="left:147.000mm;top:98.100mm;font-size:8.50pt;">78</div>
+<div class="txt center " style="left:166.000mm;top:98.100mm;font-size:8.50pt;">210,000</div>
+<div class="txt center " style="left:186.500mm;top:98.100mm;font-size:8.50pt;">16,380,000</div>
+<div class="txt center " style="left:22.000mm;top:106.600mm;font-size:8.50pt;">3</div>
+<div class="txt left " style="left:30.000mm;top:106.600mm;font-size:8.50pt;">Bu long M12</div>
+<div class="txt center " style="left:96.000mm;top:106.600mm;font-size:8.50pt;">PK022</div>
+<div class="txt center " style="left:110.000mm;top:106.600mm;font-size:8.50pt;">Bo</div>
+<div class="txt center " style="left:127.000mm;top:106.600mm;font-size:8.50pt;">500</div>
+<div class="txt center " style="left:147.000mm;top:106.600mm;font-size:8.50pt;">500</div>
+<div class="txt center " style="left:166.000mm;top:106.600mm;font-size:8.50pt;">11,200</div>
+<div class="txt center " style="left:186.500mm;top:106.600mm;font-size:8.50pt;">5,600,000</div>
+<div class="txt left " style="left:15.000mm;top:156.000mm;font-size:9.00pt;">- Tong so tien (viet bang chu): Bon muoi ba trieu sau tram nghin dong</div>
+<div class="txt left " style="left:15.000mm;top:162.000mm;font-size:9.00pt;">- So chung tu goc kem theo: 01</div>
+<div class="txt right " style="left:195.000mm;top:172.000mm;font-size:9.00pt;">Ngay 20 thang 03 nam 2026</div>
+<div class="txt center bold" style="left:30.000mm;top:180.000mm;font-size:9.10pt;">Nguoi lap phieu</div>
+<div class="txt center " style="left:30.000mm;top:185.000mm;font-size:8.00pt;">(Ky, ho ten)</div>
+<div class="txt center bold" style="left:78.000mm;top:180.000mm;font-size:9.10pt;">Nguoi giao hang</div>
+<div class="txt center " style="left:78.000mm;top:185.000mm;font-size:8.00pt;">(Ky, ho ten)</div>
+<div class="txt center bold" style="left:122.000mm;top:180.000mm;font-size:9.10pt;">Thu kho</div>
+<div class="txt center " style="left:122.000mm;top:185.000mm;font-size:8.00pt;">(Ky, ho ten)</div>
+<div class="txt center bold" style="left:170.000mm;top:180.000mm;font-size:9.10pt;">Ke toan truong</div>
+<div class="txt center " style="left:170.000mm;top:185.000mm;font-size:8.00pt;">(Ky, ho ten)</div></section>
+</body>
+</html>
