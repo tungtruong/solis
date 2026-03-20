@@ -21,6 +21,69 @@ MM_TO_PT = 72.0 / 25.4
 PAGE_W_MM = 210.0
 PAGE_H_MM = 148.0
 
+GROUP_PRESETS: Dict[str, Dict[str, float]] = {
+    "TT": {
+        "title_size": 12.8,
+        "date_size": 8.5,
+        "body_size": 8.5,
+        "table_header_size": 7.3,
+        "table_row_h": 7.2,
+        "table_header_h": 8.0,
+        "table_rows": 6,
+        "sig_size": 8.8,
+        "sig_note_size": 7.5,
+        "sig_y": 90.4,
+    },
+    "VT": {
+        "title_size": 11.9,
+        "date_size": 8.3,
+        "body_size": 8.2,
+        "table_header_size": 6.9,
+        "table_row_h": 6.7,
+        "table_header_h": 7.4,
+        "table_rows": 6,
+        "sig_size": 8.4,
+        "sig_note_size": 7.2,
+        "sig_y": 96.2,
+    },
+    "LĐTL": {
+        "title_size": 10.8,
+        "date_size": 8.1,
+        "body_size": 7.9,
+        "table_header_size": 6.4,
+        "table_row_h": 6.0,
+        "table_header_h": 6.7,
+        "table_rows": 7,
+        "sig_size": 8.2,
+        "sig_note_size": 7.0,
+        "sig_y": 98.6,
+    },
+    "BH": {
+        "title_size": 11.7,
+        "date_size": 8.3,
+        "body_size": 8.1,
+        "table_header_size": 6.9,
+        "table_row_h": 6.4,
+        "table_header_h": 7.2,
+        "table_rows": 6,
+        "sig_size": 8.4,
+        "sig_note_size": 7.2,
+        "sig_y": 97.0,
+    },
+    "TSCĐ": {
+        "title_size": 11.5,
+        "date_size": 8.2,
+        "body_size": 8.0,
+        "table_header_size": 6.7,
+        "table_row_h": 6.2,
+        "table_header_h": 7.0,
+        "table_rows": 6,
+        "sig_size": 8.3,
+        "sig_note_size": 7.1,
+        "sig_y": 97.6,
+    },
+}
+
 
 @dataclass
 class LineItem:
@@ -123,14 +186,16 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
     fields = form.get("fields", []) if isinstance(form.get("fields"), list) else []
     table_schema = form.get("table_schema", {}) if isinstance(form.get("table_schema"), dict) else {}
     layout_text = str(form.get("layout_text", ""))
+    form_group = str(form.get("form_group", "")).upper()
+    preset = GROUP_PRESETS.get(form_group, GROUP_PRESETS["TT"])
 
     texts.append(TextItem(8, 11, "Đơn vị: ........................................", 8.8, True))
     texts.append(TextItem(8, 16, "Địa chỉ/Bộ phận: ........................", 8.0))
     texts.append(TextItem(PAGE_W_MM - 8, 10, f"Mẫu số {code.replace('-', ' - ')}", 8.6, True, "right"))
     texts.append(TextItem(PAGE_W_MM - 8, 14.5, "(Thông tư 99/2025/TT-BTC)", 7.4, False, "right"))
 
-    texts.append(TextItem(PAGE_W_MM / 2, 24, title, 12.8, True, "center"))
-    texts.append(TextItem(PAGE_W_MM / 2, 29.2, "Ngày ..... tháng ..... năm .....", 8.5, False, "center"))
+    texts.append(TextItem(PAGE_W_MM / 2, 24, title, preset["title_size"], True, "center"))
+    texts.append(TextItem(PAGE_W_MM / 2, 29.2, "Ngày ..... tháng ..... năm .....", preset["date_size"], False, "center"))
 
     y = 35.0
     has_grid = bool(table_schema.get("has_grid"))
@@ -155,7 +220,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
         addr_label = pick("Địa chỉ")
         reason_label = pick("Lý do")
         money_label = pick("Số tiền")
-        words_label = pick("Viết bằng chữ")
+        words_label = re.sub(r"^[\s(]+|[\s)]+$", "", pick("Viết bằng chữ"))
         attach_label = pick("Kèm theo")
         origin_label = pick("Chứng từ gốc")
 
@@ -170,9 +235,9 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
         left = 8.0
         right = PAGE_W_MM - 8.0
         top = y
-        header_h = 8.0
-        row_h = 7.2
-        row_count = 6
+        header_h = preset["table_header_h"]
+        row_h = preset["table_row_h"]
+        row_count = int(preset["table_rows"])
         table_h = header_h + row_h * row_count
         col_w = (right - left) / len(cols)
 
@@ -188,7 +253,16 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
 
         for cidx, col in enumerate(cols):
             label = str(col.get("label", ""))
-            texts.append(TextItem(left + cidx * col_w + col_w / 2, top + 5.4, label[:24], 7.3, True, "center"))
+            texts.append(
+                TextItem(
+                    left + cidx * col_w + col_w / 2,
+                    top + header_h * 0.66,
+                    label[:24],
+                    preset["table_header_size"],
+                    True,
+                    "center",
+                )
+            )
 
         y = top + table_h + 4.0
     else:
@@ -197,7 +271,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
             label = str(fld.get("label", "")).strip()
             if not label:
                 continue
-            texts.append(TextItem(8, y, f"{label}: ...............................................................", 8.6))
+            texts.append(TextItem(8, y, f"{label}: ...............................................................", preset["body_size"]))
             y += 6.2
 
     sigs = form.get("signatures", []) if isinstance(form.get("signatures"), list) else []
@@ -206,8 +280,11 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
         sig_labels = ["Giám đốc", "Kế toán trưởng", "Người lập phiếu", "Người nhận"]
     sig_labels = sig_labels[:5]
 
-    y = min(y + 2.0, 108.0)
-    texts.append(TextItem(PAGE_W_MM - 8, y, "Ngày ..... tháng ..... năm .....", 8.2, False, "right"))
+    if is_tt_form:
+        y = min(y + 2.0, 108.0)
+    else:
+        y = max(preset["sig_y"] - 8.0, y + 2.0)
+    texts.append(TextItem(PAGE_W_MM - 8, y, "Ngày ..... tháng ..... năm .....", preset["date_size"], False, "right"))
     y += 8.0
 
     left = 8.0
@@ -215,12 +292,12 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
     col_w = (right - left) / len(sig_labels)
     for idx, label in enumerate(sig_labels):
         cx = left + idx * col_w + col_w / 2
-        texts.append(TextItem(cx, y, label, 8.8, True, "center"))
+        texts.append(TextItem(cx, y, label, preset["sig_size"], True, "center"))
         sig_note = "(Ký, họ tên)"
         label_norm = norm_text(label)
         if idx == 0 and "giam" in label_norm and (" doc" in label_norm or " đoc" in label_norm):
             sig_note = "(Ký, họ tên, đóng dấu)"
-        texts.append(TextItem(cx, y + 4.7, sig_note, 7.5, False, "center"))
+        texts.append(TextItem(cx, y + 4.7, sig_note, preset["sig_note_size"], False, "center"))
         lines.append(LineItem(cx - col_w * 0.33, y + 18.5, cx + col_w * 0.33, y + 18.5, 0.55))
 
     if is_tt_form:
