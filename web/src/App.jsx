@@ -23,6 +23,7 @@ const CASE_PAGE_SIZE = 20
 const STORAGE_TOKEN_KEY = 'solis.auth.token'
 const STORAGE_COMPANY_ID_KEY = 'solis.auth.companyId'
 const STORAGE_COMPANY_NAME_KEY = 'solis.auth.companyName'
+const STORAGE_UI_LANG_KEY = 'solis.ui.lang'
 
 const initialCaseItems = []
 const defaultStatusOptions = [{ value: 'tat_ca', label: 'Tất cả' }]
@@ -560,7 +561,21 @@ function App() {
     second: 520,
   })
   const [reportDrillResize, setReportDrillResize] = useState(null)
+  const [uiLang, setUiLang] = useState(() => {
+    const stored = String(window.sessionStorage.getItem(STORAGE_UI_LANG_KEY) || 'vi').toLowerCase()
+    return stored === 'en' ? 'en' : 'vi'
+  })
   const typedMessageKeysRef = useRef(new Set())
+
+  const tr = useCallback((vi, en) => (uiLang === 'en' ? en : vi), [uiLang])
+
+  const toggleUiLang = useCallback(() => {
+    setUiLang((prev) => {
+      const next = prev === 'vi' ? 'en' : 'vi'
+      window.sessionStorage.setItem(STORAGE_UI_LANG_KEY, next)
+      return next
+    })
+  }, [])
 
   const hasTypedKey = useCallback((key) => {
     if (!key) return false
@@ -1177,14 +1192,14 @@ function App() {
 
   const sectionLabel =
     activeSection === 'dashboard'
-      ? 'Bảng điều khiển'
+      ? tr('Bảng điều khiển', 'Dashboard')
       : activeSection === 'reports'
-        ? 'Báo cáo'
+        ? tr('Báo cáo', 'Reports')
         : activeSection === 'compliance'
-          ? 'Tuân thủ & Kê khai'
+          ? tr('Tuân thủ & Kê khai', 'Compliance & Filing')
         : activeSection === 'settings'
-          ? 'Cài đặt'
-          : activeCase?.title || 'Chưa chọn hồ sơ'
+          ? tr('Cài đặt', 'Settings')
+          : activeCase?.title || tr('Chưa chọn hồ sơ', 'No case selected')
   const isCompactSidebar = ['dashboard', 'reports', 'compliance'].includes(activeSection)
 
   const sectionContent = activeSection !== 'cases' && uiContent && typeof uiContent === 'object' ? uiContent[activeSection] || {} : {}
@@ -1635,11 +1650,11 @@ function App() {
       <header className="global-header">
         <div className="brand-block">
           <div className="logo-mark">SO</div>
-          <div className="brand-name">Solis Tài chính AI</div>
+          <div className="brand-name">{tr('Solis Tài chính AI', 'Solis Finance AI')}</div>
         </div>
 
         <div className="breadcrumb">
-          <span>Hồ sơ</span>
+          <span>{tr('Hồ sơ', 'Cases')}</span>
           <ChevronRight size={14} />
           <strong>{sectionLabel}</strong>
         </div>
@@ -1647,8 +1662,17 @@ function App() {
         <div className="global-actions" ref={notificationRef}>
           <button
             type="button"
+            className="user-chip"
+            aria-label={tr('Đổi ngôn ngữ', 'Switch language')}
+            title={tr('Đổi ngôn ngữ', 'Switch language')}
+            onClick={toggleUiLang}
+          >
+            <span>{uiLang === 'vi' ? 'VI' : 'EN'}</span>
+          </button>
+          <button
+            type="button"
             className={isNotificationOpen ? 'icon-action notification-btn active' : 'icon-action notification-btn'}
-            aria-label="Thông báo"
+            aria-label={tr('Thông báo', 'Notifications')}
             onClick={() => setIsNotificationOpen((prev) => !prev)}
           >
             <Bell size={17} />
@@ -1656,7 +1680,7 @@ function App() {
           </button>
           {isNotificationOpen ? (
             <div className="notification-popover">
-              <h4>Thông báo công việc dở dang</h4>
+              <h4>{tr('Thông báo công việc dở dang', 'Pending task notifications')}</h4>
               {unfinishedCases.length ? (
                 <ul className="notification-list-scroll">
                   {unfinishedCases.map((item) => (
@@ -1666,28 +1690,28 @@ function App() {
                         className="notification-item-btn"
                         onClick={() => openCaseFromNotification(item.id)}
                       >
-                        Hồ sơ <strong>{item.code}</strong> đang {item.statusLabel.toLowerCase()}.
+                        {tr('Hồ sơ', 'Case')} <strong>{item.code}</strong> {tr('đang', 'is')} {item.statusLabel.toLowerCase()}.
                       </button>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p>Hiện không còn hồ sơ dở dang.</p>
+                <p>{tr('Hiện không còn hồ sơ dở dang.', 'No pending cases right now.')}</p>
               )}
             </div>
           ) : null}
           <div className="user-menu-wrap" ref={userMenuRef}>
             <button type="button" className="user-chip" onClick={() => setIsUserMenuOpen((prev) => !prev)}>
               <UserCircle2 size={18} />
-              <span>{currentCompanyName || 'Chưa chọn công ty'}</span>
+              <span>{currentCompanyName || tr('Chưa chọn công ty', 'No company selected')}</span>
               <ChevronDown size={14} />
             </button>
             {isUserMenuOpen ? (
               <div className="user-menu-dropdown">
-                <p className="user-menu-title">{currentCompanyName || 'Công ty hiện tại'}</p>
-                <p className="user-menu-subtitle">{currentEmail || 'Đang tải tài khoản'}</p>
+                <p className="user-menu-title">{currentCompanyName || tr('Công ty hiện tại', 'Current company')}</p>
+                <p className="user-menu-subtitle">{currentEmail || tr('Đang tải tài khoản', 'Loading account')}</p>
                 <button type="button" className="user-menu-btn" onClick={openCompanyEditModal}>
-                  Sửa thông tin công ty
+                  {tr('Sửa thông tin công ty', 'Edit company profile')}
                 </button>
                 <button
                   type="button"
@@ -1697,10 +1721,10 @@ function App() {
                     setIsUserMenuOpen(false)
                   }}
                 >
-                  Settings
+                  {tr('Cài đặt', 'Settings')}
                 </button>
                 <button type="button" className="user-menu-btn danger" onClick={handleWorkspaceLogout}>
-                  Logout
+                  {tr('Đăng xuất', 'Logout')}
                 </button>
               </div>
             ) : null}
@@ -1866,8 +1890,8 @@ function App() {
                 <button
                   type="button"
                   className={activeSection === 'cases' ? 'compact-module-btn active' : 'compact-module-btn'}
-                  title="Hồ sơ"
-                  aria-label="Hồ sơ"
+                  title={tr('Hồ sơ', 'Cases')}
+                  aria-label={tr('Hồ sơ', 'Cases')}
                   onClick={() => handleModuleSelect('cases')}
                 >
                   <MessageSquare size={17} />
@@ -1875,8 +1899,8 @@ function App() {
                 <button
                   type="button"
                   className={activeSection === 'dashboard' ? 'compact-module-btn active' : 'compact-module-btn'}
-                  title="Bảng điều khiển"
-                  aria-label="Bảng điều khiển"
+                  title={tr('Bảng điều khiển', 'Dashboard')}
+                  aria-label={tr('Bảng điều khiển', 'Dashboard')}
                   onClick={() => handleModuleSelect('dashboard')}
                 >
                   <LayoutDashboard size={17} />
@@ -1884,8 +1908,8 @@ function App() {
                 <button
                   type="button"
                   className={activeSection === 'reports' ? 'compact-module-btn active' : 'compact-module-btn'}
-                  title="Báo cáo"
-                  aria-label="Báo cáo"
+                  title={tr('Báo cáo', 'Reports')}
+                  aria-label={tr('Báo cáo', 'Reports')}
                   onClick={() => handleModuleSelect('reports')}
                 >
                   <FileText size={17} />
@@ -1893,8 +1917,8 @@ function App() {
                 <button
                   type="button"
                   className={activeSection === 'compliance' ? 'compact-module-btn active' : 'compact-module-btn'}
-                  title="Tuân thủ & Kê khai"
-                  aria-label="Tuân thủ & Kê khai"
+                  title={tr('Tuân thủ & Kê khai', 'Compliance & Filing')}
+                  aria-label={tr('Tuân thủ & Kê khai', 'Compliance & Filing')}
                   onClick={() => handleModuleSelect('compliance')}
                 >
                   <FileCheck2 size={17} />
@@ -1902,8 +1926,8 @@ function App() {
                 <button
                   type="button"
                   className={activeSection === 'settings' ? 'compact-module-btn active' : 'compact-module-btn'}
-                  title="Cài đặt"
-                  aria-label="Cài đặt"
+                  title={tr('Cài đặt', 'Settings')}
+                  aria-label={tr('Cài đặt', 'Settings')}
                   onClick={() => handleModuleSelect('settings')}
                 >
                   <Settings size={17} />
@@ -1917,7 +1941,7 @@ function App() {
                   onClick={() => setIsModuleMenuOpen((prev) => !prev)}
                 >
                   <LayoutDashboard size={16} />
-                  <span>Phân hệ</span>
+                  <span>{tr('Phân hệ', 'Modules')}</span>
                   <ChevronDown size={14} className={isModuleMenuOpen ? 'chevron-open' : ''} />
                 </button>
                 {isModuleMenuOpen ? (
@@ -1929,7 +1953,7 @@ function App() {
                         onClick={() => handleModuleSelect('dashboard')}
                       >
                         <LayoutDashboard size={15} />
-                        <span>Bảng điều khiển</span>
+                        <span>{tr('Bảng điều khiển', 'Dashboard')}</span>
                       </button>
                       <button
                         type="button"
@@ -1937,7 +1961,7 @@ function App() {
                         onClick={() => handleModuleSelect('reports')}
                       >
                         <FileText size={15} />
-                        <span>Báo cáo</span>
+                        <span>{tr('Báo cáo', 'Reports')}</span>
                       </button>
                       <button
                         type="button"
@@ -1945,7 +1969,7 @@ function App() {
                         onClick={() => handleModuleSelect('compliance')}
                       >
                         <FileCheck2 size={15} />
-                        <span>Tuân thủ & Kê khai</span>
+                        <span>{tr('Tuân thủ & Kê khai', 'Compliance & Filing')}</span>
                       </button>
                       <button
                         type="button"
@@ -1953,7 +1977,7 @@ function App() {
                         onClick={() => handleModuleSelect('settings')}
                       >
                         <Settings size={15} />
-                        <span>Cài đặt</span>
+                        <span>{tr('Cài đặt', 'Settings')}</span>
                       </button>
                     </div>
                   </div>
@@ -2564,10 +2588,10 @@ function App() {
                   </article>
 
                   <article className="detail-row compliance-list-row">
-                    <h3>Danh sách báo cáo phải nộp</h3>
+                    <h3>{tr('Danh sách báo cáo phải nộp', 'Required reports')}</h3>
                     <div className="compliance-report-list">
                       {normalizedFilingReports.map((item) => {
-                        const statusLabel = item.status === 'da_nop' ? 'Đã nộp' : item.status === 'qua_han' ? 'Quá hạn' : 'Chưa nộp'
+                        const statusLabel = item.status === 'da_nop' ? tr('Đã nộp', 'Submitted') : item.status === 'qua_han' ? tr('Quá hạn', 'Overdue') : tr('Chưa nộp', 'Not submitted')
                         return (
                           <button
                             key={item.report_id}
@@ -2579,7 +2603,7 @@ function App() {
                             <span className={item.status === 'da_nop' ? 'status-pill status-hoan_tat' : item.status === 'qua_han' ? 'status-pill status-cho_duyet' : 'status-pill status-dang_xu_ly'}>
                               {statusLabel}
                             </span>
-                            <span className="compliance-report-due">{item.status === 'da_nop' ? '✓ Đã nộp' : `Hạn: ${formatDateByRule(item.due_date || '-') || '-'}`}</span>
+                            <span className="compliance-report-due">{item.status === 'da_nop' ? `✓ ${tr('Đã nộp', 'Submitted')}` : `${tr('Hạn', 'Due')}: ${formatDateByRule(item.due_date || '-') || '-'}`}</span>
                           </button>
                         )
                       })}
@@ -2587,12 +2611,12 @@ function App() {
                   </article>
 
                   <article className="detail-row compliance-detail-row">
-                    <h3>Chi tiết báo cáo</h3>
+                    <h3>{tr('Chi tiết báo cáo', 'Report details')}</h3>
                     <div className="report-tab-row">
                       {[
                         { key: 'preview', label: 'Preview' },
                         { key: 'xml', label: 'XML' },
-                        { key: 'history', label: 'Lịch sử nộp' },
+                        { key: 'history', label: tr('Lịch sử nộp', 'Submission history') },
                       ].map((tab) => (
                         <button
                           key={tab.key}
@@ -2607,11 +2631,11 @@ function App() {
 
                     {complianceDetailTab === 'preview' ? (
                       <div className="compliance-preview-box">
-                        <p><strong>Biểu mẫu:</strong> {complianceActiveReport?.name || 'Báo cáo thuế'}</p>
-                        <p><strong>Căn cứ pháp lý:</strong> {complianceActiveReport?.legal_basis || complianceData?.vat_declaration?.legal_basis || '-'}</p>
-                        <p><strong>Chu kỳ kê khai:</strong> {complianceData?.declaration_cycle_label || '-'}</p>
-                        <p><strong>Số liệu nguồn từ Reports:</strong> Doanh thu {formatCurrency(reportRevenue)} | Lợi nhuận {formatCurrency(reportProfit)}</p>
-                        <p><strong>Số tạm tính:</strong> {formatCurrency(complianceActiveReport?.amount || 0)}</p>
+                        <p><strong>{tr('Biểu mẫu', 'Form')}:</strong> {complianceActiveReport?.name || tr('Báo cáo thuế', 'Tax report')}</p>
+                        <p><strong>{tr('Căn cứ pháp lý', 'Legal basis')}:</strong> {complianceActiveReport?.legal_basis || complianceData?.vat_declaration?.legal_basis || '-'}</p>
+                        <p><strong>{tr('Chu kỳ kê khai', 'Declaration cycle')}:</strong> {complianceData?.declaration_cycle_label || '-'}</p>
+                        <p><strong>{tr('Số liệu nguồn từ Reports', 'Source data from Reports')}:</strong> {tr('Doanh thu', 'Revenue')} {formatCurrency(reportRevenue)} | {tr('Lợi nhuận', 'Profit')} {formatCurrency(reportProfit)}</p>
+                        <p><strong>{tr('Số tạm tính', 'Estimated amount')}:</strong> {formatCurrency(complianceActiveReport?.amount || 0)}</p>
                       </div>
                     ) : null}
 
@@ -2627,9 +2651,9 @@ function App() {
                           <thead>
                             <tr>
                               <th>Mã</th>
-                              <th>Báo cáo</th>
-                              <th>Người nộp</th>
-                              <th>Thời gian</th>
+                              <th>{tr('Báo cáo', 'Report')}</th>
+                              <th>{tr('Người nộp', 'Submitted by')}</th>
+                              <th>{tr('Thời gian', 'Time')}</th>
                               <th>File</th>
                             </tr>
                           </thead>
@@ -2649,14 +2673,14 @@ function App() {
                     ) : null}
 
                     <div className="action-buttons">
-                      <button type="button" className="action-btn" onClick={() => downloadComplianceFile('xml')}>Xuất XML</button>
-                      <button type="button" className="action-btn" onClick={() => downloadComplianceFile('pdf')}>Tải PDF</button>
-                      <button type="button" className="action-btn" onClick={handleSubmitCompliance}>Nộp điện tử</button>
+                      <button type="button" className="action-btn" onClick={() => downloadComplianceFile('xml')}>{tr('Xuất XML', 'Export XML')}</button>
+                      <button type="button" className="action-btn" onClick={() => downloadComplianceFile('pdf')}>{tr('Tải PDF', 'Download PDF')}</button>
+                      <button type="button" className="action-btn" onClick={handleSubmitCompliance}>{tr('Nộp điện tử', 'Submit online')}</button>
                     </div>
                   </article>
 
                   <article className="detail-row compliance-check-row">
-                    <h3>Auto-check lỗi trước khi nộp</h3>
+                    <h3>{tr('Auto-check lỗi trước khi nộp', 'Auto-check before submit')}</h3>
                     <ul>
                       {filingIssues.map((item) => (
                         <li key={item}>{item}</li>
