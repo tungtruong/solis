@@ -89,7 +89,7 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     page_w = 148.0
 
     # Header
-    texts.append(TextItem(8, 12, f"Đơn vị: {data['don_vi']}", 8.8, True))
+    texts.append(TextItem(8, 12, f"Đơn vị: {data['don_vi']}", 9.3, True))
     texts.append(TextItem(8, 17, f"Đ/c: {data['dia_chi_don_vi']}", 8.2))
 
     texts.append(TextItem(page_w - 8, 10, "Mẫu số 01 - TT", 8.8, True, "right"))
@@ -105,10 +105,10 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     texts.append(TextItem(104, 48, f"Có: {data['tai_khoan_co']}", 8.8))
 
     # Main body
-    texts.append(TextItem(8, 58, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 8.8, True))
+    texts.append(TextItem(8, 58, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 9.1, True))
     texts.append(TextItem(8, 65, f"Địa chỉ: {data['dia_chi_nguoi_nop']}", 8.5))
     texts.append(TextItem(8, 72, f"Lý do nộp: {data['ly_do']}", 8.5))
-    texts.append(TextItem(8, 79, f"Số tiền: {data['so_tien']}   (Viết bằng chữ): {data['so_tien_chu']}", 8.5))
+    texts.append(TextItem(8, 79, f"Số tiền: {data['so_tien']}   (Viết bằng chữ): {data['so_tien_chu']}", 9.0, True))
     texts.append(TextItem(8, 86, f"Kèm theo: {data['chung_tu_goc']}    Chứng từ gốc: ........", 8.5))
 
     # Signature area (no table/grid lines)
@@ -128,8 +128,8 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
 
     for idx, title in enumerate(titles):
         cx = left + col_w * idx + col_w / 2
-        texts.append(TextItem(cx, 104, title, 8.7, True, "center"))
-        texts.append(TextItem(cx, 109, subtitles[idx], 7.4, False, "center"))
+        texts.append(TextItem(cx, 104, title, 9.1, True, "center"))
+        texts.append(TextItem(cx, 109, subtitles[idx], 7.7, False, "center"))
         lines.append(LineItem(cx - col_w * 0.40, 131, cx + col_w * 0.40, 131, 0.6))
 
     texts.append(
@@ -182,7 +182,7 @@ def to_a5_landscape_space(
                 x_mm=tx.x_mm * sx + ox,
                 y_mm=tx.y_mm * sy + oy,
                 text=tx.text,
-                size_pt=max(7.2, tx.size_pt * 0.92),
+                size_pt=max(7.4, tx.size_pt * 0.96),
                 bold=tx.bold,
                 align=tx.align,
             )
