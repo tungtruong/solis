@@ -7,6 +7,7 @@ import argparse
 import html
 import json
 import re
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -71,6 +72,12 @@ def cap_title(title: str) -> str:
     return cleaned.upper()
 
 
+def norm_text(value: str) -> str:
+    text = unicodedata.normalize("NFKD", value)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    return text.lower().strip()
+
+
 def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem]]:
     lines: List[LineItem] = []
     texts: List[TextItem] = []
@@ -82,7 +89,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
 
     texts.append(TextItem(8, 11, "Đơn vị: ........................................", 8.8, True))
     texts.append(TextItem(8, 16, "Địa chỉ/Bộ phận: ........................", 8.0))
-    texts.append(TextItem(PAGE_W_MM - 8, 10, f"Mẫu số {code}", 8.6, True, "right"))
+    texts.append(TextItem(PAGE_W_MM - 8, 10, f"Mẫu số {code.replace('-', ' - ')}", 8.6, True, "right"))
     texts.append(TextItem(PAGE_W_MM - 8, 14.5, "(Thông tư 99/2025/TT-BTC)", 7.4, False, "right"))
 
     texts.append(TextItem(PAGE_W_MM / 2, 24, title, 12.8, True, "center"))
@@ -91,8 +98,38 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
     y = 35.0
     has_grid = bool(table_schema.get("has_grid"))
     cols = table_schema.get("table_columns", []) if isinstance(table_schema.get("table_columns"), list) else []
+    is_tt_form = code.endswith("-TT")
 
-    if has_grid and cols:
+    labels = [str(f.get("label", "")).strip() for f in fields]
+
+    def pick(token: str) -> str:
+        token_norm = norm_text(token)
+        for lb in labels:
+            if token_norm in norm_text(lb):
+                return lb
+        return token
+
+    if is_tt_form:
+        texts.append(TextItem(146, 37.0, f"{pick('Số')}: .....................", 8.6, True))
+        texts.append(TextItem(146, 42.2, f"{pick('Nợ')}: .....................", 8.4))
+        texts.append(TextItem(146, 47.4, f"{pick('Có')}: .....................", 8.4))
+
+        payer_label = pick("Họ và tên người")
+        addr_label = pick("Địa chỉ")
+        reason_label = pick("Lý do")
+        money_label = pick("Số tiền")
+        words_label = pick("Viết bằng chữ")
+        attach_label = pick("Kèm theo")
+        origin_label = pick("Chứng từ gốc")
+
+        texts.append(TextItem(8, 56.0, f"{payer_label}: ........................................................", 8.7, True))
+        texts.append(TextItem(8, 62.4, f"{addr_label}: ..............................................................", 8.4))
+        texts.append(TextItem(8, 68.8, f"{reason_label}: .............................................................", 8.4))
+        texts.append(TextItem(8, 75.2, f"{money_label}: ..................   ({words_label}): ........................", 8.5, True))
+        texts.append(TextItem(8, 81.6, f"{attach_label}: ............    {origin_label}: ............", 8.4))
+        y = 80.4
+
+    elif has_grid and cols:
         left = 8.0
         right = PAGE_W_MM - 8.0
         top = y
@@ -144,6 +181,11 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
         texts.append(TextItem(cx, y, label, 8.8, True, "center"))
         texts.append(TextItem(cx, y + 4.7, "(Ký, họ tên)", 7.5, False, "center"))
         lines.append(LineItem(cx - col_w * 0.33, y + 18.5, cx + col_w * 0.33, y + 18.5, 0.55))
+
+    if is_tt_form:
+        texts.append(TextItem(8, 118.2, f"{pick('Đã nhận đủ số tiền')}: .................................................", 8.1))
+        texts.append(TextItem(8, 123.0, f"{pick('Tỷ giá ngoại tệ')}: ......................................................", 8.1))
+        texts.append(TextItem(8, 127.8, f"{pick('Số tiền quy đổi')}: ........................................................", 8.1))
 
     return lines, texts
 
