@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from reportlab.lib.pagesizes import A4
+from reportlab.lib.utils import simpleSplit
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
@@ -68,9 +69,10 @@ def mm(v: float) -> float:
 def detect_font() -> Tuple[str, str]:
     """Register a Unicode-capable font if available on Windows."""
     font_candidates = [
-        ("FormSans", Path("C:/Windows/Fonts/arial.ttf")),
-        ("FormSans", Path("C:/Windows/Fonts/tahoma.ttf")),
-        ("FormSans", Path("C:/Windows/Fonts/calibri.ttf")),
+        ("FormSerif", Path("C:/Windows/Fonts/times.ttf")),
+        ("FormSerif", Path("C:/Windows/Fonts/timesbd.ttf")),
+        ("FormSerif", Path("C:/Windows/Fonts/tahoma.ttf")),
+        ("FormSerif", Path("C:/Windows/Fonts/arial.ttf")),
     ]
     for font_name, font_path in font_candidates:
         if font_path.exists():
@@ -84,16 +86,19 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     texts: List[TextItem] = []
 
     # Header
-    texts.append(TextItem(18, 20, f"Đơn vị: {data['don_vi']}", 10.5))
-    texts.append(TextItem(18, 27, f"Địa chỉ: {data['dia_chi_don_vi']}", 10.5))
-    texts.append(TextItem(192, 20, "Mẫu số: 01-TT", 10.5, True, "right"))
-    texts.append(TextItem(105, 42, "PHIẾU THU", 16, True, "center"))
-    texts.append(TextItem(105, 49, "(Ban hành theo Thông tư 99/2025/TT-BTC)", 9.5, False, "center"))
+    texts.append(TextItem(18, 30, f"Đơn vị: {data['don_vi']}", 10.5))
+    texts.append(TextItem(18, 37, f"Địa chỉ: {data['dia_chi_don_vi']}", 10.5))
+
+    texts.append(TextItem(192, 22, "Mẫu số: 01 - TT", 10.2, True, "right"))
+    texts.append(TextItem(192, 28.5, "(Kèm theo Thông tư số 99/2025/TT-BTC)", 8.8, False, "right"))
+    texts.append(TextItem(192, 34.2, "ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)", 8.8, False, "right"))
+
+    texts.append(TextItem(105, 54, "PHIẾU THU", 16, True, "center"))
 
     texts.append(
         TextItem(
             105,
-            56,
+            61,
             f"Ngày {data['ngay']} tháng {data['thang']} năm {data['nam']}",
             10.5,
             False,
@@ -102,30 +107,30 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     )
 
     # Right info block
-    texts.append(TextItem(145, 62, f"Quyển số: {data['quyen_so']}", 10.5))
-    texts.append(TextItem(145, 69, f"Số: {data['so_phieu']}", 10.5))
-    texts.append(TextItem(145, 76, f"Nợ: {data['tai_khoan_no']}", 10.5))
-    texts.append(TextItem(145, 83, f"Có: {data['tai_khoan_co']}", 10.5))
+    texts.append(TextItem(145, 67, f"Quyển số: {data['quyen_so']}", 10.5))
+    texts.append(TextItem(145, 74, f"Số: {data['so_phieu']}", 10.5))
+    texts.append(TextItem(145, 81, f"Nợ: {data['tai_khoan_no']}", 10.5))
+    texts.append(TextItem(145, 88, f"Có: {data['tai_khoan_co']}", 10.5))
 
     # Main body lines
-    texts.append(TextItem(18, 97, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 10.5))
-    texts.append(TextItem(18, 106, f"Địa chỉ: {data['dia_chi_nguoi_nop']}", 10.5))
-    texts.append(TextItem(18, 115, f"Lý do nộp: {data['ly_do']}", 10.5))
+    texts.append(TextItem(18, 101, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 10.5))
+    texts.append(TextItem(18, 110, f"Địa chỉ: {data['dia_chi_nguoi_nop']}", 10.5))
+    texts.append(TextItem(18, 119, f"Lý do nộp: {data['ly_do']}", 10.5))
     texts.append(
         TextItem(
             18,
-            124,
+            128,
             f"Số tiền: {data['so_tien']}   (Viết bằng chữ): {data['so_tien_chu']}",
             10.5,
         )
     )
-    texts.append(TextItem(18, 133, f"Kèm theo: {data['chung_tu_goc']} chứng từ gốc.", 10.5))
+    texts.append(TextItem(18, 137, f"Kèm theo: {data['chung_tu_goc']} chứng từ gốc.", 10.5))
 
     # Signature panel frame
-    left = 30
-    right = 180
-    top = 143
-    bottom = 214
+    left = 36
+    right = 174
+    top = 146
+    bottom = 212
     col_count = 5
     col_w = (right - left) / col_count
 
@@ -164,22 +169,22 @@ def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
     texts.append(
         TextItem(
             145,
-            139,
+            142,
             f"Ngày {data['ngay_ky']} tháng {data['thang_ky']} năm {data['nam_ky']}",
             10,
         )
     )
 
     # Footer notes
-    texts.append(TextItem(18, 226, "Đã nhận đủ số tiền (viết bằng chữ): ........................................................", 10))
-    texts.append(TextItem(18, 234, "+ Tỷ giá ngoại tệ (vàng, bạc, đá quý): ..................................................", 10))
-    texts.append(TextItem(18, 242, "+ Số tiền quy đổi: ........................................................................", 10))
-    texts.append(TextItem(18, 253, "(Liên gửi ra ngoài phải đóng dấu)", 9))
+    texts.append(TextItem(18, 224, "Đã nhận đủ số tiền (viết bằng chữ): ........................................................", 10))
+    texts.append(TextItem(18, 232, "+ Tỷ giá ngoại tệ (vàng, bạc, đá quý): ..................................................", 10))
+    texts.append(TextItem(18, 240, "+ Số tiền quy đổi: ........................................................................", 10))
+    texts.append(TextItem(18, 251, "(Liên gửi ra ngoài phải đóng dấu)", 9))
 
     texts.append(
         TextItem(
             18,
-            268,
+            266,
             "Ghi chú: Doanh nghiệp có thể tùy biến mẫu phù hợp đặc điểm hoạt động nhưng phải đủ nội dung bắt buộc.",
             8.8,
         )
@@ -206,6 +211,13 @@ def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem]) -> 
         c.setFont(font_bold if tx.bold else font_regular, tx.size_pt)
         x = mm(tx.x_mm)
         y = page_h_pt - mm(tx.y_mm)
+        if tx.align == "left":
+            wrapped = simpleSplit(tx.text, font_bold if tx.bold else font_regular, tx.size_pt, mm(176))
+            if len(wrapped) > 1:
+                line_gap = tx.size_pt * 1.2
+                for idx, line in enumerate(wrapped):
+                    c.drawString(x, y - idx * line_gap, line)
+                continue
         if tx.align == "center":
             c.drawCentredString(x, y, tx.text)
         elif tx.align == "right":
@@ -243,11 +255,11 @@ def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem]) -
   <title>01-TT Template Engine</title>
   <style>
     @page {{ size: A4; margin: 0; }}
-    body {{ margin: 0; background: #f0f2f5; font-family: 'Arial', 'Tahoma', sans-serif; }}
+    body {{ margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }}
     .toolbar {{ position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }}
     .sheet {{ position: relative; width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }}
     .grid {{ position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }}
-    .txt {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.1; transform: translateY(-0.85em); }}
+    .txt {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.12; transform: translateY(-0.85em); }}
     .txt.bold {{ font-weight: 700; }}
     .txt.center {{ transform: translate(-50%, -0.85em); text-align: center; }}
     .txt.right {{ transform: translate(-100%, -0.85em); text-align: right; }}
