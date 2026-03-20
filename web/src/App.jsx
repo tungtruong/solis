@@ -1285,6 +1285,7 @@ function App() {
       const params = new URLSearchParams({ period: compliancePeriod })
       if (currentEmail) params.set('email', currentEmail)
       if (currentCompanyId) params.set('company_id', currentCompanyId)
+      if (complianceReportId) params.set('report_id', complianceReportId)
       const response = await fetch(`/api/demo/compliance?${params.toString()}`)
       if (!response.ok) {
         throw new Error('Không tải được dữ liệu tuân thủ kê khai')

@@ -1288,6 +1288,134 @@ def _build_vat_declaration_tt80(
     }
 
 
+def _extract_year_from_period(period: str) -> int:
+    token = str(period or "").strip()
+    match = re.search(r"(\d{4})", token)
+    if match:
+        return int(match.group(1))
+    return datetime.utcnow().year
+
+
+def tax_code_or_default(company_profile: Dict[str, Any]) -> str:
+    token = _normalize_tax_code(str((company_profile or {}).get("tax_code") or ""))
+    return token or "0000000000"
+
+
+def _set_xml_text(root: ET.Element, ns: Dict[str, str], path: str, value: Any) -> None:
+    node = root.find(path, ns)
+    if node is None:
+        return
+    node.text = str(value if value is not None else "")
+
+
+def _build_bctc_declaration_tt133(
+    company_profile: Dict[str, Any],
+    period: str,
+    entries: List[Dict[str, Any]],
+) -> Dict[str, Any]:
+    template_path = Path(WORKSPACE_ROOT) / "data" / "uploads_staging" / "0111404495000-133_B01A_DNN_BCTC-Y2025-L00.xml"
+    if not template_path.exists():
+        raise FileNotFoundError(f"Missing BCTC TT133 template: {template_path}")
+
+    xml_template = template_path.read_text(encoding="utf-8")
+    filing_year = _extract_year_from_period(period)
+    start_date_iso = f"{filing_year:04d}-01-01"
+    end_date_iso = f"{filing_year:04d}-12-31"
+
+    report = report_service.generate_financial_statements(entries, end_date_iso)
+    bs = report.get("bang_can_doi_ke_toan", {}) if isinstance(report, dict) else {}
+    pl = report.get("ket_qua_hoat_dong_kinh_doanh", {}) if isinstance(report, dict) else {}
+    cf = report.get("luu_chuyen_tien_te", {}) if isinstance(report, dict) else {}
+
+    def as_int(value: Any) -> int:
+        return int(round(float(value or 0)))
+
+    tong_tai_san = as_int(bs.get("tong_tai_san"))
+    tong_no = as_int(bs.get("tong_no_phai_tra"))
+    von_chu = as_int(bs.get("von_chu_so_huu"))
+    doanh_thu = as_int(pl.get("doanh_thu"))
+    chi_phi = as_int(pl.get("chi_phi"))
+    loi_nhuan = as_int(pl.get("loi_nhuan_truoc_thue"))
+    luu_chuyen_thuan = as_int(cf.get("luu_chuyen_thuan"))
+
+    company_name = str(company_profile.get("company_name") or "").strip()
+    tax_code = _normalize_tax_code(str(company_profile.get("tax_code") or ""))
+    ma_cqt = str(company_profile.get("tax_office_code") or "10101").strip()
+    ten_cqt = str(company_profile.get("tax_office_name") or "Cơ quan thuế quản lý").strip()
+    full_address = str(company_profile.get("address") or "").strip()
+    province_code = str(company_profile.get("province_code") or "").strip()
+    province_name = str(company_profile.get("province_name") or "").strip()
+    legal_representative = str(company_profile.get("legal_representative") or "").strip()
+    today_iso = datetime.utcnow().date().isoformat()
+
+    ET.register_namespace("", "http://kekhaithue.gdt.gov.vn/TKhaiThue")
+    ET.register_namespace("xsi", "http://www.w3.org/2001/XMLSchema-instance")
+    root = ET.fromstring(xml_template)
+    ns = {"ns": "http://kekhaithue.gdt.gov.vn/TKhaiThue"}
+
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:KyKKhaiThue/ns:kieuKy", "Y")
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:KyKKhaiThue/ns:kyKKhai", str(filing_year))
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:KyKKhaiThue/ns:kyKKhaiTuNgay", _format_ddmmyyyy(start_date_iso))
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:KyKKhaiThue/ns:kyKKhaiDenNgay", _format_ddmmyyyy(end_date_iso))
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:maCQTNoiNop", ma_cqt)
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:tenCQTNoiNop", ten_cqt)
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:ngayLapTKhai", today_iso)
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:ngayKy", today_iso)
+    _set_xml_text(root, ns, ".//ns:TKhaiThue/ns:nguoiKy", legal_representative)
+
+    _set_xml_text(root, ns, ".//ns:NNT/ns:mst", tax_code)
+    _set_xml_text(root, ns, ".//ns:NNT/ns:tenNNT", company_name)
+    _set_xml_text(root, ns, ".//ns:NNT/ns:dchiNNT", full_address)
+    _set_xml_text(root, ns, ".//ns:NNT/ns:maTinhNNT", province_code)
+    _set_xml_text(root, ns, ".//ns:NNT/ns:tenTinhNNT", province_name)
+
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct110", tong_tai_san)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct200", tong_tai_san)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct300", tong_no)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct400", tong_tai_san)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct411", von_chu)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct500", tong_tai_san)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:ngayLap", today_iso)
+    _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:nguoiDaiDienTheoPhapLuat", legal_representative)
+
+    _set_xml_text(root, ns, ".//ns:PL_KQHDSXKD/ns:NamNay/ns:ct01", doanh_thu)
+    _set_xml_text(root, ns, ".//ns:PL_KQHDSXKD/ns:NamNay/ns:ct10", doanh_thu)
+    _set_xml_text(root, ns, ".//ns:PL_KQHDSXKD/ns:NamNay/ns:ct11", chi_phi)
+    _set_xml_text(root, ns, ".//ns:PL_KQHDSXKD/ns:NamNay/ns:ct20", doanh_thu - chi_phi)
+    _set_xml_text(root, ns, ".//ns:PL_KQHDSXKD/ns:NamNay/ns:ct50", loi_nhuan)
+    _set_xml_text(root, ns, ".//ns:PL_KQHDSXKD/ns:NamNay/ns:ct60", loi_nhuan)
+
+    _set_xml_text(root, ns, ".//ns:PL_LCTTGT/ns:NamNay/ns:ct20", luu_chuyen_thuan)
+    _set_xml_text(root, ns, ".//ns:PL_LCTTGT/ns:NamNay/ns:ct30", 0)
+    _set_xml_text(root, ns, ".//ns:PL_LCTTGT/ns:NamNay/ns:ct40", 0)
+    _set_xml_text(root, ns, ".//ns:PL_LCTTGT/ns:NamNay/ns:ct50", luu_chuyen_thuan)
+    _set_xml_text(root, ns, ".//ns:PL_LCTTGT/ns:NamNay/ns:ct70", max(luu_chuyen_thuan, 0))
+
+    xml_text = ET.tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
+
+    pdf_text = (
+        "BO BAO CAO TAI CHINH TT133 (B01a-DNN)\n"
+        f"Ky nam: {filing_year}\n"
+        f"Doanh nghiep: {company_name} - MST: {tax_code}\n"
+        f"Tong tai san: {tong_tai_san} VND\n"
+        f"Tong no phai tra: {tong_no} VND\n"
+        f"Von chu so huu: {von_chu} VND\n"
+        f"Doanh thu: {doanh_thu} VND\n"
+        f"Chi phi: {chi_phi} VND\n"
+        f"Loi nhuan truoc thue: {loi_nhuan} VND\n"
+    )
+
+    return {
+        "form_code": "B01a-DNN",
+        "legal_basis": "Thông tư 133/2016/TT-BTC",
+        "period": str(filing_year),
+        "period_label": f"Năm {filing_year}",
+        "xml_text": xml_text,
+        "pdf_text": pdf_text,
+        "due_date": f"{filing_year + 1:04d}-03-31",
+    }
+
+
 def _compute_compliance_seed(
     entries: list[dict[str, Any]],
     as_of_date: str,
@@ -1931,7 +2059,12 @@ def get_demo_identity() -> Dict[str, Any]:
 
 
 @app.get("/api/demo/compliance")
-def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.local", company_id: str = "") -> Dict[str, Any]:
+def get_demo_compliance(
+    period: str = "2026-03",
+    email: str = "demo@wssmeas.local",
+    company_id: str = "",
+    report_id: str = "",
+) -> Dict[str, Any]:
     normalized_email = email.lower().strip()
     resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
     scoped_data_key = company_scope_key(resolved_company_id)
@@ -1988,10 +2121,20 @@ def get_demo_compliance(period: str = "2026-03", email: str = "demo@wssmeas.loca
         issues.append("Không phát hiện sai lệch trọng yếu trước khi nộp.")
 
     history = storage.list_compliance_submission_history(scoped_data_key, effective_period)
-    active_report = filings[0] if filings else None
+    requested_report_id = str(report_id or "").strip()
+    active_report = (
+        next((item for item in filings if str(item.get("report_id") or "") == requested_report_id), None)
+        if requested_report_id
+        else None
+    )
+    if active_report is None:
+        active_report = filings[0] if filings else None
     xml_preview = ""
     if active_report and str(active_report.get("report_id") or "") == "gtgt":
         xml_preview = str(vat_declaration.get("xml_text") or "")
+    elif active_report and str(active_report.get("report_id") or "") == "bctc":
+        bctc_declaration = _build_bctc_declaration_tt133(company_profile, effective_period, entries)
+        xml_preview = str(bctc_declaration.get("xml_text") or "")
     elif active_report:
         xml_preview = (
             f"<ToKhai ky=\"{effective_period}\" loai=\"{active_report.get('report_id')}\">\n"
@@ -2061,6 +2204,17 @@ def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, An
             "content_base64": base64.b64encode(str(declaration.get("xml_text") or "").encode("utf-8")).decode("ascii"),
         }
 
+    if str(payload.report_id) == "bctc":
+        filing_year = _extract_year_from_period(payload.period)
+        period_end_date = f"{filing_year:04d}-12-31"
+        entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
+        declaration = _build_bctc_declaration_tt133(company_profile, payload.period, entries)
+        return {
+            "file_name": f"{tax_code_or_default(company_profile)}-133_B01A_DNN_BCTC-Y{filing_year}-L00.xml",
+            "mime_type": "application/xml",
+            "content_base64": base64.b64encode(str(declaration.get("xml_text") or "").encode("utf-8")).decode("ascii"),
+        }
+
     xml_text = (
         f"<ToKhai ky=\"{payload.period}\" loai=\"{payload.report_id}\">\n"
         f"  <SoTien>{int(float(filing.get('amount', 0) or 0))}</SoTien>\n"
@@ -2097,6 +2251,18 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
             "file_name": f"tokhai_gtgt_01gtgt_{period_token}.pdf",
             "mime_type": "application/pdf",
             "content_base64": base64.b64encode(_build_pdf_from_xml(xml_text, "TO KHAI GTGT 01/GTGT")).decode("ascii"),
+        }
+
+    if str(payload.report_id) == "bctc":
+        filing_year = _extract_year_from_period(payload.period)
+        period_end_date = f"{filing_year:04d}-12-31"
+        entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
+        declaration = _build_bctc_declaration_tt133(company_profile, payload.period, entries)
+        xml_text = str(declaration.get("xml_text") or "")
+        return {
+            "file_name": f"{tax_code_or_default(company_profile)}-133_B01A_DNN_BCTC-Y{filing_year}-L00.pdf",
+            "mime_type": "application/pdf",
+            "content_base64": base64.b64encode(_build_pdf_from_xml(xml_text, "BO BAO CAO TAI CHINH TT133 B01A-DNN")).decode("ascii"),
         }
 
     xml_text = (
