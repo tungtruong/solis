@@ -1,48 +1,112 @@
 <!doctype html>
-<html lang='vi'>
+<html lang="vi">
 <head>
-  <meta charset='utf-8' />
-  <meta name='viewport' content='width=device-width, initial-scale=1' />
-  <title>Phiếu thu - Bản điền thử</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phiếu thu (01-TT)</title>
   <style>
-    @page { size: A4 portrait; margin: 16mm 14mm; }
+    @page { size: A4 portrait; margin: 18mm 14mm 18mm 14mm; }
     body { font-family: 'Times New Roman', serif; margin: 0; color: #111; }
-    .page { width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 10mm 10mm; margin: 0 auto; }
-    h1 { font-size: 18px; margin: 0 0 2mm; text-transform: uppercase; }
+    .page { width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 12mm 10mm; margin: 0 auto; }
+    h1 { font-size: 18px; margin: 0 0 4mm; text-transform: uppercase; }
     .meta { font-size: 12px; margin-bottom: 4mm; }
-    h3 { font-size: 14px; margin: 3mm 0 2mm; }
+    h3 { font-size: 14px; margin: 4mm 0 2mm; }
     table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    td, th { border: 1px solid #111; padding: 4px 6px; }
-    td.label { width: 38%; font-weight: 600; }
+    td, th { border: 1px solid #111; padding: 4px 6px; vertical-align: top; }
+    td.label { width: 35%; font-weight: 600; }
+    td.value { height: 22px; }
     .grid td { height: 20px; }
-    .actions { position: fixed; right: 12px; bottom: 12px; }
-    @media print { .actions { display: none; } .page { width: auto; min-height: auto; padding: 0; } }
+    .sigs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-top: 8mm; }
+    .sig { min-height: 20mm; border-top: 1px dashed #888; padding-top: 2mm; text-align: center; font-size: 12px; }
+    .raw { white-space: pre-wrap; border: 1px solid #ccc; padding: 3mm; margin-top: 4mm; font-size: 11px; line-height: 1.4; }
+    .print-btn { position: fixed; right: 12px; bottom: 12px; padding: 8px 12px; }
+    @media print { .print-btn { display: none; } .page { padding: 0; width: auto; min-height: auto; } }
   </style>
 </head>
 <body>
-  <div class='actions'><button onclick='window.print()'>In thử</button></div>
-  <main class='page'>
+  <button class="print-btn" onclick="window.print()">In biểu mẫu</button>
+  <main class="page">
     <h1>Phiếu thu</h1>
-    <div class='meta'>Mã mẫu: <b>01-TT</b> | Bản điền thử</div>
-    <h3>Thông tin đầu vào</h3>
-    <table><tbody><tr><td class='label'>Ngày</td><td class='value'>20</td></tr>
-<tr><td class='label'>Tháng</td><td class='value'>03</td></tr>
-<tr><td class='label'>Năm</td><td class='value'>2026</td></tr>
-<tr><td class='label'>Quyển số</td><td class='value'>...</td></tr>
-<tr><td class='label'>Số</td><td class='value'>PT-0007</td></tr>
-<tr><td class='label'>Nợ</td><td class='value'>...</td></tr>
-<tr><td class='label'>Có</td><td class='value'>...</td></tr>
-<tr><td class='label'>Họ và tên người nộp tiền</td><td class='value'>Nguyễn Văn A</td></tr>
-<tr><td class='label'>Địa chỉ</td><td class='value'>Hà Nội</td></tr>
-<tr><td class='label'>Lý do nộp</td><td class='value'>Thu tiền khách hàng theo HĐ 2026-015</td></tr>
-<tr><td class='label'>Số tiền</td><td class='value'>58,000,000</td></tr>
-<tr><td class='label'>(Viết bằng chữ)</td><td class='value'>...</td></tr>
-<tr><td class='label'>Kèm theo</td><td class='value'>...</td></tr>
-<tr><td class='label'>Chứng từ gốc</td><td class='value'>...</td></tr>
-<tr><td class='label'>Đã nhận đủ số tiền (viết bằng chữ)</td><td class='value'>...</td></tr>
-<tr><td class='label'>+ Tỷ giá ngoại tệ (vàng bạc, đá quý)</td><td class='value'>...</td></tr>
-<tr><td class='label'>+ Số tiền quy đổi</td><td class='value'>...</td></tr></tbody></table>
+    <div class="meta">Mã biểu mẫu: <b>01-TT</b></div>
+
+    <section>
+      <h3>Thông tin điền mẫu</h3>
+      <table>
+        <tbody>
+          <tr><td class="label">Ngày</td><td class="value">20</td></tr>
+<tr><td class="label">Tháng</td><td class="value">03</td></tr>
+<tr><td class="label">Năm</td><td class="value">2026</td></tr>
+<tr><td class="label">Quyển số</td><td class="value">...</td></tr>
+<tr><td class="label">Số</td><td class="value">PT-0007</td></tr>
+<tr><td class="label">Nợ</td><td class="value">...</td></tr>
+<tr><td class="label">Có</td><td class="value">...</td></tr>
+<tr><td class="label">Họ và tên người nộp tiền</td><td class="value">Nguyễn Văn A</td></tr>
+<tr><td class="label">Địa chỉ</td><td class="value">Hà Nội</td></tr>
+<tr><td class="label">Lý do nộp</td><td class="value">Thu tiền khách hàng theo HĐ 2026-015</td></tr>
+<tr><td class="label">Số tiền</td><td class="value">58,000,000</td></tr>
+<tr><td class="label">(Viết bằng chữ)</td><td class="value">...</td></tr>
+<tr><td class="label">Kèm theo</td><td class="value">...</td></tr>
+<tr><td class="label">Chứng từ gốc</td><td class="value">...</td></tr>
+<tr><td class="label">Đã nhận đủ số tiền (viết bằng chữ)</td><td class="value">...</td></tr>
+<tr><td class="label">+ Tỷ giá ngoại tệ (vàng bạc, đá quý)</td><td class="value">...</td></tr>
+<tr><td class="label">+ Số tiền quy đổi</td><td class="value">...</td></tr>
+        </tbody>
+      </table>
+    </section>
+
     
+
+    <section>
+      <h3>Chữ ký</h3>
+      <div class="sigs"><div class="sig">Giám đốc</div><div class="sig">Kế toán trưởng</div><div class="sig">Người nộp tiền</div><div class="sig">Người lập phiếu</div><div class="sig">Thủ quỹ</div></div>
+    </section>
+
+    <section>
+      <h3>Bố cục gốc để in đối chiếu</h3>
+      <div class="raw">Mẫu số 01 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+PHIẾU THU 
+Ngày....... tháng....... năm....... 
+ Quyển số:.............. 
+ Số:............ .............  
+ Nợ:........... .............  
+ Có:........... .............  
+  
+Họ và tên người nộp tiền: ..................................................................................... 
+Địa chỉ:.................................................................................................................. 
+Lý do nộp:............................................................................................................. 
+Số tiền:..................................... (Viết bằng chữ): ................................................. 
+Kèm theo:..................................................................... Chứng từ gốc: ................ 
+    
+Ngày..... tháng..... năm...... 
+Giám đốc 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Người nộp tiền 
+(Ký, họ tên) 
+Người lập phiếu 
+(Ký, họ tên) 
+Thủ quỹ 
+(Ký, họ tên) 
+     
+ 
+Đã nhận đủ số tiền (viết bằng chữ):.......................................................................  
++ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................  
++ Số tiền quy đổi:...................................................................................................  
+(Liên gửi ra ngoài phải đóng dấu) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</div>
+    </section>
   </main>
 </body>
 </html>

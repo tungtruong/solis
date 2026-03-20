@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 from pathlib import Path
 from typing import Dict, List
 
@@ -70,72 +71,78 @@ def value_for(field_key: str, form_code: str) -> str:
     return "..."
 
 
-def render_sample_html(form: Dict[str, object]) -> str:
-    form_code = str(form["form_code"])
-    title = html.escape(str(form["title"]))
-    fields: List[Dict[str, object]] = form["fields"]  # type: ignore[assignment]
-    table_schema: Dict[str, object] = form["table_schema"]  # type: ignore[assignment]
+def fill_value_cells(template_html: str, values: List[str]) -> str:
+    idx = 0
 
-    field_rows = "\n".join(
-        f"<tr><td class='label'>{html.escape(str(f['label']))}</td><td class='value'>{html.escape(value_for(str(f['field_key']), form_code))}</td></tr>"
-        for f in fields
+    def repl(match: re.Match[str]) -> str:
+        nonlocal idx
+        value = values[idx] if idx < len(values) else "..."
+        idx += 1
+        quote = match.group(1)
+        return f"<td class={quote}value{quote}>{html.escape(value)}</td>"
+
+    pattern = re.compile(r"<td class=(['\"])value\1>.*?</td>", re.DOTALL)
+    return pattern.sub(repl, template_html)
+
+
+def fill_grid_rows(template_html: str, form_code: str) -> str:
+    table_pattern = re.compile(
+        r"(<table class=\"grid\">.*?<tbody>)(.*?)(</tbody>.*?</table>)",
+        re.DOTALL,
     )
+    table_match = table_pattern.search(template_html)
+    if not table_match:
+        return template_html
 
-    table_html = ""
-    if table_schema.get("has_grid"):
-        cols = table_schema.get("table_columns", [])
-        rows = GRID_ROWS.get(form_code, [])
-        if not rows:
-            rows = [["" for _ in cols] for _ in range(5)]
+    table_full = table_match.group(0)
+    col_count = len(re.findall(r"<th>", table_full))
+    if col_count == 0:
+        return template_html
 
-        head = "".join(f"<th>{html.escape(str(c.get('label', '')))}</th>" for c in cols)
-        body_rows = []
-        for r in rows:
-            padded = r + [""] * max(0, len(cols) - len(r))
-            tds = "".join(f"<td>{html.escape(str(v))}</td>" for v in padded[: len(cols)])
-            body_rows.append(f"<tr>{tds}</tr>")
-        table_html = (
-            "<h3>Dữ liệu bảng (mẫu điền thử)</h3>"
-            "<table class='grid'><thead><tr>"
-            + head
-            + "</tr></thead><tbody>"
-            + "".join(body_rows)
-            + "</tbody></table>"
-        )
+    grid_rows = GRID_ROWS.get(form_code, [])
+    if not grid_rows:
+        return template_html
 
-    return f"""<!doctype html>
-<html lang='vi'>
-<head>
-  <meta charset='utf-8' />
-  <meta name='viewport' content='width=device-width, initial-scale=1' />
-  <title>{title} - Bản điền thử</title>
-  <style>
-    @page {{ size: A4 portrait; margin: 16mm 14mm; }}
-    body {{ font-family: 'Times New Roman', serif; margin: 0; color: #111; }}
-    .page {{ width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 10mm 10mm; margin: 0 auto; }}
-    h1 {{ font-size: 18px; margin: 0 0 2mm; text-transform: uppercase; }}
-    .meta {{ font-size: 12px; margin-bottom: 4mm; }}
-    h3 {{ font-size: 14px; margin: 3mm 0 2mm; }}
-    table {{ width: 100%; border-collapse: collapse; font-size: 12px; }}
-    td, th {{ border: 1px solid #111; padding: 4px 6px; }}
-    td.label {{ width: 38%; font-weight: 600; }}
-    .grid td {{ height: 20px; }}
-    .actions {{ position: fixed; right: 12px; bottom: 12px; }}
-    @media print {{ .actions {{ display: none; }} .page {{ width: auto; min-height: auto; padding: 0; }} }}
-  </style>
-</head>
-<body>
-  <div class='actions'><button onclick='window.print()'>In thử</button></div>
-  <main class='page'>
-    <h1>{title}</h1>
-    <div class='meta'>Mã mẫu: <b>{html.escape(form_code)}</b> | Bản điền thử</div>
-    <h3>Thông tin đầu vào</h3>
-    <table><tbody>{field_rows}</tbody></table>
-    {table_html}
-  </main>
-</body>
-</html>
-"""
+    flat_values: List[str] = []
+    for row in grid_rows:
+        padded = row + [""] * max(0, col_count - len(row))
+        flat_values.extend(padded[:col_count])
+
+    cell_idx = 0
+
+    def cell_repl(match: re.Match[str]) -> str:
+        nonlocal cell_idx
+        if cell_idx >= len(flat_values):
+            return match.group(0)
+        value = html.escape(flat_values[cell_idx])
+        cell_idx += 1
+        return f"<td>{value if value else '&nbsp;'}</td>"
+
+    body_filled = re.sub(r"<td>.*?</td>", cell_repl, table_match.group(2), flags=re.DOTALL)
+    replaced = table_match.group(1) + body_filled + table_match.group(3)
+    return template_html.replace(table_full, replaced, 1)
+
+
+def render_sample_html(form: Dict[str, object], input_json_path: Path) -> str:
+    form_code = str(form["form_code"])
+    fields: List[Dict[str, object]] = form["fields"]  # type: ignore[assignment]
+    template_rel = str(form.get("print_template_html", "")).strip()
+    if not template_rel:
+        raise ValueError(f"Missing print_template_html for form {form_code}")
+
+    template_path = (input_json_path.parent / template_rel).resolve()
+    if not template_path.exists():
+        template_path = Path(template_rel)
+    if not template_path.exists():
+        raise FileNotFoundError(f"Template not found for {form_code}: {template_rel}")
+
+    template_html = template_path.read_text(encoding="utf-8")
+    values = [value_for(str(f["field_key"]), form_code) for f in fields]
+
+    filled_html = fill_value_cells(template_html, values)
+    filled_html = fill_grid_rows(filled_html, form_code)
+
+    return filled_html
 
 
 def main() -> None:
@@ -156,7 +163,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    data = load_templates(Path(args.input_json))
+    input_json_path = Path(args.input_json)
+    data = load_templates(input_json_path)
     forms: List[Dict[str, object]] = data["forms"]  # type: ignore[assignment]
     by_code = {str(f["form_code"]): f for f in forms}
 
@@ -170,7 +178,7 @@ def main() -> None:
         form = by_code[code]
         filename = f"sample_{code.replace('-', '_')}.html"
         path = out_dir / filename
-        path.write_text(render_sample_html(form), encoding="utf-8")
+        path.write_text(render_sample_html(form, input_json_path), encoding="utf-8")
         links.append((code, filename, str(form["title"])))
 
     index = [
