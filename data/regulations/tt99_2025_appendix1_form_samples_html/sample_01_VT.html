@@ -3,116 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Phiếu nhập kho (01-VT)</title>
+  <title>Phiếu nhập kho (01-VT) - Bản điền thử</title>
   <style>
-    @page { size: A4 portrait; margin: 18mm 14mm 18mm 14mm; }
-    body { font-family: 'Times New Roman', serif; margin: 0; color: #111; }
-    .page { width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 12mm 10mm; margin: 0 auto; }
-    h1 { font-size: 18px; margin: 0 0 4mm; text-transform: uppercase; }
-    .meta { font-size: 12px; margin-bottom: 4mm; }
-    h3 { font-size: 14px; margin: 4mm 0 2mm; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    td, th { border: 1px solid #111; padding: 4px 6px; vertical-align: top; }
-    td.label { width: 35%; font-weight: 600; }
-    td.value { height: 22px; }
-    .grid td { height: 20px; }
-    .sigs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-top: 8mm; }
-    .sig { min-height: 20mm; border-top: 1px dashed #888; padding-top: 2mm; text-align: center; font-size: 12px; }
-    .raw { white-space: pre-wrap; border: 1px solid #ccc; padding: 3mm; margin-top: 4mm; font-size: 11px; line-height: 1.4; }
-    .print-btn { position: fixed; right: 12px; bottom: 12px; padding: 8px 12px; }
-    @media print { .print-btn { display: none; } .page { padding: 0; width: auto; min-height: auto; } }
+    :root { --paper-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }
+    body { margin: 0; background: #e9edf2; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #101317; color: #fff; padding: 10px 14px; }
+    .toolbar button { padding: 6px 10px; }
+    .container { padding: 14px 0 28px; }
+    .page { position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; }
+    .bg { display: block; width: 100%; height: 100%; }
+    .overlay { position: absolute; inset: 0; pointer-events: none; }
+    .ov { position: absolute; color: #0a0a0a; white-space: nowrap; line-height: 1.1; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .page { box-shadow: none; margin: 0 auto; break-after: page; }
+    }
   </style>
 </head>
 <body>
-  <button class="print-btn" onclick="window.print()">In biểu mẫu</button>
-  <main class="page">
-    <h1>Phiếu nhập kho</h1>
-    <div class="meta">Mã biểu mẫu: <b>01-VT</b></div>
-
-    <section>
-      <h3>Thông tin điền mẫu</h3>
-      <table>
-        <tbody>
-          <tr><td class="label">Ngày</td><td class="value">20</td></tr>
-<tr><td class="label">Tháng</td><td class="value">03</td></tr>
-<tr><td class="label">Năm</td><td class="value">2026</td></tr>
-<tr><td class="label">Số</td><td class="value">PNK-0012</td></tr>
-<tr><td class="label">- Họ và tên người giao</td><td class="value">...</td></tr>
-<tr><td class="label">Nhập tại kho</td><td class="value">1521</td></tr>
-<tr><td class="label">- Tổng số tiền (viết bằng chữ)</td><td class="value">...</td></tr>
-<tr><td class="label">- Số chứng từ gốc kèm theo</td><td class="value">...</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section><h3>Khu vực nhập liệu dạng bảng</h3><table class="grid"><thead><tr><th>STT</th><th>Cột 2</th><th>Cột 3</th><th>Cột 4</th><th>Cột 5</th><th>Cột 6</th><th>Cột 7</th><th>Cột 8</th></tr></thead><tbody><tr><td>1</td><td>Giấy A4</td><td>Ram</td><td>200</td><td>65,000</td><td>13,000,000</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2</td><td>Mực in</td><td>Hộp</td><td>40</td><td>420,000</td><td>16,800,000</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></section>
-
-    <section>
-      <h3>Chữ ký</h3>
-      <div class="sigs"><div class="sig">Người lập phiếu</div><div class="sig">Người giao hàng</div><div class="sig">Thủ kho</div><div class="sig">có nhu cầu nhập)</div></div>
-    </section>
-
-    <section>
-      <h3>Bố cục gốc để in đối chiếu</h3>
-      <div class="raw">Mẫu số 01 - VT 
-(Kèm theo Thông tư số 99/2025/TT-BTC  
-ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
- 
-PHIẾU NHẬP KHO 
-Ngày.... tháng..... năm..... 
-Số:..................  
-Nợ ..................  
-Có.................. 
-- Họ và tên người giao:......................................................................................... 
-- Theo.................. số........... ngày..... tháng..... năm..... của.................................. 
-Nhập tại kho:........................................... địa điểm .............................................. 
- 
-Số lượng   
-STT 
-Tên, nhãn hiệu, quy cách, 
-phẩm chất vật tư, dụng cụ 
-sản phẩm, hàng hóa 
-Mã 
-số 
-Đơn 
-vị 
-tính 
-Theo 
-chứng 
-từ 
-Thực 
-nhập 
-Đơn 
-giá 
-Thành 
-tiền 
-A B C D 1 2 3 4 
-        
-        
-        
- Cộng x x x x x  
- 
-- Tổng số tiền (viết bằng chữ):.............................................................................. 
-- Số chứng từ gốc kèm theo: ................................................................................. 
- 
-   Ngày... tháng... năm... 
- Người lập phiếu  
-(Ký, họ tên) 
-Người giao hàng  
-(Ký, họ tên) 
-Thủ kho 
-(Ký, họ tên) 
-Kế toán trưởng 
-(Hoặc bộ phận 
-có nhu cầu nhập) 
-(Ký, họ tên) 
-    
-  
- 
- 
-Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
-đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</div>
-    </section>
+  <div class="toolbar">01-VT - Phiếu nhập kho | <button onclick="window.print()">In</button></div>
+  <main class="container">
+    <section class="page" style="width:1191px;height:1684px;">
+  <img class="bg" src="assets/01_VT_p45.png" alt="01-VT page 45" />
+  <div class="overlay"><div class="ov" style="left:739.0px;top:103.0px;font-size:12px;">20</div>
+<div class="ov" style="left:670.0px;top:220.4px;font-size:12px;">03</div>
+<div class="ov" style="left:741.0px;top:220.4px;font-size:12px;">2026</div>
+<div class="ov" style="left:521.9px;top:103.0px;font-size:12px;">PNK-0012</div>
+<div class="ov" style="left:438.5px;top:438.8px;font-size:12px;">...</div>
+<div class="ov" style="left:330.1px;top:527.2px;font-size:12px;">1521</div>
+<div class="ov" style="left:519.3px;top:1064.0px;font-size:12px;">...</div>
+<div class="ov" style="left:495.7px;top:1108.3px;font-size:12px;">...</div>
+<div class="ov" style="left:131.5px;top:705.0px;font-size:9px;">1</div>
+<div class="ov" style="left:258.7px;top:705.0px;font-size:9px;">Giấy A4</div>
+<div class="ov" style="left:386.0px;top:705.0px;font-size:9px;">Ram</div>
+<div class="ov" style="left:513.2px;top:705.0px;font-size:9px;">200</div>
+<div class="ov" style="left:640.5px;top:705.0px;font-size:9px;">65,000</div>
+<div class="ov" style="left:767.7px;top:705.0px;font-size:9px;">13,000,000</div>
+<div class="ov" style="left:131.5px;top:717.4px;font-size:9px;">2</div>
+<div class="ov" style="left:258.7px;top:717.4px;font-size:9px;">Mực in</div>
+<div class="ov" style="left:386.0px;top:717.4px;font-size:9px;">Hộp</div>
+<div class="ov" style="left:513.2px;top:717.4px;font-size:9px;">40</div>
+<div class="ov" style="left:640.5px;top:717.4px;font-size:9px;">420,000</div>
+<div class="ov" style="left:767.7px;top:717.4px;font-size:9px;">16,800,000</div></div>
+</section>
   </main>
 </body>
 </html>

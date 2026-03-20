@@ -3,118 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bảng thanh toán tiề n lương (01-LĐTL)</title>
+  <title>Bảng thanh toán tiề n lương (01-LĐTL) - Bản điền thử</title>
   <style>
-    @page { size: A4 portrait; margin: 18mm 14mm 18mm 14mm; }
-    body { font-family: 'Times New Roman', serif; margin: 0; color: #111; }
-    .page { width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 12mm 10mm; margin: 0 auto; }
-    h1 { font-size: 18px; margin: 0 0 4mm; text-transform: uppercase; }
-    .meta { font-size: 12px; margin-bottom: 4mm; }
-    h3 { font-size: 14px; margin: 4mm 0 2mm; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    td, th { border: 1px solid #111; padding: 4px 6px; vertical-align: top; }
-    td.label { width: 35%; font-weight: 600; }
-    td.value { height: 22px; }
-    .grid td { height: 20px; }
-    .sigs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-top: 8mm; }
-    .sig { min-height: 20mm; border-top: 1px dashed #888; padding-top: 2mm; text-align: center; font-size: 12px; }
-    .raw { white-space: pre-wrap; border: 1px solid #ccc; padding: 3mm; margin-top: 4mm; font-size: 11px; line-height: 1.4; }
-    .print-btn { position: fixed; right: 12px; bottom: 12px; padding: 8px 12px; }
-    @media print { .print-btn { display: none; } .page { padding: 0; width: auto; min-height: auto; } }
+    :root { --paper-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }
+    body { margin: 0; background: #e9edf2; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #101317; color: #fff; padding: 10px 14px; }
+    .toolbar button { padding: 6px 10px; }
+    .container { padding: 14px 0 28px; }
+    .page { position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; }
+    .bg { display: block; width: 100%; height: 100%; }
+    .overlay { position: absolute; inset: 0; pointer-events: none; }
+    .ov { position: absolute; color: #0a0a0a; white-space: nowrap; line-height: 1.1; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .page { box-shadow: none; margin: 0 auto; break-after: page; }
+    }
   </style>
 </head>
 <body>
-  <button class="print-btn" onclick="window.print()">In biểu mẫu</button>
-  <main class="page">
-    <h1>Bảng thanh toán tiề n lương</h1>
-    <div class="meta">Mã biểu mẫu: <b>01-LĐTL</b></div>
-
-    <section>
-      <h3>Thông tin điền mẫu</h3>
-      <table>
-        <tbody>
-          <tr><td class="label">Ngày</td><td class="value">20</td></tr>
-<tr><td class="label">Tháng</td><td class="value">03</td></tr>
-<tr><td class="label">Năm</td><td class="value">2026</td></tr>
-<tr><td class="label">Số</td><td class="value">LDTL-0001</td></tr>
-<tr><td class="label">Tổng số tiền (viết bằng chữ)</td><td class="value">Một trăm hai mươi triệu đồng</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section><h3>Khu vực nhập liệu dạng bảng</h3><table class="grid"><thead><tr><th>STT</th><th>Cột 2</th><th>Cột 3</th><th>Cột 4</th><th>Cột 5</th><th>Cột 6</th><th>Cột 7</th><th>Cột 8</th><th>Cột 9</th><th>Cột 10</th><th>Cột 11</th><th>Cột 12</th><th>Cột 13</th><th>Cột 14</th><th>Cột 15</th><th>Cột 16</th></tr></thead><tbody><tr><td>1</td><td>Nguyễn Văn A</td><td>Kế toán</td><td>3.0</td><td>&nbsp;</td><td>26</td><td>24,000,000</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>0</td><td>24,000,000</td><td>A</td></tr><tr><td>2</td><td>Trần Thị B</td><td>Thủ quỹ</td><td>2.6</td><td>&nbsp;</td><td>26</td><td>18,000,000</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>0</td><td>18,000,000</td><td>B</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></section>
-
-    <section>
-      <h3>Chữ ký</h3>
-      <div class="sigs"><div class="sig">Người lập bảng Kế toán trưởng Giám đốc</div></div>
-    </section>
-
-    <section>
-      <h3>Bố cục gốc để in đối chiếu</h3>
-      <div class="raw">Mẫu số: 01 - LĐTL 
-(Kèm theo Thông tư số 99/2025/TT-BTC 
-ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
-BẢNG THANH TOÁN TIỀN LƯƠNG 
-Tháng...... năm...... 
- Số:............... 
-Lương 
-sản phẩm 
-Lương 
-thời gian 
-Nghỉ việc ngừng việc 
-hưởng....% lương 
-Các khoản 
-phải khấu trừ vào lương 
-Kỳ II 
-được lĩnh 
-STT Họ và 
-tên 
- 
-Ngạch bậc 
-lương hoặc cấp 
-bậc chức vụ 
-Hệ 
-số Số 
-SP 
-Số 
-tiền 
-Số 
-công 
-Số 
-tiền Số công Số tiền 
-Phụ cấp 
-thuộc 
-quỹ 
-lương 
-Phụ 
-cấp 
-khác 
-Tổng 
-số 
-Tạm 
-ứng 
-kỳ I BHXH ... Thuế TNCN 
-phải nộp Cộng Số 
-tiền 
-Ký 
-nhận 
-A B 1 2 3 4 5 6 7 8 9 10 11 12 13 1
-4 15 16 17 C 
-                    
-                    
-                    
-                    
- Cộng x x x  x  x           x 
-Tổng số tiền (viết bằng chữ):........................................................................................................................................ 
- 
-  Ngày.... tháng.... năm.... 
-Người lập bảng Kế toán trưởng Giám đốc 
-(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
- 
- 
-Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
-thiết kế biểu mẫu chứng từ kế toán.</div>
-    </section>
+  <div class="toolbar">01-LĐTL - Bảng thanh toán tiề n lương | <button onclick="window.print()">In</button></div>
+  <main class="container">
+    <section class="page" style="width:1684px;height:1191px;">
+  <img class="bg" src="assets/01_LĐTL_p36.png" alt="01-LĐTL page 36" />
+  <div class="overlay"><div class="ov" style="left:738.3px;top:102.3px;font-size:12px;">20</div>
+<div class="ov" style="left:220.4px;top:597.7px;font-size:12px;">03</div>
+<div class="ov" style="left:220.4px;top:526.8px;font-size:12px;">2026</div>
+<div class="ov" style="left:521.2px;top:102.3px;font-size:12px;">LDTL-0001</div>
+<div class="ov" style="left:796.6px;top:1145.1px;font-size:12px;">Một trăm hai mươi triệu đồng</div>
+<div class="ov" style="left:421.4px;top:1541.8px;font-size:9px;">1</div>
+<div class="ov" style="left:497.8px;top:1541.8px;font-size:9px;">Nguyễn Văn A</div>
+<div class="ov" style="left:574.1px;top:1541.8px;font-size:9px;">Kế toán</div>
+<div class="ov" style="left:650.5px;top:1541.8px;font-size:9px;">3.0</div>
+<div class="ov" style="left:803.2px;top:1541.8px;font-size:9px;">26</div>
+<div class="ov" style="left:879.5px;top:1541.8px;font-size:9px;">24,000,000</div>
+<div class="ov" style="left:1414.0px;top:1541.8px;font-size:9px;">0</div>
+<div class="ov" style="left:1490.3px;top:1541.8px;font-size:9px;">24,000,000</div>
+<div class="ov" style="left:1566.7px;top:1541.8px;font-size:9px;">A</div>
+<div class="ov" style="left:421.4px;top:1554.2px;font-size:9px;">2</div>
+<div class="ov" style="left:497.8px;top:1554.2px;font-size:9px;">Trần Thị B</div>
+<div class="ov" style="left:574.1px;top:1554.2px;font-size:9px;">Thủ quỹ</div>
+<div class="ov" style="left:650.5px;top:1554.2px;font-size:9px;">2.6</div>
+<div class="ov" style="left:803.2px;top:1554.2px;font-size:9px;">26</div>
+<div class="ov" style="left:879.5px;top:1554.2px;font-size:9px;">18,000,000</div>
+<div class="ov" style="left:1414.0px;top:1554.2px;font-size:9px;">0</div>
+<div class="ov" style="left:1490.3px;top:1554.2px;font-size:9px;">18,000,000</div>
+<div class="ov" style="left:1566.7px;top:1554.2px;font-size:9px;">B</div></div>
+</section>
   </main>
 </body>
 </html>

@@ -3,110 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Phiếu thu (01-TT)</title>
+  <title>Phiếu thu (01-TT) - Bản điền thử</title>
   <style>
-    @page { size: A4 portrait; margin: 18mm 14mm 18mm 14mm; }
-    body { font-family: 'Times New Roman', serif; margin: 0; color: #111; }
-    .page { width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 12mm 10mm; margin: 0 auto; }
-    h1 { font-size: 18px; margin: 0 0 4mm; text-transform: uppercase; }
-    .meta { font-size: 12px; margin-bottom: 4mm; }
-    h3 { font-size: 14px; margin: 4mm 0 2mm; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    td, th { border: 1px solid #111; padding: 4px 6px; vertical-align: top; }
-    td.label { width: 35%; font-weight: 600; }
-    td.value { height: 22px; }
-    .grid td { height: 20px; }
-    .sigs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-top: 8mm; }
-    .sig { min-height: 20mm; border-top: 1px dashed #888; padding-top: 2mm; text-align: center; font-size: 12px; }
-    .raw { white-space: pre-wrap; border: 1px solid #ccc; padding: 3mm; margin-top: 4mm; font-size: 11px; line-height: 1.4; }
-    .print-btn { position: fixed; right: 12px; bottom: 12px; padding: 8px 12px; }
-    @media print { .print-btn { display: none; } .page { padding: 0; width: auto; min-height: auto; } }
+    :root { --paper-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }
+    body { margin: 0; background: #e9edf2; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #101317; color: #fff; padding: 10px 14px; }
+    .toolbar button { padding: 6px 10px; }
+    .container { padding: 14px 0 28px; }
+    .page { position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; }
+    .bg { display: block; width: 100%; height: 100%; }
+    .overlay { position: absolute; inset: 0; pointer-events: none; }
+    .ov { position: absolute; color: #0a0a0a; white-space: nowrap; line-height: 1.1; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .page { box-shadow: none; margin: 0 auto; break-after: page; }
+    }
   </style>
 </head>
 <body>
-  <button class="print-btn" onclick="window.print()">In biểu mẫu</button>
-  <main class="page">
-    <h1>Phiếu thu</h1>
-    <div class="meta">Mã biểu mẫu: <b>01-TT</b></div>
-
-    <section>
-      <h3>Thông tin điền mẫu</h3>
-      <table>
-        <tbody>
-          <tr><td class="label">Ngày</td><td class="value">20</td></tr>
-<tr><td class="label">Tháng</td><td class="value">03</td></tr>
-<tr><td class="label">Năm</td><td class="value">2026</td></tr>
-<tr><td class="label">Quyển số</td><td class="value">...</td></tr>
-<tr><td class="label">Số</td><td class="value">PT-0007</td></tr>
-<tr><td class="label">Nợ</td><td class="value">...</td></tr>
-<tr><td class="label">Có</td><td class="value">...</td></tr>
-<tr><td class="label">Họ và tên người nộp tiền</td><td class="value">Nguyễn Văn A</td></tr>
-<tr><td class="label">Địa chỉ</td><td class="value">Hà Nội</td></tr>
-<tr><td class="label">Lý do nộp</td><td class="value">Thu tiền khách hàng theo HĐ 2026-015</td></tr>
-<tr><td class="label">Số tiền</td><td class="value">58,000,000</td></tr>
-<tr><td class="label">(Viết bằng chữ)</td><td class="value">...</td></tr>
-<tr><td class="label">Kèm theo</td><td class="value">...</td></tr>
-<tr><td class="label">Chứng từ gốc</td><td class="value">...</td></tr>
-<tr><td class="label">Đã nhận đủ số tiền (viết bằng chữ)</td><td class="value">...</td></tr>
-<tr><td class="label">+ Tỷ giá ngoại tệ (vàng bạc, đá quý)</td><td class="value">...</td></tr>
-<tr><td class="label">+ Số tiền quy đổi</td><td class="value">...</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    
-
-    <section>
-      <h3>Chữ ký</h3>
-      <div class="sigs"><div class="sig">Giám đốc</div><div class="sig">Kế toán trưởng</div><div class="sig">Người nộp tiền</div><div class="sig">Người lập phiếu</div><div class="sig">Thủ quỹ</div></div>
-    </section>
-
-    <section>
-      <h3>Bố cục gốc để in đối chiếu</h3>
-      <div class="raw">Mẫu số 01 - TT  
-(Kèm theo Thông tư số 99/2025/TT-BTC  
-ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
- 
-PHIẾU THU 
-Ngày....... tháng....... năm....... 
- Quyển số:.............. 
- Số:............ .............  
- Nợ:........... .............  
- Có:........... .............  
-  
-Họ và tên người nộp tiền: ..................................................................................... 
-Địa chỉ:.................................................................................................................. 
-Lý do nộp:............................................................................................................. 
-Số tiền:..................................... (Viết bằng chữ): ................................................. 
-Kèm theo:..................................................................... Chứng từ gốc: ................ 
-    
-Ngày..... tháng..... năm...... 
-Giám đốc 
-(Ký, họ tên, đóng dấu) 
-Kế toán trưởng  
-(Ký, họ tên) 
-Người nộp tiền 
-(Ký, họ tên) 
-Người lập phiếu 
-(Ký, họ tên) 
-Thủ quỹ 
-(Ký, họ tên) 
-     
- 
-Đã nhận đủ số tiền (viết bằng chữ):.......................................................................  
-+ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................  
-+ Số tiền quy đổi:...................................................................................................  
-(Liên gửi ra ngoài phải đóng dấu) 
- 
- 
- 
- 
- 
- 
- 
-Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
-đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</div>
-    </section>
+  <div class="toolbar">01-TT - Phiếu thu | <button onclick="window.print()">In</button></div>
+  <main class="container">
+    <section class="page" style="width:1191px;height:1684px;">
+  <img class="bg" src="assets/01_TT_p55.png" alt="01-TT page 55" />
+  <div class="overlay"><div class="ov" style="left:739.0px;top:103.0px;font-size:12px;">20</div>
+<div class="ov" style="left:670.0px;top:224.9px;font-size:12px;">03</div>
+<div class="ov" style="left:741.0px;top:224.9px;font-size:12px;">2026</div>
+<div class="ov" style="left:927.0px;top:371.7px;font-size:12px;">...</div>
+<div class="ov" style="left:521.9px;top:103.0px;font-size:12px;">PT-0007</div>
+<div class="ov" style="left:855.5px;top:439.8px;font-size:12px;">...</div>
+<div class="ov" style="left:853.1px;top:473.7px;font-size:12px;">...</div>
+<div class="ov" style="left:464.7px;top:553.8px;font-size:12px;">Nguyễn Văn A</div>
+<div class="ov" style="left:224.8px;top:200.0px;font-size:12px;">Hà Nội</div>
+<div class="ov" style="left:300.3px;top:645.7px;font-size:12px;">Thu tiền khách hàng theo HĐ 2026-015</div>
+<div class="ov" style="left:264.0px;top:691.8px;font-size:12px;">58,000,000</div>
+<div class="ov" style="left:714.7px;top:691.8px;font-size:12px;">...</div>
+<div class="ov" style="left:709.6px;top:199.6px;font-size:12px;">...</div>
+<div class="ov" style="left:945.7px;top:737.7px;font-size:12px;">...</div>
+<div class="ov" style="left:572.5px;top:1050.6px;font-size:12px;">...</div>
+<div class="ov" style="left:592.1px;top:1090.6px;font-size:12px;">...</div>
+<div class="ov" style="left:378.3px;top:1130.6px;font-size:12px;">...</div></div>
+</section>
   </main>
 </body>
 </html>
