@@ -1,0 +1,293 @@
+#!/usr/bin/env python3
+"""Render TT99 form 01-TT from a structured template to PDF and HTML.
+
+This script intentionally avoids OCR coordinates. It uses explicit layout rules
+so the output is stable, printable, and easy to maintain.
+"""
+
+from __future__ import annotations
+
+import argparse
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfgen import canvas
+
+MM_TO_PT = 72.0 / 25.4
+
+
+@dataclass
+class LineItem:
+    x1_mm: float
+    y1_mm: float
+    x2_mm: float
+    y2_mm: float
+    width_pt: float = 0.8
+
+
+@dataclass
+class TextItem:
+    x_mm: float
+    y_mm: float
+    text: str
+    size_pt: float = 10.5
+    bold: bool = False
+    align: str = "left"
+
+
+SAMPLE_01TT: Dict[str, str] = {
+    "don_vi": "CÔNG TY TNHH ABC",
+    "dia_chi_don_vi": "Số 18, Trần Duy Hưng, Hà Nội",
+    "ngay": "20",
+    "thang": "03",
+    "nam": "2026",
+    "quyen_so": "Q1/2026",
+    "so_phieu": "PT-0007",
+    "tai_khoan_no": "1111",
+    "tai_khoan_co": "1311",
+    "nguoi_nop": "Nguyễn Văn A",
+    "dia_chi_nguoi_nop": "Hà Nội",
+    "ly_do": "Thu tiền khách hàng theo HĐ 2026-015",
+    "so_tien": "58.000.000",
+    "so_tien_chu": "Năm mươi tám triệu đồng chẵn",
+    "chung_tu_goc": "01",
+    "ngay_ky": "20",
+    "thang_ky": "03",
+    "nam_ky": "2026",
+}
+
+
+def mm(v: float) -> float:
+    return v * MM_TO_PT
+
+
+def detect_font() -> Tuple[str, str]:
+    """Register a Unicode-capable font if available on Windows."""
+    font_candidates = [
+        ("FormSans", Path("C:/Windows/Fonts/arial.ttf")),
+        ("FormSans", Path("C:/Windows/Fonts/tahoma.ttf")),
+        ("FormSans", Path("C:/Windows/Fonts/calibri.ttf")),
+    ]
+    for font_name, font_path in font_candidates:
+        if font_path.exists():
+            pdfmetrics.registerFont(TTFont(font_name, str(font_path)))
+            return font_name, font_name
+    return "Helvetica", "Helvetica-Bold"
+
+
+def layout_01tt(data: Dict[str, str]) -> Tuple[List[LineItem], List[TextItem]]:
+    lines: List[LineItem] = []
+    texts: List[TextItem] = []
+
+    # Header
+    texts.append(TextItem(18, 20, f"Đơn vị: {data['don_vi']}", 10.5))
+    texts.append(TextItem(18, 27, f"Địa chỉ: {data['dia_chi_don_vi']}", 10.5))
+    texts.append(TextItem(105, 42, "PHIẾU THU", 16, True, "center"))
+    texts.append(TextItem(105, 49, "(Ban hành theo Thông tư 99/2025/TT-BTC)", 9.5, False, "center"))
+
+    texts.append(
+        TextItem(
+            105,
+            56,
+            f"Ngày {data['ngay']} tháng {data['thang']} năm {data['nam']}",
+            10.5,
+            False,
+            "center",
+        )
+    )
+
+    # Right info block
+    texts.append(TextItem(145, 62, f"Quyển số: {data['quyen_so']}", 10.5))
+    texts.append(TextItem(145, 69, f"Số: {data['so_phieu']}", 10.5))
+    texts.append(TextItem(145, 76, f"Nợ: {data['tai_khoan_no']}", 10.5))
+    texts.append(TextItem(145, 83, f"Có: {data['tai_khoan_co']}", 10.5))
+
+    # Main body lines
+    texts.append(TextItem(18, 97, f"Họ và tên người nộp tiền: {data['nguoi_nop']}", 10.5))
+    texts.append(TextItem(18, 106, f"Địa chỉ: {data['dia_chi_nguoi_nop']}", 10.5))
+    texts.append(TextItem(18, 115, f"Lý do nộp: {data['ly_do']}", 10.5))
+    texts.append(
+        TextItem(
+            18,
+            124,
+            f"Số tiền: {data['so_tien']}   (Viết bằng chữ): {data['so_tien_chu']}",
+            10.5,
+        )
+    )
+    texts.append(TextItem(18, 133, f"Kèm theo: {data['chung_tu_goc']} chứng từ gốc.", 10.5))
+
+    # Signature panel frame
+    left = 18
+    right = 192
+    top = 143
+    bottom = 214
+    col_count = 5
+    col_w = (right - left) / col_count
+
+    # Outer frame
+    lines.extend(
+        [
+            LineItem(left, top, right, top, 0.9),
+            LineItem(right, top, right, bottom, 0.9),
+            LineItem(right, bottom, left, bottom, 0.9),
+            LineItem(left, bottom, left, top, 0.9),
+        ]
+    )
+
+    # Vertical separators
+    for i in range(1, col_count):
+        x = left + col_w * i
+        lines.append(LineItem(x, top, x, bottom, 0.7))
+
+    # Title row separator
+    lines.append(LineItem(left, top + 14, right, top + 14, 0.7))
+
+    titles = ["Giám đốc", "Kế toán trưởng", "Người nộp tiền", "Người lập phiếu", "Thủ quỹ"]
+    subtitles = [
+        "(Ký, họ tên, đóng dấu)",
+        "(Ký, họ tên)",
+        "(Ký, họ tên)",
+        "(Ký, họ tên)",
+        "(Ký, họ tên)",
+    ]
+
+    for idx, title in enumerate(titles):
+        cx = left + col_w * idx + col_w / 2
+        texts.append(TextItem(cx, top + 9, title, 10, True, "center"))
+        texts.append(TextItem(cx, top + 18.5, subtitles[idx], 9, False, "center"))
+
+    texts.append(
+        TextItem(
+            145,
+            139,
+            f"Ngày {data['ngay_ky']} tháng {data['thang_ky']} năm {data['nam_ky']}",
+            10,
+        )
+    )
+
+    # Footer notes
+    texts.append(TextItem(18, 226, "Đã nhận đủ số tiền (viết bằng chữ): ........................................................", 10))
+    texts.append(TextItem(18, 234, "+ Tỷ giá ngoại tệ (vàng, bạc, đá quý): ..................................................", 10))
+    texts.append(TextItem(18, 242, "+ Số tiền quy đổi: ........................................................................", 10))
+    texts.append(TextItem(18, 253, "(Liên gửi ra ngoài phải đóng dấu)", 9))
+
+    texts.append(
+        TextItem(
+            18,
+            268,
+            "Ghi chú: Doanh nghiệp có thể tùy biến mẫu phù hợp đặc điểm hoạt động nhưng phải đủ nội dung bắt buộc.",
+            8.8,
+        )
+    )
+
+    return lines, texts
+
+
+def draw_pdf(output_pdf: Path, lines: List[LineItem], texts: List[TextItem]) -> None:
+    page_w_pt, page_h_pt = A4
+    font_regular, font_bold = detect_font()
+
+    c = canvas.Canvas(str(output_pdf), pagesize=A4)
+
+    for ln in lines:
+        c.setLineWidth(ln.width_pt)
+        x1 = mm(ln.x1_mm)
+        x2 = mm(ln.x2_mm)
+        y1 = page_h_pt - mm(ln.y1_mm)
+        y2 = page_h_pt - mm(ln.y2_mm)
+        c.line(x1, y1, x2, y2)
+
+    for tx in texts:
+        c.setFont(font_bold if tx.bold else font_regular, tx.size_pt)
+        x = mm(tx.x_mm)
+        y = page_h_pt - mm(tx.y_mm)
+        if tx.align == "center":
+            c.drawCentredString(x, y, tx.text)
+        elif tx.align == "right":
+            c.drawRightString(x, y, tx.text)
+        else:
+            c.drawString(x, y, tx.text)
+
+    c.showPage()
+    c.save()
+
+
+def draw_html(output_html: Path, lines: List[LineItem], texts: List[TextItem]) -> None:
+    line_svg = "\n".join(
+        (
+            f'<line x1="{ln.x1_mm:.3f}mm" y1="{ln.y1_mm:.3f}mm" '
+            f'x2="{ln.x2_mm:.3f}mm" y2="{ln.y2_mm:.3f}mm" '
+            f'stroke="#111" stroke-width="{max(0.2, ln.width_pt * 0.12):.3f}mm" />'
+        )
+        for ln in lines
+    )
+
+    text_divs = "\n".join(
+        (
+            f'<div class="txt {tx.align} {"bold" if tx.bold else ""}" '
+            f'style="left:{tx.x_mm:.3f}mm;top:{tx.y_mm:.3f}mm;font-size:{tx.size_pt:.2f}pt;">{tx.text}</div>'
+        )
+        for tx in texts
+    )
+
+    html_doc = f"""<!doctype html>
+<html lang=\"vi\">
+<head>
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <title>01-TT Template Engine</title>
+  <style>
+    @page {{ size: A4; margin: 0; }}
+    body {{ margin: 0; background: #f0f2f5; font-family: 'Arial', 'Tahoma', sans-serif; }}
+    .toolbar {{ position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }}
+    .sheet {{ position: relative; width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }}
+    .grid {{ position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }}
+    .txt {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.1; transform: translateY(-0.85em); }}
+    .txt.bold {{ font-weight: 700; }}
+    .txt.center {{ transform: translate(-50%, -0.85em); text-align: center; }}
+    .txt.right {{ transform: translate(-100%, -0.85em); text-align: right; }}
+    @media print {{
+      body {{ background: #fff; }}
+      .toolbar {{ display: none; }}
+      .sheet {{ margin: 0; box-shadow: none; }}
+    }}
+  </style>
+</head>
+<body>
+  <div class=\"toolbar\">Mẫu 01-TT (template dựng từ đầu) | <button onclick=\"window.print()\">In</button></div>
+  <section class=\"sheet\">
+    <svg class=\"grid\" xmlns=\"http://www.w3.org/2000/svg\">{line_svg}</svg>
+    {text_divs}
+  </section>
+</body>
+</html>
+"""
+    output_html.write_text(html_doc, encoding="utf-8")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Render TT99 form 01-TT from template definitions")
+    parser.add_argument("--out-dir", default="data/regulations/tt99_2025_template_engine")
+    args = parser.parse_args()
+
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    lines, texts = layout_01tt(SAMPLE_01TT)
+
+    output_pdf = out_dir / "sample_01_TT_template.pdf"
+    output_html = out_dir / "sample_01_TT_template.html"
+
+    draw_pdf(output_pdf, lines, texts)
+    draw_html(output_html, lines, texts)
+
+    print(f"Generated: {output_pdf}")
+    print(f"Generated: {output_html}")
+
+
+if __name__ == "__main__":
+    main()

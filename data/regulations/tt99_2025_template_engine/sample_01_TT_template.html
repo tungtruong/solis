@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>01-TT Template Engine</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    body { margin: 0; background: #f0f2f5; font-family: 'Arial', 'Tahoma', sans-serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }
+    .sheet { position: relative; width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }
+    .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .txt { position: absolute; color: #111; white-space: nowrap; line-height: 1.1; transform: translateY(-0.85em); }
+    .txt.bold { font-weight: 700; }
+    .txt.center { transform: translate(-50%, -0.85em); text-align: center; }
+    .txt.right { transform: translate(-100%, -0.85em); text-align: right; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .sheet { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">Mẫu 01-TT (template dựng từ đầu) | <button onclick="window.print()">In</button></div>
+  <section class="sheet">
+    <svg class="grid" xmlns="http://www.w3.org/2000/svg"><line x1="18.000mm" y1="143.000mm" x2="192.000mm" y2="143.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="192.000mm" y1="143.000mm" x2="192.000mm" y2="214.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="192.000mm" y1="214.000mm" x2="18.000mm" y2="214.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="18.000mm" y1="214.000mm" x2="18.000mm" y2="143.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="52.800mm" y1="143.000mm" x2="52.800mm" y2="214.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="87.600mm" y1="143.000mm" x2="87.600mm" y2="214.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="122.400mm" y1="143.000mm" x2="122.400mm" y2="214.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="157.200mm" y1="143.000mm" x2="157.200mm" y2="214.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="18.000mm" y1="157.000mm" x2="192.000mm" y2="157.000mm" stroke="#111" stroke-width="0.200mm" /></svg>
+    <div class="txt left " style="left:18.000mm;top:20.000mm;font-size:10.50pt;">Đơn vị: CÔNG TY TNHH ABC</div>
+<div class="txt left " style="left:18.000mm;top:27.000mm;font-size:10.50pt;">Địa chỉ: Số 18, Trần Duy Hưng, Hà Nội</div>
+<div class="txt center bold" style="left:105.000mm;top:42.000mm;font-size:16.00pt;">PHIẾU THU</div>
+<div class="txt center " style="left:105.000mm;top:49.000mm;font-size:9.50pt;">(Ban hành theo Thông tư 99/2025/TT-BTC)</div>
+<div class="txt center " style="left:105.000mm;top:56.000mm;font-size:10.50pt;">Ngày 20 tháng 03 năm 2026</div>
+<div class="txt left " style="left:145.000mm;top:62.000mm;font-size:10.50pt;">Quyển số: Q1/2026</div>
+<div class="txt left " style="left:145.000mm;top:69.000mm;font-size:10.50pt;">Số: PT-0007</div>
+<div class="txt left " style="left:145.000mm;top:76.000mm;font-size:10.50pt;">Nợ: 1111</div>
+<div class="txt left " style="left:145.000mm;top:83.000mm;font-size:10.50pt;">Có: 1311</div>
+<div class="txt left " style="left:18.000mm;top:97.000mm;font-size:10.50pt;">Họ và tên người nộp tiền: Nguyễn Văn A</div>
+<div class="txt left " style="left:18.000mm;top:106.000mm;font-size:10.50pt;">Địa chỉ: Hà Nội</div>
+<div class="txt left " style="left:18.000mm;top:115.000mm;font-size:10.50pt;">Lý do nộp: Thu tiền khách hàng theo HĐ 2026-015</div>
+<div class="txt left " style="left:18.000mm;top:124.000mm;font-size:10.50pt;">Số tiền: 58.000.000   (Viết bằng chữ): Năm mươi tám triệu đồng chẵn</div>
+<div class="txt left " style="left:18.000mm;top:133.000mm;font-size:10.50pt;">Kèm theo: 01 chứng từ gốc.</div>
+<div class="txt center bold" style="left:35.400mm;top:152.000mm;font-size:10.00pt;">Giám đốc</div>
+<div class="txt center " style="left:35.400mm;top:161.500mm;font-size:9.00pt;">(Ký, họ tên, đóng dấu)</div>
+<div class="txt center bold" style="left:70.200mm;top:152.000mm;font-size:10.00pt;">Kế toán trưởng</div>
+<div class="txt center " style="left:70.200mm;top:161.500mm;font-size:9.00pt;">(Ký, họ tên)</div>
+<div class="txt center bold" style="left:105.000mm;top:152.000mm;font-size:10.00pt;">Người nộp tiền</div>
+<div class="txt center " style="left:105.000mm;top:161.500mm;font-size:9.00pt;">(Ký, họ tên)</div>
+<div class="txt center bold" style="left:139.800mm;top:152.000mm;font-size:10.00pt;">Người lập phiếu</div>
+<div class="txt center " style="left:139.800mm;top:161.500mm;font-size:9.00pt;">(Ký, họ tên)</div>
+<div class="txt center bold" style="left:174.600mm;top:152.000mm;font-size:10.00pt;">Thủ quỹ</div>
+<div class="txt center " style="left:174.600mm;top:161.500mm;font-size:9.00pt;">(Ký, họ tên)</div>
+<div class="txt left " style="left:145.000mm;top:139.000mm;font-size:10.00pt;">Ngày 20 tháng 03 năm 2026</div>
+<div class="txt left " style="left:18.000mm;top:226.000mm;font-size:10.00pt;">Đã nhận đủ số tiền (viết bằng chữ): ........................................................</div>
+<div class="txt left " style="left:18.000mm;top:234.000mm;font-size:10.00pt;">+ Tỷ giá ngoại tệ (vàng, bạc, đá quý): ..................................................</div>
+<div class="txt left " style="left:18.000mm;top:242.000mm;font-size:10.00pt;">+ Số tiền quy đổi: ........................................................................</div>
+<div class="txt left " style="left:18.000mm;top:253.000mm;font-size:9.00pt;">(Liên gửi ra ngoài phải đóng dấu)</div>
+<div class="txt left " style="left:18.000mm;top:268.000mm;font-size:8.80pt;">Ghi chú: Doanh nghiệp có thể tùy biến mẫu phù hợp đặc điểm hoạt động nhưng phải đủ nội dung bắt buộc.</div>
+  </section>
+</body>
+</html>
