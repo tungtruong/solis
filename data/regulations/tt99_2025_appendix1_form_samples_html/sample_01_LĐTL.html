@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bảng thanh toán tiề n lương (01-LĐTL) - Bản điền thử</title>
+  <title>Bảng thanh toán tiề n lương (01-LĐTL) - OCR Layout</title>
   <style>
     :root { --paper-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }
     body { margin: 0; background: #e9edf2; font-family: 'Times New Roman', serif; }
     .toolbar { position: sticky; top: 0; z-index: 10; background: #101317; color: #fff; padding: 10px 14px; }
     .toolbar button { padding: 6px 10px; }
     .container { padding: 14px 0 28px; }
-    .page { position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; }
-    .bg { display: block; width: 100%; height: 100%; }
-    .overlay { position: absolute; inset: 0; pointer-events: none; }
-    .ov { position: absolute; color: #0a0a0a; white-space: nowrap; line-height: 1.1; }
+    .page { position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; overflow: hidden; }
+    .layer { position: absolute; inset: 0; }
+    .ocr { position: absolute; color: #111; white-space: nowrap; line-height: 1.08; }
+    .fill { position: absolute; color: #0a56c2; font-weight: 600; white-space: nowrap; line-height: 1.08; }
     @media print {
       body { background: #fff; }
       .toolbar { display: none; }
@@ -22,33 +22,118 @@
   </style>
 </head>
 <body>
-  <div class="toolbar">01-LĐTL - Bảng thanh toán tiề n lương | <button onclick="window.print()">In</button></div>
+  <div class="toolbar">01-LĐTL - Bảng thanh toán tiề n lương | OCR layout (PaddleOCR) | <button onclick="window.print()">In</button></div>
   <main class="container">
     <section class="page" style="width:1684px;height:1191px;">
-  <img class="bg" src="assets/01_LĐTL_p36.png" alt="01-LĐTL page 36" />
-  <div class="overlay"><div class="ov" style="left:738.3px;top:102.3px;font-size:12px;">20</div>
-<div class="ov" style="left:220.4px;top:597.7px;font-size:12px;">03</div>
-<div class="ov" style="left:220.4px;top:526.8px;font-size:12px;">2026</div>
-<div class="ov" style="left:521.2px;top:102.3px;font-size:12px;">LDTL-0001</div>
-<div class="ov" style="left:796.6px;top:1145.1px;font-size:12px;">Một trăm hai mươi triệu đồng</div>
-<div class="ov" style="left:421.4px;top:1541.8px;font-size:9px;">1</div>
-<div class="ov" style="left:497.8px;top:1541.8px;font-size:9px;">Nguyễn Văn A</div>
-<div class="ov" style="left:574.1px;top:1541.8px;font-size:9px;">Kế toán</div>
-<div class="ov" style="left:650.5px;top:1541.8px;font-size:9px;">3.0</div>
-<div class="ov" style="left:803.2px;top:1541.8px;font-size:9px;">26</div>
-<div class="ov" style="left:879.5px;top:1541.8px;font-size:9px;">24,000,000</div>
-<div class="ov" style="left:1414.0px;top:1541.8px;font-size:9px;">0</div>
-<div class="ov" style="left:1490.3px;top:1541.8px;font-size:9px;">24,000,000</div>
-<div class="ov" style="left:1566.7px;top:1541.8px;font-size:9px;">A</div>
-<div class="ov" style="left:421.4px;top:1554.2px;font-size:9px;">2</div>
-<div class="ov" style="left:497.8px;top:1554.2px;font-size:9px;">Trần Thị B</div>
-<div class="ov" style="left:574.1px;top:1554.2px;font-size:9px;">Thủ quỹ</div>
-<div class="ov" style="left:650.5px;top:1554.2px;font-size:9px;">2.6</div>
-<div class="ov" style="left:803.2px;top:1554.2px;font-size:9px;">26</div>
-<div class="ov" style="left:879.5px;top:1554.2px;font-size:9px;">18,000,000</div>
-<div class="ov" style="left:1414.0px;top:1554.2px;font-size:9px;">0</div>
-<div class="ov" style="left:1490.3px;top:1554.2px;font-size:9px;">18,000,000</div>
-<div class="ov" style="left:1566.7px;top:1554.2px;font-size:9px;">B</div></div>
+  <div class="layer ocr-layer">
+<div class="ocr" style="left:146.0px;top:131.0px;font-size:18px;">Do&#x27;n vi:..</div>
+<div class="ocr" style="left:1098.0px;top:126.0px;font-size:18px;">Mäu s6: 01 - LDTL</div>
+<div class="ocr" style="left:146.0px;top:167.0px;font-size:18px;">Bo phan.....</div>
+<div class="ocr" style="left:1033.0px;top:160.0px;font-size:18px;">(Kém theo Th6ng tu s6 99/2025/TT-BTC</div>
+<div class="ocr" style="left:958.0px;top:186.0px;font-size:18px;">ngay 27 thang 10 nam 2025 cua Bo truong Bo Tai chinh)</div>
+<div class="ocr" style="left:600.0px;top:236.0px;font-size:18px;">BANG THANH TOAN TIEN LUONG</div>
+<div class="ocr" style="left:723.0px;top:266.0px;font-size:18px;">Thang..... nam.....</div>
+<div class="ocr" style="left:1281.0px;top:315.0px;font-size:18px;">S6:</div>
+<div class="ocr" style="left:1542.0px;top:319.0px;font-size:18px;">CONG BAO/S6 1563 + 1564/Ngay 16-11-2025</div>
+<div class="ocr" style="left:483.0px;top:364.0px;font-size:18px;">Luong</div>
+<div class="ocr" style="left:582.0px;top:369.0px;font-size:18px;">Luong</div>
+<div class="ocr" style="left:670.0px;top:369.0px;font-size:18px;">Nghi viêc ngung viec</div>
+<div class="ocr" style="left:1200.0px;top:370.0px;font-size:17px;">Cac khoan</div>
+<div class="ocr" style="left:1426.0px;top:370.0px;font-size:17px;">Ky II</div>
+<div class="ocr" style="left:575.0px;top:389.0px;font-size:18px;">thi gian</div>
+<div class="ocr" style="left:680.0px;top:388.0px;font-size:18px;">huróng...% lurong</div>
+<div class="ocr" style="left:847.0px;top:382.0px;font-size:18px;">Phu cäp</div>
+<div class="ocr" style="left:477.0px;top:393.0px;font-size:17px;">sän phäm</div>
+<div class="ocr" style="left:934.0px;top:396.0px;font-size:18px;">Phu</div>
+<div class="ocr" style="left:1050.0px;top:393.0px;font-size:18px;">Tam</div>
+<div class="ocr" style="left:1138.0px;top:390.0px;font-size:18px;">phái kháu trir vao luong</div>
+<div class="ocr" style="left:1407.0px;top:392.0px;font-size:18px;">dugc linh</div>
+<div class="ocr" style="left:226.0px;top:409.0px;font-size:18px;">Ho va</div>
+<div class="ocr" style="left:858.0px;top:411.0px;font-size:18px;">thuöc</div>
+<div class="ocr" style="left:988.0px;top:403.0px;font-size:18px;">Tong</div>
+<div class="ocr" style="left:163.0px;top:422.0px;font-size:17px;">STT</div>
+<div class="ocr" style="left:316.0px;top:413.0px;font-size:16px;">Ngach bac</div>
+<div class="ocr" style="left:439.0px;top:413.0px;font-size:17px;">He</div>
+<div class="ocr" style="left:937.0px;top:422.0px;font-size:18px;">cap</div>
+<div class="ocr" style="left:1054.0px;top:421.0px;font-size:18px;">úng</div>
+<div class="ocr" style="left:239.0px;top:436.0px;font-size:17px;">tén</div>
+<div class="ocr" style="left:300.0px;top:436.0px;font-size:16px;">luong hoac cap</div>
+<div class="ocr" style="left:439.0px;top:434.0px;font-size:17px;">s6</div>
+<div class="ocr" style="left:482.0px;top:441.0px;font-size:18px;">s6</div>
+<div class="ocr" style="left:532.0px;top:441.0px;font-size:18px;">s6</div>
+<div class="ocr" style="left:582.0px;top:441.0px;font-size:18px;">s6</div>
+<div class="ocr" style="left:633.0px;top:443.0px;font-size:18px;">s6</div>
+<div class="ocr" style="left:867.0px;top:438.0px;font-size:17px;">quy</div>
+<div class="ocr" style="left:1003.0px;top:434.0px;font-size:18px;">s6</div>
+<div class="ocr" style="left:671.0px;top:450.0px;font-size:18px;">só cong</div>
+<div class="ocr" style="left:931.0px;top:447.0px;font-size:18px;">khac</div>
+<div class="ocr" style="left:1054.0px;top:447.0px;font-size:17px;">ky I</div>
+<div class="ocr" style="left:1224.0px;top:441.0px;font-size:18px;">Thué TNCN</div>
+<div class="ocr" style="left:1402.0px;top:441.0px;font-size:18px;">s6</div>
+<div class="ocr" style="left:1461.0px;top:443.0px;font-size:18px;">Ky</div>
+<div class="ocr" style="left:310.0px;top:453.0px;font-size:18px;">bac chüc vu</div>
+<div class="ocr" style="left:567.0px;top:462.0px;font-size:18px;">cong</div>
+<div class="ocr" style="left:765.0px;top:454.0px;font-size:18px;">Só tién</div>
+<div class="ocr" style="left:855.0px;top:455.0px;font-size:18px;">luong</div>
+<div class="ocr" style="left:1109.0px;top:457.0px;font-size:17px;">BHXH</div>
+<div class="ocr" style="left:1334.0px;top:453.0px;font-size:18px;">Cong</div>
+<div class="ocr" style="left:477.0px;top:463.0px;font-size:18px;">SP</div>
+<div class="ocr" style="left:528.0px;top:468.0px;font-size:17px;">tién</div>
+<div class="ocr" style="left:628.0px;top:468.0px;font-size:17px;">tién</div>
+<div class="ocr" style="left:1233.0px;top:468.0px;font-size:18px;">phai nöp</div>
+<div class="ocr" style="left:1450.0px;top:464.0px;font-size:18px;">nhan</div>
+<div class="ocr" style="left:175.0px;top:526.0px;font-size:12px;">A</div>
+<div class="ocr" style="left:247.0px;top:525.0px;font-size:14px;">B</div>
+<div class="ocr" style="left:447.0px;top:525.0px;font-size:13px;">2</div>
+<div class="ocr" style="left:588.0px;top:525.0px;font-size:13px;">5</div>
+<div class="ocr" style="left:639.0px;top:525.0px;font-size:13px;">6</div>
+<div class="ocr" style="left:707.0px;top:526.0px;font-size:11px;">7</div>
+<div class="ocr" style="left:945.0px;top:525.0px;font-size:13px;">10</div>
+<div class="ocr" style="left:1007.0px;top:525.0px;font-size:13px;">11</div>
+<div class="ocr" style="left:1065.0px;top:525.0px;font-size:13px;">12</div>
+<div class="ocr" style="left:1131.0px;top:525.0px;font-size:13px;">13</div>
+<div class="ocr" style="left:1267.0px;top:525.0px;font-size:13px;">15</div>
+<div class="ocr" style="left:1351.0px;top:525.0px;font-size:13px;">16</div>
+<div class="ocr" style="left:1407.0px;top:525.0px;font-size:13px;">17</div>
+<div class="ocr" style="left:1466.0px;top:525.0px;font-size:14px;">C</div>
+<div class="ocr" style="left:226.0px;top:707.0px;font-size:18px;">Cong</div>
+<div class="ocr" style="left:360.0px;top:712.0px;font-size:11px;">x</div>
+<div class="ocr" style="left:219.0px;top:755.0px;font-size:18px;">Töng só tién (viét bang chu):</div>
+<div class="ocr" style="left:1140.0px;top:819.0px;font-size:18px;">Ngay.... thang.... nam....</div>
+<div class="ocr" style="left:328.0px;top:849.0px;font-size:18px;">Ngui láp báng</div>
+<div class="ocr" style="left:775.0px;top:847.0px;font-size:18px;">Ké toán truóng</div>
+<div class="ocr" style="left:1216.0px;top:851.0px;font-size:18px;">Giam d6c</div>
+<div class="ocr" style="left:358.0px;top:888.0px;font-size:18px;">(Ky, ho tén)</div>
+<div class="ocr" style="left:802.0px;top:884.0px;font-size:18px;">(Ky, ho tén)</div>
+<div class="ocr" style="left:1210.0px;top:884.0px;font-size:18px;">(Ky, ho tén)</div>
+<div class="ocr" style="left:189.0px;top:977.0px;font-size:18px;">8unp Kpx dönp déd8u yupop &#x27;yusu id uop pno  upnb npo nad pa yupop yudy 1pnx ups 8uöp 1boy uaip sbp odad Kni :ngo ld</div>
+<div class="ocr" style="left:147.0px;top:1012.0px;font-size:18px;">thiét ké biéu mau chi&#x27;ng tir ké toan.</div>
+  </div>
+  <div class="layer fill-layer">
+<div class="fill" style="left:1473.0px;top:186.0px;font-size:16px;">20</div>
+<div class="fill" style="left:1473.0px;top:186.0px;font-size:16px;">03</div>
+<div class="fill" style="left:1473.0px;top:186.0px;font-size:16px;">2026</div>
+<div class="fill" style="left:758.0px;top:450.0px;font-size:16px;">LDTL-0001</div>
+<div class="fill" style="left:554.0px;top:755.0px;font-size:16px;">Một trăm hai mươi triệu đồng</div>
+<div class="fill" style="left:162.0px;top:467.0px;font-size:10px;">1</div>
+<div class="fill" style="left:255.8px;top:467.0px;font-size:10px;">Nguyễn Văn A</div>
+<div class="fill" style="left:349.5px;top:467.0px;font-size:10px;">Kế toán</div>
+<div class="fill" style="left:443.2px;top:467.0px;font-size:10px;">3.0</div>
+<div class="fill" style="left:630.8px;top:467.0px;font-size:10px;">26</div>
+<div class="fill" style="left:724.5px;top:467.0px;font-size:10px;">24,000,000</div>
+<div class="fill" style="left:1380.8px;top:467.0px;font-size:10px;">0</div>
+<div class="fill" style="left:1474.5px;top:467.0px;font-size:10px;">24,000,000</div>
+<div class="fill" style="left:1568.2px;top:467.0px;font-size:10px;">A</div>
+<div class="fill" style="left:162.0px;top:490.1px;font-size:10px;">2</div>
+<div class="fill" style="left:255.8px;top:490.1px;font-size:10px;">Trần Thị B</div>
+<div class="fill" style="left:349.5px;top:490.1px;font-size:10px;">Thủ quỹ</div>
+<div class="fill" style="left:443.2px;top:490.1px;font-size:10px;">2.6</div>
+<div class="fill" style="left:630.8px;top:490.1px;font-size:10px;">26</div>
+<div class="fill" style="left:724.5px;top:490.1px;font-size:10px;">18,000,000</div>
+<div class="fill" style="left:1380.8px;top:490.1px;font-size:10px;">0</div>
+<div class="fill" style="left:1474.5px;top:490.1px;font-size:10px;">18,000,000</div>
+<div class="fill" style="left:1568.2px;top:490.1px;font-size:10px;">B</div>
+  </div>
 </section>
   </main>
 </body>

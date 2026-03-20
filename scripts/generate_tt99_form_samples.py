@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate sample TT99 forms by overlaying values on PDF page images."""
+"""Generate sample TT99 forms by OCR-reconstructing page layout with PaddleOCR."""
 
 from __future__ import annotations
 
@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import fitz
+import numpy as np
+from paddleocr import PaddleOCR
 
 
 SAMPLE_VALUES: Dict[str, Dict[str, str]] = {
@@ -103,125 +105,202 @@ def resolve_path(input_json_path: Path, path_text: str) -> Path:
     raise FileNotFoundError(f"Path not found: {path_text}")
 
 
-def find_label_rect(page: fitz.Page, label: str) -> Optional[fitz.Rect]:
-    candidates = [label, label.replace("(", "").replace(")", ""), label.lstrip("- ")]
-    for cand in candidates:
-        if not cand:
+def pix_to_ndarray(page: fitz.Page, zoom: float) -> Tuple[np.ndarray, int, int]:
+    pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+    if pix.n != 3:
+        pix = fitz.Pixmap(fitz.csRGB, pix)
+    arr = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, 3)
+    return arr, pix.width, pix.height
+
+
+def run_ocr(ocr: PaddleOCR, img: np.ndarray) -> List[Dict[str, object]]:
+    lines = []
+    try:
+        raw = ocr.ocr(img, cls=True)
+        lines = raw[0] if raw and isinstance(raw, list) and len(raw) > 0 else []
+    except Exception:
+        raw = ocr.predict(img)
+        lines = raw[0] if raw and isinstance(raw, list) and len(raw) > 0 else []
+
+    blocks: List[Dict[str, object]] = []
+    for item in lines:
+        if not item:
             continue
-        rects = page.search_for(cand)
-        if rects:
-            return rects[0]
 
-    label_norm = normalize_for_match(label)
-    words = page.get_text("words")
-    by_line: Dict[Tuple[int, int], List[Tuple[float, float, float, float, str]]] = {}
-    for x0, y0, x1, y1, w, block_no, line_no, _word_no in words:
-        by_line.setdefault((block_no, line_no), []).append((x0, y0, x1, y1, str(w)))
+        if isinstance(item, list) and len(item) >= 2:
+            box = item[0]
+            text = str(item[1][0]).strip() if item[1] else ""
+            conf = float(item[1][1]) if item[1] and len(item[1]) > 1 else 0.0
+        elif isinstance(item, dict):
+            points = item.get("dt_polys") or item.get("rec_polys")
+            recs = item.get("rec_text")
+            scores = item.get("rec_score")
+            if points is None or recs is None:
+                continue
+            box = points[0]
+            text = str(recs[0]).strip() if recs else ""
+            conf = float(scores[0]) if scores else 0.0
+        else:
+            continue
 
-    for _line_key, line_words in by_line.items():
-        ordered = sorted(line_words, key=lambda item: item[0])
-        line_text = " ".join(w[4] for w in ordered)
-        if label_norm and label_norm in normalize_for_match(line_text):
-            return fitz.Rect(ordered[0][0], ordered[0][1], ordered[-1][2], ordered[-1][3])
+        if not text:
+            continue
+
+        xs = [float(p[0]) for p in box]
+        ys = [float(p[1]) for p in box]
+        x0, y0, x1, y1 = min(xs), min(ys), max(xs), max(ys)
+        blocks.append(
+            {
+                "text": text,
+                "norm": normalize_for_match(text),
+                "x": x0,
+                "y": y0,
+                "w": x1 - x0,
+                "h": y1 - y0,
+                "conf": conf,
+            }
+        )
+
+    return blocks
+
+
+def find_label_block(blocks: List[Dict[str, object]], label: str) -> Optional[Dict[str, object]]:
+    candidates = [label, label.replace("(", "").replace(")", ""), label.lstrip("- ")]
+    norms = [normalize_for_match(c) for c in candidates if c.strip()]
+
+    for target in norms:
+        for b in blocks:
+            if target and target in str(b["norm"]):
+                return b
 
     return None
 
 
-def page_to_png(page: fitz.Page, out_path: Path, zoom: float) -> Tuple[int, int]:
-    matrix = fitz.Matrix(zoom, zoom)
-    pix = page.get_pixmap(matrix=matrix, alpha=False)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    pix.save(str(out_path))
-    return pix.width, pix.height
-
-
 def build_field_overlays(
-    page: fitz.Page,
+    blocks: List[Dict[str, object]],
     fields: List[Dict[str, object]],
     form_code: str,
-    zoom: float,
+    page_width: int,
 ) -> List[Dict[str, object]]:
     overlays: List[Dict[str, object]] = []
-    fallback_y = 110.0
+    fallback_y = 140.0
 
     for field in fields:
         label = str(field.get("label", "")).strip()
         if not label:
             continue
+
         value = value_for(str(field.get("field_key", "")), form_code)
-        rect = find_label_rect(page, label)
+        block = find_label_block(blocks, label)
 
-        if rect:
-            x = (rect.x1 + 6.0) * zoom
-            y = (rect.y0 - 1.0) * zoom
+        if block:
+            x = float(block["x"]) + float(block["w"]) + 8.0
+            y = float(block["y"])
+            fs = max(10, min(16, int(float(block["h"]) * 0.8)))
         else:
-            x = page.rect.width * 0.62 * zoom
-            y = fallback_y * zoom
-            fallback_y += 9.0
+            x = page_width * 0.62
+            y = fallback_y
+            fs = 12
+            fallback_y += 22.0
 
-        overlays.append(
-            {
-                "x": round(x, 1),
-                "y": round(y, 1),
-                "font_size": 12,
-                "text": value,
-            }
-        )
+        overlays.append({"x": round(x, 1), "y": round(y, 1), "font_size": fs, "text": value})
 
     return overlays
 
 
+def find_stt_block(blocks: List[Dict[str, object]]) -> Optional[Dict[str, object]]:
+    for b in blocks:
+        if str(b["norm"]) == "stt" or str(b["norm"]).startswith("stt "):
+            return b
+    for b in blocks:
+        if " stt " in f" {b['norm']} ":
+            return b
+    return None
+
+
 def build_grid_overlays(
-    page: fitz.Page,
+    blocks: List[Dict[str, object]],
     table_schema: Dict[str, object],
     form_code: str,
-    zoom: float,
+    page_width: int,
 ) -> List[Dict[str, object]]:
     if not table_schema.get("has_grid"):
         return []
 
-    grid_rows = GRID_ROWS.get(form_code, [])
-    if not grid_rows:
+    rows = GRID_ROWS.get(form_code, [])
+    if not rows:
         return []
 
-    stt_rects = page.search_for("STT")
-    if not stt_rects:
+    stt_block = find_stt_block(blocks)
+    if not stt_block:
         return []
 
-    stt = stt_rects[0]
     col_count = len(table_schema.get("table_columns", []))
     if col_count <= 0:
         return []
 
-    left = max(22.0, stt.x0 - 2.0)
-    right = page.rect.width - 22.0
+    left = max(20.0, float(stt_block["x"]) - 3.0)
+    right = float(page_width) - 24.0
     col_w = (right - left) / col_count
-    row_h = 6.2
-    start_y = stt.y1 + 12.0
+    row_h = max(14.0, float(stt_block["h"]) * 1.1)
+    start_y = float(stt_block["y"]) + float(stt_block["h"]) + 24.0
 
     overlays: List[Dict[str, object]] = []
-    for r_idx, row in enumerate(grid_rows):
+    for r_idx, row in enumerate(rows):
         for c_idx, val in enumerate(row[:col_count]):
             if not val:
                 continue
-            x = (left + c_idx * col_w + 1.5) * zoom
-            y = (start_y + r_idx * row_h) * zoom
-            overlays.append(
-                {
-                    "x": round(x, 1),
-                    "y": round(y, 1),
-                    "font_size": 9,
-                    "text": str(val),
-                }
-            )
+            x = left + c_idx * col_w + 2.0
+            y = start_y + r_idx * row_h
+            overlays.append({"x": round(x, 1), "y": round(y, 1), "font_size": 10, "text": str(val)})
 
     return overlays
+
+
+def render_page_html(
+    blocks: List[Dict[str, object]],
+    overlays: List[Dict[str, object]],
+    width: int,
+    height: int,
+) -> str:
+    ocr_text = "\n".join(
+        (
+            f"<div class=\"ocr\" style=\"left:{round(float(b['x']),1)}px;top:{round(float(b['y']),1)}px;"
+            f"font-size:{max(9, min(18, int(float(b['h']) * 0.85)))}px;\">"
+            + html.escape(str(b["text"]))
+            + "</div>"
+        )
+        for b in blocks
+        if float(b["conf"]) >= 0.25
+    )
+
+    filled_text = "\n".join(
+        (
+            f"<div class=\"fill\" style=\"left:{ov['x']}px;top:{ov['y']}px;font-size:{ov['font_size']}px;\">"
+            + html.escape(str(ov["text"]))
+            + "</div>"
+        )
+        for ov in overlays
+    )
+
+    return "\n".join(
+        [
+            f"<section class=\"page\" style=\"width:{width}px;height:{height}px;\">",
+            "  <div class=\"layer ocr-layer\">",
+            f"{ocr_text}",
+            "  </div>",
+            "  <div class=\"layer fill-layer\">",
+            f"{filled_text}",
+            "  </div>",
+            "</section>",
+        ]
+    )
 
 
 def render_sample_html(
     form: Dict[str, object],
     pdf_path: Path,
-    out_dir: Path,
+    ocr: PaddleOCR,
     zoom: float,
 ) -> str:
     form_code = str(form["form_code"])
@@ -233,37 +312,19 @@ def render_sample_html(
 
     doc = fitz.open(str(pdf_path))
     page_blocks: List[str] = []
-    asset_dir = out_dir / "assets"
 
     try:
         for page_num in range(start_page, end_page + 1):
             page = doc[page_num - 1]
-            image_name = f"{form_code.replace('-', '_')}_p{page_num}.png"
-            image_path = asset_dir / image_name
-            width_px, height_px = page_to_png(page, image_path, zoom)
+            img, width_px, height_px = pix_to_ndarray(page, zoom)
+            ocr_blocks = run_ocr(ocr, img)
 
-            overlays = build_field_overlays(page, fields, form_code, zoom) if page_num == start_page else []
-            overlays.extend(build_grid_overlays(page, table_schema, form_code, zoom) if page_num == start_page else [])
+            overlays: List[Dict[str, object]] = []
+            if page_num == start_page:
+                overlays.extend(build_field_overlays(ocr_blocks, fields, form_code, width_px))
+                overlays.extend(build_grid_overlays(ocr_blocks, table_schema, form_code, width_px))
 
-            overlay_html = "\n".join(
-                (
-                    f"<div class=\"ov\" style=\"left:{ov['x']}px;top:{ov['y']}px;font-size:{ov['font_size']}px;\">"
-                    + html.escape(str(ov["text"]))
-                    + "</div>"
-                )
-                for ov in overlays
-            )
-
-            page_blocks.append(
-                "\n".join(
-                    [
-                        f"<section class=\"page\" style=\"width:{width_px}px;height:{height_px}px;\">",
-                        f"  <img class=\"bg\" src=\"assets/{html.escape(image_name)}\" alt=\"{html.escape(form_code)} page {page_num}\" />",
-                        f"  <div class=\"overlay\">{overlay_html}</div>",
-                        "</section>",
-                    ]
-                )
-            )
+            page_blocks.append(render_page_html(ocr_blocks, overlays, width_px, height_px))
     finally:
         doc.close()
 
@@ -272,17 +333,17 @@ def render_sample_html(
 <head>
   <meta charset=\"utf-8\" />
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-  <title>{html.escape(title)} ({html.escape(form_code)}) - Bản điền thử</title>
+  <title>{html.escape(title)} ({html.escape(form_code)}) - OCR Layout</title>
   <style>
     :root {{ --paper-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }}
     body {{ margin: 0; background: #e9edf2; font-family: 'Times New Roman', serif; }}
     .toolbar {{ position: sticky; top: 0; z-index: 10; background: #101317; color: #fff; padding: 10px 14px; }}
     .toolbar button {{ padding: 6px 10px; }}
     .container {{ padding: 14px 0 28px; }}
-    .page {{ position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; }}
-    .bg {{ display: block; width: 100%; height: 100%; }}
-    .overlay {{ position: absolute; inset: 0; pointer-events: none; }}
-    .ov {{ position: absolute; color: #0a0a0a; white-space: nowrap; line-height: 1.1; }}
+    .page {{ position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; overflow: hidden; }}
+    .layer {{ position: absolute; inset: 0; }}
+    .ocr {{ position: absolute; color: #111; white-space: nowrap; line-height: 1.08; }}
+    .fill {{ position: absolute; color: #0a56c2; font-weight: 600; white-space: nowrap; line-height: 1.08; }}
     @media print {{
       body {{ background: #fff; }}
       .toolbar {{ display: none; }}
@@ -291,7 +352,7 @@ def render_sample_html(
   </style>
 </head>
 <body>
-  <div class=\"toolbar\">{html.escape(form_code)} - {html.escape(title)} | <button onclick=\"window.print()\">In</button></div>
+  <div class=\"toolbar\">{html.escape(form_code)} - {html.escape(title)} | OCR layout (PaddleOCR) | <button onclick=\"window.print()\">In</button></div>
   <main class=\"container\">
     {''.join(page_blocks)}
   </main>
@@ -301,10 +362,10 @@ def render_sample_html(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate sample forms using PDF visual layout")
+    parser = argparse.ArgumentParser(description="Generate sample forms using OCR text-layout reconstruction")
     parser.add_argument("--input-json", default="data/regulations/tt99_2025_appendix1_form_templates.json")
     parser.add_argument("--out-dir", default="data/regulations/tt99_2025_appendix1_form_samples_html")
-    parser.add_argument("--zoom", type=float, default=2.0, help="Render scale for PDF pages")
+    parser.add_argument("--zoom", type=float, default=2.0, help="Render scale before OCR")
     parser.add_argument("--codes", nargs="*", default=["01-LĐTL", "01-TT", "01-VT"], help="Form codes to export")
     args = parser.parse_args()
 
@@ -317,19 +378,21 @@ def main() -> None:
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    ocr = PaddleOCR(use_angle_cls=True, lang="vi", show_log=False)
+
     links: List[Tuple[str, str, str]] = []
     for code in args.codes:
         if code not in by_code:
             continue
         form = by_code[code]
         file_name = f"sample_{code.replace('-', '_')}.html"
-        html_output = render_sample_html(form, pdf_path, out_dir, args.zoom)
+        html_output = render_sample_html(form, pdf_path, ocr, args.zoom)
         (out_dir / file_name).write_text(html_output, encoding="utf-8")
         links.append((code, file_name, str(form["title"])))
 
     index_html = [
-        "<!doctype html><html lang='vi'><head><meta charset='utf-8'><title>TT99 Visual Samples</title></head><body>",
-        "<h1>Bản điền thử theo layout ảnh PDF</h1>",
+        "<!doctype html><html lang='vi'><head><meta charset='utf-8'><title>TT99 OCR Layout Samples</title></head><body>",
+        "<h1>Bản điền thử theo OCR layout (PaddleOCR)</h1>",
         "<ul>",
     ]
     for code, file_name, title in links:
