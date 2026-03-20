@@ -4,6 +4,141 @@
   "source_pdf": "data/regulations/TT99/2025_1563 + 1564_99-2025-TT-BTC.pdf",
   "generated_by": "scripts/extract_tt99_appendix1_form_templates.py",
   "total_forms": 33,
+  "html_output_dir": "data/regulations/tt99_2025_appendix1_form_templates_html",
+  "html_files": [
+    {
+      "form_code": "01-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/01_LĐTL.html"
+    },
+    {
+      "form_code": "02-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/02_LĐTL.html"
+    },
+    {
+      "form_code": "03-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/03_LĐTL.html"
+    },
+    {
+      "form_code": "04-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/04_LĐTL.html"
+    },
+    {
+      "form_code": "05-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/05_LĐTL.html"
+    },
+    {
+      "form_code": "06-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/06_LĐTL.html"
+    },
+    {
+      "form_code": "07-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/07_LĐTL.html"
+    },
+    {
+      "form_code": "08-LĐTL",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/08_LĐTL.html"
+    },
+    {
+      "form_code": "01-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/01_VT.html"
+    },
+    {
+      "form_code": "02-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/02_VT.html"
+    },
+    {
+      "form_code": "03-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/03_VT.html"
+    },
+    {
+      "form_code": "04-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/04_VT.html"
+    },
+    {
+      "form_code": "05-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/05_VT.html"
+    },
+    {
+      "form_code": "06-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/06_VT.html"
+    },
+    {
+      "form_code": "07-VT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/07_VT.html"
+    },
+    {
+      "form_code": "01-BH",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/01_BH.html"
+    },
+    {
+      "form_code": "02-BH",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/02_BH.html"
+    },
+    {
+      "form_code": "01-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/01_TT.html"
+    },
+    {
+      "form_code": "02-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/02_TT.html"
+    },
+    {
+      "form_code": "03-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/03_TT.html"
+    },
+    {
+      "form_code": "04-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/04_TT.html"
+    },
+    {
+      "form_code": "05-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/05_TT.html"
+    },
+    {
+      "form_code": "06-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/06_TT.html"
+    },
+    {
+      "form_code": "07-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/07_TT.html"
+    },
+    {
+      "form_code": "08a-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/08a_TT.html"
+    },
+    {
+      "form_code": "08b-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/08b_TT.html"
+    },
+    {
+      "form_code": "09-TT",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/09_TT.html"
+    },
+    {
+      "form_code": "01-TSCĐ",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/01_TSCĐ.html"
+    },
+    {
+      "form_code": "02-TSCĐ",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/02_TSCĐ.html"
+    },
+    {
+      "form_code": "03-TSCĐ",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/03_TSCĐ.html"
+    },
+    {
+      "form_code": "04-TSCĐ",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/04_TSCĐ.html"
+    },
+    {
+      "form_code": "05-TSCĐ",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/05_TSCĐ.html"
+    },
+    {
+      "form_code": "06-TSCĐ",
+      "path": "data/regulations/tt99_2025_appendix1_form_templates_html/06_TSCĐ.html"
+    }
+  ],
   "forms": [
     {
       "form_id": "tt99_appendix1_01_ldtl",
@@ -44,10 +179,335 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 46,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_9",
+            "label": "Cột 9",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_10",
+            "label": "Cột 10",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_11",
+            "label": "Cột 11",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_12",
+            "label": "Cột 12",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_13",
+            "label": "Cột 13",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_14",
+            "label": "Cột 14",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_15",
+            "label": "Cột 15",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_16",
+            "label": "Cột 16",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người lập bảng Kế toán trưởng Giám đốc"
       ],
-      "layout_text": "Mẫu số: 01 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG THANH TOÁN TIỀN LƯƠNG \nTháng...... năm...... \n Số:............... \nLương \nsản phẩm \nLương \nthời gian \nNghỉ việc ngừng việc \nhưởng....% lương \nCác khoản \nphải khấu trừ vào lương \nKỳ II \nđược lĩnh \nSTT Họ và \ntên \n \nNgạch bậc \nlương hoặc cấp \nbậc chức vụ \nHệ \nsố Số \nSP \nSố \ntiền \nSố \ncông \nSố \ntiền Số công Số tiền \nPhụ cấp \nthuộc \nquỹ \nlương \nPhụ \ncấp \nkhác \nTổng \nsố \nTạm \nứng \nkỳ I BHXH ... Thuế TNCN \nphải nộp Cộng Số \ntiền \nKý \nnhận \nA B 1 2 3 4 5 6 7 8 9 10 11 12 13 1\n4 15 16 17 C \n                    \n                    \n                    \n                    \n Cộng x x x  x  x           x \nTổng số tiền (viết bằng chữ):........................................................................................................................................ \n \n  Ngày.... tháng.... năm.... \nNgười lập bảng Kế toán trưởng Giám đốc \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số: 01 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG THANH TOÁN TIỀN LƯƠNG \nTháng...... năm...... \n Số:............... \nLương \nsản phẩm \nLương \nthời gian \nNghỉ việc ngừng việc \nhưởng....% lương \nCác khoản \nphải khấu trừ vào lương \nKỳ II \nđược lĩnh \nSTT Họ và \ntên \n \nNgạch bậc \nlương hoặc cấp \nbậc chức vụ \nHệ \nsố Số \nSP \nSố \ntiền \nSố \ncông \nSố \ntiền Số công Số tiền \nPhụ cấp \nthuộc \nquỹ \nlương \nPhụ \ncấp \nkhác \nTổng \nsố \nTạm \nứng \nkỳ I BHXH ... Thuế TNCN \nphải nộp Cộng Số \ntiền \nKý \nnhận \nA B 1 2 3 4 5 6 7 8 9 10 11 12 13 1\n4 15 16 17 C \n                    \n                    \n                    \n                    \n Cộng x x x  x  x           x \nTổng số tiền (viết bằng chữ):........................................................................................................................................ \n \n  Ngày.... tháng.... năm.... \nNgười lập bảng Kế toán trưởng Giám đốc \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/01_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_02_ldtl",
@@ -88,10 +548,191 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 10,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người lập bảng Kế toán trưởng Giám đốc"
       ],
-      "layout_text": "Mẫu số 02 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG THANH TOÁN TIỀN THƯỞNG \nQuý...... năm......  \n Số:................  \nMức thưởng \nSTT Họ và tên Ngạch bậc lương hoặc \ncấp bậc chức vụ Xếp loại thưởng Số tiền Ký nhận \nGhi chú \nA B C 1 2 D E \n       \n       \n       \n       \n       \n       \n       \nCộng x   x x \n \nTổng số tiền (Viết bằng chữ):.............................................................................................................................................  \n  Ngày... tháng... năm...... \nNgười lập bảng Kế toán trưởng Giám đốc \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 02 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG THANH TOÁN TIỀN THƯỞNG \nQuý...... năm......  \n Số:................  \nMức thưởng \nSTT Họ và tên Ngạch bậc lương hoặc \ncấp bậc chức vụ Xếp loại thưởng Số tiền Ký nhận \nGhi chú \nA B C 1 2 D E \n       \n       \n       \n       \n       \n       \n       \nCộng x   x x \n \nTổng số tiền (Viết bằng chữ):.............................................................................................................................................  \n  Ngày... tháng... năm...... \nNgười lập bảng Kế toán trưởng Giám đốc \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/02_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_03_ldtl",
@@ -132,10 +773,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Người lập bảng Kế toán trưởng Người duyệt"
       ],
-      "layout_text": "Mẫu số 03 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG THANH TOÁN TIỀN LÀM THÊM GIỜ \nTháng...... năm...... \nSố:........................ \nMức lương Làm thêm \nngày làm việc \nLàm thêm \nngày thứ bảy, \nchủ nhật \nLàm thêm \nngày lễ,       \nngày tết \nLàm thêm \nbuổi đêm \nSố ngày \nnghỉ bù STT \nHọ \nvà \ntên \nNgạch bậc \nlương hoặc \ncấp bậc \nchức vụ \n \nHệ \nsố \nlương \nHệ số \nphụ \ncấp \nchức \nvụ \nCộng \nhệ số \nTiền \nlương \ntháng Ngày Giờ Số \ngiờ \nThành \ntiền \nSố \ngiờ \nThành \ntiền \nSố \ngiờ \nThành \ntiền \nSố \ngiờ \nThành \ntiền \nTổng \ncộng \ntiền Số \ngiờ \nThành \ntiền \nSố tiền \nthực được \nthanh toán \nNgười \nnhận \ntiền \nký tên \nA B C 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 D \n                      \n                      \n                      \n                      \n                      \n                      \n                      \nC ộ n g  x  x  x  x  x  x  x   x   x   x    x    x  \n \nTổng số tiền (Viết bằng chữ):...................................................................................................................................................... \n Ngày... tháng... năm...... \nNgười lập bảng Kế toán trưởng Người duyệt \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 03 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG THANH TOÁN TIỀN LÀM THÊM GIỜ \nTháng...... năm...... \nSố:........................ \nMức lương Làm thêm \nngày làm việc \nLàm thêm \nngày thứ bảy, \nchủ nhật \nLàm thêm \nngày lễ,       \nngày tết \nLàm thêm \nbuổi đêm \nSố ngày \nnghỉ bù STT \nHọ \nvà \ntên \nNgạch bậc \nlương hoặc \ncấp bậc \nchức vụ \n \nHệ \nsố \nlương \nHệ số \nphụ \ncấp \nchức \nvụ \nCộng \nhệ số \nTiền \nlương \ntháng Ngày Giờ Số \ngiờ \nThành \ntiền \nSố \ngiờ \nThành \ntiền \nSố \ngiờ \nThành \ntiền \nSố \ngiờ \nThành \ntiền \nTổng \ncộng \ntiền Số \ngiờ \nThành \ntiền \nSố tiền \nthực được \nthanh toán \nNgười \nnhận \ntiền \nký tên \nA B C 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 D \n                      \n                      \n                      \n                      \n                      \n                      \n                      \nC ộ n g  x  x  x  x  x  x  x   x   x   x    x    x  \n \nTổng số tiền (Viết bằng chữ):...................................................................................................................................................... \n Ngày... tháng... năm...... \nNgười lập bảng Kế toán trưởng Người duyệt \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/03_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_04_ldtl",
@@ -200,10 +847,271 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 40,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_9",
+            "label": "Cột 9",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_10",
+            "label": "Cột 10",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_11",
+            "label": "Cột 11",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_12",
+            "label": "Cột 12",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người đề nghị thanh toán  Kế toán trưởng Người duyệt"
       ],
-      "layout_text": "Mẫu số 04 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG THANH TOÁN TIỀN THUÊ NGOÀI \n(Dùng cho thuê nhân công, thuê khoán việc) \n      Số:....................... \nHọ và tên người thuê:.........................................................................................................................................................  \nBộ phận (hoặc địa chỉ):...................................................................................................................................................... \nĐã thuê những công việc sau để:........................... tại địa điểm..................................... từ ngày.../.../... đến ngày.../.../....  \nSTT \nHọ và tên \nngười được \nthuê \n CCCD/MST \nTNCN của người \nđược thuê \nNội dung \nhoặc tên \ncông việc \nthuê \nSố công hoặc \nkhối lượng \ncông việc \nđã làm \nĐơn \ngiá \nthanh \ntoán \nThành \ntiền \nTiền \nthuế \nkhấu \ntrừ \nSố tiền \ncòn lại \nđược \nnhận \nKý \nnhận \nA B C D 1 2 3 4 5 = 3 - 4 E \n          \n          \n          \n Cộng x x x x    x \n \nĐề nghị............... cho thanh toán số tiền:........................................................................................................................... \nSố tiền (Viết bằng chữ):...................................................................................................................................................... \n(Kèm theo... chứng từ kế toán khác)  \n  Ngày... tháng... năm... \nNgười đề nghị thanh toán  Kế toán trưởng Người duyệt  \n(Ký, họ tên)  (Ký, h ọ tên)  (Ký, h ọ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 04 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG THANH TOÁN TIỀN THUÊ NGOÀI \n(Dùng cho thuê nhân công, thuê khoán việc) \n      Số:....................... \nHọ và tên người thuê:.........................................................................................................................................................  \nBộ phận (hoặc địa chỉ):...................................................................................................................................................... \nĐã thuê những công việc sau để:........................... tại địa điểm..................................... từ ngày.../.../... đến ngày.../.../....  \nSTT \nHọ và tên \nngười được \nthuê \n CCCD/MST \nTNCN của người \nđược thuê \nNội dung \nhoặc tên \ncông việc \nthuê \nSố công hoặc \nkhối lượng \ncông việc \nđã làm \nĐơn \ngiá \nthanh \ntoán \nThành \ntiền \nTiền \nthuế \nkhấu \ntrừ \nSố tiền \ncòn lại \nđược \nnhận \nKý \nnhận \nA B C D 1 2 3 4 5 = 3 - 4 E \n          \n          \n          \n Cộng x x x x    x \n \nĐề nghị............... cho thanh toán số tiền:........................................................................................................................... \nSố tiền (Viết bằng chữ):...................................................................................................................................................... \n(Kèm theo... chứng từ kế toán khác)  \n  Ngày... tháng... năm... \nNgười đề nghị thanh toán  Kế toán trưởng Người duyệt  \n(Ký, họ tên)  (Ký, h ọ tên)  (Ký, h ọ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/04_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_05_ldtl",
@@ -274,10 +1182,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Đại diện bên nhận khoán Đại diện bên giao khoán"
       ],
-      "layout_text": "Mẫu số: 05 - LĐTL \nBộ phận:............... (Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nHỢP ĐỒNG GIAO KHOÁN \nNgày... tháng... năm... \n Số:.................. \nHọ và tên:...................... Chức vụ......................................................................... \nĐại diện.......................... bên giao khoán ............................................................. \nHọ và tên:...................... Chức vụ......................................................................... \nĐại diện......................... bên nhận khoán ............................................................. \nCÙNG KÝ KẾT HỢP ĐỒNG GIAO KHOÁN NHƯ SAU: \nI- Điều khoản chung: \n- Phương thức giao khoán:....................................................................................  \n- Điều kiện thực hiện hợp đồng: ...........................................................................  \n- Thời gian thực hiện hợp đồng: ...........................................................................  \n- Các điều kiện khác: ............................................................................................  \nII- Điều khoản cụ thể: \n1. Nội dung công việc khoán: \n- .............................................................................................................................  \n- .............................................................................................................................  \n2. Trách nhiệm, quyền lợi và nghĩa vụ của người nhận khoán: \n- .............................................................................................................................  \n- .............................................................................................................................  \n3. Trách nhiệm, quyền lợi và nghĩa vụ của bên giao khoán: \n- .............................................................................................................................  \n- .............................................................................................................................  \n \nĐại diện bên nhận khoán Đại diện bên giao khoán \n(Ký, họ tên) (Ký, h ọ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số: 05 - LĐTL \nBộ phận:............... (Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nHỢP ĐỒNG GIAO KHOÁN \nNgày... tháng... năm... \n Số:.................. \nHọ và tên:...................... Chức vụ......................................................................... \nĐại diện.......................... bên giao khoán ............................................................. \nHọ và tên:...................... Chức vụ......................................................................... \nĐại diện......................... bên nhận khoán ............................................................. \nCÙNG KÝ KẾT HỢP ĐỒNG GIAO KHOÁN NHƯ SAU: \nI- Điều khoản chung: \n- Phương thức giao khoán:....................................................................................  \n- Điều kiện thực hiện hợp đồng: ...........................................................................  \n- Thời gian thực hiện hợp đồng: ...........................................................................  \n- Các điều kiện khác: ............................................................................................  \nII- Điều khoản cụ thể: \n1. Nội dung công việc khoán: \n- .............................................................................................................................  \n- .............................................................................................................................  \n2. Trách nhiệm, quyền lợi và nghĩa vụ của người nhận khoán: \n- .............................................................................................................................  \n- .............................................................................................................................  \n3. Trách nhiệm, quyền lợi và nghĩa vụ của bên giao khoán: \n- .............................................................................................................................  \n- .............................................................................................................................  \n \nĐại diện bên nhận khoán Đại diện bên giao khoán \n(Ký, họ tên) (Ký, h ọ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/05_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_06_ldtl",
@@ -348,10 +1262,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Đại diện bên nhận khoán Đại diện bên giao khoán"
       ],
-      "layout_text": "Mẫu số: 06 - LĐTL \nBộ phận:............... (Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN THANH LÝ (NGHIỆM THU) HỢP ĐỒNG GIAO KHOÁN \nNgày... tháng... năm... \n Số:............... \n \nHọ và tên:............Chức vụ............. Đại diện............... Bên giao khoán............... \nHọ và tên:............Chức vụ............. Đại diện............... Bên nhận khoán.............. \nCùng thanh lý Hợp đồng số... ngày... tháng... năm... \nNội dung công việc (ghi trong hợp đồng) đã được thực hiện:.............................. \nGiá trị hợp đồng đã thực hiện:.............................................................................. \nBên...... đã thanh toán cho bên...... số tiền là................ đồng (viết bằng chữ)...... \nSố tiền bị phạt do bên..... vi phạm hợp đồng:............... đồng (viết bằng chữ)...... \nSố tiền bên.... còn phải thanh toán cho bên..... là........ đồng (viết bằng chữ)....... \nKết luận:................................................................................................................ \n \nĐại diện bên nhận khoán Đại diện bên giao khoán \n(Ký, họ tên) (Ký, họ tên, đóng dấu) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số: 06 - LĐTL \nBộ phận:............... (Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN THANH LÝ (NGHIỆM THU) HỢP ĐỒNG GIAO KHOÁN \nNgày... tháng... năm... \n Số:............... \n \nHọ và tên:............Chức vụ............. Đại diện............... Bên giao khoán............... \nHọ và tên:............Chức vụ............. Đại diện............... Bên nhận khoán.............. \nCùng thanh lý Hợp đồng số... ngày... tháng... năm... \nNội dung công việc (ghi trong hợp đồng) đã được thực hiện:.............................. \nGiá trị hợp đồng đã thực hiện:.............................................................................. \nBên...... đã thanh toán cho bên...... số tiền là................ đồng (viết bằng chữ)...... \nSố tiền bị phạt do bên..... vi phạm hợp đồng:............... đồng (viết bằng chữ)...... \nSố tiền bên.... còn phải thanh toán cho bên..... là........ đồng (viết bằng chữ)....... \nKết luận:................................................................................................................ \n \nĐại diện bên nhận khoán Đại diện bên giao khoán \n(Ký, họ tên) (Ký, họ tên, đóng dấu) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/06_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_07_ldtl",
@@ -392,12 +1312,225 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 26,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_9",
+            "label": "Cột 9",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người lập bảng",
         "Kế toán trưởng",
         "Giám đốc"
       ],
-      "layout_text": "Mẫu số 07 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG \nTháng.... năm... \n Số:............... \n Đơn vị tính:......... \nBHXH, BHYT, BHTN KPCĐ \nTrong đó: STT \nSố tháng trích \nBHXH, BHYT, \nBHTN, KPCĐ \nTổng quỹ lương \ntrích BHXH, \nBHYT, BHTN, \nKPCĐ \nTổng \nsố Trích vào chi phí Trừ vào \nlương \nTổng số \nSố phải nộp \ncông đoàn cấp \ntrên \nSố được để \nlại chi tại \nđơn vị \nA B 1 2 3 4 5 6 7 \n         \n         \n         \n Cộng        \n \n \nNgười lập bảng \n(Ký, họ tên) \n \nKế toán trưởng \n(Ký, họ tên) \nNgày..... tháng..... năm..... \nGiám đốc \n(Ký, họ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế \nbiểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 07 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG \nTháng.... năm... \n Số:............... \n Đơn vị tính:......... \nBHXH, BHYT, BHTN KPCĐ \nTrong đó: STT \nSố tháng trích \nBHXH, BHYT, \nBHTN, KPCĐ \nTổng quỹ lương \ntrích BHXH, \nBHYT, BHTN, \nKPCĐ \nTổng \nsố Trích vào chi phí Trừ vào \nlương \nTổng số \nSố phải nộp \ncông đoàn cấp \ntrên \nSố được để \nlại chi tại \nđơn vị \nA B 1 2 3 4 5 6 7 \n         \n         \n         \n Cộng        \n \n \nNgười lập bảng \n(Ký, họ tên) \n \nKế toán trưởng \n(Ký, họ tên) \nNgày..... tháng..... năm..... \nGiám đốc \n(Ký, họ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế \nbiểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/07_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_08_ldtl",
@@ -432,10 +1565,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Kế toán trưởng"
       ],
-      "layout_text": "Mẫu số 08 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG PHÂN BỔ TIỀN LƯƠNG VÀ CÁC KHOẢN TRÍCH THEO LƯƠNG \nTháng... năm... \n Số:............... \nGhi Có Tài khoản TK 334 - Phải trả người lao động TK 338 - Phải trả, phải nộp khác \nSố \nTT Đối tượng \nsử dụng (Ghi \nNợ các Tài khoản) \n \nLương \nCác \nkhoản \nkhác \nCộng Có \nTK 334 \nKinh \nphí \ncông \nđoàn \nBảo \nhiểm \nxã hội \nBảo \nhiểm \ny tế \nBảo \nhiểm \nthất \nnghiệp \nCộng Có TK \n338 (3382, 3383, \n3384, 3386) \nTK \n335 \nChi \nphí \nphải \ntrả \nTổng \ncộng \nA B 1 2 3 4 5 6 7 8 9 10 \n1 \nTK 622 - Chi phí nhân công trực tiếp \n- Phân xưởng (sản phẩm) \n-.......................................................... \n- Phân xưởng (sản phẩm) \n-.......................................................... \n         \n \n2 TK 623 - Chi phí sử dụng máy thi công \n-..........................................................          \n \n3 \nTK 627- Chi phí sản xuất chung \n- Phân xưởng (sản phẩm) \n-.......................................................... \n- Phân xưởng (sản phẩm) \n-.......................................................... \n         \n \n \n \n66 \n66 \n    \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 66 \nGhi Có Tài khoản TK 334 - Phải trả người lao động TK 338 - Phải trả, phải nộp khác \nSố \nTT Đối tượng \nsử dụng (Ghi \nNợ các Tài khoản) \n \nLương \nCác \nkhoản \nkhác \nCộng Có \nTK 334 \nKinh \nphí \ncông \nđoàn \nBảo \nhiểm \nxã hội \nBảo \nhiểm \ny tế \nBảo \nhiểm \nthất \nnghiệp \nCộng Có TK \n338 (3382, 3383, \n3384, 3386) \nTK \n335 \nChi \nphí \nphải \ntrả \nTổng \ncộng \nA B 1 2 3 4 5 6 7 8 9 10 \n4 TK 641 - Chi phí bán hàng           \n5 TK 642 - Chi phí quản lý doanh nghiệp           \n6 TK 242 - Chi phí chờ phân bổ           \n7 TK 335 - Chi phí phải trả           \n8 TK 241 - Xây dựng cơ bản dở dang           \n9 TK 334 - Phải trả người lao động           \n10 TK 338 - Phải trả, phải nộp khác           \n11 ...................................................           \n Cộng:           \n  \n  \n \nNgười lập bảng \nNgày...... tháng..... năm... \n Kế toán trưởng \n(Ký, họ tên)  (Ký, họ tên) \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 08 - LĐTL \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBẢNG PHÂN BỔ TIỀN LƯƠNG VÀ CÁC KHOẢN TRÍCH THEO LƯƠNG \nTháng... năm... \n Số:............... \nGhi Có Tài khoản TK 334 - Phải trả người lao động TK 338 - Phải trả, phải nộp khác \nSố \nTT Đối tượng \nsử dụng (Ghi \nNợ các Tài khoản) \n \nLương \nCác \nkhoản \nkhác \nCộng Có \nTK 334 \nKinh \nphí \ncông \nđoàn \nBảo \nhiểm \nxã hội \nBảo \nhiểm \ny tế \nBảo \nhiểm \nthất \nnghiệp \nCộng Có TK \n338 (3382, 3383, \n3384, 3386) \nTK \n335 \nChi \nphí \nphải \ntrả \nTổng \ncộng \nA B 1 2 3 4 5 6 7 8 9 10 \n1 \nTK 622 - Chi phí nhân công trực tiếp \n- Phân xưởng (sản phẩm) \n-.......................................................... \n- Phân xưởng (sản phẩm) \n-.......................................................... \n         \n \n2 TK 623 - Chi phí sử dụng máy thi công \n-..........................................................          \n \n3 \nTK 627- Chi phí sản xuất chung \n- Phân xưởng (sản phẩm) \n-.......................................................... \n- Phân xưởng (sản phẩm) \n-.......................................................... \n         \n \n \n \n66 \n66 \n    \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 66 \nGhi Có Tài khoản TK 334 - Phải trả người lao động TK 338 - Phải trả, phải nộp khác \nSố \nTT Đối tượng \nsử dụng (Ghi \nNợ các Tài khoản) \n \nLương \nCác \nkhoản \nkhác \nCộng Có \nTK 334 \nKinh \nphí \ncông \nđoàn \nBảo \nhiểm \nxã hội \nBảo \nhiểm \ny tế \nBảo \nhiểm \nthất \nnghiệp \nCộng Có TK \n338 (3382, 3383, \n3384, 3386) \nTK \n335 \nChi \nphí \nphải \ntrả \nTổng \ncộng \nA B 1 2 3 4 5 6 7 8 9 10 \n4 TK 641 - Chi phí bán hàng           \n5 TK 642 - Chi phí quản lý doanh nghiệp           \n6 TK 242 - Chi phí chờ phân bổ           \n7 TK 335 - Chi phí phải trả           \n8 TK 241 - Xây dựng cơ bản dở dang           \n9 TK 334 - Phải trả người lao động           \n10 TK 338 - Phải trả, phải nộp khác           \n11 ...................................................           \n Cộng:           \n  \n  \n \nNgười lập bảng \nNgày...... tháng..... năm... \n Kế toán trưởng \n(Ký, họ tên)  (Ký, họ tên) \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \nthiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/08_LĐTL.html"
     },
     {
       "form_id": "tt99_appendix1_01_vt",
@@ -494,13 +1633,210 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 30,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người lập phiếu",
         "Người giao hàng",
         "Thủ kho",
         "có nhu cầu nhập)"
       ],
-      "layout_text": "Mẫu số 01 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU NHẬP KHO \nNgày.... tháng..... năm..... \nSố:..................  \nNợ ..................  \nCó.................. \n- Họ và tên người giao:......................................................................................... \n- Theo.................. số........... ngày..... tháng..... năm..... của.................................. \nNhập tại kho:........................................... địa điểm .............................................. \n \nSố lượng   \nSTT \nTên, nhãn hiệu, quy cách, \nphẩm chất vật tư, dụng cụ \nsản phẩm, hàng hóa \nMã \nsố \nĐơn \nvị \ntính \nTheo \nchứng \ntừ \nThực \nnhập \nĐơn \ngiá \nThành \ntiền \nA B C D 1 2 3 4 \n        \n        \n        \n Cộng x x x x x  \n \n- Tổng số tiền (viết bằng chữ):.............................................................................. \n- Số chứng từ gốc kèm theo: ................................................................................. \n \n   Ngày... tháng... năm... \n Người lập phiếu  \n(Ký, họ tên) \nNgười giao hàng  \n(Ký, họ tên) \nThủ kho \n(Ký, họ tên) \nKế toán trưởng \n(Hoặc bộ phận \ncó nhu cầu nhập) \n(Ký, họ tên) \n    \n  \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 01 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU NHẬP KHO \nNgày.... tháng..... năm..... \nSố:..................  \nNợ ..................  \nCó.................. \n- Họ và tên người giao:......................................................................................... \n- Theo.................. số........... ngày..... tháng..... năm..... của.................................. \nNhập tại kho:........................................... địa điểm .............................................. \n \nSố lượng   \nSTT \nTên, nhãn hiệu, quy cách, \nphẩm chất vật tư, dụng cụ \nsản phẩm, hàng hóa \nMã \nsố \nĐơn \nvị \ntính \nTheo \nchứng \ntừ \nThực \nnhập \nĐơn \ngiá \nThành \ntiền \nA B C D 1 2 3 4 \n        \n        \n        \n Cộng x x x x x  \n \n- Tổng số tiền (viết bằng chữ):.............................................................................. \n- Số chứng từ gốc kèm theo: ................................................................................. \n \n   Ngày... tháng... năm... \n Người lập phiếu  \n(Ký, họ tên) \nNgười giao hàng  \n(Ký, họ tên) \nThủ kho \n(Ký, họ tên) \nKế toán trưởng \n(Hoặc bộ phận \ncó nhu cầu nhập) \n(Ký, họ tên) \n    \n  \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/01_VT.html"
     },
     {
       "form_id": "tt99_appendix1_02_vt",
@@ -565,6 +1901,202 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 30,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người lập phiếu",
         "Người nhận hàng",
@@ -572,7 +2104,8 @@
         "nhu cầu nhập)",
         "Giám đốc"
       ],
-      "layout_text": "Mẫu số 02 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU XUẤT KHO \nNgày.... tháng..... năm..... \nSố:..................  \nNợ ..................  \nCó...................  \n \n- Họ và tên người nhận hàng:.................................... Địa chỉ (bộ phận)................. \n- Lý do xuất kho: ..................................................................................................... \n- Xuất tại kho (ngăn lô):................................ Địa điểm.......................................... \n \nSố lượng \nSTT \nTên, nhãn hiệu, quy \ncách, phẩm chất vật tư, \ndụng cụ, sản phẩm, \nhàng hóa \nMã \nsố \nĐơn \nvị \ntính \nYêu \ncầu \nThực \nxuất \nĐơn \ngiá \nThành \ntiền \nA B C D 1 2 3 4 \n        \n        \n        \n        \n        \nCộng x x x x x  \n \n- Tổng số tiền (viết bằng chữ): .............................................................................. \n- Số chứng từ gốc kèm theo:................................................................................. \n \n    \n \nNgười lập phiếu  \n(Ký, họ tên)  \n \nNgười nhận hàng \n(Ký, họ tên) \n \nThủ kho \n(Ký, họ tên) \n \nKế toán trưởng  \n(Hoặc bộ phận có  \nnhu cầu nhập) \n(Ký, họ tên) \nNgày... tháng.... năm.... \nGiám đốc \n(Ký, họ tên)  \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 02 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU XUẤT KHO \nNgày.... tháng..... năm..... \nSố:..................  \nNợ ..................  \nCó...................  \n \n- Họ và tên người nhận hàng:.................................... Địa chỉ (bộ phận)................. \n- Lý do xuất kho: ..................................................................................................... \n- Xuất tại kho (ngăn lô):................................ Địa điểm.......................................... \n \nSố lượng \nSTT \nTên, nhãn hiệu, quy \ncách, phẩm chất vật tư, \ndụng cụ, sản phẩm, \nhàng hóa \nMã \nsố \nĐơn \nvị \ntính \nYêu \ncầu \nThực \nxuất \nĐơn \ngiá \nThành \ntiền \nA B C D 1 2 3 4 \n        \n        \n        \n        \n        \nCộng x x x x x  \n \n- Tổng số tiền (viết bằng chữ): .............................................................................. \n- Số chứng từ gốc kèm theo:................................................................................. \n \n    \n \nNgười lập phiếu  \n(Ký, họ tên)  \n \nNgười nhận hàng \n(Ký, họ tên) \n \nThủ kho \n(Ký, họ tên) \n \nKế toán trưởng  \n(Hoặc bộ phận có  \nnhu cầu nhập) \n(Ký, họ tên) \nNgày... tháng.... năm.... \nGiám đốc \n(Ký, họ tên)  \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/02_VT.html"
     },
     {
       "form_id": "tt99_appendix1_03_vt",
@@ -613,8 +2146,14 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [],
-      "layout_text": "Mẫu số 03 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN KIỂM NGHIỆM \nVật tư, công cụ, sản phẩm, hàng hóa \nNgày... tháng... năm.... \nSố:................... \n- Căn cứ......... số..... ngày..... tháng..... năm..... của......................... \nBan kiểm nghiệm gồm: \n+ Ông/Bà..................... Chức vụ............ Đại diện.......... Trưởng ban \n+ Ông/Bà..................... Chức vụ............ Đại diện............... Ủy viên \n+ Ông/Bà..................... Chức vụ............ Đại diện............... Ủy viên \nĐã kiểm nghiệm các loại: \nKết quả kiểm nghiệm \nSố \nTT \nTên nhãn \nhiệu, quy cách \nvật tư, công \ncụ, sản phẩm, \nhàng hóa \nMã \nsố \nPhương \nthức \nkiểm \nnghiệm \nĐơn \nvị \ntính \nSố \nlượng \ntheo \nchứng \ntừ \nSố lượng \nđúng quy \ncách, phẩm \nchất \nSố lượng \nkhông đúng \nquy cách, \nphẩm chất \nGhi \nchú \nA B C D E 1 2 3 F \n         \n         \n         \n         \n \n Ý kiến của Ban kiểm nghiệm:.............................................................................. \n..................................................................................................................................... \n \nĐại diện bộ phận có nhu cầu kiểm nghiệm Đại diện bộ phận cung cấp dịch vụ kiểm nghiệm \n(Ký, họ tên) (Ký, h ọ tên) \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 03 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN KIỂM NGHIỆM \nVật tư, công cụ, sản phẩm, hàng hóa \nNgày... tháng... năm.... \nSố:................... \n- Căn cứ......... số..... ngày..... tháng..... năm..... của......................... \nBan kiểm nghiệm gồm: \n+ Ông/Bà..................... Chức vụ............ Đại diện.......... Trưởng ban \n+ Ông/Bà..................... Chức vụ............ Đại diện............... Ủy viên \n+ Ông/Bà..................... Chức vụ............ Đại diện............... Ủy viên \nĐã kiểm nghiệm các loại: \nKết quả kiểm nghiệm \nSố \nTT \nTên nhãn \nhiệu, quy cách \nvật tư, công \ncụ, sản phẩm, \nhàng hóa \nMã \nsố \nPhương \nthức \nkiểm \nnghiệm \nĐơn \nvị \ntính \nSố \nlượng \ntheo \nchứng \ntừ \nSố lượng \nđúng quy \ncách, phẩm \nchất \nSố lượng \nkhông đúng \nquy cách, \nphẩm chất \nGhi \nchú \nA B C D E 1 2 3 F \n         \n         \n         \n         \n \n Ý kiến của Ban kiểm nghiệm:.............................................................................. \n..................................................................................................................................... \n \nĐại diện bộ phận có nhu cầu kiểm nghiệm Đại diện bộ phận cung cấp dịch vụ kiểm nghiệm \n(Ký, họ tên) (Ký, h ọ tên) \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/03_VT.html"
     },
     {
       "form_id": "tt99_appendix1_04_vt",
@@ -655,10 +2194,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Phụ trách bộ phận sử dụng"
       ],
-      "layout_text": "Mẫu số 04 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \n \n BẢNG KÊ CHI TIẾT VẬT TƯ CÒN LẠI CUỐI KỲ \nNgày... tháng... năm... \n S ố:................. \n \nBộ phận sử dụng:.................................................................................................. \n \nSố lượng Số \nTT \nTên, nhãn hiệu,  \nquy cách, phẩm chất \nvật tư \nMã \nsố \nĐơn vị \ntính Tổng Để lại sử dụng Nhập lại kho \nA B C D 1 2 3 \n       \n       \n       \n       \n \n  Phụ trách bộ phận sử dụng \n  (Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 04 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \n \n BẢNG KÊ CHI TIẾT VẬT TƯ CÒN LẠI CUỐI KỲ \nNgày... tháng... năm... \n S ố:................. \n \nBộ phận sử dụng:.................................................................................................. \n \nSố lượng Số \nTT \nTên, nhãn hiệu,  \nquy cách, phẩm chất \nvật tư \nMã \nsố \nĐơn vị \ntính Tổng Để lại sử dụng Nhập lại kho \nA B C D 1 2 3 \n       \n       \n       \n       \n \n  Phụ trách bộ phận sử dụng \n  (Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/04_VT.html"
     },
     {
       "form_id": "tt99_appendix1_05_vt",
@@ -705,13 +2250,338 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 49,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_9",
+            "label": "Cột 9",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_10",
+            "label": "Cột 10",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_11",
+            "label": "Cột 11",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_12",
+            "label": "Cột 12",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_13",
+            "label": "Cột 13",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_14",
+            "label": "Cột 14",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_15",
+            "label": "Cột 15",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_16",
+            "label": "Cột 16",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": "",
+              "col_14": "",
+              "col_15": "",
+              "col_16": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Kế toán trưởng",
         "Thủ kho",
         "(Ký, họ tên)",
         "Trưởng ban/Chủ tịch Hội đồng kiểm kê"
       ],
-      "layout_text": "Mẫu số 05 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBIÊN BẢN TỔNG HỢP KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA \n Số:.....................  \n- Thời điểm kiểm kê..... giờ... ngày... tháng... năm...... \n- Ban kiểm kê/Hội đồng kiểm kê gồm :  \nÔng/Bà:.......................................... Chức vụ...................................... Đại diện:............................ Trưởng ban/Chủ tịch Hội đồng \nÔng/Bà:.......................................... Chức vụ...................................... Đại diện:............................. Ủy viên \nÔng/Bà:.......................................... Chức vụ...................................... Đại diện:............................. Ủy viên  \n- Đã kiểm kê kho có những mặt hàng dưới đây:  \nChênh lệch Phẩm chất Theo \nsổ kế toán \nTheo \nkiểm kê Thừa Thiếu STT \nTên, nhãn hiệu, \nquy cách vật tư, \ndụng cụ,... \nMã \nsố \nĐơn \nvị \ntính \nĐơn \ngiá Số \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nCòn \ntốt \n100% \nKém \nphẩm \nchất \nMất \nphẩm \nchất \nA B C D 1 2 3 4 5 6 7 8 9 10 11 12 \n                \n                \n                \n Cộng x x x x  x  x  x  x x x \n \n   Ngày... tháng... năm... \nGiám đốc \n(Ý kiến giải quyết số chênh lệch) \nKế toán trưởng \n(Ký, họ tên) \nThủ kho \n(Ký, họ tên) \n(Ký, họ tên)    \nTrưởng ban/Chủ tịch Hội đồng kiểm kê \n(Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế \nbiểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 05 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBIÊN BẢN TỔNG HỢP KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA \n Số:.....................  \n- Thời điểm kiểm kê..... giờ... ngày... tháng... năm...... \n- Ban kiểm kê/Hội đồng kiểm kê gồm :  \nÔng/Bà:.......................................... Chức vụ...................................... Đại diện:............................ Trưởng ban/Chủ tịch Hội đồng \nÔng/Bà:.......................................... Chức vụ...................................... Đại diện:............................. Ủy viên \nÔng/Bà:.......................................... Chức vụ...................................... Đại diện:............................. Ủy viên  \n- Đã kiểm kê kho có những mặt hàng dưới đây:  \nChênh lệch Phẩm chất Theo \nsổ kế toán \nTheo \nkiểm kê Thừa Thiếu STT \nTên, nhãn hiệu, \nquy cách vật tư, \ndụng cụ,... \nMã \nsố \nĐơn \nvị \ntính \nĐơn \ngiá Số \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nCòn \ntốt \n100% \nKém \nphẩm \nchất \nMất \nphẩm \nchất \nA B C D 1 2 3 4 5 6 7 8 9 10 11 12 \n                \n                \n                \n Cộng x x x x  x  x  x  x x x \n \n   Ngày... tháng... năm... \nGiám đốc \n(Ý kiến giải quyết số chênh lệch) \nKế toán trưởng \n(Ký, họ tên) \nThủ kho \n(Ký, họ tên) \n(Ký, họ tên)    \nTrưởng ban/Chủ tịch Hội đồng kiểm kê \n(Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế \nbiểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/05_VT.html"
     },
     {
       "form_id": "tt99_appendix1_06_vt",
@@ -788,10 +2658,191 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 25,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người mua  Kế toán trưởng Người duyệt mua"
       ],
-      "layout_text": "Mẫu số 06 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \n BẢNG KÊ MUA HÀNG   \n Ngày.... tháng.... năm....  \nQuyển số:............... \n   Số:............... \n Nợ:.............. \n Có:............... \n \n- Họ và tên người mua: ........................................................................................ \n- Bộ phận (phòng, ban): ....................................................................................... \n \nSTT \nTên, quy cách,  \nphẩm chất hàng hóa \n(vật tư, công cụ...) \nĐịa chỉ \nmua hàng \nĐơn \nvị tính \nSố \nlượng \nĐơn \ngiá \nThành \ntiền \nA B C D 1 2 3 \n       \n \n \n \n \n \n \n \n \n \n     \n Cộng x x x x  \n \nTổng số tiền (Viết bằng chữ):...............................................................................  \n* Ghi chú:..............................................................................................................  \n \n \nNgười mua  Kế toán trưởng Người duyệt mua \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 06 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \n BẢNG KÊ MUA HÀNG   \n Ngày.... tháng.... năm....  \nQuyển số:............... \n   Số:............... \n Nợ:.............. \n Có:............... \n \n- Họ và tên người mua: ........................................................................................ \n- Bộ phận (phòng, ban): ....................................................................................... \n \nSTT \nTên, quy cách,  \nphẩm chất hàng hóa \n(vật tư, công cụ...) \nĐịa chỉ \nmua hàng \nĐơn \nvị tính \nSố \nlượng \nĐơn \ngiá \nThành \ntiền \nA B C D 1 2 3 \n       \n \n \n \n \n \n \n \n \n \n     \n Cộng x x x x  \n \nTổng số tiền (Viết bằng chữ):...............................................................................  \n* Ghi chú:..............................................................................................................  \n \n \nNgười mua  Kế toán trưởng Người duyệt mua \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/06_VT.html"
     },
     {
       "form_id": "tt99_appendix1_07_vt",
@@ -826,10 +2877,191 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 23,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Kế toán trưởng"
       ],
-      "layout_text": "Mẫu số 07 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG PHÂN BỔ NGUYÊN LIỆU, VẬT LIỆU  \nCÔNG CỤ, DỤNG CỤ \nTháng...... năm...... \n Số:.................. \n \n  Ghi Có các TK Tài khoản 152 Tài khoản 153 \nSTT Đối tượng sử dụng \n(Ghi Nợ các TK) \nGiá \nhạch \ntoán \nGiá thực \ntế \nGiá hạch \ntoán \nGiá \nthực \ntế \nTài \nkhoản \n242 \nA B 1 2 3 4 5 \n1 \n \nTK 621 – Chi phí nguyên liệu, vật liệu \ntrực tiếp \n- Phân xưởng (sản phẩm)... \n- ................................ \n     \n2 \n3 \n4 \n5 \n6 \n7 \n \nTK 623 – Chi phí sử dụng máy thi công \nTK 627 – Chi phí sản xuất chung \n- Phân xưởng................... \nTK 641 – Chi phí bán hàng \nTK 642 – Chi phí quản lý doanh nghiệp \nTK 242- Chi phí chờ phân bổ \n............................ \n     \n \nCộng      \n  \n \nNgười lập biểu \nNgày.... tháng.... năm.... \nKế toán trưởng \n(Ký, họ tên) (Ký, h ọ tên) \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 07 - VT \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG PHÂN BỔ NGUYÊN LIỆU, VẬT LIỆU  \nCÔNG CỤ, DỤNG CỤ \nTháng...... năm...... \n Số:.................. \n \n  Ghi Có các TK Tài khoản 152 Tài khoản 153 \nSTT Đối tượng sử dụng \n(Ghi Nợ các TK) \nGiá \nhạch \ntoán \nGiá thực \ntế \nGiá hạch \ntoán \nGiá \nthực \ntế \nTài \nkhoản \n242 \nA B 1 2 3 4 5 \n1 \n \nTK 621 – Chi phí nguyên liệu, vật liệu \ntrực tiếp \n- Phân xưởng (sản phẩm)... \n- ................................ \n     \n2 \n3 \n4 \n5 \n6 \n7 \n \nTK 623 – Chi phí sử dụng máy thi công \nTK 627 – Chi phí sản xuất chung \n- Phân xưởng................... \nTK 641 – Chi phí bán hàng \nTK 642 – Chi phí quản lý doanh nghiệp \nTK 242- Chi phí chờ phân bổ \n............................ \n     \n \nCộng      \n  \n \nNgười lập biểu \nNgày.... tháng.... năm.... \nKế toán trưởng \n(Ký, họ tên) (Ký, h ọ tên) \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/07_VT.html"
     },
     {
       "form_id": "tt99_appendix1_01_bh",
@@ -918,12 +3150,18 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Giám đốc đơn vị gửi",
         "nhận bán hàng đại lý",
         "Kế toán trưởng đơn vị gửi"
       ],
-      "layout_text": "Mẫu số 01 - BH  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG THANH TOÁN HÀNG ĐẠI LÝ, KÝ GỬI \n \n Ngày... tháng... năm... Quyển số:............ \n  Số:....................... \n  Nợ:........ .............. \n   Có:....................... \n \nCăn cứ Hợp đồng số:..... ngày... tháng... năm... về việc bán hàng đại lý (ký gửi), \nChúng tôi gồm: \n- Ông/Bà......... chức vụ......... Đại diện........................ có hàng đại lý (ký gửi). \n- Ông/Bà......... chức vụ......... Đại diện................................................................ \n- Ông/Bà....... chức vụ......... Đại diện................. nhận bán hàng đại lý (ký gửi). \n- Ông/Bà......... chức vụ......... Đại diện đơn vị..................................................... \nI- Thanh quyết toán số hàng đại lý từ ngày..../.../... đến ngày.../.../.... như sau: \nSố hàng đã bán \ntrong kỳ Số \nTT \nTên, quy cách, \nphẩm chất \nsản phẩm \n(hàng hóa) \nĐơn \nvị \ntính \nSố \nlượng \ntồn \nđầu kỳ \nSố \nlượng \nnhận \ntrong kỳ \nTổng \nsố Số \nlượng \nĐơn \ngiá \nThành \ntiền \nSố lượng \ntồn cuối \nkỳ \nA B C 1 2 3 = 1+2 4 5 6 7 = 3 - 4 \n          \n          \n          \n Cộng x x x x x x  x \nII- Số tiền còn nợ của các kỳ trước:...................................................................... \nIII- Số tiền phải thanh toán đến kỳ này: (III = II + Cột 6).................................... \nIV- Số tiền được nhận lại:..................................................................................... \n+ Hoa hồng............................................................................................................ \n+ Thuế nộp hộ....................................................................................................... \n+ Chi phí (nếu có) ................................................................................................. \n+ ............................................................. .............................................................. \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 75 \n \n \nV- Số tiền thanh toán kỳ này: \n+ Tiền mặt:............................................................................................................ \n+ Séc: .................................................................................................................... \nVI- Số tiền nợ lại (VI= III - IV - V) ..................................................................... \n* Ghi chú: \n \nGiám đốc đơn vị gửi \nhàng đại lý (ký gửi) \nNgười lập bảng  \nthanh toán \nGiám đốc đơn vị  \nnhận bán hàng đại lý \n(Ký, họ tên, đóng dấu) (Ký, họ tên) (Ký, họ tên, đóng dấu) \n \n \n \nKế toán trưởng đơn vị gửi \nhàng đại lý (ký gửi) \n Kế toán trưởng đơn vị \nnhận bán hàng đại lý \n(Ký, họ tên)  (Ký, họ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 01 - BH  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG THANH TOÁN HÀNG ĐẠI LÝ, KÝ GỬI \n \n Ngày... tháng... năm... Quyển số:............ \n  Số:....................... \n  Nợ:........ .............. \n   Có:....................... \n \nCăn cứ Hợp đồng số:..... ngày... tháng... năm... về việc bán hàng đại lý (ký gửi), \nChúng tôi gồm: \n- Ông/Bà......... chức vụ......... Đại diện........................ có hàng đại lý (ký gửi). \n- Ông/Bà......... chức vụ......... Đại diện................................................................ \n- Ông/Bà....... chức vụ......... Đại diện................. nhận bán hàng đại lý (ký gửi). \n- Ông/Bà......... chức vụ......... Đại diện đơn vị..................................................... \nI- Thanh quyết toán số hàng đại lý từ ngày..../.../... đến ngày.../.../.... như sau: \nSố hàng đã bán \ntrong kỳ Số \nTT \nTên, quy cách, \nphẩm chất \nsản phẩm \n(hàng hóa) \nĐơn \nvị \ntính \nSố \nlượng \ntồn \nđầu kỳ \nSố \nlượng \nnhận \ntrong kỳ \nTổng \nsố Số \nlượng \nĐơn \ngiá \nThành \ntiền \nSố lượng \ntồn cuối \nkỳ \nA B C 1 2 3 = 1+2 4 5 6 7 = 3 - 4 \n          \n          \n          \n Cộng x x x x x x  x \nII- Số tiền còn nợ của các kỳ trước:...................................................................... \nIII- Số tiền phải thanh toán đến kỳ này: (III = II + Cột 6).................................... \nIV- Số tiền được nhận lại:..................................................................................... \n+ Hoa hồng............................................................................................................ \n+ Thuế nộp hộ....................................................................................................... \n+ Chi phí (nếu có) ................................................................................................. \n+ ............................................................. .............................................................. \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 75 \n \n \nV- Số tiền thanh toán kỳ này: \n+ Tiền mặt:............................................................................................................ \n+ Séc: .................................................................................................................... \nVI- Số tiền nợ lại (VI= III - IV - V) ..................................................................... \n* Ghi chú: \n \nGiám đốc đơn vị gửi \nhàng đại lý (ký gửi) \nNgười lập bảng  \nthanh toán \nGiám đốc đơn vị  \nnhận bán hàng đại lý \n(Ký, họ tên, đóng dấu) (Ký, họ tên) (Ký, họ tên, đóng dấu) \n \n \n \nKế toán trưởng đơn vị gửi \nhàng đại lý (ký gửi) \n Kế toán trưởng đơn vị \nnhận bán hàng đại lý \n(Ký, họ tên)  (Ký, họ tên) \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/01_BH.html"
     },
     {
       "form_id": "tt99_appendix1_02_bh",
@@ -964,10 +3202,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Người lập"
       ],
-      "layout_text": "Mẫu số 02 - BH  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nTHẺ QUẦY HÀNG \nNgày lập thẻ.............................. Tờ số:.............................. \n \n- Tên hàng :.................................................. Quy cách:........................................ \n- Đơn vị tính:................................................ Đơn giá:.......................................... \n \nXuất bán Xuất khác \nNgày \ntháng \nTên \nngười \nbán \nhàng \nSố \nlượng \ntồn \nđầu \nngày \n(ca) \nSố lượng \nnhập từ \nkho \ntrong \nngày (ca) \nSố \nlượng \nnhập \nkhác \ntrong \nngày \n(ca) \nCộng \ntồn đầu \nngày (ca) \nvà nhập \ntrong ngày \n(ca) \nLượng Tiền Lượng Tiền \nSố lượng \ntồn \ncuối ngày \n(ca) \nA B 1 2 3 4 = 1+2+3 5 6 7 8 9 = 4-5-7 \n           \n           \n           \n           \n           \n           \n           \n           \n           \n           \n Cộng          \n \n Người lập \n(Ký, họ và tên) \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 02 - BH  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nTHẺ QUẦY HÀNG \nNgày lập thẻ.............................. Tờ số:.............................. \n \n- Tên hàng :.................................................. Quy cách:........................................ \n- Đơn vị tính:................................................ Đơn giá:.......................................... \n \nXuất bán Xuất khác \nNgày \ntháng \nTên \nngười \nbán \nhàng \nSố \nlượng \ntồn \nđầu \nngày \n(ca) \nSố lượng \nnhập từ \nkho \ntrong \nngày (ca) \nSố \nlượng \nnhập \nkhác \ntrong \nngày \n(ca) \nCộng \ntồn đầu \nngày (ca) \nvà nhập \ntrong ngày \n(ca) \nLượng Tiền Lượng Tiền \nSố lượng \ntồn \ncuối ngày \n(ca) \nA B 1 2 3 4 = 1+2+3 5 6 7 8 9 = 4-5-7 \n           \n           \n           \n           \n           \n           \n           \n           \n           \n           \n Cộng          \n \n Người lập \n(Ký, họ và tên) \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/02_BH.html"
     },
     {
       "form_id": "tt99_appendix1_01_tt",
@@ -1080,6 +3324,11 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Giám đốc",
         "Kế toán trưởng",
@@ -1087,7 +3336,8 @@
         "Người lập phiếu",
         "Thủ quỹ"
       ],
-      "layout_text": "Mẫu số 01 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU THU \nNgày....... tháng....... năm....... \n Quyển số:.............. \n Số:............ .............  \n Nợ:........... .............  \n Có:........... .............  \n  \nHọ và tên người nộp tiền: ..................................................................................... \nĐịa chỉ:.................................................................................................................. \nLý do nộp:............................................................................................................. \nSố tiền:..................................... (Viết bằng chữ): ................................................. \nKèm theo:..................................................................... Chứng từ gốc: ................ \n    \nNgày..... tháng..... năm...... \nGiám đốc \n(Ký, họ tên, đóng dấu) \nKế toán trưởng  \n(Ký, họ tên) \nNgười nộp tiền \n(Ký, họ tên) \nNgười lập phiếu \n(Ký, họ tên) \nThủ quỹ \n(Ký, họ tên) \n     \n \nĐã nhận đủ số tiền (viết bằng chữ):.......................................................................  \n+ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................  \n+ Số tiền quy đổi:...................................................................................................  \n(Liên gửi ra ngoài phải đóng dấu) \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 01 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU THU \nNgày....... tháng....... năm....... \n Quyển số:.............. \n Số:............ .............  \n Nợ:........... .............  \n Có:........... .............  \n  \nHọ và tên người nộp tiền: ..................................................................................... \nĐịa chỉ:.................................................................................................................. \nLý do nộp:............................................................................................................. \nSố tiền:..................................... (Viết bằng chữ): ................................................. \nKèm theo:..................................................................... Chứng từ gốc: ................ \n    \nNgày..... tháng..... năm...... \nGiám đốc \n(Ký, họ tên, đóng dấu) \nKế toán trưởng  \n(Ký, họ tên) \nNgười nộp tiền \n(Ký, họ tên) \nNgười lập phiếu \n(Ký, họ tên) \nThủ quỹ \n(Ký, họ tên) \n     \n \nĐã nhận đủ số tiền (viết bằng chữ):.......................................................................  \n+ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................  \n+ Số tiền quy đổi:...................................................................................................  \n(Liên gửi ra ngoài phải đóng dấu) \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/01_TT.html"
     },
     {
       "form_id": "tt99_appendix1_02_tt",
@@ -1200,6 +3450,11 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Giám đốc",
         "Kế toán trưởng",
@@ -1207,7 +3462,8 @@
         "Người lập phiếu",
         "Người nhận tiền"
       ],
-      "layout_text": "Mẫu số 02 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU CHI \nNgày....... tháng....... năm....... \n Quyển số:.............. \n Số:............ .............  \n Nợ:........... .............  \n Có:........... .............  \n  \nHọ và tên người nhận tiền:...................................................................................  \nĐịa chỉ:.................................................................................................................  \nLý do chi: .............................................................................................................  \nSố tiền:..................................... (Viết bằng chữ): ................................................  \nKèm theo:..................................................................... Chứng từ gốc: ...............  \n    Ngày..... tháng..... năm...... \nGiám đốc \n(Ký, họ tên, đóng dấu) \nKế toán trưởng  \n(Ký, họ tên) \nThủ quỹ \n(Ký, họ tên) \nNgười lập phiếu \n(Ký, họ tên) \nNgười nhận tiền \n(Ký, họ tên) \n     \n \nĐã nhận đủ số tiền (viết bằng chữ):......................................................................  \n+ Tỷ giá ngoại tệ (vàng bạc, đá quý):...................................................................  \n+ Số tiền quy đổi:..................................................................................................  \n(Liên gửi ra ngoài phải đóng dấu) \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 02 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nPHIẾU CHI \nNgày....... tháng....... năm....... \n Quyển số:.............. \n Số:............ .............  \n Nợ:........... .............  \n Có:........... .............  \n  \nHọ và tên người nhận tiền:...................................................................................  \nĐịa chỉ:.................................................................................................................  \nLý do chi: .............................................................................................................  \nSố tiền:..................................... (Viết bằng chữ): ................................................  \nKèm theo:..................................................................... Chứng từ gốc: ...............  \n    Ngày..... tháng..... năm...... \nGiám đốc \n(Ký, họ tên, đóng dấu) \nKế toán trưởng  \n(Ký, họ tên) \nThủ quỹ \n(Ký, họ tên) \nNgười lập phiếu \n(Ký, họ tên) \nNgười nhận tiền \n(Ký, họ tên) \n     \n \nĐã nhận đủ số tiền (viết bằng chữ):......................................................................  \n+ Tỷ giá ngoại tệ (vàng bạc, đá quý):...................................................................  \n+ Số tiền quy đổi:..................................................................................................  \n(Liên gửi ra ngoài phải đóng dấu) \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/02_TT.html"
     },
     {
       "form_id": "tt99_appendix1_03_tt",
@@ -1278,13 +3534,19 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Giám đốc",
         "Kế toán trưởng",
         "Phụ trách bộ phận",
         "Người đề nghị tạm ứng"
       ],
-      "layout_text": "Mẫu số 03 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nGIẤY ĐỀ NGHỊ TẠM ỨNG \nNgày..... tháng..... năm...... \n Số:............................  \n \n Kính gửi:..............................................................................................................  \n Tên tôi là: .............................................................................................................  \n Địa chỉ:.................................................................................................................  \n Đề nghị cho tạm ứng số tiền:.................................. (Viết bằng chữ) ..................  \n .............................................................................................................................. \n Lý do tạm ứng:.....................................................................................................  \n Thời hạn thanh toán: ............................................................................................  \n \n \nGiám đốc \n(Ký, họ tên)  \n \nKế toán trưởng  \n(Ký, họ tên) \nPhụ trách bộ phận  \n(Ký, họ tên) \nNgười đề nghị tạm ứng \n(Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 03 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nGIẤY ĐỀ NGHỊ TẠM ỨNG \nNgày..... tháng..... năm...... \n Số:............................  \n \n Kính gửi:..............................................................................................................  \n Tên tôi là: .............................................................................................................  \n Địa chỉ:.................................................................................................................  \n Đề nghị cho tạm ứng số tiền:.................................. (Viết bằng chữ) ..................  \n .............................................................................................................................. \n Lý do tạm ứng:.....................................................................................................  \n Thời hạn thanh toán: ............................................................................................  \n \n \nGiám đốc \n(Ký, họ tên)  \n \nKế toán trưởng  \n(Ký, họ tên) \nPhụ trách bộ phận  \n(Ký, họ tên) \nNgười đề nghị tạm ứng \n(Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/03_TT.html"
     },
     {
       "form_id": "tt99_appendix1_04_tt",
@@ -1349,13 +3611,19 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Giám đốc",
         "Kế toán trưởng",
         "Kế toán thanh toán",
         "thanh toán"
       ],
-      "layout_text": "Mẫu số 04 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nGIẤY THANH TOÁN TIỀN TẠM ỨNG \nNgày..... tháng..... năm....... \n Số:............................. \n N ợ: ............................ \n Có :............................. \n- Họ và tên người thanh toán: ............................................................................... \n- Bộ phận (hoặc địa chỉ): ...................................................................................... \n- Số tiền tạm ứng được thanh toán theo bảng dưới đây: \nDiễn giải Số tiền \nA 1 \nI . Số tiền tạm ứng ............................... \n1. Số tạm ứng các kỳ trước chưa chi hết ............................... \n2. Số tạm ứng kỳ này: ............................... \n- Phiếu chi số............. ngày......... .... ........................... \n- Phiếu chi số............. ngày......... .... ........................... \n-... ............................... \nII . Số tiền đã chi ............................... \n1. Chứng từ số...........ngày........... ............................... \n2.... ............................... \nIII . Chênh lệch ............................... \n1. Số tạm ứng chi không hết (I - II) ............................... \n2. Chi quá số tạm ứng (II - I) ............................... \n  \nGiám đốc \n(Ký, họ tên) \nKế toán trưởng  \n(Ký, họ tên) \nKế toán thanh toán \n(Ký, họ tên) \n   \nNgười đề nghị  \nthanh toán \n(Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 04 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nGIẤY THANH TOÁN TIỀN TẠM ỨNG \nNgày..... tháng..... năm....... \n Số:............................. \n N ợ: ............................ \n Có :............................. \n- Họ và tên người thanh toán: ............................................................................... \n- Bộ phận (hoặc địa chỉ): ...................................................................................... \n- Số tiền tạm ứng được thanh toán theo bảng dưới đây: \nDiễn giải Số tiền \nA 1 \nI . Số tiền tạm ứng ............................... \n1. Số tạm ứng các kỳ trước chưa chi hết ............................... \n2. Số tạm ứng kỳ này: ............................... \n- Phiếu chi số............. ngày......... .... ........................... \n- Phiếu chi số............. ngày......... .... ........................... \n-... ............................... \nII . Số tiền đã chi ............................... \n1. Chứng từ số...........ngày........... ............................... \n2.... ............................... \nIII . Chênh lệch ............................... \n1. Số tạm ứng chi không hết (I - II) ............................... \n2. Chi quá số tạm ứng (II - I) ............................... \n  \nGiám đốc \n(Ký, họ tên) \nKế toán trưởng  \n(Ký, họ tên) \nKế toán thanh toán \n(Ký, họ tên) \n   \nNgười đề nghị  \nthanh toán \n(Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/04_TT.html"
     },
     {
       "form_id": "tt99_appendix1_05_tt",
@@ -1420,13 +3688,19 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Người đề nghị thanh toán",
         "Người duyệt",
         "Phụ trách bộ phận",
         "Kế toán trưởng"
       ],
-      "layout_text": "Mẫu số 05 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nGIẤY ĐỀ NGHỊ THANH TOÁN  \nNgày....... tháng........ năm... \n \nKính gửi:...............................................................................................................  \nHọ và tên người đề nghị thanh toán:.....................................................................  \nBộ phận (Hoặc địa chỉ):........................................................................................  \nNội dung thanh toán:.............................................................................................  \nSố tiền:.................... (Viết bằng chữ):...................................................................  \n(Kèm theo............ chứng từ gốc). \n \nNgười đề nghị thanh toán \n(Ký, họ tên) \nNgười duyệt  \n (Ký, họ tên) \n \nPhụ trách bộ phận \n(Ký, họ tên) \nKế toán trưởng  \n(Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 05 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nGIẤY ĐỀ NGHỊ THANH TOÁN  \nNgày....... tháng........ năm... \n \nKính gửi:...............................................................................................................  \nHọ và tên người đề nghị thanh toán:.....................................................................  \nBộ phận (Hoặc địa chỉ):........................................................................................  \nNội dung thanh toán:.............................................................................................  \nSố tiền:.................... (Viết bằng chữ):...................................................................  \n(Kèm theo............ chứng từ gốc). \n \nNgười đề nghị thanh toán \n(Ký, họ tên) \nNgười duyệt  \n (Ký, họ tên) \n \nPhụ trách bộ phận \n(Ký, họ tên) \nKế toán trưởng  \n(Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/05_TT.html"
     },
     {
       "form_id": "tt99_appendix1_06_tt",
@@ -1497,10 +3771,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Người nộp tiền Người thu tiền"
       ],
-      "layout_text": "Mẫu số 06 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN LAI THU TIỀN  \nNgày..... tháng..... năm.....  \n Quyển số: ..........................  \n Số: .....................................  \n \n- Họ và tên người nộp:..........................................................................................  \n- Địa chỉ: ...............................................................................................................  \n- Nội dung thu:......................................................................................................  \n- Số tiền thu:........................... (Viết bằng chữ): ...................................................  \n \nNgười nộp tiền Người thu tiền \n(Ký, họ tên) (Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 06 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN LAI THU TIỀN  \nNgày..... tháng..... năm.....  \n Quyển số: ..........................  \n Số: .....................................  \n \n- Họ và tên người nộp:..........................................................................................  \n- Địa chỉ: ...............................................................................................................  \n- Nội dung thu:......................................................................................................  \n- Số tiền thu:........................... (Viết bằng chữ): ...................................................  \n \nNgười nộp tiền Người thu tiền \n(Ký, họ tên) (Ký, họ tên) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/06_TT.html"
     },
     {
       "form_id": "tt99_appendix1_07_tt",
@@ -1541,13 +3821,194 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 18,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Kế toán trưởng",
         "Thủ quỹ",
         "Người kiểm nghiệm",
         "Người nộp (nhận)"
       ],
-      "layout_text": "Mẫu số 07 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KÊ VÀNG TIỀN TỆ \n(Đính kèm phiếu..............  Quyển số: ...............  \nNgày....... tháng......... năm............)  Số: ............... ...........  \n \nSTT Tên, loại, qui cách \nphẩm chất \nĐơn vị \ntính \nSố \nlượng \nĐơn \ngiá \nThành \ntiền \nGhi \nchú \nA B C 1 2 3 D \n       \n       \n       \n Cộng x x x  x \n \n   \nKế toán trưởng \n(Ký, họ tên) \nThủ quỹ \n(Ký, họ tên) \nNgày....... tháng...... năm.... \nNgười kiểm nghiệm \n(Ký, họ tên) \n \nNgười nộp (nhận) \n(Ký, họ tên) \n  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 07 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KÊ VÀNG TIỀN TỆ \n(Đính kèm phiếu..............  Quyển số: ...............  \nNgày....... tháng......... năm............)  Số: ............... ...........  \n \nSTT Tên, loại, qui cách \nphẩm chất \nĐơn vị \ntính \nSố \nlượng \nĐơn \ngiá \nThành \ntiền \nGhi \nchú \nA B C 1 2 3 D \n       \n       \n       \n Cộng x x x  x \n \n   \nKế toán trưởng \n(Ký, họ tên) \nThủ quỹ \n(Ký, họ tên) \nNgày....... tháng...... năm.... \nNgười kiểm nghiệm \n(Ký, họ tên) \n \nNgười nộp (nhận) \n(Ký, họ tên) \n  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/07_TT.html"
     },
     {
       "form_id": "tt99_appendix1_08a_tt",
@@ -1636,10 +4097,143 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 13,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Kế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ"
       ],
-      "layout_text": "Mẫu số 08a - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KIỂM KÊ QUỸ  \n(Dùng cho VNĐ) \n Số: ............................. \nHôm nay, vào........ giờ......... ngày......... tháng......... năm....... \nChúng tôi gồm: \n- Ông/Bà:................................................................................... đại diện kế toán \n- Ông/Bà:................................................................................... đại diện thủ quỹ \n- Ông/Bà:............................................................................. đại diện.................... \nCùng tiến hành kiểm kê quỹ tiền mặt kết quả như sau: \nSTT Diễn giải Số lượng ( tờ ) Số tiền \nA B 1 2 \nI Số dư theo sổ q uỹ: x ....................... \nII Số kiểm kê thực tế: x ....................... \n1 Trong đó: - Loại ......... .............. .................... ... \n2 - Loại .................. ..... ....................... \n3 - Loại ....................... ....................... \n4 - Loại ....................... ......... .............. \n5 -... ....................... ......... .............. \nIII Chênh lệch (III = I –  II): x ....................... \n \n- Lý do: + Thừa:....................................................................................................  \n             + Thiếu: ...................................................................................................  \n- Kết luận sau khi kiểm kê quỹ:............................................................................  \n \nKế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 08a - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KIỂM KÊ QUỸ  \n(Dùng cho VNĐ) \n Số: ............................. \nHôm nay, vào........ giờ......... ngày......... tháng......... năm....... \nChúng tôi gồm: \n- Ông/Bà:................................................................................... đại diện kế toán \n- Ông/Bà:................................................................................... đại diện thủ quỹ \n- Ông/Bà:............................................................................. đại diện.................... \nCùng tiến hành kiểm kê quỹ tiền mặt kết quả như sau: \nSTT Diễn giải Số lượng ( tờ ) Số tiền \nA B 1 2 \nI Số dư theo sổ q uỹ: x ....................... \nII Số kiểm kê thực tế: x ....................... \n1 Trong đó: - Loại ......... .............. .................... ... \n2 - Loại .................. ..... ....................... \n3 - Loại ....................... ....................... \n4 - Loại ....................... ......... .............. \n5 -... ....................... ......... .............. \nIII Chênh lệch (III = I –  II): x ....................... \n \n- Lý do: + Thừa:....................................................................................................  \n             + Thiếu: ...................................................................................................  \n- Kết luận sau khi kiểm kê quỹ:............................................................................  \n \nKế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/08a_TT.html"
     },
     {
       "form_id": "tt99_appendix1_08b_tt",
@@ -1704,12 +4298,209 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 21,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Thủ quỹ",
         "Kế toán trưởng",
         "Người chịu trách nhiệm kiểm kê quỹ"
       ],
-      "layout_text": "Mẫu số 08b - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KIỂM KÊ QUỸ  \n(Dùng cho ngoại tệ, vàng tiền tệ)  \n  Số: ......................... \nHôm nay, vào........ giờ......... ngày......... tháng......... năm......... \nChúng tôi gồm: \n- Ông/Bà:...................................... đại diện kế toán \n- Ông/Bà:...................................... đại diện thủ quỹ \n- Ông/Bà:...................................... đại diện............ \nCùng tiến hành kiểm kê quỹ ngoại tệ, vàng bạc... kết quả như sau: \nTính ra VNĐ \nSTT Diễn giải Đơn vị \ntính \nSố \nlượng \nĐơn \ngiá Tỷ giá VNĐ \nGhi \nchú \nA B C 1 2 3 4 D \nI Số dư theo sổ quỹ x x ......... ........... ......... ....... .... \nII Số kiểm kê thực tế (*) x x ......... ........... ......... . .......... \n1 - Loại ............ ........... ......... ........... ....... .. ........... \n2 - Loại ............ ........... ......... ........... ....... .. ........... \n3 -... ............ ........... ......... ........ ......... .. ......... \nIII Chênh lệch (III = I - II) x x ......... ........... ....... .. ........... \n- Lý do : + Thừa:..................................................................................................  \n               + Thiếu:.................................................................................................  \n- Kết luận sau khi kiểm kê quỹ:...........................................................................  \n \nThủ quỹ \n(Ký, họ tên) \nKế toán trưởng \n(Ký, họ tên) \nNgười chịu trách nhiệm kiểm kê quỹ \n(Ký, họ tên) \n   \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 08b - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KIỂM KÊ QUỸ  \n(Dùng cho ngoại tệ, vàng tiền tệ)  \n  Số: ......................... \nHôm nay, vào........ giờ......... ngày......... tháng......... năm......... \nChúng tôi gồm: \n- Ông/Bà:...................................... đại diện kế toán \n- Ông/Bà:...................................... đại diện thủ quỹ \n- Ông/Bà:...................................... đại diện............ \nCùng tiến hành kiểm kê quỹ ngoại tệ, vàng bạc... kết quả như sau: \nTính ra VNĐ \nSTT Diễn giải Đơn vị \ntính \nSố \nlượng \nĐơn \ngiá Tỷ giá VNĐ \nGhi \nchú \nA B C 1 2 3 4 D \nI Số dư theo sổ quỹ x x ......... ........... ......... ....... .... \nII Số kiểm kê thực tế (*) x x ......... ........... ......... . .......... \n1 - Loại ............ ........... ......... ........... ....... .. ........... \n2 - Loại ............ ........... ......... ........... ....... .. ........... \n3 -... ............ ........... ......... ........ ......... .. ......... \nIII Chênh lệch (III = I - II) x x ......... ........... ....... .. ........... \n- Lý do : + Thừa:..................................................................................................  \n               + Thiếu:.................................................................................................  \n- Kết luận sau khi kiểm kê quỹ:...........................................................................  \n \nThủ quỹ \n(Ký, họ tên) \nKế toán trưởng \n(Ký, họ tên) \nNgười chịu trách nhiệm kiểm kê quỹ \n(Ký, họ tên) \n   \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/08b_TT.html"
     },
     {
       "form_id": "tt99_appendix1_09_tt",
@@ -1762,10 +4553,159 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 12,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Người lập bảng kê Kế toán trưởng Người duyệt"
       ],
-      "layout_text": "Mẫu số 09 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KÊ CHI TIỀN  \nNgày..... tháng..... năm.... \n \nHọ và tên người chi: ............................................................................................. \nBộ phận (hoặc địa chỉ):......................................................................................... \nChi cho công việc: ................................................................................................ \nChứng từ \nSTT \nSố hiệu Ngày, tháng \nNội dung chi Số tiền \nA B C D 1 \n \n     \n   Cộng  \n \nSố tiền bằng chữ:................................................................................................ \n(Kèm theo.... chứng từ gốc).  \n \nNgười lập bảng kê Kế toán trưởng Người duyệt \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)  \n \n \n \n \n \n \n  \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 09 - TT  \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBẢNG KÊ CHI TIỀN  \nNgày..... tháng..... năm.... \n \nHọ và tên người chi: ............................................................................................. \nBộ phận (hoặc địa chỉ):......................................................................................... \nChi cho công việc: ................................................................................................ \nChứng từ \nSTT \nSố hiệu Ngày, tháng \nNội dung chi Số tiền \nA B C D 1 \n \n     \n   Cộng  \n \nSố tiền bằng chữ:................................................................................................ \n(Kèm theo.... chứng từ gốc).  \n \nNgười lập bảng kê Kế toán trưởng Người duyệt \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)  \n \n \n \n \n \n \n  \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/09_TT.html"
     },
     {
       "form_id": "tt99_appendix1_01_tscd",
@@ -1824,13 +4764,19 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Giám đốc bên nhận",
         "bên nhận",
         "Người nhận",
         "Người giao"
       ],
-      "layout_text": "Mẫu số 01 - TSCĐ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN GIAO NHẬN TSCĐ \nNgày..... tháng..... năm...... \n Số: ...................................... \n Nợ: ..................................... \n Có:...................................... \n \nCăn cứ Quyết định số:................. ngày....... tháng....... năm....... của................... \n............................................................................. về việc bàn giao TSCĐ.......... \nBan giao nhận TSCĐ gồm: \n- Ông/Bà..................................... chức vụ.............................. Đại diện bên giao \n- Ông/Bà..................................... chức vụ............................... Đại diện bên nhận \n- Ông/Bà............................... chức vụ............................... Đại diện..................... \nĐịa điểm giao nhận TSCĐ :.................................................................................. \nXác nhận việc giao nhận TSCĐ như sau:  \n \nTính nguyên giá tài sản cố định \nSTT \nTên, \nký hiệu \nquy cách \n(cấp \nhạng \nTSCĐ) \nSố \nhiệu/Mã \nTSCĐ \nNước \nsản \nxuất \n(XD) \nNăm \nsản \nxuất \nNăm \nđưa \nvào sử \ndụng \nCông \nsuất \n(diện \ntích \nthiết \nkế) \nGiá \nmua \n \nChi \nphí \nvận \nchuyển \nChi \nphí \nchạy \nthử \n... \nNguyên \ngiá \nTSCĐ \nTài \nliệu \nkỹ \nthuật \nkèm \ntheo \nA B C D 1 2 3 4 5 6 7 8 E \n             \n             \n             \n             \n             \n             \n             \n             \n Cộng x x x x x      x \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 88  \n  \n 88 \nDỤNG CỤ, PHỤ TÙNG KÈM THEO \n \nSố \nthứ tự \nTên, qui cách dụng cụ, \nphụ tùng Đơn vị tính Số lượng Giá trị \nA B C 1 2 \n     \n     \n     \n     \n     \n \nGiám đốc bên nhận \n(Ký, họ tên, đóng dấu) \nKế toán trưởng \nbên nhận \n(Ký, họ tên) \nNgười nhận \n(Ký, họ tên) \nNgười giao \n(Ký, họ tên) \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 01 - TSCĐ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN GIAO NHẬN TSCĐ \nNgày..... tháng..... năm...... \n Số: ...................................... \n Nợ: ..................................... \n Có:...................................... \n \nCăn cứ Quyết định số:................. ngày....... tháng....... năm....... của................... \n............................................................................. về việc bàn giao TSCĐ.......... \nBan giao nhận TSCĐ gồm: \n- Ông/Bà..................................... chức vụ.............................. Đại diện bên giao \n- Ông/Bà..................................... chức vụ............................... Đại diện bên nhận \n- Ông/Bà............................... chức vụ............................... Đại diện..................... \nĐịa điểm giao nhận TSCĐ :.................................................................................. \nXác nhận việc giao nhận TSCĐ như sau:  \n \nTính nguyên giá tài sản cố định \nSTT \nTên, \nký hiệu \nquy cách \n(cấp \nhạng \nTSCĐ) \nSố \nhiệu/Mã \nTSCĐ \nNước \nsản \nxuất \n(XD) \nNăm \nsản \nxuất \nNăm \nđưa \nvào sử \ndụng \nCông \nsuất \n(diện \ntích \nthiết \nkế) \nGiá \nmua \n \nChi \nphí \nvận \nchuyển \nChi \nphí \nchạy \nthử \n... \nNguyên \ngiá \nTSCĐ \nTài \nliệu \nkỹ \nthuật \nkèm \ntheo \nA B C D 1 2 3 4 5 6 7 8 E \n             \n             \n             \n             \n             \n             \n             \n             \n Cộng x x x x x      x \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 88  \n  \n 88 \nDỤNG CỤ, PHỤ TÙNG KÈM THEO \n \nSố \nthứ tự \nTên, qui cách dụng cụ, \nphụ tùng Đơn vị tính Số lượng Giá trị \nA B C 1 2 \n     \n     \n     \n     \n     \n \nGiám đốc bên nhận \n(Ký, họ tên, đóng dấu) \nKế toán trưởng \nbên nhận \n(Ký, họ tên) \nNgười nhận \n(Ký, họ tên) \nNgười giao \n(Ký, họ tên) \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/01_TSCĐ.html"
     },
     {
       "form_id": "tt99_appendix1_02_tscd",
@@ -1901,11 +4847,17 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Trưởng Ban thanh lý",
         "Giám đốc  Kế toán trưởng"
       ],
-      "layout_text": "Mẫu số 02 - TSCĐ \\ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN THANH LÝ TSCĐ  \nNgày..... tháng...... năm...... \n \n Số: ..........................  \n Nợ: .........................  \n Có:..........................  \n \nCăn cứ Quyết định số:........ ngày...... tháng...... năm...... của ............................... \n.......................................................................... về việc thanh lý tài sản cố định. \n \nI. Ban thanh lý TSCĐ gồm:  \nÔng/Bà:............................ Chức vụ.................. Đại diện.................. Trưởng ban \nÔng/Bà:............................ Chức vụ.................. Đại diện.................. Ủy viên \nÔng/Bà:............................ Chức vụ.................. Đại diện.................. Ủy viên \nII. Tiến hành thanh lý TSCĐ: \n- Tên, ký mã hiệu, qui cách (cấp hạng) TSCĐ .....................................................  \n- Số hiệu TSCĐ/Mã TSCĐ ...................................................................................  \n- Năm sản xuất ......................................................................................................  \n- Năm đưa vào sử dụng.................................... Số thẻ TSCĐ ..............................  \n- Nguyên giá TSCĐ ..............................................................................................  \n- Giá trị hao mòn đã trích đến thời điểm thanh lý ................................................  \n- Giá trị còn lại của TSCĐ ....................................................................................  \nIII. Kết luận của Ban thanh lý TSCĐ: \n............................................................................................................................... \n............................................................................................................................... \n \nNgày......... tháng......... năm..... \nTrưởng Ban thanh lý \n(Ký, họ tên) \n \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 90  \n  \n 90 \nIV. Kết quả thanh lý TSCĐ:  \n- Chi phí thanh lý TSCĐ:................................ (viết bằng chữ) ............................ \n- Giá trị thu hồi:.............................................. (viết bằng chữ)............................. \n- Đã ghi giảm sổ TSCĐ ngày........... tháng.......... năm.......... \n \n  Ngày......... tháng......... năm......  \n   Giám đốc  Kế toán trưởng  \n(Ký, họ tên, đóng dấu)  (Ký, h ọ tên) \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán"
+      "layout_text": "Mẫu số 02 - TSCĐ \\ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN THANH LÝ TSCĐ  \nNgày..... tháng...... năm...... \n \n Số: ..........................  \n Nợ: .........................  \n Có:..........................  \n \nCăn cứ Quyết định số:........ ngày...... tháng...... năm...... của ............................... \n.......................................................................... về việc thanh lý tài sản cố định. \n \nI. Ban thanh lý TSCĐ gồm:  \nÔng/Bà:............................ Chức vụ.................. Đại diện.................. Trưởng ban \nÔng/Bà:............................ Chức vụ.................. Đại diện.................. Ủy viên \nÔng/Bà:............................ Chức vụ.................. Đại diện.................. Ủy viên \nII. Tiến hành thanh lý TSCĐ: \n- Tên, ký mã hiệu, qui cách (cấp hạng) TSCĐ .....................................................  \n- Số hiệu TSCĐ/Mã TSCĐ ...................................................................................  \n- Năm sản xuất ......................................................................................................  \n- Năm đưa vào sử dụng.................................... Số thẻ TSCĐ ..............................  \n- Nguyên giá TSCĐ ..............................................................................................  \n- Giá trị hao mòn đã trích đến thời điểm thanh lý ................................................  \n- Giá trị còn lại của TSCĐ ....................................................................................  \nIII. Kết luận của Ban thanh lý TSCĐ: \n............................................................................................................................... \n............................................................................................................................... \n \nNgày......... tháng......... năm..... \nTrưởng Ban thanh lý \n(Ký, họ tên) \n \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 90  \n  \n 90 \nIV. Kết quả thanh lý TSCĐ:  \n- Chi phí thanh lý TSCĐ:................................ (viết bằng chữ) ............................ \n- Giá trị thu hồi:.............................................. (viết bằng chữ)............................. \n- Đã ghi giảm sổ TSCĐ ngày........... tháng.......... năm.......... \n \n  Ngày......... tháng......... năm......  \n   Giám đốc  Kế toán trưởng  \n(Ký, họ tên, đóng dấu)  (Ký, h ọ tên) \n \n \n \n \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/02_TSCĐ.html"
     },
     {
       "form_id": "tt99_appendix1_03_tscd",
@@ -1976,10 +4928,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Đại diện đơn vị nhận Đại diện đơn vị giao"
       ],
-      "layout_text": "Mẫu số 03 - TSCĐ \\ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN BÀN GIAO TSCĐ  \nSỬA CHỮA, BẢO DƯỠNG HOẶC NÂNG CẤP, CẢI TẠO HOÀN THÀNH \n  Ngày... tháng... năm... Số:...................... \n   Nợ:........ .............. \n  Có:......... ............. \nCăn cứ Quyết định số:................... ngày... tháng... năm... của............................. \nChúng tôi gồm:  \n- Ông/Bà..................... Chức vụ............. Đại diện............................... đơn vị sửa \nchữa, bảo dưỡng hoặc nâng cấp, cải tạo \n- Ông/Bà.................... Chức vụ.............. Đại diện.................... đơn vị có TSCĐ. \nĐã kiểm nhận việc sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo TSCĐ như sau: \n- Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ..................................................... \n- Số hiệu TSCĐ.............................................. Số thẻ TSCĐ:............................... \n- Bộ phận quản lý, sử dụng:.................................................................................. \n- Thời gian sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo từ ngày. .... tháng.... \nnăm...... đến ngày..... tháng.... năm......... \nCác bộ phận sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo gồm có: \nTên bộ phận \ncần sửa chữa, \nbảo dưỡng \nhoặc nâng cấp, \ncải tạo \nNội dung (mức độ) \ncông việc sửa chữa, \nbảo dưỡng hoặc \nnâng cấp, cải tạo \nGiá \ndự \ntoán \nChi \nphí \nthực \ntế \nKết quả kiểm tra \nsau sửa chữa, bảo \ndưỡng hoặc nâng \ncấp, cải tạo \nA B 1 2 3 \n     \n \n \n \n \n \n \n \n \n   \n Cộng    \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 92  \n  \n 92 \nKết luận:............................................................................................................... \n.............................................................................................................................. \n \nĐại diện đơn vị nhận Đại diện đơn vị giao \n(Ký, họ tên) (Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 03 - TSCĐ \\ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN BÀN GIAO TSCĐ  \nSỬA CHỮA, BẢO DƯỠNG HOẶC NÂNG CẤP, CẢI TẠO HOÀN THÀNH \n  Ngày... tháng... năm... Số:...................... \n   Nợ:........ .............. \n  Có:......... ............. \nCăn cứ Quyết định số:................... ngày... tháng... năm... của............................. \nChúng tôi gồm:  \n- Ông/Bà..................... Chức vụ............. Đại diện............................... đơn vị sửa \nchữa, bảo dưỡng hoặc nâng cấp, cải tạo \n- Ông/Bà.................... Chức vụ.............. Đại diện.................... đơn vị có TSCĐ. \nĐã kiểm nhận việc sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo TSCĐ như sau: \n- Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ..................................................... \n- Số hiệu TSCĐ.............................................. Số thẻ TSCĐ:............................... \n- Bộ phận quản lý, sử dụng:.................................................................................. \n- Thời gian sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo từ ngày. .... tháng.... \nnăm...... đến ngày..... tháng.... năm......... \nCác bộ phận sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo gồm có: \nTên bộ phận \ncần sửa chữa, \nbảo dưỡng \nhoặc nâng cấp, \ncải tạo \nNội dung (mức độ) \ncông việc sửa chữa, \nbảo dưỡng hoặc \nnâng cấp, cải tạo \nGiá \ndự \ntoán \nChi \nphí \nthực \ntế \nKết quả kiểm tra \nsau sửa chữa, bảo \ndưỡng hoặc nâng \ncấp, cải tạo \nA B 1 2 3 \n     \n \n \n \n \n \n \n \n \n   \n Cộng    \n \n CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 92  \n  \n 92 \nKết luận:............................................................................................................... \n.............................................................................................................................. \n \nĐại diện đơn vị nhận Đại diện đơn vị giao \n(Ký, họ tên) (Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của \nđơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/03_TSCĐ.html"
     },
     {
       "form_id": "tt99_appendix1_04_tscd",
@@ -2038,10 +4996,287 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 52,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_8",
+            "label": "Cột 8",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_9",
+            "label": "Cột 9",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_10",
+            "label": "Cột 10",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_11",
+            "label": "Cột 11",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_12",
+            "label": "Cột 12",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_13",
+            "label": "Cột 13",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": "",
+              "col_8": "",
+              "col_9": "",
+              "col_10": "",
+              "col_11": "",
+              "col_12": "",
+              "col_13": ""
+            }
+          }
+        ]
+      },
       "signatures": [
         "Ủy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng"
       ],
-      "layout_text": "Mẫu số 04 - TSCĐ \\ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN ĐÁNH GIÁ LẠI TSCĐ  \nNgày..... tháng..... năm...... \n Số: ..........................  \n Nợ: .........................  \n Có:..........................  \n \n - Căn cứ Quyết định số:.......... ngày....... tháng....... năm........ \n Của....................................................................... Về việc đánh giá lại TSCĐ \n - Ông/Bà........... Chức vụ................ Đại diện...................... Chủ tịch Hội đồng \n - Ông/Bà........... Chức vụ........................ Đại diện............................. Ủy viên \n - Ông/Bà........... Chức vụ........................ Đại diện............................. Ủy viên \nĐã thực hiện đánh giá lại giá trị các TSCĐ sau đây: \nGiá trị đang ghi sổ Giá trị còn lại theo      \nđánh giá lại Chênh lệch \nSTT \nTên, ký \nmã hiệu, \nqui cách \n(cấp \nhạng) \nTSCĐ \nSố \nhiệu \nTSCĐ \nSố \nthẻ \nTSCĐ Nguyên \nGiá \nHao \nmòn \nGiá \ntrị \ncòn \nlại \nNguyên \nGiá \nHao \nmòn \nGiá \ntrị \ncòn \nlại \nNguyên \ngiá \nHao \nmòn \nGiá \ntrị \nCòn \nlại \nA B C D 1 2 3 4 5 6 7 8 9 \n             \n             \n             \n             \n             \n Cộng X X          \nKết luận:........................................................................................................................ \n........................................................................................................................................ \n \n  Ngày... tháng... năm... \nỦy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị \nmình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 04 - TSCĐ \\ \n(Kèm theo Thông tư số 99/2025/TT-BTC  \nngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \n \nBIÊN BẢN ĐÁNH GIÁ LẠI TSCĐ  \nNgày..... tháng..... năm...... \n Số: ..........................  \n Nợ: .........................  \n Có:..........................  \n \n - Căn cứ Quyết định số:.......... ngày....... tháng....... năm........ \n Của....................................................................... Về việc đánh giá lại TSCĐ \n - Ông/Bà........... Chức vụ................ Đại diện...................... Chủ tịch Hội đồng \n - Ông/Bà........... Chức vụ........................ Đại diện............................. Ủy viên \n - Ông/Bà........... Chức vụ........................ Đại diện............................. Ủy viên \nĐã thực hiện đánh giá lại giá trị các TSCĐ sau đây: \nGiá trị đang ghi sổ Giá trị còn lại theo      \nđánh giá lại Chênh lệch \nSTT \nTên, ký \nmã hiệu, \nqui cách \n(cấp \nhạng) \nTSCĐ \nSố \nhiệu \nTSCĐ \nSố \nthẻ \nTSCĐ Nguyên \nGiá \nHao \nmòn \nGiá \ntrị \ncòn \nlại \nNguyên \nGiá \nHao \nmòn \nGiá \ntrị \ncòn \nlại \nNguyên \ngiá \nHao \nmòn \nGiá \ntrị \nCòn \nlại \nA B C D 1 2 3 4 5 6 7 8 9 \n             \n             \n             \n             \n             \n Cộng X X          \nKết luận:........................................................................................................................ \n........................................................................................................................................ \n \n  Ngày... tháng... năm... \nỦy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị \nmình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/04_TSCĐ.html"
     },
     {
       "form_id": "tt99_appendix1_05_tscd",
@@ -2076,12 +5311,18 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "(Ghi ý kiến giải quyết số chênh lệch)",
         "Kế toán trưởng",
         "Trưởng Ban kiểm kê"
       ],
-      "layout_text": "Mẫu số 05 - TSCĐ \n(Kèm theo Thông tư số 99/2025/TT-BTC \n ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBIÊN BẢN TỔNG HỢP KIỂM KÊ TÀI SẢN CỐ ĐỊNH \nSố:.................. \nThời điểm kiểm kê............ giờ......... ngày......... tháng........ năm.......... \nBan kiểm kê gồm: \n- Ông /Bà................................................... Chức vụ............................... Đại diện........................................ Trưởng ban \n- Ông /Bà.................................................. Chức vụ................................ Đại diện.............................................. Ủy viên \n- Ông/Bà................................................... Chức vụ................................ Đại diện.............................................. Ủy viên \nĐã kiểm kê TSCĐ, kết quả như sau: \nTheo sổ kế toán Theo kiểm kê Chênh lệch \nSố \nTT \nTên \nTSCĐ \nĐơn \nvị \ntính \nMã \nsố \nNơi \nsử \ndụng Số \nlượng \nNguyên \ngiá \nGiá trị \ncòn lại \nSố \nlượng \nNguyên \ngiá \nGiá trị \ncòn lại \nSố \nlượng \nNguyên \ngiá \nGiá trị \ncòn lại \nGhi \nchú \nA B C D E 1 2 3 4 5 6 7 8 9 F \n               \nCộng  x x x   x   x   x \n \n Ngày...... tháng...... năm..... \nGiám đốc \n (Ghi ý kiến giải quyết số chênh lệch) \n (Ký, họ tên, đóng dấu) \nKế toán trưởng \n(Ký, họ tên) \nTrưởng Ban kiểm kê \n(Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \n thiết kế biểu mẫu chứng từ kế toán."
+      "layout_text": "Mẫu số 05 - TSCĐ \n(Kèm theo Thông tư số 99/2025/TT-BTC \n ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) \nBIÊN BẢN TỔNG HỢP KIỂM KÊ TÀI SẢN CỐ ĐỊNH \nSố:.................. \nThời điểm kiểm kê............ giờ......... ngày......... tháng........ năm.......... \nBan kiểm kê gồm: \n- Ông /Bà................................................... Chức vụ............................... Đại diện........................................ Trưởng ban \n- Ông /Bà.................................................. Chức vụ................................ Đại diện.............................................. Ủy viên \n- Ông/Bà................................................... Chức vụ................................ Đại diện.............................................. Ủy viên \nĐã kiểm kê TSCĐ, kết quả như sau: \nTheo sổ kế toán Theo kiểm kê Chênh lệch \nSố \nTT \nTên \nTSCĐ \nĐơn \nvị \ntính \nMã \nsố \nNơi \nsử \ndụng Số \nlượng \nNguyên \ngiá \nGiá trị \ncòn lại \nSố \nlượng \nNguyên \ngiá \nGiá trị \ncòn lại \nSố \nlượng \nNguyên \ngiá \nGiá trị \ncòn lại \nGhi \nchú \nA B C D E 1 2 3 4 5 6 7 8 9 F \n               \nCộng  x x x   x   x   x \n \n Ngày...... tháng...... năm..... \nGiám đốc \n (Ghi ý kiến giải quyết số chênh lệch) \n (Ký, họ tên, đóng dấu) \nKế toán trưởng \n(Ký, họ tên) \nTrưởng Ban kiểm kê \n(Ký, họ tên) \n \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, \n thiết kế biểu mẫu chứng từ kế toán.",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/05_TSCĐ.html"
     },
     {
       "form_id": "tt99_appendix1_06_tscd",
@@ -2116,10 +5357,16 @@
           "required": false
         }
       ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
       "signatures": [
         "Người lập bảng  Kế toán trưởng"
       ],
-      "layout_text": "Mẫu số 06 - TSCĐ \n(Kèm theo Thông tư số 99/2025/TT-BTC \n ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)   \nBẢNG TÍNH VÀ PHÂN BỔ KHẤU HAO TSCĐ \nTháng...... năm..... \nSố:........... \n \n Nơi sử dụng \n \nTK 627 – Chi phí \nsản xuất chung \nToàn DN \nSTT Chỉ tiêu \nTỷ lệ \nkhấu \nhao (%) \nhoặc \nthời gian \nsử dụng \nNguyên \ngiá \nTSCĐ \nSố \nkhấu \nhao \nPhân \nxưởng \n(sản \nphẩm) \nPhân \nxưởng \n(sản \nphẩm) \nPhân \nxưởng \n(sản \nphẩm) \nPhân \nxưởng \n(sản \nphẩm) \nTK 623 \nChi phí sử \ndụng máy \nthi công \nTK 641 \nChi phí \nbán \nhàng \nTK 642 Chi \nphí quản lý \nDoanh \nnghiệp \nTK 241 \nXDCB dở \ndang \nTK 242  \nChi phí chờ \nphân bổ \nTK 335 \nChi phí \nphải trả \n... \nA B 1 2 3 4 5 6 7 8 9 10 11 12 13 ... \n1 I. Số khấu hao trích \ntháng trước               \n2 II . Số KH TSCĐ tăng \ntrong tháng               \n3 III. Số KH TSCĐ \ngiảm trong tháng               \n4 IV. Số KH trích tháng \nnày (I + II - III)               \nCộng x              \n \n  Ngày..... tháng.... năm... \nNgười lập bảng  Kế toán trưởng \n(Ký, họ tên)  (Ký, h ọ tên)  \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý c ủa đơn vị mình, doanh nghi ệp được xây \ndựng, thiết kế biểu mẫu chứng từ kế toán. \n \n(Xem tiếp Công báo số 1565 + 1566) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nVĂN PHÒNG CHÍNH PHỦ XUẤT BẢN \nĐịa chỉ: Số 1, Hoàng Hoa Thám, Ba Đình, Hà Nội \nĐiện thoại liên hệ:  \n- Nội dung: 080.44417 \n- Phát hành:  080.44243 \nEmail:  congbao@chinhphu.vn \nWebsite http://congbao.chinhphu.vn"
+      "layout_text": "Mẫu số 06 - TSCĐ \n(Kèm theo Thông tư số 99/2025/TT-BTC \n ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)   \nBẢNG TÍNH VÀ PHÂN BỔ KHẤU HAO TSCĐ \nTháng...... năm..... \nSố:........... \n \n Nơi sử dụng \n \nTK 627 – Chi phí \nsản xuất chung \nToàn DN \nSTT Chỉ tiêu \nTỷ lệ \nkhấu \nhao (%) \nhoặc \nthời gian \nsử dụng \nNguyên \ngiá \nTSCĐ \nSố \nkhấu \nhao \nPhân \nxưởng \n(sản \nphẩm) \nPhân \nxưởng \n(sản \nphẩm) \nPhân \nxưởng \n(sản \nphẩm) \nPhân \nxưởng \n(sản \nphẩm) \nTK 623 \nChi phí sử \ndụng máy \nthi công \nTK 641 \nChi phí \nbán \nhàng \nTK 642 Chi \nphí quản lý \nDoanh \nnghiệp \nTK 241 \nXDCB dở \ndang \nTK 242  \nChi phí chờ \nphân bổ \nTK 335 \nChi phí \nphải trả \n... \nA B 1 2 3 4 5 6 7 8 9 10 11 12 13 ... \n1 I. Số khấu hao trích \ntháng trước               \n2 II . Số KH TSCĐ tăng \ntrong tháng               \n3 III. Số KH TSCĐ \ngiảm trong tháng               \n4 IV. Số KH trích tháng \nnày (I + II - III)               \nCộng x              \n \n  Ngày..... tháng.... năm... \nNgười lập bảng  Kế toán trưởng \n(Ký, họ tên)  (Ký, h ọ tên)  \nGhi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý c ủa đơn vị mình, doanh nghi ệp được xây \ndựng, thiết kế biểu mẫu chứng từ kế toán. \n \n(Xem tiếp Công báo số 1565 + 1566) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nVĂN PHÒNG CHÍNH PHỦ XUẤT BẢN \nĐịa chỉ: Số 1, Hoàng Hoa Thám, Ba Đình, Hà Nội \nĐiện thoại liên hệ:  \n- Nội dung: 080.44417 \n- Phát hành:  080.44243 \nEmail:  congbao@chinhphu.vn \nWebsite http://congbao.chinhphu.vn",
+      "print_template_html": "data/regulations/tt99_2025_appendix1_form_templates_html/06_TSCĐ.html"
     }
   ]
 }

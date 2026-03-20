@@ -80,6 +80,27 @@ Người lập bảng Kế toán trưởng Giám đốc
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
 thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/01_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+          <Column key="col_11" label="Cột 11" type="string" required="false" />
+          <Column key="col_12" label="Cột 12" type="string" required="false" />
+          <Column key="col_13" label="Cột 13" type="string" required="false" />
+          <Column key="col_14" label="Cột 14" type="string" required="false" />
+          <Column key="col_15" label="Cột 15" type="string" required="false" />
+          <Column key="col_16" label="Cột 16" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="02-LĐTL" id="tt99_appendix1_02_ldtl" group="LĐTL" start_page="37" end_page="37">
       <Title>Bảng thanh toán tiề n thưởng</Title>
@@ -121,6 +142,18 @@ Người lập bảng Kế toán trưởng Giám đốc
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
 thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/02_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="03-LĐTL" id="tt99_appendix1_03_ldtl" group="LĐTL" start_page="38" end_page="38">
       <Title>Bảng thanh toán tiền là m thêm giờ</Title>
@@ -220,6 +253,10 @@ Người lập bảng Kế toán trưởng Người duyệt
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
 thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/03_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="04-LĐTL" id="tt99_appendix1_04_ldtl" group="LĐTL" start_page="39" end_page="39">
       <Title>Bảng thanh toán tiền thuê ngoài</Title>
@@ -292,6 +329,23 @@ Người đề nghị thanh toán  Kế toán trưởng Người duyệt
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
 thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/04_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+          <Column key="col_11" label="Cột 11" type="string" required="false" />
+          <Column key="col_12" label="Cột 12" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="05-LĐTL" id="tt99_appendix1_05_ldtl" group="LĐTL" start_page="40" end_page="40">
       <Title>Hợp đồng giao khoán</Title>
@@ -345,6 +399,10 @@ II- Điều khoản cụ thể:
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/05_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="06-LĐTL" id="tt99_appendix1_06_ldtl" group="LĐTL" start_page="41" end_page="41">
       <Title>Biên bản thanh lý (nghiệm thu)  hợp đồng giao khoán</Title>
@@ -400,6 +458,10 @@ Kết luận:...................................................................
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/06_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="07-LĐTL" id="tt99_appendix1_07_ldtl" group="LĐTL" start_page="42" end_page="42">
       <Title>Bảng kê trích nộp các khoả n theo lương</Title>
@@ -461,6 +523,20 @@ Giám đốc
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế 
 biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/07_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="08-LĐTL" id="tt99_appendix1_08_ldtl" group="LĐTL" start_page="43" end_page="44">
       <Title>BẢNG PHÂN BỔ TIỀN LƯƠNG VÀ CÁC KHOẢN TRÍCH THEO LƯƠNG</Title>
@@ -600,6 +676,10 @@ Ngày...... tháng..... năm...
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
 thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/08_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="01-VT" id="tt99_appendix1_01_vt" group="VT" start_page="45" end_page="45">
       <Title>Phiếu nhập kho</Title>
@@ -677,6 +757,19 @@ có nhu cầu nhập)
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/01_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="02-VT" id="tt99_appendix1_02_vt" group="VT" start_page="46" end_page="46">
       <Title>Phiếu xuất kho</Title>
@@ -768,6 +861,19 @@ Giám đốc
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/02_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="03-VT" id="tt99_appendix1_03_vt" group="VT" start_page="47" end_page="47">
       <Title>Biên bản kiểm nghiệm vật tư, c ông cụ, sản phẩm, hàng hóa</Title>
@@ -850,6 +956,10 @@ A B C D E 1 2 3 F
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/03_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="04-VT" id="tt99_appendix1_04_vt" group="VT" start_page="48" end_page="48">
       <Title>Bảng kê chi tiết vật tư  còn lại cuối kỳ</Title>
@@ -912,6 +1022,10 @@ A B C D 1 2 3
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/04_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="05-VT" id="tt99_appendix1_05_vt" group="VT" start_page="49" end_page="49">
       <Title>Biên bản tổng hợp ki ểm kê vật tư, công cụ, sản phẩm, hàng hóa</Title>
@@ -997,6 +1111,27 @@ Trưởng ban/Chủ tịch Hội đồng kiểm kê
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế 
 biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/05_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+          <Column key="col_11" label="Cột 11" type="string" required="false" />
+          <Column key="col_12" label="Cột 12" type="string" required="false" />
+          <Column key="col_13" label="Cột 13" type="string" required="false" />
+          <Column key="col_14" label="Cột 14" type="string" required="false" />
+          <Column key="col_15" label="Cột 15" type="string" required="false" />
+          <Column key="col_16" label="Cột 16" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="06-VT" id="tt99_appendix1_06_vt" group="VT" start_page="50" end_page="50">
       <Title>Bảng kê mua hàng</Title>
@@ -1070,6 +1205,18 @@ Người mua  Kế toán trưởng Người duyệt mua
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/06_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="07-VT" id="tt99_appendix1_07_vt" group="VT" start_page="51" end_page="51">
       <Title>Bảng phân bổ nguyên liệu, vật liệu, công cụ, dụng cụ</Title>
@@ -1147,6 +1294,18 @@ Kế toán trưởng
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/07_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="01-BH" id="tt99_appendix1_01_bh" group="BH" start_page="52" end_page="53">
       <Title>Bảng thanh toán hàng đại lý, ký gửi</Title>
@@ -1258,6 +1417,10 @@ nhận bán hàng đại lý
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/01_BH.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="02-BH" id="tt99_appendix1_02_bh" group="BH" start_page="54" end_page="54">
       <Title>Thẻ quầy hàng</Title>
@@ -1340,6 +1503,10 @@ A B 1 2 3 4 = 1+2+3 5 6 7 8 9 = 4-5-7
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/02_BH.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="01-TT" id="tt99_appendix1_01_tt" group="TT" start_page="55" end_page="55">
       <Title>Phiếu thu</Title>
@@ -1412,6 +1579,10 @@ Thủ quỹ
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/01_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="02-TT" id="tt99_appendix1_02_tt" group="TT" start_page="56" end_page="56">
       <Title>Phiếu chi</Title>
@@ -1483,6 +1654,10 @@ Người nhận tiền
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/02_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="03-TT" id="tt99_appendix1_03_tt" group="TT" start_page="57" end_page="57">
       <Title>Giấy đề nghị tạm ứng</Title>
@@ -1547,6 +1722,10 @@ Người đề nghị tạm ứng
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/03_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="04-TT" id="tt99_appendix1_04_tt" group="TT" start_page="58" end_page="58">
       <Title>Giấy thanh toán tiền tạm ứng</Title>
@@ -1607,6 +1786,10 @@ thanh toán
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/04_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="05-TT" id="tt99_appendix1_05_tt" group="TT" start_page="59" end_page="59">
       <Title>Giấy đề nghị thanh toán</Title>
@@ -1671,6 +1854,10 @@ Kế toán trưởng
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/05_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="06-TT" id="tt99_appendix1_06_tt" group="TT" start_page="60" end_page="60">
       <Title>Biên lai thu tiền</Title>
@@ -1727,6 +1914,10 @@ Người nộp tiền Người thu tiền
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/06_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="07-TT" id="tt99_appendix1_07_tt" group="TT" start_page="61" end_page="61">
       <Title>Bảng kê vàng tiền tệ</Title>
@@ -1798,6 +1989,18 @@ Người nộp (nhận)
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/07_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="08a-TT" id="tt99_appendix1_08a_tt" group="TT" start_page="62" end_page="62">
       <Title>Bảng kiểm kê quỹ (dùng cho VND)</Title>
@@ -1852,6 +2055,15 @@ Kế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/08a_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="08b-TT" id="tt99_appendix1_08b_tt" group="TT" start_page="63" end_page="63">
       <Title>Bảng kiểm kê quỹ (dùng cho n goại tệ, vàng tiền tệ)</Title>
@@ -1915,6 +2127,19 @@ Người chịu trách nhiệm kiểm kê quỹ
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/08b_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="09-TT" id="tt99_appendix1_09_tt" group="TT" start_page="64" end_page="64">
       <Title>Bảng kê chi tiền</Title>
@@ -1965,6 +2190,16 @@ Người lập bảng kê Kế toán trưởng Người duyệt
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/09_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="01-TSCĐ" id="tt99_appendix1_01_tscd" group="TSCĐ" start_page="65" end_page="66">
       <Title>Biên bản giao nhận TSCĐ</Title>
@@ -2095,6 +2330,10 @@ Người giao
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/01_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="02-TSCĐ" id="tt99_appendix1_02_tscd" group="TSCĐ" start_page="67" end_page="68">
       <Title>Biên bản thanh lý TSCĐ</Title>
@@ -2167,6 +2406,10 @@ IV. Kết quả thanh lý TSCĐ:
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/02_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="03-TSCĐ" id="tt99_appendix1_03_tscd" group="TSCĐ" start_page="69" end_page="70">
       <Title>BIÊN BẢN BÀN GIAO TSCĐ SỬA CHỮA, BẢO DƯỠNG HOẶC NÂNG CẤP, CẢI TẠO HOÀN THÀNH</Title>
@@ -2250,6 +2493,10 @@ Kết luận:...................................................................
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
 đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/03_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="04-TSCĐ" id="tt99_appendix1_04_tscd" group="TSCĐ" start_page="71" end_page="71">
       <Title>Biên bản đánh giá lại TSCĐ</Title>
@@ -2335,6 +2582,24 @@ Kết luận:...................................................................
 (Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị 
 mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/04_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+          <Column key="col_11" label="Cột 11" type="string" required="false" />
+          <Column key="col_12" label="Cột 12" type="string" required="false" />
+          <Column key="col_13" label="Cột 13" type="string" required="false" />
+        </Columns>
+      </TableSchema>
     </Form>
     <Form code="05-TSCĐ" id="tt99_appendix1_05_tscd" group="TSCĐ" start_page="72" end_page="72">
       <Title>Biên bản tổng hợp kiểm kê TSCĐ</Title>
@@ -2407,6 +2672,10 @@ Trưởng Ban kiểm kê
  
 Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
  thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/05_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
     <Form code="06-TSCĐ" id="tt99_appendix1_06_tscd" group="TSCĐ" start_page="73" end_page="74">
       <Title>Bảng tính và phân bổ khấ u hao TSCĐ</Title>
@@ -2539,6 +2808,10 @@ VĂN PHÒNG CHÍNH PHỦ XUẤT BẢN
 - Phát hành:  080.44243 
 Email:  congbao@chinhphu.vn 
 Website http://congbao.chinhphu.vn</LayoutText>
+      <PrintTemplateHtml>data/regulations/tt99_2025_appendix1_form_templates_html/06_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
     </Form>
   </Forms>
 </TT99AppendixIForms>
