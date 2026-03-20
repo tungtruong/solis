@@ -343,6 +343,67 @@ def cleanup_vector_lines(lines: List[Dict[str, float]]) -> List[Dict[str, float]
     return cleaned
 
 
+def strip_cong_bao_footer(
+    blocks: List[Dict[str, object]],
+    vector_lines: List[Dict[str, float]],
+    page_width: int,
+    page_height: int,
+) -> Tuple[List[Dict[str, object]], List[Dict[str, float]]]:
+    footer_anchor: Optional[float] = None
+    for b in blocks:
+        norm = str(b.get("norm", ""))
+        if "cong bao" in norm:
+            y = float(b.get("y", 0.0))
+            footer_anchor = y if footer_anchor is None else min(footer_anchor, y)
+
+    if footer_anchor is None:
+        return blocks, vector_lines
+
+    footer_top = max(0.0, footer_anchor - 18.0)
+
+    filtered_blocks: List[Dict[str, object]] = []
+    for b in blocks:
+        text = str(b.get("text", "")).strip()
+        norm = str(b.get("norm", ""))
+        y = float(b.get("y", 0.0))
+        x = float(b.get("x", 0.0))
+
+        # Remove gazette footer line and trailing page number near page bottom.
+        is_footer_text = y >= footer_top and (
+            ("cong bao" in norm)
+            or ("/ngay" in norm)
+            or bool(re.search(r"\bso\s*\d", norm))
+            or (
+                bool(re.fullmatch(r"\d{1,4}", text))
+                and y <= (footer_anchor + 160.0)
+                and x >= page_width * 0.80
+            )
+            or (bool(re.fullmatch(r"\d{1,4}", text)) and y >= page_height * 0.90)
+        )
+        if is_footer_text:
+            continue
+
+        filtered_blocks.append(b)
+
+    filtered_lines: List[Dict[str, float]] = []
+    for ln in vector_lines:
+        x1 = float(ln.get("x1", 0.0))
+        y1 = float(ln.get("y1", 0.0))
+        x2 = float(ln.get("x2", 0.0))
+        y2 = float(ln.get("y2", 0.0))
+
+        is_h = abs(y1 - y2) <= 1.4
+        seg_len = abs(x2 - x1) if is_h else abs(y2 - y1)
+
+        is_footer_line = is_h and seg_len >= page_width * 0.30 and min(y1, y2) >= footer_top
+        if is_footer_line:
+            continue
+
+        filtered_lines.append(ln)
+
+    return filtered_blocks, filtered_lines
+
+
 def find_label_block(blocks: List[Dict[str, object]], label: str) -> Optional[Dict[str, object]]:
     candidates = [label, label.replace("(", "").replace(")", ""), label.lstrip("- ")]
     norms = [normalize_for_match(c) for c in candidates if c.strip()]
@@ -510,6 +571,7 @@ def render_sample_html(
             vector_lines = extract_pdf_vector_lines(page, zoom)
 
             base_blocks = pdf_blocks if pdf_blocks else layout_blocks
+            base_blocks, vector_lines = strip_cong_bao_footer(base_blocks, vector_lines, width_px, height_px)
 
             overlays: List[Dict[str, object]] = []
             if page_num == start_page:
