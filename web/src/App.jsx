@@ -2180,47 +2180,47 @@ function App() {
             <section className="detail-screen">
               <div className="detail-head">
                 <h2>{sectionLabel}</h2>
-                <p>Màn hình chi tiết cho phân hệ {sectionLabel.toLowerCase()}.</p>
+                <p>{tr('Màn hình chi tiết cho phân hệ', 'Detailed view for')} {sectionLabel.toLowerCase()}.</p>
               </div>
               {actionNotice ? <p className="report-inline-note">{actionNotice}</p> : null}
 
               {activeSection === 'dashboard' ? (
                 <div className="dashboard-decision-layout">
                   <article className="detail-row dashboard-ai-query">
-                    <h3>Hỏi AI để ra quyết định</h3>
+                    <h3>{tr('Hỏi AI để ra quyết định', 'Ask AI for decisions')}</h3>
                     <div className="report-chat-input">
                       <input
                         type="text"
                         value={dashboardQuery}
-                        placeholder="Ví dụ: Tuần này nên ưu tiên thu hồi khoản nào?"
+                        placeholder={tr('Ví dụ: Tuần này nên ưu tiên thu hồi khoản nào?', 'Example: Which receivable should we prioritize this week?')}
                         onChange={(event) => setDashboardQuery(event.target.value)}
                       />
-                      <button type="button" onClick={handleDashboardAnalyze}>Phân tích</button>
+                      <button type="button" onClick={handleDashboardAnalyze}>{tr('Phân tích', 'Analyze')}</button>
                     </div>
                   </article>
 
                   <article className="detail-row dashboard-hero">
                     <div className="dashboard-hero-head">
-                      <h3>Tình hình tài chính hôm nay</h3>
+                      <h3>{tr('Tình hình tài chính hôm nay', 'Financial snapshot today')}</h3>
                       <span className="report-live-badge">Control Center</span>
                     </div>
                     <div className="dashboard-hero-metrics">
-                      <div><span>Tiền mặt</span><strong className="metric-up">{formatCurrency(cashValue)} ↑ +{cashTrendPct}%</strong></div>
-                      <div><span>Công nợ phải trả</span><strong className="metric-down">{formatCurrency(payableValue)} ↑ +{payableTrendPct}%</strong></div>
-                      <div><span>Công nợ phải thu</span><strong className="metric-up">{formatCurrency(receivableValue)} ↓ {Math.abs(receivableTrendPct)}%</strong></div>
+                      <div><span>{tr('Tiền mặt', 'Cash')}</span><strong className="metric-up">{formatCurrency(cashValue)} ↑ +{cashTrendPct}%</strong></div>
+                      <div><span>{tr('Công nợ phải trả', 'Accounts payable')}</span><strong className="metric-down">{formatCurrency(payableValue)} ↑ +{payableTrendPct}%</strong></div>
+                      <div><span>{tr('Công nợ phải thu', 'Accounts receivable')}</span><strong className="metric-up">{formatCurrency(receivableValue)} ↓ {Math.abs(receivableTrendPct)}%</strong></div>
                     </div>
                     <div className="dashboard-hero-foot">
-                      <p>Dự báo: Dòng tiền đủ vận hành khoảng <strong>{runwayMonths.toFixed(1)} tháng</strong></p>
-                      <p>Khuyến nghị: Chốt lịch thanh toán nhà cung cấp trước 48 giờ.</p>
+                      <p>{tr('Dự báo: Dòng tiền đủ vận hành khoảng', 'Forecast: cash runway about')} <strong>{runwayMonths.toFixed(1)} {tr('tháng', 'months')}</strong></p>
+                      <p>{tr('Khuyến nghị: Chốt lịch thanh toán nhà cung cấp trước 48 giờ.', 'Recommendation: lock supplier payments at least 48 hours in advance.')}</p>
                     </div>
                   </article>
 
                   <article className="detail-row dashboard-kpi-row">
                     {[
-                      { title: 'Tiền mặt', value: formatCurrency(cashValue), trend: `+${cashTrendPct}%`, tone: 'up' },
-                      { title: 'Phải trả', value: formatCurrency(payableValue), trend: `+${payableTrendPct}%`, tone: 'down' },
-                      { title: 'Phải thu', value: formatCurrency(receivableValue), trend: `${receivableTrendPct}%`, tone: 'up' },
-                      { title: 'Burn rate', value: `${formatCurrency(burnRateValue)} / tháng`, trend: `${runwayMonths.toFixed(1)} tháng runway`, tone: 'warn' },
+                      { title: tr('Tiền mặt', 'Cash'), value: formatCurrency(cashValue), trend: `+${cashTrendPct}%`, tone: 'up' },
+                      { title: tr('Phải trả', 'Payables'), value: formatCurrency(payableValue), trend: `+${payableTrendPct}%`, tone: 'down' },
+                      { title: tr('Phải thu', 'Receivables'), value: formatCurrency(receivableValue), trend: `${receivableTrendPct}%`, tone: 'up' },
+                      { title: 'Burn rate', value: `${formatCurrency(burnRateValue)} / ${tr('tháng', 'month')}`, trend: `${runwayMonths.toFixed(1)} ${tr('tháng runway', 'months runway')}`, tone: 'warn' },
                     ].map((card) => (
                       <article className="kpi-smart-card" key={card.title}>
                         <h4>{card.title}</h4>
@@ -2233,7 +2233,7 @@ function App() {
                   <article className="detail-row dashboard-chart-row">
                     <div className="visual-grid">
                       <div className="visual-item">
-                        <h4>Dòng tiền gần nhất</h4>
+                        <h4>{tr('Dòng tiền gần nhất', 'Recent cashflow')}</h4>
                         <div className="sparkline-bars">
                           {(cashflowSeries.length ? cashflowSeries : [{ label: '--', value: 0 }]).map((point) => (
                             <div key={`${point.label}-${point.value}`} className="sparkline-col" title={`${point.label}: ${formatCurrency(point.value)}`}>
@@ -2247,14 +2247,14 @@ function App() {
                         </div>
                       </div>
                       <div className="visual-item">
-                        <h4>Doanh thu vs Chi phí</h4>
+                        <h4>{tr('Doanh thu vs Chi phí', 'Revenue vs Cost')}</h4>
                         <div className="bar-duo">
-                          <div className="bar-row"><span>Doanh thu</span><div className="bar-track"><div className="bar-fill revenue" style={{ width: `${Math.min(100, 35 + (reportRevenue > 0 ? 65 : 0))}%` }} /></div></div>
-                          <div className="bar-row"><span>Chi phí</span><div className="bar-track"><div className="bar-fill cost" style={{ width: `${Math.min(100, Math.max(10, reportRevenue > 0 ? (reportCost / reportRevenue) * 100 : 10))}%` }} /></div></div>
+                          <div className="bar-row"><span>{tr('Doanh thu', 'Revenue')}</span><div className="bar-track"><div className="bar-fill revenue" style={{ width: `${Math.min(100, 35 + (reportRevenue > 0 ? 65 : 0))}%` }} /></div></div>
+                          <div className="bar-row"><span>{tr('Chi phí', 'Cost')}</span><div className="bar-track"><div className="bar-fill cost" style={{ width: `${Math.min(100, Math.max(10, reportRevenue > 0 ? (reportCost / reportRevenue) * 100 : 10))}%` }} /></div></div>
                         </div>
                       </div>
                       <div className="visual-item">
-                        <h4>Công nợ theo nhóm</h4>
+                        <h4>{tr('Công nợ theo nhóm', 'Debt by group')}</h4>
                         <div className="bar-duo">
                           {debtBalanceSeries.map((point) => (
                             <div className="bar-row" key={point.label}>
@@ -2271,7 +2271,7 @@ function App() {
 
                   <article className="detail-row dashboard-bottom-grid">
                     <section className="dashboard-alert-card">
-                      <h3>Cảnh báo trọng yếu</h3>
+                      <h3>{tr('Cảnh báo trọng yếu', 'Critical warnings')}</h3>
                       <ul>
                         {dashboardWarnings.map((item) => (
                           <li key={item}>{item}</li>
@@ -2279,7 +2279,7 @@ function App() {
                       </ul>
                     </section>
                     <section className="dashboard-action-card">
-                      <h3>Hành động đề xuất</h3>
+                      <h3>{tr('Hành động đề xuất', 'Suggested actions')}</h3>
                       <div className="action-buttons">
                         <button
                           type="button"
@@ -2290,7 +2290,7 @@ function App() {
                             setActiveSection('reports')
                           }}
                         >
-                          Mở báo cáo công nợ
+                          {tr('Mở báo cáo công nợ', 'Open debt report')}
                         </button>
                         <button
                           type="button"
@@ -2301,15 +2301,15 @@ function App() {
                             setActiveSection('reports')
                           }}
                         >
-                          Mở báo cáo chi phí
+                          {tr('Mở báo cáo chi phí', 'Open cost report')}
                         </button>
                       </div>
                     </section>
                     {dashboardComplianceAlert ? (
                       <section className="dashboard-compliance-callout">
-                        <h3>Nhắc nộp báo cáo</h3>
+                        <h3>{tr('Nhắc nộp báo cáo', 'Submission reminder')}</h3>
                         <p>
-                          {dashboardComplianceAlert.status === 'qua_han' ? 'Quá hạn' : 'Sắp đến hạn'}: {dashboardComplianceAlert.name} - hạn {formatDateByRule(dashboardComplianceAlert.due_date || '-') || '-'}
+                          {dashboardComplianceAlert.status === 'qua_han' ? tr('Quá hạn', 'Overdue') : tr('Sắp đến hạn', 'Due soon')}: {dashboardComplianceAlert.name} - {tr('hạn', 'due')} {formatDateByRule(dashboardComplianceAlert.due_date || '-') || '-'}
                         </p>
                         <button
                           type="button"
@@ -2319,7 +2319,7 @@ function App() {
                             setActiveSection('compliance')
                           }}
                         >
-                          Nộp ngay
+                          {tr('Nộp ngay', 'Submit now')}
                         </button>
                       </section>
                     ) : null}
@@ -2331,26 +2331,26 @@ function App() {
                 <div className="detail-list report-analysis-layout">
                   <article className="detail-row report-filter-row">
                     <label>
-                      Kỳ báo cáo
+                      {tr('Kỳ báo cáo', 'Reporting period')}
                       <select value={reportPeriod} onChange={(event) => setReportPeriod(event.target.value)}>
-                        <option value="7_ngay">7 ngày</option>
-                        <option value="30_ngay">30 ngày</option>
-                        <option value="quy_nay">Quý này</option>
-                        <option value="nam_nay">Năm nay</option>
+                        <option value="7_ngay">{tr('7 ngày', '7 days')}</option>
+                        <option value="30_ngay">{tr('30 ngày', '30 days')}</option>
+                        <option value="quy_nay">{tr('Quý này', 'This quarter')}</option>
+                        <option value="nam_nay">{tr('Năm nay', 'This year')}</option>
                       </select>
                     </label>
                     <label>
-                      Đơn vị
+                      {tr('Đơn vị', 'Entity')}
                       <select value={reportEntity} onChange={(event) => setReportEntity(event.target.value)} disabled>
                         <option value="cong_ty_hien_tai">{reportCompanyLabel}</option>
                       </select>
                     </label>
                     <label>
-                      Lọc giao dịch
+                      {tr('Lọc giao dịch', 'Transaction filter')}
                       <select value={reportTxnFilter} onChange={(event) => setReportTxnFilter(event.target.value)}>
-                        <option value="tat_ca">Tất cả</option>
-                        <option value="gia_tri_lon">Giá trị lớn</option>
-                        <option value="rui_ro">Rủi ro cao</option>
+                        <option value="tat_ca">{tr('Tất cả', 'All')}</option>
+                        <option value="gia_tri_lon">{tr('Giá trị lớn', 'Large value')}</option>
+                        <option value="rui_ro">{tr('Rủi ro cao', 'High risk')}</option>
                       </select>
                     </label>
                   </article>
@@ -2358,9 +2358,9 @@ function App() {
                   <article className="detail-row">
                     <div className="report-tab-row">
                       {[
-                        { key: 'hieu_qua_kinh_doanh', label: 'Hiệu quả kinh doanh' },
-                        { key: 'can_doi_ke_toan', label: 'Sức khỏe tài chính' },
-                        { key: 'dong_tien', label: 'Dòng tiền' },
+                        { key: 'hieu_qua_kinh_doanh', label: tr('Hiệu quả kinh doanh', 'Business performance') },
+                        { key: 'can_doi_ke_toan', label: tr('Sức khỏe tài chính', 'Financial health') },
+                        { key: 'dong_tien', label: tr('Dòng tiền', 'Cashflow') },
                       ].map((tab) => (
                         <button
                           key={tab.key}
@@ -2376,22 +2376,22 @@ function App() {
 
                   <article className="detail-row report-summary-plain">
                     <div>
-                      <span>Doanh thu</span>
+                      <span>{tr('Doanh thu', 'Revenue')}</span>
                       <strong>{formatCurrency(reportRevenue)}</strong>
                     </div>
                     <div>
-                      <span>Lợi nhuận</span>
+                      <span>{tr('Lợi nhuận', 'Profit')}</span>
                       <strong className={reportProfit >= 0 ? 'metric-up' : 'metric-down'}>{formatCurrency(reportProfit)}</strong>
                     </div>
                     <div>
-                      <span>Dòng tiền thuần</span>
+                      <span>{tr('Dòng tiền thuần', 'Net cashflow')}</span>
                       <strong className={reportCashNet >= 0 ? 'metric-up' : 'metric-down'}>{formatCurrency(reportCashNet)}</strong>
                     </div>
                   </article>
 
                   <article className="detail-row report-to-compliance">
                     <p>
-                      Nguồn dữ liệu từ Reports đã sẵn sàng để đóng gói tờ khai. Ví dụ: lợi nhuận hiện tại {formatCurrency(reportProfit)} sẽ dùng để tính TNDN tạm tính.
+                      {tr('Nguồn dữ liệu từ Reports đã sẵn sàng để đóng gói tờ khai. Ví dụ: lợi nhuận hiện tại', 'Reports data is ready for filing package. Example: current profit')} {formatCurrency(reportProfit)} {tr('sẽ dùng để tính TNDN tạm tính.', 'will be used to estimate CIT.')}
                     </p>
                     <button
                       type="button"
@@ -2402,25 +2402,25 @@ function App() {
                         setActiveSection('compliance')
                       }}
                     >
-                      Mở Tuân thủ & Kê khai
+                      {tr('Mở Tuân thủ & Kê khai', 'Open Compliance & Filing')}
                     </button>
                   </article>
 
                   <article className="detail-row">
                     <p className="report-inline-note">
-                      Đang hiển thị {Number(reportDetail?.gl?.total || 0)} giao dịch sau lọc cho kỳ {reportPeriod.replace('_', ' ')} ({reportTxnFilter.replace('_', ' ')}).
+                      {tr('Đang hiển thị', 'Showing')} {Number(reportDetail?.gl?.total || 0)} {tr('giao dịch sau lọc cho kỳ', 'transactions after filtering for')} {reportPeriod.replace('_', ' ')} ({reportTxnFilter.replace('_', ' ')}).
                     </p>
                   </article>
 
                   <article className="detail-row report-detail-card">
                     <div className="report-detail-head">
-                      <h3>Bảng phân tích chính</h3>
+                      <h3>{tr('Bảng phân tích chính', 'Main analysis table')}</h3>
                       <p>
-                        {reportDetail?.tt133?.basis || 'Thông tư 133/2016/TT-BTC'} | Dữ liệu đến ngày {formatDateByRule(reportDetail?.as_of_date || reportAsOfDate) || '-'}
+                        {reportDetail?.tt133?.basis || 'Thông tư 133/2016/TT-BTC'} | {tr('Dữ liệu đến ngày', 'Data as of')} {formatDateByRule(reportDetail?.as_of_date || reportAsOfDate) || '-'}
                       </p>
                     </div>
 
-                    {reportLoading ? <p className="report-inline-note">Đang tải dữ liệu báo cáo chi tiết...</p> : null}
+                    {reportLoading ? <p className="report-inline-note">{tr('Đang tải dữ liệu báo cáo chi tiết...', 'Loading detailed report data...')}</p> : null}
                     {reportError ? <p className="report-inline-note report-error">{reportError}</p> : null}
 
                     {!reportLoading && !reportError && reportDetail ? (
@@ -2430,9 +2430,9 @@ function App() {
                             <table className="report-table report-table-compact">
                               <thead>
                                 <tr>
-                                  <th>Mã số</th>
-                                  <th>Chỉ tiêu</th>
-                                  <th>Số tiền</th>
+                                  <th>{tr('Mã số', 'Code')}</th>
+                                  <th>{tr('Chỉ tiêu', 'Item')}</th>
+                                  <th>{tr('Số tiền', 'Amount')}</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -2453,9 +2453,9 @@ function App() {
                             <table className="report-table report-table-compact">
                               <thead>
                                 <tr>
-                                  <th>Mã số</th>
-                                  <th>Chỉ tiêu</th>
-                                  <th>Số tiền</th>
+                                  <th>{tr('Mã số', 'Code')}</th>
+                                  <th>{tr('Chỉ tiêu', 'Item')}</th>
+                                  <th>{tr('Số tiền', 'Amount')}</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -2476,9 +2476,9 @@ function App() {
                             <table className="report-table report-table-compact">
                               <thead>
                                 <tr>
-                                  <th>Mã số</th>
-                                  <th>Chỉ tiêu</th>
-                                  <th>Số tiền</th>
+                                  <th>{tr('Mã số', 'Code')}</th>
+                                  <th>{tr('Chỉ tiêu', 'Item')}</th>
+                                  <th>{tr('Số tiền', 'Amount')}</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -2500,9 +2500,9 @@ function App() {
                   <article className="detail-row report-drill-row">
                     <div className="report-tab-row">
                       {[
-                        { key: 'giao_dich', label: 'Giao dịch' },
-                        { key: 'cong_no', label: 'Công nợ' },
-                        { key: 'chi_phi', label: 'Chi phí' },
+                        { key: 'giao_dich', label: tr('Giao dịch', 'Transactions') },
+                        { key: 'cong_no', label: tr('Công nợ', 'Debt') },
+                        { key: 'chi_phi', label: tr('Chi phí', 'Costs') },
                       ].map((tab) => (
                         <button
                           key={tab.key}
@@ -2524,24 +2524,24 @@ function App() {
                         <thead>
                           <tr>
                             <th className="report-resizable-th">
-                              {reportDrillTab === 'giao_dich' ? 'Ngày hồ sơ' : 'Nhóm'}
+                              {reportDrillTab === 'giao_dich' ? tr('Ngày hồ sơ', 'Case date') : tr('Nhóm', 'Group')}
                               <button
                                 type="button"
                                 className="report-col-resize-grip"
-                                aria-label="Co giãn cột ngày hồ sơ"
+                                aria-label={tr('Co giãn cột ngày hồ sơ', 'Resize case-date column')}
                                 onMouseDown={(event) => startReportDrillResize('first', event)}
                               />
                             </th>
                             <th className="report-resizable-th">
-                              Diễn giải
+                              {tr('Diễn giải', 'Narration')}
                               <button
                                 type="button"
                                 className="report-col-resize-grip"
-                                aria-label="Co giãn cột diễn giải"
+                                aria-label={tr('Co giãn cột diễn giải', 'Resize narration column')}
                                 onMouseDown={(event) => startReportDrillResize('second', event)}
                               />
                             </th>
-                            <th>Giá trị</th>
+                            <th>{tr('Giá trị', 'Value')}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -2554,14 +2554,14 @@ function App() {
                           )) : null}
                           {reportDrillTab === 'cong_no' ? (
                             <>
-                              <tr><td>Công nợ</td><td>Phải trả</td><td>{formatCurrency(payableValue)}</td></tr>
-                              <tr><td>Công nợ</td><td>Phải thu</td><td>{formatCurrency(receivableValue)}</td></tr>
+                              <tr><td>{tr('Công nợ', 'Debt')}</td><td>{tr('Phải trả', 'Payables')}</td><td>{formatCurrency(payableValue)}</td></tr>
+                              <tr><td>{tr('Công nợ', 'Debt')}</td><td>{tr('Phải thu', 'Receivables')}</td><td>{formatCurrency(receivableValue)}</td></tr>
                             </>
                           ) : null}
                           {reportDrillTab === 'chi_phi' ? (
                             <>
-                              <tr><td>Chi phí</td><td>Tổng chi phí kỳ</td><td>{formatCurrency(reportCost)}</td></tr>
-                              <tr><td>Chi phí</td><td>Tỷ trọng chi phí / doanh thu</td><td>{reportCostRatioPct.toFixed(1)}%</td></tr>
+                              <tr><td>{tr('Chi phí', 'Cost')}</td><td>{tr('Tổng chi phí kỳ', 'Total period cost')}</td><td>{formatCurrency(reportCost)}</td></tr>
+                              <tr><td>{tr('Chi phí', 'Cost')}</td><td>{tr('Tỷ trọng chi phí / doanh thu', 'Cost to revenue ratio')}</td><td>{reportCostRatioPct.toFixed(1)}%</td></tr>
                             </>
                           ) : null}
                         </tbody>
@@ -2575,7 +2575,7 @@ function App() {
                 <div className="detail-list compliance-layout">
                   <article className="detail-row compliance-period-row">
                     <label>
-                      Kỳ báo cáo
+                      {tr('Kỳ báo cáo', 'Reporting period')}
                       <select value={compliancePeriod} onChange={(event) => setCompliancePeriod(event.target.value)}>
                         {(Array.isArray(complianceData?.period_options) && complianceData.period_options.length
                           ? complianceData.period_options
@@ -2650,11 +2650,11 @@ function App() {
                         <table className="report-table report-table-compact">
                           <thead>
                             <tr>
-                              <th>Mã</th>
+                              <th>{tr('Mã', 'Code')}</th>
                               <th>{tr('Báo cáo', 'Report')}</th>
                               <th>{tr('Người nộp', 'Submitted by')}</th>
                               <th>{tr('Thời gian', 'Time')}</th>
-                              <th>File</th>
+                              <th>{tr('File', 'File')}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -2790,7 +2790,7 @@ function App() {
 
               {activeSection === 'dashboard' ? (
                 <section className="intel-block">
-                  <h2>Ưu tiên hôm nay</h2>
+                  <h2>{tr('Ưu tiên hôm nay', 'Today priorities')}</h2>
                   <ol className="priority-list">
                     {dashboardPriorities.map((item) => (
                       <li key={item}>{item}</li>
@@ -2799,7 +2799,7 @@ function App() {
                 </section>
               ) : activeSection === 'reports' ? (
                 <section className="intel-block">
-                  <h2>Mẹo phân tích</h2>
+                  <h2>{tr('Mẹo phân tích', 'Analysis tips')}</h2>
                   <ul>
                     {(Array.isArray(serverPanels?.reports_tips) ? serverPanels.reports_tips : []).map((tip) => (
                       <li key={tip}>{tip}</li>
@@ -2808,7 +2808,7 @@ function App() {
                 </section>
               ) : activeSection === 'compliance' ? (
                 <section className="intel-block">
-                  <h2>Checklist nộp báo cáo</h2>
+                  <h2>{tr('Checklist nộp báo cáo', 'Submission checklist')}</h2>
                   <ul>
                     {(Array.isArray(serverPanels?.compliance_checklist) ? serverPanels.compliance_checklist : []).map((item) => (
                       <li key={item}>{item}</li>
@@ -2817,7 +2817,7 @@ function App() {
                 </section>
               ) : (
                 <section className="intel-block">
-                  <h2>Thao tác nhanh</h2>
+                  <h2>{tr('Thao tác nhanh', 'Quick actions')}</h2>
                   <div className="evidence-list">
                     {sideCompanion.actions.map((item) => (
                       <a
