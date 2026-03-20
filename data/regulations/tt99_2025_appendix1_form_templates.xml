@@ -1,0 +1,2544 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TT99AppendixIForms document="Thông tư 99/2025/TT-BTC" source_pdf="data/regulations/TT99/2025_1563 + 1564_99-2025-TT-BTC.pdf">
+  <Meta>
+    <GeneratedBy>scripts/extract_tt99_appendix1_form_templates.py</GeneratedBy>
+    <TotalForms>33</TotalForms>
+  </Meta>
+  <Forms>
+    <Form code="01-LĐTL" id="tt99_appendix1_01_ldtl" group="LĐTL" start_page="36" end_page="36">
+      <Title>Bảng thanh toán tiề n lương</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng Kế toán trưởng Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số: 01 - LĐTL 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BẢNG THANH TOÁN TIỀN LƯƠNG 
+Tháng...... năm...... 
+ Số:............... 
+Lương 
+sản phẩm 
+Lương 
+thời gian 
+Nghỉ việc ngừng việc 
+hưởng....% lương 
+Các khoản 
+phải khấu trừ vào lương 
+Kỳ II 
+được lĩnh 
+STT Họ và 
+tên 
+ 
+Ngạch bậc 
+lương hoặc cấp 
+bậc chức vụ 
+Hệ 
+số Số 
+SP 
+Số 
+tiền 
+Số 
+công 
+Số 
+tiền Số công Số tiền 
+Phụ cấp 
+thuộc 
+quỹ 
+lương 
+Phụ 
+cấp 
+khác 
+Tổng 
+số 
+Tạm 
+ứng 
+kỳ I BHXH ... Thuế TNCN 
+phải nộp Cộng Số 
+tiền 
+Ký 
+nhận 
+A B 1 2 3 4 5 6 7 8 9 10 11 12 13 1
+4 15 16 17 C 
+                    
+                    
+                    
+                    
+ Cộng x x x  x  x           x 
+Tổng số tiền (viết bằng chữ):........................................................................................................................................ 
+ 
+  Ngày.... tháng.... năm.... 
+Người lập bảng Kế toán trưởng Giám đốc 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
+thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="02-LĐTL" id="tt99_appendix1_02_ldtl" group="LĐTL" start_page="37" end_page="37">
+      <Title>Bảng thanh toán tiề n thưởng</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (Viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng Kế toán trưởng Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - LĐTL 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG THANH TOÁN TIỀN THƯỞNG 
+Quý...... năm......  
+ Số:................  
+Mức thưởng 
+STT Họ và tên Ngạch bậc lương hoặc 
+cấp bậc chức vụ Xếp loại thưởng Số tiền Ký nhận 
+Ghi chú 
+A B C 1 2 D E 
+       
+       
+       
+       
+       
+       
+       
+Cộng x   x x 
+ 
+Tổng số tiền (Viết bằng chữ):.............................................................................................................................................  
+  Ngày... tháng... năm...... 
+Người lập bảng Kế toán trưởng Giám đốc 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
+thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="03-LĐTL" id="tt99_appendix1_03_ldtl" group="LĐTL" start_page="38" end_page="38">
+      <Title>Bảng thanh toán tiền là m thêm giờ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (Viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng Kế toán trưởng Người duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03 - LĐTL 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BẢNG THANH TOÁN TIỀN LÀM THÊM GIỜ 
+Tháng...... năm...... 
+Số:........................ 
+Mức lương Làm thêm 
+ngày làm việc 
+Làm thêm 
+ngày thứ bảy, 
+chủ nhật 
+Làm thêm 
+ngày lễ,       
+ngày tết 
+Làm thêm 
+buổi đêm 
+Số ngày 
+nghỉ bù STT 
+Họ 
+và 
+tên 
+Ngạch bậc 
+lương hoặc 
+cấp bậc 
+chức vụ 
+ 
+Hệ 
+số 
+lương 
+Hệ số 
+phụ 
+cấp 
+chức 
+vụ 
+Cộng 
+hệ số 
+Tiền 
+lương 
+tháng Ngày Giờ Số 
+giờ 
+Thành 
+tiền 
+Số 
+giờ 
+Thành 
+tiền 
+Số 
+giờ 
+Thành 
+tiền 
+Số 
+giờ 
+Thành 
+tiền 
+Tổng 
+cộng 
+tiền Số 
+giờ 
+Thành 
+tiền 
+Số tiền 
+thực được 
+thanh toán 
+Người 
+nhận 
+tiền 
+ký tên 
+A B C 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 D 
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+C ộ n g  x  x  x  x  x  x  x   x   x   x    x    x  
+ 
+Tổng số tiền (Viết bằng chữ):...................................................................................................................................................... 
+ Ngày... tháng... năm...... 
+Người lập bảng Kế toán trưởng Người duyệt 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
+thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="04-LĐTL" id="tt99_appendix1_04_ldtl" group="LĐTL" start_page="39" end_page="39">
+      <Title>Bảng thanh toán tiền thuê ngoài</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_thue" label="Họ và tên người thuê" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (hoặc địa chỉ)" type="string" required="false" />
+        <Field key="da_thue_nhung_cong_viec_sau_de" label="Đã thuê những công việc sau để" type="string" required="false" />
+        <Field key="de_nghi_cho_thanh_toan_so_tien" label="Đề nghị............... cho thanh toán số tiền" type="string" required="false" />
+        <Field key="so_tien_viet_bang_chu" label="Số tiền (Viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người đề nghị thanh toán  Kế toán trưởng Người duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - LĐTL 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BẢNG THANH TOÁN TIỀN THUÊ NGOÀI 
+(Dùng cho thuê nhân công, thuê khoán việc) 
+      Số:....................... 
+Họ và tên người thuê:.........................................................................................................................................................  
+Bộ phận (hoặc địa chỉ):...................................................................................................................................................... 
+Đã thuê những công việc sau để:........................... tại địa điểm..................................... từ ngày.../.../... đến ngày.../.../....  
+STT 
+Họ và tên 
+người được 
+thuê 
+ CCCD/MST 
+TNCN của người 
+được thuê 
+Nội dung 
+hoặc tên 
+công việc 
+thuê 
+Số công hoặc 
+khối lượng 
+công việc 
+đã làm 
+Đơn 
+giá 
+thanh 
+toán 
+Thành 
+tiền 
+Tiền 
+thuế 
+khấu 
+trừ 
+Số tiền 
+còn lại 
+được 
+nhận 
+Ký 
+nhận 
+A B C D 1 2 3 4 5 = 3 - 4 E 
+          
+          
+          
+ Cộng x x x x    x 
+ 
+Đề nghị............... cho thanh toán số tiền:........................................................................................................................... 
+Số tiền (Viết bằng chữ):...................................................................................................................................................... 
+(Kèm theo... chứng từ kế toán khác)  
+  Ngày... tháng... năm... 
+Người đề nghị thanh toán  Kế toán trưởng Người duyệt  
+(Ký, họ tên)  (Ký, h ọ tên)  (Ký, h ọ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
+thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="05-LĐTL" id="tt99_appendix1_05_ldtl" group="LĐTL" start_page="40" end_page="40">
+      <Title>Hợp đồng giao khoán</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten" label="Họ và tên" type="string" required="false" />
+        <Field key="phuong_thuc_giao_khoan" label="- Phương thức giao khoán" type="string" required="false" />
+        <Field key="dieu_kien_thuc_hien_hop_dong" label="- Điều kiện thực hiện hợp đồng" type="string" required="false" />
+        <Field key="thoi_gian_thuc_hien_hop_dong" label="- Thời gian thực hiện hợp đồng" type="string" required="false" />
+        <Field key="cac_dieu_kien_khac" label="- Các điều kiện khác" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Đại diện bên nhận khoán Đại diện bên giao khoán</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số: 05 - LĐTL 
+Bộ phận:............... (Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+HỢP ĐỒNG GIAO KHOÁN 
+Ngày... tháng... năm... 
+ Số:.................. 
+Họ và tên:...................... Chức vụ......................................................................... 
+Đại diện.......................... bên giao khoán ............................................................. 
+Họ và tên:...................... Chức vụ......................................................................... 
+Đại diện......................... bên nhận khoán ............................................................. 
+CÙNG KÝ KẾT HỢP ĐỒNG GIAO KHOÁN NHƯ SAU: 
+I- Điều khoản chung: 
+- Phương thức giao khoán:....................................................................................  
+- Điều kiện thực hiện hợp đồng: ...........................................................................  
+- Thời gian thực hiện hợp đồng: ...........................................................................  
+- Các điều kiện khác: ............................................................................................  
+II- Điều khoản cụ thể: 
+1. Nội dung công việc khoán: 
+- .............................................................................................................................  
+- .............................................................................................................................  
+2. Trách nhiệm, quyền lợi và nghĩa vụ của người nhận khoán: 
+- .............................................................................................................................  
+- .............................................................................................................................  
+3. Trách nhiệm, quyền lợi và nghĩa vụ của bên giao khoán: 
+- .............................................................................................................................  
+- .............................................................................................................................  
+ 
+Đại diện bên nhận khoán Đại diện bên giao khoán 
+(Ký, họ tên) (Ký, h ọ tên) 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="06-LĐTL" id="tt99_appendix1_06_ldtl" group="LĐTL" start_page="41" end_page="41">
+      <Title>Biên bản thanh lý (nghiệm thu)  hợp đồng giao khoán</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten" label="Họ và tên" type="string" required="false" />
+        <Field key="noi_dung_cong_viec_ghi_trong_hop_dong_da_duoc_thuc_hien" label="Nội dung công việc (ghi trong hợp đồng) đã được thực hiện" type="string" required="false" />
+        <Field key="gia_tri_hop_dong_da_thuc_hien" label="Giá trị hợp đồng đã thực hiện" type="string" required="false" />
+        <Field key="so_tien_bi_phat_do_ben_vi_pham_hop_dong" label="Số tiền bị phạt do bên..... vi phạm hợp đồng" type="string" required="false" />
+        <Field key="ket_luan" label="Kết luận" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Đại diện bên nhận khoán Đại diện bên giao khoán</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số: 06 - LĐTL 
+Bộ phận:............... (Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN BẢN THANH LÝ (NGHIỆM THU) HỢP ĐỒNG GIAO KHOÁN 
+Ngày... tháng... năm... 
+ Số:............... 
+ 
+Họ và tên:............Chức vụ............. Đại diện............... Bên giao khoán............... 
+Họ và tên:............Chức vụ............. Đại diện............... Bên nhận khoán.............. 
+Cùng thanh lý Hợp đồng số... ngày... tháng... năm... 
+Nội dung công việc (ghi trong hợp đồng) đã được thực hiện:.............................. 
+Giá trị hợp đồng đã thực hiện:.............................................................................. 
+Bên...... đã thanh toán cho bên...... số tiền là................ đồng (viết bằng chữ)...... 
+Số tiền bị phạt do bên..... vi phạm hợp đồng:............... đồng (viết bằng chữ)...... 
+Số tiền bên.... còn phải thanh toán cho bên..... là........ đồng (viết bằng chữ)....... 
+Kết luận:................................................................................................................ 
+ 
+Đại diện bên nhận khoán Đại diện bên giao khoán 
+(Ký, họ tên) (Ký, họ tên, đóng dấu) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="07-LĐTL" id="tt99_appendix1_07_ldtl" group="LĐTL" start_page="42" end_page="42">
+      <Title>Bảng kê trích nộp các khoả n theo lương</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="don_vi_tinh" label="Đơn vị tính" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 07 - LĐTL 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG 
+Tháng.... năm... 
+ Số:............... 
+ Đơn vị tính:......... 
+BHXH, BHYT, BHTN KPCĐ 
+Trong đó: STT 
+Số tháng trích 
+BHXH, BHYT, 
+BHTN, KPCĐ 
+Tổng quỹ lương 
+trích BHXH, 
+BHYT, BHTN, 
+KPCĐ 
+Tổng 
+số Trích vào chi phí Trừ vào 
+lương 
+Tổng số 
+Số phải nộp 
+công đoàn cấp 
+trên 
+Số được để 
+lại chi tại 
+đơn vị 
+A B 1 2 3 4 5 6 7 
+         
+         
+         
+ Cộng        
+ 
+ 
+Người lập bảng 
+(Ký, họ tên) 
+ 
+Kế toán trưởng 
+(Ký, họ tên) 
+Ngày..... tháng..... năm..... 
+Giám đốc 
+(Ký, họ tên) 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế 
+biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="08-LĐTL" id="tt99_appendix1_08_ldtl" group="LĐTL" start_page="43" end_page="44">
+      <Title>BẢNG PHÂN BỔ TIỀN LƯƠNG VÀ CÁC KHOẢN TRÍCH THEO LƯƠNG</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 08 - LĐTL 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BẢNG PHÂN BỔ TIỀN LƯƠNG VÀ CÁC KHOẢN TRÍCH THEO LƯƠNG 
+Tháng... năm... 
+ Số:............... 
+Ghi Có Tài khoản TK 334 - Phải trả người lao động TK 338 - Phải trả, phải nộp khác 
+Số 
+TT Đối tượng 
+sử dụng (Ghi 
+Nợ các Tài khoản) 
+ 
+Lương 
+Các 
+khoản 
+khác 
+Cộng Có 
+TK 334 
+Kinh 
+phí 
+công 
+đoàn 
+Bảo 
+hiểm 
+xã hội 
+Bảo 
+hiểm 
+y tế 
+Bảo 
+hiểm 
+thất 
+nghiệp 
+Cộng Có TK 
+338 (3382, 3383, 
+3384, 3386) 
+TK 
+335 
+Chi 
+phí 
+phải 
+trả 
+Tổng 
+cộng 
+A B 1 2 3 4 5 6 7 8 9 10 
+1 
+TK 622 - Chi phí nhân công trực tiếp 
+- Phân xưởng (sản phẩm) 
+-.......................................................... 
+- Phân xưởng (sản phẩm) 
+-.......................................................... 
+         
+ 
+2 TK 623 - Chi phí sử dụng máy thi công 
+-..........................................................          
+ 
+3 
+TK 627- Chi phí sản xuất chung 
+- Phân xưởng (sản phẩm) 
+-.......................................................... 
+- Phân xưởng (sản phẩm) 
+-.......................................................... 
+         
+ 
+ 
+ 
+66 
+66 
+    
+ CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 66 
+Ghi Có Tài khoản TK 334 - Phải trả người lao động TK 338 - Phải trả, phải nộp khác 
+Số 
+TT Đối tượng 
+sử dụng (Ghi 
+Nợ các Tài khoản) 
+ 
+Lương 
+Các 
+khoản 
+khác 
+Cộng Có 
+TK 334 
+Kinh 
+phí 
+công 
+đoàn 
+Bảo 
+hiểm 
+xã hội 
+Bảo 
+hiểm 
+y tế 
+Bảo 
+hiểm 
+thất 
+nghiệp 
+Cộng Có TK 
+338 (3382, 3383, 
+3384, 3386) 
+TK 
+335 
+Chi 
+phí 
+phải 
+trả 
+Tổng 
+cộng 
+A B 1 2 3 4 5 6 7 8 9 10 
+4 TK 641 - Chi phí bán hàng           
+5 TK 642 - Chi phí quản lý doanh nghiệp           
+6 TK 242 - Chi phí chờ phân bổ           
+7 TK 335 - Chi phí phải trả           
+8 TK 241 - Xây dựng cơ bản dở dang           
+9 TK 334 - Phải trả người lao động           
+10 TK 338 - Phải trả, phải nộp khác           
+11 ...................................................           
+ Cộng:           
+  
+  
+ 
+Người lập bảng 
+Ngày...... tháng..... năm... 
+ Kế toán trưởng 
+(Ký, họ tên)  (Ký, họ tên) 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
+thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="01-VT" id="tt99_appendix1_01_vt" group="VT" start_page="45" end_page="45">
+      <Title>Phiếu nhập kho</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_giao" label="- Họ và tên người giao" type="string" required="false" />
+        <Field key="nhap_tai_kho" label="Nhập tại kho" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="- Tổng số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="so_chung_tu_goc_kem_theo" label="- Số chứng từ gốc kèm theo" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Người giao hàng</Signer>
+        <Signer>Thủ kho</Signer>
+        <Signer>có nhu cầu nhập)</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+PHIẾU NHẬP KHO 
+Ngày.... tháng..... năm..... 
+Số:..................  
+Nợ ..................  
+Có.................. 
+- Họ và tên người giao:......................................................................................... 
+- Theo.................. số........... ngày..... tháng..... năm..... của.................................. 
+Nhập tại kho:........................................... địa điểm .............................................. 
+ 
+Số lượng   
+STT 
+Tên, nhãn hiệu, quy cách, 
+phẩm chất vật tư, dụng cụ 
+sản phẩm, hàng hóa 
+Mã 
+số 
+Đơn 
+vị 
+tính 
+Theo 
+chứng 
+từ 
+Thực 
+nhập 
+Đơn 
+giá 
+Thành 
+tiền 
+A B C D 1 2 3 4 
+        
+        
+        
+ Cộng x x x x x  
+ 
+- Tổng số tiền (viết bằng chữ):.............................................................................. 
+- Số chứng từ gốc kèm theo: ................................................................................. 
+ 
+   Ngày... tháng... năm... 
+ Người lập phiếu  
+(Ký, họ tên) 
+Người giao hàng  
+(Ký, họ tên) 
+Thủ kho 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Hoặc bộ phận 
+có nhu cầu nhập) 
+(Ký, họ tên) 
+    
+  
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="02-VT" id="tt99_appendix1_02_vt" group="VT" start_page="46" end_page="46">
+      <Title>Phiếu xuất kho</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nhan_hang" label="- Họ và tên người nhận hàng" type="string" required="false" />
+        <Field key="ly_do_xuat_kho" label="- Lý do xuất kho" type="string" required="false" />
+        <Field key="xuat_tai_kho_ngan_lo" label="- Xuất tại kho (ngăn lô)" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="- Tổng số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="so_chung_tu_goc_kem_theo" label="- Số chứng từ gốc kèm theo" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Người nhận hàng</Signer>
+        <Signer>Thủ kho</Signer>
+        <Signer>nhu cầu nhập)</Signer>
+        <Signer>Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+PHIẾU XUẤT KHO 
+Ngày.... tháng..... năm..... 
+Số:..................  
+Nợ ..................  
+Có...................  
+ 
+- Họ và tên người nhận hàng:.................................... Địa chỉ (bộ phận)................. 
+- Lý do xuất kho: ..................................................................................................... 
+- Xuất tại kho (ngăn lô):................................ Địa điểm.......................................... 
+ 
+Số lượng 
+STT 
+Tên, nhãn hiệu, quy 
+cách, phẩm chất vật tư, 
+dụng cụ, sản phẩm, 
+hàng hóa 
+Mã 
+số 
+Đơn 
+vị 
+tính 
+Yêu 
+cầu 
+Thực 
+xuất 
+Đơn 
+giá 
+Thành 
+tiền 
+A B C D 1 2 3 4 
+        
+        
+        
+        
+        
+Cộng x x x x x  
+ 
+- Tổng số tiền (viết bằng chữ): .............................................................................. 
+- Số chứng từ gốc kèm theo:................................................................................. 
+ 
+    
+ 
+Người lập phiếu  
+(Ký, họ tên)  
+ 
+Người nhận hàng 
+(Ký, họ tên) 
+ 
+Thủ kho 
+(Ký, họ tên) 
+ 
+Kế toán trưởng  
+(Hoặc bộ phận có  
+nhu cầu nhập) 
+(Ký, họ tên) 
+Ngày... tháng.... năm.... 
+Giám đốc 
+(Ký, họ tên)  
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="03-VT" id="tt99_appendix1_03_vt" group="VT" start_page="47" end_page="47">
+      <Title>Biên bản kiểm nghiệm vật tư, c ông cụ, sản phẩm, hàng hóa</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="y_kien_cua_ban_kiem_nghiem" label="Ý kiến của Ban kiểm nghiệm" type="string" required="false" />
+      </Fields>
+      <Signatures />
+      <LayoutText>Mẫu số 03 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN BẢN KIỂM NGHIỆM 
+Vật tư, công cụ, sản phẩm, hàng hóa 
+Ngày... tháng... năm.... 
+Số:................... 
+- Căn cứ......... số..... ngày..... tháng..... năm..... của......................... 
+Ban kiểm nghiệm gồm: 
++ Ông/Bà..................... Chức vụ............ Đại diện.......... Trưởng ban 
++ Ông/Bà..................... Chức vụ............ Đại diện............... Ủy viên 
++ Ông/Bà..................... Chức vụ............ Đại diện............... Ủy viên 
+Đã kiểm nghiệm các loại: 
+Kết quả kiểm nghiệm 
+Số 
+TT 
+Tên nhãn 
+hiệu, quy cách 
+vật tư, công 
+cụ, sản phẩm, 
+hàng hóa 
+Mã 
+số 
+Phương 
+thức 
+kiểm 
+nghiệm 
+Đơn 
+vị 
+tính 
+Số 
+lượng 
+theo 
+chứng 
+từ 
+Số lượng 
+đúng quy 
+cách, phẩm 
+chất 
+Số lượng 
+không đúng 
+quy cách, 
+phẩm chất 
+Ghi 
+chú 
+A B C D E 1 2 3 F 
+         
+         
+         
+         
+ 
+ Ý kiến của Ban kiểm nghiệm:.............................................................................. 
+..................................................................................................................................... 
+ 
+Đại diện bộ phận có nhu cầu kiểm nghiệm Đại diện bộ phận cung cấp dịch vụ kiểm nghiệm 
+(Ký, họ tên) (Ký, h ọ tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="04-VT" id="tt99_appendix1_04_vt" group="VT" start_page="48" end_page="48">
+      <Title>Bảng kê chi tiết vật tư  còn lại cuối kỳ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="s_o" label="S ố" type="string" required="false" />
+        <Field key="bo_phan_su_dung" label="Bộ phận sử dụng" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Phụ trách bộ phận sử dụng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+ 
+ BẢNG KÊ CHI TIẾT VẬT TƯ CÒN LẠI CUỐI KỲ 
+Ngày... tháng... năm... 
+ S ố:................. 
+ 
+Bộ phận sử dụng:.................................................................................................. 
+ 
+Số lượng Số 
+TT 
+Tên, nhãn hiệu,  
+quy cách, phẩm chất 
+vật tư 
+Mã 
+số 
+Đơn vị 
+tính Tổng Để lại sử dụng Nhập lại kho 
+A B C D 1 2 3 
+       
+       
+       
+       
+ 
+  Phụ trách bộ phận sử dụng 
+  (Ký, họ tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="05-VT" id="tt99_appendix1_05_vt" group="VT" start_page="49" end_page="49">
+      <Title>Biên bản tổng hợp ki ểm kê vật tư, công cụ, sản phẩm, hàng hóa</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ong_ba" label="Ông/Bà" type="string" required="false" />
+        <Field key="chuc_vu_dai_dien" label="Chức vụ...................................... Đại diện" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Thủ kho</Signer>
+        <Signer>(Ký, họ tên)</Signer>
+        <Signer>Trưởng ban/Chủ tịch Hội đồng kiểm kê</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 05 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BIÊN BẢN TỔNG HỢP KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA 
+ Số:.....................  
+- Thời điểm kiểm kê..... giờ... ngày... tháng... năm...... 
+- Ban kiểm kê/Hội đồng kiểm kê gồm :  
+Ông/Bà:.......................................... Chức vụ...................................... Đại diện:............................ Trưởng ban/Chủ tịch Hội đồng 
+Ông/Bà:.......................................... Chức vụ...................................... Đại diện:............................. Ủy viên 
+Ông/Bà:.......................................... Chức vụ...................................... Đại diện:............................. Ủy viên  
+- Đã kiểm kê kho có những mặt hàng dưới đây:  
+Chênh lệch Phẩm chất Theo 
+sổ kế toán 
+Theo 
+kiểm kê Thừa Thiếu STT 
+Tên, nhãn hiệu, 
+quy cách vật tư, 
+dụng cụ,... 
+Mã 
+số 
+Đơn 
+vị 
+tính 
+Đơn 
+giá Số 
+lượng 
+Thành 
+tiền 
+Số 
+lượng 
+Thành 
+tiền 
+Số 
+lượng 
+Thành 
+tiền 
+Số 
+lượng 
+Thành 
+tiền 
+Còn 
+tốt 
+100% 
+Kém 
+phẩm 
+chất 
+Mất 
+phẩm 
+chất 
+A B C D 1 2 3 4 5 6 7 8 9 10 11 12 
+                
+                
+                
+ Cộng x x x x  x  x  x  x x x 
+ 
+   Ngày... tháng... năm... 
+Giám đốc 
+(Ý kiến giải quyết số chênh lệch) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Thủ kho 
+(Ký, họ tên) 
+(Ký, họ tên)    
+Trưởng ban/Chủ tịch Hội đồng kiểm kê 
+(Ký, họ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị mình, doanh nghi ệp được xây dựng, thiết kế 
+biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="06-VT" id="tt99_appendix1_06_vt" group="VT" start_page="50" end_page="50">
+      <Title>Bảng kê mua hàng</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_mua" label="- Họ và tên người mua" type="string" required="false" />
+        <Field key="bo_phan_phong_ban" label="- Bộ phận (phòng, ban)" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (Viết bằng chữ)" type="string" required="false" />
+        <Field key="ghi_chu" label="* Ghi chú" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người mua  Kế toán trưởng Người duyệt mua</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 06 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+ BẢNG KÊ MUA HÀNG   
+ Ngày.... tháng.... năm....  
+Quyển số:............... 
+   Số:............... 
+ Nợ:.............. 
+ Có:............... 
+ 
+- Họ và tên người mua: ........................................................................................ 
+- Bộ phận (phòng, ban): ....................................................................................... 
+ 
+STT 
+Tên, quy cách,  
+phẩm chất hàng hóa 
+(vật tư, công cụ...) 
+Địa chỉ 
+mua hàng 
+Đơn 
+vị tính 
+Số 
+lượng 
+Đơn 
+giá 
+Thành 
+tiền 
+A B C D 1 2 3 
+       
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+ Cộng x x x x  
+ 
+Tổng số tiền (Viết bằng chữ):...............................................................................  
+* Ghi chú:..............................................................................................................  
+ 
+ 
+Người mua  Kế toán trưởng Người duyệt mua 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="07-VT" id="tt99_appendix1_07_vt" group="VT" start_page="51" end_page="51">
+      <Title>Bảng phân bổ nguyên liệu, vật liệu, công cụ, dụng cụ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 07 - VT 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG PHÂN BỔ NGUYÊN LIỆU, VẬT LIỆU  
+CÔNG CỤ, DỤNG CỤ 
+Tháng...... năm...... 
+ Số:.................. 
+ 
+  Ghi Có các TK Tài khoản 152 Tài khoản 153 
+STT Đối tượng sử dụng 
+(Ghi Nợ các TK) 
+Giá 
+hạch 
+toán 
+Giá thực 
+tế 
+Giá hạch 
+toán 
+Giá 
+thực 
+tế 
+Tài 
+khoản 
+242 
+A B 1 2 3 4 5 
+1 
+ 
+TK 621 – Chi phí nguyên liệu, vật liệu 
+trực tiếp 
+- Phân xưởng (sản phẩm)... 
+- ................................ 
+     
+2 
+3 
+4 
+5 
+6 
+7 
+ 
+TK 623 – Chi phí sử dụng máy thi công 
+TK 627 – Chi phí sản xuất chung 
+- Phân xưởng................... 
+TK 641 – Chi phí bán hàng 
+TK 642 – Chi phí quản lý doanh nghiệp 
+TK 242- Chi phí chờ phân bổ 
+............................ 
+     
+ 
+Cộng      
+  
+ 
+Người lập biểu 
+Ngày.... tháng.... năm.... 
+Kế toán trưởng 
+(Ký, họ tên) (Ký, h ọ tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="01-BH" id="tt99_appendix1_01_bh" group="BH" start_page="52" end_page="53">
+      <Title>Bảng thanh toán hàng đại lý, ký gửi</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ngay_thang_nam_quyen_so" label="Ngày... tháng... năm... Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_hop_dong_so" label="Căn cứ Hợp đồng số" type="string" required="false" />
+        <Field key="ii_so_tien_con_no_cua_cac_ky_truoc" label="II- Số tiền còn nợ của các kỳ trước" type="string" required="false" />
+        <Field key="iii_so_tien_phai_thanh_toan_den_ky_nay" label="III- Số tiền phải thanh toán đến kỳ này" type="string" required="false" />
+        <Field key="iv_so_tien_duoc_nhan_lai" label="IV- Số tiền được nhận lại" type="string" required="false" />
+        <Field key="tien_mat" label="+ Tiền mặt" type="string" required="false" />
+        <Field key="sec" label="+ Séc" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc đơn vị gửi</Signer>
+        <Signer>nhận bán hàng đại lý</Signer>
+        <Signer>Kế toán trưởng đơn vị gửi</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - BH  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG THANH TOÁN HÀNG ĐẠI LÝ, KÝ GỬI 
+ 
+ Ngày... tháng... năm... Quyển số:............ 
+  Số:....................... 
+  Nợ:........ .............. 
+   Có:....................... 
+ 
+Căn cứ Hợp đồng số:..... ngày... tháng... năm... về việc bán hàng đại lý (ký gửi), 
+Chúng tôi gồm: 
+- Ông/Bà......... chức vụ......... Đại diện........................ có hàng đại lý (ký gửi). 
+- Ông/Bà......... chức vụ......... Đại diện................................................................ 
+- Ông/Bà....... chức vụ......... Đại diện................. nhận bán hàng đại lý (ký gửi). 
+- Ông/Bà......... chức vụ......... Đại diện đơn vị..................................................... 
+I- Thanh quyết toán số hàng đại lý từ ngày..../.../... đến ngày.../.../.... như sau: 
+Số hàng đã bán 
+trong kỳ Số 
+TT 
+Tên, quy cách, 
+phẩm chất 
+sản phẩm 
+(hàng hóa) 
+Đơn 
+vị 
+tính 
+Số 
+lượng 
+tồn 
+đầu kỳ 
+Số 
+lượng 
+nhận 
+trong kỳ 
+Tổng 
+số Số 
+lượng 
+Đơn 
+giá 
+Thành 
+tiền 
+Số lượng 
+tồn cuối 
+kỳ 
+A B C 1 2 3 = 1+2 4 5 6 7 = 3 - 4 
+          
+          
+          
+ Cộng x x x x x x  x 
+II- Số tiền còn nợ của các kỳ trước:...................................................................... 
+III- Số tiền phải thanh toán đến kỳ này: (III = II + Cột 6).................................... 
+IV- Số tiền được nhận lại:..................................................................................... 
++ Hoa hồng............................................................................................................ 
++ Thuế nộp hộ....................................................................................................... 
++ Chi phí (nếu có) ................................................................................................. 
++ ............................................................. .............................................................. 
+ 
+ CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 75 
+ 
+ 
+V- Số tiền thanh toán kỳ này: 
++ Tiền mặt:............................................................................................................ 
++ Séc: .................................................................................................................... 
+VI- Số tiền nợ lại (VI= III - IV - V) ..................................................................... 
+* Ghi chú: 
+ 
+Giám đốc đơn vị gửi 
+hàng đại lý (ký gửi) 
+Người lập bảng  
+thanh toán 
+Giám đốc đơn vị  
+nhận bán hàng đại lý 
+(Ký, họ tên, đóng dấu) (Ký, họ tên) (Ký, họ tên, đóng dấu) 
+ 
+ 
+ 
+Kế toán trưởng đơn vị gửi 
+hàng đại lý (ký gửi) 
+ Kế toán trưởng đơn vị 
+nhận bán hàng đại lý 
+(Ký, họ tên)  (Ký, họ tên) 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="02-BH" id="tt99_appendix1_02_bh" group="BH" start_page="54" end_page="54">
+      <Title>Thẻ quầy hàng</Title>
+      <Fields>
+        <Field key="ngay_lap_the_to_so" label="Ngày lập thẻ.............................. Tờ số" type="string" required="false" />
+        <Field key="ten_hang" label="- Tên hàng" type="string" required="false" />
+        <Field key="quy_cach" label="Quy cách" type="string" required="false" />
+        <Field key="don_vi_tinh" label="- Đơn vị tính" type="string" required="false" />
+        <Field key="don_gia" label="Đơn giá" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - BH  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+THẺ QUẦY HÀNG 
+Ngày lập thẻ.............................. Tờ số:.............................. 
+ 
+- Tên hàng :.................................................. Quy cách:........................................ 
+- Đơn vị tính:................................................ Đơn giá:.......................................... 
+ 
+Xuất bán Xuất khác 
+Ngày 
+tháng 
+Tên 
+người 
+bán 
+hàng 
+Số 
+lượng 
+tồn 
+đầu 
+ngày 
+(ca) 
+Số lượng 
+nhập từ 
+kho 
+trong 
+ngày (ca) 
+Số 
+lượng 
+nhập 
+khác 
+trong 
+ngày 
+(ca) 
+Cộng 
+tồn đầu 
+ngày (ca) 
+và nhập 
+trong ngày 
+(ca) 
+Lượng Tiền Lượng Tiền 
+Số lượng 
+tồn 
+cuối ngày 
+(ca) 
+A B 1 2 3 4 = 1+2+3 5 6 7 8 9 = 4-5-7 
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+ Cộng          
+ 
+ Người lập 
+(Ký, họ và tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="01-TT" id="tt99_appendix1_01_tt" group="TT" start_page="55" end_page="55">
+      <Title>Phiếu thu</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nop_tien" label="Họ và tên người nộp tiền" type="string" required="false" />
+        <Field key="dia_chi" label="Địa chỉ" type="string" required="false" />
+        <Field key="ly_do_nop" label="Lý do nộp" type="string" required="false" />
+        <Field key="so_tien" label="Số tiền" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+        <Field key="kem_theo" label="Kèm theo" type="string" required="false" />
+        <Field key="chung_tu_goc" label="Chứng từ gốc" type="string" required="false" />
+        <Field key="da_nhan_du_so_tien_viet_bang_chu" label="Đã nhận đủ số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="ty_gia_ngoai_te_vang_bac_da_quy" label="+ Tỷ giá ngoại tệ (vàng bạc, đá quý)" type="string" required="false" />
+        <Field key="so_tien_quy_doi" label="+ Số tiền quy đổi" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người nộp tiền</Signer>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Thủ quỹ</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+PHIẾU THU 
+Ngày....... tháng....... năm....... 
+ Quyển số:.............. 
+ Số:............ .............  
+ Nợ:........... .............  
+ Có:........... .............  
+  
+Họ và tên người nộp tiền: ..................................................................................... 
+Địa chỉ:.................................................................................................................. 
+Lý do nộp:............................................................................................................. 
+Số tiền:..................................... (Viết bằng chữ): ................................................. 
+Kèm theo:..................................................................... Chứng từ gốc: ................ 
+    
+Ngày..... tháng..... năm...... 
+Giám đốc 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Người nộp tiền 
+(Ký, họ tên) 
+Người lập phiếu 
+(Ký, họ tên) 
+Thủ quỹ 
+(Ký, họ tên) 
+     
+ 
+Đã nhận đủ số tiền (viết bằng chữ):.......................................................................  
++ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................  
++ Số tiền quy đổi:...................................................................................................  
+(Liên gửi ra ngoài phải đóng dấu) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="02-TT" id="tt99_appendix1_02_tt" group="TT" start_page="56" end_page="56">
+      <Title>Phiếu chi</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nhan_tien" label="Họ và tên người nhận tiền" type="string" required="false" />
+        <Field key="dia_chi" label="Địa chỉ" type="string" required="false" />
+        <Field key="ly_do_chi" label="Lý do chi" type="string" required="false" />
+        <Field key="so_tien" label="Số tiền" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+        <Field key="kem_theo" label="Kèm theo" type="string" required="false" />
+        <Field key="chung_tu_goc" label="Chứng từ gốc" type="string" required="false" />
+        <Field key="da_nhan_du_so_tien_viet_bang_chu" label="Đã nhận đủ số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="ty_gia_ngoai_te_vang_bac_da_quy" label="+ Tỷ giá ngoại tệ (vàng bạc, đá quý)" type="string" required="false" />
+        <Field key="so_tien_quy_doi" label="+ Số tiền quy đổi" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Thủ quỹ</Signer>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Người nhận tiền</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+PHIẾU CHI 
+Ngày....... tháng....... năm....... 
+ Quyển số:.............. 
+ Số:............ .............  
+ Nợ:........... .............  
+ Có:........... .............  
+  
+Họ và tên người nhận tiền:...................................................................................  
+Địa chỉ:.................................................................................................................  
+Lý do chi: .............................................................................................................  
+Số tiền:..................................... (Viết bằng chữ): ................................................  
+Kèm theo:..................................................................... Chứng từ gốc: ...............  
+    Ngày..... tháng..... năm...... 
+Giám đốc 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Thủ quỹ 
+(Ký, họ tên) 
+Người lập phiếu 
+(Ký, họ tên) 
+Người nhận tiền 
+(Ký, họ tên) 
+     
+ 
+Đã nhận đủ số tiền (viết bằng chữ):......................................................................  
++ Tỷ giá ngoại tệ (vàng bạc, đá quý):...................................................................  
++ Số tiền quy đổi:..................................................................................................  
+(Liên gửi ra ngoài phải đóng dấu) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="03-TT" id="tt99_appendix1_03_tt" group="TT" start_page="57" end_page="57">
+      <Title>Giấy đề nghị tạm ứng</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="kinh_gui" label="Kính gửi" type="string" required="false" />
+        <Field key="ten_toi_la" label="Tên tôi là" type="string" required="false" />
+        <Field key="dia_chi" label="Địa chỉ" type="string" required="false" />
+        <Field key="de_nghi_cho_tam_ung_so_tien" label="Đề nghị cho tạm ứng số tiền" type="string" required="false" />
+        <Field key="ly_do_tam_ung" label="Lý do tạm ứng" type="string" required="false" />
+        <Field key="thoi_han_thanh_toan" label="Thời hạn thanh toán" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Phụ trách bộ phận</Signer>
+        <Signer>Người đề nghị tạm ứng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+GIẤY ĐỀ NGHỊ TẠM ỨNG 
+Ngày..... tháng..... năm...... 
+ Số:............................  
+ 
+ Kính gửi:..............................................................................................................  
+ Tên tôi là: .............................................................................................................  
+ Địa chỉ:.................................................................................................................  
+ Đề nghị cho tạm ứng số tiền:.................................. (Viết bằng chữ) ..................  
+ .............................................................................................................................. 
+ Lý do tạm ứng:.....................................................................................................  
+ Thời hạn thanh toán: ............................................................................................  
+ 
+ 
+Giám đốc 
+(Ký, họ tên)  
+ 
+Kế toán trưởng  
+(Ký, họ tên) 
+Phụ trách bộ phận  
+(Ký, họ tên) 
+Người đề nghị tạm ứng 
+(Ký, họ tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="04-TT" id="tt99_appendix1_04_tt" group="TT" start_page="58" end_page="58">
+      <Title>Giấy thanh toán tiền tạm ứng</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="n_o" label="N ợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_thanh_toan" label="- Họ và tên người thanh toán" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="- Bộ phận (hoặc địa chỉ)" type="string" required="false" />
+        <Field key="2_so_tam_ung_ky_nay" label="2. Số tạm ứng kỳ này" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Kế toán thanh toán</Signer>
+        <Signer>thanh toán</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+GIẤY THANH TOÁN TIỀN TẠM ỨNG 
+Ngày..... tháng..... năm....... 
+ Số:............................. 
+ N ợ: ............................ 
+ Có :............................. 
+- Họ và tên người thanh toán: ............................................................................... 
+- Bộ phận (hoặc địa chỉ): ...................................................................................... 
+- Số tiền tạm ứng được thanh toán theo bảng dưới đây: 
+Diễn giải Số tiền 
+A 1 
+I . Số tiền tạm ứng ............................... 
+1. Số tạm ứng các kỳ trước chưa chi hết ............................... 
+2. Số tạm ứng kỳ này: ............................... 
+- Phiếu chi số............. ngày......... .... ........................... 
+- Phiếu chi số............. ngày......... .... ........................... 
+-... ............................... 
+II . Số tiền đã chi ............................... 
+1. Chứng từ số...........ngày........... ............................... 
+2.... ............................... 
+III . Chênh lệch ............................... 
+1. Số tạm ứng chi không hết (I - II) ............................... 
+2. Chi quá số tạm ứng (II - I) ............................... 
+  
+Giám đốc 
+(Ký, họ tên) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Kế toán thanh toán 
+(Ký, họ tên) 
+   
+Người đề nghị  
+thanh toán 
+(Ký, họ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="05-TT" id="tt99_appendix1_05_tt" group="TT" start_page="59" end_page="59">
+      <Title>Giấy đề nghị thanh toán</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="kinh_gui" label="Kính gửi" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_de_nghi_thanh_toan" label="Họ và tên người đề nghị thanh toán" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (Hoặc địa chỉ)" type="string" required="false" />
+        <Field key="noi_dung_thanh_toan" label="Nội dung thanh toán" type="string" required="false" />
+        <Field key="so_tien" label="Số tiền" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người đề nghị thanh toán</Signer>
+        <Signer>Người duyệt</Signer>
+        <Signer>Phụ trách bộ phận</Signer>
+        <Signer>Kế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 05 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+GIẤY ĐỀ NGHỊ THANH TOÁN  
+Ngày....... tháng........ năm... 
+ 
+Kính gửi:...............................................................................................................  
+Họ và tên người đề nghị thanh toán:.....................................................................  
+Bộ phận (Hoặc địa chỉ):........................................................................................  
+Nội dung thanh toán:.............................................................................................  
+Số tiền:.................... (Viết bằng chữ):...................................................................  
+(Kèm theo............ chứng từ gốc). 
+ 
+Người đề nghị thanh toán 
+(Ký, họ tên) 
+Người duyệt  
+ (Ký, họ tên) 
+ 
+Phụ trách bộ phận 
+(Ký, họ tên) 
+Kế toán trưởng  
+(Ký, họ tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="06-TT" id="tt99_appendix1_06_tt" group="TT" start_page="60" end_page="60">
+      <Title>Biên lai thu tiền</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nop" label="- Họ và tên người nộp" type="string" required="false" />
+        <Field key="dia_chi" label="- Địa chỉ" type="string" required="false" />
+        <Field key="noi_dung_thu" label="- Nội dung thu" type="string" required="false" />
+        <Field key="so_tien_thu" label="- Số tiền thu" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người nộp tiền Người thu tiền</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 06 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN LAI THU TIỀN  
+Ngày..... tháng..... năm.....  
+ Quyển số: ..........................  
+ Số: .....................................  
+ 
+- Họ và tên người nộp:..........................................................................................  
+- Địa chỉ: ...............................................................................................................  
+- Nội dung thu:......................................................................................................  
+- Số tiền thu:........................... (Viết bằng chữ): ...................................................  
+ 
+Người nộp tiền Người thu tiền 
+(Ký, họ tên) (Ký, họ tên) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="07-TT" id="tt99_appendix1_07_tt" group="TT" start_page="61" end_page="61">
+      <Title>Bảng kê vàng tiền tệ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="dinh_kem_phieu_quyen_so" label="(Đính kèm phiếu..............  Quyển số" type="string" required="false" />
+        <Field key="ngay_thang_nam_so" label="Ngày....... tháng......... năm............)  Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Thủ quỹ</Signer>
+        <Signer>Người kiểm nghiệm</Signer>
+        <Signer>Người nộp (nhận)</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 07 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG KÊ VÀNG TIỀN TỆ 
+(Đính kèm phiếu..............  Quyển số: ...............  
+Ngày....... tháng......... năm............)  Số: ............... ...........  
+ 
+STT Tên, loại, qui cách 
+phẩm chất 
+Đơn vị 
+tính 
+Số 
+lượng 
+Đơn 
+giá 
+Thành 
+tiền 
+Ghi 
+chú 
+A B C 1 2 3 D 
+       
+       
+       
+ Cộng x x x  x 
+ 
+   
+Kế toán trưởng 
+(Ký, họ tên) 
+Thủ quỹ 
+(Ký, họ tên) 
+Ngày....... tháng...... năm.... 
+Người kiểm nghiệm 
+(Ký, họ tên) 
+ 
+Người nộp (nhận) 
+(Ký, họ tên) 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="08a-TT" id="tt99_appendix1_08a_tt" group="TT" start_page="62" end_page="62">
+      <Title>Bảng kiểm kê quỹ (dùng cho VND)</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ong_ba" label="- Ông/Bà" type="string" required="false" />
+        <Field key="i_so_du_theo_so_q_uy" label="I Số dư theo sổ q uỹ" type="string" required="false" />
+        <Field key="ii_so_kiem_ke_thuc_te" label="II Số kiểm kê thực tế" type="string" required="false" />
+        <Field key="1_trong_do" label="1 Trong đó" type="string" required="false" />
+        <Field key="iii_chenh_lech_iii_i_ii" label="III Chênh lệch (III = I –  II)" type="string" required="false" />
+        <Field key="thua" label="+ Thừa" type="string" required="false" />
+        <Field key="ly_do" label="- Lý do" type="string" required="false" />
+        <Field key="thieu" label="+ Thiếu" type="string" required="false" />
+        <Field key="ket_luan_sau_khi_kiem_ke_quy" label="- Kết luận sau khi kiểm kê quỹ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 08a - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG KIỂM KÊ QUỸ  
+(Dùng cho VNĐ) 
+ Số: ............................. 
+Hôm nay, vào........ giờ......... ngày......... tháng......... năm....... 
+Chúng tôi gồm: 
+- Ông/Bà:................................................................................... đại diện kế toán 
+- Ông/Bà:................................................................................... đại diện thủ quỹ 
+- Ông/Bà:............................................................................. đại diện.................... 
+Cùng tiến hành kiểm kê quỹ tiền mặt kết quả như sau: 
+STT Diễn giải Số lượng ( tờ ) Số tiền 
+A B 1 2 
+I Số dư theo sổ q uỹ: x ....................... 
+II Số kiểm kê thực tế: x ....................... 
+1 Trong đó: - Loại ......... .............. .................... ... 
+2 - Loại .................. ..... ....................... 
+3 - Loại ....................... ....................... 
+4 - Loại ....................... ......... .............. 
+5 -... ....................... ......... .............. 
+III Chênh lệch (III = I –  II): x ....................... 
+ 
+- Lý do: + Thừa:....................................................................................................  
+             + Thiếu: ...................................................................................................  
+- Kết luận sau khi kiểm kê quỹ:............................................................................  
+ 
+Kế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="08b-TT" id="tt99_appendix1_08b_tt" group="TT" start_page="63" end_page="63">
+      <Title>Bảng kiểm kê quỹ (dùng cho n goại tệ, vàng tiền tệ)</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ong_ba" label="- Ông/Bà" type="string" required="false" />
+        <Field key="thua" label="+ Thừa" type="string" required="false" />
+        <Field key="ly_do" label="- Lý do" type="string" required="false" />
+        <Field key="thieu" label="+ Thiếu" type="string" required="false" />
+        <Field key="ket_luan_sau_khi_kiem_ke_quy" label="- Kết luận sau khi kiểm kê quỹ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Thủ quỹ</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người chịu trách nhiệm kiểm kê quỹ</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 08b - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG KIỂM KÊ QUỸ  
+(Dùng cho ngoại tệ, vàng tiền tệ)  
+  Số: ......................... 
+Hôm nay, vào........ giờ......... ngày......... tháng......... năm......... 
+Chúng tôi gồm: 
+- Ông/Bà:...................................... đại diện kế toán 
+- Ông/Bà:...................................... đại diện thủ quỹ 
+- Ông/Bà:...................................... đại diện............ 
+Cùng tiến hành kiểm kê quỹ ngoại tệ, vàng bạc... kết quả như sau: 
+Tính ra VNĐ 
+STT Diễn giải Đơn vị 
+tính 
+Số 
+lượng 
+Đơn 
+giá Tỷ giá VNĐ 
+Ghi 
+chú 
+A B C 1 2 3 4 D 
+I Số dư theo sổ quỹ x x ......... ........... ......... ....... .... 
+II Số kiểm kê thực tế (*) x x ......... ........... ......... . .......... 
+1 - Loại ............ ........... ......... ........... ....... .. ........... 
+2 - Loại ............ ........... ......... ........... ....... .. ........... 
+3 -... ............ ........... ......... ........ ......... .. ......... 
+III Chênh lệch (III = I - II) x x ......... ........... ....... .. ........... 
+- Lý do : + Thừa:..................................................................................................  
+               + Thiếu:.................................................................................................  
+- Kết luận sau khi kiểm kê quỹ:...........................................................................  
+ 
+Thủ quỹ 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Người chịu trách nhiệm kiểm kê quỹ 
+(Ký, họ tên) 
+   
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="09-TT" id="tt99_appendix1_09_tt" group="TT" start_page="64" end_page="64">
+      <Title>Bảng kê chi tiền</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ho_va_ten_nguoi_chi" label="Họ và tên người chi" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (hoặc địa chỉ)" type="string" required="false" />
+        <Field key="chi_cho_cong_viec" label="Chi cho công việc" type="string" required="false" />
+        <Field key="so_tien_bang_chu" label="Số tiền bằng chữ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng kê Kế toán trưởng Người duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 09 - TT  
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BẢNG KÊ CHI TIỀN  
+Ngày..... tháng..... năm.... 
+ 
+Họ và tên người chi: ............................................................................................. 
+Bộ phận (hoặc địa chỉ):......................................................................................... 
+Chi cho công việc: ................................................................................................ 
+Chứng từ 
+STT 
+Số hiệu Ngày, tháng 
+Nội dung chi Số tiền 
+A B C D 1 
+ 
+     
+   Cộng  
+ 
+Số tiền bằng chữ:................................................................................................ 
+(Kèm theo.... chứng từ gốc).  
+ 
+Người lập bảng kê Kế toán trưởng Người duyệt 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)  
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="01-TSCĐ" id="tt99_appendix1_01_tscd" group="TSCĐ" start_page="65" end_page="66">
+      <Title>Biên bản giao nhận TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="dia_diem_giao_nhan_tscd" label="Địa điểm giao nhận TSCĐ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc bên nhận</Signer>
+        <Signer>bên nhận</Signer>
+        <Signer>Người nhận</Signer>
+        <Signer>Người giao</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - TSCĐ 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN BẢN GIAO NHẬN TSCĐ 
+Ngày..... tháng..... năm...... 
+ Số: ...................................... 
+ Nợ: ..................................... 
+ Có:...................................... 
+ 
+Căn cứ Quyết định số:................. ngày....... tháng....... năm....... của................... 
+............................................................................. về việc bàn giao TSCĐ.......... 
+Ban giao nhận TSCĐ gồm: 
+- Ông/Bà..................................... chức vụ.............................. Đại diện bên giao 
+- Ông/Bà..................................... chức vụ............................... Đại diện bên nhận 
+- Ông/Bà............................... chức vụ............................... Đại diện..................... 
+Địa điểm giao nhận TSCĐ :.................................................................................. 
+Xác nhận việc giao nhận TSCĐ như sau:  
+ 
+Tính nguyên giá tài sản cố định 
+STT 
+Tên, 
+ký hiệu 
+quy cách 
+(cấp 
+hạng 
+TSCĐ) 
+Số 
+hiệu/Mã 
+TSCĐ 
+Nước 
+sản 
+xuất 
+(XD) 
+Năm 
+sản 
+xuất 
+Năm 
+đưa 
+vào sử 
+dụng 
+Công 
+suất 
+(diện 
+tích 
+thiết 
+kế) 
+Giá 
+mua 
+ 
+Chi 
+phí 
+vận 
+chuyển 
+Chi 
+phí 
+chạy 
+thử 
+... 
+Nguyên 
+giá 
+TSCĐ 
+Tài 
+liệu 
+kỹ 
+thuật 
+kèm 
+theo 
+A B C D 1 2 3 4 5 6 7 8 E 
+             
+             
+             
+             
+             
+             
+             
+             
+ Cộng x x x x x      x 
+ 
+ CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 88  
+  
+ 88 
+DỤNG CỤ, PHỤ TÙNG KÈM THEO 
+ 
+Số 
+thứ tự 
+Tên, qui cách dụng cụ, 
+phụ tùng Đơn vị tính Số lượng Giá trị 
+A B C 1 2 
+     
+     
+     
+     
+     
+ 
+Giám đốc bên nhận 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng 
+bên nhận 
+(Ký, họ tên) 
+Người nhận 
+(Ký, họ tên) 
+Người giao 
+(Ký, họ tên) 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="02-TSCĐ" id="tt99_appendix1_02_tscd" group="TSCĐ" start_page="67" end_page="68">
+      <Title>Biên bản thanh lý TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="ong_ba" label="Ông/Bà" type="string" required="false" />
+        <Field key="chi_phi_thanh_ly_tscd" label="- Chi phí thanh lý TSCĐ" type="string" required="false" />
+        <Field key="gia_tri_thu_hoi" label="- Giá trị thu hồi" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Trưởng Ban thanh lý</Signer>
+        <Signer>Giám đốc  Kế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - TSCĐ \ 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN BẢN THANH LÝ TSCĐ  
+Ngày..... tháng...... năm...... 
+ 
+ Số: ..........................  
+ Nợ: .........................  
+ Có:..........................  
+ 
+Căn cứ Quyết định số:........ ngày...... tháng...... năm...... của ............................... 
+.......................................................................... về việc thanh lý tài sản cố định. 
+ 
+I. Ban thanh lý TSCĐ gồm:  
+Ông/Bà:............................ Chức vụ.................. Đại diện.................. Trưởng ban 
+Ông/Bà:............................ Chức vụ.................. Đại diện.................. Ủy viên 
+Ông/Bà:............................ Chức vụ.................. Đại diện.................. Ủy viên 
+II. Tiến hành thanh lý TSCĐ: 
+- Tên, ký mã hiệu, qui cách (cấp hạng) TSCĐ .....................................................  
+- Số hiệu TSCĐ/Mã TSCĐ ...................................................................................  
+- Năm sản xuất ......................................................................................................  
+- Năm đưa vào sử dụng.................................... Số thẻ TSCĐ ..............................  
+- Nguyên giá TSCĐ ..............................................................................................  
+- Giá trị hao mòn đã trích đến thời điểm thanh lý ................................................  
+- Giá trị còn lại của TSCĐ ....................................................................................  
+III. Kết luận của Ban thanh lý TSCĐ: 
+............................................................................................................................... 
+............................................................................................................................... 
+ 
+Ngày......... tháng......... năm..... 
+Trưởng Ban thanh lý 
+(Ký, họ tên) 
+ 
+ 
+ CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 90  
+  
+ 90 
+IV. Kết quả thanh lý TSCĐ:  
+- Chi phí thanh lý TSCĐ:................................ (viết bằng chữ) ............................ 
+- Giá trị thu hồi:.............................................. (viết bằng chữ)............................. 
+- Đã ghi giảm sổ TSCĐ ngày........... tháng.......... năm.......... 
+ 
+  Ngày......... tháng......... năm......  
+   Giám đốc  Kế toán trưởng  
+(Ký, họ tên, đóng dấu)  (Ký, h ọ tên) 
+ 
+ 
+ 
+ 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán</LayoutText>
+    </Form>
+    <Form code="03-TSCĐ" id="tt99_appendix1_03_tscd" group="TSCĐ" start_page="69" end_page="70">
+      <Title>BIÊN BẢN BÀN GIAO TSCĐ SỬA CHỮA, BẢO DƯỠNG HOẶC NÂNG CẤP, CẢI TẠO HOÀN THÀNH</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ngay_thang_nam_so" label="Ngày... tháng... năm... Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="so_hieu_tscd_so_the_tscd" label="- Số hiệu TSCĐ.............................................. Số thẻ TSCĐ" type="string" required="false" />
+        <Field key="bo_phan_quan_ly_su_dung" label="- Bộ phận quản lý, sử dụng" type="string" required="false" />
+        <Field key="ket_luan" label="Kết luận" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Đại diện đơn vị nhận Đại diện đơn vị giao</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03 - TSCĐ \ 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN BẢN BÀN GIAO TSCĐ  
+SỬA CHỮA, BẢO DƯỠNG HOẶC NÂNG CẤP, CẢI TẠO HOÀN THÀNH 
+  Ngày... tháng... năm... Số:...................... 
+   Nợ:........ .............. 
+  Có:......... ............. 
+Căn cứ Quyết định số:................... ngày... tháng... năm... của............................. 
+Chúng tôi gồm:  
+- Ông/Bà..................... Chức vụ............. Đại diện............................... đơn vị sửa 
+chữa, bảo dưỡng hoặc nâng cấp, cải tạo 
+- Ông/Bà.................... Chức vụ.............. Đại diện.................... đơn vị có TSCĐ. 
+Đã kiểm nhận việc sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo TSCĐ như sau: 
+- Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ..................................................... 
+- Số hiệu TSCĐ.............................................. Số thẻ TSCĐ:............................... 
+- Bộ phận quản lý, sử dụng:.................................................................................. 
+- Thời gian sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo từ ngày. .... tháng.... 
+năm...... đến ngày..... tháng.... năm......... 
+Các bộ phận sửa chữa, bảo dưỡng hoặc nâng cấp, cải tạo gồm có: 
+Tên bộ phận 
+cần sửa chữa, 
+bảo dưỡng 
+hoặc nâng cấp, 
+cải tạo 
+Nội dung (mức độ) 
+công việc sửa chữa, 
+bảo dưỡng hoặc 
+nâng cấp, cải tạo 
+Giá 
+dự 
+toán 
+Chi 
+phí 
+thực 
+tế 
+Kết quả kiểm tra 
+sau sửa chữa, bảo 
+dưỡng hoặc nâng 
+cấp, cải tạo 
+A B 1 2 3 
+     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+ Cộng    
+ 
+ CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025 92  
+  
+ 92 
+Kết luận:............................................................................................................... 
+.............................................................................................................................. 
+ 
+Đại diện đơn vị nhận Đại diện đơn vị giao 
+(Ký, họ tên) (Ký, họ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của 
+đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="04-TSCĐ" id="tt99_appendix1_04_tscd" group="TSCĐ" start_page="71" end_page="71">
+      <Title>Biên bản đánh giá lại TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="- Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="ket_luan" label="Kết luận" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Ủy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - TSCĐ \ 
+(Kèm theo Thông tư số 99/2025/TT-BTC  
+ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+ 
+BIÊN BẢN ĐÁNH GIÁ LẠI TSCĐ  
+Ngày..... tháng..... năm...... 
+ Số: ..........................  
+ Nợ: .........................  
+ Có:..........................  
+ 
+ - Căn cứ Quyết định số:.......... ngày....... tháng....... năm........ 
+ Của....................................................................... Về việc đánh giá lại TSCĐ 
+ - Ông/Bà........... Chức vụ................ Đại diện...................... Chủ tịch Hội đồng 
+ - Ông/Bà........... Chức vụ........................ Đại diện............................. Ủy viên 
+ - Ông/Bà........... Chức vụ........................ Đại diện............................. Ủy viên 
+Đã thực hiện đánh giá lại giá trị các TSCĐ sau đây: 
+Giá trị đang ghi sổ Giá trị còn lại theo      
+đánh giá lại Chênh lệch 
+STT 
+Tên, ký 
+mã hiệu, 
+qui cách 
+(cấp 
+hạng) 
+TSCĐ 
+Số 
+hiệu 
+TSCĐ 
+Số 
+thẻ 
+TSCĐ Nguyên 
+Giá 
+Hao 
+mòn 
+Giá 
+trị 
+còn 
+lại 
+Nguyên 
+Giá 
+Hao 
+mòn 
+Giá 
+trị 
+còn 
+lại 
+Nguyên 
+giá 
+Hao 
+mòn 
+Giá 
+trị 
+Còn 
+lại 
+A B C D 1 2 3 4 5 6 7 8 9 
+             
+             
+             
+             
+             
+ Cộng X X          
+Kết luận:........................................................................................................................ 
+........................................................................................................................................ 
+ 
+  Ngày... tháng... năm... 
+Ủy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý của đơn vị 
+mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="05-TSCĐ" id="tt99_appendix1_05_tscd" group="TSCĐ" start_page="72" end_page="72">
+      <Title>Biên bản tổng hợp kiểm kê TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>(Ghi ý kiến giải quyết số chênh lệch)</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Trưởng Ban kiểm kê</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 05 - TSCĐ 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính) 
+BIÊN BẢN TỔNG HỢP KIỂM KÊ TÀI SẢN CỐ ĐỊNH 
+Số:.................. 
+Thời điểm kiểm kê............ giờ......... ngày......... tháng........ năm.......... 
+Ban kiểm kê gồm: 
+- Ông /Bà................................................... Chức vụ............................... Đại diện........................................ Trưởng ban 
+- Ông /Bà.................................................. Chức vụ................................ Đại diện.............................................. Ủy viên 
+- Ông/Bà................................................... Chức vụ................................ Đại diện.............................................. Ủy viên 
+Đã kiểm kê TSCĐ, kết quả như sau: 
+Theo sổ kế toán Theo kiểm kê Chênh lệch 
+Số 
+TT 
+Tên 
+TSCĐ 
+Đơn 
+vị 
+tính 
+Mã 
+số 
+Nơi 
+sử 
+dụng Số 
+lượng 
+Nguyên 
+giá 
+Giá trị 
+còn lại 
+Số 
+lượng 
+Nguyên 
+giá 
+Giá trị 
+còn lại 
+Số 
+lượng 
+Nguyên 
+giá 
+Giá trị 
+còn lại 
+Ghi 
+chú 
+A B C D E 1 2 3 4 5 6 7 8 9 F 
+               
+Cộng  x x x   x   x   x 
+ 
+ Ngày...... tháng...... năm..... 
+Giám đốc 
+ (Ghi ý kiến giải quyết số chênh lệch) 
+ (Ký, họ tên, đóng dấu) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Trưởng Ban kiểm kê 
+(Ký, họ tên) 
+ 
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của đơn vị mình, doanh nghiệp được xây dựng, 
+ thiết kế biểu mẫu chứng từ kế toán.</LayoutText>
+    </Form>
+    <Form code="06-TSCĐ" id="tt99_appendix1_06_tscd" group="TSCĐ" start_page="73" end_page="74">
+      <Title>Bảng tính và phân bổ khấ u hao TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng  Kế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 06 - TSCĐ 
+(Kèm theo Thông tư số 99/2025/TT-BTC 
+ ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)   
+BẢNG TÍNH VÀ PHÂN BỔ KHẤU HAO TSCĐ 
+Tháng...... năm..... 
+Số:........... 
+ 
+ Nơi sử dụng 
+ 
+TK 627 – Chi phí 
+sản xuất chung 
+Toàn DN 
+STT Chỉ tiêu 
+Tỷ lệ 
+khấu 
+hao (%) 
+hoặc 
+thời gian 
+sử dụng 
+Nguyên 
+giá 
+TSCĐ 
+Số 
+khấu 
+hao 
+Phân 
+xưởng 
+(sản 
+phẩm) 
+Phân 
+xưởng 
+(sản 
+phẩm) 
+Phân 
+xưởng 
+(sản 
+phẩm) 
+Phân 
+xưởng 
+(sản 
+phẩm) 
+TK 623 
+Chi phí sử 
+dụng máy 
+thi công 
+TK 641 
+Chi phí 
+bán 
+hàng 
+TK 642 Chi 
+phí quản lý 
+Doanh 
+nghiệp 
+TK 241 
+XDCB dở 
+dang 
+TK 242  
+Chi phí chờ 
+phân bổ 
+TK 335 
+Chi phí 
+phải trả 
+... 
+A B 1 2 3 4 5 6 7 8 9 10 11 12 13 ... 
+1 I. Số khấu hao trích 
+tháng trước               
+2 II . Số KH TSCĐ tăng 
+trong tháng               
+3 III. Số KH TSCĐ 
+giảm trong tháng               
+4 IV. Số KH trích tháng 
+này (I + II - III)               
+Cộng x              
+ 
+  Ngày..... tháng.... năm... 
+Người lập bảng  Kế toán trưởng 
+(Ký, họ tên)  (Ký, h ọ tên)  
+Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu c ầu quản lý c ủa đơn vị mình, doanh nghi ệp được xây 
+dựng, thiết kế biểu mẫu chứng từ kế toán. 
+ 
+(Xem tiếp Công báo số 1565 + 1566) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+VĂN PHÒNG CHÍNH PHỦ XUẤT BẢN 
+Địa chỉ: Số 1, Hoàng Hoa Thám, Ba Đình, Hà Nội 
+Điện thoại liên hệ:  
+- Nội dung: 080.44417 
+- Phát hành:  080.44243 
+Email:  congbao@chinhphu.vn 
+Website http://congbao.chinhphu.vn</LayoutText>
+    </Form>
+  </Forms>
+</TT99AppendixIForms>
