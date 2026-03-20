@@ -5,46 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Giấy thanh toán tiền tạm ứng (04-TT)</title>
   <style>
-    @page { size: A4 portrait; margin: 0; }
-    body { margin: 0; background: #eef1f5; font-family: 'Times New Roman', serif; color: #111; }
-    .toolbar { position: sticky; top: 0; background: #101317; color: #fff; padding: 8px 12px; z-index: 10; }
-    .sheet { width: 210mm; height: 297mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,0.15); box-sizing: border-box; padding: 10mm; overflow: hidden; }
-    h1 { margin: 0 0 2mm; text-align: center; font-size: 15pt; text-transform: uppercase; }
-    .meta { font-size: 10pt; margin-bottom: 3mm; }
-    h3 { margin: 3mm 0 1.5mm; font-size: 11pt; }
-    table { width: 100%; border-collapse: collapse; font-size: 10pt; }
-    td, th { border: 1px solid #111; padding: 2.5mm 2mm; vertical-align: top; }
-    td.label { width: 38%; font-weight: 700; }
-    td.value { height: 8mm; }
-    .grid td { height: 7mm; }
-    .signatures { margin-top: 6mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
-    .sig { text-align: center; min-height: 24mm; border-top: 1px dashed #888; padding-top: 2mm; font-weight: 700; }
-    .hint { margin-top: 2mm; font-weight: 400; font-size: 9pt; }
-    @media print { body { background: #fff; } .toolbar { display: none; } .sheet { margin: 0; box-shadow: none; } }
+    @page { size: A5 landscape; margin: 0; }
+    body { margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }
+    .sheet { position: relative; width: 210mm; height: 148mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }
+    .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .txt { position: absolute; color: #111; white-space: nowrap; line-height: 1.12; transform: translateY(-0.85em); }
+    .txt.bold { font-weight: 800; }
+    .txt.center { transform: translate(-50%, -0.85em); text-align: center; }
+    .txt.right { transform: translate(-100%, -0.85em); text-align: right; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .sheet { margin: 0; box-shadow: none; }
+    }
   </style>
 </head>
 <body>
-    <div class="toolbar">04-TT - Giấy thanh toán tiền tạm ứng | <button onclick="window.print()">In</button></div>
-  <main class="sheet">
-    <h1>Giấy thanh toán tiền tạm ứng</h1>
-        <div class="meta"><b>Mã biểu mẫu:</b> 04-TT | <b>Thông tư:</b> 99/2025/TT-BTC</div>
-    <section>
-            <h3>Thông tin điền mẫu</h3>
-      <table><tbody><tr><td class="label">Ngày</td><td class="value"></td></tr>
-<tr><td class="label">Tháng</td><td class="value"></td></tr>
-<tr><td class="label">Năm</td><td class="value"></td></tr>
-<tr><td class="label">Số</td><td class="value"></td></tr>
-<tr><td class="label">N ợ</td><td class="value"></td></tr>
-<tr><td class="label">Có</td><td class="value"></td></tr>
-<tr><td class="label">- Họ và tên người thanh toán</td><td class="value"></td></tr>
-<tr><td class="label">- Bộ phận (hoặc địa chỉ)</td><td class="value"></td></tr>
-<tr><td class="label">2. Số tạm ứng kỳ này</td><td class="value"></td></tr></tbody></table>
-    </section>
-    
-    <section>
-      <h3>Chữ ký</h3>
-      <div class="signatures"><div class="sig">Giám đốc<div class="hint">(Ký, họ tên)</div></div><div class="sig">Kế toán trưởng<div class="hint">(Ký, họ tên)</div></div><div class="sig">Kế toán thanh toán<div class="hint">(Ký, họ tên)</div></div><div class="sig">thanh toán<div class="hint">(Ký, họ tên)</div></div></div>
-    </section>
-  </main>
+  <div class="toolbar">04-TT - Giấy thanh toán tiền tạm ứng | <button onclick="window.print()">In</button></div>
+  <section class="sheet">
+    <svg class="grid" xmlns="http://www.w3.org/2000/svg"><line x1="16.245mm" y1="106.900mm" x2="48.255mm" y2="106.900mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="64.745mm" y1="106.900mm" x2="96.755mm" y2="106.900mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="113.245mm" y1="106.900mm" x2="145.255mm" y2="106.900mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="161.745mm" y1="106.900mm" x2="193.755mm" y2="106.900mm" stroke="#111" stroke-width="0.200mm" /></svg>
+    <div class="txt left bold" style="left:8.000mm;top:11.000mm;font-size:8.80pt;">Đơn vị: ........................................</div>
+<div class="txt left " style="left:8.000mm;top:16.000mm;font-size:8.00pt;">Địa chỉ/Bộ phận: ........................</div>
+<div class="txt right bold" style="left:202.000mm;top:10.000mm;font-size:8.60pt;">Mẫu số 04-TT</div>
+<div class="txt right " style="left:202.000mm;top:14.500mm;font-size:7.40pt;">(Thông tư 99/2025/TT-BTC)</div>
+<div class="txt center bold" style="left:105.000mm;top:24.000mm;font-size:12.80pt;">GIẤY THANH TOÁN TIỀN TẠM ỨNG</div>
+<div class="txt center " style="left:105.000mm;top:29.200mm;font-size:8.50pt;">Ngày ..... tháng ..... năm .....</div>
+<div class="txt left " style="left:8.000mm;top:35.000mm;font-size:8.60pt;">Ngày: ...............................................................</div>
+<div class="txt left " style="left:8.000mm;top:41.200mm;font-size:8.60pt;">Tháng: ...............................................................</div>
+<div class="txt left " style="left:8.000mm;top:47.400mm;font-size:8.60pt;">Năm: ...............................................................</div>
+<div class="txt left " style="left:8.000mm;top:53.600mm;font-size:8.60pt;">Số: ...............................................................</div>
+<div class="txt left " style="left:8.000mm;top:59.800mm;font-size:8.60pt;">N ợ: ...............................................................</div>
+<div class="txt left " style="left:8.000mm;top:66.000mm;font-size:8.60pt;">Có: ...............................................................</div>
+<div class="txt left " style="left:8.000mm;top:72.200mm;font-size:8.60pt;">- Họ và tên người thanh toán: ...............................................................</div>
+<div class="txt right " style="left:202.000mm;top:80.400mm;font-size:8.20pt;">Ngày ..... tháng ..... năm .....</div>
+<div class="txt center bold" style="left:32.250mm;top:88.400mm;font-size:8.80pt;">Giám đốc</div>
+<div class="txt center " style="left:32.250mm;top:93.100mm;font-size:7.50pt;">(Ký, họ tên)</div>
+<div class="txt center bold" style="left:80.750mm;top:88.400mm;font-size:8.80pt;">Kế toán trưởng</div>
+<div class="txt center " style="left:80.750mm;top:93.100mm;font-size:7.50pt;">(Ký, họ tên)</div>
+<div class="txt center bold" style="left:129.250mm;top:88.400mm;font-size:8.80pt;">Kế toán thanh toán</div>
+<div class="txt center " style="left:129.250mm;top:93.100mm;font-size:7.50pt;">(Ký, họ tên)</div>
+<div class="txt center bold" style="left:177.750mm;top:88.400mm;font-size:8.80pt;">thanh toán</div>
+<div class="txt center " style="left:177.750mm;top:93.100mm;font-size:7.50pt;">(Ký, họ tên)</div>
+  </section>
 </body>
 </html>

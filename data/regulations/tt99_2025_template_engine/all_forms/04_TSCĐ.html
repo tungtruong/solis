@@ -5,45 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Biên bản đánh giá lại TSCĐ (04-TSCĐ)</title>
   <style>
-    @page { size: A4 landscape; margin: 0; }
-    body { margin: 0; background: #eef1f5; font-family: 'Times New Roman', serif; color: #111; }
-    .toolbar { position: sticky; top: 0; background: #101317; color: #fff; padding: 8px 12px; z-index: 10; }
-    .sheet { width: 297mm; height: 210mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,0.15); box-sizing: border-box; padding: 10mm; overflow: hidden; }
-    h1 { margin: 0 0 2mm; text-align: center; font-size: 15pt; text-transform: uppercase; }
-    .meta { font-size: 10pt; margin-bottom: 3mm; }
-    h3 { margin: 3mm 0 1.5mm; font-size: 11pt; }
-    table { width: 100%; border-collapse: collapse; font-size: 10pt; }
-    td, th { border: 1px solid #111; padding: 2.5mm 2mm; vertical-align: top; }
-    td.label { width: 38%; font-weight: 700; }
-    td.value { height: 8mm; }
-    .grid td { height: 7mm; }
-    .signatures { margin-top: 6mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
-    .sig { text-align: center; min-height: 24mm; border-top: 1px dashed #888; padding-top: 2mm; font-weight: 700; }
-    .hint { margin-top: 2mm; font-weight: 400; font-size: 9pt; }
-    @media print { body { background: #fff; } .toolbar { display: none; } .sheet { margin: 0; box-shadow: none; } }
+    @page { size: A5 landscape; margin: 0; }
+    body { margin: 0; background: #f0f2f5; font-family: 'Times New Roman', serif; }
+    .toolbar { position: sticky; top: 0; z-index: 10; background: #111; color: #fff; padding: 8px 12px; }
+    .sheet { position: relative; width: 210mm; height: 148mm; margin: 10px auto 20px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; }
+    .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .txt { position: absolute; color: #111; white-space: nowrap; line-height: 1.12; transform: translateY(-0.85em); }
+    .txt.bold { font-weight: 800; }
+    .txt.center { transform: translate(-50%, -0.85em); text-align: center; }
+    .txt.right { transform: translate(-100%, -0.85em); text-align: right; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .sheet { margin: 0; box-shadow: none; }
+    }
   </style>
 </head>
 <body>
-    <div class="toolbar">04-TSCĐ - Biên bản đánh giá lại TSCĐ | <button onclick="window.print()">In</button></div>
-  <main class="sheet">
-    <h1>Biên bản đánh giá lại TSCĐ</h1>
-        <div class="meta"><b>Mã biểu mẫu:</b> 04-TSCĐ | <b>Thông tư:</b> 99/2025/TT-BTC</div>
-    <section>
-            <h3>Thông tin điền mẫu</h3>
-      <table><tbody><tr><td class="label">Ngày</td><td class="value"></td></tr>
-<tr><td class="label">Tháng</td><td class="value"></td></tr>
-<tr><td class="label">Năm</td><td class="value"></td></tr>
-<tr><td class="label">Số</td><td class="value"></td></tr>
-<tr><td class="label">Nợ</td><td class="value"></td></tr>
-<tr><td class="label">Có</td><td class="value"></td></tr>
-<tr><td class="label">- Căn cứ Quyết định số</td><td class="value"></td></tr>
-<tr><td class="label">Kết luận</td><td class="value"></td></tr></tbody></table>
-    </section>
-    <section><h3>Bảng nhập liệu</h3><table class="grid"><thead><tr><th>STT</th><th>Cột 2</th><th>Cột 3</th><th>Cột 4</th><th>Cột 5</th><th>Cột 6</th><th>Cột 7</th><th>Cột 8</th><th>Cột 9</th><th>Cột 10</th><th>Cột 11</th><th>Cột 12</th><th>Cột 13</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></section>
-    <section>
-      <h3>Chữ ký</h3>
-      <div class="signatures"><div class="sig">Ủy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng<div class="hint">(Ký, họ tên)</div></div></div>
-    </section>
-  </main>
+  <div class="toolbar">04-TSCĐ - Biên bản đánh giá lại TSCĐ | <button onclick="window.print()">In</button></div>
+  <section class="sheet">
+    <svg class="grid" xmlns="http://www.w3.org/2000/svg"><line x1="8.000mm" y1="35.000mm" x2="8.000mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="22.923mm" y1="35.000mm" x2="22.923mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="37.846mm" y1="35.000mm" x2="37.846mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="52.769mm" y1="35.000mm" x2="52.769mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="67.692mm" y1="35.000mm" x2="67.692mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="82.615mm" y1="35.000mm" x2="82.615mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="97.538mm" y1="35.000mm" x2="97.538mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="112.462mm" y1="35.000mm" x2="112.462mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="127.385mm" y1="35.000mm" x2="127.385mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="142.308mm" y1="35.000mm" x2="142.308mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="157.231mm" y1="35.000mm" x2="157.231mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="172.154mm" y1="35.000mm" x2="172.154mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="187.077mm" y1="35.000mm" x2="187.077mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="202.000mm" y1="35.000mm" x2="202.000mm" y2="86.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="35.000mm" x2="202.000mm" y2="35.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="43.000mm" x2="202.000mm" y2="43.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="49.400mm" x2="202.000mm" y2="49.400mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="56.600mm" x2="202.000mm" y2="56.600mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="63.800mm" x2="202.000mm" y2="63.800mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="71.000mm" x2="202.000mm" y2="71.000mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="78.200mm" x2="202.000mm" y2="78.200mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="8.000mm" y1="85.400mm" x2="202.000mm" y2="85.400mm" stroke="#111" stroke-width="0.200mm" />
+<line x1="40.980mm" y1="118.700mm" x2="169.020mm" y2="118.700mm" stroke="#111" stroke-width="0.200mm" /></svg>
+    <div class="txt left bold" style="left:8.000mm;top:11.000mm;font-size:8.80pt;">Đơn vị: ........................................</div>
+<div class="txt left " style="left:8.000mm;top:16.000mm;font-size:8.00pt;">Địa chỉ/Bộ phận: ........................</div>
+<div class="txt right bold" style="left:202.000mm;top:10.000mm;font-size:8.60pt;">Mẫu số 04-TSCĐ</div>
+<div class="txt right " style="left:202.000mm;top:14.500mm;font-size:7.40pt;">(Thông tư 99/2025/TT-BTC)</div>
+<div class="txt center bold" style="left:105.000mm;top:24.000mm;font-size:12.80pt;">BIÊN BẢN ĐÁNH GIÁ LẠI TSCĐ</div>
+<div class="txt center " style="left:105.000mm;top:29.200mm;font-size:8.50pt;">Ngày ..... tháng ..... năm .....</div>
+<div class="txt center bold" style="left:15.462mm;top:40.400mm;font-size:7.30pt;">STT</div>
+<div class="txt center bold" style="left:30.385mm;top:40.400mm;font-size:7.30pt;">Cột 2</div>
+<div class="txt center bold" style="left:45.308mm;top:40.400mm;font-size:7.30pt;">Cột 3</div>
+<div class="txt center bold" style="left:60.231mm;top:40.400mm;font-size:7.30pt;">Cột 4</div>
+<div class="txt center bold" style="left:75.154mm;top:40.400mm;font-size:7.30pt;">Cột 5</div>
+<div class="txt center bold" style="left:90.077mm;top:40.400mm;font-size:7.30pt;">Cột 6</div>
+<div class="txt center bold" style="left:105.000mm;top:40.400mm;font-size:7.30pt;">Cột 7</div>
+<div class="txt center bold" style="left:119.923mm;top:40.400mm;font-size:7.30pt;">Cột 8</div>
+<div class="txt center bold" style="left:134.846mm;top:40.400mm;font-size:7.30pt;">Cột 9</div>
+<div class="txt center bold" style="left:149.769mm;top:40.400mm;font-size:7.30pt;">Cột 10</div>
+<div class="txt center bold" style="left:164.692mm;top:40.400mm;font-size:7.30pt;">Cột 11</div>
+<div class="txt center bold" style="left:179.615mm;top:40.400mm;font-size:7.30pt;">Cột 12</div>
+<div class="txt center bold" style="left:194.538mm;top:40.400mm;font-size:7.30pt;">Cột 13</div>
+<div class="txt right " style="left:202.000mm;top:92.200mm;font-size:8.20pt;">Ngày ..... tháng ..... năm .....</div>
+<div class="txt center bold" style="left:105.000mm;top:100.200mm;font-size:8.80pt;">Ủy viên/người lập Kế toán trưởng  Chủ tịch Hội đồng</div>
+<div class="txt center " style="left:105.000mm;top:104.900mm;font-size:7.50pt;">(Ký, họ tên)</div>
+  </section>
 </body>
 </html>
