@@ -569,6 +569,31 @@ function App() {
   const typedMessageKeysRef = useRef(new Set())
 
   const tr = useCallback((vi, en) => (uiLang === 'en' ? en : vi), [uiLang])
+  const localizeRuntimeText = useCallback((value) => {
+    const text = String(value || '').trim()
+    if (!text || uiLang !== 'en') return text
+
+    return text
+      .replace(/\bquá hạn\b/gi, 'overdue')
+      .replace(/\bsắp đến hạn\b/gi, 'due soon')
+      .replace(/\bhạn nộp\b/gi, 'due date')
+      .replace(/\bbáo cáo\b/gi, 'report')
+      .replace(/\bdòng tiền\b/gi, 'cashflow')
+      .replace(/\bcông nợ phải trả\b/gi, 'accounts payable')
+      .replace(/\bcông nợ phải thu\b/gi, 'accounts receivable')
+      .replace(/\bcông nợ\b/gi, 'debt')
+      .replace(/\bphải trả\b/gi, 'payables')
+      .replace(/\bphải thu\b/gi, 'receivables')
+      .replace(/\bdoanh thu\b/gi, 'revenue')
+      .replace(/\bchi phí\b/gi, 'cost')
+      .replace(/\blợi nhuận\b/gi, 'profit')
+      .replace(/\bthuế\s*vat\b/gi, 'VAT')
+      .replace(/\bchưa nộp\b/gi, 'not submitted')
+      .replace(/\bđã nộp\b/gi, 'submitted')
+      .replace(/\bkê khai\b/gi, 'filing')
+      .replace(/\btuân thủ\b/gi, 'compliance')
+      .replace(/\bhồ sơ\b/gi, 'case')
+  }, [uiLang])
   const caseStatusLabelMap = useMemo(() => ({
     moi: tr('Mới', 'New'),
     dang_xu_ly: tr('Đang xử lý', 'Processing'),
@@ -2317,7 +2342,7 @@ function App() {
                       <section className="dashboard-compliance-callout">
                         <h3>{tr('Nhắc nộp báo cáo', 'Submission reminder')}</h3>
                         <p>
-                          {dashboardComplianceAlert.status === 'qua_han' ? tr('Quá hạn', 'Overdue') : tr('Sắp đến hạn', 'Due soon')}: {dashboardComplianceAlert.name} - {tr('hạn', 'due')} {formatDateByRule(dashboardComplianceAlert.due_date || '-') || '-'}
+                          {dashboardComplianceAlert.status === 'qua_han' ? tr('Quá hạn', 'Overdue') : tr('Sắp đến hạn', 'Due soon')}: {localizeRuntimeText(dashboardComplianceAlert.name)} - {tr('hạn', 'due')} {formatDateByRule(dashboardComplianceAlert.due_date || '-') || '-'}
                         </p>
                         <button
                           type="button"
@@ -2447,7 +2472,7 @@ function App() {
                                 {(reportDetail.tt133?.pl_rows || []).map((row) => (
                                   <tr key={row.code}>
                                     <td>{row.code}</td>
-                                    <td>{row.item}</td>
+                                    <td>{localizeRuntimeText(row.item)}</td>
                                     <td>{formatCurrency(row.amount)}</td>
                                   </tr>
                                 ))}
@@ -2470,7 +2495,7 @@ function App() {
                                 {(reportDetail.tt133?.bs_rows || []).map((row) => (
                                   <tr key={row.code}>
                                     <td>{row.code}</td>
-                                    <td>{row.item}</td>
+                                    <td>{localizeRuntimeText(row.item)}</td>
                                     <td>{formatCurrency(row.amount)}</td>
                                   </tr>
                                 ))}
@@ -2493,7 +2518,7 @@ function App() {
                                 {(reportDetail.tt133?.cf_rows || []).map((row) => (
                                   <tr key={row.code}>
                                     <td>{row.code}</td>
-                                    <td>{row.item}</td>
+                                    <td>{localizeRuntimeText(row.item)}</td>
                                     <td>{formatCurrency(row.amount)}</td>
                                   </tr>
                                 ))}
@@ -2556,7 +2581,7 @@ function App() {
                           {reportDrillTab === 'giao_dich' ? (reportDetail?.gl?.items || []).slice(-8).map((item) => (
                             <tr key={item.entry_id}>
                               <td>{formatDateByRule(item.event_date || item.meta?.event_date || '-') || '-'}</td>
-                              <td>{formatReportNarration(item.narration, item.entry_id)}</td>
+                              <td>{localizeRuntimeText(formatReportNarration(item.narration, item.entry_id))}</td>
                               <td>{formatCurrency(item.debit_total)}</td>
                             </tr>
                           )) : null}
@@ -2787,11 +2812,11 @@ function App() {
           ) : (
             <>
               <section className="intel-block">
-                <h2>{sideCompanion.title}</h2>
-                <p>{sideCompanion.subtitle}</p>
+                <h2>{localizeRuntimeText(sideCompanion.title)}</h2>
+                <p>{localizeRuntimeText(sideCompanion.subtitle)}</p>
                 <ul>
                   {sideCompanion.highlights.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}>{localizeRuntimeText(item)}</li>
                   ))}
                 </ul>
               </section>
@@ -2801,7 +2826,7 @@ function App() {
                   <h2>{tr('Ưu tiên hôm nay', 'Today priorities')}</h2>
                   <ol className="priority-list">
                     {dashboardPriorities.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item}>{localizeRuntimeText(item)}</li>
                     ))}
                   </ol>
                 </section>
@@ -2810,7 +2835,7 @@ function App() {
                   <h2>{tr('Mẹo phân tích', 'Analysis tips')}</h2>
                   <ul>
                     {(Array.isArray(serverPanels?.reports_tips) ? serverPanels.reports_tips : []).map((tip) => (
-                      <li key={tip}>{tip}</li>
+                      <li key={tip}>{localizeRuntimeText(tip)}</li>
                     ))}
                   </ul>
                 </section>
@@ -2819,7 +2844,7 @@ function App() {
                   <h2>{tr('Checklist nộp báo cáo', 'Submission checklist')}</h2>
                   <ul>
                     {(Array.isArray(serverPanels?.compliance_checklist) ? serverPanels.compliance_checklist : []).map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item}>{localizeRuntimeText(item)}</li>
                     ))}
                   </ul>
                 </section>
@@ -2838,7 +2863,7 @@ function App() {
                         }}
                       >
                         <FileText size={15} />
-                        <span>{item}</span>
+                        <span>{localizeRuntimeText(item)}</span>
                       </a>
                     ))}
                   </div>
