@@ -11,8 +11,9 @@
     .toolbar button { padding: 6px 10px; }
     .container { padding: 14px 0 28px; }
     .page { position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; overflow: hidden; }
+    .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
     .layer { position: absolute; inset: 0; }
-    .ocr { position: absolute; color: #111; white-space: pre-wrap; overflow: hidden; line-height: 1.08; }
+    .txt { position: absolute; color: #111; white-space: nowrap; overflow: visible; line-height: 1.0; }
     .fill { position: absolute; color: #0a56c2; font-weight: 600; white-space: nowrap; line-height: 1.08; }
     @media print {
       body { background: #fff; }
@@ -25,44 +26,43 @@
   <div class="toolbar">01-TT - Phiếu thu | OCR layout (PaddleOCR) | <button onclick="window.print()">In</button></div>
   <main class="container">
     <section class="page" style="width:1191px;height:1684px;">
-  <div class="layer ocr-layer">
-<div class="ocr" style="left:326.0px;top:102.0px;width:539.0px;height:31.0px;font-size:18px;">CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025</div>
-<div class="ocr" style="left:1031.0px;top:105.0px;width:38.0px;height:32.0px;font-size:18px;">77</div>
-<div class="ocr" style="left:124.0px;top:168.0px;width:110.0px;height:36.0px;font-size:18px;">Đơn vị:...................</div>
-<div class="ocr" style="left:693.0px;top:168.0px;width:184.0px;height:30.0px;font-size:18px;">Mẫu số 01 - TT</div>
-<div class="ocr" style="left:126.0px;top:203.0px;width:103.0px;height:30.0px;font-size:18px;">Địa chỉ:................</div>
-<div class="ocr" style="left:606.0px;top:202.0px;width:360.0px;height:23.0px;font-size:18px;">(Kèm theo Thông tư số 99/2025/TT-BTC</div>
-<div class="ocr" style="left:530.0px;top:226.0px;width:507.0px;height:27.0px;font-size:18px;">ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)</div>
-<div class="ocr" style="left:516.0px;top:305.0px;width:159.0px;height:30.0px;font-size:18px;">PHIẾU THU</div>
-<div class="ocr" style="left:429.0px;top:342.0px;width:294.0px;height:30.0px;font-size:18px;">Ngày....... tháng....... năm.......</div>
-<div class="ocr" style="left:808.0px;top:374.0px;width:114.0px;height:31.0px;font-size:18px;">Quyển số:..............</div>
-<div class="ocr" style="left:806.0px;top:409.0px;width:43.0px;height:28.0px;font-size:18px;">Số:.........................</div>
-<div class="ocr" style="left:802.0px;top:441.0px;width:55.0px;height:34.0px;font-size:18px;">Nợ:........................</div>
-<div class="ocr" style="left:808.0px;top:481.0px;width:43.0px;height:21.0px;font-size:17px;">Có:........................</div>
-<div class="ocr" style="left:172.0px;top:556.0px;width:285.0px;height:30.0px;font-size:18px;">Họ và tên người nộp tiền: .....................................................................................</div>
-<div class="ocr" style="left:170.0px;top:603.0px;width:98.0px;height:30.0px;font-size:18px;">Địa chỉ:..................................................................................................................</div>
-<div class="ocr" style="left:170.0px;top:649.0px;width:130.0px;height:32.0px;font-size:18px;">Lý do nộp:.............................................................................................................</div>
-<div class="ocr" style="left:172.0px;top:693.0px;width:101.0px;height:31.0px;font-size:18px;">Số tiền:..................................... (Viết bằng chữ): .................................................</div>
-<div class="ocr" style="left:517.0px;top:691.0px;width:217.0px;height:35.0px;font-size:18px;">Số tiền:..................................... (Viết bằng chữ): .................................................</div>
-<div class="ocr" style="left:170.0px;top:740.0px;width:124.0px;height:30.0px;font-size:18px;">Kèm theo:..................................................................... Chứng từ gốc: ................</div>
-<div class="ocr" style="left:776.0px;top:740.0px;width:163.0px;height:32.0px;font-size:18px;">Kèm theo:..................................................................... Chứng từ gốc: ................</div>
-<div class="ocr" style="left:776.0px;top:802.0px;width:232.0px;height:29.0px;font-size:18px;">Ngày..... tháng..... năm......</div>
-<div class="ocr" style="left:183.0px;top:842.0px;width:101.0px;height:30.0px;font-size:18px;">Giám đốc</div>
-<div class="ocr" style="left:358.0px;top:838.0px;width:153.0px;height:36.0px;font-size:18px;">Kế toán trưởng</div>
-<div class="ocr" style="left:558.0px;top:842.0px;width:146.0px;height:30.0px;font-size:18px;">Người nộp tiền</div>
-<div class="ocr" style="left:755.0px;top:840.0px;width:158.0px;height:34.0px;font-size:18px;">Người lập phiếu</div>
-<div class="ocr" style="left:951.0px;top:840.0px;width:92.0px;height:36.0px;font-size:18px;">Thủ quỹ</div>
-<div class="ocr" style="left:135.0px;top:875.0px;width:198.0px;height:25.0px;font-size:18px;">(Ký, họ tên, đóng dấu)</div>
-<div class="ocr" style="left:381.0px;top:875.0px;width:106.0px;height:25.0px;font-size:18px;">(Ký, họ tên)</div>
-<div class="ocr" style="left:578.0px;top:874.0px;width:110.0px;height:29.0px;font-size:18px;">(Ký, họ tên)</div>
-<div class="ocr" style="left:782.0px;top:877.0px;width:109.0px;height:25.0px;font-size:18px;">(Ký, họ tên)</div>
-<div class="ocr" style="left:945.0px;top:874.0px;width:110.0px;height:29.0px;font-size:18px;">(Ký, họ tên)</div>
-<div class="ocr" style="left:172.0px;top:1052.0px;width:404.0px;height:30.0px;font-size:18px;">Đã nhận đủ số tiền (viết bằng chữ):.......................................................................</div>
-<div class="ocr" style="left:174.0px;top:1096.0px;width:416.0px;height:30.0px;font-size:18px;">+ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................</div>
-<div class="ocr" style="left:170.0px;top:1131.0px;width:211.0px;height:36.0px;font-size:18px;">+ Số tiền quy đổi:...................................................................................................</div>
-<div class="ocr" style="left:172.0px;top:1174.0px;width:379.0px;height:29.0px;font-size:18px;">(Liên gửi ra ngoài phải đóng dấu)</div>
-<div class="ocr" style="left:172.0px;top:1452.0px;width:888.0px;height:30.0px;font-size:18px;">Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của</div>
-<div class="ocr" style="left:126.0px;top:1486.0px;width:820.0px;height:30.0px;font-size:18px;">đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</div>
+  <svg class="grid" viewBox="0 0 1191 1684" preserveAspectRatio="none"><line x1="126.8" y1="145.4" x2="1062.2" y2="145.4" stroke="#2b2b2b" stroke-width="1.00" /><line x1="126.8" y1="141.2" x2="1062.2" y2="141.2" stroke="#2b2b2b" stroke-width="1.00" /></svg>
+  <div class="layer text-layer">
+<div class="txt" style="left:327.1px;top:105.0px;min-width:545.4px;height:31.0px;font-size:18px;">CÔNG BÁO/Số 1563 + 1564/Ngày 16-11-2025</div>
+<div class="txt" style="left:1035.7px;top:105.0px;min-width:35.9px;height:31.0px;font-size:18px;">77</div>
+<div class="txt" style="left:128.2px;top:169.8px;min-width:229.1px;height:31.0px;font-size:18px;">Đơn vị:...................</div>
+<div class="txt" style="left:128.2px;top:202.0px;min-width:212.9px;height:31.0px;font-size:18px;">Địa chỉ:................</div>
+<div class="txt" style="left:693.5px;top:169.8px;min-width:194.4px;height:31.0px;font-size:18px;">Mẫu số 01 - TT</div>
+<div class="txt" style="left:606.5px;top:201.6px;min-width:368.3px;height:24.3px;font-size:18px;">(Kèm theo Thông tư số 99/2025/TT-BTC</div>
+<div class="txt" style="left:532.2px;top:225.1px;min-width:511.9px;height:26.6px;font-size:18px;">ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)</div>
+<div class="txt" style="left:517.3px;top:305.7px;min-width:163.2px;height:31.0px;font-size:18px;">PHIẾU THU</div>
+<div class="txt" style="left:429.5px;top:339.8px;min-width:338.9px;height:31.0px;font-size:18px;">Ngày....... tháng....... năm.......</div>
+<div class="txt" style="left:808.6px;top:373.7px;min-width:219.1px;height:31.0px;font-size:18px;">Quyển số:..............</div>
+<div class="txt" style="left:808.6px;top:407.7px;min-width:226.2px;height:31.0px;font-size:18px;">Số:.........................</div>
+<div class="txt" style="left:808.6px;top:441.8px;min-width:224.6px;height:31.0px;font-size:18px;">Nợ:........................</div>
+<div class="txt" style="left:808.6px;top:475.7px;min-width:222.3px;height:31.0px;font-size:18px;">Có:........................</div>
+<div class="txt" style="left:173.5px;top:555.8px;min-width:894.0px;height:31.0px;font-size:18px;">Họ và tên người nộp tiền: .....................................................................................</div>
+<div class="txt" style="left:173.5px;top:601.7px;min-width:894.0px;height:31.0px;font-size:18px;">Địa chỉ:..................................................................................................................</div>
+<div class="txt" style="left:173.5px;top:647.7px;min-width:894.0px;height:31.0px;font-size:18px;">Lý do nộp:.............................................................................................................</div>
+<div class="txt" style="left:173.5px;top:693.8px;min-width:894.0px;height:31.0px;font-size:18px;">Số tiền:..................................... (Viết bằng chữ): .................................................</div>
+<div class="txt" style="left:173.5px;top:739.7px;min-width:894.0px;height:31.0px;font-size:18px;">Kèm theo:..................................................................... Chứng từ gốc: ................</div>
+<div class="txt" style="left:778.7px;top:801.2px;min-width:260.6px;height:26.6px;font-size:18px;">Ngày..... tháng..... năm......</div>
+<div class="txt" style="left:187.7px;top:845.9px;min-width:96.5px;height:24.3px;font-size:18px;">Giám đốc</div>
+<div class="txt" style="left:134.2px;top:875.9px;min-width:203.6px;height:24.3px;font-size:18px;">(Ký, họ tên, đóng dấu)</div>
+<div class="txt" style="left:361.0px;top:845.9px;min-width:156.2px;height:24.3px;font-size:18px;">Kế toán trưởng</div>
+<div class="txt" style="left:381.2px;top:875.9px;min-width:110.0px;height:24.3px;font-size:18px;">(Ký, họ tên)</div>
+<div class="txt" style="left:561.8px;top:845.9px;min-width:145.8px;height:24.3px;font-size:18px;">Người nộp tiền</div>
+<div class="txt" style="left:579.7px;top:875.9px;min-width:110.0px;height:24.3px;font-size:18px;">(Ký, họ tên)</div>
+<div class="txt" style="left:759.8px;top:845.9px;min-width:156.8px;height:24.3px;font-size:18px;">Người lập phiếu</div>
+<div class="txt" style="left:783.2px;top:875.9px;min-width:110.0px;height:24.3px;font-size:18px;">(Ký, họ tên)</div>
+<div class="txt" style="left:959.2px;top:845.9px;min-width:85.6px;height:24.3px;font-size:18px;">Thủ quỹ</div>
+<div class="txt" style="left:946.9px;top:875.9px;min-width:110.0px;height:24.3px;font-size:18px;">(Ký, họ tên)</div>
+<div class="txt" style="left:173.5px;top:1052.6px;min-width:901.8px;height:31.0px;font-size:18px;">Đã nhận đủ số tiền (viết bằng chữ):.......................................................................</div>
+<div class="txt" style="left:173.5px;top:1092.6px;min-width:901.8px;height:31.0px;font-size:18px;">+ Tỷ giá ngoại tệ (vàng bạc, đá quý):....................................................................</div>
+<div class="txt" style="left:173.5px;top:1132.6px;min-width:901.8px;height:31.0px;font-size:18px;">+ Số tiền quy đổi:...................................................................................................</div>
+<div class="txt" style="left:173.5px;top:1172.6px;min-width:384.6px;height:31.0px;font-size:18px;">(Liên gửi ra ngoài phải đóng dấu)</div>
+<div class="txt" style="left:173.5px;top:1452.3px;min-width:895.7px;height:28.8px;font-size:18px;">Ghi chú: Tùy theo đặc điểm hoạt động sản xuất kinh doanh và yêu cầu quản lý của</div>
+<div class="txt" style="left:128.2px;top:1486.3px;min-width:826.2px;height:28.8px;font-size:18px;">đơn vị mình, doanh nghiệp được xây dựng, thiết kế biểu mẫu chứng từ kế toán.</div>
   </div>
   <div class="layer fill-layer">
 <div class="fill" style="left:873.0px;top:102.0px;font-size:16px;">20</div>

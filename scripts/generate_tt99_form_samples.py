@@ -248,6 +248,52 @@ def merge_ocr_with_pdf_text(
     return merged
 
 
+def extract_pdf_vector_lines(page: fitz.Page, zoom: float) -> List[Dict[str, float]]:
+    lines: List[Dict[str, float]] = []
+    drawings = page.get_drawings()
+    for drawing in drawings:
+        raw_width = drawing.get("width", 0.6)
+        try:
+            width = float(raw_width) * zoom
+        except Exception:
+            width = 0.6
+        if width <= 0:
+            width = 0.6
+
+        for item in drawing.get("items", []):
+            if not item:
+                continue
+            op = item[0]
+
+            if op == "l" and len(item) >= 3:
+                p1, p2 = item[1], item[2]
+                lines.append(
+                    {
+                        "x1": float(p1.x) * zoom,
+                        "y1": float(p1.y) * zoom,
+                        "x2": float(p2.x) * zoom,
+                        "y2": float(p2.y) * zoom,
+                        "w": width,
+                    }
+                )
+            elif op == "re" and len(item) >= 2:
+                r = item[1]
+                x0 = float(r.x0) * zoom
+                y0 = float(r.y0) * zoom
+                x1 = float(r.x1) * zoom
+                y1 = float(r.y1) * zoom
+                lines.extend(
+                    [
+                        {"x1": x0, "y1": y0, "x2": x1, "y2": y0, "w": width},
+                        {"x1": x1, "y1": y0, "x2": x1, "y2": y1, "w": width},
+                        {"x1": x1, "y1": y1, "x2": x0, "y2": y1, "w": width},
+                        {"x1": x0, "y1": y1, "x2": x0, "y2": y0, "w": width},
+                    ]
+                )
+
+    return lines
+
+
 def find_label_block(blocks: List[Dict[str, object]], label: str) -> Optional[Dict[str, object]]:
     candidates = [label, label.replace("(", "").replace(")", ""), label.lstrip("- ")]
     norms = [normalize_for_match(c) for c in candidates if c.strip()]
@@ -344,19 +390,25 @@ def build_grid_overlays(
 def render_page_html(
     blocks: List[Dict[str, object]],
     overlays: List[Dict[str, object]],
+    vector_lines: List[Dict[str, float]],
     width: int,
     height: int,
 ) -> str:
-    ocr_text = "\n".join(
+    base_text = "\n".join(
         (
-            f"<div class=\"ocr\" style=\"left:{round(float(b['x']),1)}px;top:{round(float(b['y']),1)}px;"
-            f"width:{round(float(b['w']),1)}px;height:{round(float(b['h']),1)}px;"
+            f"<div class=\"txt\" style=\"left:{round(float(b['x']),1)}px;top:{round(float(b['y']),1)}px;"
+            f"min-width:{round(float(b['w']),1)}px;height:{round(float(b['h']),1)}px;"
             f"font-size:{max(9, min(18, int(float(b['h']) * 0.82)))}px;\">"
             + html.escape(str(b["text"]))
             + "</div>"
         )
         for b in blocks
-        if float(b["conf"]) >= 0.25
+        if str(b.get("text", "")).strip()
+    )
+
+    line_svg = "".join(
+        f"<line x1=\"{ln['x1']:.1f}\" y1=\"{ln['y1']:.1f}\" x2=\"{ln['x2']:.1f}\" y2=\"{ln['y2']:.1f}\" stroke=\"#2b2b2b\" stroke-width=\"{max(0.5, min(1.4, ln['w'])):.2f}\" />"
+        for ln in vector_lines
     )
 
     filled_text = "\n".join(
@@ -371,8 +423,9 @@ def render_page_html(
     return "\n".join(
         [
             f"<section class=\"page\" style=\"width:{width}px;height:{height}px;\">",
-            "  <div class=\"layer ocr-layer\">",
-            f"{ocr_text}",
+            f"  <svg class=\"grid\" viewBox=\"0 0 {width} {height}\" preserveAspectRatio=\"none\">{line_svg}</svg>",
+            "  <div class=\"layer text-layer\">",
+            f"{base_text}",
             "  </div>",
             "  <div class=\"layer fill-layer\">",
             f"{filled_text}",
@@ -405,13 +458,16 @@ def render_sample_html(
             ocr_blocks = run_ocr(ocr, img)
             pdf_blocks = extract_pdf_text_blocks(page, zoom)
             layout_blocks = merge_ocr_with_pdf_text(ocr_blocks, pdf_blocks)
+            vector_lines = extract_pdf_vector_lines(page, zoom)
+
+            base_blocks = pdf_blocks if pdf_blocks else layout_blocks
 
             overlays: List[Dict[str, object]] = []
             if page_num == start_page:
                 overlays.extend(build_field_overlays(layout_blocks, fields, form_code, width_px))
                 overlays.extend(build_grid_overlays(layout_blocks, table_schema, form_code, width_px))
 
-            page_blocks.append(render_page_html(layout_blocks, overlays, width_px, height_px))
+            page_blocks.append(render_page_html(base_blocks, overlays, vector_lines, width_px, height_px))
     finally:
         doc.close()
 
@@ -428,8 +484,9 @@ def render_sample_html(
     .toolbar button {{ padding: 6px 10px; }}
     .container {{ padding: 14px 0 28px; }}
     .page {{ position: relative; margin: 0 auto 16px; box-shadow: var(--paper-shadow); background: #fff; overflow: hidden; }}
+    .grid {{ position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }}
     .layer {{ position: absolute; inset: 0; }}
-    .ocr {{ position: absolute; color: #111; white-space: pre-wrap; overflow: hidden; line-height: 1.08; }}
+    .txt {{ position: absolute; color: #111; white-space: nowrap; overflow: visible; line-height: 1.0; }}
     .fill {{ position: absolute; color: #0a56c2; font-weight: 600; white-space: nowrap; line-height: 1.08; }}
     @media print {{
       body {{ background: #fff; }}
