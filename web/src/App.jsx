@@ -1396,6 +1396,8 @@ function App() {
       if (currentCompanyId) {
         params.set('company_id', currentCompanyId)
       }
+      params.set('report_period', reportPeriod)
+      params.set('report_txn_filter', reportTxnFilter)
       const response = await fetch(`/api/demo/reports/detailed?${params.toString()}`)
       if (!response.ok) {
         throw new Error('Không tải được báo cáo chi tiết')
@@ -1424,7 +1426,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [activeSection, currentEmail, currentCompanyId, reportAsOfDate])
+  }, [activeSection, currentEmail, currentCompanyId, reportAsOfDate, reportPeriod, reportTxnFilter])
 
   useEffect(() => {
     if (!['dashboard', 'compliance'].includes(activeSection)) return undefined

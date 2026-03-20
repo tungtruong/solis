@@ -16,7 +16,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from xml.etree import ElementTree as ET
@@ -3827,6 +3827,8 @@ def get_demo_detailed_reports(
     as_of_date: Optional[str] = None,
     email: str = "demo@wssmeas.local",
     company_id: str = "",
+    report_period: str = "30_ngay",
+    report_txn_filter: str = "tat_ca",
 ) -> Dict[str, Any]:
     def format_date_for_display(value: str) -> str:
         raw = str(value or "").strip()
@@ -3848,6 +3850,70 @@ def get_demo_detailed_reports(
                 continue
         return raw
 
+    def parse_filter_date(value: Any) -> Optional[datetime]:
+        raw = str(value or "").strip()
+        if not raw:
+            return None
+        token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
+        if not token_match:
+            return None
+        token = token_match.group(1).replace("/", "-")
+        if re.fullmatch(r"\d{8}", token):
+            try:
+                return datetime.strptime(token, "%Y%m%d")
+            except ValueError:
+                return None
+        for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
+            try:
+                return datetime.strptime(token, fmt)
+            except ValueError:
+                continue
+        return None
+
+    def resolve_period_bounds(period_key: str, as_of_iso: str) -> Tuple[Optional[datetime], Optional[datetime]]:
+        as_of_dt = parse_filter_date(as_of_iso)
+        if as_of_dt is None:
+            return None, None
+
+        to_dt = as_of_dt.replace(hour=23, minute=59, second=59, microsecond=0)
+        if period_key == "7_ngay":
+            return to_dt - timedelta(days=6), to_dt
+        if period_key == "30_ngay":
+            return to_dt - timedelta(days=29), to_dt
+        if period_key == "quy_nay":
+            quarter_start_month = (int((as_of_dt.month - 1) / 3) * 3) + 1
+            from_dt = datetime(as_of_dt.year, quarter_start_month, 1)
+            return from_dt, to_dt
+        if period_key == "nam_nay":
+            return datetime(as_of_dt.year, 1, 1), to_dt
+        return None, to_dt
+
+    def keep_entry_by_txn_filter(entry: Dict[str, Any], txn_filter: str) -> bool:
+        if txn_filter == "tat_ca":
+            return True
+
+        lines = entry.get("lines", []) if isinstance(entry, dict) else []
+        debit_total = 0.0
+        has_tax_account = False
+        for line in lines:
+            if not isinstance(line, dict):
+                continue
+            side_raw = str(line.get("side", "")).strip()
+            amount = float(line.get("amount", 0) or 0)
+            account = str(line.get("account", "")).strip()
+            if side_raw == "debit":
+                debit_total += amount
+            if account.startswith("133") or account.startswith("333") or account.startswith("138"):
+                has_tax_account = True
+
+        if txn_filter == "gia_tri_lon":
+            return debit_total >= 20_000_000
+
+        if txn_filter == "rui_ro":
+            return has_tax_account or len(lines) >= 4
+
+        return True
+
     normalized_email = email.lower().strip()
     resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
     entries = _derive_journal_entries_from_truth(company_scope_key(resolved_company_id), as_of_date)
@@ -3861,6 +3927,24 @@ def get_demo_detailed_reports(
         ]
         valid_dates = [value for value in event_dates if value]
         derived_as_of_date = max(valid_dates) if valid_dates else datetime.utcnow().date().isoformat()
+
+    period_from, period_to = resolve_period_bounds(report_period, derived_as_of_date)
+    filtered_entries: List[Dict[str, Any]] = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        meta = entry.get("meta", {}) if isinstance(entry.get("meta", {}), dict) else {}
+        event_date_raw = str(meta.get("event_date") or derived_as_of_date).strip()
+        event_dt = parse_filter_date(event_date_raw)
+        if period_from is not None and (event_dt is None or event_dt < period_from):
+            continue
+        if period_to is not None and (event_dt is None or event_dt > period_to):
+            continue
+        if not keep_entry_by_txn_filter(entry, report_txn_filter):
+            continue
+        filtered_entries.append(entry)
+
+    entries = filtered_entries
 
     financial_report = report_service.generate_financial_statements(entries, derived_as_of_date)
     chart_accounts = store.chart_of_accounts_tt133()
@@ -4091,6 +4175,12 @@ def get_demo_detailed_reports(
         "company_id": resolved_company_id,
         "as_of_date": format_date_for_display(derived_as_of_date),
         "as_of_date_iso": derived_as_of_date,
+        "filters": {
+            "report_period": report_period,
+            "report_txn_filter": report_txn_filter,
+            "period_from": period_from.date().isoformat() if period_from else "",
+            "period_to": period_to.date().isoformat() if period_to else "",
+        },
         "gl": {
             "items": gl_items,
             "total": len(gl_items),
