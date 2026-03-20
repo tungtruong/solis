@@ -291,7 +291,56 @@ def extract_pdf_vector_lines(page: fitz.Page, zoom: float) -> List[Dict[str, flo
                     ]
                 )
 
-    return lines
+    return cleanup_vector_lines(lines)
+
+
+def cleanup_vector_lines(lines: List[Dict[str, float]]) -> List[Dict[str, float]]:
+    """Drop noisy tiny segments and deduplicate near-identical vector lines."""
+    if not lines:
+        return []
+
+    min_len = 10.0
+    axis_tol = 1.2
+    grid = 0.5
+    seen = set()
+    cleaned: List[Dict[str, float]] = []
+
+    for ln in lines:
+        x1 = float(ln["x1"])
+        y1 = float(ln["y1"])
+        x2 = float(ln["x2"])
+        y2 = float(ln["y2"])
+        w = float(ln.get("w", 0.6))
+
+        # Keep only near axis-aligned segments to avoid text-outline noise.
+        is_h = abs(y1 - y2) <= axis_tol
+        is_v = abs(x1 - x2) <= axis_tol
+        if not (is_h or is_v):
+            continue
+
+        if is_h:
+            y = (y1 + y2) / 2.0
+            a, b = sorted([x1, x2])
+            if (b - a) < min_len:
+                continue
+            key = ("h", round(y / grid), round(a / grid), round(b / grid), round(max(0.5, min(1.4, w)), 1))
+            if key in seen:
+                continue
+            seen.add(key)
+            cleaned.append({"x1": a, "y1": y, "x2": b, "y2": y, "w": w})
+            continue
+
+        x = (x1 + x2) / 2.0
+        a, b = sorted([y1, y2])
+        if (b - a) < min_len:
+            continue
+        key = ("v", round(x / grid), round(a / grid), round(b / grid), round(max(0.5, min(1.4, w)), 1))
+        if key in seen:
+            continue
+        seen.add(key)
+        cleaned.append({"x1": x, "y1": a, "x2": x, "y2": b, "w": w})
+
+    return cleaned
 
 
 def find_label_block(blocks: List[Dict[str, object]], label: str) -> Optional[Dict[str, object]]:
