@@ -26,7 +26,7 @@ const STORAGE_COMPANY_NAME_KEY = 'solis.auth.companyName'
 const STORAGE_UI_LANG_KEY = 'solis.ui.lang'
 
 const initialCaseItems = []
-const defaultStatusOptions = [{ value: 'tat_ca', label: 'Tất cả' }]
+const defaultStatusOptions = [{ value: 'tat_ca', label: 'All' }]
 
 function formatFieldLabel(value) {
   return String(value || '')
@@ -252,16 +252,17 @@ function TypingText({ text, speed = 8, onComplete, animate = true }) {
   return <span>{visibleText}</span>
 }
 
-function normalizeCaseItem(raw, fallbackIndex = 0) {
+function normalizeCaseItem(raw, fallbackIndex = 0, statusLabelMapInput = {}) {
   if (!raw || typeof raw !== 'object') return null
   const id = raw.id || raw.case_id || `case-fallback-${fallbackIndex}`
   const status = raw.status || 'moi'
   const statusLabelMap = {
-    moi: 'Mới',
-    dang_xu_ly: 'Đang xử lý',
-    cho_xac_nhan: 'Chờ khách hàng xác nhận',
-    cho_duyet: 'Chờ duyệt',
-    hoan_tat: 'Hoàn tất',
+    moi: 'New',
+    dang_xu_ly: 'Processing',
+    cho_xac_nhan: 'Pending customer confirmation',
+    cho_duyet: 'Pending approval',
+    hoan_tat: 'Completed',
+    ...statusLabelMapInput,
   }
 
   const normalizeEvidenceEntry = (entry, fallbackStaged = false) => {
@@ -306,12 +307,12 @@ function normalizeCaseItem(raw, fallbackIndex = 0) {
   return {
     id,
     code: raw.code || String(id).toUpperCase(),
-    title: raw.title || 'Hồ sơ kế toán',
-    partner: raw.partner || raw.counterparty_name || 'Đối tác',
+    title: raw.title || 'Accounting case',
+    partner: raw.partner || raw.counterparty_name || 'Partner',
     amount: raw.amount || '0 VND',
-    updatedAt: raw.updatedAt || raw.event_date || 'Vừa xong',
+    updatedAt: raw.updatedAt || raw.event_date || 'Just now',
     status,
-    statusLabel: raw.statusLabel || statusLabelMap[status] || 'Mới',
+    statusLabel: raw.statusLabel || statusLabelMap[status] || statusLabelMap.moi,
     timeline: Array.isArray(raw.timeline) ? raw.timeline : [],
     evidence: Array.from(mergedEvidenceMap.values()),
     reasoning: Array.isArray(raw.reasoning) ? raw.reasoning : [],
@@ -568,6 +569,13 @@ function App() {
   const typedMessageKeysRef = useRef(new Set())
 
   const tr = useCallback((vi, en) => (uiLang === 'en' ? en : vi), [uiLang])
+  const caseStatusLabelMap = useMemo(() => ({
+    moi: tr('Mới', 'New'),
+    dang_xu_ly: tr('Đang xử lý', 'Processing'),
+    cho_xac_nhan: tr('Chờ khách hàng xác nhận', 'Pending customer confirmation'),
+    cho_duyet: tr('Chờ duyệt', 'Pending approval'),
+    hoan_tat: tr('Hoàn tất', 'Completed'),
+  }), [tr])
 
   const toggleUiLang = useCallback(() => {
     setUiLang((prev) => {
@@ -603,7 +611,7 @@ function App() {
       const sessionCompanyName = String(window.sessionStorage.getItem(STORAGE_COMPANY_NAME_KEY) || '')
       const items = Array.isArray(payload?.items) ? payload.items : []
       const normalized = items
-        .map((item, idx) => normalizeCaseItem(item, idx))
+        .map((item, idx) => normalizeCaseItem(item, idx, caseStatusLabelMap))
         .filter(Boolean)
         .sort((left, right) => toSortableTimestamp(right.updatedAt) - toSortableTimestamp(left.updatedAt))
 
@@ -649,7 +657,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [caseStatusLabelMap])
 
   useEffect(() => {
     const storedCompanyId = String(window.sessionStorage.getItem(STORAGE_COMPANY_ID_KEY) || '')
@@ -735,7 +743,7 @@ function App() {
   const saveCompanyEdit = useCallback(async () => {
     const token = String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || '')
     if (!token) {
-      setCompanyEditError('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.')
+      setCompanyEditError(tr('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.', 'Session has expired. Please sign in again.'))
       return
     }
 
@@ -767,7 +775,7 @@ function App() {
       })
       const result = await response.json().catch(() => ({}))
       if (!response.ok || !result?.saved) {
-        throw new Error('Không thể cập nhật thông tin công ty.')
+        throw new Error(tr('Không thể cập nhật thông tin công ty.', 'Could not update company profile.'))
       }
 
       const nextName = String(result?.profile?.company_name || payload.company_name || '')
@@ -777,15 +785,15 @@ function App() {
       window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, nextName)
       window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, nextCompanyId)
       setCompanyEditForm((prev) => ({ ...prev, ...result.profile }))
-      setCompanyEditSuccess('Đã cập nhật thông tin công ty.')
+      setCompanyEditSuccess(tr('Đã cập nhật thông tin công ty.', 'Company profile updated.'))
     } catch (error) {
-      setCompanyEditError(error.message || 'Không thể cập nhật thông tin công ty.')
+      setCompanyEditError(error.message || tr('Không thể cập nhật thông tin công ty.', 'Could not update company profile.'))
     } finally {
       setIsCompanySaving(false)
     }
-  }, [companyEditForm, currentCompanyId, currentEmail])
+  }, [companyEditForm, currentCompanyId, currentEmail, tr])
 
-  const statusFilterLabel = statusOptions.find((item) => item.value === statusFilter)?.label || 'Tất cả'
+  const statusFilterLabel = statusOptions.find((item) => item.value === statusFilter)?.label || tr('Tất cả', 'All')
 
   const filteredCases = useMemo(() => {
     const search = query.trim().toLowerCase()
@@ -937,7 +945,7 @@ function App() {
     const loader = async () => {
       const response = await fetch(previewFileUrl)
       if (!response.ok) {
-        throw new Error('Không tải được file để xem nhanh')
+        throw new Error(tr('Không tải được file để xem nhanh', 'Could not load file for quick preview'))
       }
 
       const rawText = await response.text()
@@ -955,7 +963,7 @@ function App() {
       })
       .catch((error) => {
         if (!cancelled) {
-          setStructuredError(error.message || 'Không thể hiển thị dữ liệu dạng bảng')
+          setStructuredError(error.message || tr('Không thể hiển thị dữ liệu dạng bảng', 'Could not display structured table data'))
           setStructuredSections([])
         }
       })
@@ -968,7 +976,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [previewFileName, previewFileUrl, isStructuredPreview, isXmlPreview, isJsonPreview, isDocPreview])
+  }, [previewFileName, previewFileUrl, isStructuredPreview, isXmlPreview, isJsonPreview, isDocPreview, tr])
 
   useEffect(() => {
     if (!previewFileName || !isDocxPagePreview) {
@@ -992,7 +1000,7 @@ function App() {
     const loader = async () => {
       const response = await fetch(previewFileUrl)
       if (!response.ok) {
-        throw new Error('Không tải được file DOCX để xem nhanh')
+        throw new Error(tr('Không tải được file DOCX để xem nhanh', 'Could not load DOCX for quick preview'))
       }
 
       const buffer = await response.arrayBuffer()
@@ -1012,7 +1020,7 @@ function App() {
     loader()
       .catch((error) => {
         if (!cancelled) {
-          setDocxError(error.message || 'Không thể dựng tài liệu DOCX theo trang')
+          setDocxError(error.message || tr('Không thể dựng tài liệu DOCX theo trang', 'Could not render DOCX page by page'))
         }
       })
       .finally(() => {
@@ -1027,7 +1035,7 @@ function App() {
         host.innerHTML = ''
       }
     }
-  }, [previewFileName, previewFileUrl, isDocxPagePreview])
+  }, [previewFileName, previewFileUrl, isDocxPagePreview, tr])
 
   async function confirmDeleteActiveCase() {
     if (!activeCase) return
@@ -1204,8 +1212,8 @@ function App() {
 
   const sectionContent = activeSection !== 'cases' && uiContent && typeof uiContent === 'object' ? uiContent[activeSection] || {} : {}
   const sideCompanion = sectionContent?.companion || {
-    title: `Màn phụ ${sectionLabel}`,
-    subtitle: 'Đang tải dữ liệu cấu hình từ hệ thống.',
+    title: `${tr('Màn phụ', 'Side panel')} ${sectionLabel}`,
+    subtitle: tr('Đang tải dữ liệu cấu hình từ hệ thống.', 'Loading configured panel data.'),
     highlights: [],
     actions: [],
   }
@@ -1226,7 +1234,7 @@ function App() {
   const reportAssets = Number(reportDetail?.bs?.tong_tai_san || 0)
   const reportLiabilities = Number(reportDetail?.bs?.tong_no_phai_tra || 0)
   const reportEquity = Number(reportDetail?.bs?.von_chu_so_huu || 0)
-  const reportCompanyLabel = String(currentCompanyName || companyEditForm?.company_name || 'Công ty hiện tại')
+  const reportCompanyLabel = String(currentCompanyName || companyEditForm?.company_name || tr('Công ty hiện tại', 'Current company'))
   const reportCostRatioPct = reportRevenue > 0 ? (reportCost / reportRevenue) * 100 : 0
   const cashflowSeries = useMemo(() => {
     const rows = (reportDetail?.gl?.items || []).slice(-6)
@@ -1264,7 +1272,7 @@ function App() {
       params.set('report_txn_filter', reportTxnFilter)
       const response = await fetch(`/api/demo/reports/detailed?${params.toString()}`)
       if (!response.ok) {
-        throw new Error('Không tải được báo cáo chi tiết')
+        throw new Error(tr('Không tải được báo cáo chi tiết', 'Could not load detailed report'))
       }
       return response.json()
     }
@@ -1277,7 +1285,7 @@ function App() {
       })
       .catch((error) => {
         if (!cancelled) {
-          setReportError(error.message || 'Không tải được báo cáo chi tiết')
+          setReportError(error.message || tr('Không tải được báo cáo chi tiết', 'Could not load detailed report'))
           setReportDetail(null)
         }
       })
@@ -1290,7 +1298,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [activeSection, currentEmail, currentCompanyId, reportAsOfDate, reportPeriod, reportTxnFilter])
+  }, [activeSection, currentEmail, currentCompanyId, reportAsOfDate, reportPeriod, reportTxnFilter, tr])
 
   useEffect(() => {
     if (!['dashboard', 'compliance'].includes(activeSection)) return undefined
@@ -1303,7 +1311,7 @@ function App() {
       if (complianceReportId) params.set('report_id', complianceReportId)
       const response = await fetch(`/api/demo/compliance?${params.toString()}`)
       if (!response.ok) {
-        throw new Error('Không tải được dữ liệu tuân thủ kê khai')
+        throw new Error(tr('Không tải được dữ liệu tuân thủ kê khai', 'Could not load compliance data'))
       }
       return response.json()
     }
@@ -1323,14 +1331,14 @@ function App() {
       })
       .catch((error) => {
         if (!cancelled) {
-          setActionNotice(error.message || 'Không tải được dữ liệu tuân thủ kê khai')
+          setActionNotice(error.message || tr('Không tải được dữ liệu tuân thủ kê khai', 'Could not load compliance data'))
         }
       })
 
     return () => {
       cancelled = true
     }
-  }, [activeSection, currentEmail, currentCompanyId, compliancePeriod, complianceReportId])
+  }, [activeSection, currentEmail, currentCompanyId, compliancePeriod, complianceReportId, tr])
 
   async function runUiAction(action, text = '', caseId = '') {
     const attachmentPayload = await Promise.all(
@@ -1379,7 +1387,7 @@ function App() {
       } catch {
         detail = ''
       }
-      throw new Error(detail || 'Thao tác không thành công')
+      throw new Error(detail || tr('Thao tác không thành công', 'Action failed'))
     }
     return response.json()
   }
@@ -1393,7 +1401,7 @@ function App() {
     const payload = await response.json()
     const items = Array.isArray(payload?.items) ? payload.items : []
     const normalized = items
-      .map((item, idx) => normalizeCaseItem(item, idx))
+      .map((item, idx) => normalizeCaseItem(item, idx, caseStatusLabelMap))
       .filter(Boolean)
       .sort((left, right) => toSortableTimestamp(right.updatedAt) - toSortableTimestamp(left.updatedAt))
     setCases(normalized)
@@ -1453,7 +1461,7 @@ function App() {
       await reloadDemoCases(activeCaseId)
       setCaseActionNotice('')
     } catch (error) {
-      setCaseActionNotice(error.message || 'Không xử lý được xác nhận')
+      setCaseActionNotice(error.message || tr('Không xử lý được xác nhận', 'Could not process confirmation'))
     } finally {
       setIsSendingCaseCommand(false)
     }
@@ -1462,14 +1470,14 @@ function App() {
   async function handleDashboardAnalyze() {
     const text = dashboardQuery.trim()
     if (!text) {
-      setActionNotice('Vui lòng nhập câu hỏi để phân tích')
+      setActionNotice(tr('Vui lòng nhập câu hỏi để phân tích', 'Please enter a question to analyze'))
       return
     }
     try {
       const payload = await runUiAction('dashboard_query', text)
-      setActionNotice(payload?.message || 'Đã chạy phân tích')
+      setActionNotice(payload?.message || tr('Đã chạy phân tích', 'Analysis completed'))
     } catch (error) {
-      setActionNotice(error.message || 'Không phân tích được dữ liệu')
+      setActionNotice(error.message || tr('Không phân tích được dữ liệu', 'Could not analyze data'))
     }
   }
 
@@ -1487,11 +1495,11 @@ function App() {
       }),
     })
     if (!response.ok) {
-      throw new Error('Không xuất được file')
+      throw new Error(tr('Không xuất được file', 'Could not export file'))
     }
     const payload = await response.json()
     downloadBase64File(payload.file_name, payload.mime_type, payload.content_base64)
-    setActionNotice(`Đã tải file ${payload.file_name}`)
+    setActionNotice(`${tr('Đã tải file', 'Downloaded file')} ${payload.file_name}`)
   }
 
   async function handleSubmitCompliance() {
@@ -1508,10 +1516,10 @@ function App() {
       }),
     })
     if (!response.ok) {
-      setActionNotice('Nộp điện tử thất bại')
+      setActionNotice(tr('Nộp điện tử thất bại', 'Online submission failed'))
       return
     }
-    setActionNotice('Đã nộp báo cáo điện tử thành công')
+    setActionNotice(tr('Đã nộp báo cáo điện tử thành công', 'Online submission completed successfully'))
     const params = new URLSearchParams({ period: compliancePeriod })
     if (currentEmail) params.set('email', currentEmail)
     if (currentCompanyId) params.set('company_id', currentCompanyId)
@@ -1537,7 +1545,7 @@ function App() {
       setActiveSection('settings')
       return
     }
-    setActionNotice(`Đã ghi nhận thao tác: ${actionLabel}`)
+    setActionNotice(`${tr('Đã ghi nhận thao tác:', 'Action recorded:')} ${actionLabel}`)
   }
 
   const cashValue = Math.max(reportCashNet, 0)
@@ -1551,8 +1559,8 @@ function App() {
   const dashboardWarnings = Array.isArray(dashboardMeta?.warnings) ? dashboardMeta.warnings : []
   const dashboardPriorities = Array.isArray(dashboardMeta?.priorities) ? dashboardMeta.priorities : []
   const debtBalanceSeries = [
-    { label: 'Phải trả', value: payableValue },
-    { label: 'Phải thu', value: receivableValue },
+    { key: 'payable', label: tr('Phải trả', 'Payables'), value: payableValue },
+    { key: 'receivable', label: tr('Phải thu', 'Receivables'), value: receivableValue },
   ]
   const normalizedFilingReports = Array.isArray(complianceData?.reports) ? complianceData.reports : []
   const complianceActiveReport = normalizedFilingReports.find((item) => String(item.report_id) === complianceReportId) || normalizedFilingReports[0]
@@ -1746,60 +1754,60 @@ function App() {
                   }}
                 >
                   <Cpu size={16} />
-                  <span>Thoát Advanced Mode</span>
+                  <span>{tr('Thoát Advanced Mode', 'Exit Advanced Mode')}</span>
                 </button>
               </div>
               <div className="advanced-head">
-                <h2>Trình soạn bút toán chuyên sâu</h2>
-                <p>Thiết kế bút toán nhiều dòng, phân bổ kỳ và kiểm tra cân đối tức thì.</p>
+                <h2>{tr('Trình soạn bút toán chuyên sâu', 'Advanced journal composer')}</h2>
+                <p>{tr('Thiết kế bút toán nhiều dòng, phân bổ kỳ và kiểm tra cân đối tức thì.', 'Design multi-line entries, period allocations, and instant balancing checks.')}</p>
               </div>
               <div className="advanced-block">
-                <h3>Bút toán mẫu</h3>
-                <p>Nợ 242: 70,000,000</p>
-                <p>Nợ 1331: 7,000,000</p>
-                <p>Có 331: 77,000,000</p>
+                <h3>{tr('Bút toán mẫu', 'Sample entries')}</h3>
+                <p>{tr('Nợ', 'Debit')} 242: 70,000,000</p>
+                <p>{tr('Nợ', 'Debit')} 1331: 7,000,000</p>
+                <p>{tr('Có', 'Credit')} 331: 77,000,000</p>
               </div>
               <div className="advanced-block">
-                <h3>Phân bổ tự động</h3>
-                <p>Phân bổ TK 242 trong 6 kỳ, bắt đầu từ 04/2026.</p>
+                <h3>{tr('Phân bổ tự động', 'Auto allocation')}</h3>
+                <p>{tr('Phân bổ TK 242 trong 6 kỳ, bắt đầu từ 04/2026.', 'Allocate account 242 over 6 periods, starting from 04/2026.')}</p>
               </div>
             </section>
 
             <section className="advanced-panel advanced-center">
               <div className="advanced-head">
-                <h2>Bảng điều phối nghiệp vụ nâng cao</h2>
-                <p>Toàn bộ luồng từ nhận chứng từ -&gt; xác thực -&gt; hậu kiểm bút toán.</p>
+                <h2>{tr('Bảng điều phối nghiệp vụ nâng cao', 'Advanced workflow orchestrator')}</h2>
+                <p>{tr('Toàn bộ luồng từ nhận chứng từ -&gt; xác thực -&gt; hậu kiểm bút toán.', 'End-to-end flow from receiving evidence -&gt; validation -&gt; posting quality checks.')}</p>
               </div>
               <div className="advanced-timeline">
                 <article>
-                  <h3>Bước 1: Nhận chứng từ</h3>
-                  <p>AI trích xuất dữ liệu hóa đơn, hợp đồng, điều khoản thanh toán.</p>
+                  <h3>{tr('Bước 1: Nhận chứng từ', 'Step 1: Receive documents')}</h3>
+                  <p>{tr('AI trích xuất dữ liệu hóa đơn, hợp đồng, điều khoản thanh toán.', 'AI extracts invoice, contract, and payment-term data.')}</p>
                 </article>
                 <article>
-                  <h3>Bước 2: Tạo bút toán nhiều lớp</h3>
-                  <p>Cho phép tách nghiệp vụ thành nhiều dòng theo trung tâm chi phí.</p>
+                  <h3>{tr('Bước 2: Tạo bút toán nhiều lớp', 'Step 2: Build layered entries')}</h3>
+                  <p>{tr('Cho phép tách nghiệp vụ thành nhiều dòng theo trung tâm chi phí.', 'Split one business event into multiple lines by cost center.')}</p>
                 </article>
                 <article>
-                  <h3>Bước 3: Kiểm tra ràng buộc</h3>
-                  <p>Kiểm tra cân đối Nợ-Có, giới hạn tài khoản và quy tắc thuế.</p>
+                  <h3>{tr('Bước 3: Kiểm tra ràng buộc', 'Step 3: Validate constraints')}</h3>
+                  <p>{tr('Kiểm tra cân đối Nợ-Có, giới hạn tài khoản và quy tắc thuế.', 'Validate debit-credit balance, account limits, and tax rules.')}</p>
                 </article>
                 <article>
-                  <h3>Bước 4: Duyệt và ghi sổ</h3>
-                  <p>Luồng duyệt 2 cấp trước khi ghi nhận vào sổ cái.</p>
+                  <h3>{tr('Bước 4: Duyệt và ghi sổ', 'Step 4: Approve and post')}</h3>
+                  <p>{tr('Luồng duyệt 2 cấp trước khi ghi nhận vào sổ cái.', 'Use two-level approval before posting into the general ledger.')}</p>
                 </article>
               </div>
             </section>
 
             <section className="advanced-panel advanced-right">
               <div className="advanced-head">
-                <h2>Kiểm soát chuyên sâu</h2>
-                <p>Giám sát sai lệch và tuân thủ theo chuẩn kế toán.</p>
+                <h2>{tr('Kiểm soát chuyên sâu', 'Advanced controls')}</h2>
+                <p>{tr('Giám sát sai lệch và tuân thủ theo chuẩn kế toán.', 'Monitor deviations and accounting-rule compliance.')}</p>
               </div>
               <ul>
-                <li>Cảnh báo lệch định khoản theo nhóm tài khoản nhạy cảm.</li>
-                <li>Đối chiếu VAT đầu vào/đầu ra theo thời gian thực.</li>
-                <li>Nhật ký thay đổi bút toán trước và sau duyệt.</li>
-                <li>Kiểm tra chồng chéo chứng từ giữa các hồ sơ.</li>
+                <li>{tr('Cảnh báo lệch định khoản theo nhóm tài khoản nhạy cảm.', 'Alert abnormal postings in sensitive account groups.')}</li>
+                <li>{tr('Đối chiếu VAT đầu vào/đầu ra theo thời gian thực.', 'Reconcile input/output VAT in real time.')}</li>
+                <li>{tr('Nhật ký thay đổi bút toán trước và sau duyệt.', 'Track journal changes before and after approval.')}</li>
+                <li>{tr('Kiểm tra chồng chéo chứng từ giữa các hồ sơ.', 'Detect overlapping documents across cases.')}</li>
               </ul>
             </section>
           </div>
@@ -1816,7 +1824,7 @@ function App() {
               <Search size={15} />
               <input
                 type="text"
-                placeholder="Tìm theo hồ sơ, hóa đơn, đối tác"
+                  placeholder={tr('Tìm theo hồ sơ, hóa đơn, đối tác', 'Search by case, invoice, partner')}
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
@@ -1824,8 +1832,8 @@ function App() {
                 <button
                   type="button"
                   className={isStatusFilterOpen ? 'search-filter-icon-btn active' : 'search-filter-icon-btn'}
-                  aria-label={`Lọc trạng thái: ${statusFilterLabel}`}
-                  title={`Lọc trạng thái: ${statusFilterLabel}`}
+                  aria-label={`${tr('Lọc trạng thái', 'Filter status')}: ${statusFilterLabel}`}
+                  title={`${tr('Lọc trạng thái', 'Filter status')}: ${statusFilterLabel}`}
                   onClick={() => setIsStatusFilterOpen((prev) => !prev)}
                 >
                   <SlidersHorizontal size={14} />
@@ -1853,7 +1861,7 @@ function App() {
             </div>
           </div> : null}
 
-          {!['reports', 'dashboard', 'compliance'].includes(activeSection) ? <div className="case-list" aria-label="Danh sách hồ sơ cuộn vô hạn" onScroll={handleCaseListScroll}>
+          {!['reports', 'dashboard', 'compliance'].includes(activeSection) ? <div className="case-list" aria-label={tr('Danh sách hồ sơ cuộn vô hạn', 'Infinite scrolling case list')} onScroll={handleCaseListScroll}>
             {filteredCases.length ? (
               visibleCases.map((item) => (
                 <button
@@ -1886,7 +1894,7 @@ function App() {
 
           <nav className="sidebar-bottom">
             {isCompactSidebar ? (
-              <div className="compact-module-rail" aria-label="Điều hướng phân hệ nhanh">
+              <div className="compact-module-rail" aria-label={tr('Điều hướng phân hệ nhanh', 'Quick module navigation')}>
                 <button
                   type="button"
                   className={activeSection === 'cases' ? 'compact-module-btn active' : 'compact-module-btn'}
@@ -2004,7 +2012,7 @@ function App() {
 
               {isAdvancedMode ? (
                 <div className="advanced-banner">
-                  Advanced Mode đang bật: cho phép hạch toán chuyên sâu, tùy chỉnh bút toán và kiểm soát chi tiết.
+                  {tr('Advanced Mode đang bật: cho phép hạch toán chuyên sâu, tùy chỉnh bút toán và kiểm soát chi tiết.', 'Advanced Mode is on: enables deep posting workflows, configurable entries, and detailed controls.')}
                 </div>
               ) : null}
 
@@ -2046,8 +2054,8 @@ function App() {
                         <table className="chat-inline-table">
                           <thead>
                             <tr>
-                              <th>Trường dữ liệu</th>
-                              <th>Giá trị</th>
+                              <th>{tr('Trường dữ liệu', 'Field')}</th>
+                              <th>{tr('Giá trị', 'Value')}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -2069,14 +2077,14 @@ function App() {
                 {shouldShowParseSummary ? (
                   <section className="parse-summary-box">
                     <div className="parse-summary-head">
-                      <h4>Thông tin trích xuất hồ sơ</h4>
-                      <span>Vui lòng khách hàng xác nhận trước khi post</span>
+                      <h4>{tr('Thông tin trích xuất hồ sơ', 'Extracted case information')}</h4>
+                      <span>{tr('Vui lòng khách hàng xác nhận trước khi post', 'Please confirm before posting')}</span>
                     </div>
                     <table className="parse-summary-table">
                       <thead>
                         <tr>
-                          <th>Trường dữ liệu</th>
-                          <th>Giá trị</th>
+                          <th>{tr('Trường dữ liệu', 'Field')}</th>
+                          <th>{tr('Giá trị', 'Value')}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -2260,7 +2268,7 @@ function App() {
                             <div className="bar-row" key={point.label}>
                               <span>{point.label}</span>
                               <div className="bar-track">
-                                <div className={point.label === 'Phải trả' ? 'bar-fill debt' : 'bar-fill receivable'} style={{ width: `${Math.max(12, Math.min(100, (point.value / Math.max(payableValue, receivableValue, 1)) * 100))}%` }} />
+                                <div className={point.key === 'payable' ? 'bar-fill debt' : 'bar-fill receivable'} style={{ width: `${Math.max(12, Math.min(100, (point.value / Math.max(payableValue, receivableValue, 1)) * 100))}%` }} />
                               </div>
                             </div>
                           ))}
@@ -2695,10 +2703,10 @@ function App() {
                   {modeToggleConfig ? (
                     <article className="detail-row mode-setting-row">
                       <div className="mode-setting-title">
-                        <h3>{modeToggleConfig.title || 'Chế độ kế toán nâng cao'}</h3>
+                        <h3>{modeToggleConfig.title || tr('Chế độ kế toán nâng cao', 'Advanced accounting mode')}</h3>
                         <p>
                           {modeToggleConfig.text ||
-                            'Cho phép hạch toán chuyên sâu với bút toán nhiều lớp, phân bổ tự động và kiểm soát ràng buộc nâng cao.'}
+                            tr('Cho phép hạch toán chuyên sâu với bút toán nhiều lớp, phân bổ tự động và kiểm soát ràng buộc nâng cao.', 'Enable deep posting with multi-layer journals, auto-allocation, and advanced constraints.')}
                         </p>
                       </div>
                       <button
@@ -2709,8 +2717,8 @@ function App() {
                         <Cpu size={16} />
                         <span>
                           {isAdvancedMode
-                            ? modeToggleConfig.cta_off || 'Tắt Advanced Mode'
-                            : modeToggleConfig.cta_on || 'Bật Advanced Mode'}
+                            ? modeToggleConfig.cta_off || tr('Tắt Advanced Mode', 'Turn off Advanced Mode')
+                            : modeToggleConfig.cta_on || tr('Bật Advanced Mode', 'Turn on Advanced Mode')}
                         </span>
                       </button>
                     </article>
@@ -2763,7 +2771,7 @@ function App() {
                   {reasoning.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
-                  {isAdvancedMode ? <li>Đang hiển thị thêm lớp kiểm soát chuyên sâu cho kế toán viên.</li> : null}
+                  {isAdvancedMode ? <li>{tr('Đang hiển thị thêm lớp kiểm soát chuyên sâu cho kế toán viên.', 'Showing additional advanced control layers for accountants.')}</li> : null}
                 </ul>
               </section>
 
@@ -2866,32 +2874,32 @@ function App() {
       {isCompanyEditOpen ? (
         <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="company-edit-title">
           <div className="modal-card company-edit-modal">
-            <h3 id="company-edit-title">Cập nhật thông tin công ty</h3>
+            <h3 id="company-edit-title">{tr('Cập nhật thông tin công ty', 'Update company profile')}</h3>
             <div className="company-edit-form-grid">
               <label>
-                Mã số thuế
+                {tr('Mã số thuế', 'Tax code')}
                 <input value={companyEditForm.tax_code || ''} readOnly className="readonly-input" />
               </label>
               <label>
-                Tên công ty
+                {tr('Tên công ty', 'Company name')}
                 <input
                   value={companyEditForm.company_name || ''}
                   onChange={(event) => handleCompanyEditField('company_name', event.target.value)}
                 />
               </label>
               <label>
-                Địa chỉ
+                {tr('Địa chỉ', 'Address')}
                 <input value={companyEditForm.address || ''} onChange={(event) => handleCompanyEditField('address', event.target.value)} />
               </label>
               <label>
-                Người đại diện pháp luật
+                {tr('Người đại diện pháp luật', 'Legal representative')}
                 <input
                   value={companyEditForm.legal_representative || ''}
                   onChange={(event) => handleCompanyEditField('legal_representative', event.target.value)}
                 />
               </label>
               <label>
-                Ngày thành lập
+                {tr('Ngày thành lập', 'Established date')}
                 <input
                   type="date"
                   value={companyEditForm.established_date || ''}
@@ -2899,7 +2907,7 @@ function App() {
                 />
               </label>
               <label>
-                Ngày bắt đầu phần mềm kế toán
+                {tr('Ngày bắt đầu phần mềm kế toán', 'Accounting software start date')}
                 <input
                   type="date"
                   value={companyEditForm.accounting_software_start_date || ''}
@@ -2907,7 +2915,7 @@ function App() {
                 />
               </label>
               <label>
-                Ngày bắt đầu năm tài chính
+                {tr('Ngày bắt đầu năm tài chính', 'Fiscal year start date')}
                 <input
                   type="date"
                   value={companyEditForm.fiscal_year_start || ''}
@@ -2915,24 +2923,24 @@ function App() {
                 />
               </label>
               <label>
-                Chu kỳ kê khai
+                {tr('Chu kỳ kê khai', 'Declaration cycle')}
                 <select
                   value={companyEditForm.tax_declaration_cycle || 'thang'}
                   onChange={(event) => handleCompanyEditField('tax_declaration_cycle', event.target.value)}
                 >
-                  <option value="thang">Tháng</option>
-                  <option value="quy">Quý</option>
+                  <option value="thang">{tr('Tháng', 'Month')}</option>
+                  <option value="quy">{tr('Quý', 'Quarter')}</option>
                 </select>
               </label>
               <label>
-                Tài khoản ngân hàng mặc định
+                {tr('Tài khoản ngân hàng mặc định', 'Default bank account')}
                 <input
                   value={companyEditForm.default_bank_account || ''}
                   onChange={(event) => handleCompanyEditField('default_bank_account', event.target.value)}
                 />
               </label>
               <label>
-                Email kế toán
+                {tr('Email kế toán', 'Accounting email')}
                 <input
                   type="email"
                   value={companyEditForm.accountant_email || ''}
@@ -2946,10 +2954,10 @@ function App() {
 
             <div className="modal-actions">
               <button type="button" className="modal-btn secondary" onClick={() => setIsCompanyEditOpen(false)}>
-                Đóng
+                {tr('Đóng', 'Close')}
               </button>
               <button type="button" className="modal-btn" onClick={saveCompanyEdit} disabled={isCompanySaving}>
-                {isCompanySaving ? 'Đang lưu...' : 'Lưu thay đổi'}
+                {isCompanySaving ? tr('Đang lưu...', 'Saving...') : tr('Lưu thay đổi', 'Save changes')}
               </button>
             </div>
           </div>
@@ -2984,7 +2992,7 @@ function App() {
 
               {officeViewerUrl ? (
                 <iframe
-                  title="Xem tài liệu Microsoft Office"
+                  title={tr('Xem tài liệu Microsoft Office', 'View Microsoft Office document')}
                   className="preview-office-frame"
                   src={officeViewerUrl}
                 />
@@ -2992,7 +3000,7 @@ function App() {
 
               {isDocxPagePreview ? (
                 <div className="docx-preview-wrap">
-                  {docxLoading ? <p>Đang dựng tài liệu DOCX theo từng trang...</p> : null}
+                  {docxLoading ? <p>{tr('Đang dựng tài liệu DOCX theo từng trang...', 'Rendering DOCX page by page...')}</p> : null}
                   {docxError ? <p>{docxError}</p> : null}
                   <div className="docx-preview-host" ref={docxPreviewRef} />
                 </div>
@@ -3002,11 +3010,10 @@ function App() {
                 <div className="structured-preview">
                   {isDocPreview && !officeViewerUrl ? (
                     <p>
-                      File DOC đang được xem ở chế độ tương thích. Để hiển thị giống Microsoft theo từng trang, hãy dùng DOCX
-                      hoặc mở trên môi trường HTTPS công khai để dùng trình xem Office.
+                      {tr('File DOC đang được xem ở chế độ tương thích. Để hiển thị giống Microsoft theo từng trang, hãy dùng DOCX hoặc mở trên môi trường HTTPS công khai để dùng trình xem Office.', 'DOC is being viewed in compatibility mode. For Microsoft-like page rendering, use DOCX or open on a public HTTPS environment to use Office viewer.')}
                     </p>
                   ) : null}
-                  {structuredLoading ? <p>Đang dựng bảng dữ liệu chuẩn...</p> : null}
+                  {structuredLoading ? <p>{tr('Đang dựng bảng dữ liệu chuẩn...', 'Building structured data table...')}</p> : null}
                   {structuredError ? <p>{structuredError}</p> : null}
                   {!structuredLoading && !structuredError
                     ? structuredSections.map((section) => (
@@ -3015,8 +3022,8 @@ function App() {
                           <table className="structured-table">
                             <thead>
                               <tr>
-                                <th>Chỉ tiêu</th>
-                                <th>Giá trị</th>
+                                <th>{tr('Chỉ tiêu', 'Item')}</th>
+                                <th>{tr('Giá trị', 'Value')}</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -3039,20 +3046,20 @@ function App() {
                   <FileText size={22} />
                   <div>
                     <strong>{previewFileName}</strong>
-                    <p>Định dạng này hiện xem nhanh ở mức thông tin cơ bản.</p>
+                    <p>{tr('Định dạng này hiện xem nhanh ở mức thông tin cơ bản.', 'This format is currently previewed at basic information level.')}</p>
                   </div>
                 </div>
               ) : null}
             </div>
             <div className="modal-actions">
               <a href={previewFileUrl} className="modal-btn secondary" target="_blank" rel="noreferrer">
-                Mở tab mới
+                {tr('Mở tab mới', 'Open in new tab')}
               </a>
               <a href={previewFileUrl} className="modal-btn secondary" download={previewFileName}>
-                Tải về
+                {tr('Tải về', 'Download')}
               </a>
               <button type="button" className="modal-btn secondary" onClick={closePreview}>
-                Đóng
+                {tr('Đóng', 'Close')}
               </button>
             </div>
           </div>
