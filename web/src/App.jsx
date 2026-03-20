@@ -1809,7 +1809,7 @@ function App() {
           {!['reports', 'dashboard', 'compliance'].includes(activeSection) ? <div className="sidebar-top">
             <button type="button" className="new-case-btn" onClick={handleCreateNewCase}>
               <Plus size={16} />
-              <span>Hồ sơ mới</span>
+              <span>{tr('Hồ sơ mới', 'New case')}</span>
             </button>
 
             <div className="search-wrap">
@@ -1991,15 +1991,15 @@ function App() {
           className={dragSide === 'left' ? 'resize-handle active' : 'resize-handle'}
           onMouseDown={() => setDragSide('left')}
           role="separator"
-          aria-label="Thay đổi độ rộng thanh bên và dòng sự kiện"
+          aria-label={tr('Thay đổi độ rộng thanh bên và dòng sự kiện', 'Resize sidebar and timeline')}
         />
 
         <main className="timeline-panel">
           {activeSection === 'cases' ? (
             <>
               <div className="timeline-head">
-                <h2>Dòng sự kiện</h2>
-                <p>Luồng tường thuật từ phân tích AI đến các sự kiện kế toán có cấu trúc.</p>
+                <h2>{tr('Dòng sự kiện', 'Timeline')}</h2>
+                <p>{tr('Luồng tường thuật từ phân tích AI đến các sự kiện kế toán có cấu trúc.', 'Narrative flow from AI analysis to structured accounting events.')}</p>
               </div>
 
               {isAdvancedMode ? (
@@ -2731,14 +2731,14 @@ function App() {
           className={dragSide === 'right' ? 'resize-handle active' : 'resize-handle'}
           onMouseDown={() => setDragSide('right')}
           role="separator"
-          aria-label="Thay đổi độ rộng dòng sự kiện và bảng thông minh"
+          aria-label={tr('Thay đổi độ rộng dòng sự kiện và bảng thông minh', 'Resize timeline and smart panel')}
         />
 
         <aside className={activeSection === 'cases' ? 'right-panel right-panel-cases' : 'right-panel'}>
           {activeSection === 'cases' ? (
             <>
               <section className="intel-block">
-                <h2>Chứng từ</h2>
+                <h2>{tr('Chứng từ', 'Documents')}</h2>
                 <div className="evidence-list scrollable-pane">
                   {evidence.map((name) => (
                     <a
@@ -2758,7 +2758,7 @@ function App() {
               </section>
 
               <section className="intel-block">
-                <h2>Lý giải của AI</h2>
+                <h2>{tr('Lý giải của AI', 'AI reasoning')}</h2>
                 <ul className="reasoning-list scrollable-pane">
                   {reasoning.map((item) => (
                     <li key={item}>{item}</li>
@@ -2773,7 +2773,7 @@ function App() {
                 onClick={() => setIsDeleteModalOpen(true)}
                 disabled={!activeCase}
               >
-                Xóa hồ sơ
+                {tr('Xóa hồ sơ', 'Delete case')}
               </button>
             </>
           ) : (
@@ -2846,17 +2846,17 @@ function App() {
       {isDeleteModalOpen && activeCase ? (
         <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
           <div className="modal-card">
-            <h3 id="delete-modal-title">Xác nhận xóa hồ sơ</h3>
+            <h3 id="delete-modal-title">{tr('Xác nhận xóa hồ sơ', 'Confirm case deletion')}</h3>
             <p>
-              Bạn sắp xóa hồ sơ <strong>{activeCase.title}</strong>.
+              {tr('Bạn sắp xóa hồ sơ', 'You are about to delete case')} <strong>{activeCase.title}</strong>.
             </p>
-            <p className="modal-warning">Hành động này không thể khôi phục.</p>
+            <p className="modal-warning">{tr('Hành động này không thể khôi phục.', 'This action cannot be undone.')}</p>
             <div className="modal-actions">
               <button type="button" className="modal-btn secondary" onClick={() => setIsDeleteModalOpen(false)}>
-                Hủy
+                {tr('Hủy', 'Cancel')}
               </button>
               <button type="button" className="modal-btn danger" onClick={confirmDeleteActiveCase}>
-                Xóa hồ sơ
+                {tr('Xóa hồ sơ', 'Delete case')}
               </button>
             </div>
           </div>
