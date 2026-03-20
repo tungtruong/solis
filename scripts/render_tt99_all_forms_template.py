@@ -130,6 +130,10 @@ def safe_code(code: str) -> str:
     return cleaned.strip("_")
 
 
+def canonical_code(code: str) -> str:
+    return safe_code(code).upper()
+
+
 def cap_title(title: str) -> str:
     cleaned = re.sub(r"\s+", " ", title).strip()
     return cleaned.upper()
@@ -177,7 +181,39 @@ def sanitize_signatures(raw_sigs: List[str]) -> List[str]:
     return cleaned
 
 
-def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem]]:
+def infer_circular_meta(data: Dict[str, object], input_json: Path, out_dir: Path) -> Tuple[str, str, str]:
+    src = str(data.get("source_pdf", "")).lower()
+    doc = str(data.get("document", ""))
+    hint = f"{src} {input_json.as_posix().lower()} {doc.lower()} {out_dir.as_posix().lower()}"
+    if "133" in hint:
+        return "133/2016/TT-BTC", "Thông tư 133", "Thông tư 133 - Bộ biểu mẫu theo style phiếu đã duyệt"
+    return "99/2025/TT-BTC", "Thông tư 99", "Thông tư 99 - Bộ biểu mẫu theo style phiếu đã duyệt"
+
+
+def form_quality_score(form: Dict[str, object]) -> Tuple[int, int, int]:
+    title = str(form.get("title", "")).strip()
+    fields = form.get("fields", []) if isinstance(form.get("fields"), list) else []
+    layout_text = str(form.get("layout_text", ""))
+    bad_title = 1 if norm_text(title) in {"bieu mau ke toan", "", "cong bao/so 1105 + 1106/ngay 12-10-2016 87"} else 0
+    return (bad_title, -len(fields), -len(layout_text))
+
+
+def dedupe_forms(forms: List[Dict[str, object]]) -> List[Dict[str, object]]:
+    keep: Dict[str, Dict[str, object]] = {}
+    for form in forms:
+        code = str(form.get("form_code", "")).strip()
+        if not code:
+            continue
+        key = canonical_code(code)
+        if not key:
+            continue
+        cur = keep.get(key)
+        if cur is None or form_quality_score(form) < form_quality_score(cur):
+            keep[key] = form
+    return [keep[k] for k in sorted(keep.keys())]
+
+
+def build_layout(form: Dict[str, object], circular_code: str) -> Tuple[List[LineItem], List[TextItem]]:
     lines: List[LineItem] = []
     texts: List[TextItem] = []
 
@@ -192,7 +228,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
     texts.append(TextItem(8, 11, "Đơn vị: ........................................", 8.8, True))
     texts.append(TextItem(8, 16, "Địa chỉ/Bộ phận: ........................", 8.0))
     texts.append(TextItem(PAGE_W_MM - 8, 10, f"Mẫu số {code.replace('-', ' - ')}", 8.6, True, "right"))
-    texts.append(TextItem(PAGE_W_MM - 8, 14.5, "(Thông tư 99/2025/TT-BTC)", 7.4, False, "right"))
+    texts.append(TextItem(PAGE_W_MM - 8, 14.5, f"(Thông tư {circular_code})", 7.4, False, "right"))
 
     texts.append(TextItem(PAGE_W_MM / 2, 24, title, preset["title_size"], True, "center"))
     texts.append(TextItem(PAGE_W_MM / 2, 29.2, "Ngày ..... tháng ..... năm .....", preset["date_size"], False, "center"))
@@ -308,7 +344,7 @@ def build_layout(form: Dict[str, object]) -> Tuple[List[LineItem], List[TextItem
             texts.append(TextItem(8, 132.4, "(Liên gửi ra ngoài phải đóng dấu)", 7.6))
 
     if "Ghi chú" in layout_text:
-        texts.append(TextItem(8, 139.2, "Ghi chú: Biểu mẫu được xây dựng theo TT99/2025/TT-BTC.", 7.2))
+        texts.append(TextItem(8, 139.2, f"Ghi chú: Biểu mẫu được xây dựng theo TT{circular_code}.", 7.2))
 
     return lines, texts
 
@@ -389,7 +425,7 @@ def render_html(code: str, title: str, lines: List[LineItem], texts: List[TextIt
 """
 
 
-def build_index(output_dir: Path, items: List[Tuple[str, str]]) -> None:
+def build_index(output_dir: Path, items: List[Tuple[str, str]], index_title: str) -> None:
     links = "\n".join(
         f'<li><a href="{html.escape(code)}.html" target="_blank">{html.escape(code)} - {html.escape(title)}</a></li>'
         for code, title in items
@@ -399,14 +435,14 @@ def build_index(output_dir: Path, items: List[Tuple[str, str]]) -> None:
 <head>
   <meta charset=\"utf-8\" />
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-  <title>TT99 A5 Landscape Templates</title>
+    <title>{html.escape(index_title)}</title>
   <style>
     body {{ font-family: 'Times New Roman', serif; margin: 24px; }}
     li {{ margin: 6px 0; }}
   </style>
 </head>
 <body>
-  <h1>Thông tư 99 - Bộ biểu mẫu theo style phiếu đã duyệt</h1>
+    <h1>{html.escape(index_title)}</h1>
   <ul>{links}</ul>
 </body>
 </html>
@@ -418,14 +454,24 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Render all TT99 forms in approved voucher style")
     parser.add_argument("--input-json", default="data/regulations/tt99_2025_appendix1_form_templates.json")
     parser.add_argument("--out-dir", default="data/regulations/tt99_2025_template_engine/all_forms")
+    parser.add_argument("--circular-code", default="")
+    parser.add_argument("--index-title", default="")
     args = parser.parse_args()
 
     input_json = Path(args.input_json)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    for stale in out_dir.glob("*.html"):
+        stale.unlink()
+    for stale in out_dir.glob("*.pdf"):
+        stale.unlink()
 
     data = json.loads(input_json.read_text(encoding="utf-8"))
-    forms = data.get("forms", [])
+    forms_raw = data.get("forms", [])
+    forms = dedupe_forms(forms_raw if isinstance(forms_raw, list) else [])
+    inferred_code, _circular_name, inferred_index_title = infer_circular_meta(data, input_json, out_dir)
+    circular_code = args.circular_code.strip() or inferred_code
+    index_title = args.index_title.strip() or inferred_index_title
 
     index_items: List[Tuple[str, str]] = []
     for form in forms:
@@ -433,7 +479,7 @@ def main() -> None:
         title = str(form.get("title", "Biểu mẫu"))
         safe = safe_code(code)
 
-        lines, texts = build_layout(form)
+        lines, texts = build_layout(form, circular_code)
 
         html_path = out_dir / f"{safe}.html"
         pdf_path = out_dir / f"{safe}.pdf"
@@ -442,7 +488,7 @@ def main() -> None:
         draw_pdf(pdf_path, lines, texts)
         index_items.append((safe, title))
 
-    build_index(out_dir, index_items)
+    build_index(out_dir, index_items, index_title)
     print(f"Generated forms: {len(forms)}")
     print(f"Output directory: {out_dir}")
 
