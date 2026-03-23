@@ -2727,7 +2727,13 @@ def import_demo_opening_balances_from_bctc_xml(payload: OpeningBalancesImportXml
 @app.post("/api/demo/voucher-test/import")
 def import_demo_voucher_sheet_for_test(payload: VoucherSheetTestPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
-    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    try:
+        resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    except HTTPException as exc:
+        if getattr(exc, "detail", "") == "COMPANY_ACCESS_DENIED":
+            resolved_company_id = resolve_company_id_for_user(normalized_email, "")
+        else:
+            raise
     scoped_data_key = company_scope_key(resolved_company_id)
 
     raw_base64 = str(payload.content_base64 or "")
