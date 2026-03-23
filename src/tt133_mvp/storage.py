@@ -15,12 +15,10 @@ class AppStorage:
 
     @classmethod
     def from_workspace(cls, workspace_root: str) -> "AppStorage":
-        backend = str(os.getenv("SOLIS_STORAGE_BACKEND", "sqlite") or "sqlite").strip().lower()
-        if backend == "firestore":
-            return FirestoreAppStorage.from_workspace(workspace_root)
-        data_dir = Path(workspace_root) / "data"
-        data_dir.mkdir(parents=True, exist_ok=True)
-        return cls(db_path=data_dir / "mvp_app.db")
+        backend = str(os.getenv("SOLIS_STORAGE_BACKEND", "firestore") or "firestore").strip().lower()
+        if backend != "firestore":
+            raise RuntimeError("LOCAL_STORAGE_DISABLED_USE_FIRESTORE")
+        return FirestoreAppStorage.from_workspace(workspace_root)
 
     def connect(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self.db_path)
