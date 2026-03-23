@@ -2653,6 +2653,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         def detect_schema(root: ET.Element, xml_text: str, path_values: Dict[str, List[str]]) -> Dict[str, str]:
             xml_lower = str(xml_text or "").lower()
+            xml_ascii = _to_ascii_text(xml_lower)
             root_name = local_tag(root.tag)
             namespace = ""
             root_tag = str(root.tag or "")
@@ -2678,6 +2679,13 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 or pick_first_path(path_values, ["ctieutkhaichinh_socuoinam_ct500", "socuoinam_ct500", "pluc_pl_kqhdxskd_namnay_ct07"])
             ):
                 document_type = "financial_statement"
+
+            # Fallback from raw XML text for robustness across unexpected path keys.
+            if document_type != "financial_statement":
+                if re.search(r"<\s*matkhai\s*>\s*686\s*<\s*/\s*matkhai\s*>", xml_lower):
+                    document_type = "financial_statement"
+                elif "bao cao tai chinh" in xml_ascii or re.search(r"\bbctc\b", xml_ascii):
+                    document_type = "financial_statement"
 
             invoice_type = "unknown"
             if "misa" in xml_lower or "amis" in xml_lower:
