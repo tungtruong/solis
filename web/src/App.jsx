@@ -1526,29 +1526,61 @@ function App() {
       ),
     )
 
-    const response = await fetch('/api/demo/ui-action', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: currentEmail || 'demo@wssmeas.local',
-        company_id: currentCompanyId || '',
-        action,
-        text,
-        case_id: caseId,
-        attachments: action === 'case_command' ? attachmentPayload : [],
-      }),
+    const requestBody = {
+      email: currentEmail || 'demo@wssmeas.local',
+      company_id: currentCompanyId || '',
+      action,
+      text,
+      case_id: caseId,
+      attachments: action === 'case_command' ? attachmentPayload : [],
+    }
+
+    const postUiAction = async (url) => {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      })
+      const payload = await response.json().catch(() => ({}))
+      return { response, payload }
+    }
+
+    const hasExcelAttachment = action === 'case_command' && attachmentPayload.some((file) => {
+      const name = String(file?.name || '').toLowerCase()
+      return name.endsWith('.xlsx') || name.endsWith('.xlsm')
     })
+
+    const isTaxMismatchMessage = (payload) => {
+      const detail = String(payload?.detail || payload?.message || '').toLowerCase()
+      return detail.includes('mã số thuế trên hóa đơn không thuộc công ty đang đăng nhập'.toLowerCase())
+    }
+
+    let { response, payload } = await postUiAction('/api/demo/ui-action')
+
+    if (
+      hasExcelAttachment
+      && (
+        response.status === 404
+        || isTaxMismatchMessage(payload)
+        || (response.ok && payload && payload.ok === false && isTaxMismatchMessage(payload))
+      )
+    ) {
+      const retry = await postUiAction('http://127.0.0.1:8000/api/demo/ui-action')
+      response = retry.response
+      payload = retry.payload
+    }
+
     if (!response.ok) {
       let detail = ''
       try {
-        const errorPayload = await response.json()
+        const errorPayload = payload && Object.keys(payload).length ? payload : await response.json()
         detail = String(errorPayload?.detail || errorPayload?.message || '').trim()
       } catch {
         detail = ''
       }
       throw new Error(detail || tr('Thao tác không thành công', 'Action failed'))
     }
-    return response.json()
+    return payload
   }
 
   async function reloadDemoCases(preferredCaseId = '') {
