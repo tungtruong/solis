@@ -911,6 +911,101 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             best_sheet_result = result
 
     if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
+        heuristic_rows: List[Dict[str, Any]] = []
+        heuristic_events: List[Dict[str, Any]] = []
+
+        for ws in workbook.worksheets:
+            for row in ws.iter_rows(min_row=1, max_row=1000, values_only=True):
+                cells = [cell for cell in row if str(cell or "").strip()]
+                if len(cells) < 2:
+                    continue
+
+                amount_candidates = [max(_coerce_sheet_number(cell), 0.0) for cell in cells]
+                amount_total = max(amount_candidates) if amount_candidates else 0.0
+                if amount_total <= 0:
+                    continue
+
+                date_value = ""
+                for cell in cells:
+                    parsed_date = parse_date_value(cell)
+                    if parsed_date:
+                        date_value = parsed_date
+                        break
+
+                text_cells: List[str] = []
+                for cell in cells:
+                    raw = str(cell or "").strip()
+                    if not raw:
+                        continue
+                    if parse_date_value(raw):
+                        continue
+                    if _coerce_sheet_number(raw) > 0:
+                        continue
+                    if len(raw) <= 1:
+                        continue
+                    text_cells.append(raw)
+
+                description = max(text_cells, key=len) if text_cells else "Nghiệp vụ từ bảng kê chứng từ"
+                reference_no = ""
+                for cell in cells:
+                    token = str(cell or "").strip()
+                    if re.fullmatch(r"[A-Za-z0-9\-_/]{3,40}", token):
+                        reference_no = token
+                        break
+                if not reference_no:
+                    reference_no = f"BK-AUTO-{len(heuristic_events) + 1:04d}"
+
+                counterparty_name = "Đối tác"
+                for token in text_cells:
+                    normalized = _normalize_header_token(token)
+                    if normalized in {"diengiai", "noidung", "ghichu", "description"}:
+                        continue
+                    if token != description:
+                        counterparty_name = token
+                        break
+
+                mapped = {
+                    "event_date": date_value,
+                    "reference_no": reference_no,
+                    "description": description,
+                    "counterparty_name": counterparty_name,
+                    "amount_total": amount_total,
+                    "amount_untaxed": 0.0,
+                    "vat_amount": 0.0,
+                }
+
+                event_payload = build_event(mapped, len(heuristic_events) + 1)
+                event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
+                event_amount = max(
+                    float(event.get("amount") or 0),
+                    float(event.get("amount_total") or 0),
+                    float(event.get("total_amount") or 0),
+                    float(event.get("amount_untaxed") or 0),
+                )
+                if event_amount <= 0:
+                    continue
+
+                heuristic_rows.append(
+                    {
+                        "event_date": mapped.get("event_date") or "",
+                        "reference_no": mapped.get("reference_no") or "",
+                        "counterparty_name": mapped.get("counterparty_name") or "",
+                        "description": mapped.get("description") or "",
+                        "event_type": event_payload.get("event_type"),
+                        "amount": float(round(amount_total)),
+                    }
+                )
+                heuristic_events.append(event_payload)
+
+        if heuristic_events or heuristic_rows:
+            return {
+                "events": heuristic_events,
+                "rows": heuristic_rows,
+                "issues": ["Đã dùng chế độ nhận diện linh hoạt vì không tìm thấy tiêu đề chuẩn trong bảng kê."],
+                "source": "xlsx",
+            }
+
+    if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
         return {
             "events": [],
             "rows": [],
