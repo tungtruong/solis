@@ -1789,19 +1789,32 @@ function App() {
         reader.readAsDataURL(voucherTestFile)
       })
 
-      const response = await fetch('/api/demo/voucher-test/import', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: currentEmail || 'demo@wssmeas.local',
-          company_id: currentCompanyId || '',
-          file_name: voucherTestFile.name,
-          content_base64: dataUrl,
-          auto_post: Boolean(autoPost),
-        }),
-      })
+      const requestBody = {
+        email: currentEmail || 'demo@wssmeas.local',
+        company_id: currentCompanyId || '',
+        file_name: voucherTestFile.name,
+        content_base64: dataUrl,
+        auto_post: Boolean(autoPost),
+      }
 
-      const payload = await response.json()
+      const postVoucherImport = async (url) => {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody),
+        })
+        const payload = await response.json().catch(() => ({}))
+        return { response, payload }
+      }
+
+      let { response, payload } = await postVoucherImport('/api/demo/voucher-test/import')
+      if (response.status === 404) {
+        const fallbackUrl = 'http://127.0.0.1:8000/api/demo/voucher-test/import'
+        const fallbackResult = await postVoucherImport(fallbackUrl)
+        response = fallbackResult.response
+        payload = fallbackResult.payload
+      }
+
       if (!response.ok) {
         throw new Error(String(payload?.detail || payload?.message || tr('Test bảng kê thất bại', 'Voucher test failed')))
       }
