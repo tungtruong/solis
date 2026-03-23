@@ -500,6 +500,14 @@ class OpeningBalancesImportXmlPayload(BaseModel):
     source_year: Optional[int] = None
 
 
+class VoucherSheetTestPayload(BaseModel):
+    email: str = "demo@wssmeas.local"
+    company_id: str = ""
+    file_name: str = ""
+    content_base64: str = ""
+    auto_post: bool = False
+
+
 def _extract_token(authorization: Optional[str]) -> str:
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="MISSING_BEARER_TOKEN")
@@ -2713,6 +2721,106 @@ def import_demo_opening_balances_from_bctc_xml(payload: OpeningBalancesImportXml
         "source_year": source_year,
         "target_year": target_year,
         "lines": lines,
+    }
+
+
+@app.post("/api/demo/voucher-test/import")
+def import_demo_voucher_sheet_for_test(payload: VoucherSheetTestPayload) -> Dict[str, Any]:
+    normalized_email = payload.email.lower().strip()
+    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
+    scoped_data_key = company_scope_key(resolved_company_id)
+
+    raw_base64 = str(payload.content_base64 or "")
+    if "," in raw_base64 and raw_base64.lower().startswith("data:"):
+        raw_base64 = raw_base64.split(",", 1)[1]
+
+    try:
+        content = base64.b64decode(raw_base64)
+    except (ValueError, binascii.Error):
+        raise HTTPException(status_code=400, detail="INVALID_BASE64_FILE")
+
+    parsed = _extract_voucher_events_from_workbook_bytes(content)
+    parsed_events = parsed.get("events") if isinstance(parsed.get("events"), list) else []
+    preview_rows = parsed.get("rows") if isinstance(parsed.get("rows"), list) else []
+    issues = [str(item) for item in (parsed.get("issues") if isinstance(parsed.get("issues"), list) else []) if str(item).strip()]
+
+    if not parsed_events:
+        return {
+            "ok": False,
+            "email": normalized_email,
+            "company_id": resolved_company_id,
+            "file_name": str(payload.file_name or "voucher_sheet.xlsx"),
+            "converted_count": 0,
+            "posted_count": 0,
+            "failed_count": 0,
+            "preview_rows": preview_rows,
+            "issues": issues or ["Không nhận diện được dòng nghiệp vụ nào trong bảng kê."],
+            "post_results": [],
+        }
+
+    post_results: List[Dict[str, Any]] = []
+    posted_count = 0
+    failed_count = 0
+    now = datetime.utcnow().isoformat() + "Z"
+    batch_tag = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+
+    if payload.auto_post:
+        for idx, entry in enumerate(parsed_events, start=1):
+            event = entry.get("event") if isinstance(entry.get("event"), dict) else {}
+            event_type = str(entry.get("event_type") or event.get("event_type") or "").strip()
+            if not event:
+                failed_count += 1
+                post_results.append(
+                    {
+                        "line_no": idx,
+                        "event_type": event_type,
+                        "accepted": False,
+                        "reason": "EMPTY_EVENT",
+                    }
+                )
+                continue
+
+            normalized_event = dict(event)
+            normalized_event["event_type"] = event_type or str(normalized_event.get("event_type") or "")
+            normalized_event["event_date"] = str(
+                normalized_event.get("statement_date")
+                or normalized_event.get("issue_date")
+                or normalized_event.get("event_date")
+                or datetime.utcnow().date().isoformat()
+            )
+            case_id = f"VTEST-{batch_tag}-{idx:03d}"
+            normalized_event["case_id"] = case_id
+
+            posting_result = posting_engine.post(normalized_event)
+            accepted = bool(posting_result.accepted and posting_result.journal_entry)
+            if accepted:
+                posted_count += 1
+                storage.upsert_case_event(scoped_data_key, case_id, normalized_event, now)
+            else:
+                failed_count += 1
+
+            post_results.append(
+                {
+                    "line_no": idx,
+                    "event_type": normalized_event.get("event_type"),
+                    "accepted": accepted,
+                    "reason": posting_result.reason,
+                    "entry_id": posting_result.journal_entry.get("entry_id") if posting_result.journal_entry else "",
+                }
+            )
+
+    return {
+        "ok": True,
+        "email": normalized_email,
+        "company_id": resolved_company_id,
+        "file_name": str(payload.file_name or "voucher_sheet.xlsx"),
+        "converted_count": len(parsed_events),
+        "posted_count": posted_count,
+        "failed_count": failed_count,
+        "preview_rows": preview_rows,
+        "issues": issues,
+        "post_results": post_results,
+        "auto_post": bool(payload.auto_post),
     }
 
 
