@@ -666,7 +666,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             return {
                 "event_type": "gop_von",
                 "event": {
-                    "source_id": "voucher_sheet_xlsx",
+                    "source_id": "bank_statement",
                     "event_type": "gop_von",
                     "statement_date": event_date,
                     "counterparty_name": counterparty_name,
@@ -682,7 +682,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             return {
                 "event_type": "nop_thue",
                 "event": {
-                    "source_id": "voucher_sheet_xlsx",
+                    "source_id": "bank_statement",
                     "event_type": "nop_thue",
                     "statement_date": event_date,
                     "counterparty_name": counterparty_name,
@@ -702,7 +702,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             return {
                 "event_type": "ban_hang_dich_vu",
                 "event": {
-                    "source_id": "voucher_sheet_xlsx",
+                    "source_id": "sales_invoice_xml",
                     "event_type": "ban_hang_dich_vu",
                     "invoice_no": reference_no,
                     "issue_date": event_date,
@@ -725,7 +725,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         return {
             "event_type": "mua_dich_vu",
             "event": {
-                "source_id": "voucher_sheet_xlsx",
+                "source_id": "purchase_invoice_xml",
                 "event_type": "mua_dich_vu",
                 "invoice_no": reference_no,
                 "issue_date": event_date,
