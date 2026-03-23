@@ -852,7 +852,15 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
                 header_row_idx = best_start_idx - 1
 
         if header_row_idx < 0:
-            return {"events": [], "rows": [], "score": 0, "sheet": str(getattr(worksheet, "title", ""))}
+            return {
+                "events": [],
+                "rows": [],
+                "score": 0,
+                "sheet": str(getattr(worksheet, "title", "")),
+                "header_row_index": 0,
+                "header_fields": [],
+                "scanned_rows": int(getattr(worksheet, "max_row", 0) or 0),
+            }
 
         parsed_rows: List[Dict[str, Any]] = []
         events: List[Dict[str, Any]] = []
@@ -934,13 +942,35 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             "rows": parsed_rows,
             "score": score,
             "sheet": str(getattr(worksheet, "title", "")),
+            "header_row_index": int(header_row_idx),
+            "header_fields": sorted(set(header_mapping.values())),
+            "scanned_rows": int(getattr(worksheet, "max_row", 0) or 0),
         }
 
+    sheet_results: List[Dict[str, Any]] = []
     best_sheet_result: Dict[str, Any] = {"events": [], "rows": [], "score": -1, "sheet": ""}
     for ws in workbook.worksheets:
         result = parse_sheet(ws)
+        sheet_results.append(result)
         if int(result.get("score") or -1) > int(best_sheet_result.get("score") or -1):
             best_sheet_result = result
+
+    diagnostics = {
+        "workbook_sheet_count": len(workbook.worksheets),
+        "sheet_summaries": [
+            {
+                "sheet": str(item.get("sheet") or ""),
+                "score": int(item.get("score") or 0),
+                "events": len(item.get("events") or []),
+                "rows": len(item.get("rows") or []),
+                "scanned_rows": int(item.get("scanned_rows") or 0),
+                "header_row_index": int(item.get("header_row_index") or 0),
+                "header_fields": list(item.get("header_fields") or []),
+            }
+            for item in sheet_results
+        ],
+        "selected_sheet": str(best_sheet_result.get("sheet") or ""),
+    }
 
     if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
         heuristic_rows: List[Dict[str, Any]] = []
@@ -1035,6 +1065,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
                 "rows": heuristic_rows,
                 "issues": ["Đã dùng chế độ nhận diện linh hoạt vì không tìm thấy tiêu đề chuẩn trong bảng kê."],
                 "source": "xlsx",
+                "diagnostics": diagnostics,
             }
 
     if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
@@ -1043,6 +1074,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             "rows": [],
             "issues": ["Không tìm thấy dòng tiêu đề hợp lệ trong bảng kê chứng từ."],
             "source": "xlsx",
+            "diagnostics": diagnostics,
         }
 
     return {
@@ -1050,6 +1082,7 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         "rows": best_sheet_result.get("rows", []),
         "issues": [],
         "source": "xlsx",
+        "diagnostics": diagnostics,
     }
 
 
@@ -2959,6 +2992,7 @@ def import_demo_voucher_sheet_for_test(payload: VoucherSheetTestPayload) -> Dict
     parsed_events = parsed.get("events") if isinstance(parsed.get("events"), list) else []
     preview_rows = parsed.get("rows") if isinstance(parsed.get("rows"), list) else []
     issues = [str(item) for item in (parsed.get("issues") if isinstance(parsed.get("issues"), list) else []) if str(item).strip()]
+    diagnostics = parsed.get("diagnostics") if isinstance(parsed.get("diagnostics"), dict) else {}
 
     if not parsed_events:
         return {
@@ -2971,6 +3005,7 @@ def import_demo_voucher_sheet_for_test(payload: VoucherSheetTestPayload) -> Dict
             "failed_count": 0,
             "preview_rows": preview_rows,
             "issues": issues or ["Không nhận diện được dòng nghiệp vụ nào trong bảng kê."],
+            "diagnostics": diagnostics,
             "post_results": [],
         }
 
@@ -3035,6 +3070,7 @@ def import_demo_voucher_sheet_for_test(payload: VoucherSheetTestPayload) -> Dict
         "failed_count": failed_count,
         "preview_rows": preview_rows,
         "issues": issues,
+        "diagnostics": diagnostics,
         "post_results": post_results,
         "auto_post": bool(payload.auto_post),
     }
