@@ -807,6 +807,45 @@ function App() {
     setIsUserMenuOpen(false)
   }, [])
 
+  const selectActiveCompany = useCallback(async (companyId) => {
+    const normalizedCompanyId = String(companyId || '').trim()
+    if (!normalizedCompanyId) return
+
+    const token = String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || '')
+    if (!token) {
+      setActionNotice(tr('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.', 'Session has expired. Please sign in again.'))
+      return
+    }
+
+    try {
+      const response = await fetch('/api/onboard/select-company', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ company_id: normalizedCompanyId }),
+      })
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok || !payload?.selected) {
+        throw new Error(tr('Không chọn được công ty', 'Could not switch company'))
+      }
+
+      const profile = payload?.profile && typeof payload.profile === 'object' ? payload.profile : {}
+      const nextCompanyId = String(profile.company_id || normalizedCompanyId)
+      const nextCompanyName = String(profile.company_name || nextCompanyId)
+      setCurrentCompanyId(nextCompanyId)
+      setCurrentCompanyName(nextCompanyName)
+      window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, nextCompanyId)
+      window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, nextCompanyName)
+      setCompanyEditForm((prev) => ({ ...prev, ...profile }))
+      setIsUserMenuOpen(false)
+      setActionNotice(`${tr('Đã chuyển sang công ty', 'Switched to company')}: ${nextCompanyName}`)
+    } catch (error) {
+      setActionNotice(error.message || tr('Không chọn được công ty', 'Could not switch company'))
+    }
+  }, [tr])
+
   const handleWorkspaceLogout = useCallback(() => {
     setIsUserMenuOpen(false)
     window.sessionStorage.setItem('solis.auth.hasCompanyProfile', 'false')
@@ -1990,6 +2029,26 @@ function App() {
               <div className="user-menu-dropdown">
                 <p className="user-menu-title">{currentCompanyName || tr('Công ty hiện tại', 'Current company')}</p>
                 <p className="user-menu-subtitle">{currentEmail || tr('Đang tải tài khoản', 'Loading account')}</p>
+                {companyChoices.length ? (
+                  <>
+                    <p className="user-menu-subtitle">{tr('Danh sách công ty', 'Company list')}</p>
+                    {companyChoices.map((item) => {
+                      const companyId = String(item?.company_id || '')
+                      const companyName = String(item?.company_name || companyId || tr('Không rõ tên', 'Unnamed'))
+                      const isActive = companyId && companyId === String(currentCompanyId || '')
+                      return (
+                        <button
+                          key={companyId || companyName}
+                          type="button"
+                          className={isActive ? 'user-menu-btn active' : 'user-menu-btn'}
+                          onClick={() => selectActiveCompany(companyId)}
+                        >
+                          {isActive ? `✓ ${companyName}` : companyName}
+                        </button>
+                      )
+                    })}
+                  </>
+                ) : null}
                 <button type="button" className="user-menu-btn" onClick={openCompanyEditModal}>
                   {tr('Sửa thông tin công ty', 'Edit company profile')}
                 </button>
