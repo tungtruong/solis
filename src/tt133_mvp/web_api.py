@@ -4859,6 +4859,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "role": "system",
                 "title": "Yêu cầu xác nhận",
                 "body": confirm_body,
+                "table_rows": parse_table_rows,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
         ]
