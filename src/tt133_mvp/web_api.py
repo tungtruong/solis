@@ -4591,8 +4591,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         attachment_count = len(payload.attachments)
+        excel_suffixes = {".xlsx", ".xlsm"}
         has_voucher_sheet_attachment = any(
-            Path(str(item.name or "")).suffix.lower() in {".xlsx", ".xlsm"}
+            Path(str(item.name or "")).suffix.lower() in excel_suffixes
             for item in payload.attachments
         )
         staged_attachments = save_case_attachments_to_staging(case_id, payload.attachments)
@@ -4605,7 +4606,13 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         voucher_batch_issues = voucher_batch.get("issues") if isinstance(voucher_batch.get("issues"), list) else []
         company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
         parse_warnings = parse_meta.get("warnings") if isinstance(parse_meta.get("warnings"), list) else []
-        tax_match_ok = bool(company_validation.get("is_tax_code_match")) or bool(voucher_batch_events) or has_voucher_sheet_attachment
+        has_excel_in_staged_names = any(Path(str(name or "")).suffix.lower() in excel_suffixes for name in staged_attachment_names)
+        tax_match_ok = (
+            bool(company_validation.get("is_tax_code_match"))
+            or bool(voucher_batch_events)
+            or has_voucher_sheet_attachment
+            or has_excel_in_staged_names
+        )
         blocking_reason = str(company_validation.get("blocking_reason") or "").strip()
 
         if not tax_match_ok:
