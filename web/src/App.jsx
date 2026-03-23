@@ -1815,6 +1815,15 @@ function App() {
         payload = fallbackResult.payload
       }
 
+      const convertedCount = Number(payload?.converted_count || 0)
+      const payloadIssues = Array.isArray(payload?.issues) ? payload.issues.map((item) => String(item || '')) : []
+      const shouldRetryLocalOnZero = response.ok && convertedCount <= 0 && payloadIssues.some((item) => item.toLowerCase().includes('không tìm thấy dòng tiêu đề hợp lệ'))
+      if (shouldRetryLocalOnZero) {
+        const retryLocal = await postVoucherImport('http://127.0.0.1:8000/api/demo/voucher-test/import')
+        response = retryLocal.response
+        payload = retryLocal.payload
+      }
+
       const deniedDetail = String(payload?.detail || payload?.message || '').trim()
       if (!response.ok && deniedDetail === 'COMPANY_ACCESS_DENIED') {
         const fallbackBody = { ...requestBody, company_id: '' }
