@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "source": "TT133 MVP validation baseline",
+  "total_items": 10,
+  "items": [
+    {
+      "validation_id": "TT133_MVP_VAL_001",
+      "name": "Balanced Entry",
+      "description": "Tong No phai bang Tong Co cho moi but toan.",
+      "severity": "error",
+      "applies_to": "journal_entry"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_002",
+      "name": "Account Exists In TT133 COA",
+      "description": "Moi tai khoan su dung phai ton tai trong danh muc tai khoan TT133.",
+      "severity": "error",
+      "applies_to": "journal_line"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_003",
+      "name": "Advance Recipient Required",
+      "description": "Giao dich tam_ung bat buoc co thong tin nguoi nhan tam ung.",
+      "severity": "error",
+      "applies_to": "event"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_004",
+      "name": "Reimbursement By Money Only",
+      "description": "Giao dich hoan_ung chi cho phep thanh toan qua 111 hoac 112.",
+      "severity": "error",
+      "applies_to": "event"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_005",
+      "name": "VAT Coherence",
+      "description": "Neu has_vat=true thi bat buoc co vat_amount va untaxed_amount hop le.",
+      "severity": "error",
+      "applies_to": "vat_related_transaction"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_006",
+      "name": "Transfer Direction Valid",
+      "description": "rut_tien bat buoc co from_account va to_account thuoc cap 111/112.",
+      "severity": "error",
+      "applies_to": "event"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_007",
+      "name": "CCDC Threshold Rule",
+      "description": "CCDC khi amount > 3000000 va useful_life_months > 12.",
+      "severity": "error",
+      "applies_to": "classification"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_008",
+      "name": "Prepaid Service Threshold Rule",
+      "description": "Chi phi tra truoc khi amount > 3000000 va service_term_months > 12.",
+      "severity": "error",
+      "applies_to": "classification"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_009",
+      "name": "CCDC Allocation Source",
+      "description": "phan_bo_ccdc chi duoc ghi nhan khi co so du 242 hop le tu CCDC.",
+      "severity": "error",
+      "applies_to": "allocation"
+    },
+    {
+      "validation_id": "TT133_MVP_VAL_010",
+      "name": "Prepaid Allocation Source",
+      "description": "phan_bo_chi_phi_tra_truoc chi duoc ghi nhan khi co so du 242 hop le.",
+      "severity": "error",
+      "applies_to": "allocation"
+    }
+  ]
+}

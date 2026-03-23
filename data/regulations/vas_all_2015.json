@@ -1,0 +1,3759 @@
+{
+  "schema_version": "2.0-law-first",
+  "file_id": "vas_all_2015_event_rule_mapping",
+  "law_source": {
+    "primary_source": "Hệ thống Chuẩn mực Kế toán Việt Nam (VAS)",
+    "standards_used": [
+      "VAS 01",
+      "VAS 02",
+      "VAS 03",
+      "VAS 04",
+      "VAS 06",
+      "VAS 10",
+      "VAS 14",
+      "VAS 15",
+      "VAS 16",
+      "VAS 24"
+    ],
+    "core_decision": "165/2002/QD-BTC"
+  },
+  "generated_by": {
+    "requested_model": "gpt-5-mini",
+    "executed_by": "GPT-5.3-Codex",
+    "method": "Trích xuất luật trước, sau đó ánh xạ sự kiện và hệ thống tài khoản",
+    "generated_at": "2026-03-15T01:24:48+07:00"
+  },
+  "mapping_principles": [
+    "Trích xuất các quy tắc được nêu rõ từ văn bản VAS trước",
+    "Ánh xạ từng economic event type vào các quy tắc VAS đã trích xuất",
+    "Ràng buộc phạm vi tài khoản bằng hệ thống tài khoản TT200",
+    "Không ép cặp bút toán Nợ/Có khi VAS không quy định rõ nghiệp vụ hạch toán"
+  ],
+  "total_extracted_vas_rules": 24,
+  "total_event_types": 92,
+  "total_rules": 92,
+  "vas_rule_catalog": [
+    {
+      "rule_key": "accrual_basis_recognition",
+      "standard": "VAS 01",
+      "clause": "Đoạn 03",
+      "source_quote": "Mọi nghiệp vụ kinh tế, tài chính phải ghi sổ tại thời điểm phát sinh.",
+      "rule_type": "timing_principle",
+      "business_meaning": "Ghi nhận nghiệp vụ theo cơ sở dồn tích tại thời điểm phát sinh."
+    },
+    {
+      "rule_key": "historical_cost_measurement",
+      "standard": "VAS 01",
+      "clause": "Đoạn 05",
+      "source_quote": "Tài sản phải được ghi nhận theo giá gốc.",
+      "rule_type": "measurement_principle",
+      "business_meaning": "Ghi nhận tài sản theo giá gốc, trừ khi chuẩn mực cụ thể quy định khác."
+    },
+    {
+      "rule_key": "matching_revenue_expenses",
+      "standard": "VAS 01",
+      "clause": "Đoạn 06",
+      "source_quote": "Ghi nhận doanh thu và chi phí phải phù hợp với nhau.",
+      "rule_type": "principle",
+      "business_meaning": "Chi phí liên quan phải được ghi nhận phù hợp với doanh thu tương ứng."
+    },
+    {
+      "rule_key": "prudence_provisions",
+      "standard": "VAS 01",
+      "clause": "Đoạn 08",
+      "source_quote": "Phải lập các khoản dự phòng nhưng không lập quá lớn.",
+      "rule_type": "principle",
+      "business_meaning": "Áp dụng nguyên tắc thận trọng khi ước tính và trích lập dự phòng."
+    },
+    {
+      "rule_key": "recognition_criteria_probable_reliable",
+      "standard": "VAS 01",
+      "clause": "Đoạn 39-40",
+      "source_quote": "Chỉ ghi nhận khi lợi ích kinh tế có khả năng chắc chắn và giá trị xác định đáng tin cậy.",
+      "rule_type": "recognition_criteria",
+      "business_meaning": "Chỉ ghi nhận khoản mục khi thỏa điều kiện về khả năng thu lợi ích kinh tế và đo lường đáng tin cậy."
+    },
+    {
+      "rule_key": "lease_classification_finance_or_operating",
+      "standard": "VAS 06",
+      "clause": "Đoạn 06-07",
+      "source_quote": "Phân loại thuê tài sản thành thuê tài chính hoặc thuê hoạt động.",
+      "rule_type": "classification",
+      "business_meaning": "Phân loại thuê theo mức độ chuyển giao rủi ro và lợi ích."
+    },
+    {
+      "rule_key": "lease_finance_recognition_asset_liability",
+      "standard": "VAS 06",
+      "clause": "Đoạn 13",
+      "source_quote": "Bên thuê ghi nhận tài sản thuê tài chính và nợ phải trả với cùng một giá trị.",
+      "rule_type": "recognition",
+      "business_meaning": "Ghi nhận thuê tài chính đồng thời vào tài sản và nợ phải trả tại thời điểm khởi đầu thuê."
+    },
+    {
+      "rule_key": "lease_payment_split_principal_interest",
+      "standard": "VAS 06",
+      "clause": "Đoạn 16",
+      "source_quote": "Khoản thanh toán tiền thuê tài chính phải chia thành chi phí tài chính và nợ gốc.",
+      "rule_type": "measurement",
+      "business_meaning": "Phân bổ dòng tiền thuê thành phần gốc và phần chi phí tài chính theo kỳ."
+    },
+    {
+      "rule_key": "foreign_currency_initial_rate",
+      "standard": "VAS 10",
+      "clause": "Đoạn 08-09",
+      "source_quote": "Giao dịch ngoại tệ ghi nhận ban đầu theo tỷ giá tại ngày giao dịch.",
+      "rule_type": "measurement",
+      "business_meaning": "Ghi nhận ban đầu giao dịch ngoại tệ theo tỷ giá giao dịch thực tế tại ngày phát sinh."
+    },
+    {
+      "rule_key": "exchange_difference_treatment",
+      "standard": "VAS 10",
+      "clause": "Đoạn 12-13",
+      "source_quote": "Chênh lệch tỷ giá được xử lý vào kết quả kinh doanh hoặc vốn hóa theo từng trường hợp.",
+      "rule_type": "recognition",
+      "business_meaning": "Ghi nhận chênh lệch tỷ giá theo bối cảnh nghiệp vụ; chỉ vốn hóa khi đủ điều kiện."
+    },
+    {
+      "rule_key": "construction_percentage_of_completion",
+      "standard": "VAS 15",
+      "clause": "Đoạn 22-25",
+      "source_quote": "Doanh thu và chi phí hợp đồng xây dựng được ghi nhận theo phần công việc đã hoàn thành.",
+      "rule_type": "recognition_timing",
+      "business_meaning": "Ghi nhận doanh thu/chi phí xây dựng theo phương pháp tỷ lệ hoàn thành."
+    },
+    {
+      "rule_key": "construction_fixed_price_conditions",
+      "standard": "VAS 15",
+      "clause": "Đoạn 23",
+      "source_quote": "Hợp đồng giá cố định chỉ ghi nhận khi đáp ứng đủ điều kiện ước tính đáng tin cậy.",
+      "rule_type": "recognition_criteria",
+      "business_meaning": "Hợp đồng xây dựng giá cố định phải đáp ứng điều kiện đo lường đáng tin cậy trước khi ghi nhận."
+    },
+    {
+      "rule_key": "borrowing_cost_general_expense",
+      "standard": "VAS 16",
+      "clause": "Đoạn 06-08",
+      "source_quote": "Chi phí đi vay ghi nhận vào chi phí trong kỳ, trừ phần được vốn hóa theo quy định.",
+      "rule_type": "recognition",
+      "business_meaning": "Nguyên tắc chung: chi phí đi vay được ghi nhận vào chi phí, ngoại trừ phần đủ điều kiện vốn hóa."
+    },
+    {
+      "rule_key": "borrowing_cost_capitalization_conditions",
+      "standard": "VAS 16",
+      "clause": "Đoạn 13",
+      "source_quote": "Vốn hóa chi phí đi vay khi đồng thời phát sinh chi phí đầu tư, chi phí đi vay và hoạt động chuẩn bị tài sản.",
+      "rule_type": "recognition_criteria",
+      "business_meaning": "Chỉ vốn hóa chi phí đi vay khi đáp ứng đầy đủ điều kiện của chuẩn mực."
+    },
+    {
+      "rule_key": "cash_flow_classification_required",
+      "standard": "VAS 24",
+      "clause": "Nội dung chuẩn mực",
+      "source_quote": "Báo cáo lưu chuyển tiền tệ yêu cầu phân loại dòng tiền theo hoạt động kinh doanh, đầu tư và tài chính.",
+      "rule_type": "presentation",
+      "business_meaning": "Dòng tiền phải được phân loại phục vụ lập Báo cáo lưu chuyển tiền tệ."
+    },
+    {
+      "rule_key": "inventory_lower_of_cost_or_nrv",
+      "standard": "VAS 02",
+      "clause": "Đoạn 04",
+      "source_quote": "Hàng tồn kho theo giá gốc; nếu giá trị thuần có thể thực hiện thấp hơn thì ghi theo giá trị thuần.",
+      "rule_type": "measurement",
+      "business_meaning": "Đo lường hàng tồn kho theo nguyên tắc giá thấp hơn giữa giá gốc và giá trị thuần có thể thực hiện."
+    },
+    {
+      "rule_key": "inventory_cost_components",
+      "standard": "VAS 02",
+      "clause": "Đoạn 05-12",
+      "source_quote": "Giá gốc hàng tồn kho gồm chi phí mua, chi phí chế biến và chi phí liên quan trực tiếp.",
+      "rule_type": "measurement",
+      "business_meaning": "Xác định giá gốc hàng tồn kho theo đầy đủ các thành phần chi phí theo chuẩn mực."
+    },
+    {
+      "rule_key": "inventory_fixed_overhead_normal_capacity",
+      "standard": "VAS 02",
+      "clause": "Đoạn 08",
+      "source_quote": "Chi phí sản xuất chung cố định phân bổ theo công suất bình thường.",
+      "rule_type": "measurement",
+      "business_meaning": "Phân bổ chi phí sản xuất chung cố định dựa trên công suất bình thường."
+    },
+    {
+      "rule_key": "fixed_asset_recognition_criteria",
+      "standard": "VAS 03",
+      "clause": "Đoạn 06",
+      "source_quote": "Tài sản cố định hữu hình chỉ được ghi nhận khi đáp ứng đủ tiêu chuẩn ghi nhận.",
+      "rule_type": "recognition_criteria",
+      "business_meaning": "Ghi nhận tài sản cố định hữu hình khi thỏa đồng thời các điều kiện của chuẩn mực."
+    },
+    {
+      "rule_key": "fixed_asset_initial_cost_components",
+      "standard": "VAS 03",
+      "clause": "Đoạn 14",
+      "source_quote": "Nguyên giá tài sản cố định mua sắm gồm giá mua, thuế và chi phí liên quan trực tiếp.",
+      "rule_type": "measurement",
+      "business_meaning": "Xác định nguyên giá tài sản cố định theo đầy đủ các thành phần chi phí trực tiếp."
+    },
+    {
+      "rule_key": "fixed_asset_systematic_depreciation",
+      "standard": "VAS 03",
+      "clause": "Đoạn 29-32",
+      "source_quote": "Giá trị phải khấu hao được phân bổ có hệ thống trong thời gian sử dụng hữu ích.",
+      "rule_type": "measurement",
+      "business_meaning": "Thực hiện khấu hao có hệ thống phù hợp mô hình tiêu dùng lợi ích kinh tế của tài sản."
+    },
+    {
+      "rule_key": "intangible_research_expensed",
+      "standard": "VAS 04",
+      "clause": "Đoạn 38-39",
+      "source_quote": "Chi phí giai đoạn nghiên cứu không ghi nhận là tài sản vô hình mà ghi nhận vào chi phí trong kỳ.",
+      "rule_type": "recognition",
+      "business_meaning": "Toàn bộ chi phí nghiên cứu phải hạch toán chi phí trong kỳ, không vốn hóa."
+    },
+    {
+      "rule_key": "intangible_development_capitalization_conditions",
+      "standard": "VAS 04",
+      "clause": "Đoạn 40",
+      "source_quote": "Chi phí giai đoạn triển khai chỉ được ghi nhận tài sản vô hình khi đáp ứng đủ điều kiện.",
+      "rule_type": "recognition_criteria",
+      "business_meaning": "Vốn hóa chi phí triển khai khi đáp ứng đầy đủ tiêu chí ghi nhận tài sản vô hình."
+    },
+    {
+      "rule_key": "revenue_fair_value_net_discounts",
+      "standard": "VAS 14",
+      "clause": "Đoạn 05-07",
+      "source_quote": "Doanh thu xác định theo giá trị hợp lý của khoản đã thu hoặc sẽ thu sau khi trừ chiết khấu, giảm giá.",
+      "rule_type": "measurement",
+      "business_meaning": "Đo lường doanh thu theo giá trị hợp lý ròng sau các khoản giảm trừ doanh thu."
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "VAS2015_capital_contribution_committed",
+      "event_code": "capital_contribution_committed",
+      "event_name": "Capital Contribution Committed",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_capital_contribution_received",
+      "event_code": "capital_contribution_received",
+      "event_name": "Capital Contribution Received",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_capital_contribution_returned",
+      "event_code": "capital_contribution_returned",
+      "event_name": "Capital Contribution Returned",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_share_premium_recorded",
+      "event_code": "share_premium_recorded",
+      "event_name": "Share Premium Recorded",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_treasury_shares_acquired",
+      "event_code": "treasury_shares_acquired",
+      "event_name": "Treasury Shares Acquired",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_treasury_shares_reissued",
+      "event_code": "treasury_shares_reissued",
+      "event_name": "Treasury Shares Reissued",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_dividend_declared",
+      "event_code": "dividend_declared",
+      "event_name": "Dividend Declared",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_dividend_paid",
+      "event_code": "dividend_paid",
+      "event_name": "Dividend Paid",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_profit_allocated",
+      "event_code": "profit_allocated",
+      "event_name": "Profit Allocated",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_retained_earnings_adjusted",
+      "event_code": "retained_earnings_adjusted",
+      "event_name": "Retained Earnings Adjusted",
+      "category": "Capital & Equity",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "411",
+          "418",
+          "421",
+          "419"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_loan_received",
+      "event_code": "loan_received",
+      "event_name": "Loan Received",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_loan_repaid",
+      "event_code": "loan_repaid",
+      "event_name": "Loan Repaid",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_interest_accrued",
+      "event_code": "interest_accrued",
+      "event_name": "Interest Accrued",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense",
+        "borrowing_cost_capitalization_conditions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08",
+        "VAS 16 - Đoạn 13"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": false
+      },
+      "posting_template": {
+        "debit_account_template": "635",
+        "credit_account_template": "335"
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": false,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_interest_paid",
+      "event_code": "interest_paid",
+      "event_name": "Interest Paid",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense",
+        "borrowing_cost_capitalization_conditions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08",
+        "VAS 16 - Đoạn 13"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": false
+      },
+      "posting_template": {
+        "debit_account_template": "335/635",
+        "credit_account_template": "111/112"
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": false,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_borrowing_cost_capitalized",
+      "event_code": "borrowing_cost_capitalized",
+      "event_name": "Borrowing Cost Capitalized",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense",
+        "borrowing_cost_capitalization_conditions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08",
+        "VAS 16 - Đoạn 13"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": false
+      },
+      "posting_template": {
+        "debit_account_template": "241",
+        "credit_account_template": "335/341"
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": false,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_bond_issued",
+      "event_code": "bond_issued",
+      "event_name": "Bond Issued",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_bond_redeemed",
+      "event_code": "bond_redeemed",
+      "event_name": "Bond Redeemed",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_lease_liability_recognized",
+      "event_code": "lease_liability_recognized",
+      "event_name": "Lease Liability Recognized",
+      "category": "Financing & Borrowings",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "borrowing_cost_general_expense",
+        "lease_classification_finance_or_operating",
+        "lease_finance_recognition_asset_liability",
+        "lease_payment_split_principal_interest"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 16 - Đoạn 06-08",
+        "VAS 06 - Đoạn 06-07",
+        "VAS 06 - Đoạn 13",
+        "VAS 06 - Đoạn 16"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "341",
+          "343",
+          "635",
+          "335",
+          "241"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": false
+      },
+      "posting_template": {
+        "debit_account_template": "212",
+        "credit_account_template": "3412"
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": false,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payment_received",
+      "event_code": "payment_received",
+      "event_name": "Payment Received",
+      "category": "Payments & Cash Movement",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "111",
+          "112",
+          "113"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payment_made",
+      "event_code": "payment_made",
+      "event_name": "Payment Made",
+      "category": "Payments & Cash Movement",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "111",
+          "112",
+          "113"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_fund_transfer",
+      "event_code": "fund_transfer",
+      "event_name": "Fund Transfer",
+      "category": "Payments & Cash Movement",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "111",
+          "112",
+          "113"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_receivable_recognized",
+      "event_code": "receivable_recognized",
+      "event_name": "Receivable Recognized",
+      "category": "Accounts Receivable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "131",
+          "2293",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_receivable_written_off",
+      "event_code": "receivable_written_off",
+      "event_name": "Receivable Written Off",
+      "category": "Accounts Receivable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "131",
+          "2293",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_receivable_provision_recorded",
+      "event_code": "receivable_provision_recorded",
+      "event_name": "Receivable Provision Recorded",
+      "category": "Accounts Receivable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "131",
+          "2293",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_receivable_provision_reversed",
+      "event_code": "receivable_provision_reversed",
+      "event_name": "Receivable Provision Reversed",
+      "category": "Accounts Receivable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "131",
+          "2293",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_receivable_settled",
+      "event_code": "receivable_settled",
+      "event_name": "Receivable Settled",
+      "category": "Accounts Receivable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "131",
+          "2293",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_customer_advance_received",
+      "event_code": "customer_advance_received",
+      "event_name": "Customer Advance Received",
+      "category": "Accounts Receivable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "131",
+          "2293",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payable_recognized",
+      "event_code": "payable_recognized",
+      "event_name": "Payable Recognized",
+      "category": "Accounts Payable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "331",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payable_written_off",
+      "event_code": "payable_written_off",
+      "event_name": "Payable Written Off",
+      "category": "Accounts Payable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "331",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payable_settled",
+      "event_code": "payable_settled",
+      "event_name": "Payable Settled",
+      "category": "Accounts Payable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "331",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_supplier_advance_paid",
+      "event_code": "supplier_advance_paid",
+      "event_name": "Supplier Advance Paid",
+      "category": "Accounts Payable",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "331",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_revenue_recognized",
+      "event_code": "revenue_recognized",
+      "event_name": "Revenue Recognized",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_revenue_accrued",
+      "event_code": "revenue_accrued",
+      "event_name": "Revenue Accrued",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_revenue_deferred",
+      "event_code": "revenue_deferred",
+      "event_name": "Revenue Deferred",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_deferred_revenue_recognized",
+      "event_code": "deferred_revenue_recognized",
+      "event_name": "Deferred Revenue Recognized",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_sales_returned",
+      "event_code": "sales_returned",
+      "event_name": "Sales Returned",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_sales_discount_given",
+      "event_code": "sales_discount_given",
+      "event_name": "Sales Discount Given",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_promotional_goods_issued",
+      "event_code": "promotional_goods_issued",
+      "event_name": "Promotional Goods Issued",
+      "category": "Revenue",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "revenue_fair_value_net_discounts"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 14 - Đoạn 05-07"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "511",
+          "521",
+          "3387",
+          "131",
+          "111",
+          "112"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_purchase_recognized",
+      "event_code": "purchase_recognized",
+      "event_name": "Purchase Recognized",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_purchase_returned",
+      "event_code": "purchase_returned",
+      "event_name": "Purchase Returned",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_purchase_discount_received",
+      "event_code": "purchase_discount_received",
+      "event_name": "Purchase Discount Received",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_expense_incurred",
+      "event_code": "expense_incurred",
+      "event_name": "Expense Incurred",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_expense_accrued",
+      "event_code": "expense_accrued",
+      "event_name": "Expense Accrued",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_expense_prepaid",
+      "event_code": "expense_prepaid",
+      "event_name": "Expense Prepaid",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_prepaid_expense_amortized",
+      "event_code": "prepaid_expense_amortized",
+      "event_name": "Prepaid Expense Amortized",
+      "category": "Purchases & Expenses",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "156",
+          "242",
+          "627",
+          "641",
+          "642",
+          "335"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_received",
+      "event_code": "inventory_received",
+      "event_name": "Inventory Received",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_issued",
+      "event_code": "inventory_issued",
+      "event_name": "Inventory Issued",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_transferred",
+      "event_code": "inventory_transferred",
+      "event_name": "Inventory Transferred",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_adjusted",
+      "event_code": "inventory_adjusted",
+      "event_name": "Inventory Adjusted",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_reserved",
+      "event_code": "inventory_reserved",
+      "event_name": "Inventory Reserved",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_released",
+      "event_code": "inventory_released",
+      "event_name": "Inventory Released",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_written_down",
+      "event_code": "inventory_written_down",
+      "event_name": "Inventory Written Down",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_counted",
+      "event_code": "inventory_counted",
+      "event_name": "Inventory Counted",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_inventory_shrinkage_recorded",
+      "event_code": "inventory_shrinkage_recorded",
+      "event_name": "Inventory Shrinkage Recorded",
+      "category": "Inventory",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_lower_of_cost_or_nrv",
+        "inventory_cost_components"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 04",
+        "VAS 02 - Đoạn 05-12"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "152",
+          "153",
+          "155",
+          "156",
+          "2294",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_production_started",
+      "event_code": "production_started",
+      "event_name": "Production Started",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_raw_material_issued_to_production",
+      "event_code": "raw_material_issued_to_production",
+      "event_name": "Raw Material Issued To Production",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_production_cost_accumulated",
+      "event_code": "production_cost_accumulated",
+      "event_name": "Production Cost Accumulated",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity",
+        "construction_percentage_of_completion",
+        "construction_fixed_price_conditions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08",
+        "VAS 15 - Đoạn 22-25",
+        "VAS 15 - Đoạn 23"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_work_in_progress_recorded",
+      "event_code": "work_in_progress_recorded",
+      "event_name": "Work In Progress Recorded",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity",
+        "construction_percentage_of_completion",
+        "construction_fixed_price_conditions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08",
+        "VAS 15 - Đoạn 22-25",
+        "VAS 15 - Đoạn 23"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_finished_goods_completed",
+      "event_code": "finished_goods_completed",
+      "event_name": "Finished Goods Completed",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_cost_of_goods_sold_recognized",
+      "event_code": "cost_of_goods_sold_recognized",
+      "event_name": "Cost Of Goods Sold Recognized",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_overhead_allocated",
+      "event_code": "overhead_allocated",
+      "event_name": "Overhead Allocated",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_cost_variance_recorded",
+      "event_code": "cost_variance_recorded",
+      "event_name": "Cost Variance Recorded",
+      "category": "Production & Costing",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "inventory_fixed_overhead_normal_capacity"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 02 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "154",
+          "621",
+          "622",
+          "627",
+          "155",
+          "632"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_fixed_asset_acquired",
+      "event_code": "fixed_asset_acquired",
+      "event_name": "Fixed Asset Acquired",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_fixed_asset_constructed",
+      "event_code": "fixed_asset_constructed",
+      "event_name": "Fixed Asset Constructed",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation",
+        "construction_percentage_of_completion",
+        "construction_fixed_price_conditions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32",
+        "VAS 15 - Đoạn 22-25",
+        "VAS 15 - Đoạn 23"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_put_into_use",
+      "event_code": "asset_put_into_use",
+      "event_name": "Asset Put Into Use",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_depreciation_recorded",
+      "event_code": "depreciation_recorded",
+      "event_name": "Depreciation Recorded",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": false
+      },
+      "posting_template": {
+        "debit_account_template": "627/641/642",
+        "credit_account_template": "214"
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": false,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_impairment_recorded",
+      "event_code": "asset_impairment_recorded",
+      "event_name": "Asset Impairment Recorded",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_revalued",
+      "event_code": "asset_revalued",
+      "event_name": "Asset Revalued",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_component_replaced",
+      "event_code": "asset_component_replaced",
+      "event_name": "Asset Component Replaced",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_transferred",
+      "event_code": "asset_transferred",
+      "event_name": "Asset Transferred",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_disposed",
+      "event_code": "asset_disposed",
+      "event_name": "Asset Disposed",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_asset_derecognized",
+      "event_code": "asset_derecognized",
+      "event_name": "Asset Derecognized",
+      "category": "Fixed Assets",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "fixed_asset_recognition_criteria",
+        "fixed_asset_initial_cost_components",
+        "fixed_asset_systematic_depreciation"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 03 - Đoạn 06",
+        "VAS 03 - Đoạn 14",
+        "VAS 03 - Đoạn 29-32"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "211",
+          "214",
+          "241",
+          "811",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_investment_acquired",
+      "event_code": "investment_acquired",
+      "event_name": "Investment Acquired",
+      "category": "Investments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "121",
+          "128",
+          "221",
+          "228",
+          "515",
+          "635",
+          "229"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_investment_sold",
+      "event_code": "investment_sold",
+      "event_name": "Investment Sold",
+      "category": "Investments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "121",
+          "128",
+          "221",
+          "228",
+          "515",
+          "635",
+          "229"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_investment_income_recognized",
+      "event_code": "investment_income_recognized",
+      "event_name": "Investment Income Recognized",
+      "category": "Investments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "121",
+          "128",
+          "221",
+          "228",
+          "515",
+          "635",
+          "229"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_investment_revalued",
+      "event_code": "investment_revalued",
+      "event_name": "Investment Revalued",
+      "category": "Investments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "121",
+          "128",
+          "221",
+          "228",
+          "515",
+          "635",
+          "229"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_investment_impairment_recorded",
+      "event_code": "investment_impairment_recorded",
+      "event_name": "Investment Impairment Recorded",
+      "category": "Investments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "121",
+          "128",
+          "221",
+          "228",
+          "515",
+          "635",
+          "229"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_salary_accrued",
+      "event_code": "salary_accrued",
+      "event_name": "Salary Accrued",
+      "category": "Payroll",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "334",
+          "3383",
+          "3384",
+          "3386",
+          "622",
+          "641",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_salary_paid",
+      "event_code": "salary_paid",
+      "event_name": "Salary Paid",
+      "category": "Payroll",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "334",
+          "3383",
+          "3384",
+          "3386",
+          "622",
+          "641",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_bonus_accrued",
+      "event_code": "bonus_accrued",
+      "event_name": "Bonus Accrued",
+      "category": "Payroll",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "334",
+          "3383",
+          "3384",
+          "3386",
+          "622",
+          "641",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payroll_tax_accrued",
+      "event_code": "payroll_tax_accrued",
+      "event_name": "Payroll Tax Accrued",
+      "category": "Payroll",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "334",
+          "3383",
+          "3384",
+          "3386",
+          "622",
+          "641",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_payroll_tax_paid",
+      "event_code": "payroll_tax_paid",
+      "event_name": "Payroll Tax Paid",
+      "category": "Payroll",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "matching_revenue_expenses"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 06"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "334",
+          "3383",
+          "3384",
+          "3386",
+          "622",
+          "641",
+          "642"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_tax_accrued",
+      "event_code": "tax_accrued",
+      "event_name": "Tax Accrued",
+      "category": "Tax",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "333",
+          "133",
+          "243",
+          "347",
+          "821"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_tax_paid",
+      "event_code": "tax_paid",
+      "event_name": "Tax Paid",
+      "category": "Tax",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement",
+        "cash_flow_classification_required"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05",
+        "VAS 24 - Nội dung chuẩn mực"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "333",
+          "133",
+          "243",
+          "347",
+          "821"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_tax_refund_received",
+      "event_code": "tax_refund_received",
+      "event_name": "Tax Refund Received",
+      "category": "Tax",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "333",
+          "133",
+          "243",
+          "347",
+          "821"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_deferred_tax_asset_recognized",
+      "event_code": "deferred_tax_asset_recognized",
+      "event_name": "Deferred Tax Asset Recognized",
+      "category": "Tax",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "333",
+          "133",
+          "243",
+          "347",
+          "821"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_deferred_tax_liability_recognized",
+      "event_code": "deferred_tax_liability_recognized",
+      "event_name": "Deferred Tax Liability Recognized",
+      "category": "Tax",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "historical_cost_measurement"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 05"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "333",
+          "133",
+          "243",
+          "347",
+          "821"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_provision_recorded",
+      "event_code": "provision_recorded",
+      "event_name": "Provision Recorded",
+      "category": "Provisions & Estimates",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "352",
+          "642",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_provision_reversed",
+      "event_code": "provision_reversed",
+      "event_name": "Provision Reversed",
+      "category": "Provisions & Estimates",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "352",
+          "642",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_accounting_estimate_updated",
+      "event_code": "accounting_estimate_updated",
+      "event_name": "Accounting Estimate Updated",
+      "category": "Provisions & Estimates",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "prudence_provisions"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 01 - Đoạn 08"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "352",
+          "642",
+          "711"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_fx_revaluation_recorded",
+      "event_code": "fx_revaluation_recorded",
+      "event_name": "Fx Revaluation Recorded",
+      "category": "Financial Adjustments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "exchange_difference_treatment",
+        "foreign_currency_initial_rate"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 10 - Đoạn 12-13",
+        "VAS 10 - Đoạn 08-09"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "413",
+          "412",
+          "515",
+          "635"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": false
+      },
+      "posting_template": {
+        "debit_account_template": "413/635",
+        "credit_account_template": "413/515"
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": false,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    },
+    {
+      "rule_id": "VAS2015_fair_value_adjustment_recorded",
+      "event_code": "fair_value_adjustment_recorded",
+      "event_name": "Fair Value Adjustment Recorded",
+      "category": "Financial Adjustments",
+      "mapped_vas_rule_keys": [
+        "accrual_basis_recognition",
+        "recognition_criteria_probable_reliable",
+        "exchange_difference_treatment"
+      ],
+      "legal_citations": [
+        "VAS 01 - Đoạn 03",
+        "VAS 01 - Đoạn 39-40",
+        "VAS 10 - Đoạn 12-13"
+      ],
+      "coa_mapping": {
+        "account_system": "TT200",
+        "account_code_candidates": [
+          "413",
+          "412",
+          "515",
+          "635"
+        ],
+        "mapping_basis": "Ánh xạ theo hướng luật trước: liên kết sự kiện với quy tắc VAS, sau đó giới hạn bằng nhóm tài khoản TT200.",
+        "requires_manual_account_selection": true
+      },
+      "posting_template": {
+        "debit_account_template": null,
+        "credit_account_template": null
+      },
+      "tax_deductibility": "NotSpecifiedByVAS",
+      "manual_review_required": true,
+      "description": "Được ánh xạ từ các quy tắc VAS nêu rõ trong văn bản; cặp tài khoản hạch toán được hoàn thiện bằng rulebook TT200 khi triển khai.",
+      "valid_from": "2015-01-01",
+      "valid_to": null
+    }
+  ]
+}

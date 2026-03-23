@@ -361,42 +361,6 @@ function formatDateByRule(dateValue) {
   return `${String(dd).padStart(2, '0')}/${String(mm).padStart(2, '0')}/${yyyy}`
 }
 
-function extractYearFromToken(value) {
-  const text = String(value || '').trim()
-  const matched = text.match(/(\d{4})/)
-  if (!matched) return new Date().getFullYear()
-  return Number(matched[1])
-}
-
-const openingBalanceFields = [
-  { code: 'ct110', labelVi: 'Tổng tài sản', labelEn: 'Total assets' },
-  { code: 'ct120', labelVi: 'Tiền và tương đương tiền', labelEn: 'Cash and equivalents' },
-  { code: 'ct130', labelVi: 'Đầu tư tài chính ngắn hạn', labelEn: 'Short-term investments' },
-  { code: 'ct140', labelVi: 'Các khoản phải thu', labelEn: 'Receivables' },
-  { code: 'ct150', labelVi: 'Hàng tồn kho', labelEn: 'Inventories' },
-  { code: 'ct160', labelVi: 'Tài sản khác', labelEn: 'Other assets' },
-  { code: 'ct200', labelVi: 'Tổng cộng tài sản', labelEn: 'Total assets (sum)' },
-  { code: 'ct300', labelVi: 'Nợ phải trả', labelEn: 'Liabilities' },
-  { code: 'ct310', labelVi: 'Nợ ngắn hạn', labelEn: 'Short-term liabilities' },
-  { code: 'ct320', labelVi: 'Nợ dài hạn', labelEn: 'Long-term liabilities' },
-  { code: 'ct330', labelVi: 'Phải trả người bán', labelEn: 'Trade payables' },
-  { code: 'ct340', labelVi: 'Thuế và khoản phải nộp', labelEn: 'Taxes payable' },
-  { code: 'ct350', labelVi: 'Phải trả người lao động', labelEn: 'Payroll payables' },
-  { code: 'ct360', labelVi: 'Phải trả khác', labelEn: 'Other payables' },
-  { code: 'ct400', labelVi: 'Vốn chủ sở hữu', labelEn: 'Equity' },
-  { code: 'ct411', labelVi: 'Vốn góp của chủ sở hữu', labelEn: 'Owner contributed capital' },
-  { code: 'ct412', labelVi: 'Thặng dư vốn cổ phần', labelEn: 'Share premium' },
-  { code: 'ct413', labelVi: 'Chênh lệch đánh giá lại', labelEn: 'Revaluation differences' },
-  { code: 'ct414', labelVi: 'Quỹ đầu tư phát triển', labelEn: 'Development investment fund' },
-  { code: 'ct415', labelVi: 'Quỹ khác', labelEn: 'Other funds' },
-  { code: 'ct416', labelVi: 'Lợi nhuận sau thuế chưa phân phối', labelEn: 'Retained earnings' },
-  { code: 'ct417', labelVi: 'Nguồn vốn khác', labelEn: 'Other equity sources' },
-  { code: 'ct420', labelVi: 'Lợi nhuận sau thuế chưa phân phối', labelEn: 'Retained earnings (detail)' },
-  { code: 'ct430', labelVi: 'Nguồn kinh phí và quỹ khác', labelEn: 'Funding and other funds' },
-  { code: 'ct440', labelVi: 'Lợi ích cổ đông không kiểm soát', labelEn: 'Minority interests' },
-  { code: 'ct500', labelVi: 'Tổng cộng nguồn vốn', labelEn: 'Total liabilities and equity' },
-]
-
 function normalizeComparableText(value) {
   const raw = String(value || '').trim().toLowerCase()
   if (!raw) return ''
@@ -416,7 +380,41 @@ function normalizeParseSummaryRows(rows, options = {}) {
   const companyNameNorm = normalizeComparableText(companyName)
 
   const deniedLabels = new Set(['MST người bán', 'MST người mua', 'Vai trò hóa đơn'])
+  const financialLabels = new Set([
+    'Loại chứng từ',
+    'Tên báo cáo',
+    'Doanh nghiệp',
+    'MST doanh nghiệp',
+    'Kỳ báo cáo',
+    'Tổng tài sản cuối kỳ',
+    'Nợ phải trả cuối kỳ',
+    'Vốn chủ sở hữu cuối kỳ',
+    'Lợi nhuận sau thuế',
+  ])
+  const hasFinancialStatementRows = rows.some((row) => {
+    const label = String(row?.label || '').trim()
+    const value = String(row?.value || '').trim().toLowerCase()
+    return financialLabels.has(label) || value.includes('báo cáo tài chính') || value.includes('bao cao tai chinh')
+  })
+
+  if (hasFinancialStatementRows) {
+    return rows
+      .map((row) => ({
+        label: String(row?.label || '').trim(),
+        value: String(row?.value || '').trim() || '-',
+      }))
+      .filter((row) => row.label && !deniedLabels.has(row.label))
+      .map((row) => {
+        if (!/ngày|ky bao cao|kỳ báo cáo/i.test(row.label)) return row
+        return {
+          ...row,
+          value: formatDateByRule(row.value) || row.value || '-',
+        }
+      })
+  }
+
   const allowedOrder = [
+    'Loại chứng từ',
     'Đối tác',
     'Nội dung',
     'MST đối tác',
@@ -586,18 +584,6 @@ function App() {
   const [compliancePeriod, setCompliancePeriod] = useState('2026-03')
   const [complianceReportId, setComplianceReportId] = useState('gtgt')
   const [complianceDetailTab, setComplianceDetailTab] = useState('preview')
-  const [openingBalanceYear, setOpeningBalanceYear] = useState(2026)
-  const [openingBalanceLines, setOpeningBalanceLines] = useState({})
-  const [openingBalanceSource, setOpeningBalanceSource] = useState('none')
-  const [openingBalanceSourceYear, setOpeningBalanceSourceYear] = useState(null)
-  const [openingBalanceLoading, setOpeningBalanceLoading] = useState(false)
-  const [openingBalanceNotice, setOpeningBalanceNotice] = useState('')
-  const [voucherTestFile, setVoucherTestFile] = useState(null)
-  const [voucherTestLoading, setVoucherTestLoading] = useState(false)
-  const [voucherTestNotice, setVoucherTestNotice] = useState('')
-  const [voucherTestSummary, setVoucherTestSummary] = useState(null)
-  const [voucherTestRows, setVoucherTestRows] = useState([])
-  const [voucherTestPostResults, setVoucherTestPostResults] = useState([])
   const [dashboardMeta, setDashboardMeta] = useState({ trends: {}, warnings: [], priorities: [] })
   const [complianceData, setComplianceData] = useState({ period_options: [], reports: [], issues: [], history: [], xml_preview: '' })
   const [serverPanels, setServerPanels] = useState({ reports_tips: [], compliance_checklist: [] })
@@ -610,8 +596,6 @@ function App() {
     second: 520,
   })
   const [reportDrillResize, setReportDrillResize] = useState(null)
-  const openingImportInputRef = useRef(null)
-  const voucherTestInputRef = useRef(null)
   const [uiLang, setUiLang] = useState(() => {
     const stored = String(window.sessionStorage.getItem(STORAGE_UI_LANG_KEY) || 'vi').toLowerCase()
     return stored === 'en' ? 'en' : 'vi'
@@ -806,45 +790,6 @@ function App() {
     setIsCompanyEditOpen(true)
     setIsUserMenuOpen(false)
   }, [])
-
-  const selectActiveCompany = useCallback(async (companyId) => {
-    const normalizedCompanyId = String(companyId || '').trim()
-    if (!normalizedCompanyId) return
-
-    const token = String(window.sessionStorage.getItem(STORAGE_TOKEN_KEY) || '')
-    if (!token) {
-      setActionNotice(tr('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.', 'Session has expired. Please sign in again.'))
-      return
-    }
-
-    try {
-      const response = await fetch('/api/onboard/select-company', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ company_id: normalizedCompanyId }),
-      })
-      const payload = await response.json().catch(() => ({}))
-      if (!response.ok || !payload?.selected) {
-        throw new Error(tr('Không chọn được công ty', 'Could not switch company'))
-      }
-
-      const profile = payload?.profile && typeof payload.profile === 'object' ? payload.profile : {}
-      const nextCompanyId = String(profile.company_id || normalizedCompanyId)
-      const nextCompanyName = String(profile.company_name || nextCompanyId)
-      setCurrentCompanyId(nextCompanyId)
-      setCurrentCompanyName(nextCompanyName)
-      window.sessionStorage.setItem(STORAGE_COMPANY_ID_KEY, nextCompanyId)
-      window.sessionStorage.setItem(STORAGE_COMPANY_NAME_KEY, nextCompanyName)
-      setCompanyEditForm((prev) => ({ ...prev, ...profile }))
-      setIsUserMenuOpen(false)
-      setActionNotice(`${tr('Đã chuyển sang công ty', 'Switched to company')}: ${nextCompanyName}`)
-    } catch (error) {
-      setActionNotice(error.message || tr('Không chọn được công ty', 'Could not switch company'))
-    }
-  }, [tr])
 
   const handleWorkspaceLogout = useCallback(() => {
     setIsUserMenuOpen(false)
@@ -1368,51 +1313,6 @@ function App() {
   }, [reportDetail])
 
   useEffect(() => {
-    const nextYear = extractYearFromToken(compliancePeriod)
-    if (nextYear !== openingBalanceYear) {
-      setOpeningBalanceYear(nextYear)
-    }
-  }, [compliancePeriod, openingBalanceYear])
-
-  useEffect(() => {
-    if (activeSection !== 'compliance') return undefined
-
-    let cancelled = false
-    setOpeningBalanceLoading(true)
-
-    const params = new URLSearchParams({ year: String(openingBalanceYear) })
-    if (currentEmail) params.set('email', currentEmail)
-    if (currentCompanyId) params.set('company_id', currentCompanyId)
-
-    fetch(`/api/demo/opening-balances/annual?${params.toString()}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(tr('Không tải được số dư đầu kỳ', 'Could not load opening balances'))
-        }
-        return response.json()
-      })
-      .then((payload) => {
-        if (cancelled) return
-        setOpeningBalanceLines(payload?.lines && typeof payload.lines === 'object' ? payload.lines : {})
-        setOpeningBalanceSource(String(payload?.source || 'none'))
-        setOpeningBalanceSourceYear(payload?.source_year ? Number(payload.source_year) : null)
-      })
-      .catch((error) => {
-        if (cancelled) return
-        setOpeningBalanceNotice(error.message || tr('Không tải được số dư đầu kỳ', 'Could not load opening balances'))
-      })
-      .finally(() => {
-        if (!cancelled) {
-          setOpeningBalanceLoading(false)
-        }
-      })
-
-    return () => {
-      cancelled = true
-    }
-  }, [activeSection, openingBalanceYear, currentEmail, currentCompanyId, tr])
-
-  useEffect(() => {
     if (!['reports', 'dashboard', 'compliance'].includes(activeSection)) return undefined
 
     let cancelled = false
@@ -1526,61 +1426,29 @@ function App() {
       ),
     )
 
-    const requestBody = {
-      email: currentEmail || 'demo@wssmeas.local',
-      company_id: currentCompanyId || '',
-      action,
-      text,
-      case_id: caseId,
-      attachments: action === 'case_command' ? attachmentPayload : [],
-    }
-
-    const postUiAction = async (url) => {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody),
-      })
-      const payload = await response.json().catch(() => ({}))
-      return { response, payload }
-    }
-
-    const hasExcelAttachment = action === 'case_command' && attachmentPayload.some((file) => {
-      const name = String(file?.name || '').toLowerCase()
-      return name.endsWith('.xlsx') || name.endsWith('.xlsm')
+    const response = await fetch('/api/demo/ui-action', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: currentEmail || 'demo@wssmeas.local',
+        company_id: currentCompanyId || '',
+        action,
+        text,
+        case_id: caseId,
+        attachments: action === 'case_command' ? attachmentPayload : [],
+      }),
     })
-
-    const isTaxMismatchMessage = (payload) => {
-      const detail = String(payload?.detail || payload?.message || '').toLowerCase()
-      return detail.includes('mã số thuế trên hóa đơn không thuộc công ty đang đăng nhập'.toLowerCase())
-    }
-
-    let { response, payload } = await postUiAction('/api/demo/ui-action')
-
-    if (
-      hasExcelAttachment
-      && (
-        response.status === 404
-        || isTaxMismatchMessage(payload)
-        || (response.ok && payload && payload.ok === false && isTaxMismatchMessage(payload))
-      )
-    ) {
-      const retry = await postUiAction('http://127.0.0.1:8000/api/demo/ui-action')
-      response = retry.response
-      payload = retry.payload
-    }
-
     if (!response.ok) {
       let detail = ''
       try {
-        const errorPayload = payload && Object.keys(payload).length ? payload : await response.json()
+        const errorPayload = await response.json()
         detail = String(errorPayload?.detail || errorPayload?.message || '').trim()
       } catch {
         detail = ''
       }
       throw new Error(detail || tr('Thao tác không thành công', 'Action failed'))
     }
-    return payload
+    return response.json()
   }
 
   async function reloadDemoCases(preferredCaseId = '') {
@@ -1718,201 +1586,6 @@ function App() {
     if (reload.ok) {
       const payload = await reload.json()
       setComplianceData(payload)
-    }
-  }
-
-  function updateOpeningLine(code, rawValue) {
-    const normalizedCode = String(code || '').toLowerCase()
-    const cleaned = String(rawValue || '').replace(/[^0-9-]/g, '')
-    setOpeningBalanceLines((prev) => ({
-      ...prev,
-      [normalizedCode]: cleaned,
-    }))
-  }
-
-  async function saveOpeningBalances() {
-    setOpeningBalanceLoading(true)
-    setOpeningBalanceNotice('')
-    try {
-      const response = await fetch('/api/demo/opening-balances/annual', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: currentEmail || 'demo@wssmeas.local',
-          company_id: currentCompanyId || '',
-          year: Number(openingBalanceYear),
-          lines: openingBalanceLines,
-        }),
-      })
-      if (!response.ok) {
-        throw new Error(tr('Không lưu được số dư đầu kỳ', 'Could not save opening balances'))
-      }
-      setOpeningBalanceSource('manual')
-      setOpeningBalanceNotice(tr('Đã lưu số dư đầu kỳ theo năm', 'Saved annual opening balances'))
-    } catch (error) {
-      setOpeningBalanceNotice(error.message || tr('Không lưu được số dư đầu kỳ', 'Could not save opening balances'))
-    } finally {
-      setOpeningBalanceLoading(false)
-    }
-  }
-
-  async function importOpeningBalancesFromXml(event) {
-    const file = event?.target?.files?.[0]
-    if (!file) return
-
-    setOpeningBalanceLoading(true)
-    setOpeningBalanceNotice('')
-    try {
-      const xmlText = await file.text()
-      const response = await fetch('/api/demo/opening-balances/import-bctc-xml', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: currentEmail || 'demo@wssmeas.local',
-          company_id: currentCompanyId || '',
-          xml_text: xmlText,
-        }),
-      })
-      if (!response.ok) {
-        throw new Error(tr('Không import được XML BCTC', 'Could not import BCTC XML'))
-      }
-      const payload = await response.json()
-      const targetYear = Number(payload?.target_year || openingBalanceYear)
-      setOpeningBalanceYear(targetYear)
-      setOpeningBalanceSource('carry_forward')
-      setOpeningBalanceSourceYear(payload?.source_year ? Number(payload.source_year) : null)
-      setOpeningBalanceLines(payload?.lines && typeof payload.lines === 'object' ? payload.lines : {})
-      setOpeningBalanceNotice(
-        tr('Đã import số cuối năm trước thành số đầu năm hiện tại', 'Imported previous-year closing balances as current-year opening balances'),
-      )
-    } catch (error) {
-      setOpeningBalanceNotice(error.message || tr('Không import được XML BCTC', 'Could not import BCTC XML'))
-    } finally {
-      setOpeningBalanceLoading(false)
-      if (event?.target) {
-        event.target.value = ''
-      }
-    }
-  }
-
-  function handleVoucherTestFile(event) {
-    const file = event?.target?.files?.[0]
-    if (!file) return
-    setVoucherTestFile(file)
-    setVoucherTestNotice('')
-    setVoucherTestSummary(null)
-    setVoucherTestRows([])
-    setVoucherTestPostResults([])
-  }
-
-  async function runVoucherSheetTest(autoPost = false) {
-    if (!voucherTestFile) {
-      setVoucherTestNotice(tr('Vui lòng chọn file bảng kê (.xlsx) trước khi test', 'Please choose an .xlsx voucher sheet before testing'))
-      return
-    }
-
-    setVoucherTestLoading(true)
-    setVoucherTestNotice('')
-    try {
-      const dataUrl = await new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '')
-        reader.onerror = () => reject(new Error(tr('Không đọc được file Excel', 'Could not read Excel file')))
-        reader.readAsDataURL(voucherTestFile)
-      })
-
-      const requestBody = {
-        email: currentEmail || 'demo@wssmeas.local',
-        company_id: currentCompanyId || '',
-        file_name: voucherTestFile.name,
-        content_base64: dataUrl,
-        auto_post: Boolean(autoPost),
-      }
-
-      const postVoucherImport = async (url) => {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(requestBody),
-        })
-        const payload = await response.json().catch(() => ({}))
-        return { response, payload }
-      }
-
-      let { response, payload } = await postVoucherImport('/api/demo/voucher-test/import')
-      if (response.status === 404) {
-        const fallbackUrl = 'http://127.0.0.1:8000/api/demo/voucher-test/import'
-        const fallbackResult = await postVoucherImport(fallbackUrl)
-        response = fallbackResult.response
-        payload = fallbackResult.payload
-      }
-
-      const convertedCount = Number(payload?.converted_count || 0)
-      const payloadIssues = Array.isArray(payload?.issues) ? payload.issues.map((item) => String(item || '')) : []
-      const shouldRetryLocalOnZero = response.ok && convertedCount <= 0 && payloadIssues.some((item) => item.toLowerCase().includes('không tìm thấy dòng tiêu đề hợp lệ'))
-      if (shouldRetryLocalOnZero) {
-        const retryLocal = await postVoucherImport('http://127.0.0.1:8000/api/demo/voucher-test/import')
-        response = retryLocal.response
-        payload = retryLocal.payload
-      }
-
-      const deniedDetail = String(payload?.detail || payload?.message || '').trim()
-      if (!response.ok && deniedDetail === 'COMPANY_ACCESS_DENIED') {
-        const fallbackBody = { ...requestBody, company_id: '' }
-        const postVoucherImportNoCompany = async (url) => {
-          const nextResponse = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(fallbackBody),
-          })
-          const nextPayload = await nextResponse.json().catch(() => ({}))
-          return { response: nextResponse, payload: nextPayload }
-        }
-
-        let retry = await postVoucherImportNoCompany('/api/demo/voucher-test/import')
-        if (retry.response.status === 404) {
-          retry = await postVoucherImportNoCompany('http://127.0.0.1:8000/api/demo/voucher-test/import')
-        }
-        response = retry.response
-        payload = retry.payload
-      }
-
-      if (!response.ok) {
-        throw new Error(String(payload?.detail || payload?.message || tr('Test bảng kê thất bại', 'Voucher test failed')))
-      }
-
-      setVoucherTestSummary({
-        fileName: String(payload?.file_name || voucherTestFile.name || ''),
-        convertedCount: Number(payload?.converted_count || 0),
-        postedCount: Number(payload?.posted_count || 0),
-        failedCount: Number(payload?.failed_count || 0),
-        autoPost: Boolean(payload?.auto_post),
-      })
-      setVoucherTestRows(Array.isArray(payload?.preview_rows) ? payload.preview_rows : [])
-      setVoucherTestPostResults(Array.isArray(payload?.post_results) ? payload.post_results : [])
-
-      const issues = Array.isArray(payload?.issues) ? payload.issues.filter(Boolean) : []
-      if (issues.length) {
-        setVoucherTestNotice(issues.join('\n'))
-      } else if (autoPost) {
-        setVoucherTestNotice(
-          tr(
-            `Đã convert ${Number(payload?.converted_count || 0)} dòng và post ${Number(payload?.posted_count || 0)} dòng`,
-            `Converted ${Number(payload?.converted_count || 0)} rows and posted ${Number(payload?.posted_count || 0)} rows`,
-          ),
-        )
-      } else {
-        setVoucherTestNotice(
-          tr(
-            `Đã convert ${Number(payload?.converted_count || 0)} dòng bảng kê`,
-            `Converted ${Number(payload?.converted_count || 0)} voucher rows`,
-          ),
-        )
-      }
-    } catch (error) {
-      setVoucherTestNotice(error.message || tr('Test bảng kê thất bại', 'Voucher test failed'))
-    } finally {
-      setVoucherTestLoading(false)
     }
   }
 
@@ -2104,26 +1777,6 @@ function App() {
               <div className="user-menu-dropdown">
                 <p className="user-menu-title">{currentCompanyName || tr('Công ty hiện tại', 'Current company')}</p>
                 <p className="user-menu-subtitle">{currentEmail || tr('Đang tải tài khoản', 'Loading account')}</p>
-                {companyChoices.length ? (
-                  <>
-                    <p className="user-menu-subtitle">{tr('Danh sách công ty', 'Company list')}</p>
-                    {companyChoices.map((item) => {
-                      const companyId = String(item?.company_id || '')
-                      const companyName = String(item?.company_name || companyId || tr('Không rõ tên', 'Unnamed'))
-                      const isActive = companyId && companyId === String(currentCompanyId || '')
-                      return (
-                        <button
-                          key={companyId || companyName}
-                          type="button"
-                          className={isActive ? 'user-menu-btn active' : 'user-menu-btn'}
-                          onClick={() => selectActiveCompany(companyId)}
-                        >
-                          {isActive ? `✓ ${companyName}` : companyName}
-                        </button>
-                      )
-                    })}
-                  </>
-                ) : null}
                 <button type="button" className="user-menu-btn" onClick={openCompanyEditModal}>
                   {tr('Sửa thông tin công ty', 'Edit company profile')}
                 </button>
@@ -3030,8 +2683,6 @@ function App() {
                       {[
                         { key: 'preview', label: 'Preview' },
                         { key: 'xml', label: 'XML' },
-                        { key: 'opening', label: tr('Số dư đầu kỳ', 'Opening balances') },
-                        { key: 'voucher_test', label: tr('Test bảng kê', 'Voucher test') },
                         { key: 'history', label: tr('Lịch sử nộp', 'Submission history') },
                       ].map((tab) => (
                         <button
@@ -3058,170 +2709,6 @@ function App() {
                     {complianceDetailTab === 'xml' ? (
                       <div className="compliance-preview-box">
                         <pre>{complianceData?.xml_preview || ''}</pre>
-                      </div>
-                    ) : null}
-
-                    {complianceDetailTab === 'opening' ? (
-                      <div className="compliance-preview-box opening-balance-box">
-                        <div className="opening-balance-toolbar">
-                          <label>
-                            {tr('Năm đầu kỳ', 'Opening year')}
-                            <input
-                              type="number"
-                              min="1900"
-                              max="9999"
-                              value={openingBalanceYear}
-                              onChange={(event) => setOpeningBalanceYear(Number(event.target.value || new Date().getFullYear()))}
-                            />
-                          </label>
-                          <div className="opening-balance-toolbar-actions">
-                            <input
-                              ref={openingImportInputRef}
-                              type="file"
-                              accept=".xml,text/xml,application/xml"
-                              className="attachment-input-hidden"
-                              onChange={importOpeningBalancesFromXml}
-                            />
-                            <button type="button" className="action-btn secondary" onClick={() => openingImportInputRef.current?.click()}>
-                              {tr('Import XML BCTC năm trước', 'Import previous-year BCTC XML')}
-                            </button>
-                            <button type="button" className="action-btn" onClick={saveOpeningBalances} disabled={openingBalanceLoading}>
-                              {openingBalanceLoading ? tr('Đang lưu...', 'Saving...') : tr('Lưu số dư đầu kỳ', 'Save opening balances')}
-                            </button>
-                          </div>
-                        </div>
-
-                        <p>
-                          <strong>{tr('Nguồn dữ liệu', 'Data source')}:</strong>{' '}
-                          {openingBalanceSource === 'manual'
-                            ? tr('Nhập tay', 'Manual')
-                            : openingBalanceSource === 'carry_forward'
-                              ? tr('Kế thừa từ số cuối năm trước', 'Carried from previous-year closing balances')
-                              : tr('Chưa có', 'Not set')}
-                          {openingBalanceSourceYear ? ` (${tr('năm nguồn', 'source year')}: ${openingBalanceSourceYear})` : ''}
-                        </p>
-                        <p>{tr('Quy tắc: Số cuối kỳ năm N sẽ được dùng làm số đầu kỳ năm N+1.', 'Rule: year N closing balances are used as year N+1 opening balances.')}</p>
-
-                        <div className="opening-balance-grid">
-                          {openingBalanceFields.map((field) => (
-                            <label key={field.code}>
-                              <span>{uiLang === 'en' ? field.labelEn : field.labelVi} ({field.code.toUpperCase()})</span>
-                              <input
-                                type="text"
-                                inputMode="numeric"
-                                value={String(openingBalanceLines?.[field.code] ?? '')}
-                                onChange={(event) => updateOpeningLine(field.code, event.target.value)}
-                              />
-                            </label>
-                          ))}
-                        </div>
-
-                        {openingBalanceNotice ? <p className="report-inline-note">{openingBalanceNotice}</p> : null}
-                      </div>
-                    ) : null}
-
-                    {complianceDetailTab === 'voucher_test' ? (
-                      <div className="compliance-preview-box opening-balance-box">
-                        <div className="opening-balance-toolbar">
-                          <label>
-                            {tr('File bảng kê chứng từ (.xlsx)', 'Voucher sheet file (.xlsx)')}
-                            <input
-                              ref={voucherTestInputRef}
-                              type="file"
-                              accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                              onChange={handleVoucherTestFile}
-                            />
-                          </label>
-                          <div className="opening-balance-toolbar-actions">
-                            <button
-                              type="button"
-                              className="action-btn secondary"
-                              onClick={() => runVoucherSheetTest(false)}
-                              disabled={voucherTestLoading}
-                            >
-                              {voucherTestLoading ? tr('Đang xử lý...', 'Processing...') : tr('Test convert', 'Test convert')}
-                            </button>
-                            <button
-                              type="button"
-                              className="action-btn"
-                              onClick={() => runVoucherSheetTest(true)}
-                              disabled={voucherTestLoading}
-                            >
-                              {voucherTestLoading ? tr('Đang post...', 'Posting...') : tr('Test convert + post', 'Test convert + post')}
-                            </button>
-                          </div>
-                        </div>
-
-                        <p>
-                          <strong>{tr('Lưu ý', 'Note')}:</strong>{' '}
-                          {tr('Module test bảng kê không kiểm tra MST hóa đơn như luồng XML, dùng để kiểm thử map dòng chứng từ sang economic events.', 'Voucher test module does not enforce invoice tax-code check like XML flow; it is for testing row-to-economic-event mapping.')}
-                        </p>
-                        <p>
-                          <strong>{tr('File đã chọn', 'Selected file')}:</strong> {voucherTestFile?.name || '-'}
-                        </p>
-
-                        {voucherTestSummary ? (
-                          <p>
-                            <strong>{tr('Kết quả', 'Result')}:</strong>{' '}
-                            {tr('Convert', 'Converted')} {Number(voucherTestSummary.convertedCount || 0)} | {tr('Post thành công', 'Posted')} {Number(voucherTestSummary.postedCount || 0)} | {tr('Lỗi', 'Failed')} {Number(voucherTestSummary.failedCount || 0)}
-                          </p>
-                        ) : null}
-
-                        {voucherTestRows.length ? (
-                          <div className="report-table-wrap">
-                            <table className="report-table report-table-compact">
-                              <thead>
-                                <tr>
-                                  <th>{tr('Ngày', 'Date')}</th>
-                                  <th>{tr('Số CT', 'Ref')}</th>
-                                  <th>{tr('Đối tác', 'Counterparty')}</th>
-                                  <th>{tr('Diễn giải', 'Description')}</th>
-                                  <th>{tr('Loại event', 'Event type')}</th>
-                                  <th>{tr('Số tiền', 'Amount')}</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {voucherTestRows.slice(0, 50).map((row, idx) => (
-                                  <tr key={`${idx}-${row.reference_no || row.description || 'row'}`}>
-                                    <td>{row.event_date || '-'}</td>
-                                    <td>{row.reference_no || '-'}</td>
-                                    <td>{row.counterparty_name || '-'}</td>
-                                    <td>{row.description || '-'}</td>
-                                    <td>{row.event_type || '-'}</td>
-                                    <td>{formatCurrency(Number(row.amount || 0))}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        ) : null}
-
-                        {voucherTestPostResults.length ? (
-                          <div className="report-table-wrap">
-                            <table className="report-table report-table-compact">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>{tr('Loại event', 'Event type')}</th>
-                                  <th>{tr('Kết quả post', 'Post result')}</th>
-                                  <th>{tr('Lý do', 'Reason')}</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {voucherTestPostResults.map((row, idx) => (
-                                  <tr key={`${idx}-${row.line_no || idx}`}>
-                                    <td>{row.line_no || idx + 1}</td>
-                                    <td>{row.event_type || '-'}</td>
-                                    <td>{row.accepted ? tr('Thành công', 'Accepted') : tr('Thất bại', 'Rejected')}</td>
-                                    <td>{row.reason || '-'}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        ) : null}
-
-                        {voucherTestNotice ? <p className="report-inline-note">{voucherTestNotice}</p> : null}
                       </div>
                     ) : null}
 

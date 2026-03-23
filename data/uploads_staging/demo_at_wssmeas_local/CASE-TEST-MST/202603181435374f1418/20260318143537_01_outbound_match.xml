@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<HDon>
+  <DLHDon>
+    <TTChung><SHDon>OUT-001</SHDon><NLap>2026-03-18</NLap></TTChung>
+    <NDHDon>
+      <NBan><Ten>SME Demo</Ten><MST>0312345678</MST><DChi>123 Le Loi, Q1, HCM</DChi></NBan>
+      <NMua><Ten>Khach A</Ten><MST>0101111111</MST><DChi>HN</DChi></NMua>
+      <DSHHDVu><HHDVu><THHDVu>Dich vu tu van</THHDVu><ThTien>10000000</ThTien><TSuat>10</TSuat></HHDVu></DSHHDVu>
+      <TToan><TgTCThue>10000000</TgTCThue><TgTThue>1000000</TgTThue><TgTTTBSo>11000000</TgTTTBSo></TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>

@@ -1,0 +1,33 @@
+{
+  "engine_id": "tt99_auto_posting_engine_v2",
+  "mode": "fully_automatic",
+  "generated_at": "2026-03-15T17:26:42",
+  "preconditions": [
+    "all_required_facts_present",
+    "ledger_period_open",
+    "amount_non_negative"
+  ],
+  "selection_flow": [
+    "filter_by_hard_constraints",
+    "score_candidates",
+    "select_top1_deterministic",
+    "apply_posting_guardrails",
+    "post_or_reject_with_machine_reason"
+  ],
+  "tie_break_policy": {
+    "if_same_score": [
+      "prefer_more_signals_matched",
+      "prefer_more_specific_accounts",
+      "prefer_lowest_method_id"
+    ],
+    "no_human_review": true
+  },
+  "failure_policy": {
+    "on_no_match": "reject_with_reason_code",
+    "reason_codes": [
+      "CTX_MISSING_REQUIRED_FACTS",
+      "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "GUARDRAIL_FAILED"
+    ]
+  }
+}

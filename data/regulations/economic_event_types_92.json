@@ -1,0 +1,646 @@
+[
+  {
+    "id": "61b6fd21-80f7-4629-aa09-1fb2461c37fb",
+    "code": "capital_contribution_committed",
+    "name": "Capital Contribution Committed",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "cc1ad6b1-7c7b-440d-8a16-6e486504ce5d",
+    "code": "capital_contribution_received",
+    "name": "Capital Contribution Received",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "e5e95a99-e64f-45f2-8718-b01f9522e5ad",
+    "code": "capital_contribution_returned",
+    "name": "Capital Contribution Returned",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "2dd285d7-dd44-4bb3-a5c3-242e73946bb6",
+    "code": "share_premium_recorded",
+    "name": "Share Premium Recorded",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "21c6720a-e2b2-46b8-96cf-b880d2e094f7",
+    "code": "treasury_shares_acquired",
+    "name": "Treasury Shares Acquired",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "b295cf57-fd1a-4ec1-8f5a-7c7210142360",
+    "code": "treasury_shares_reissued",
+    "name": "Treasury Shares Reissued",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "09fd7e1a-2919-487f-a254-16a13323afe8",
+    "code": "dividend_declared",
+    "name": "Dividend Declared",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "1ecd41d8-2b7a-4990-897d-52318956c803",
+    "code": "dividend_paid",
+    "name": "Dividend Paid",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "f3db2062-9fec-4dd4-b47e-ed5adc83fbfb",
+    "code": "profit_allocated",
+    "name": "Profit Allocated",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "cfb1e167-7cbb-4633-84c5-c8cbeffdbdf1",
+    "code": "retained_earnings_adjusted",
+    "name": "Retained Earnings Adjusted",
+    "category": "Capital & Equity",
+    "description": "Economic event type for Capital & Equity"
+  },
+  {
+    "id": "f207cba8-676c-4d87-9373-cb9cf21d4d94",
+    "code": "loan_received",
+    "name": "Loan Received",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "3e4b0871-a66d-42c5-849e-bcc6db2d9b83",
+    "code": "loan_repaid",
+    "name": "Loan Repaid",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "58d579fd-2821-4fe0-a0bc-72e09f455747",
+    "code": "interest_accrued",
+    "name": "Interest Accrued",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "b78b1337-4baf-4356-b4b5-0dd23164e66f",
+    "code": "interest_paid",
+    "name": "Interest Paid",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "74a74b4e-0f14-4cf3-80a6-a64d70139dd9",
+    "code": "borrowing_cost_capitalized",
+    "name": "Borrowing Cost Capitalized",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "cd1b5dcd-494f-4cda-a89b-736dc7fc9056",
+    "code": "bond_issued",
+    "name": "Bond Issued",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "3a0bdbc4-a2ee-412e-98d5-e6d0aab2f77a",
+    "code": "bond_redeemed",
+    "name": "Bond Redeemed",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "b642898f-12cb-49ad-b05d-3b330078db80",
+    "code": "lease_liability_recognized",
+    "name": "Lease Liability Recognized",
+    "category": "Financing & Borrowings",
+    "description": "Economic event type for Financing & Borrowings"
+  },
+  {
+    "id": "d9400536-055f-48fb-9c45-1d525e40f39f",
+    "code": "payment_received",
+    "name": "Payment Received",
+    "category": "Payments & Cash Movement",
+    "description": "Economic event type for Payments & Cash Movement"
+  },
+  {
+    "id": "fce0d69f-fb29-4a52-b779-e0c651a86983",
+    "code": "payment_made",
+    "name": "Payment Made",
+    "category": "Payments & Cash Movement",
+    "description": "Economic event type for Payments & Cash Movement"
+  },
+  {
+    "id": "58070981-3ae2-4135-b143-d9673c04c5d1",
+    "code": "fund_transfer",
+    "name": "Fund Transfer",
+    "category": "Payments & Cash Movement",
+    "description": "Economic event type for Payments & Cash Movement"
+  },
+  {
+    "id": "e8d4098a-82f0-4034-a122-d8556b6e2571",
+    "code": "receivable_recognized",
+    "name": "Receivable Recognized",
+    "category": "Accounts Receivable",
+    "description": "Economic event type for Accounts Receivable"
+  },
+  {
+    "id": "c89a74da-055b-4ca7-9db7-c6e9a47cb201",
+    "code": "receivable_written_off",
+    "name": "Receivable Written Off",
+    "category": "Accounts Receivable",
+    "description": "Economic event type for Accounts Receivable"
+  },
+  {
+    "id": "c324f344-ba58-49cc-8828-70f9da3e1346",
+    "code": "receivable_provision_recorded",
+    "name": "Receivable Provision Recorded",
+    "category": "Accounts Receivable",
+    "description": "Economic event type for Accounts Receivable"
+  },
+  {
+    "id": "70c30392-d3a3-468e-b6c9-ed71a50f98af",
+    "code": "receivable_provision_reversed",
+    "name": "Receivable Provision Reversed",
+    "category": "Accounts Receivable",
+    "description": "Economic event type for Accounts Receivable"
+  },
+  {
+    "id": "1d4bf7df-f372-42ad-920a-f067741c1dcb",
+    "code": "receivable_settled",
+    "name": "Receivable Settled",
+    "category": "Accounts Receivable",
+    "description": "Economic event type for Accounts Receivable"
+  },
+  {
+    "id": "cc9ac7f8-00c3-4533-9315-efca9c049a1c",
+    "code": "customer_advance_received",
+    "name": "Customer Advance Received",
+    "category": "Accounts Receivable",
+    "description": "Economic event type for Accounts Receivable"
+  },
+  {
+    "id": "638841c9-3503-4c4b-97d3-e286b81bf907",
+    "code": "payable_recognized",
+    "name": "Payable Recognized",
+    "category": "Accounts Payable",
+    "description": "Economic event type for Accounts Payable"
+  },
+  {
+    "id": "dbdf320a-c378-49e5-b388-3c4b40484be4",
+    "code": "payable_written_off",
+    "name": "Payable Written Off",
+    "category": "Accounts Payable",
+    "description": "Economic event type for Accounts Payable"
+  },
+  {
+    "id": "281a4a3a-1d1a-4363-8a93-67789c101e6f",
+    "code": "payable_settled",
+    "name": "Payable Settled",
+    "category": "Accounts Payable",
+    "description": "Economic event type for Accounts Payable"
+  },
+  {
+    "id": "915a487e-f70f-4bf8-8827-0240f739630a",
+    "code": "supplier_advance_paid",
+    "name": "Supplier Advance Paid",
+    "category": "Accounts Payable",
+    "description": "Economic event type for Accounts Payable"
+  },
+  {
+    "id": "1dd27a1c-3a65-4a7b-947a-c625aa037e2f",
+    "code": "revenue_recognized",
+    "name": "Revenue Recognized",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "2a3938a7-5a8b-49d1-9d7e-9cfe87bf40b3",
+    "code": "revenue_accrued",
+    "name": "Revenue Accrued",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "0d1a098a-bfe1-4688-83a5-d50298d007d4",
+    "code": "revenue_deferred",
+    "name": "Revenue Deferred",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "c17cef91-839b-4ab1-ae46-e46e3ca2c21f",
+    "code": "deferred_revenue_recognized",
+    "name": "Deferred Revenue Recognized",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "14fbb126-1d1c-4b50-bba6-0620fddfe684",
+    "code": "sales_returned",
+    "name": "Sales Returned",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "59326bac-f8dc-4ae4-9ab0-5a30dadcb8f3",
+    "code": "sales_discount_given",
+    "name": "Sales Discount Given",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "132ec98d-409d-40fd-885a-106fa6501a37",
+    "code": "promotional_goods_issued",
+    "name": "Promotional Goods Issued",
+    "category": "Revenue",
+    "description": "Economic event type for Revenue"
+  },
+  {
+    "id": "3b820034-592f-4039-b6d5-8780430c73ba",
+    "code": "purchase_recognized",
+    "name": "Purchase Recognized",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "bb12be38-144e-4896-82f6-69574f3844c4",
+    "code": "purchase_returned",
+    "name": "Purchase Returned",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "e451ee77-6b1d-4cf1-9202-b2cb70f88e33",
+    "code": "purchase_discount_received",
+    "name": "Purchase Discount Received",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "ab4e0df0-618b-4bcb-874f-b87dfdd1e963",
+    "code": "expense_incurred",
+    "name": "Expense Incurred",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "8ba0b93b-a39a-43ed-aafc-ef271a596a9d",
+    "code": "expense_accrued",
+    "name": "Expense Accrued",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "5bbbbe40-a4be-479e-9811-4ef2e79f6b84",
+    "code": "expense_prepaid",
+    "name": "Expense Prepaid",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "add75c2c-cb2a-49ed-93cd-9d2ba8852ad8",
+    "code": "prepaid_expense_amortized",
+    "name": "Prepaid Expense Amortized",
+    "category": "Purchases & Expenses",
+    "description": "Economic event type for Purchases & Expenses"
+  },
+  {
+    "id": "28ce49fe-fddf-4085-853e-0ec2451f4ae4",
+    "code": "inventory_received",
+    "name": "Inventory Received",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "1d50b436-e069-4bde-bf24-8051270adc19",
+    "code": "inventory_issued",
+    "name": "Inventory Issued",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "a4562fd1-2e81-46b1-bbb1-5a58f5436c07",
+    "code": "inventory_transferred",
+    "name": "Inventory Transferred",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "655a271f-20d1-4c9a-af8f-48f4949bcf0a",
+    "code": "inventory_adjusted",
+    "name": "Inventory Adjusted",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "f7254e62-9266-439f-bb87-48470cd88b21",
+    "code": "inventory_reserved",
+    "name": "Inventory Reserved",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "96e0bc26-cc6f-4552-921d-74bcc0e4f353",
+    "code": "inventory_released",
+    "name": "Inventory Released",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "b0609d03-be2b-4b67-bcd7-ed3689edb635",
+    "code": "inventory_written_down",
+    "name": "Inventory Written Down",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "f01ada9b-7b71-49a0-b938-6ac34b37133c",
+    "code": "inventory_counted",
+    "name": "Inventory Counted",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "4bb58838-c2ac-446a-93c5-00eff486d065",
+    "code": "inventory_shrinkage_recorded",
+    "name": "Inventory Shrinkage Recorded",
+    "category": "Inventory",
+    "description": "Economic event type for Inventory"
+  },
+  {
+    "id": "1f8709d5-ea27-42d9-8305-a2523a98a54a",
+    "code": "production_started",
+    "name": "Production Started",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "ca3eed03-d5d3-4789-9284-bc105638a542",
+    "code": "raw_material_issued_to_production",
+    "name": "Raw Material Issued To Production",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "5881952d-aca7-4f36-912b-6ef2b5eb2b34",
+    "code": "production_cost_accumulated",
+    "name": "Production Cost Accumulated",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "cd98ed89-6c34-4cb4-bf68-847e8afaed8e",
+    "code": "work_in_progress_recorded",
+    "name": "Work In Progress Recorded",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "eec65148-07d5-44a6-b538-c2717547500d",
+    "code": "finished_goods_completed",
+    "name": "Finished Goods Completed",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "409d782e-ac28-41ef-8ea5-58352b3a2127",
+    "code": "cost_of_goods_sold_recognized",
+    "name": "Cost Of Goods Sold Recognized",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "db31d813-b463-4794-ad22-c0df6341a5df",
+    "code": "overhead_allocated",
+    "name": "Overhead Allocated",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "8da44ef7-7c11-4175-b565-c8b3d7bc2897",
+    "code": "cost_variance_recorded",
+    "name": "Cost Variance Recorded",
+    "category": "Production & Costing",
+    "description": "Economic event type for Production & Costing"
+  },
+  {
+    "id": "6750f0b2-2783-40c8-b68f-1acfd2410ccd",
+    "code": "fixed_asset_acquired",
+    "name": "Fixed Asset Acquired",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "6d86f6c6-c4b6-4e3f-aa88-239cd7cd60cc",
+    "code": "fixed_asset_constructed",
+    "name": "Fixed Asset Constructed",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "a064ba01-5461-48dd-bb90-5dabcee723c7",
+    "code": "asset_put_into_use",
+    "name": "Asset Put Into Use",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "1c2eb941-8799-412f-bff2-5e4d258be165",
+    "code": "depreciation_recorded",
+    "name": "Depreciation Recorded",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "0755af23-2f86-4049-8550-c2c0ddc7854e",
+    "code": "asset_impairment_recorded",
+    "name": "Asset Impairment Recorded",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "a9d588a8-e53d-467e-83a0-f280156e6c1e",
+    "code": "asset_revalued",
+    "name": "Asset Revalued",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "784692a0-32b7-41c6-8952-12b3057affac",
+    "code": "asset_component_replaced",
+    "name": "Asset Component Replaced",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "af162ddb-d108-491f-a435-5e8fb5eef0f2",
+    "code": "asset_transferred",
+    "name": "Asset Transferred",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "eac92cd7-0fd6-413b-a207-46e7c5bf37f8",
+    "code": "asset_disposed",
+    "name": "Asset Disposed",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "228dc1ba-8143-4132-841f-3bd1e0159f3e",
+    "code": "asset_derecognized",
+    "name": "Asset Derecognized",
+    "category": "Fixed Assets",
+    "description": "Economic event type for Fixed Assets"
+  },
+  {
+    "id": "ee40255e-04b7-496d-ab0a-0058ae3f19ba",
+    "code": "investment_acquired",
+    "name": "Investment Acquired",
+    "category": "Investments",
+    "description": "Economic event type for Investments"
+  },
+  {
+    "id": "64b15cc0-ebdb-46d6-8990-b56b120d62b9",
+    "code": "investment_sold",
+    "name": "Investment Sold",
+    "category": "Investments",
+    "description": "Economic event type for Investments"
+  },
+  {
+    "id": "caa7ce76-9e02-469e-abeb-3c500d5bab68",
+    "code": "investment_income_recognized",
+    "name": "Investment Income Recognized",
+    "category": "Investments",
+    "description": "Economic event type for Investments"
+  },
+  {
+    "id": "ee051d84-51d2-4f39-8a97-870e4e162cd5",
+    "code": "investment_revalued",
+    "name": "Investment Revalued",
+    "category": "Investments",
+    "description": "Economic event type for Investments"
+  },
+  {
+    "id": "714c0c2c-9fd6-4fb6-81b7-3102fd732b0b",
+    "code": "investment_impairment_recorded",
+    "name": "Investment Impairment Recorded",
+    "category": "Investments",
+    "description": "Economic event type for Investments"
+  },
+  {
+    "id": "33f1f993-4667-4ef3-80e1-c02f85d4966a",
+    "code": "salary_accrued",
+    "name": "Salary Accrued",
+    "category": "Payroll",
+    "description": "Economic event type for Payroll"
+  },
+  {
+    "id": "df939bb8-452f-4c36-84f3-f94ec0732fa3",
+    "code": "salary_paid",
+    "name": "Salary Paid",
+    "category": "Payroll",
+    "description": "Economic event type for Payroll"
+  },
+  {
+    "id": "2ee541ae-be8a-4d8b-81a9-45ff89ccdb99",
+    "code": "bonus_accrued",
+    "name": "Bonus Accrued",
+    "category": "Payroll",
+    "description": "Economic event type for Payroll"
+  },
+  {
+    "id": "cb5eb40b-3f5c-4021-b792-01ef22160564",
+    "code": "payroll_tax_accrued",
+    "name": "Payroll Tax Accrued",
+    "category": "Payroll",
+    "description": "Economic event type for Payroll"
+  },
+  {
+    "id": "d0b05b17-f2a1-4a05-9dfb-bd23b78829de",
+    "code": "payroll_tax_paid",
+    "name": "Payroll Tax Paid",
+    "category": "Payroll",
+    "description": "Economic event type for Payroll"
+  },
+  {
+    "id": "96924eda-c952-46f7-b168-9e41204ed798",
+    "code": "tax_accrued",
+    "name": "Tax Accrued",
+    "category": "Tax",
+    "description": "Economic event type for Tax"
+  },
+  {
+    "id": "418bf3bd-ca67-40f9-bb2f-c8e241509009",
+    "code": "tax_paid",
+    "name": "Tax Paid",
+    "category": "Tax",
+    "description": "Economic event type for Tax"
+  },
+  {
+    "id": "ab148638-ffaf-4f51-be2c-2a2dfbb073d9",
+    "code": "tax_refund_received",
+    "name": "Tax Refund Received",
+    "category": "Tax",
+    "description": "Economic event type for Tax"
+  },
+  {
+    "id": "9f5d8b9a-f2b1-4d70-bed4-c54bf9d37aea",
+    "code": "deferred_tax_asset_recognized",
+    "name": "Deferred Tax Asset Recognized",
+    "category": "Tax",
+    "description": "Economic event type for Tax"
+  },
+  {
+    "id": "cdf245bd-166f-49b2-b590-a5f2e7e0bd80",
+    "code": "deferred_tax_liability_recognized",
+    "name": "Deferred Tax Liability Recognized",
+    "category": "Tax",
+    "description": "Economic event type for Tax"
+  },
+  {
+    "id": "fc97e2fe-cdb3-4ebd-b5a3-3c539598eb57",
+    "code": "provision_recorded",
+    "name": "Provision Recorded",
+    "category": "Provisions & Estimates",
+    "description": "Economic event type for Provisions & Estimates"
+  },
+  {
+    "id": "5ec9dc5a-ca3a-4ae7-b1dd-1f0614a19ba9",
+    "code": "provision_reversed",
+    "name": "Provision Reversed",
+    "category": "Provisions & Estimates",
+    "description": "Economic event type for Provisions & Estimates"
+  },
+  {
+    "id": "1cf318d9-0b81-4b9e-bd85-76ff88bb35fc",
+    "code": "accounting_estimate_updated",
+    "name": "Accounting Estimate Updated",
+    "category": "Provisions & Estimates",
+    "description": "Economic event type for Provisions & Estimates"
+  },
+  {
+    "id": "62b0c152-ad2b-4572-b5d3-a6b533b610ab",
+    "code": "fx_revaluation_recorded",
+    "name": "Fx Revaluation Recorded",
+    "category": "Financial Adjustments",
+    "description": "Economic event type for Financial Adjustments"
+  },
+  {
+    "id": "a26c15a6-b2ad-4346-8b7e-fd5ffaa91082",
+    "code": "fair_value_adjustment_recorded",
+    "name": "Fair Value Adjustment Recorded",
+    "category": "Financial Adjustments",
+    "description": "Economic event type for Financial Adjustments"
+  }
+]

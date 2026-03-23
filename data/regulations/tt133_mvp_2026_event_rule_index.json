@@ -1,0 +1,73 @@
+{
+  "index_id": "tt133_mvp_event_rule_index_v1",
+  "source": "Thong tu 133/2016/TT-BTC",
+  "generated_at": "2026-03-15T00:00:00",
+  "mapping_strategy": "event_type_exact_match",
+  "items": [
+    {
+      "event_code": "gop_von",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0001"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002"]
+    },
+    {
+      "event_code": "rut_tien",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0002"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_006"]
+    },
+    {
+      "event_code": "tam_ung",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0003"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_003"]
+    },
+    {
+      "event_code": "nop_tien",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0004"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002"]
+    },
+    {
+      "event_code": "hoan_ung",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0005"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_004"]
+    },
+    {
+      "event_code": "ban_hang_dich_vu",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0006", "TT133_MVP_POSTING_0007"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_005"]
+    },
+    {
+      "event_code": "mua_hang_dung_noi_bo",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0008", "TT133_MVP_POSTING_0009"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_005", "TT133_MVP_VAL_007"]
+    },
+    {
+      "event_code": "mua_dich_vu",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0010", "TT133_MVP_POSTING_0011"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_005", "TT133_MVP_VAL_008"]
+    },
+    {
+      "event_code": "mua_tscd",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0012"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_005"]
+    },
+    {
+      "event_code": "khau_hao",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0013"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002"]
+    },
+    {
+      "event_code": "nop_thue",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0014"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002"]
+    },
+    {
+      "event_code": "phan_bo_ccdc",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0015"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_009"]
+    },
+    {
+      "event_code": "phan_bo_chi_phi_tra_truoc",
+      "candidate_posting_method_ids": ["TT133_MVP_POSTING_0016"],
+      "required_validations": ["TT133_MVP_VAL_001", "TT133_MVP_VAL_002", "TT133_MVP_VAL_010"]
+    }
+  ]
+}

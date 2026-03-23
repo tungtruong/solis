@@ -1,0 +1,3629 @@
+{
+  "posting_rule_basis": {
+    "router": {
+      "schema_version": "1.0",
+      "document": "TT133_MVP_2026",
+      "router_id": "tt133_mvp_posting_router_v1",
+      "routing_order": [
+        "ingestion_source_validation",
+        "event_type_resolution",
+        "context_field_validation",
+        "classification_rule_evaluation",
+        "posting_template_selection",
+        "journal_balance_check",
+        "post_or_reject"
+      ],
+      "ambiguity_policy": {
+        "mode": "deterministic_only",
+        "otherwise": "reject_with_reason"
+      }
+    },
+    "classification_rules": {
+      "schema_version": "1.0",
+      "source": "TT133 MVP classification policy",
+      "rules": [
+        {
+          "classification_id": "TT133_MVP_CLASS_001",
+          "applies_to_event": "mua_hang_dung_noi_bo",
+          "output": "ccdc_allocate",
+          "when_all": [
+            {
+              "field": "amount",
+              "operator": ">",
+              "value": 3000000
+            },
+            {
+              "field": "useful_life_months",
+              "operator": ">",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "classification_id": "TT133_MVP_CLASS_002",
+          "applies_to_event": "mua_hang_dung_noi_bo",
+          "output": "direct_expense",
+          "when_any": [
+            {
+              "field": "amount",
+              "operator": "<=",
+              "value": 3000000
+            },
+            {
+              "field": "useful_life_months",
+              "operator": "<=",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "classification_id": "TT133_MVP_CLASS_003",
+          "applies_to_event": "mua_dich_vu",
+          "output": "prepaid_allocate",
+          "when_all": [
+            {
+              "field": "amount",
+              "operator": ">",
+              "value": 3000000
+            },
+            {
+              "field": "service_term_months",
+              "operator": ">",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "classification_id": "TT133_MVP_CLASS_004",
+          "applies_to_event": "mua_dich_vu",
+          "output": "direct_expense",
+          "when_any": [
+            {
+              "field": "amount",
+              "operator": "<=",
+              "value": 3000000
+            },
+            {
+              "field": "service_term_months",
+              "operator": "<=",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "demo_email": "demo@wssmeas.local",
+  "mock_case_list": [
+    {
+      "case_id": "CASE-2026-0001",
+      "step": 1,
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "event_date": "2026-03-01",
+      "counterparty_name": "Chủ sở hữu công ty",
+      "description": "Góp vốn đợt đầu để vận hành doanh nghiệp",
+      "payment_channel": "bank",
+      "amount": 300000000,
+      "reference_no": "CAP-2026-0001",
+      "debit_credit_flag": "credit"
+    },
+    {
+      "case_id": "CASE-2026-0002",
+      "step": 2,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-06",
+      "counterparty_name": "Bright Ads",
+      "description": "Hợp đồng marketing 24 tháng",
+      "invoice_no": "IN-2026-0101",
+      "seller_tax_code": "0109999999",
+      "goods_service_type": "service",
+      "amount_untaxed": 12000000,
+      "vat_amount": 1200000,
+      "amount_total": 13200000,
+      "service_term_months": 24,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0003",
+      "step": 3,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-07",
+      "counterparty_name": "Cloud Ops",
+      "description": "Phí dịch vụ cloud 1 quý",
+      "invoice_no": "IN-2026-0102",
+      "seller_tax_code": "0109999998",
+      "goods_service_type": "service",
+      "amount_untaxed": 2000000,
+      "vat_amount": 200000,
+      "amount_total": 2200000,
+      "service_term_months": 3,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0004",
+      "step": 4,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-08",
+      "counterparty_name": "Stationery Hub",
+      "description": "Mua CCDC dùng nội bộ",
+      "invoice_no": "IN-2026-0103",
+      "seller_tax_code": "0109999997",
+      "goods_service_type": "tools",
+      "amount_untaxed": 5909091,
+      "vat_amount": 590909,
+      "amount_total": 6500000,
+      "useful_life_months": 24,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0005",
+      "step": 5,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-09",
+      "counterparty_name": "Office Mart",
+      "description": "Mua vật tư tiêu hao",
+      "invoice_no": "IN-2026-0104",
+      "seller_tax_code": "0109999996",
+      "goods_service_type": "office_supply",
+      "amount_untaxed": 1636364,
+      "vat_amount": 163636,
+      "amount_total": 1800000,
+      "useful_life_months": 2,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0006",
+      "step": 6,
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-10",
+      "counterparty_name": "Viet Infra Tech",
+      "description": "Mua máy chủ lưu trữ",
+      "invoice_no": "IN-2026-0105",
+      "seller_tax_code": "0109999995",
+      "goods_service_type": "fixed_asset",
+      "amount_untaxed": 180000000,
+      "vat_amount": 18000000,
+      "amount_total": 198000000,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0007",
+      "step": 7,
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "event_date": "2026-03-12",
+      "counterparty_name": "An Phuc Trading",
+      "description": "Dịch vụ triển khai hệ thống",
+      "invoice_no": "OUT-2026-0301",
+      "buyer_tax_code": "0310001111",
+      "amount_untaxed": 25000000,
+      "vat_amount": 2500000,
+      "amount_total": 27500000,
+      "receipt_account": "131",
+      "has_vat": true,
+      "payment_status": "unpaid"
+    },
+    {
+      "case_id": "CASE-2026-0008",
+      "step": 8,
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "event_date": "2026-03-20",
+      "counterparty_name": "Kho bạc Nhà nước",
+      "description": "Nộp thuế GTGT tháng 03/2026",
+      "amount": 3500000,
+      "reference_no": "STMT-2026-0301",
+      "debit_credit_flag": "debit",
+      "tax_payable_account": "3331",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0009",
+      "step": 9,
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "event_date": "2026-03-21",
+      "counterparty_name": "Nhân viên Nguyễn A",
+      "description": "Tạm ứng công tác phí",
+      "amount": 5000000,
+      "reference_no": "STMT-2026-0302",
+      "debit_credit_flag": "debit",
+      "payment_channel": "bank",
+      "person_name": "Nguyễn A"
+    },
+    {
+      "case_id": "CASE-2026-0010",
+      "step": 10,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-22",
+      "counterparty_name": "Công ty Vận hành Sao Việt",
+      "description": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 1",
+      "invoice_no": "IN-2026-0010",
+      "seller_tax_code": "0190000010",
+      "goods_service_type": "service",
+      "amount_untaxed": 4800000,
+      "vat_amount": 480000,
+      "amount_total": 5280000,
+      "service_term_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0011",
+      "step": 11,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-23",
+      "counterparty_name": "Siêu thị Văn phòng phẩm Hà Nội",
+      "description": "Mua vật tư văn phòng định kỳ - đợt 2",
+      "invoice_no": "IN-2026-0011",
+      "seller_tax_code": "0190000011",
+      "goods_service_type": "office_supply",
+      "amount_untaxed": 2220000,
+      "vat_amount": 222000,
+      "amount_total": 2442000,
+      "useful_life_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0012",
+      "step": 12,
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "event_date": "2026-03-24",
+      "counterparty_name": "Công ty Cổ phần Minh Long",
+      "description": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 3",
+      "invoice_no": "OUT-2026-0012",
+      "buyer_tax_code": "0310000012",
+      "amount_untaxed": 32360000,
+      "vat_amount": 3236000,
+      "amount_total": 35596000,
+      "payment_status": "unpaid",
+      "receipt_account": "131",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0013",
+      "step": 13,
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "event_date": "2026-03-25",
+      "counterparty_name": "Kho bạc Nhà nước",
+      "description": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 4",
+      "amount": 4650000,
+      "reference_no": "STMT-2026-0013",
+      "debit_credit_flag": "debit",
+      "tax_payable_account": "3331",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0014",
+      "step": 14,
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "event_date": "2026-03-26",
+      "counterparty_name": "Nhân viên phụ trách dự án",
+      "description": "Tạm ứng chi phí công tác nội bộ - đợt 5",
+      "amount": 4100000,
+      "reference_no": "STMT-2026-0014",
+      "debit_credit_flag": "debit",
+      "payment_channel": "bank",
+      "person_name": "Lê Quang Anh"
+    },
+    {
+      "case_id": "CASE-2026-0015",
+      "step": 15,
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "event_date": "2026-03-27",
+      "counterparty_name": "Thành viên góp vốn",
+      "description": "Bổ sung vốn lưu động đợt tiếp theo - đợt 6",
+      "amount": 150750000,
+      "reference_no": "STMT-2026-0015",
+      "debit_credit_flag": "credit",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0016",
+      "step": 16,
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-28",
+      "counterparty_name": "Công ty Thiết bị Kỹ thuật Việt",
+      "description": "Mua mới thiết bị phục vụ vận hành - đợt 7",
+      "invoice_no": "IN-2026-0016",
+      "seller_tax_code": "0190000016",
+      "goods_service_type": "fixed_asset",
+      "amount_untaxed": 95720000,
+      "vat_amount": 9572000,
+      "amount_total": 105292000,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0017",
+      "step": 17,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-29",
+      "counterparty_name": "Công ty Vận hành Sao Việt",
+      "description": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 8",
+      "invoice_no": "IN-2026-0017",
+      "seller_tax_code": "0190000017",
+      "goods_service_type": "service",
+      "amount_untaxed": 5640000,
+      "vat_amount": 564000,
+      "amount_total": 6204000,
+      "service_term_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0018",
+      "step": 18,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-03-30",
+      "counterparty_name": "Siêu thị Văn phòng phẩm Hà Nội",
+      "description": "Mua vật tư văn phòng định kỳ - đợt 9",
+      "invoice_no": "IN-2026-0018",
+      "seller_tax_code": "0190000018",
+      "goods_service_type": "office_supply",
+      "amount_untaxed": 3060000,
+      "vat_amount": 306000,
+      "amount_total": 3366000,
+      "useful_life_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0019",
+      "step": 19,
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "event_date": "2026-03-31",
+      "counterparty_name": "Công ty Cổ phần Minh Long",
+      "description": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 10",
+      "invoice_no": "OUT-2026-0019",
+      "buyer_tax_code": "0310000019",
+      "amount_untaxed": 33620000,
+      "vat_amount": 3362000,
+      "amount_total": 36982000,
+      "payment_status": "unpaid",
+      "receipt_account": "131",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0020",
+      "step": 20,
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-01",
+      "counterparty_name": "Kho bạc Nhà nước",
+      "description": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 11",
+      "amount": 5700000,
+      "reference_no": "STMT-2026-0020",
+      "debit_credit_flag": "debit",
+      "tax_payable_account": "3331",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0021",
+      "step": 21,
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-02",
+      "counterparty_name": "Nhân viên phụ trách dự án",
+      "description": "Tạm ứng chi phí công tác nội bộ - đợt 12",
+      "amount": 5150000,
+      "reference_no": "STMT-2026-0021",
+      "debit_credit_flag": "debit",
+      "payment_channel": "bank",
+      "person_name": "Lê Quang Anh"
+    },
+    {
+      "case_id": "CASE-2026-0022",
+      "step": 22,
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-03",
+      "counterparty_name": "Thành viên góp vốn",
+      "description": "Bổ sung vốn lưu động đợt tiếp theo - đợt 13",
+      "amount": 151800000,
+      "reference_no": "STMT-2026-0022",
+      "debit_credit_flag": "credit",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0023",
+      "step": 23,
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-04",
+      "counterparty_name": "Công ty Thiết bị Kỹ thuật Việt",
+      "description": "Mua mới thiết bị phục vụ vận hành - đợt 14",
+      "invoice_no": "IN-2026-0023",
+      "seller_tax_code": "0190000023",
+      "goods_service_type": "fixed_asset",
+      "amount_untaxed": 96560000,
+      "vat_amount": 9656000,
+      "amount_total": 106216000,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0024",
+      "step": 24,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-05",
+      "counterparty_name": "Công ty Vận hành Sao Việt",
+      "description": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 15",
+      "invoice_no": "IN-2026-0024",
+      "seller_tax_code": "0190000024",
+      "goods_service_type": "service",
+      "amount_untaxed": 6480000,
+      "vat_amount": 648000,
+      "amount_total": 7128000,
+      "service_term_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0025",
+      "step": 25,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-06",
+      "counterparty_name": "Siêu thị Văn phòng phẩm Hà Nội",
+      "description": "Mua vật tư văn phòng định kỳ - đợt 16",
+      "invoice_no": "IN-2026-0025",
+      "seller_tax_code": "0190000025",
+      "goods_service_type": "office_supply",
+      "amount_untaxed": 3900000,
+      "vat_amount": 390000,
+      "amount_total": 4290000,
+      "useful_life_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0026",
+      "step": 26,
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "event_date": "2026-04-07",
+      "counterparty_name": "Công ty Cổ phần Minh Long",
+      "description": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 17",
+      "invoice_no": "OUT-2026-0026",
+      "buyer_tax_code": "0310000026",
+      "amount_untaxed": 34880000,
+      "vat_amount": 3488000,
+      "amount_total": 38368000,
+      "payment_status": "unpaid",
+      "receipt_account": "131",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0027",
+      "step": 27,
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-08",
+      "counterparty_name": "Kho bạc Nhà nước",
+      "description": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 18",
+      "amount": 6750000,
+      "reference_no": "STMT-2026-0027",
+      "debit_credit_flag": "debit",
+      "tax_payable_account": "3331",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0028",
+      "step": 28,
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-09",
+      "counterparty_name": "Nhân viên phụ trách dự án",
+      "description": "Tạm ứng chi phí công tác nội bộ - đợt 19",
+      "amount": 6200000,
+      "reference_no": "STMT-2026-0028",
+      "debit_credit_flag": "debit",
+      "payment_channel": "bank",
+      "person_name": "Lê Quang Anh"
+    },
+    {
+      "case_id": "CASE-2026-0029",
+      "step": 29,
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-10",
+      "counterparty_name": "Thành viên góp vốn",
+      "description": "Bổ sung vốn lưu động đợt tiếp theo - đợt 20",
+      "amount": 152850000,
+      "reference_no": "STMT-2026-0029",
+      "debit_credit_flag": "credit",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0030",
+      "step": 30,
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-11",
+      "counterparty_name": "Công ty Thiết bị Kỹ thuật Việt",
+      "description": "Mua mới thiết bị phục vụ vận hành - đợt 21",
+      "invoice_no": "IN-2026-0030",
+      "seller_tax_code": "0190000030",
+      "goods_service_type": "fixed_asset",
+      "amount_untaxed": 97400000,
+      "vat_amount": 9740000,
+      "amount_total": 107140000,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0031",
+      "step": 31,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-12",
+      "counterparty_name": "Công ty Vận hành Sao Việt",
+      "description": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 22",
+      "invoice_no": "IN-2026-0031",
+      "seller_tax_code": "0190000031",
+      "goods_service_type": "service",
+      "amount_untaxed": 7320000,
+      "vat_amount": 732000,
+      "amount_total": 8052000,
+      "service_term_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0032",
+      "step": 32,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-13",
+      "counterparty_name": "Siêu thị Văn phòng phẩm Hà Nội",
+      "description": "Mua vật tư văn phòng định kỳ - đợt 23",
+      "invoice_no": "IN-2026-0032",
+      "seller_tax_code": "0190000032",
+      "goods_service_type": "office_supply",
+      "amount_untaxed": 4740000,
+      "vat_amount": 474000,
+      "amount_total": 5214000,
+      "useful_life_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0033",
+      "step": 33,
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "event_date": "2026-04-14",
+      "counterparty_name": "Công ty Cổ phần Minh Long",
+      "description": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 24",
+      "invoice_no": "OUT-2026-0033",
+      "buyer_tax_code": "0310000033",
+      "amount_untaxed": 36140000,
+      "vat_amount": 3614000,
+      "amount_total": 39754000,
+      "payment_status": "unpaid",
+      "receipt_account": "131",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0034",
+      "step": 34,
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-15",
+      "counterparty_name": "Kho bạc Nhà nước",
+      "description": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 25",
+      "amount": 7800000,
+      "reference_no": "STMT-2026-0034",
+      "debit_credit_flag": "debit",
+      "tax_payable_account": "3331",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0035",
+      "step": 35,
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-16",
+      "counterparty_name": "Nhân viên phụ trách dự án",
+      "description": "Tạm ứng chi phí công tác nội bộ - đợt 26",
+      "amount": 7250000,
+      "reference_no": "STMT-2026-0035",
+      "debit_credit_flag": "debit",
+      "payment_channel": "bank",
+      "person_name": "Lê Quang Anh"
+    },
+    {
+      "case_id": "CASE-2026-0036",
+      "step": 36,
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "event_date": "2026-04-17",
+      "counterparty_name": "Thành viên góp vốn",
+      "description": "Bổ sung vốn lưu động đợt tiếp theo - đợt 27",
+      "amount": 153900000,
+      "reference_no": "STMT-2026-0036",
+      "debit_credit_flag": "credit",
+      "payment_channel": "bank"
+    },
+    {
+      "case_id": "CASE-2026-0037",
+      "step": 37,
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-18",
+      "counterparty_name": "Công ty Thiết bị Kỹ thuật Việt",
+      "description": "Mua mới thiết bị phục vụ vận hành - đợt 28",
+      "invoice_no": "IN-2026-0037",
+      "seller_tax_code": "0190000037",
+      "goods_service_type": "fixed_asset",
+      "amount_untaxed": 98240000,
+      "vat_amount": 9824000,
+      "amount_total": 108064000,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0038",
+      "step": 38,
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-19",
+      "counterparty_name": "Công ty Vận hành Sao Việt",
+      "description": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 29",
+      "invoice_no": "IN-2026-0038",
+      "seller_tax_code": "0190000038",
+      "goods_service_type": "service",
+      "amount_untaxed": 8160000,
+      "vat_amount": 816000,
+      "amount_total": 8976000,
+      "service_term_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    },
+    {
+      "case_id": "CASE-2026-0039",
+      "step": 39,
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "event_date": "2026-04-20",
+      "counterparty_name": "Siêu thị Văn phòng phẩm Hà Nội",
+      "description": "Mua vật tư văn phòng định kỳ - đợt 30",
+      "invoice_no": "IN-2026-0039",
+      "seller_tax_code": "0190000039",
+      "goods_service_type": "office_supply",
+      "amount_untaxed": 5580000,
+      "vat_amount": 558000,
+      "amount_total": 6138000,
+      "useful_life_months": 1,
+      "payment_account": "331",
+      "has_vat": true
+    }
+  ],
+  "ui_case_items": [
+    {
+      "id": "CASE-2026-0001",
+      "code": "CS-2026-0001",
+      "title": "Góp vốn - Góp vốn đợt đầu để vận hành doanh nghiệp",
+      "partner": "Chủ sở hữu công ty",
+      "amount": "300,000,000 VND",
+      "updatedAt": "2026-03-01",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "reference_no": "CAP-2026-0001",
+      "timeline": [
+        {
+          "id": "CASE-2026-0001-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho gop_von từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0001-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Góp vốn đợt đầu để vận hành doanh nghiệp",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0001-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=gop_von theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là góp vốn theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0002",
+      "code": "CS-2026-0002",
+      "title": "Mua dịch vụ - Hợp đồng marketing 24 tháng",
+      "partner": "Bright Ads",
+      "amount": "13,200,000 VND",
+      "updatedAt": "2026-03-06",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0101",
+      "timeline": [
+        {
+          "id": "CASE-2026-0002-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0002-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Hợp đồng marketing 24 tháng",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0002-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0003",
+      "code": "CS-2026-0003",
+      "title": "Mua dịch vụ - Phí dịch vụ cloud 1 quý",
+      "partner": "Cloud Ops",
+      "amount": "2,200,000 VND",
+      "updatedAt": "2026-03-07",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0102",
+      "timeline": [
+        {
+          "id": "CASE-2026-0003-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0003-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Phí dịch vụ cloud 1 quý",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0003-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0004",
+      "code": "CS-2026-0004",
+      "title": "Mua hàng dùng nội bộ - Mua CCDC dùng nội bộ",
+      "partner": "Stationery Hub",
+      "amount": "6,500,000 VND",
+      "updatedAt": "2026-03-08",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0103",
+      "timeline": [
+        {
+          "id": "CASE-2026-0004-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0004-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua CCDC dùng nội bộ",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0004-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0005",
+      "code": "CS-2026-0005",
+      "title": "Mua hàng dùng nội bộ - Mua vật tư tiêu hao",
+      "partner": "Office Mart",
+      "amount": "1,800,000 VND",
+      "updatedAt": "2026-03-09",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0104",
+      "timeline": [
+        {
+          "id": "CASE-2026-0005-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0005-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua vật tư tiêu hao",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0005-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0006",
+      "code": "CS-2026-0006",
+      "title": "Mua tài sản cố định - Mua máy chủ lưu trữ",
+      "partner": "Viet Infra Tech",
+      "amount": "198,000,000 VND",
+      "updatedAt": "2026-03-10",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0105",
+      "timeline": [
+        {
+          "id": "CASE-2026-0006-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_tscd từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0006-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua máy chủ lưu trữ",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0006-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_tscd theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "device_invoice_041.pdf",
+        "delivery_note_991.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua tài sản cố định theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0007",
+      "code": "CS-2026-0007",
+      "title": "Bán hàng dịch vụ - Dịch vụ triển khai hệ thống",
+      "partner": "An Phuc Trading",
+      "amount": "27,500,000 VND",
+      "updatedAt": "2026-03-12",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "reference_no": "OUT-2026-0301",
+      "timeline": [
+        {
+          "id": "CASE-2026-0007-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho ban_hang_dich_vu từ sales_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0007-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Dịch vụ triển khai hệ thống",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0007-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=ban_hang_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "delivery_note_991.pdf",
+        "appendix_scope_work.png",
+        "bao_cao_tai_chinh_dummy.docx",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là bán hàng dịch vụ theo nguồn sales_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0008",
+      "code": "CS-2026-0008",
+      "title": "Nộp thuế - Nộp thuế GTGT tháng 03/2026",
+      "partner": "Kho bạc Nhà nước",
+      "amount": "3,500,000 VND",
+      "updatedAt": "2026-03-20",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0301",
+      "timeline": [
+        {
+          "id": "CASE-2026-0008-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho nop_thue từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0008-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Nộp thuế GTGT tháng 03/2026",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0008-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=nop_thue theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là nộp thuế theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0009",
+      "code": "CS-2026-0009",
+      "title": "Tạm ứng - Tạm ứng công tác phí",
+      "partner": "Nhân viên Nguyễn A",
+      "amount": "5,000,000 VND",
+      "updatedAt": "2026-03-21",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0302",
+      "timeline": [
+        {
+          "id": "CASE-2026-0009-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho tam_ung từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0009-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Tạm ứng công tác phí",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0009-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=tam_ung theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là tạm ứng theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0010",
+      "code": "CS-2026-0010",
+      "title": "Mua dịch vụ - Thuê dịch vụ vận hành hệ thống theo tháng - đợt 1",
+      "partner": "Công ty Vận hành Sao Việt",
+      "amount": "5,280,000 VND",
+      "updatedAt": "2026-03-22",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0010",
+      "timeline": [
+        {
+          "id": "CASE-2026-0010-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0010-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 1",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0010-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0011",
+      "code": "CS-2026-0011",
+      "title": "Mua hàng dùng nội bộ - Mua vật tư văn phòng định kỳ - đợt 2",
+      "partner": "Siêu thị Văn phòng phẩm Hà Nội",
+      "amount": "2,442,000 VND",
+      "updatedAt": "2026-03-23",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0011",
+      "timeline": [
+        {
+          "id": "CASE-2026-0011-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0011-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua vật tư văn phòng định kỳ - đợt 2",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0011-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0012",
+      "code": "CS-2026-0012",
+      "title": "Bán hàng dịch vụ - Cung cấp gói dịch vụ tư vấn triển khai - đợt 3",
+      "partner": "Công ty Cổ phần Minh Long",
+      "amount": "35,596,000 VND",
+      "updatedAt": "2026-03-24",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "reference_no": "OUT-2026-0012",
+      "timeline": [
+        {
+          "id": "CASE-2026-0012-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho ban_hang_dich_vu từ sales_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0012-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 3",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0012-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=ban_hang_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "delivery_note_991.pdf",
+        "appendix_scope_work.png",
+        "bao_cao_tai_chinh_dummy.docx",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là bán hàng dịch vụ theo nguồn sales_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0013",
+      "code": "CS-2026-0013",
+      "title": "Nộp thuế - Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 4",
+      "partner": "Kho bạc Nhà nước",
+      "amount": "4,650,000 VND",
+      "updatedAt": "2026-03-25",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0013",
+      "timeline": [
+        {
+          "id": "CASE-2026-0013-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho nop_thue từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0013-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 4",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0013-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=nop_thue theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là nộp thuế theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0014",
+      "code": "CS-2026-0014",
+      "title": "Tạm ứng - Tạm ứng chi phí công tác nội bộ - đợt 5",
+      "partner": "Nhân viên phụ trách dự án",
+      "amount": "4,100,000 VND",
+      "updatedAt": "2026-03-26",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0014",
+      "timeline": [
+        {
+          "id": "CASE-2026-0014-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho tam_ung từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0014-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Tạm ứng chi phí công tác nội bộ - đợt 5",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0014-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=tam_ung theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là tạm ứng theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0015",
+      "code": "CS-2026-0015",
+      "title": "Góp vốn - Bổ sung vốn lưu động đợt tiếp theo - đợt 6",
+      "partner": "Thành viên góp vốn",
+      "amount": "150,750,000 VND",
+      "updatedAt": "2026-03-27",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0015",
+      "timeline": [
+        {
+          "id": "CASE-2026-0015-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho gop_von từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0015-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Bổ sung vốn lưu động đợt tiếp theo - đợt 6",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0015-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=gop_von theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là góp vốn theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0016",
+      "code": "CS-2026-0016",
+      "title": "Mua tài sản cố định - Mua mới thiết bị phục vụ vận hành - đợt 7",
+      "partner": "Công ty Thiết bị Kỹ thuật Việt",
+      "amount": "105,292,000 VND",
+      "updatedAt": "2026-03-28",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0016",
+      "timeline": [
+        {
+          "id": "CASE-2026-0016-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_tscd từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0016-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua mới thiết bị phục vụ vận hành - đợt 7",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0016-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_tscd theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "device_invoice_041.pdf",
+        "delivery_note_991.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua tài sản cố định theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0017",
+      "code": "CS-2026-0017",
+      "title": "Mua dịch vụ - Thuê dịch vụ vận hành hệ thống theo tháng - đợt 8",
+      "partner": "Công ty Vận hành Sao Việt",
+      "amount": "6,204,000 VND",
+      "updatedAt": "2026-03-29",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0017",
+      "timeline": [
+        {
+          "id": "CASE-2026-0017-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0017-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 8",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0017-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0018",
+      "code": "CS-2026-0018",
+      "title": "Mua hàng dùng nội bộ - Mua vật tư văn phòng định kỳ - đợt 9",
+      "partner": "Siêu thị Văn phòng phẩm Hà Nội",
+      "amount": "3,366,000 VND",
+      "updatedAt": "2026-03-30",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0018",
+      "timeline": [
+        {
+          "id": "CASE-2026-0018-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0018-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua vật tư văn phòng định kỳ - đợt 9",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0018-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0019",
+      "code": "CS-2026-0019",
+      "title": "Bán hàng dịch vụ - Cung cấp gói dịch vụ tư vấn triển khai - đợt 10",
+      "partner": "Công ty Cổ phần Minh Long",
+      "amount": "36,982,000 VND",
+      "updatedAt": "2026-03-31",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "reference_no": "OUT-2026-0019",
+      "timeline": [
+        {
+          "id": "CASE-2026-0019-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho ban_hang_dich_vu từ sales_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0019-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 10",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0019-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=ban_hang_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "delivery_note_991.pdf",
+        "appendix_scope_work.png",
+        "bao_cao_tai_chinh_dummy.docx",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là bán hàng dịch vụ theo nguồn sales_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0020",
+      "code": "CS-2026-0020",
+      "title": "Nộp thuế - Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 11",
+      "partner": "Kho bạc Nhà nước",
+      "amount": "5,700,000 VND",
+      "updatedAt": "2026-04-01",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0020",
+      "timeline": [
+        {
+          "id": "CASE-2026-0020-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho nop_thue từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0020-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 11",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0020-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=nop_thue theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là nộp thuế theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0021",
+      "code": "CS-2026-0021",
+      "title": "Tạm ứng - Tạm ứng chi phí công tác nội bộ - đợt 12",
+      "partner": "Nhân viên phụ trách dự án",
+      "amount": "5,150,000 VND",
+      "updatedAt": "2026-04-02",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0021",
+      "timeline": [
+        {
+          "id": "CASE-2026-0021-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho tam_ung từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0021-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Tạm ứng chi phí công tác nội bộ - đợt 12",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0021-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=tam_ung theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là tạm ứng theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0022",
+      "code": "CS-2026-0022",
+      "title": "Góp vốn - Bổ sung vốn lưu động đợt tiếp theo - đợt 13",
+      "partner": "Thành viên góp vốn",
+      "amount": "151,800,000 VND",
+      "updatedAt": "2026-04-03",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0022",
+      "timeline": [
+        {
+          "id": "CASE-2026-0022-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho gop_von từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0022-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Bổ sung vốn lưu động đợt tiếp theo - đợt 13",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0022-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=gop_von theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là góp vốn theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0023",
+      "code": "CS-2026-0023",
+      "title": "Mua tài sản cố định - Mua mới thiết bị phục vụ vận hành - đợt 14",
+      "partner": "Công ty Thiết bị Kỹ thuật Việt",
+      "amount": "106,216,000 VND",
+      "updatedAt": "2026-04-04",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0023",
+      "timeline": [
+        {
+          "id": "CASE-2026-0023-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_tscd từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0023-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua mới thiết bị phục vụ vận hành - đợt 14",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0023-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_tscd theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "device_invoice_041.pdf",
+        "delivery_note_991.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua tài sản cố định theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0024",
+      "code": "CS-2026-0024",
+      "title": "Mua dịch vụ - Thuê dịch vụ vận hành hệ thống theo tháng - đợt 15",
+      "partner": "Công ty Vận hành Sao Việt",
+      "amount": "7,128,000 VND",
+      "updatedAt": "2026-04-05",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0024",
+      "timeline": [
+        {
+          "id": "CASE-2026-0024-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0024-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 15",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0024-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0025",
+      "code": "CS-2026-0025",
+      "title": "Mua hàng dùng nội bộ - Mua vật tư văn phòng định kỳ - đợt 16",
+      "partner": "Siêu thị Văn phòng phẩm Hà Nội",
+      "amount": "4,290,000 VND",
+      "updatedAt": "2026-04-06",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0025",
+      "timeline": [
+        {
+          "id": "CASE-2026-0025-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0025-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua vật tư văn phòng định kỳ - đợt 16",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0025-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0026",
+      "code": "CS-2026-0026",
+      "title": "Bán hàng dịch vụ - Cung cấp gói dịch vụ tư vấn triển khai - đợt 17",
+      "partner": "Công ty Cổ phần Minh Long",
+      "amount": "38,368,000 VND",
+      "updatedAt": "2026-04-07",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "reference_no": "OUT-2026-0026",
+      "timeline": [
+        {
+          "id": "CASE-2026-0026-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho ban_hang_dich_vu từ sales_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0026-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 17",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0026-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=ban_hang_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "delivery_note_991.pdf",
+        "appendix_scope_work.png",
+        "bao_cao_tai_chinh_dummy.docx",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là bán hàng dịch vụ theo nguồn sales_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0027",
+      "code": "CS-2026-0027",
+      "title": "Nộp thuế - Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 18",
+      "partner": "Kho bạc Nhà nước",
+      "amount": "6,750,000 VND",
+      "updatedAt": "2026-04-08",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0027",
+      "timeline": [
+        {
+          "id": "CASE-2026-0027-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho nop_thue từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0027-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 18",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0027-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=nop_thue theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là nộp thuế theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0028",
+      "code": "CS-2026-0028",
+      "title": "Tạm ứng - Tạm ứng chi phí công tác nội bộ - đợt 19",
+      "partner": "Nhân viên phụ trách dự án",
+      "amount": "6,200,000 VND",
+      "updatedAt": "2026-04-09",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0028",
+      "timeline": [
+        {
+          "id": "CASE-2026-0028-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho tam_ung từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0028-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Tạm ứng chi phí công tác nội bộ - đợt 19",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0028-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=tam_ung theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là tạm ứng theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0029",
+      "code": "CS-2026-0029",
+      "title": "Góp vốn - Bổ sung vốn lưu động đợt tiếp theo - đợt 20",
+      "partner": "Thành viên góp vốn",
+      "amount": "152,850,000 VND",
+      "updatedAt": "2026-04-10",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0029",
+      "timeline": [
+        {
+          "id": "CASE-2026-0029-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho gop_von từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0029-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Bổ sung vốn lưu động đợt tiếp theo - đợt 20",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0029-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=gop_von theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là góp vốn theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0030",
+      "code": "CS-2026-0030",
+      "title": "Mua tài sản cố định - Mua mới thiết bị phục vụ vận hành - đợt 21",
+      "partner": "Công ty Thiết bị Kỹ thuật Việt",
+      "amount": "107,140,000 VND",
+      "updatedAt": "2026-04-11",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0030",
+      "timeline": [
+        {
+          "id": "CASE-2026-0030-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_tscd từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0030-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua mới thiết bị phục vụ vận hành - đợt 21",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0030-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_tscd theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "device_invoice_041.pdf",
+        "delivery_note_991.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua tài sản cố định theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0031",
+      "code": "CS-2026-0031",
+      "title": "Mua dịch vụ - Thuê dịch vụ vận hành hệ thống theo tháng - đợt 22",
+      "partner": "Công ty Vận hành Sao Việt",
+      "amount": "8,052,000 VND",
+      "updatedAt": "2026-04-12",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0031",
+      "timeline": [
+        {
+          "id": "CASE-2026-0031-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0031-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 22",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0031-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0032",
+      "code": "CS-2026-0032",
+      "title": "Mua hàng dùng nội bộ - Mua vật tư văn phòng định kỳ - đợt 23",
+      "partner": "Siêu thị Văn phòng phẩm Hà Nội",
+      "amount": "5,214,000 VND",
+      "updatedAt": "2026-04-13",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0032",
+      "timeline": [
+        {
+          "id": "CASE-2026-0032-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0032-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua vật tư văn phòng định kỳ - đợt 23",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0032-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0033",
+      "code": "CS-2026-0033",
+      "title": "Bán hàng dịch vụ - Cung cấp gói dịch vụ tư vấn triển khai - đợt 24",
+      "partner": "Công ty Cổ phần Minh Long",
+      "amount": "39,754,000 VND",
+      "updatedAt": "2026-04-14",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "reference_no": "OUT-2026-0033",
+      "timeline": [
+        {
+          "id": "CASE-2026-0033-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho ban_hang_dich_vu từ sales_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0033-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Cung cấp gói dịch vụ tư vấn triển khai - đợt 24",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0033-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=ban_hang_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "delivery_note_991.pdf",
+        "appendix_scope_work.png",
+        "bao_cao_tai_chinh_dummy.docx",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là bán hàng dịch vụ theo nguồn sales_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0034",
+      "code": "CS-2026-0034",
+      "title": "Nộp thuế - Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 25",
+      "partner": "Kho bạc Nhà nước",
+      "amount": "7,800,000 VND",
+      "updatedAt": "2026-04-15",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0034",
+      "timeline": [
+        {
+          "id": "CASE-2026-0034-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho nop_thue từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0034-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Nộp thuế GTGT theo tờ khai kỳ gần nhất - đợt 25",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0034-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=nop_thue theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là nộp thuế theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0035",
+      "code": "CS-2026-0035",
+      "title": "Tạm ứng - Tạm ứng chi phí công tác nội bộ - đợt 26",
+      "partner": "Nhân viên phụ trách dự án",
+      "amount": "7,250,000 VND",
+      "updatedAt": "2026-04-16",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0035",
+      "timeline": [
+        {
+          "id": "CASE-2026-0035-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho tam_ung từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0035-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Tạm ứng chi phí công tác nội bộ - đợt 26",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0035-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=tam_ung theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là tạm ứng theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0036",
+      "code": "CS-2026-0036",
+      "title": "Góp vốn - Bổ sung vốn lưu động đợt tiếp theo - đợt 27",
+      "partner": "Thành viên góp vốn",
+      "amount": "153,900,000 VND",
+      "updatedAt": "2026-04-17",
+      "status": "moi",
+      "statusLabel": "Mới",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "reference_no": "STMT-2026-0036",
+      "timeline": [
+        {
+          "id": "CASE-2026-0036-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho gop_von từ bank_statement.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0036-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Bổ sung vốn lưu động đợt tiếp theo - đợt 27",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0036-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=gop_von theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "payment_order_772.pdf",
+        "bao_cao_tai_chinh_q1_2026.xml",
+        "bao_cao_tai_chinh_dummy.doc",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là góp vốn theo nguồn bank_statement.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0037",
+      "code": "CS-2026-0037",
+      "title": "Mua tài sản cố định - Mua mới thiết bị phục vụ vận hành - đợt 28",
+      "partner": "Công ty Thiết bị Kỹ thuật Việt",
+      "amount": "108,064,000 VND",
+      "updatedAt": "2026-04-18",
+      "status": "hoan_tat",
+      "statusLabel": "Hoàn tất",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0037",
+      "timeline": [
+        {
+          "id": "CASE-2026-0037-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_tscd từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0037-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua mới thiết bị phục vụ vận hành - đợt 28",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0037-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_tscd theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "device_invoice_041.pdf",
+        "delivery_note_991.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua tài sản cố định theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0038",
+      "code": "CS-2026-0038",
+      "title": "Mua dịch vụ - Thuê dịch vụ vận hành hệ thống theo tháng - đợt 29",
+      "partner": "Công ty Vận hành Sao Việt",
+      "amount": "8,976,000 VND",
+      "updatedAt": "2026-04-19",
+      "status": "dang_xu_ly",
+      "statusLabel": "Đang xử lý",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0038",
+      "timeline": [
+        {
+          "id": "CASE-2026-0038-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_dich_vu từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0038-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Thuê dịch vụ vận hành hệ thống theo tháng - đợt 29",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0038-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_dich_vu theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua dịch vụ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    },
+    {
+      "id": "CASE-2026-0039",
+      "code": "CS-2026-0039",
+      "title": "Mua hàng dùng nội bộ - Mua vật tư văn phòng định kỳ - đợt 30",
+      "partner": "Siêu thị Văn phòng phẩm Hà Nội",
+      "amount": "6,138,000 VND",
+      "updatedAt": "2026-04-20",
+      "status": "cho_duyet",
+      "statusLabel": "Chờ duyệt",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "reference_no": "IN-2026-0039",
+      "timeline": [
+        {
+          "id": "CASE-2026-0039-a1",
+          "kind": "analysis",
+          "title": "Phân tích AI",
+          "body": "Đã đối chiếu dữ liệu nguồn cho mua_hang_dung_noi_bo từ purchase_invoice_xml.",
+          "time": "09:10"
+        },
+        {
+          "id": "CASE-2026-0039-e1",
+          "kind": "event",
+          "title": "Sự kiện kinh tế",
+          "body": "Mua vật tư văn phòng định kỳ - đợt 30",
+          "time": "09:12"
+        },
+        {
+          "id": "CASE-2026-0039-e2",
+          "kind": "event",
+          "title": "Định tuyến posting rule",
+          "body": "Ánh xạ event_type=mua_hang_dung_noi_bo theo TT133 MVP rule index.",
+          "time": "09:14"
+        }
+      ],
+      "evidence": [
+        "ABC_invoice.pdf",
+        "marketing_contract_signed.pdf",
+        "vendor_tax_lookup.png",
+        "bao_cao_tai_chinh_q1_2026.xml"
+      ],
+      "reasoning": [
+        "Nghiệp vụ được nhận diện là mua hàng dùng nội bộ theo nguồn purchase_invoice_xml.",
+        "Hệ thống chọn phương pháp định khoản theo rule-file, không hardcode trong UI."
+      ]
+    }
+  ],
+  "input_summary": {
+    "total_events": 39,
+    "accepted_events": 39,
+    "rejected_events": 0
+  },
+  "rejected_events": [],
+  "journal_entries": [
+    {
+      "entry_id": "JE-20260317150201636529-4285efd1",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0001",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "112",
+          "amount": 300000000.0
+        },
+        {
+          "side": "credit",
+          "account": "411",
+          "amount": 300000000.0
+        }
+      ],
+      "normal_narration": "Chủ sở hữu vừa góp vốn 300 triệu đồng vào công ty.",
+      "meta": {
+        "source_reference": "CAP-2026-0001",
+        "event_date": "2026-03-01"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-2eb2cc5d",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "prepaid_allocate",
+      "method_id": "TT133_MVP_POSTING_0010",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "242",
+          "amount": 12000000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 1200000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 13200000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Bright Ads số tiền 13,2 triệu đồng để mua dịch vụ Hợp đồng marketing 24 tháng.",
+      "meta": {
+        "source_reference": "IN-2026-0101",
+        "event_date": "2026-03-06"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-683cfa89",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0011",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 2000000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 200000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 2200000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Cloud Ops số tiền 2,2 triệu đồng để mua dịch vụ Phí dịch vụ cloud 1 quý.",
+      "meta": {
+        "source_reference": "IN-2026-0102",
+        "event_date": "2026-03-07"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-1bd1a155",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "ccdc_allocate",
+      "method_id": "TT133_MVP_POSTING_0008",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "153",
+          "amount": 5909091.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 590909.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 6500000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Stationery Hub số tiền 6,5 triệu đồng để mua Mua CCDC dùng nội bộ.",
+      "meta": {
+        "source_reference": "IN-2026-0103",
+        "event_date": "2026-03-08"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-19bcdc9c",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0009",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 1636364.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 163636.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 1800000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Office Mart số tiền 1,8 triệu đồng để mua Mua vật tư tiêu hao.",
+      "meta": {
+        "source_reference": "IN-2026-0104",
+        "event_date": "2026-03-09"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-d8757f2a",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0012",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "211",
+          "amount": 180000000.0
+        },
+        {
+          "side": "debit",
+          "account": "1332",
+          "amount": 18000000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 198000000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa mua tài sản cố định từ Viet Infra Tech với số tiền 198 triệu đồng.",
+      "meta": {
+        "source_reference": "IN-2026-0105",
+        "event_date": "2026-03-10"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-42d3fec0",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0006",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "131",
+          "amount": 27500000.0
+        },
+        {
+          "side": "credit",
+          "account": "511",
+          "amount": 25000000.0
+        },
+        {
+          "side": "credit",
+          "account": "3331",
+          "amount": 2500000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa cung cấp dịch vụ theo hợp đồng cho An Phuc Trading tại địa điểm kinh doanh và nhận số tiền 27,5 triệu đồng.",
+      "meta": {
+        "source_reference": "OUT-2026-0301",
+        "event_date": "2026-03-12"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-8e7bbc0b",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0014",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "3331",
+          "amount": 3500000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 3500000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa nộp thuế số tiền 3,5 triệu đồng qua ngân hàng.",
+      "meta": {
+        "source_reference": "STMT-2026-0301",
+        "event_date": "2026-03-20"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201636529-81142ad9",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0003",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "141",
+          "amount": 5000000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 5000000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa tạm ứng cho Nguyễn A số tiền 5 triệu đồng.",
+      "meta": {
+        "source_reference": "STMT-2026-0302",
+        "event_date": "2026-03-21"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-9dcd5c55",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0011",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 4800000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 480000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 5280000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Công ty Vận hành Sao Việt số tiền 5,28 triệu đồng để mua dịch vụ Thuê dịch vụ vận hành hệ thống theo tháng - đợt 1.",
+      "meta": {
+        "source_reference": "IN-2026-0010",
+        "event_date": "2026-03-22"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-c344879f",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0009",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 2220000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 222000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 2442000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Siêu thị Văn phòng phẩm Hà Nội số tiền 2,44 triệu đồng để mua Mua vật tư văn phòng định kỳ - đợt 2.",
+      "meta": {
+        "source_reference": "IN-2026-0011",
+        "event_date": "2026-03-23"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-87a03d96",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0006",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "131",
+          "amount": 35596000.0
+        },
+        {
+          "side": "credit",
+          "account": "511",
+          "amount": 32360000.0
+        },
+        {
+          "side": "credit",
+          "account": "3331",
+          "amount": 3236000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa cung cấp dịch vụ theo hợp đồng cho Công ty Cổ phần Minh Long tại địa điểm kinh doanh và nhận số tiền 35,6 triệu đồng.",
+      "meta": {
+        "source_reference": "OUT-2026-0012",
+        "event_date": "2026-03-24"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-70203540",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0014",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "3331",
+          "amount": 4650000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 4650000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa nộp thuế số tiền 4,65 triệu đồng qua ngân hàng.",
+      "meta": {
+        "source_reference": "STMT-2026-0013",
+        "event_date": "2026-03-25"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-f1277aca",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0003",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "141",
+          "amount": 4100000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 4100000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa tạm ứng cho Lê Quang Anh số tiền 4,1 triệu đồng.",
+      "meta": {
+        "source_reference": "STMT-2026-0014",
+        "event_date": "2026-03-26"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-9f6b8e99",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0001",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "112",
+          "amount": 150750000.0
+        },
+        {
+          "side": "credit",
+          "account": "411",
+          "amount": 150750000.0
+        }
+      ],
+      "normal_narration": "Chủ sở hữu vừa góp vốn 150,75 triệu đồng vào công ty.",
+      "meta": {
+        "source_reference": "STMT-2026-0015",
+        "event_date": "2026-03-27"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-2cb5f294",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0012",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "211",
+          "amount": 95720000.0
+        },
+        {
+          "side": "debit",
+          "account": "1332",
+          "amount": 9572000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 105292000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa mua tài sản cố định từ Công ty Thiết bị Kỹ thuật Việt với số tiền 105,29 triệu đồng.",
+      "meta": {
+        "source_reference": "IN-2026-0016",
+        "event_date": "2026-03-28"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-d3f5cb09",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0011",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 5640000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 564000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 6204000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Công ty Vận hành Sao Việt số tiền 6,2 triệu đồng để mua dịch vụ Thuê dịch vụ vận hành hệ thống theo tháng - đợt 8.",
+      "meta": {
+        "source_reference": "IN-2026-0017",
+        "event_date": "2026-03-29"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-7b23469d",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0009",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 3060000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 306000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 3366000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Siêu thị Văn phòng phẩm Hà Nội số tiền 3,37 triệu đồng để mua Mua vật tư văn phòng định kỳ - đợt 9.",
+      "meta": {
+        "source_reference": "IN-2026-0018",
+        "event_date": "2026-03-30"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-7e5923f1",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0006",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "131",
+          "amount": 36982000.0
+        },
+        {
+          "side": "credit",
+          "account": "511",
+          "amount": 33620000.0
+        },
+        {
+          "side": "credit",
+          "account": "3331",
+          "amount": 3362000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa cung cấp dịch vụ theo hợp đồng cho Công ty Cổ phần Minh Long tại địa điểm kinh doanh và nhận số tiền 36,98 triệu đồng.",
+      "meta": {
+        "source_reference": "OUT-2026-0019",
+        "event_date": "2026-03-31"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-4a162d4e",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0014",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "3331",
+          "amount": 5700000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 5700000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa nộp thuế số tiền 5,7 triệu đồng qua ngân hàng.",
+      "meta": {
+        "source_reference": "STMT-2026-0020",
+        "event_date": "2026-04-01"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-50f79380",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0003",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "141",
+          "amount": 5150000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 5150000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa tạm ứng cho Lê Quang Anh số tiền 5,15 triệu đồng.",
+      "meta": {
+        "source_reference": "STMT-2026-0021",
+        "event_date": "2026-04-02"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-698dee0f",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0001",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "112",
+          "amount": 151800000.0
+        },
+        {
+          "side": "credit",
+          "account": "411",
+          "amount": 151800000.0
+        }
+      ],
+      "normal_narration": "Chủ sở hữu vừa góp vốn 151,8 triệu đồng vào công ty.",
+      "meta": {
+        "source_reference": "STMT-2026-0022",
+        "event_date": "2026-04-03"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-57dbcd87",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0012",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "211",
+          "amount": 96560000.0
+        },
+        {
+          "side": "debit",
+          "account": "1332",
+          "amount": 9656000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 106216000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa mua tài sản cố định từ Công ty Thiết bị Kỹ thuật Việt với số tiền 106,22 triệu đồng.",
+      "meta": {
+        "source_reference": "IN-2026-0023",
+        "event_date": "2026-04-04"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-19885205",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0011",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 6480000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 648000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 7128000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Công ty Vận hành Sao Việt số tiền 7,13 triệu đồng để mua dịch vụ Thuê dịch vụ vận hành hệ thống theo tháng - đợt 15.",
+      "meta": {
+        "source_reference": "IN-2026-0024",
+        "event_date": "2026-04-05"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-40a78ebd",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0009",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 3900000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 390000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 4290000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Siêu thị Văn phòng phẩm Hà Nội số tiền 4,29 triệu đồng để mua Mua vật tư văn phòng định kỳ - đợt 16.",
+      "meta": {
+        "source_reference": "IN-2026-0025",
+        "event_date": "2026-04-06"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-9b551637",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0006",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "131",
+          "amount": 38368000.0
+        },
+        {
+          "side": "credit",
+          "account": "511",
+          "amount": 34880000.0
+        },
+        {
+          "side": "credit",
+          "account": "3331",
+          "amount": 3488000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa cung cấp dịch vụ theo hợp đồng cho Công ty Cổ phần Minh Long tại địa điểm kinh doanh và nhận số tiền 38,37 triệu đồng.",
+      "meta": {
+        "source_reference": "OUT-2026-0026",
+        "event_date": "2026-04-07"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-78a2e7d6",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0014",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "3331",
+          "amount": 6750000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 6750000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa nộp thuế số tiền 6,75 triệu đồng qua ngân hàng.",
+      "meta": {
+        "source_reference": "STMT-2026-0027",
+        "event_date": "2026-04-08"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-29bda1bb",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0003",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "141",
+          "amount": 6200000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 6200000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa tạm ứng cho Lê Quang Anh số tiền 6,2 triệu đồng.",
+      "meta": {
+        "source_reference": "STMT-2026-0028",
+        "event_date": "2026-04-09"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-931083ba",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0001",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "112",
+          "amount": 152850000.0
+        },
+        {
+          "side": "credit",
+          "account": "411",
+          "amount": 152850000.0
+        }
+      ],
+      "normal_narration": "Chủ sở hữu vừa góp vốn 152,85 triệu đồng vào công ty.",
+      "meta": {
+        "source_reference": "STMT-2026-0029",
+        "event_date": "2026-04-10"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-16ff703f",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0012",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "211",
+          "amount": 97400000.0
+        },
+        {
+          "side": "debit",
+          "account": "1332",
+          "amount": 9740000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 107140000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa mua tài sản cố định từ Công ty Thiết bị Kỹ thuật Việt với số tiền 107,14 triệu đồng.",
+      "meta": {
+        "source_reference": "IN-2026-0030",
+        "event_date": "2026-04-11"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-55f0bbc2",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0011",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 7320000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 732000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 8052000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Công ty Vận hành Sao Việt số tiền 8,05 triệu đồng để mua dịch vụ Thuê dịch vụ vận hành hệ thống theo tháng - đợt 22.",
+      "meta": {
+        "source_reference": "IN-2026-0031",
+        "event_date": "2026-04-12"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-3a592490",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0009",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 4740000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 474000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 5214000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Siêu thị Văn phòng phẩm Hà Nội số tiền 5,21 triệu đồng để mua Mua vật tư văn phòng định kỳ - đợt 23.",
+      "meta": {
+        "source_reference": "IN-2026-0032",
+        "event_date": "2026-04-13"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-d743a29d",
+      "event_type": "ban_hang_dich_vu",
+      "source_id": "sales_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0006",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "131",
+          "amount": 39754000.0
+        },
+        {
+          "side": "credit",
+          "account": "511",
+          "amount": 36140000.0
+        },
+        {
+          "side": "credit",
+          "account": "3331",
+          "amount": 3614000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa cung cấp dịch vụ theo hợp đồng cho Công ty Cổ phần Minh Long tại địa điểm kinh doanh và nhận số tiền 39,75 triệu đồng.",
+      "meta": {
+        "source_reference": "OUT-2026-0033",
+        "event_date": "2026-04-14"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-8e2cf43b",
+      "event_type": "nop_thue",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0014",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "3331",
+          "amount": 7800000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 7800000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa nộp thuế số tiền 7,8 triệu đồng qua ngân hàng.",
+      "meta": {
+        "source_reference": "STMT-2026-0034",
+        "event_date": "2026-04-15"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-bb0ecc0a",
+      "event_type": "tam_ung",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0003",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "141",
+          "amount": 7250000.0
+        },
+        {
+          "side": "credit",
+          "account": "112",
+          "amount": 7250000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa tạm ứng cho Lê Quang Anh số tiền 7,25 triệu đồng.",
+      "meta": {
+        "source_reference": "STMT-2026-0035",
+        "event_date": "2026-04-16"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-2f4f2615",
+      "event_type": "gop_von",
+      "source_id": "bank_statement",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0001",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "112",
+          "amount": 153900000.0
+        },
+        {
+          "side": "credit",
+          "account": "411",
+          "amount": 153900000.0
+        }
+      ],
+      "normal_narration": "Chủ sở hữu vừa góp vốn 153,9 triệu đồng vào công ty.",
+      "meta": {
+        "source_reference": "STMT-2026-0036",
+        "event_date": "2026-04-17"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-517ef03a",
+      "event_type": "mua_tscd",
+      "source_id": "purchase_invoice_xml",
+      "classification": null,
+      "method_id": "TT133_MVP_POSTING_0012",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "211",
+          "amount": 98240000.0
+        },
+        {
+          "side": "debit",
+          "account": "1332",
+          "amount": 9824000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 108064000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa mua tài sản cố định từ Công ty Thiết bị Kỹ thuật Việt với số tiền 108,06 triệu đồng.",
+      "meta": {
+        "source_reference": "IN-2026-0037",
+        "event_date": "2026-04-18"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-95dbabef",
+      "event_type": "mua_dich_vu",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0011",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 8160000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 816000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 8976000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Công ty Vận hành Sao Việt số tiền 8,98 triệu đồng để mua dịch vụ Thuê dịch vụ vận hành hệ thống theo tháng - đợt 29.",
+      "meta": {
+        "source_reference": "IN-2026-0038",
+        "event_date": "2026-04-19"
+      }
+    },
+    {
+      "entry_id": "JE-20260317150201637529-694a8ba7",
+      "event_type": "mua_hang_dung_noi_bo",
+      "source_id": "purchase_invoice_xml",
+      "classification": "direct_expense",
+      "method_id": "TT133_MVP_POSTING_0009",
+      "lines": [
+        {
+          "side": "debit",
+          "account": "642",
+          "amount": 5580000.0
+        },
+        {
+          "side": "debit",
+          "account": "1331",
+          "amount": 558000.0
+        },
+        {
+          "side": "credit",
+          "account": "331",
+          "amount": 6138000.0
+        }
+      ],
+      "normal_narration": "Công ty vừa thanh toán cho Siêu thị Văn phòng phẩm Hà Nội số tiền 6,14 triệu đồng để mua Mua vật tư văn phòng định kỳ - đợt 30.",
+      "meta": {
+        "source_reference": "IN-2026-0039",
+        "event_date": "2026-04-20"
+      }
+    }
+  ],
+  "report_request": {
+    "report_code": "BCTC_BANG_CAN_DOI_KE_TOAN",
+    "name": "Bang can doi ke toan",
+    "frequency": "month",
+    "as_of_date": "2026-03-31",
+    "traceability_required": true
+  },
+  "financial_statements": {
+    "as_of_date": "2026-03-31",
+    "bang_can_doi_ke_toan": {
+      "tong_tai_san": 1709065636.0,
+      "tong_no_phai_tra": 693302000.0,
+      "von_chu_so_huu": 909300000.0
+    },
+    "ket_qua_hoat_dong_kinh_doanh": {
+      "doanh_thu": 162000000.0,
+      "chi_phi": 55536364.0,
+      "loi_nhuan_truoc_thue": 106463636.0
+    },
+    "luu_chuyen_tien_te": {
+      "luu_chuyen_tien_vao": 909300000.0,
+      "luu_chuyen_tien_ra": 56100000.0,
+      "luu_chuyen_thuan": 853200000.0
+    },
+    "thuyet_minh": {
+      "tong_so_but_toan": 39,
+      "co_the_truy_vet_chung_tu": true
+    }
+  },
+  "tax_reports": {
+    "as_of_date": "2026-03-31",
+    "thue_gtgt": {
+      "thue_dau_ra": -12200000.0,
+      "thue_dau_vao_duoc_khau_tru": 7344545.0,
+      "thue_gtgt_thuan": -19544545.0
+    },
+    "thue_tncn": {
+      "so_phai_nop": 0.0
+    },
+    "thue_tndn": {
+      "so_phai_nop": 0.0
+    }
+  }
+}

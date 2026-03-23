@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FinancialReport>
+  <ReportInfo>
+    <ReportName>BaoCaoTaiChinhQuy1</ReportName>
+    <CompanyName>Cong ty TNHH Demo SME</CompanyName>
+    <TaxCode>0312345678</TaxCode>
+    <PeriodFrom>2026-01-01</PeriodFrom>
+    <PeriodTo>2026-03-31</PeriodTo>
+    <Currency>VND</Currency>
+  </ReportInfo>
+
+  <BalanceSheet>
+    <Assets>
+      <CurrentAssets>2450000000</CurrentAssets>
+      <NonCurrentAssets>4180000000</NonCurrentAssets>
+      <TotalAssets>6630000000</TotalAssets>
+    </Assets>
+    <LiabilitiesAndEquity>
+      <Liabilities>2890000000</Liabilities>
+      <OwnerEquity>3740000000</OwnerEquity>
+      <TotalLiabilitiesAndEquity>6630000000</TotalLiabilitiesAndEquity>
+    </LiabilitiesAndEquity>
+  </BalanceSheet>
+
+  <IncomeStatement>
+    <NetRevenue>3920000000</NetRevenue>
+    <CostOfGoodsSold>2280000000</CostOfGoodsSold>
+    <GrossProfit>1640000000</GrossProfit>
+    <OperatingExpense>860000000</OperatingExpense>
+    <ProfitBeforeTax>780000000</ProfitBeforeTax>
+    <CorporateIncomeTax>156000000</CorporateIncomeTax>
+    <ProfitAfterTax>624000000</ProfitAfterTax>
+  </IncomeStatement>
+
+  <CashFlow>
+    <OperatingCashFlow>510000000</OperatingCashFlow>
+    <InvestingCashFlow>-260000000</InvestingCashFlow>
+    <FinancingCashFlow>120000000</FinancingCashFlow>
+    <NetCashFlow>370000000</NetCashFlow>
+  </CashFlow>
+
+  <GeneratedBy>
+    <System>WSSMEAS Dummy Generator</System>
+    <GeneratedAt>2026-03-17T10:15:00+07:00</GeneratedAt>
+  </GeneratedBy>
+</FinancialReport>

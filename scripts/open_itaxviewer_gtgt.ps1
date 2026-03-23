@@ -6,7 +6,11 @@ Param(
     [string]$Period = "2026-03",
     [string]$ReportId = "gtgt",
     [string]$OutputDir = "d:/Repos/WSSMEAS/.local-dev",
-    [string]$ITaxViewerPath = "C:/Program Files (x86)/iTax Viewer/iTaxViewer.exe"
+    [string]$ITaxViewerPath = "C:/Program Files (x86)/iTax Viewer/iTaxViewer.exe",
+    [switch]$ConvertToPdf,
+    [string]$PdfPath = "",
+    [int]$StartupDelaySeconds = 5,
+    [int]$DialogDelaySeconds = 2
 )
 
 $ErrorActionPreference = "Stop"
@@ -48,5 +52,59 @@ $xmlPath = Join-Path $OutputDir $fileName
 Write-Host "Da luu XML:" $xmlPath
 
 # Mo truc tiep bang iTaxViewer de xem dung giao dien/chuan in cua app tong cuc thue.
-Start-Process -FilePath $ITaxViewerPath -ArgumentList $xmlPath
+$viewerProcess = Start-Process -FilePath $ITaxViewerPath -ArgumentList $xmlPath -PassThru
 Write-Host "Da mo iTaxViewer voi file XML."
+
+if ($ConvertToPdf) {
+    $resolvedPdfPath = if ([string]::IsNullOrWhiteSpace($PdfPath)) {
+        Join-Path $OutputDir (([System.IO.Path]::GetFileNameWithoutExtension($fileName)) + ".pdf")
+    }
+    else {
+        $PdfPath
+    }
+
+    New-Item -ItemType Directory -Path (Split-Path -Path $resolvedPdfPath -Parent) -Force | Out-Null
+
+    $previousDefaultPrinter = Get-CimInstance Win32_Printer | Where-Object { $_.Default -eq $true } | Select-Object -First 1
+    $pdfPrinter = Get-CimInstance Win32_Printer -Filter "Name='Microsoft Print to PDF'"
+    if (-not $pdfPrinter) {
+        throw "Khong tim thay may in 'Microsoft Print to PDF'."
+    }
+
+    $null = Invoke-CimMethod -InputObject $pdfPrinter -MethodName SetDefaultPrinter
+
+    Start-Sleep -Seconds $StartupDelaySeconds
+    $shell = New-Object -ComObject WScript.Shell
+    $activated = $shell.AppActivate($viewerProcess.Id)
+    if (-not $activated) {
+        $activated = $shell.AppActivate("iTax Viewer")
+    }
+    if (-not $activated) {
+        throw "Khong the focus cua so iTaxViewer de auto print."
+    }
+
+    $shell.SendKeys("^p")
+    Start-Sleep -Seconds $DialogDelaySeconds
+    $shell.SendKeys("{ENTER}")
+    Start-Sleep -Seconds $DialogDelaySeconds
+
+    Set-Clipboard -Value $resolvedPdfPath
+    $shell.SendKeys("^v")
+    Start-Sleep -Milliseconds 300
+    $shell.SendKeys("{ENTER}")
+    Start-Sleep -Seconds 4
+
+    if (Test-Path $resolvedPdfPath) {
+        Write-Host "Da convert PDF bang iTaxViewer:" $resolvedPdfPath
+    }
+    else {
+        Write-Warning "Khong tim thay file PDF sau auto print. Kiem tra hop thoai Save As va thu lai."
+    }
+
+    if ($previousDefaultPrinter -and $previousDefaultPrinter.Name -ne $pdfPrinter.Name) {
+        $restorePrinter = Get-CimInstance Win32_Printer -Filter "Name='$($previousDefaultPrinter.Name.Replace("'", "''"))'"
+        if ($restorePrinter) {
+            $null = Invoke-CimMethod -InputObject $restorePrinter -MethodName SetDefaultPrinter
+        }
+    }
+}

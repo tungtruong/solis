@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "source": "System validation baseline",
+  "total_items": 5,
+  "items": [
+    {
+      "validation_id": "TT99_VAL_001",
+      "name": "Balanced Entry",
+      "description": "Tổng Nợ phải bằng Tổng Có cho mỗi bút toán.",
+      "severity": "error",
+      "applies_to": "journal_entry"
+    },
+    {
+      "validation_id": "TT99_VAL_002",
+      "name": "Account Exists In TT99 COA",
+      "description": "Mọi tài khoản sử dụng phải tồn tại trong danh mục tài khoản TT99.",
+      "severity": "error",
+      "applies_to": "journal_line"
+    },
+    {
+      "validation_id": "TT99_VAL_003",
+      "name": "Posting Method Candidate Check",
+      "description": "Bút toán sinh tự động phải dùng cặp tài khoản thuộc danh sách candidate của phương pháp được chọn.",
+      "severity": "warning",
+      "applies_to": "auto_posting"
+    },
+    {
+      "validation_id": "TT99_VAL_004",
+      "name": "Currency And FX Rule",
+      "description": "Nghiệp vụ ngoại tệ phải có tỷ giá giao dịch thực tế và quy tắc đánh giá cuối kỳ.",
+      "severity": "error",
+      "applies_to": "foreign_currency_transaction"
+    },
+    {
+      "validation_id": "TT99_VAL_005",
+      "name": "VAT Separation",
+      "description": "Doanh thu/chi phí chịu thuế GTGT phải tách phần thuế theo quy định.",
+      "severity": "warning",
+      "applies_to": "vat_related_transaction"
+    }
+  ]
+}

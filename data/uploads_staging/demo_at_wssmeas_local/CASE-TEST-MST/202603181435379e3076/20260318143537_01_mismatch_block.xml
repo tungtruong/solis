@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<HDon>
+  <DLHDon>
+    <TTChung><SHDon>BAD-001</SHDon><NLap>2026-03-18</NLap></TTChung>
+    <NDHDon>
+      <NBan><Ten>NCC C</Ten><MST>0103333333</MST><DChi>HN</DChi></NBan>
+      <NMua><Ten>Khach C</Ten><MST>0104444444</MST><DChi>DN</DChi></NMua>
+      <DSHHDVu><HHDVu><THHDVu>Dich vu khac</THHDVu><ThTien>3000000</ThTien><TSuat>10</TSuat></HHDVu></DSHHDVu>
+      <TToan><TgTCThue>3000000</TgTCThue><TgTThue>300000</TgTThue><TgTTTBSo>3300000</TgTTTBSo></TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>

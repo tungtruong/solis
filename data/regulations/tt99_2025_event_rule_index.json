@@ -1,0 +1,175 @@
+{
+  "index_id": "tt99_event_rule_index_v1",
+  "source": "Thông tư 99/2025/TT-BTC",
+  "generated_at": "2026-03-15T17:13:39",
+  "mapping_strategy": "keyword + account candidate + manual review",
+  "items": [
+    {
+      "event_code": "payment_received",
+      "candidate_posting_method_ids": [
+        "TT99_POSTING_0001",
+        "TT99_POSTING_0003",
+        "TT99_POSTING_0004",
+        "TT99_POSTING_0005",
+        "TT99_POSTING_0006",
+        "TT99_POSTING_0007",
+        "TT99_POSTING_0008",
+        "TT99_POSTING_0011",
+        "TT99_POSTING_0012",
+        "TT99_POSTING_0014",
+        "TT99_POSTING_0015",
+        "TT99_POSTING_0016",
+        "TT99_POSTING_0017",
+        "TT99_POSTING_0018",
+        "TT99_POSTING_0019",
+        "TT99_POSTING_0020",
+        "TT99_POSTING_0027",
+        "TT99_POSTING_0292",
+        "TT99_POSTING_0339",
+        "TT99_POSTING_0382",
+        "TT99_POSTING_0400"
+      ],
+      "candidate_principle_ids": [
+        "TT99_PRINCIPLE_001",
+        "TT99_PRINCIPLE_004",
+        "TT99_PRINCIPLE_005",
+        "TT99_PRINCIPLE_006",
+        "TT99_PRINCIPLE_011"
+      ],
+      "required_validations": [
+        "TT99_VAL_001",
+        "TT99_VAL_002"
+      ]
+    },
+    {
+      "event_code": "payment_made",
+      "candidate_posting_method_ids": [
+        "TT99_POSTING_0005",
+        "TT99_POSTING_0008",
+        "TT99_POSTING_0009",
+        "TT99_POSTING_0010",
+        "TT99_POSTING_0013",
+        "TT99_POSTING_0017",
+        "TT99_POSTING_0021",
+        "TT99_POSTING_0022",
+        "TT99_POSTING_0023",
+        "TT99_POSTING_0024",
+        "TT99_POSTING_0025",
+        "TT99_POSTING_0197",
+        "TT99_POSTING_0207",
+        "TT99_POSTING_0295",
+        "TT99_POSTING_0338",
+        "TT99_POSTING_0375",
+        "TT99_POSTING_0401",
+        "TT99_POSTING_0409",
+        "TT99_POSTING_0513"
+      ],
+      "candidate_principle_ids": [
+        "TT99_PRINCIPLE_001",
+        "TT99_PRINCIPLE_004",
+        "TT99_PRINCIPLE_005",
+        "TT99_PRINCIPLE_006",
+        "TT99_PRINCIPLE_011"
+      ],
+      "required_validations": [
+        "TT99_VAL_001",
+        "TT99_VAL_002"
+      ]
+    },
+    {
+      "event_code": "revenue_recognized",
+      "candidate_posting_method_ids": [
+        "TT99_POSTING_0001",
+        "TT99_POSTING_0014",
+        "TT99_POSTING_0040",
+        "TT99_POSTING_0044",
+        "TT99_POSTING_0046",
+        "TT99_POSTING_0049",
+        "TT99_POSTING_0055",
+        "TT99_POSTING_0059",
+        "TT99_POSTING_0060",
+        "TT99_POSTING_0115",
+        "TT99_POSTING_0116",
+        "TT99_POSTING_0129",
+        "TT99_POSTING_0203",
+        "TT99_POSTING_0212",
+        "TT99_POSTING_0218",
+        "TT99_POSTING_0228",
+        "TT99_POSTING_0231",
+        "TT99_POSTING_0274",
+        "TT99_POSTING_0317",
+        "TT99_POSTING_0322",
+        "TT99_POSTING_0333",
+        "TT99_POSTING_0336",
+        "TT99_POSTING_0415",
+        "TT99_POSTING_0417",
+        "TT99_POSTING_0419",
+        "TT99_POSTING_0420",
+        "TT99_POSTING_0422",
+        "TT99_POSTING_0425",
+        "TT99_POSTING_0428",
+        "TT99_POSTING_0430",
+        "TT99_POSTING_0450",
+        "TT99_POSTING_0481"
+      ],
+      "candidate_principle_ids": [
+        "TT99_PRINCIPLE_014",
+        "TT99_PRINCIPLE_017",
+        "TT99_PRINCIPLE_019",
+        "TT99_PRINCIPLE_020"
+      ],
+      "required_validations": [
+        "TT99_VAL_001",
+        "TT99_VAL_002",
+        "TT99_VAL_005"
+      ]
+    },
+    {
+      "event_code": "purchase_recognized",
+      "candidate_posting_method_ids": [
+        "TT99_POSTING_0077",
+        "TT99_POSTING_0079",
+        "TT99_POSTING_0082",
+        "TT99_POSTING_0088",
+        "TT99_POSTING_0091",
+        "TT99_POSTING_0092",
+        "TT99_POSTING_0104",
+        "TT99_POSTING_0105",
+        "TT99_POSTING_0117",
+        "TT99_POSTING_0118",
+        "TT99_POSTING_0119",
+        "TT99_POSTING_0121",
+        "TT99_POSTING_0122",
+        "TT99_POSTING_0140",
+        "TT99_POSTING_0141",
+        "TT99_POSTING_0142",
+        "TT99_POSTING_0145",
+        "TT99_POSTING_0148",
+        "TT99_POSTING_0151",
+        "TT99_POSTING_0155",
+        "TT99_POSTING_0167",
+        "TT99_POSTING_0180",
+        "TT99_POSTING_0189",
+        "TT99_POSTING_0193",
+        "TT99_POSTING_0194",
+        "TT99_POSTING_0225",
+        "TT99_POSTING_0252",
+        "TT99_POSTING_0254",
+        "TT99_POSTING_0262",
+        "TT99_POSTING_0315",
+        "TT99_POSTING_0441",
+        "TT99_POSTING_0471",
+        "TT99_POSTING_0502"
+      ],
+      "candidate_principle_ids": [
+        "TT99_PRINCIPLE_011",
+        "TT99_PRINCIPLE_014",
+        "TT99_PRINCIPLE_017"
+      ],
+      "required_validations": [
+        "TT99_VAL_001",
+        "TT99_VAL_002"
+      ]
+    }
+  ]
+}

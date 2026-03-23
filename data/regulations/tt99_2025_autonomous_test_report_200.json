@@ -1,0 +1,1868 @@
+{
+  "generated_at": "2026-03-15T17:38:15",
+  "catalog_file": "d:\\Repos\\WSSMEAS\\data\\regulations\\tt99_2025_posting_methods_autonomous.json",
+  "test_total": 200,
+  "test_passed": 193,
+  "test_failed": 7,
+  "overall_pass_rate": 0.965,
+  "positive_total": 150,
+  "positive_passed": 143,
+  "positive_pass_rate": 0.9533,
+  "negative_total": 50,
+  "negative_passed": 50,
+  "negative_pass_rate": 1.0,
+  "misclassification_count": 7,
+  "misclassifications_sample": [
+    {
+      "test": "pos_125",
+      "expected": "TT99_POSTING_0103",
+      "got": "TT99_POSTING_0097",
+      "score": 0.85,
+      "reason": null
+    },
+    {
+      "test": "pos_072",
+      "expected": "TT99_POSTING_0037",
+      "got": "TT99_POSTING_0032",
+      "score": 1.0,
+      "reason": null
+    },
+    {
+      "test": "pos_007",
+      "expected": "TT99_POSTING_0436",
+      "got": "TT99_POSTING_0032",
+      "score": 0.7,
+      "reason": null
+    },
+    {
+      "test": "pos_040",
+      "expected": "TT99_POSTING_0303",
+      "got": "TT99_POSTING_0002",
+      "score": 0.85,
+      "reason": null
+    },
+    {
+      "test": "pos_130",
+      "expected": "TT99_POSTING_0321",
+      "got": "TT99_POSTING_0299",
+      "score": 1.0,
+      "reason": null
+    },
+    {
+      "test": "pos_063",
+      "expected": "TT99_POSTING_0303",
+      "got": "TT99_POSTING_0002",
+      "score": 0.8,
+      "reason": null
+    },
+    {
+      "test": "pos_124",
+      "expected": "TT99_POSTING_0372",
+      "got": "TT99_POSTING_0368",
+      "score": 0.9,
+      "reason": null
+    }
+  ],
+  "results": [
+    {
+      "test": "pos_056",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0165",
+      "expected": "TT99_POSTING_0165",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_084",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0203",
+      "expected": "TT99_POSTING_0203",
+      "reason": null,
+      "score": 0.9625
+    },
+    {
+      "test": "pos_080",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0100",
+      "expected": "TT99_POSTING_0100",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_099",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0088",
+      "expected": "TT99_POSTING_0088",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_059",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0242",
+      "expected": "TT99_POSTING_0242",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_011",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_046",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_108",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0223",
+      "expected": "TT99_POSTING_0223",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_140",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0470",
+      "expected": "TT99_POSTING_0470",
+      "reason": null,
+      "score": 0.95
+    },
+    {
+      "test": "pos_037",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0295",
+      "expected": "TT99_POSTING_0295",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_066",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0019",
+      "expected": "TT99_POSTING_0019",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_067",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0430",
+      "expected": "TT99_POSTING_0430",
+      "reason": null,
+      "score": 0.95
+    },
+    {
+      "test": "pos_134",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0132",
+      "expected": "TT99_POSTING_0132",
+      "reason": null,
+      "score": 0.8571
+    },
+    {
+      "test": "neg_042",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_150",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0019",
+      "expected": "TT99_POSTING_0019",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "neg_039",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_024",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0319",
+      "expected": "TT99_POSTING_0319",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "pos_143",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0309",
+      "expected": "TT99_POSTING_0309",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_142",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0469",
+      "expected": "TT99_POSTING_0469",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "pos_090",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0434",
+      "expected": "TT99_POSTING_0434",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_013",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0206",
+      "expected": "TT99_POSTING_0206",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_036",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0271",
+      "expected": "TT99_POSTING_0271",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_144",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0381",
+      "expected": "TT99_POSTING_0381",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_100",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0420",
+      "expected": "TT99_POSTING_0420",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_074",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0094",
+      "expected": "TT99_POSTING_0094",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_127",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0440",
+      "expected": "TT99_POSTING_0440",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_039",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0379",
+      "expected": "TT99_POSTING_0379",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_105",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0396",
+      "expected": "TT99_POSTING_0396",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_079",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0075",
+      "expected": "TT99_POSTING_0075",
+      "reason": null,
+      "score": 0.825
+    },
+    {
+      "test": "pos_018",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0327",
+      "expected": "TT99_POSTING_0327",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_085",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0145",
+      "expected": "TT99_POSTING_0145",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_015",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_008",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0474",
+      "expected": "TT99_POSTING_0474",
+      "reason": null,
+      "score": 0.9625
+    },
+    {
+      "test": "pos_028",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0263",
+      "expected": "TT99_POSTING_0263",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_114",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0200",
+      "expected": "TT99_POSTING_0200",
+      "reason": null,
+      "score": 0.8
+    },
+    {
+      "test": "pos_070",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0135",
+      "expected": "TT99_POSTING_0135",
+      "reason": null,
+      "score": 0.8125
+    },
+    {
+      "test": "pos_106",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0163",
+      "expected": "TT99_POSTING_0163",
+      "reason": null,
+      "score": 0.94
+    },
+    {
+      "test": "pos_093",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0278",
+      "expected": "TT99_POSTING_0278",
+      "reason": null,
+      "score": 0.925
+    },
+    {
+      "test": "pos_021",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0409",
+      "expected": "TT99_POSTING_0409",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_013",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_048",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_060",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0083",
+      "expected": "TT99_POSTING_0083",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_082",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0262",
+      "expected": "TT99_POSTING_0262",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "neg_031",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_019",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0121",
+      "expected": "TT99_POSTING_0121",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_041",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_054",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0154",
+      "expected": "TT99_POSTING_0154",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "neg_006",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_031",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0364",
+      "expected": "TT99_POSTING_0364",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_016",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_020",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0514",
+      "expected": "TT99_POSTING_0514",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_034",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_136",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0248",
+      "expected": "TT99_POSTING_0248",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_026",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_058",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0013",
+      "expected": "TT99_POSTING_0013",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_125",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0097",
+      "expected": "TT99_POSTING_0103",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_118",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0358",
+      "expected": "TT99_POSTING_0358",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "neg_004",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_135",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0031",
+      "expected": "TT99_POSTING_0031",
+      "reason": null,
+      "score": 0.84
+    },
+    {
+      "test": "pos_038",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0078",
+      "expected": "TT99_POSTING_0078",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_107",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0072",
+      "expected": "TT99_POSTING_0072",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "neg_045",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_032",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_109",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0459",
+      "expected": "TT99_POSTING_0459",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_035",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_102",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0110",
+      "expected": "TT99_POSTING_0110",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_019",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_025",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0256",
+      "expected": "TT99_POSTING_0256",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_101",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0021",
+      "expected": "TT99_POSTING_0021",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "pos_104",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0182",
+      "expected": "TT99_POSTING_0182",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_025",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_097",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0109",
+      "expected": "TT99_POSTING_0109",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_029",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_072",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0032",
+      "expected": "TT99_POSTING_0037",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_149",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0177",
+      "expected": "TT99_POSTING_0177",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "pos_071",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0188",
+      "expected": "TT99_POSTING_0188",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_017",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0304",
+      "expected": "TT99_POSTING_0304",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_007",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0032",
+      "expected": "TT99_POSTING_0436",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "neg_027",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_022",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_042",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0458",
+      "expected": "TT99_POSTING_0458",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_033",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_045",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0488",
+      "expected": "TT99_POSTING_0488",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_015",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0488",
+      "expected": "TT99_POSTING_0488",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_043",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_111",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0073",
+      "expected": "TT99_POSTING_0073",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_010",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_062",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0136",
+      "expected": "TT99_POSTING_0136",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_147",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0271",
+      "expected": "TT99_POSTING_0271",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_020",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_047",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_131",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0297",
+      "expected": "TT99_POSTING_0297",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "pos_040",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0002",
+      "expected": "TT99_POSTING_0303",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_130",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0299",
+      "expected": "TT99_POSTING_0321",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_030",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0451",
+      "expected": "TT99_POSTING_0451",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "pos_120",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0435",
+      "expected": "TT99_POSTING_0435",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_022",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0095",
+      "expected": "TT99_POSTING_0095",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "neg_009",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_034",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0004",
+      "expected": "TT99_POSTING_0004",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "pos_096",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0329",
+      "expected": "TT99_POSTING_0329",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_041",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0409",
+      "expected": "TT99_POSTING_0409",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_018",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_145",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0357",
+      "expected": "TT99_POSTING_0357",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_044",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0392",
+      "expected": "TT99_POSTING_0392",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_076",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0138",
+      "expected": "TT99_POSTING_0138",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_047",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0005",
+      "expected": "TT99_POSTING_0005",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_046",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0471",
+      "expected": "TT99_POSTING_0471",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_113",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0085",
+      "expected": "TT99_POSTING_0085",
+      "reason": null,
+      "score": 0.8071
+    },
+    {
+      "test": "pos_023",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0409",
+      "expected": "TT99_POSTING_0409",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "neg_040",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_148",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0423",
+      "expected": "TT99_POSTING_0423",
+      "reason": null,
+      "score": 0.8
+    },
+    {
+      "test": "pos_146",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0382",
+      "expected": "TT99_POSTING_0382",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_132",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0295",
+      "expected": "TT99_POSTING_0295",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_092",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0066",
+      "expected": "TT99_POSTING_0066",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_137",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0364",
+      "expected": "TT99_POSTING_0364",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_128",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0387",
+      "expected": "TT99_POSTING_0387",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_014",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0454",
+      "expected": "TT99_POSTING_0454",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "neg_024",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_012",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_129",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0065",
+      "expected": "TT99_POSTING_0065",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_069",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0097",
+      "expected": "TT99_POSTING_0097",
+      "reason": null,
+      "score": 0.925
+    },
+    {
+      "test": "neg_021",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_004",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0222",
+      "expected": "TT99_POSTING_0222",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_061",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0383",
+      "expected": "TT99_POSTING_0383",
+      "reason": null,
+      "score": 0.8
+    },
+    {
+      "test": "neg_049",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_064",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0168",
+      "expected": "TT99_POSTING_0168",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_083",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0164",
+      "expected": "TT99_POSTING_0164",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_123",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0070",
+      "expected": "TT99_POSTING_0070",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_078",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0080",
+      "expected": "TT99_POSTING_0080",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "pos_086",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0368",
+      "expected": "TT99_POSTING_0368",
+      "reason": null,
+      "score": 0.9571
+    },
+    {
+      "test": "pos_121",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0181",
+      "expected": "TT99_POSTING_0181",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_002",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_088",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0073",
+      "expected": "TT99_POSTING_0073",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_095",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0125",
+      "expected": "TT99_POSTING_0125",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_073",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0076",
+      "expected": "TT99_POSTING_0076",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "pos_103",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0188",
+      "expected": "TT99_POSTING_0188",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_007",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_011",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0176",
+      "expected": "TT99_POSTING_0176",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_043",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0184",
+      "expected": "TT99_POSTING_0184",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_027",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0329",
+      "expected": "TT99_POSTING_0329",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_116",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0195",
+      "expected": "TT99_POSTING_0195",
+      "reason": null,
+      "score": 0.6
+    },
+    {
+      "test": "pos_005",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0218",
+      "expected": "TT99_POSTING_0218",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "pos_075",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0214",
+      "expected": "TT99_POSTING_0214",
+      "reason": null,
+      "score": 0.8821
+    },
+    {
+      "test": "pos_063",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0002",
+      "expected": "TT99_POSTING_0303",
+      "reason": null,
+      "score": 0.8
+    },
+    {
+      "test": "pos_087",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0076",
+      "expected": "TT99_POSTING_0076",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "neg_014",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_094",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0456",
+      "expected": "TT99_POSTING_0456",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_091",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0270",
+      "expected": "TT99_POSTING_0270",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_122",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0022",
+      "expected": "TT99_POSTING_0022",
+      "reason": null,
+      "score": 0.7
+    },
+    {
+      "test": "pos_068",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0417",
+      "expected": "TT99_POSTING_0417",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "neg_044",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_048",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0327",
+      "expected": "TT99_POSTING_0327",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_002",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0089",
+      "expected": "TT99_POSTING_0089",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_133",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0028",
+      "expected": "TT99_POSTING_0028",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_055",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0171",
+      "expected": "TT99_POSTING_0171",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_053",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0084",
+      "expected": "TT99_POSTING_0084",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "neg_005",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_017",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_038",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_010",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0182",
+      "expected": "TT99_POSTING_0182",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_052",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0203",
+      "expected": "TT99_POSTING_0203",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_012",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0089",
+      "expected": "TT99_POSTING_0089",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "neg_030",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_036",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_006",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0090",
+      "expected": "TT99_POSTING_0090",
+      "reason": null,
+      "score": 0.9571
+    },
+    {
+      "test": "pos_065",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0036",
+      "expected": "TT99_POSTING_0036",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_057",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0447",
+      "expected": "TT99_POSTING_0447",
+      "reason": null,
+      "score": 0.775
+    },
+    {
+      "test": "pos_035",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0172",
+      "expected": "TT99_POSTING_0172",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_049",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0407",
+      "expected": "TT99_POSTING_0407",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_001",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_028",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_029",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0164",
+      "expected": "TT99_POSTING_0164",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_001",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0414",
+      "expected": "TT99_POSTING_0414",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_139",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0222",
+      "expected": "TT99_POSTING_0222",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_110",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0153",
+      "expected": "TT99_POSTING_0153",
+      "reason": null,
+      "score": 0.7125
+    },
+    {
+      "test": "pos_141",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0226",
+      "expected": "TT99_POSTING_0226",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_037",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_033",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0237",
+      "expected": "TT99_POSTING_0237",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_051",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0120",
+      "expected": "TT99_POSTING_0120",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_016",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0155",
+      "expected": "TT99_POSTING_0155",
+      "reason": null,
+      "score": 0.94
+    },
+    {
+      "test": "pos_081",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0323",
+      "expected": "TT99_POSTING_0323",
+      "reason": null,
+      "score": 0.75
+    },
+    {
+      "test": "pos_112",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0346",
+      "expected": "TT99_POSTING_0346",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_098",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0287",
+      "expected": "TT99_POSTING_0287",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_003",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0092",
+      "expected": "TT99_POSTING_0092",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_126",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0434",
+      "expected": "TT99_POSTING_0434",
+      "reason": null,
+      "score": 0.69
+    },
+    {
+      "test": "pos_089",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0083",
+      "expected": "TT99_POSTING_0083",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_032",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0176",
+      "expected": "TT99_POSTING_0176",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "pos_050",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0300",
+      "expected": "TT99_POSTING_0300",
+      "reason": null,
+      "score": 0.65
+    },
+    {
+      "test": "pos_117",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0517",
+      "expected": "TT99_POSTING_0517",
+      "reason": null,
+      "score": 0.85
+    },
+    {
+      "test": "neg_023",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_009",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0165",
+      "expected": "TT99_POSTING_0165",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "pos_124",
+      "type": "positive",
+      "passed": false,
+      "selected_method_id": "TT99_POSTING_0368",
+      "expected": "TT99_POSTING_0372",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "pos_026",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0449",
+      "expected": "TT99_POSTING_0449",
+      "reason": null,
+      "score": 0.95
+    },
+    {
+      "test": "pos_119",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0238",
+      "expected": "TT99_POSTING_0238",
+      "reason": null,
+      "score": 1.0
+    },
+    {
+      "test": "neg_008",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "pos_115",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0151",
+      "expected": "TT99_POSTING_0151",
+      "reason": null,
+      "score": 0.9571
+    },
+    {
+      "test": "pos_138",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0364",
+      "expected": "TT99_POSTING_0364",
+      "reason": null,
+      "score": 0.9571
+    },
+    {
+      "test": "pos_077",
+      "type": "positive",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0263",
+      "expected": "TT99_POSTING_0263",
+      "reason": null,
+      "score": 0.9
+    },
+    {
+      "test": "neg_050",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    },
+    {
+      "test": "neg_003",
+      "type": "negative",
+      "passed": true,
+      "selected_method_id": null,
+      "expected": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0
+    }
+  ]
+}

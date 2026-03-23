@@ -4,7 +4,6 @@ import base64
 import binascii
 import calendar
 from collections import Counter
-from io import BytesIO
 import json
 import math
 import mimetypes
@@ -27,11 +26,6 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-
-try:
-    from openpyxl import load_workbook
-except Exception:  # pragma: no cover - optional dependency at runtime
-    load_workbook = None
 
 from .advanced_controls import AdjustmentControlService
 from .posting_engine import PostingEngine
@@ -486,28 +480,6 @@ class OpeningBalancesPayload(BaseModel):
     lines: List[Dict[str, Any]] = []
 
 
-class OpeningBalancesAnnualPayload(BaseModel):
-    email: str = "demo@wssmeas.local"
-    company_id: str = ""
-    year: int
-    lines: Dict[str, Any] = {}
-
-
-class OpeningBalancesImportXmlPayload(BaseModel):
-    email: str = "demo@wssmeas.local"
-    company_id: str = ""
-    xml_text: str = ""
-    source_year: Optional[int] = None
-
-
-class VoucherSheetTestPayload(BaseModel):
-    email: str = "demo@wssmeas.local"
-    company_id: str = ""
-    file_name: str = ""
-    content_base64: str = ""
-    auto_post: bool = False
-
-
 def _extract_token(authorization: Optional[str]) -> str:
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="MISSING_BEARER_TOKEN")
@@ -524,566 +496,6 @@ def get_current_email(authorization: Optional[str] = Header(default=None)) -> st
 
 def _normalize_tax_code(tax_code: str) -> str:
     return re.sub(r"[^0-9A-Za-z-]", "", str(tax_code or "")).strip().upper()
-
-
-def _normalize_header_token(value: Any) -> str:
-    raw = unicodedata.normalize("NFD", str(value or "").strip().lower())
-    raw = "".join(ch for ch in raw if unicodedata.category(ch) != "Mn")
-    raw = re.sub(r"[^a-z0-9]", "", raw)
-    return raw
-
-
-def _coerce_sheet_number(value: Any) -> float:
-    if isinstance(value, (int, float)):
-        amount = float(value)
-        if not math.isfinite(amount):
-            return 0.0
-        return amount
-    text = str(value or "").strip()
-    if not text:
-        return 0.0
-    text = text.replace(" ", "")
-    if "," in text and "." in text:
-        if text.rfind(",") > text.rfind("."):
-            text = text.replace(".", "").replace(",", ".")
-        else:
-            text = text.replace(",", "")
-    elif "," in text:
-        left, right = text.split(",", 1)
-        if 1 <= len(right) <= 2:
-            text = f"{left}.{right}"
-        else:
-            text = text.replace(",", "")
-    else:
-        text = text
-    text = re.sub(r"[^\d\.-]", "", text)
-    if not text or text in {"-", ".", "-.", ".-"}:
-        return 0.0
-    try:
-        amount = float(text)
-    except ValueError:
-        return 0.0
-    if not math.isfinite(amount):
-        return 0.0
-    return amount
-
-
-def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any]:
-    if load_workbook is None:
-        return {
-            "events": [],
-            "rows": [],
-            "issues": ["Thiếu thư viện openpyxl để đọc tệp Excel (.xlsx)."],
-            "source": "xlsx",
-        }
-    if not content:
-        return {"events": [], "rows": [], "issues": ["Tệp Excel rỗng."], "source": "xlsx"}
-
-    header_aliases: Dict[str, List[str]] = {
-        "event_date": [
-            "ngaychungtu",
-            "ngayct",
-            "ngaygs",
-            "ngayghiso",
-            "ngayhachtoan",
-            "ngayhoadon",
-            "issue_date",
-            "date",
-        ],
-        "reference_no": ["sochungtu", "soct", "soctu", "sochungtugoc", "sohoadon", "sodon", "invoice", "invoiceno"],
-        "description": ["diengiai", "diengiaichung", "noidung", "ghichu", "description"],
-        "counterparty_name": ["doituong", "tenkhachhang", "tennhacungcap", "counterparty", "partner"],
-        "counterparty_tax_code": ["mst", "masothue", "taxcode", "madoituong"],
-        "event_type": ["loainghiepvu", "nghiepvu", "eventtype", "type"],
-        "debit_account": ["tkno", "taikhoanno", "accountno", "debitaccount", "debit"],
-        "credit_account": ["tkco", "taikhoanco", "accountco", "creditaccount", "credit"],
-        "amount_total": ["sotien", "thanhtien", "tongtien", "amount", "total"],
-        "amount_untaxed": ["tientruocthue", "doanhsothuachue", "untaxed", "subtotal"],
-        "vat_amount": ["thuevat", "tienthue", "vat", "taxamount"],
-        "debit_amount": ["psno", "phatsinhno", "sotienno", "tienno", "debitamount", "debitvalue", "amtdebit"],
-        "credit_amount": ["psco", "phatsinhco", "sotienco", "tienco", "creditamount", "creditvalue", "amtcredit"],
-    }
-
-    alias_to_field: Dict[str, str] = {}
-    for field, aliases in header_aliases.items():
-        for alias in aliases:
-            alias_to_field[alias] = field
-
-    def resolve_field_from_header_token(raw_value: Any) -> str:
-        normalized = _normalize_header_token(raw_value)
-        if not normalized:
-            return ""
-        if normalized in alias_to_field:
-            return alias_to_field[normalized]
-        for alias, field in alias_to_field.items():
-            if len(alias) < 3:
-                continue
-            if alias in normalized or normalized in alias:
-                return field
-        return ""
-
-    def parse_date_value(value: Any) -> str:
-        if value is None:
-            return ""
-        if isinstance(value, datetime):
-            return value.date().isoformat()
-        raw = str(value).strip()
-        if not raw:
-            return ""
-        token_match = re.search(r"(\d{4}[\-/]\d{1,2}[\-/]\d{1,2}|\d{1,2}[\-/]\d{1,2}[\-/]\d{4}|\d{8})", raw)
-        if not token_match:
-            return ""
-        token = token_match.group(1).replace("/", "-")
-        if re.fullmatch(r"\d{8}", token):
-            try:
-                return datetime.strptime(token, "%Y%m%d").date().isoformat()
-            except ValueError:
-                return ""
-        for fmt in ["%Y-%m-%d", "%d-%m-%Y"]:
-            try:
-                return datetime.strptime(token, fmt).date().isoformat()
-            except ValueError:
-                continue
-        return ""
-
-    def infer_event_type(row_data: Dict[str, Any]) -> str:
-        raw_text = " ".join(
-            [
-                str(row_data.get("event_type") or ""),
-                str(row_data.get("description") or ""),
-                str(row_data.get("debit_account") or ""),
-                str(row_data.get("credit_account") or ""),
-            ]
-        ).lower()
-        debit = str(row_data.get("debit_account") or "").strip()
-        credit = str(row_data.get("credit_account") or "").strip()
-
-        if "gop von" in unicodedata.normalize("NFD", raw_text).encode("ascii", "ignore").decode("ascii") or "góp vốn" in raw_text:
-            return "gop_von"
-        if any(token in raw_text for token in ["thue", "thuế", "vat", "gtgt", "tndn"]):
-            return "nop_thue"
-        if credit.startswith("511") or debit.startswith("131") or any(token in raw_text for token in ["ban hang", "bán hàng", "doanh thu", "sales"]):
-            return "ban_hang_dich_vu"
-        return "mua_dich_vu"
-
-    def build_event(row_data: Dict[str, Any], seq: int) -> Dict[str, Any]:
-        event_type = infer_event_type(row_data)
-        event_date = str(row_data.get("event_date") or datetime.utcnow().date().isoformat())
-        description = str(row_data.get("description") or "Nghiệp vụ từ bảng kê chứng từ").strip()
-        counterparty_name = str(row_data.get("counterparty_name") or "Đối tác").strip()
-        reference_no = str(row_data.get("reference_no") or f"BK-{seq:04d}").strip()
-        tax_code = _normalize_tax_code(str(row_data.get("counterparty_tax_code") or ""))
-        debit_amount = max(_coerce_sheet_number(row_data.get("debit_amount")), 0.0)
-        credit_amount = max(_coerce_sheet_number(row_data.get("credit_amount")), 0.0)
-        amount_total = max(_coerce_sheet_number(row_data.get("amount_total")), debit_amount, credit_amount, 0.0)
-        amount_untaxed = max(_coerce_sheet_number(row_data.get("amount_untaxed")), 0.0)
-        vat_amount = max(_coerce_sheet_number(row_data.get("vat_amount")), 0.0)
-
-        if amount_total <= 0 and amount_untaxed > 0:
-            amount_total = amount_untaxed + vat_amount
-        if amount_untaxed <= 0 and amount_total > 0 and vat_amount > 0 and amount_total >= vat_amount:
-            amount_untaxed = amount_total - vat_amount
-        if vat_amount <= 0 and amount_total > 0 and amount_untaxed > 0 and amount_total >= amount_untaxed:
-            vat_amount = amount_total - amount_untaxed
-        if amount_total <= 0 and amount_untaxed <= 0:
-            amount_total = 0.0
-
-        if event_type == "gop_von":
-            amount = amount_total or amount_untaxed or 0.0
-            return {
-                "event_type": "gop_von",
-                "event": {
-                    "source_id": "bank_statement",
-                    "event_type": "gop_von",
-                    "statement_date": event_date,
-                    "counterparty_name": counterparty_name,
-                    "description": description,
-                    "amount": amount,
-                    "reference_no": reference_no,
-                    "debit_credit_flag": "credit",
-                },
-            }
-
-        if event_type == "nop_thue":
-            amount = vat_amount or amount_total or amount_untaxed
-            return {
-                "event_type": "nop_thue",
-                "event": {
-                    "source_id": "bank_statement",
-                    "event_type": "nop_thue",
-                    "statement_date": event_date,
-                    "counterparty_name": counterparty_name,
-                    "description": description,
-                    "amount": amount,
-                    "reference_no": reference_no,
-                    "debit_credit_flag": "debit",
-                    "tax_payable_account": "3331",
-                    "payment_channel": "bank",
-                },
-            }
-
-        if event_type == "ban_hang_dich_vu":
-            untaxed = amount_untaxed or (amount_total / 1.1 if amount_total > 0 else 0.0)
-            vat = vat_amount or (amount_total - untaxed if amount_total > untaxed else round(untaxed * 0.1))
-            total = amount_total or (untaxed + vat)
-            return {
-                "event_type": "ban_hang_dich_vu",
-                "event": {
-                    "source_id": "sales_invoice_xml",
-                    "event_type": "ban_hang_dich_vu",
-                    "invoice_no": reference_no,
-                    "issue_date": event_date,
-                    "buyer_tax_code": tax_code or "0310001111",
-                    "counterparty_name": counterparty_name,
-                    "description": description,
-                    "amount_untaxed": float(round(untaxed)),
-                    "vat_amount": float(round(vat)),
-                    "amount_total": float(round(total)),
-                    "total_amount": float(round(total)),
-                    "untaxed_amount": float(round(untaxed)),
-                    "has_vat": bool(vat > 0),
-                    "payment_status": "unpaid",
-                },
-            }
-
-        untaxed = amount_untaxed or (amount_total / 1.1 if amount_total > 0 else 0.0)
-        vat = vat_amount or (amount_total - untaxed if amount_total > untaxed else round(untaxed * 0.1))
-        total = amount_total or (untaxed + vat)
-        return {
-            "event_type": "mua_dich_vu",
-            "event": {
-                "source_id": "purchase_invoice_xml",
-                "event_type": "mua_dich_vu",
-                "invoice_no": reference_no,
-                "issue_date": event_date,
-                "seller_tax_code": tax_code or "0109999999",
-                "counterparty_name": counterparty_name,
-                "description": description,
-                "goods_service_type": "service",
-                "amount_untaxed": float(round(untaxed)),
-                "vat_amount": float(round(vat)),
-                "amount_total": float(round(total)),
-                "total_amount": float(round(total)),
-                "untaxed_amount": float(round(untaxed)),
-                "service_term_months": 1,
-                "payment_account": "331",
-                "has_vat": bool(vat > 0),
-            },
-        }
-
-    try:
-        workbook = load_workbook(filename=BytesIO(content), data_only=True, read_only=True)
-    except Exception:
-        return {
-            "events": [],
-            "rows": [],
-            "issues": ["Không đọc được tệp Excel. Vui lòng kiểm tra định dạng .xlsx."],
-            "source": "xlsx",
-        }
-
-    def parse_sheet(worksheet: Any) -> Dict[str, Any]:
-        def infer_amount_from_raw_row(row_values: Any) -> float:
-            candidates: List[float] = []
-            for value in row_values:
-                amount = max(_coerce_sheet_number(value), 0.0)
-                # Ignore tiny values and likely date parts (e.g., 2026) unless they look like money.
-                if amount >= 1_000:
-                    candidates.append(amount)
-            return max(candidates) if candidates else 0.0
-
-        sample_rows = list(worksheet.iter_rows(min_row=1, max_row=60, values_only=True))
-        header_row_idx = -1
-        header_mapping: Dict[int, str] = {}
-
-        for idx, row in enumerate(sample_rows, start=1):
-            current_mapping: Dict[int, str] = {}
-            for col_idx, cell in enumerate(row):
-                resolved_field = resolve_field_from_header_token(cell)
-                if resolved_field:
-                    current_mapping[col_idx] = resolved_field
-            has_amount_field = any(field in current_mapping.values() for field in ["amount_total", "amount_untaxed", "debit_amount", "credit_amount"])
-            if len(current_mapping) >= 3 and has_amount_field:
-                header_row_idx = idx
-                header_mapping = current_mapping
-                break
-
-        if header_row_idx < 0:
-            candidate_patterns: List[Dict[int, str]] = [
-                {0: "event_date", 1: "reference_no", 2: "description", 3: "counterparty_name", 4: "debit_account", 5: "credit_account", 6: "amount_total", 7: "amount_untaxed", 8: "vat_amount"},
-                {0: "event_date", 1: "reference_no", 2: "description", 3: "counterparty_name", 4: "debit_account", 5: "credit_account", 6: "debit_amount", 7: "credit_amount"},
-                {0: "event_date", 1: "reference_no", 2: "description", 3: "counterparty_name", 4: "amount_total", 5: "amount_untaxed", 6: "vat_amount"},
-                {0: "reference_no", 1: "event_date", 2: "description", 3: "counterparty_name", 4: "amount_total", 5: "amount_untaxed", 6: "vat_amount"},
-            ]
-            best_score = -1
-            best_pattern: Dict[int, str] = {}
-            best_start_idx = 1
-
-            for start_idx, row in enumerate(sample_rows, start=1):
-                if not any(str(cell or "").strip() for cell in row):
-                    continue
-                for pattern in candidate_patterns:
-                    score = 0
-                    for probe_idx in range(start_idx - 1, min(start_idx - 1 + 16, len(sample_rows))):
-                        probe_row = sample_rows[probe_idx]
-                        mapped_row: Dict[str, Any] = {}
-                        for col_idx, field in pattern.items():
-                            mapped_row[field] = probe_row[col_idx] if col_idx < len(probe_row) else None
-                        amount_hint = max(
-                            _coerce_sheet_number(mapped_row.get("amount_total")),
-                            _coerce_sheet_number(mapped_row.get("debit_amount")),
-                            _coerce_sheet_number(mapped_row.get("credit_amount")),
-                            _coerce_sheet_number(mapped_row.get("amount_untaxed")) + _coerce_sheet_number(mapped_row.get("vat_amount")),
-                        )
-                        if amount_hint > 0:
-                            score += 2
-                        if str(mapped_row.get("description") or "").strip():
-                            score += 1
-                        if str(mapped_row.get("reference_no") or "").strip():
-                            score += 1
-                        if parse_date_value(mapped_row.get("event_date")):
-                            score += 1
-                    if score > best_score:
-                        best_score = score
-                        best_pattern = pattern
-                        best_start_idx = start_idx
-
-            if best_score >= 8 and best_pattern:
-                header_mapping = dict(best_pattern)
-                header_row_idx = best_start_idx - 1
-
-        if header_row_idx < 0:
-            return {
-                "events": [],
-                "rows": [],
-                "score": 0,
-                "sheet": str(getattr(worksheet, "title", "")),
-                "header_row_index": 0,
-                "header_fields": [],
-                "scanned_rows": int(getattr(worksheet, "max_row", 0) or 0),
-            }
-
-        parsed_rows: List[Dict[str, Any]] = []
-        events: List[Dict[str, Any]] = []
-        empty_streak = 0
-        last_context: Dict[str, str] = {
-            "event_date": "",
-            "reference_no": "",
-            "description": "",
-            "counterparty_name": "",
-        }
-
-        for row in worksheet.iter_rows(min_row=max(header_row_idx + 1, 1), values_only=True):
-            mapped: Dict[str, Any] = {}
-            for col_idx, field in header_mapping.items():
-                mapped[field] = row[col_idx] if col_idx < len(row) else None
-
-            if not any(str(value or "").strip() for value in mapped.values()):
-                empty_streak += 1
-                if empty_streak >= 8:
-                    break
-                continue
-            empty_streak = 0
-
-            mapped["event_date"] = parse_date_value(mapped.get("event_date"))
-            mapped["description"] = str(mapped.get("description") or "").strip()
-            mapped["counterparty_name"] = str(mapped.get("counterparty_name") or "").strip()
-            mapped["reference_no"] = str(mapped.get("reference_no") or "").strip()
-            mapped["counterparty_tax_code"] = _normalize_tax_code(str(mapped.get("counterparty_tax_code") or ""))
-
-            for context_key in ["event_date", "reference_no", "description", "counterparty_name"]:
-                value = str(mapped.get(context_key) or "").strip()
-                if value:
-                    last_context[context_key] = value
-                elif last_context.get(context_key):
-                    mapped[context_key] = last_context[context_key]
-
-            event_payload = build_event(mapped, len(events) + 1)
-            amount_preview = max(
-                _coerce_sheet_number(mapped.get("amount_total")),
-                _coerce_sheet_number(mapped.get("debit_amount")),
-                _coerce_sheet_number(mapped.get("credit_amount")),
-            )
-            if amount_preview <= 0:
-                amount_preview = _coerce_sheet_number(mapped.get("amount_untaxed")) + _coerce_sheet_number(mapped.get("vat_amount"))
-            if amount_preview <= 0:
-                amount_preview = infer_amount_from_raw_row(row)
-
-            parsed_rows.append(
-                {
-                    "event_date": mapped.get("event_date") or "",
-                    "reference_no": mapped.get("reference_no") or "",
-                    "counterparty_name": mapped.get("counterparty_name") or "",
-                    "description": mapped.get("description") or "",
-                    "event_type": event_payload.get("event_type"),
-                    "amount": float(round(amount_preview)) if amount_preview > 0 else 0.0,
-                }
-            )
-
-            event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
-            numeric_values = [
-                float(event.get("amount") or 0),
-                float(event.get("amount_total") or 0),
-                float(event.get("total_amount") or 0),
-                float(event.get("amount_untaxed") or 0),
-            ]
-            if max(numeric_values) <= 0 and amount_preview <= 0:
-                continue
-            if max(numeric_values) <= 0 and amount_preview > 0:
-                fallback_event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
-                fallback_event["amount"] = float(round(amount_preview))
-                fallback_event["amount_total"] = float(round(amount_preview))
-                fallback_event["total_amount"] = float(round(amount_preview))
-                event_payload["event"] = fallback_event
-            events.append(event_payload)
-
-        score = len(events) * 2 + len(parsed_rows)
-        return {
-            "events": events,
-            "rows": parsed_rows,
-            "score": score,
-            "sheet": str(getattr(worksheet, "title", "")),
-            "header_row_index": int(header_row_idx),
-            "header_fields": sorted(set(header_mapping.values())),
-            "scanned_rows": int(getattr(worksheet, "max_row", 0) or 0),
-        }
-
-    sheet_results: List[Dict[str, Any]] = []
-    best_sheet_result: Dict[str, Any] = {"events": [], "rows": [], "score": -1, "sheet": ""}
-    for ws in workbook.worksheets:
-        result = parse_sheet(ws)
-        sheet_results.append(result)
-        if int(result.get("score") or -1) > int(best_sheet_result.get("score") or -1):
-            best_sheet_result = result
-
-    diagnostics = {
-        "workbook_sheet_count": len(workbook.worksheets),
-        "sheet_summaries": [
-            {
-                "sheet": str(item.get("sheet") or ""),
-                "score": int(item.get("score") or 0),
-                "events": len(item.get("events") or []),
-                "rows": len(item.get("rows") or []),
-                "scanned_rows": int(item.get("scanned_rows") or 0),
-                "header_row_index": int(item.get("header_row_index") or 0),
-                "header_fields": list(item.get("header_fields") or []),
-            }
-            for item in sheet_results
-        ],
-        "selected_sheet": str(best_sheet_result.get("sheet") or ""),
-    }
-
-    if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
-        heuristic_rows: List[Dict[str, Any]] = []
-        heuristic_events: List[Dict[str, Any]] = []
-
-        for ws in workbook.worksheets:
-            for row in ws.iter_rows(min_row=1, max_row=1000, values_only=True):
-                cells = [cell for cell in row if str(cell or "").strip()]
-                if len(cells) < 2:
-                    continue
-
-                amount_candidates = [max(_coerce_sheet_number(cell), 0.0) for cell in cells]
-                amount_total = max(amount_candidates) if amount_candidates else 0.0
-                if amount_total <= 0:
-                    continue
-
-                date_value = ""
-                for cell in cells:
-                    parsed_date = parse_date_value(cell)
-                    if parsed_date:
-                        date_value = parsed_date
-                        break
-
-                text_cells: List[str] = []
-                for cell in cells:
-                    raw = str(cell or "").strip()
-                    if not raw:
-                        continue
-                    if parse_date_value(raw):
-                        continue
-                    if _coerce_sheet_number(raw) > 0:
-                        continue
-                    if len(raw) <= 1:
-                        continue
-                    text_cells.append(raw)
-
-                description = max(text_cells, key=len) if text_cells else "Nghiệp vụ từ bảng kê chứng từ"
-                reference_no = ""
-                for cell in cells:
-                    token = str(cell or "").strip()
-                    if re.fullmatch(r"[A-Za-z0-9\-_/]{3,40}", token):
-                        reference_no = token
-                        break
-                if not reference_no:
-                    reference_no = f"BK-AUTO-{len(heuristic_events) + 1:04d}"
-
-                counterparty_name = "Đối tác"
-                for token in text_cells:
-                    normalized = _normalize_header_token(token)
-                    if normalized in {"diengiai", "noidung", "ghichu", "description"}:
-                        continue
-                    if token != description:
-                        counterparty_name = token
-                        break
-
-                mapped = {
-                    "event_date": date_value,
-                    "reference_no": reference_no,
-                    "description": description,
-                    "counterparty_name": counterparty_name,
-                    "amount_total": amount_total,
-                    "amount_untaxed": 0.0,
-                    "vat_amount": 0.0,
-                }
-
-                event_payload = build_event(mapped, len(heuristic_events) + 1)
-                event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
-                event_amount = max(
-                    float(event.get("amount") or 0),
-                    float(event.get("amount_total") or 0),
-                    float(event.get("total_amount") or 0),
-                    float(event.get("amount_untaxed") or 0),
-                )
-                if event_amount <= 0:
-                    continue
-
-                heuristic_rows.append(
-                    {
-                        "event_date": mapped.get("event_date") or "",
-                        "reference_no": mapped.get("reference_no") or "",
-                        "counterparty_name": mapped.get("counterparty_name") or "",
-                        "description": mapped.get("description") or "",
-                        "event_type": event_payload.get("event_type"),
-                        "amount": float(round(amount_total)),
-                    }
-                )
-                heuristic_events.append(event_payload)
-
-        if heuristic_events or heuristic_rows:
-            return {
-                "events": heuristic_events,
-                "rows": heuristic_rows,
-                "issues": ["Đã dùng chế độ nhận diện linh hoạt vì không tìm thấy tiêu đề chuẩn trong bảng kê."],
-                "source": "xlsx",
-                "diagnostics": diagnostics,
-            }
-
-    if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
-        return {
-            "events": [],
-            "rows": [],
-            "issues": ["Không tìm thấy dòng tiêu đề hợp lệ trong bảng kê chứng từ."],
-            "source": "xlsx",
-            "diagnostics": diagnostics,
-        }
-
-    return {
-        "events": best_sheet_result.get("events", []),
-        "rows": best_sheet_result.get("rows", []),
-        "issues": [],
-        "source": "xlsx",
-        "diagnostics": diagnostics,
-    }
 
 
 def _profile_complete(profile: Dict[str, Any]) -> bool:
@@ -1896,90 +1308,10 @@ def _set_xml_text(root: ET.Element, ns: Dict[str, str], path: str, value: Any) -
     node.text = str(value if value is not None else "")
 
 
-def _normalize_financial_cell_map(raw_lines: Any) -> Dict[str, int]:
-    if not isinstance(raw_lines, dict):
-        return {}
-
-    normalized: Dict[str, int] = {}
-    for key, value in raw_lines.items():
-        code = str(key or "").strip().lower()
-        if not re.fullmatch(r"ct\d{2,4}", code):
-            continue
-        try:
-            normalized[code] = int(round(float(value or 0)))
-        except (TypeError, ValueError):
-            continue
-    return normalized
-
-
-def _extract_tt133_balances_from_xml(xml_text: str) -> Dict[str, Any]:
-    payload = str(xml_text or "").strip()
-    if not payload:
-        raise HTTPException(status_code=400, detail="EMPTY_XML")
-
-    try:
-        root = ET.fromstring(payload)
-    except ET.ParseError as exc:
-        raise HTTPException(status_code=400, detail="INVALID_XML") from exc
-
-    ns = {"ns": "http://kekhaithue.gdt.gov.vn/TKhaiThue"}
-
-    year_text = ""
-    year_node = root.find(".//ns:TKhaiThue/ns:KyKKhaiThue/ns:kyKKhai", ns)
-    if year_node is not None:
-        year_text = str(year_node.text or "").strip()
-
-    if not year_text:
-        alt_year = root.find(".//ns:TKhaiThue/ns:kyKKhai", ns)
-        year_text = str(alt_year.text or "").strip() if alt_year is not None else ""
-
-    source_year = _extract_year_from_period(year_text)
-    so_cuoi_nam_node = root.find(".//ns:CTieuTKhaiChinh/ns:SoCuoiNam", ns)
-    if so_cuoi_nam_node is None:
-        raise HTTPException(status_code=400, detail="MISSING_SO_CUOI_NAM")
-
-    balances: Dict[str, int] = {}
-    for child in list(so_cuoi_nam_node):
-        tag = str(child.tag or "")
-        code = tag.split("}", 1)[-1].strip().lower()
-        if not re.fullmatch(r"ct\d{2,4}", code):
-            continue
-        value_text = str(child.text or "").strip().replace(",", "")
-        if value_text == "":
-            balances[code] = 0
-            continue
-        try:
-            balances[code] = int(round(float(value_text)))
-        except ValueError:
-            balances[code] = 0
-
-    return {"source_year": source_year, "balances": balances}
-
-
-def _resolve_opening_balances_for_year(scope_key: str, filing_year: int) -> Dict[str, int]:
-    payload = storage.get_opening_balances(scope_key)
-    if not isinstance(payload, dict):
-        return {}
-
-    annual = payload.get("annual") if isinstance(payload.get("annual"), dict) else {}
-    carry_forward = payload.get("carry_forward") if isinstance(payload.get("carry_forward"), dict) else {}
-
-    annual_lines = _normalize_financial_cell_map((annual.get(str(filing_year)) or {}).get("lines"))
-    if annual_lines:
-        return annual_lines
-
-    forwarded_lines = _normalize_financial_cell_map((carry_forward.get(str(filing_year)) or {}).get("lines"))
-    if forwarded_lines:
-        return forwarded_lines
-
-    return {}
-
-
 def _build_bctc_declaration_tt133(
     company_profile: Dict[str, Any],
     period: str,
     entries: List[Dict[str, Any]],
-    scope_key: str = "",
 ) -> Dict[str, Any]:
     template_path = Path(WORKSPACE_ROOT) / "data" / "uploads_staging" / "0111404495000-133_B01A_DNN_BCTC-Y2025-L00.xml"
     if not template_path.exists():
@@ -2043,11 +1375,6 @@ def _build_bctc_declaration_tt133(
     _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct400", tong_tai_san)
     _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct411", von_chu)
     _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:SoCuoiNam/ns:ct500", tong_tai_san)
-
-    opening_balances = _resolve_opening_balances_for_year(scope_key, filing_year) if scope_key else {}
-    for code, amount in opening_balances.items():
-        _set_xml_text(root, ns, f".//ns:CTieuTKhaiChinh/ns:SoDauNam/ns:{code}", amount)
-
     _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:ngayLap", today_iso)
     _set_xml_text(root, ns, ".//ns:CTieuTKhaiChinh/ns:nguoiDaiDienTheoPhapLuat", legal_representative)
 
@@ -2808,7 +2135,7 @@ def get_demo_compliance(
     if active_report and str(active_report.get("report_id") or "") == "gtgt":
         xml_preview = str(vat_declaration.get("xml_text") or "")
     elif active_report and str(active_report.get("report_id") or "") == "bctc":
-        bctc_declaration = _build_bctc_declaration_tt133(company_profile, effective_period, entries, scoped_data_key)
+        bctc_declaration = _build_bctc_declaration_tt133(company_profile, effective_period, entries)
         xml_preview = str(bctc_declaration.get("xml_text") or "")
     elif active_report:
         xml_preview = (
@@ -2855,227 +2182,6 @@ def upsert_demo_opening_balances(payload: OpeningBalancesPayload) -> Dict[str, A
     return {"saved": True, "email": normalized_email, "company_id": resolved_company_id, "lines": payload.lines}
 
 
-@app.get("/api/demo/opening-balances/annual")
-def get_demo_opening_balances_annual(
-    year: int,
-    email: str = "demo@wssmeas.local",
-    company_id: str = "",
-) -> Dict[str, Any]:
-    if year < 1900 or year > 9999:
-        raise HTTPException(status_code=400, detail="INVALID_YEAR")
-
-    normalized_email = email.lower().strip()
-    resolved_company_id = resolve_company_id_for_user(normalized_email, company_id)
-    scoped_data_key = company_scope_key(resolved_company_id)
-    payload = storage.get_opening_balances(scoped_data_key)
-
-    annual = payload.get("annual") if isinstance(payload, dict) and isinstance(payload.get("annual"), dict) else {}
-    carry_forward = payload.get("carry_forward") if isinstance(payload, dict) and isinstance(payload.get("carry_forward"), dict) else {}
-
-    manual_lines = _normalize_financial_cell_map((annual.get(str(year)) or {}).get("lines"))
-    auto_lines = _normalize_financial_cell_map((carry_forward.get(str(year)) or {}).get("lines"))
-    effective_lines = manual_lines if manual_lines else auto_lines
-
-    source = "manual" if manual_lines else "carry_forward" if auto_lines else "none"
-    source_year = int((carry_forward.get(str(year)) or {}).get("source_year") or (year - 1)) if auto_lines else None
-
-    return {
-        "email": normalized_email,
-        "company_id": resolved_company_id,
-        "year": year,
-        "source": source,
-        "source_year": source_year,
-        "lines": effective_lines,
-    }
-
-
-@app.post("/api/demo/opening-balances/annual")
-def upsert_demo_opening_balances_annual(payload: OpeningBalancesAnnualPayload) -> Dict[str, Any]:
-    if payload.year < 1900 or payload.year > 9999:
-        raise HTTPException(status_code=400, detail="INVALID_YEAR")
-
-    normalized_email = payload.email.lower().strip()
-    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
-    scoped_data_key = company_scope_key(resolved_company_id)
-    current_payload = storage.get_opening_balances(scoped_data_key)
-    if not isinstance(current_payload, dict):
-        current_payload = {"lines": []}
-
-    annual = current_payload.get("annual") if isinstance(current_payload.get("annual"), dict) else {}
-    carry_forward = current_payload.get("carry_forward") if isinstance(current_payload.get("carry_forward"), dict) else {}
-
-    normalized_lines = _normalize_financial_cell_map(payload.lines)
-    annual[str(payload.year)] = {
-        "lines": normalized_lines,
-        "source": "manual",
-    }
-
-    current_payload["annual"] = annual
-    current_payload["carry_forward"] = carry_forward
-
-    now = datetime.utcnow().isoformat() + "Z"
-    storage.upsert_opening_balances(scoped_data_key, current_payload, now)
-    return {
-        "saved": True,
-        "email": normalized_email,
-        "company_id": resolved_company_id,
-        "year": payload.year,
-        "lines": normalized_lines,
-    }
-
-
-@app.post("/api/demo/opening-balances/import-bctc-xml")
-def import_demo_opening_balances_from_bctc_xml(payload: OpeningBalancesImportXmlPayload) -> Dict[str, Any]:
-    normalized_email = payload.email.lower().strip()
-    resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
-    scoped_data_key = company_scope_key(resolved_company_id)
-
-    extracted = _extract_tt133_balances_from_xml(payload.xml_text)
-    source_year = int(payload.source_year or extracted.get("source_year") or 0)
-    if source_year < 1900 or source_year > 9999:
-        raise HTTPException(status_code=400, detail="INVALID_SOURCE_YEAR")
-
-    target_year = source_year + 1
-    lines = _normalize_financial_cell_map(extracted.get("balances"))
-
-    current_payload = storage.get_opening_balances(scoped_data_key)
-    if not isinstance(current_payload, dict):
-        current_payload = {"lines": []}
-
-    annual = current_payload.get("annual") if isinstance(current_payload.get("annual"), dict) else {}
-    carry_forward = current_payload.get("carry_forward") if isinstance(current_payload.get("carry_forward"), dict) else {}
-
-    carry_forward[str(target_year)] = {
-        "source": "bctc_xml",
-        "source_year": source_year,
-        "lines": lines,
-    }
-
-    current_payload["annual"] = annual
-    current_payload["carry_forward"] = carry_forward
-
-    now = datetime.utcnow().isoformat() + "Z"
-    storage.upsert_opening_balances(scoped_data_key, current_payload, now)
-
-    return {
-        "imported": True,
-        "email": normalized_email,
-        "company_id": resolved_company_id,
-        "source_year": source_year,
-        "target_year": target_year,
-        "lines": lines,
-    }
-
-
-@app.post("/api/demo/voucher-test/import")
-def import_demo_voucher_sheet_for_test(payload: VoucherSheetTestPayload) -> Dict[str, Any]:
-    normalized_email = payload.email.lower().strip()
-    try:
-        resolved_company_id = resolve_company_id_for_user(normalized_email, payload.company_id)
-    except HTTPException as exc:
-        if getattr(exc, "detail", "") == "COMPANY_ACCESS_DENIED":
-            resolved_company_id = resolve_company_id_for_user(normalized_email, "")
-        else:
-            raise
-    scoped_data_key = company_scope_key(resolved_company_id)
-
-    raw_base64 = str(payload.content_base64 or "")
-    if "," in raw_base64 and raw_base64.lower().startswith("data:"):
-        raw_base64 = raw_base64.split(",", 1)[1]
-
-    try:
-        content = base64.b64decode(raw_base64)
-    except (ValueError, binascii.Error):
-        raise HTTPException(status_code=400, detail="INVALID_BASE64_FILE")
-
-    parsed = _extract_voucher_events_from_workbook_bytes(content)
-    parsed_events = parsed.get("events") if isinstance(parsed.get("events"), list) else []
-    preview_rows = parsed.get("rows") if isinstance(parsed.get("rows"), list) else []
-    issues = [str(item) for item in (parsed.get("issues") if isinstance(parsed.get("issues"), list) else []) if str(item).strip()]
-    diagnostics = parsed.get("diagnostics") if isinstance(parsed.get("diagnostics"), dict) else {}
-
-    if not parsed_events:
-        return {
-            "ok": False,
-            "email": normalized_email,
-            "company_id": resolved_company_id,
-            "file_name": str(payload.file_name or "voucher_sheet.xlsx"),
-            "converted_count": 0,
-            "posted_count": 0,
-            "failed_count": 0,
-            "preview_rows": preview_rows,
-            "issues": issues or ["Không nhận diện được dòng nghiệp vụ nào trong bảng kê."],
-            "diagnostics": diagnostics,
-            "post_results": [],
-        }
-
-    post_results: List[Dict[str, Any]] = []
-    posted_count = 0
-    failed_count = 0
-    now = datetime.utcnow().isoformat() + "Z"
-    batch_tag = datetime.utcnow().strftime("%Y%m%d%H%M%S")
-
-    if payload.auto_post:
-        for idx, entry in enumerate(parsed_events, start=1):
-            event = entry.get("event") if isinstance(entry.get("event"), dict) else {}
-            event_type = str(entry.get("event_type") or event.get("event_type") or "").strip()
-            if not event:
-                failed_count += 1
-                post_results.append(
-                    {
-                        "line_no": idx,
-                        "event_type": event_type,
-                        "accepted": False,
-                        "reason": "EMPTY_EVENT",
-                    }
-                )
-                continue
-
-            normalized_event = dict(event)
-            normalized_event["event_type"] = event_type or str(normalized_event.get("event_type") or "")
-            normalized_event["event_date"] = str(
-                normalized_event.get("statement_date")
-                or normalized_event.get("issue_date")
-                or normalized_event.get("event_date")
-                or datetime.utcnow().date().isoformat()
-            )
-            case_id = f"VTEST-{batch_tag}-{idx:03d}"
-            normalized_event["case_id"] = case_id
-
-            posting_result = posting_engine.post(normalized_event)
-            accepted = bool(posting_result.accepted and posting_result.journal_entry)
-            if accepted:
-                posted_count += 1
-                storage.upsert_case_event(scoped_data_key, case_id, normalized_event, now)
-            else:
-                failed_count += 1
-
-            post_results.append(
-                {
-                    "line_no": idx,
-                    "event_type": normalized_event.get("event_type"),
-                    "accepted": accepted,
-                    "reason": posting_result.reason,
-                    "entry_id": posting_result.journal_entry.get("entry_id") if posting_result.journal_entry else "",
-                }
-            )
-
-    return {
-        "ok": True,
-        "email": normalized_email,
-        "company_id": resolved_company_id,
-        "file_name": str(payload.file_name or "voucher_sheet.xlsx"),
-        "converted_count": len(parsed_events),
-        "posted_count": posted_count,
-        "failed_count": failed_count,
-        "preview_rows": preview_rows,
-        "issues": issues,
-        "diagnostics": diagnostics,
-        "post_results": post_results,
-        "auto_post": bool(payload.auto_post),
-    }
-
-
 @app.post("/api/demo/compliance/export-xml")
 def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, Any]:
     normalized_email = payload.email.lower().strip()
@@ -3104,7 +2210,7 @@ def export_demo_compliance_xml(payload: ComplianceActionPayload) -> Dict[str, An
         filing_year = _extract_year_from_period(payload.period)
         period_end_date = f"{filing_year:04d}-12-31"
         entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
-        declaration = _build_bctc_declaration_tt133(company_profile, payload.period, entries, scoped_data_key)
+        declaration = _build_bctc_declaration_tt133(company_profile, payload.period, entries)
         return {
             "file_name": f"{tax_code_or_default(company_profile)}-133_B01A_DNN_BCTC-Y{filing_year}-L00.xml",
             "mime_type": "application/xml",
@@ -3153,7 +2259,7 @@ def export_demo_compliance_pdf(payload: ComplianceActionPayload) -> Dict[str, An
         filing_year = _extract_year_from_period(payload.period)
         period_end_date = f"{filing_year:04d}-12-31"
         entries = _derive_journal_entries_from_truth(scoped_data_key, period_end_date)
-        declaration = _build_bctc_declaration_tt133(company_profile, payload.period, entries, scoped_data_key)
+        declaration = _build_bctc_declaration_tt133(company_profile, payload.period, entries)
         xml_text = str(declaration.get("xml_text") or "")
         return {
             "file_name": f"{tax_code_or_default(company_profile)}-133_B01A_DNN_BCTC-Y{filing_year}-L00.pdf",
@@ -3338,6 +2444,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
     def parse_attachment_details(attachments: List[DemoAttachmentPayload], attachment_names: List[str]) -> Dict[str, Any]:
         details: Dict[str, Any] = {
+            "document_type": "unknown",
             "supplier_name": "",
             "service_name": "",
             "invoice_number": "",
@@ -3354,14 +2461,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "amount_total": 0.0,
             "vat_rate": 0.0,
             "amount": 0.0,
+            "company_tax_code": "",
+            "company_name": "",
+            "report_name": "",
+            "filing_period": "",
+            "total_assets": 0.0,
+            "liabilities": 0.0,
+            "equity": 0.0,
+            "profit_after_tax": 0.0,
             "files": attachment_names,
-            "voucher_batch": {
-                "source": "",
-                "rows": [],
-                "events": [],
-                "issues": [],
-            },
             "parse_meta": {
+                "document_type": "unknown",
                 "invoice_type": "unknown",
                 "schema_version": "",
                 "status": "needs_review",
@@ -3389,6 +2499,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         issues: List[str] = []
         warnings: List[str] = []
         xml_schema_counter: Counter[str] = Counter()
+        document_type_counter: Counter[str] = Counter()
         xml_versions: List[str] = []
 
         text_candidates: Dict[str, List[Dict[str, Any]]] = {
@@ -3557,6 +2668,17 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
             has_signature = bool(re.search(r"<\s*signature\b|<\s*dscks\b|signedinfo", xml_lower, flags=re.IGNORECASE))
 
+            document_type = "unknown"
+            ma_tkhai = pick_first_path(path_values, ["matkhai", "tkhaithue_matkhai", "ttintkhaithue_tkhaithue_matkhai"]).strip()
+            ten_tkhai = pick_first_path(path_values, ["tentkhai", "tkhaithue_tentkhai", "ttintkhaithue_tkhaithue_tentkhai"]).lower()
+            if (
+                ma_tkhai == "686"
+                or "bao cao tai chinh" in _to_ascii_text(ten_tkhai).lower()
+                or "bctc" in ten_tkhai
+                or pick_first_path(path_values, ["ctieutkhaichinh_socuoinam_ct500", "socuoinam_ct500", "pluc_pl_kqhdxskd_namnay_ct07"])
+            ):
+                document_type = "financial_statement"
+
             invoice_type = "unknown"
             if "misa" in xml_lower or "amis" in xml_lower:
                 invoice_type = "misa_custom"
@@ -3572,11 +2694,68 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             if invoice_type == "unknown" and has_signature and root_name in {"hdon", "hoadon"}:
                 invoice_type = "viettel_variant"
 
+            if document_type == "unknown" and invoice_type != "unknown":
+                document_type = "invoice"
+
             return {
+                "document_type": document_type,
                 "invoice_type": invoice_type,
                 "version": version,
                 "root_tag": root_name,
                 "namespace": namespace,
+            }
+
+        def parse_financial_statement(path_values: Dict[str, List[str]]) -> Dict[str, Any]:
+            report_name = pick_first_path(path_values, ["ttintkhaithue_tkhaithue_tentkhai", "tkhaithue_tentkhai", "tentkhai"])
+            filing_year = pick_first_path(path_values, ["ttintkhaithue_tkhaithue_kykkhaithue_kykkhai", "kykkhaithue_kykkhai", "kykkhai"])
+            period_from = pick_first_path(path_values, ["ttintkhaithue_tkhaithue_kykkhaithue_kykkhaitungay", "kykkhaithue_kykkhaitungay", "kykkhaitungay"])
+            period_to = pick_first_path(path_values, ["ttintkhaithue_tkhaithue_kykkhaithue_kykkhaidenngay", "kykkhaithue_kykkhaidenngay", "kykkhaidenngay"])
+            filing_period = ""
+            if period_from or period_to:
+                filing_period = f"{period_from} - {period_to}".strip(" -")
+            elif filing_year:
+                filing_period = str(filing_year)
+
+            total_assets = to_amount(pick_first_path(path_values, [
+                "ctieutkhaichinh_socuoinam_ct500",
+                "socuoinam_ct500",
+                "ctieutkhaichinh_socuoinam_ct400",
+                "socuoinam_ct400",
+                "ctieutkhaichinh_socuoinam_ct200",
+                "socuoinam_ct200",
+            ]))
+            liabilities = to_amount(pick_first_path(path_values, [
+                "ctieutkhaichinh_socuoinam_ct300",
+                "socuoinam_ct300",
+            ]))
+            equity = to_amount(pick_first_path(path_values, [
+                "ctieutkhaichinh_socuoinam_ct400",
+                "socuoinam_ct400",
+                "ctieutkhaichinh_socuoinam_ct410",
+                "socuoinam_ct410",
+            ]))
+            profit_after_tax = to_amount(pick_first_path(path_values, [
+                "pluc_pl_kqhdxskd_namnay_ct07",
+                "pl_kqhdxskd_namnay_ct07",
+                "namnay_ct07",
+                "pluc_pl_kqhdxskd_namnay_ct05",
+            ]))
+
+            return {
+                "company_tax_code": clean_extracted_value(
+                    pick_first_path(path_values, ["ttintkhaithue_nnt_mst", "nnt_mst", "mst"]),
+                    max_len=30,
+                ),
+                "company_name": pick_first_path(path_values, ["ttintkhaithue_nnt_tennnt", "nnt_tennnt", "tennnt"]),
+                "report_name": report_name,
+                "filing_period": filing_period,
+                "filing_year": filing_year,
+                "period_from": period_from,
+                "period_to": period_to,
+                "total_assets": float(total_assets),
+                "liabilities": float(liabilities),
+                "equity": float(equity),
+                "profit_after_tax": float(profit_after_tax),
             }
 
         def parse_by_schema(invoice_type: str, path_values: Dict[str, List[str]]) -> Dict[str, Any]:
@@ -3751,25 +2930,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         for item in attachments:
-            ext = Path(str(item.name or "")).suffix.lower()
-            if ext in {".xlsx", ".xlsm"}:
-                workbook_content = decode_attachment_content(str(item.content_base64 or ""))
-                batch_result = _extract_voucher_events_from_workbook_bytes(workbook_content)
-                details["voucher_batch"] = {
-                    "source": str(batch_result.get("source") or "xlsx"),
-                    "rows": batch_result.get("rows") if isinstance(batch_result.get("rows"), list) else [],
-                    "events": batch_result.get("events") if isinstance(batch_result.get("events"), list) else [],
-                    "issues": batch_result.get("issues") if isinstance(batch_result.get("issues"), list) else [],
-                }
-                batch_issues = details["voucher_batch"].get("issues") if isinstance(details["voucher_batch"], dict) else []
-                if isinstance(batch_issues, list):
-                    issues.extend(str(issue) for issue in batch_issues if str(issue).strip())
-                continue
-
             text = extract_attachment_text(item)
             if not text:
                 continue
 
+            ext = Path(str(item.name or "")).suffix.lower()
             plain_text = text
             if ext == ".xml":
                 plain_text = re.sub(r"<[^>]+>", " ", text)
@@ -3783,10 +2948,45 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     root = ET.fromstring(text)
                     path_values = collect_path_values(root)
                     schema = detect_schema(root, text, path_values)
+                    document_type = schema.get("document_type") or "unknown"
+                    document_type_counter[document_type] += 1
                     invoice_type = schema["invoice_type"]
                     xml_schema_counter[invoice_type] += 1
                     if schema.get("version"):
                         xml_versions.append(schema["version"])
+
+                    if document_type == "financial_statement":
+                        fs_data = parse_financial_statement(path_values)
+                        company_tax_code = _normalize_tax_code(str(fs_data.get("company_tax_code") or ""))
+                        details["company_tax_code"] = company_tax_code
+                        details["company_name"] = str(fs_data.get("company_name") or "")
+                        details["report_name"] = str(fs_data.get("report_name") or "")
+                        details["filing_period"] = str(fs_data.get("filing_period") or "")
+                        details["total_assets"] = float(fs_data.get("total_assets") or 0.0)
+                        details["liabilities"] = float(fs_data.get("liabilities") or 0.0)
+                        details["equity"] = float(fs_data.get("equity") or 0.0)
+                        details["profit_after_tax"] = float(fs_data.get("profit_after_tax") or 0.0)
+
+                        add_text_candidate("supplier_name", details["company_name"], 0.95, "financial_statement:company_name")
+                        add_text_candidate("service_name", details["report_name"] or "Báo cáo tài chính", 0.95, "financial_statement:report_name")
+                        add_text_candidate("invoice_number", str(fs_data.get("filing_year") or ""), 0.85, "financial_statement:filing_year")
+                        add_date_source(str(fs_data.get("period_to") or ""), 0.9, "financial_statement:period_to")
+
+                        if not details.get("company_name"):
+                            issues.append("Không xác định được tên doanh nghiệp trong XML báo cáo tài chính")
+                        if not company_tax_code:
+                            issues.append("Không xác định được MST doanh nghiệp trong XML báo cáo tài chính")
+                        if details["total_assets"] <= 0:
+                            warnings.append("Không đọc được chỉ tiêu tổng tài sản từ XML báo cáo tài chính")
+
+                        # Reuse generic fields so later flow and UI can still render safely.
+                        details["supplier_name"] = details["company_name"] or details["supplier_name"]
+                        details["service_name"] = details["report_name"] or "Báo cáo tài chính"
+                        details["invoice_number"] = str(fs_data.get("filing_year") or details.get("invoice_number") or "")
+                        details["invoice_date"] = normalize_date_value(str(fs_data.get("period_to") or ""))
+
+                        add_amount_source(float(details["total_assets"] or 0.0), 0.95, "financial_statement:total_assets")
+                        continue
 
                     mapped = parse_by_schema(invoice_type, path_values)
                     add_text_candidate("supplier_name", str(mapped.get("supplier") or ""), 0.95, f"{invoice_type}:supplier")
@@ -3864,13 +3064,16 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         seller_address_best = pick_best_text("seller_address")
         buyer_address_best = pick_best_text("buyer_address")
 
-        details["supplier_name"] = supplier_best["value"]
-        details["service_name"] = service_best["value"]
-        details["invoice_number"] = invoice_best["value"]
-        details["seller_name"] = seller_name_best["value"]
-        details["buyer_name"] = buyer_name_best["value"]
-        details["seller_address"] = seller_address_best["value"]
-        details["buyer_address"] = buyer_address_best["value"]
+        dominant_document_type = document_type_counter.most_common(1)[0][0] if document_type_counter else "unknown"
+
+        details["document_type"] = dominant_document_type
+        details["supplier_name"] = supplier_best["value"] or str(details.get("supplier_name") or "")
+        details["service_name"] = service_best["value"] or str(details.get("service_name") or "")
+        details["invoice_number"] = invoice_best["value"] or str(details.get("invoice_number") or "")
+        details["seller_name"] = seller_name_best["value"] or str(details.get("seller_name") or "")
+        details["buyer_name"] = buyer_name_best["value"] or str(details.get("buyer_name") or "")
+        details["seller_address"] = seller_address_best["value"] or str(details.get("seller_address") or "")
+        details["buyer_address"] = buyer_address_best["value"] or str(details.get("buyer_address") or "")
 
         if date_sources:
             best_date = sorted(date_sources, key=lambda item: item["confidence"], reverse=True)[0]
@@ -3886,9 +3089,16 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         vote_candidates = [value for value in [total_tag_value, computed_total, lines_plus_vat] if value > 0]
         vote = majority_vote_numeric(vote_candidates)
 
-        final_amount = 0.0
+        final_amount = float(details.get("total_assets") or 0.0) if dominant_document_type == "financial_statement" else 0.0
         amount_confidence = 0.0
-        if vote["count"] >= 2:
+        if dominant_document_type == "financial_statement":
+            if final_amount > 0:
+                amount_confidence = 0.95
+            elif amount_sources:
+                strongest = sorted(amount_sources, key=lambda item: (item["confidence"], item["value"]), reverse=True)[0]
+                final_amount = float(round(float(strongest["value"])))
+                amount_confidence = float(strongest["confidence"])
+        elif vote["count"] >= 2:
             final_amount = float(vote["value"])
             amount_confidence = 0.95
         elif total_tag_value > 0:
@@ -3901,15 +3111,19 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         details["amount"] = final_amount
         details["amount_total"] = final_amount
-        details["vat_amount"] = float(round(vat_value)) if vat_value > 0 else 0.0
-        if subtotal_value > 0:
+        details["vat_amount"] = float(round(vat_value)) if vat_value > 0 and dominant_document_type != "financial_statement" else 0.0
+        if dominant_document_type == "financial_statement":
+            details["amount_untaxed"] = 0.0
+        elif subtotal_value > 0:
             details["amount_untaxed"] = float(round(subtotal_value))
         elif final_amount > 0 and vat_value > 0 and final_amount >= vat_value:
             details["amount_untaxed"] = float(round(final_amount - vat_value))
         else:
             details["amount_untaxed"] = 0.0
 
-        if subtotal_value > 0 and vat_value >= 0:
+        if dominant_document_type == "financial_statement":
+            details["vat_rate"] = 0.0
+        elif subtotal_value > 0 and vat_value >= 0:
             details["vat_rate"] = round((vat_value / subtotal_value) * 100.0, 4)
         else:
             explicit_rates = [float(rate) for rate in tax_rates if float(rate) > 0]
@@ -3926,22 +3140,28 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "vote_size": vote["size"],
         }
 
-        if total_tag_value > 0 and computed_total > 0 and abs(total_tag_value - computed_total) > 2:
-            issues.append("Đối chiếu thất bại: tổng tiền khác subtotal + VAT")
-        if total_tag_value > 0 and lines_sum > 0 and abs(total_tag_value - lines_sum - vat_value) > 3:
-            issues.append("Đối chiếu thất bại: tổng tiền khác tổng dòng hàng + VAT")
+        if dominant_document_type == "financial_statement":
+            if details["total_assets"] <= 0:
+                issues.append("Không xác định được tổng tài sản trong báo cáo tài chính")
+            if details["liabilities"] > details["total_assets"] and details["total_assets"] > 0:
+                warnings.append("Cảnh báo: Nợ phải trả lớn hơn tổng tài sản")
+        else:
+            if total_tag_value > 0 and computed_total > 0 and abs(total_tag_value - computed_total) > 2:
+                issues.append("Đối chiếu thất bại: tổng tiền khác subtotal + VAT")
+            if total_tag_value > 0 and lines_sum > 0 and abs(total_tag_value - lines_sum - vat_value) > 3:
+                issues.append("Đối chiếu thất bại: tổng tiền khác tổng dòng hàng + VAT")
 
-        if final_amount <= 0:
-            issues.append("Tổng tiền hóa đơn bằng 0 hoặc không xác định")
-        if subtotal_value > 0 and vat_value > subtotal_value * 0.5:
-            issues.append("VAT vượt ngưỡng bất thường (>50% subtotal)")
-        if any(value < 0 for value in [total_tag_value, subtotal_value, vat_value, lines_sum]):
-            issues.append("Phát hiện giá trị âm bất thường trong hóa đơn")
+            if final_amount <= 0:
+                issues.append("Tổng tiền hóa đơn bằng 0 hoặc không xác định")
+            if subtotal_value > 0 and vat_value > subtotal_value * 0.5:
+                issues.append("VAT vượt ngưỡng bất thường (>50% subtotal)")
+            if any(value < 0 for value in [total_tag_value, subtotal_value, vat_value, lines_sum]):
+                issues.append("Phát hiện giá trị âm bất thường trong hóa đơn")
 
-        if not details["supplier_name"]:
-            issues.append("Không xác định được nhà cung cấp")
-        if not details["invoice_number"]:
-            issues.append("Không xác định được số hóa đơn")
+            if not details["supplier_name"]:
+                issues.append("Không xác định được nhà cung cấp")
+            if not details["invoice_number"]:
+                issues.append("Không xác định được số hóa đơn")
 
         company_validation: Dict[str, Any] = {
             "company_tax_code": selected_company_tax_code,
@@ -3954,36 +3174,45 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
         normalized_seller_tax = _normalize_tax_code(str(details.get("seller_tax_code") or ""))
         normalized_buyer_tax = _normalize_tax_code(str(details.get("buyer_tax_code") or ""))
+        normalized_company_tax_in_report = _normalize_tax_code(str(details.get("company_tax_code") or ""))
         details["seller_tax_code"] = normalized_seller_tax
         details["buyer_tax_code"] = normalized_buyer_tax
-        company_validation["has_invoice_tax_code"] = bool(normalized_seller_tax or normalized_buyer_tax)
+        company_validation["has_invoice_tax_code"] = bool(normalized_seller_tax or normalized_buyer_tax or normalized_company_tax_in_report)
 
         if selected_company_tax_code:
-            if normalized_seller_tax == selected_company_tax_code:
-                company_validation["is_tax_code_match"] = True
-                company_validation["matched_party"] = "seller"
-                company_validation["invoice_role"] = "outbound"
-            elif normalized_buyer_tax == selected_company_tax_code:
-                company_validation["is_tax_code_match"] = True
-                company_validation["matched_party"] = "buyer"
-                company_validation["invoice_role"] = "inbound"
+            if dominant_document_type == "financial_statement":
+                if normalized_company_tax_in_report == selected_company_tax_code:
+                    company_validation["is_tax_code_match"] = True
+                    company_validation["matched_party"] = "company"
+                    company_validation["invoice_role"] = "financial_statement"
+                else:
+                    company_validation["blocking_reason"] = "MST trên báo cáo tài chính không thuộc công ty đang đăng nhập"
             else:
-                company_validation["blocking_reason"] = "Mã số thuế trên hóa đơn không thuộc công ty đang đăng nhập"
+                if normalized_seller_tax == selected_company_tax_code:
+                    company_validation["is_tax_code_match"] = True
+                    company_validation["matched_party"] = "seller"
+                    company_validation["invoice_role"] = "outbound"
+                elif normalized_buyer_tax == selected_company_tax_code:
+                    company_validation["is_tax_code_match"] = True
+                    company_validation["matched_party"] = "buyer"
+                    company_validation["invoice_role"] = "inbound"
+                else:
+                    company_validation["blocking_reason"] = "Mã số thuế trên hóa đơn không thuộc công ty đang đăng nhập"
 
-            matched_name = details.get("seller_name") if company_validation["matched_party"] == "seller" else details.get("buyer_name")
-            matched_address = details.get("seller_address") if company_validation["matched_party"] == "seller" else details.get("buyer_address")
-            normalized_company_name = normalize_text_field(selected_company_name)
-            normalized_company_address = normalize_text_field(selected_company_address)
-            normalized_matched_name = normalize_text_field(str(matched_name or ""))
-            normalized_matched_address = normalize_text_field(str(matched_address or ""))
+                matched_name = details.get("seller_name") if company_validation["matched_party"] == "seller" else details.get("buyer_name")
+                matched_address = details.get("seller_address") if company_validation["matched_party"] == "seller" else details.get("buyer_address")
+                normalized_company_name = normalize_text_field(selected_company_name)
+                normalized_company_address = normalize_text_field(selected_company_address)
+                normalized_matched_name = normalize_text_field(str(matched_name or ""))
+                normalized_matched_address = normalize_text_field(str(matched_address or ""))
 
-            if company_validation["is_tax_code_match"] and normalized_company_name and normalized_matched_name:
-                if normalized_company_name not in normalized_matched_name and normalized_matched_name not in normalized_company_name:
-                    warnings.append("Cảnh báo: MST khớp nhưng tên công ty trên hóa đơn khác hồ sơ công ty")
+                if company_validation["is_tax_code_match"] and normalized_company_name and normalized_matched_name:
+                    if normalized_company_name not in normalized_matched_name and normalized_matched_name not in normalized_company_name:
+                        warnings.append("Cảnh báo: MST khớp nhưng tên công ty trên hóa đơn khác hồ sơ công ty")
 
-            if company_validation["is_tax_code_match"] and normalized_company_address and normalized_matched_address:
-                if normalized_company_address not in normalized_matched_address and normalized_matched_address not in normalized_company_address:
-                    warnings.append("Cảnh báo: MST khớp nhưng địa chỉ trên hóa đơn khác hồ sơ công ty")
+                if company_validation["is_tax_code_match"] and normalized_company_address and normalized_matched_address:
+                    if normalized_company_address not in normalized_matched_address and normalized_matched_address not in normalized_company_address:
+                        warnings.append("Cảnh báo: MST khớp nhưng địa chỉ trên hóa đơn khác hồ sơ công ty")
 
         if xml_schema_counter:
             dominant_schema = xml_schema_counter.most_common(1)[0][0]
@@ -4000,10 +3229,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         status = "ok"
         if any("bất thường" in item.lower() for item in issues):
             status = "suspicious"
-        elif issues or overall_confidence < 0.75 or dominant_schema == "unknown":
+        elif issues or overall_confidence < 0.75 or (dominant_document_type == "invoice" and dominant_schema == "unknown"):
             status = "needs_review"
 
         details["parse_meta"] = {
+            "document_type": dominant_document_type,
             "invoice_type": dominant_schema,
             "schema_version": max(xml_versions) if xml_versions else "",
             "status": status,
@@ -4332,81 +3562,26 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         if pending_posting and is_confirm_command(text):
-            pending_events_payload = pending_posting.get("events") if isinstance(pending_posting.get("events"), list) else []
-            normalized_pending_events: List[Dict[str, Any]] = []
-            for idx, row in enumerate(pending_events_payload, start=1):
-                if not isinstance(row, dict):
-                    continue
-                pending_event = row.get("event") if isinstance(row.get("event"), dict) else {}
-                event_type = str(row.get("event_type") or pending_event.get("event_type") or "").strip()
-                if not pending_event:
-                    continue
-                normalized_pending_events.append(
-                    {
-                        "event_type": event_type,
-                        "event": dict(pending_event),
-                        "seq": idx,
-                    }
-                )
-
-            if not normalized_pending_events:
-                fallback_event = pending_posting.get("event") if isinstance(pending_posting.get("event"), dict) else {}
-                if isinstance(fallback_event, dict) and fallback_event:
-                    normalized_pending_events.append(
-                        {
-                            "event_type": str(pending_posting.get("event_type") or fallback_event.get("event_type") or "").strip(),
-                            "event": dict(fallback_event),
-                            "seq": 1,
-                        }
-                    )
-
-            if not normalized_pending_events:
-                return {
-                    "ok": False,
-                    "message": "Không có dữ liệu nghiệp vụ chờ post.",
-                    "posting_accepted": False,
-                    "requires_confirmation": False,
-                    "updated_at": now,
-                }
-
-            accepted_events: List[Dict[str, Any]] = []
-            failed_reasons: List[str] = []
-            latest_posting_date = datetime.utcnow().date().isoformat()
+            pending_event = pending_posting.get("event") if isinstance(pending_posting.get("event"), dict) else {}
+            pending_event = dict(pending_event)
+            pending_event["case_id"] = case_id
+            pending_event["event_date"] = str(
+                pending_event.get("statement_date")
+                or pending_event.get("issue_date")
+                or pending_event.get("event_date")
+                or datetime.utcnow().date().isoformat()
+            )
+            posting_event_date = str(pending_event.get("event_date") or datetime.utcnow().date().isoformat())
 
             staged_attachments = pending_posting.get("received_attachments") if isinstance(pending_posting, dict) else []
             committed_attachment_names: List[str] = []
             if isinstance(staged_attachments, list):
                 committed_attachment_names = _commit_staged_attachments(normalized_email, case_id, staged_attachments)
 
-            for idx, item in enumerate(normalized_pending_events, start=1):
-                pending_event = dict(item.get("event") or {})
-                pending_event["event_type"] = str(item.get("event_type") or pending_event.get("event_type") or "")
-                event_case_id = case_id if len(normalized_pending_events) == 1 else f"{case_id}-{idx:03d}"
-                pending_event["case_id"] = event_case_id
-                pending_event["event_date"] = str(
-                    pending_event.get("statement_date")
-                    or pending_event.get("issue_date")
-                    or pending_event.get("event_date")
-                    or datetime.utcnow().date().isoformat()
-                )
-                latest_posting_date = str(pending_event.get("event_date") or latest_posting_date)
-
-                posting_result = posting_engine.post(pending_event)
-                if posting_result.accepted and posting_result.journal_entry:
-                    storage.upsert_case_event(scoped_data_key, event_case_id, pending_event, now)
-                    accepted_events.append(
-                        {
-                            "event": pending_event,
-                            "journal_entry": posting_result.journal_entry,
-                        }
-                    )
-                else:
-                    reason = str(posting_result.reason or "Thiếu dữ liệu chuẩn.")
-                    failed_reasons.append(f"Dòng {idx}: {reason}")
-
-            posting_accepted = bool(accepted_events) and len(failed_reasons) == 0
-            posting_event_date = latest_posting_date
-            primary_posted_event = accepted_events[0]["event"] if accepted_events else dict(normalized_pending_events[0].get("event") or {})
+            posting_result = posting_engine.post(pending_event)
+            posting_accepted = bool(posting_result.accepted and posting_result.journal_entry)
+            if posting_accepted:
+                storage.upsert_case_event(scoped_data_key, case_id, pending_event, now)
 
             def format_date_for_summary(value: str) -> str:
                 raw = str(value or "").strip()
@@ -4464,22 +3639,22 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
             if not posted_by_label:
                 fallback_date = str(
-                    primary_posted_event.get("issue_date")
-                    or primary_posted_event.get("statement_date")
-                    or primary_posted_event.get("event_date")
+                    pending_event.get("issue_date")
+                    or pending_event.get("statement_date")
+                    or pending_event.get("event_date")
                     or ""
                 )
-                fallback_total = float(primary_posted_event.get("amount_total") or primary_posted_event.get("total_amount") or primary_posted_event.get("amount") or 0)
-                fallback_untaxed = float(primary_posted_event.get("amount_untaxed") or primary_posted_event.get("untaxed_amount") or 0)
-                fallback_vat = float(primary_posted_event.get("vat_amount") or 0)
+                fallback_total = float(pending_event.get("amount_total") or pending_event.get("total_amount") or pending_event.get("amount") or 0)
+                fallback_untaxed = float(pending_event.get("amount_untaxed") or pending_event.get("untaxed_amount") or 0)
+                fallback_vat = float(pending_event.get("vat_amount") or 0)
                 if fallback_untaxed <= 0 and fallback_total > 0 and fallback_vat > 0 and fallback_total >= fallback_vat:
                     fallback_untaxed = fallback_total - fallback_vat
                 if fallback_vat <= 0 and fallback_total > 0 and fallback_untaxed > 0 and fallback_total >= fallback_untaxed:
                     fallback_vat = fallback_total - fallback_untaxed
                 posted_by_label = {
-                    "Đối tác": str(primary_posted_event.get("counterparty_name") or "Đối tác"),
-                    "Nội dung": str(primary_posted_event.get("description") or primary_posted_event.get("goods_service_type") or "-"),
-                    "Số hóa đơn": str(primary_posted_event.get("invoice_no") or primary_posted_event.get("reference_no") or "-"),
+                    "Đối tác": str(pending_event.get("counterparty_name") or "Đối tác"),
+                    "Nội dung": str(pending_event.get("description") or pending_event.get("goods_service_type") or "-"),
+                    "Số hóa đơn": str(pending_event.get("invoice_no") or pending_event.get("reference_no") or "-"),
                     "Ngày hóa đơn": format_date_for_summary(fallback_date),
                     "Số tiền trước thuế": f"{fallback_untaxed:,.0f} đồng" if fallback_untaxed > 0 else "-",
                     "Thuế VAT": f"{fallback_vat:,.0f} đồng" if fallback_vat > 0 else "-",
@@ -4491,14 +3666,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     continue
                 posted_summary_rows.append({"label": label, "value": str(posted_by_label.get(label) or "-")})
 
-            total_pending = len(normalized_pending_events)
-            accepted_count = len(accepted_events)
-            if posting_accepted:
-                result_body = f"Đã tạo bút toán tự động thành công cho {accepted_count}/{total_pending} nghiệp vụ."
-            elif accepted_count > 0:
-                result_body = f"Đã tạo bút toán {accepted_count}/{total_pending} nghiệp vụ. Còn lỗi: {'; '.join(failed_reasons[:3])}"
-            else:
-                result_body = f"Không thể tạo bút toán tự động: {'; '.join(failed_reasons[:3]) or 'Thiếu dữ liệu chuẩn.'}"
+            result_body = (
+                "Đã tạo bút toán tự động thành công."
+                if posting_accepted and posting_result.journal_entry
+                else f"Không thể tạo bút toán tự động: {posting_result.reason or 'Thiếu dữ liệu chuẩn.'}"
+            )
 
             timeline_entries = [
                 {
@@ -4511,18 +3683,14 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 },
             ]
 
-            if accepted_count > 0 and posted_summary_rows:
+            if posting_accepted and posted_summary_rows:
                 timeline_entries.append(
                     {
                         "id": f"{case_id}-posted-summary-{uuid.uuid4().hex[:6]}",
                         "kind": "analysis",
                         "role": "system",
                         "title": "Thông tin đã post",
-                        "body": (
-                            "Hệ thống đã thực hiện post theo lô bảng kê chứng từ. Dưới đây là thông tin nghiệp vụ đầu tiên đã post:"
-                            if len(normalized_pending_events) > 1
-                            else "Hệ thống đã thực hiện post với các thông tin cơ bản sau:"
-                        ),
+                        "body": "Hệ thống đã thực hiện post với các thông tin cơ bản sau:",
                         "table_rows": posted_summary_rows,
                         "time": datetime.utcnow().strftime("%H:%M"),
                     }
@@ -4561,9 +3729,9 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         "evidence": merged_evidence,
                         "reasoning": [
                             (
-                                f"Khách hàng đã đồng ý post bảng kê và hệ thống đã sinh bút toán {accepted_count}/{total_pending} nghiệp vụ."
-                                if accepted_count > 0
-                                else f"Khách hàng đã đồng ý post nhưng hệ thống chưa thể sinh bút toán: {'; '.join(failed_reasons[:2]) or 'Thiếu dữ liệu'}"
+                                f"Khách hàng đã đồng ý post và hệ thống đã sinh bút toán {posting_result.journal_entry.get('entry_id')}."
+                                if posting_accepted and posting_result.journal_entry
+                                else f"Khách hàng đã đồng ý post nhưng hệ thống chưa thể sinh bút toán: {posting_result.reason or 'Thiếu dữ liệu'}"
                             ),
                             *current_reasoning,
                         ],
@@ -4580,39 +3748,25 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "ok": True,
                 "message": (
                     "Đã nhận xác nhận của khách hàng. Đã tạo bút toán tự động thành công."
-                    if posting_accepted
+                    if posting_accepted and posting_result.journal_entry
                     else f"Đã nhận xác nhận của khách hàng. {result_body}"
                 ),
                 "timeline_entries": timeline_entries,
                 "posting_accepted": posting_accepted,
-                "posting_reason": "; ".join(failed_reasons),
+                "posting_reason": posting_result.reason,
                 "requires_confirmation": False,
                 "updated_at": now,
             }
 
         attachment_count = len(payload.attachments)
-        excel_suffixes = {".xlsx", ".xlsm"}
-        has_voucher_sheet_attachment = any(
-            Path(str(item.name or "")).suffix.lower() in excel_suffixes
-            for item in payload.attachments
-        )
         staged_attachments = save_case_attachments_to_staging(case_id, payload.attachments)
         staged_attachment_names = [str(item.get("name") or item.get("stored_name") or "") for item in staged_attachments]
         attachment_details = parse_attachment_details(payload.attachments, staged_attachment_names)
         parse_meta = attachment_details.get("parse_meta") if isinstance(attachment_details.get("parse_meta"), dict) else {}
-        voucher_batch = attachment_details.get("voucher_batch") if isinstance(attachment_details.get("voucher_batch"), dict) else {}
-        voucher_batch_rows = voucher_batch.get("rows") if isinstance(voucher_batch.get("rows"), list) else []
-        voucher_batch_events = voucher_batch.get("events") if isinstance(voucher_batch.get("events"), list) else []
-        voucher_batch_issues = voucher_batch.get("issues") if isinstance(voucher_batch.get("issues"), list) else []
+        parsed_document_type = str(parse_meta.get("document_type") or attachment_details.get("document_type") or "unknown")
         company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
         parse_warnings = parse_meta.get("warnings") if isinstance(parse_meta.get("warnings"), list) else []
-        has_excel_in_staged_names = any(Path(str(name or "")).suffix.lower() in excel_suffixes for name in staged_attachment_names)
-        tax_match_ok = (
-            bool(company_validation.get("is_tax_code_match"))
-            or bool(voucher_batch_events)
-            or has_voucher_sheet_attachment
-            or has_excel_in_staged_names
-        )
+        tax_match_ok = bool(company_validation.get("is_tax_code_match"))
         blocking_reason = str(company_validation.get("blocking_reason") or "").strip()
 
         if not tax_match_ok:
@@ -4626,7 +3780,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
                     current_timeline = item.get("timeline") if isinstance(item.get("timeline"), list) else []
                     current_reasoning = item.get("reasoning") if isinstance(item.get("reasoning"), list) else []
-                    reject_message = blocking_reason or "Hóa đơn không thuộc công ty đang đăng nhập (MST không khớp)."
+                    reject_message = blocking_reason or (
+                        "Báo cáo tài chính không thuộc công ty đang đăng nhập (MST không khớp)."
+                        if parsed_document_type == "financial_statement"
+                        else "Hóa đơn không thuộc công ty đang đăng nhập (MST không khớp)."
+                    )
                     reject_timeline = {
                         "id": f"{case_id}-reject-tax-{uuid.uuid4().hex[:6]}",
                         "kind": "analysis",
@@ -4640,7 +3798,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                         **item,
                         "timeline": [*current_timeline, reject_timeline],
                         "reasoning": [
-                            "Hệ thống từ chối hồ sơ vì MST trên hóa đơn không khớp với công ty đang đăng nhập.",
+                            (
+                                "Hệ thống từ chối hồ sơ vì MST trên báo cáo tài chính không khớp với công ty đang đăng nhập."
+                                if parsed_document_type == "financial_statement"
+                                else "Hệ thống từ chối hồ sơ vì MST trên hóa đơn không khớp với công ty đang đăng nhập."
+                            ),
                             *current_reasoning,
                         ],
                         "status": "can_xu_ly",
@@ -4655,7 +3817,11 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
 
             return {
                 "ok": False,
-                "message": blocking_reason or "Từ chối xử lý: mã số thuế trên hóa đơn không khớp công ty đang đăng nhập.",
+                "message": blocking_reason or (
+                    "Từ chối xử lý: mã số thuế trên báo cáo tài chính không khớp công ty đang đăng nhập."
+                    if parsed_document_type == "financial_statement"
+                    else "Từ chối xử lý: mã số thuế trên hóa đơn không khớp công ty đang đăng nhập."
+                ),
                 "received_attachments": staged_attachment_names,
                 "staged_attachments": staged_attachments,
                 "requires_confirmation": False,
@@ -4666,20 +3832,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "updated_at": now,
             }
 
-        if voucher_batch_issues:
-            parse_warnings = [*parse_warnings, *[str(issue) for issue in voucher_batch_issues if str(issue).strip()]]
-
-        inferred_events = [
-            item
-            for item in voucher_batch_events
-            if isinstance(item, dict) and isinstance(item.get("event"), dict)
-        ]
-        if inferred_events:
-            inferred = inferred_events[0]
-        else:
-            inferred = infer_event_from_input(text, staged_attachment_names, attachment_details)
-            inferred_events = [inferred]
-
+        inferred = infer_event_from_input(text, staged_attachment_names, attachment_details)
         inferred_event = dict(inferred["event"])
         inferred_event["case_id"] = case_id
         inferred_event["event_date"] = str(
@@ -4722,17 +3875,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         parsed_total = float(attachment_details.get("amount_total") or attachment_details.get("amount") or inferred_event.get("amount_total") or inferred_event.get("amount") or 0)
         parsed_untaxed = float(attachment_details.get("amount_untaxed") or inferred_event.get("amount_untaxed") or inferred_event.get("untaxed_amount") or 0)
         parsed_vat = float(attachment_details.get("vat_amount") or inferred_event.get("vat_amount") or 0)
-        if len(inferred_events) > 1:
-            parsed_total = 0.0
-            parsed_untaxed = 0.0
-            parsed_vat = 0.0
-            for item in inferred_events:
-                event_item = item.get("event") if isinstance(item.get("event"), dict) else {}
-                parsed_total += float(event_item.get("amount_total") or event_item.get("total_amount") or event_item.get("amount") or 0)
-                parsed_untaxed += float(event_item.get("amount_untaxed") or event_item.get("untaxed_amount") or 0)
-                parsed_vat += float(event_item.get("vat_amount") or 0)
-            service_name = f"Bảng kê chứng từ ({len(inferred_events)} dòng)"
-            supplier_name = str(inferred_event.get("counterparty_name") or supplier_name)
         if parsed_untaxed <= 0 and parsed_total > 0 and parsed_vat > 0 and parsed_total >= parsed_vat:
             parsed_untaxed = parsed_total - parsed_vat
         if parsed_vat <= 0 and parsed_total > 0 and parsed_untaxed > 0 and parsed_total >= parsed_untaxed:
@@ -4812,19 +3954,41 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         partner_name = str(partner_name or "Đối tác")
         partner_tax_code = _normalize_tax_code(str(partner_tax_code or "").strip())
 
-        parse_table_rows = [
-            {"label": "Đối tác", "value": partner_name},
-            {"label": "Nội dung", "value": service_name},
-            {"label": "Số hóa đơn", "value": invoice_no},
-            {"label": "Ngày hóa đơn", "value": invoice_date_display or "-"},
-            {"label": "Số tiền trước thuế", "value": f"{amount_text_untaxed} đồng" if amount_text_untaxed != "-" else "-"},
-            {"label": "Thuế VAT", "value": f"{amount_text_vat} đồng" if amount_text_vat != "-" else "-"},
-            {"label": "Số tiền sau thuế", "value": f"{amount_text_total} đồng" if amount_text_total != "-" else "-"},
-        ]
-        if len(inferred_events) > 1:
-            parse_table_rows.insert(0, {"label": "Số dòng bảng kê", "value": str(len(inferred_events))})
-        if partner_tax_code:
-            parse_table_rows.insert(2, {"label": "MST đối tác", "value": partner_tax_code})
+        if parsed_document_type == "financial_statement":
+            report_name = str(attachment_details.get("report_name") or service_name or "Báo cáo tài chính")
+            report_period = str(attachment_details.get("filing_period") or invoice_date_display or "-")
+            report_company_name = str(attachment_details.get("company_name") or supplier_name or "-")
+            report_company_tax = _normalize_tax_code(str(attachment_details.get("company_tax_code") or ""))
+            total_assets = float(attachment_details.get("total_assets") or 0)
+            liabilities = float(attachment_details.get("liabilities") or 0)
+            equity = float(attachment_details.get("equity") or 0)
+            profit_after_tax = float(attachment_details.get("profit_after_tax") or 0)
+
+            parse_table_rows = [
+                {"label": "Loại chứng từ", "value": "Báo cáo tài chính XML"},
+                {"label": "Tên báo cáo", "value": report_name},
+                {"label": "Doanh nghiệp", "value": report_company_name or "-"},
+                {"label": "Kỳ báo cáo", "value": report_period or "-"},
+                {"label": "Tổng tài sản cuối kỳ", "value": f"{total_assets:,.0f} đồng" if total_assets > 0 else "-"},
+                {"label": "Nợ phải trả cuối kỳ", "value": f"{liabilities:,.0f} đồng" if liabilities > 0 else "-"},
+                {"label": "Vốn chủ sở hữu cuối kỳ", "value": f"{equity:,.0f} đồng" if equity != 0 else "-"},
+                {"label": "Lợi nhuận sau thuế", "value": f"{profit_after_tax:,.0f} đồng" if profit_after_tax != 0 else "-"},
+            ]
+            if report_company_tax:
+                parse_table_rows.insert(3, {"label": "MST doanh nghiệp", "value": report_company_tax})
+        else:
+            parse_table_rows = [
+                {"label": "Loại chứng từ", "value": "Hóa đơn XML"},
+                {"label": "Đối tác", "value": partner_name},
+                {"label": "Nội dung", "value": service_name},
+                {"label": "Số hóa đơn", "value": invoice_no},
+                {"label": "Ngày hóa đơn", "value": invoice_date_display or "-"},
+                {"label": "Số tiền trước thuế", "value": f"{amount_text_untaxed} đồng" if amount_text_untaxed != "-" else "-"},
+                {"label": "Thuế VAT", "value": f"{amount_text_vat} đồng" if amount_text_vat != "-" else "-"},
+                {"label": "Số tiền sau thuế", "value": f"{amount_text_total} đồng" if amount_text_total != "-" else "-"},
+            ]
+            if partner_tax_code:
+                parse_table_rows.insert(3, {"label": "MST đối tác", "value": partner_tax_code})
 
         extract_body = (
             f"Đã tiếp nhận hồ sơ: {', '.join(staged_attachment_names)}"
@@ -4836,12 +4000,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         if staged_attachment_names:
             user_message += f"\nĐính kèm: {', '.join(staged_attachment_names)}"
 
-        confirm_body = (
-            f"Đã nhận diện {len(inferred_events)} dòng nghiệp vụ từ bảng kê. "
-            "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
-            if len(inferred_events) > 1
-            else "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
-        )
+        confirm_body = "Vui lòng khách hàng xác nhận thông tin và trả lời 'Xác nhận và đồng ý post' để hệ thống thực hiện hạch toán."
 
         timeline_entries = [
             {
@@ -4866,7 +4025,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                 "role": "system",
                 "title": "Yêu cầu xác nhận",
                 "body": confirm_body,
-                "table_rows": parse_table_rows,
                 "time": datetime.utcnow().strftime("%H:%M"),
             },
         ]
@@ -4919,7 +4077,6 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
                     "pending_posting": {
                         "event_type": inferred["event_type"],
                         "event": inferred_event,
-                        "events": inferred_events,
                         "parse_rows": parse_table_rows,
                         "parse_meta": attachment_details.get("parse_meta", {}),
                         "received_attachments": staged_attachments,
@@ -4942,14 +4099,12 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             "requires_confirmation": True,
             "proposed_posting": {
                 "event_type": inferred["event_type"],
-                "event_count": len(inferred_events),
                 "supplier_name": supplier_name,
                 "service_name": service_name,
                 "invoice_number": invoice_no,
                 "amount": parsed_total,
                 "attachment_count": attachment_count,
                 "staged_attachments": staged_attachments,
-                "voucher_rows": voucher_batch_rows[:20],
                 "parse_rows": parse_table_rows,
                 "parse_meta": attachment_details.get("parse_meta", {}),
             },

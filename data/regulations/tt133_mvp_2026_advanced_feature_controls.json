@@ -1,0 +1,19 @@
+{
+  "feature_id": "advanced_manual_adjustment_v1",
+  "enabled_in_phase": "phase_5_advanced_feature",
+  "allow_manual_adjustment_after_posting": true,
+  "controls": {
+    "maker_checker_required": true,
+    "reason_required": true,
+    "attachment_required": false,
+    "forbid_direct_edit_locked_entry": true,
+    "adjustment_mode": "reversal_or_adjustment_entry_only",
+    "full_audit_trail": true
+  },
+  "workflow": [
+    "maker_create_adjustment_request",
+    "checker_review_and_approve",
+    "system_post_adjustment_entry",
+    "system_link_original_and_adjustment"
+  ]
+}

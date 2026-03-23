@@ -1,0 +1,1624 @@
+
+--- PAGE 76 ---
+ 
+ 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+77 
+ 
+PHỤ LỤC 1 
+DANH MỤC HỆ THỐNG TÀI KHOẢN KẾ TOÁN ÁP DỤNG  
+CHO DOANH NGHIỆP NHỎ VÀ VỪA 
+(Ban hành kèm theo Thông tư số 133/2016/TT-BTC ngày 26/8/2016  
+của Bộ Tài chính) 
+ 
+SỐ HIỆU TK 
+Số 
+TT 
+Cấp 1 
+Cấp 2 
+TÊN TÀI KHOẢN 
+1 
+2 
+3 
+4 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN TÀI SẢN 
+ 
+ 
+ 
+ 
+01 
+111 
+ 
+Tiền mặt 
+ 
+ 
+1111 
+Tiền Việt Nam 
+ 
+ 
+1112 
+Ngoại tệ 
+ 
+ 
+ 
+ 
+02 
+112 
+ 
+Tiền gửi Ngân hàng 
+ 
+ 
+1121 
+Tiền Việt Nam 
+ 
+ 
+1122 
+Ngoại tệ 
+ 
+ 
+ 
+ 
+03 
+121 
+ 
+Chứng khoán kinh doanh 
+ 
+ 
+ 
+ 
+04 
+128 
+ 
+Đầu tư nắm giữ đến ngày đáo hạn  
+ 
+ 
+1281 
+Tiền gửi có kỳ hạn  
+ 
+ 
+1288 
+Các khoản đầu tư khác nắm giữ đến ngày đáo hạn 
+ 
+05 
+131 
+ 
+Phải thu của khách hàng 
+ 
+ 
+ 
+ 
+06 
+133 
+ 
+Thuế GTGT được khấu trừ 
+ 
+ 
+1331 
+1332 
+Thuế GTGT được khấu trừ của hàng hóa, dịch vụ 
+Thuế GTGT được khấu trừ của TSCĐ 
+ 
+ 
+ 
+ 
+07 
+136 
+ 
+Phải thu nội bộ 
+ 
+ 
+1361 
+Vốn kinh doanh ở đơn vị trực thuộc 
+ 
+ 
+1368 
+Phải thu nội bộ khác 
+ 
+ 
+ 
+ 
+08 
+138 
+ 
+Phải thu khác 
+ 
+ 
+1381 
+Tài sản thiếu chờ xử lý 
+
+--- PAGE 77 ---
+ 
+78 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+  
+SỐ HIỆU TK 
+Số 
+TT 
+Cấp 1 
+Cấp 2 
+TÊN TÀI KHOẢN 
+1 
+2 
+3 
+4 
+ 
+ 
+1386 
+Cầm cố, thế chấp, ký quỹ, ký cược 
+ 
+ 
+1388 
+Phải thu khác 
+ 
+ 
+ 
+ 
+09 
+141 
+ 
+Tạm ứng 
+ 
+ 
+ 
+ 
+10 
+151 
+ 
+Hàng mua đang đi đường  
+ 
+ 
+ 
+ 
+11 
+152 
+ 
+Nguyên liệu, vật liệu 
+ 
+ 
+ 
+ 
+12 
+153 
+ 
+Công cụ, dụng cụ  
+ 
+ 
+ 
+ 
+13 
+154 
+ 
+Chi phí sản xuất, kinh doanh dở dang 
+ 
+ 
+ 
+ 
+14 
+155 
+ 
+Thành phẩm 
+ 
+ 
+ 
+ 
+15 
+156 
+ 
+Hàng hóa 
+ 
+ 
+ 
+ 
+16 
+157 
+ 
+Hàng gửi đi bán 
+ 
+ 
+ 
+ 
+17 
+211 
+ 
+Tài sản cố định  
+ 
+ 
+2111 
+TSCĐ hữu hình 
+ 
+ 
+2112 
+TSCĐ thuê tài chính 
+ 
+ 
+2113 
+TSCĐ vô hình 
+ 
+ 
+ 
+ 
+18 
+214 
+ 
+Hao mòn tài sản cố định 
+ 
+ 
+2141 
+Hao mòn TSCĐ hữu hình 
+ 
+ 
+2142 
+Hao mòn TSCĐ thuê tài chính 
+ 
+ 
+2143 
+Hao mòn TSCĐ vô hình  
+ 
+ 
+2147 
+Hao mòn bất động sản đầu tư 
+ 
+ 
+ 
+ 
+19 
+217 
+ 
+Bất động sản đầu tư 
+ 
+ 
+ 
+ 
+20 
+228 
+ 
+2281 
+2288 
+Đầu tư góp vốn vào đơn vị khác 
+Đầu tư vào công ty liên doanh, liên kết  
+Đầu tư khác 
+
+--- PAGE 78 ---
+ 
+ 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+79 
+ 
+SỐ HIỆU TK 
+Số 
+TT 
+Cấp 1 
+Cấp 2 
+TÊN TÀI KHOẢN 
+1 
+2 
+3 
+4 
+21 
+229 
+ 
+2291 
+2292 
+2293 
+2294 
+Dự phòng tổn thất tài sản 
+Dự phòng giảm giá chứng khoán kinh doanh 
+Dự phòng tổn thất đầu tư vào đơn vị khác 
+Dự phòng phải thu khó đòi 
+Dự phòng giảm giá hàng tồn kho 
+ 
+ 
+ 
+ 
+22 
+241 
+ 
+Xây dựng cơ bản dở dang  
+ 
+ 
+2411 
+Mua sắm TSCĐ 
+ 
+ 
+2412 
+Xây dựng cơ bản 
+ 
+ 
+2413 
+Sửa chữa lớn TSCĐ 
+ 
+ 
+ 
+ 
+23 
+242 
+ 
+Chi phí trả trước 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN NỢ PHẢI TRẢ 
+ 
+ 
+ 
+ 
+24 
+331 
+ 
+Phải trả cho người bán 
+ 
+ 
+ 
+ 
+25 
+333 
+ 
+Thuế và các khoản phải nộp Nhà nước 
+ 
+ 
+3331 
+Thuế giá trị gia tăng phải nộp 
+ 
+ 
+33311 
+Thuế GTGT đầu ra 
+ 
+ 
+33312 
+Thuế GTGT hàng nhập khẩu 
+ 
+ 
+3332 
+Thuế tiêu thụ đặc biệt  
+ 
+ 
+3333 
+Thuế xuất, nhập khẩu 
+ 
+ 
+3334 
+Thuế thu nhập doanh nghiệp  
+ 
+ 
+3335 
+Thuế thu nhập cá nhân 
+ 
+ 
+3336 
+Thuế tài nguyên 
+ 
+ 
+3337 
+Thuế nhà đất, tiền thuê đất 
+ 
+ 
+3338 
+33381 
+33382 
+Thuế bảo vệ môi trường và các loại thuế khác 
+Thuế bảo vệ môi trường 
+Các loại thuế khác 
+ 
+ 
+3339 
+Phí, lệ phí và các khoản phải nộp khác 
+ 
+ 
+ 
+ 
+26 
+334 
+ 
+Phải trả người lao động 
+
+--- PAGE 79 ---
+ 
+80 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+  
+SỐ HIỆU TK 
+Số 
+TT 
+Cấp 1 
+Cấp 2 
+TÊN TÀI KHOẢN 
+1 
+2 
+3 
+4 
+27 
+335 
+ 
+Chi phí phải trả 
+ 
+ 
+ 
+ 
+28 
+336 
+ 
+Phải trả nội bộ 
+ 
+ 
+3361  
+3368 
+Phải trả nội bộ về vốn kinh doanh 
+Phải trả nội bộ khác 
+ 
+ 
+ 
+ 
+29 
+338 
+ 
+Phải trả, phải nộp khác 
+ 
+ 
+3381 
+Tài sản thừa chờ giải quyết 
+ 
+ 
+3382 
+Kinh phí công đoàn 
+ 
+ 
+3383 
+Bảo hiểm xã hội 
+ 
+ 
+3384 
+Bảo hiểm y tế 
+ 
+ 
+3385 
+Bảo hiểm thất nghiệp 
+ 
+ 
+3386 
+Nhận ký quỹ, ký cược 
+ 
+ 
+3387 
+Doanh thu chưa thực hiện 
+ 
+ 
+3388 
+Phải trả, phải nộp khác  
+ 
+ 
+ 
+ 
+30 
+341 
+ 
+3411 
+3412 
+Vay và nợ thuê tài chính 
+Các khoản đi vay 
+Nợ thuê tài chính 
+ 
+ 
+ 
+ 
+31 
+352 
+ 
+3521 
+3522 
+3524 
+Dự phòng phải trả 
+Dự phòng bảo hành sản phẩm hàng hóa 
+Dự phòng bảo hành công trình xây dựng 
+Dự phòng phải trả khác 
+ 
+ 
+ 
+ 
+32 
+353 
+ 
+Quỹ khen thưởng phúc lợi 
+ 
+ 
+3531 
+Quỹ khen thưởng 
+ 
+ 
+3532 
+Quỹ phúc lợi 
+ 
+ 
+3533 
+Quỹ phúc lợi đã hình thành TSCĐ 
+ 
+ 
+3534 
+Quỹ thưởng ban quản lý điều hành công ty 
+ 
+ 
+ 
+ 
+33 
+356 
+ 
+Quỹ phát triển khoa học và công nghệ 
+ 
+ 
+3561 
+Quỹ phát triển khoa học và công nghệ 
+ 
+ 
+3562 
+Quỹ phát triển khoa học và công nghệ đã hình thành TSCĐ
+
+--- PAGE 80 ---
+ 
+ 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+81 
+ 
+SỐ HIỆU TK 
+Số 
+TT 
+Cấp 1 
+Cấp 2 
+TÊN TÀI KHOẢN 
+1 
+2 
+3 
+4 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN VỐN CHỦ SỞ HỮU 
+ 
+ 
+ 
+ 
+34 
+411 
+ 
+Vốn đầu tư của chủ sở hữu 
+ 
+ 
+4111 
+Vốn góp của chủ sở hữu 
+ 
+ 
+4112 
+Thặng dư vốn cổ phần 
+ 
+ 
+4118 
+Vốn khác  
+ 
+ 
+ 
+ 
+35 
+413 
+ 
+Chênh lệch tỷ giá hối đoái 
+ 
+ 
+ 
+ 
+36 
+418 
+ 
+Các quỹ thuộc vốn chủ sở hữu 
+ 
+37 
+419 
+ 
+Cổ phiếu quỹ 
+ 
+ 
+ 
+ 
+38 
+421 
+ 
+Lợi nhuận sau thuế chưa phân phối 
+ 
+ 
+4211 
+Lợi nhuận sau thuế chưa phân phối năm trước 
+ 
+ 
+4212 
+Lợi nhuận sau thuế chưa phân phối năm nay 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN DOANH THU 
+ 
+ 
+ 
+ 
+39 
+511 
+ 
+Doanh thu bán hàng và cung cấp dịch vụ 
+ 
+ 
+5111 
+Doanh thu bán hàng hóa 
+ 
+ 
+5112 
+Doanh thu bán thành phẩm 
+ 
+ 
+5113 
+Doanh thu cung cấp dịch vụ 
+ 
+ 
+5118 
+Doanh thu khác 
+ 
+ 
+ 
+ 
+40 
+515 
+ 
+Doanh thu hoạt động tài chính  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN CHI PHÍ SẢN XUẤT, KINH DOANH
+ 
+ 
+ 
+ 
+41 
+611 
+ 
+Mua hàng 
+ 
+ 
+ 
+ 
+42 
+631 
+ 
+Giá thành sản xuất 
+
+--- PAGE 81 ---
+ 
+82 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+  
+SỐ HIỆU TK 
+Số 
+TT 
+Cấp 1 
+Cấp 2 
+TÊN TÀI KHOẢN 
+1 
+2 
+3 
+4 
+43 
+632 
+ 
+Giá vốn hàng bán 
+ 
+ 
+ 
+ 
+44 
+635 
+ 
+Chi phí tài chính 
+ 
+ 
+ 
+ 
+45 
+642 
+ 
+Chi phí quản lý kinh doanh  
+ 
+ 
+6421 
+Chi phí bán hàng 
+ 
+ 
+6422 
+Chi phí quản lý doanh nghiệp 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN THU NHẬP KHÁC 
+ 
+ 
+ 
+ 
+46 
+711 
+ 
+Thu nhập khác 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LOẠI TÀI KHOẢN CHI PHÍ KHÁC 
+ 
+ 
+ 
+ 
+47 
+811 
+ 
+Chi phí khác 
+ 
+ 
+ 
+ 
+48 
+821 
+ 
+Chi phí thuế thu nhập doanh nghiệp 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TÀI KHOẢN XÁC ĐỊNH KẾT QUẢ KINH 
+DOANH 
+ 
+ 
+ 
+ 
+49 
+911 
+ 
+Xác định kết quả kinh doanh 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 82 ---
+ 
+ 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+83 
+ 
+PHỤ LỤC 2 
+BIỂU MẪU BÁO CÁO TÀI CHÍNH NĂM 
+(Ban hành kèm theo Thông tư số 133/2016/TT-BTC ngày 26/8/2016  
+của Bộ Tài chính) 
+ 
+I. BIỂU MẪU BÁO CÁO TÀI CHÍNH NĂM CỦA DOANH NGHIỆP NHỎ VÀ VỪA 
+1. Báo cáo tình hình tài chính (Mẫu số B01a - DNN) 
+ 
+Đơn vị báo cáo:.................. 
+Mẫu số B01a - DNN 
+Địa chỉ:............................... 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BÁO CÁO TÌNH HÌNH TÀI CHÍNH 
+Tại ngày... tháng... năm... 
+(Áp dụng cho doanh nghiệp đáp ứng giả định hoạt động liên tục) 
+ 
+ Đơn vị tính:............. 
+CHỈ TIÊU 
+Mã 
+số 
+Thuyết 
+minh 
+Số cuối 
+năm 
+Số đầu 
+năm 
+1 
+2 
+3 
+4 
+5 
+TÀI SẢN 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+I. Tiền và các khoản tương đương tiền 
+110 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+II. Đầu tư tài chính  
+120 
+ 
+ 
+ 
+1. Chứng khoán kinh doanh 
+2. Đầu tư nắm giữ đến ngày đáo hạn 
+3. Đầu tư góp vốn vào đơn vị khác 
+121 
+122 
+123 
+ 
+ 
+ 
+4. Dự phòng tổn thất đầu tư tài chính (*)  
+124 
+ 
+(...) 
+(...) 
+III. Các khoản phải thu  
+130 
+ 
+ 
+ 
+1. Phải thu của khách hàng  
+131 
+ 
+ 
+ 
+2. Trả trước cho người bán  
+3. Vốn kinh doanh ở đơn vị trực thuộc 
+132 
+133 
+ 
+ 
+ 
+4. Phải thu khác 
+134 
+ 
+ 
+ 
+5. Tài sản thiếu chờ xử lý 
+135 
+ 
+ 
+ 
+6. Dự phòng phải thu khó đòi (*) 
+136 
+ 
+(...) 
+(...) 
+IV. Hàng tồn kho 
+140 
+ 
+ 
+ 
+1. Hàng tồn kho 
+2. Dự phòng giảm giá hàng tồn kho (*) 
+141 
+142 
+ 
+ 
+(...) 
+ 
+(...) 
+V. Tài sản cố định 
+150 
+ 
+ 
+ 
+- Nguyên giá 
+151 
+ 
+ 
+ 
+- Giá trị hao mòn lũy kế (*) 
+152 
+ 
+(...) 
+(...) 
+VI. Bất động sản đầu tư 
+160 
+ 
+ 
+ 
+- Nguyên giá 
+161 
+ 
+ 
+ 
+- Giá trị hao mòn lũy kế (*) 
+162 
+ 
+(...) 
+(...) 
+
+--- PAGE 83 ---
+ 
+84 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+  
+CHỈ TIÊU 
+Mã 
+số 
+Thuyết 
+minh 
+Số cuối 
+năm 
+Số đầu 
+năm 
+1 
+2 
+3 
+4 
+5 
+VII. XDCB dở dang 
+170 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+VIII. Tài sản khác 
+180 
+ 
+ 
+ 
+1. Thuế GTGT được khấu trừ 
+181 
+ 
+ 
+ 
+2. Tài sản khác 
+182 
+ 
+ 
+ 
+TỔNG CỘNG TÀI SẢN 
+(200 = 110 + 120 + 130 + 140 + 150 + 160 + 170 + 180) 
+200 
+ 
+ 
+ 
+NGUỒN VỐN 
+ 
+ 
+ 
+ 
+I. Nợ phải trả 
+300 
+ 
+ 
+ 
+1. Phải trả người bán  
+311 
+ 
+ 
+ 
+2. Người mua trả tiền trước  
+312 
+ 
+ 
+ 
+3. Thuế và các khoản phải nộp Nhà nước 
+313 
+ 
+ 
+ 
+4. Phải trả người lao động 
+314 
+ 
+ 
+ 
+5. Phải trả khác 
+315 
+ 
+ 
+ 
+6. Vay và nợ thuê tài chính  
+7. Phải trả nội bộ về vốn kinh doanh 
+316 
+317 
+ 
+ 
+ 
+8. Dự phòng phải trả  
+318 
+ 
+ 
+ 
+9. Quỹ khen thưởng, phúc lợi  
+319 
+ 
+ 
+ 
+10. Quỹ phát triển khoa học và công nghệ 
+320 
+ 
+ 
+ 
+II. Vốn chủ sở hữu 
+400 
+ 
+ 
+ 
+1. Vốn góp của chủ sở hữu  
+411 
+ 
+ 
+ 
+2. Thặng dư vốn cổ phần 
+412 
+ 
+ 
+ 
+3. Vốn khác của chủ sở hữu  
+413 
+ 
+ 
+ 
+4. Cổ phiếu quỹ (*) 
+414 
+ 
+(...) 
+(...) 
+5. Chênh lệch tỷ giá hối đoái 
+6. Các quỹ thuộc vốn chủ sở hữu 
+415 
+416 
+ 
+ 
+ 
+7. Lợi nhuận sau thuế chưa phân phối 
+417 
+ 
+ 
+ 
+TỔNG CỘNG NGUỒN VỐN  
+(500 = 300 + 400)  
+500 
+ 
+ 
+ 
+  
+ 
+NGƯỜI LẬP BIỂU 
+(Ký, họ tên) 
+ 
+KẾ TOÁN TRƯỞNG 
+(Ký, họ tên)  
+Lập, ngày... tháng... năm... 
+NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT 
+(Ký, họ tên, đóng dấu) 
+Ghi chú: 
+(1) Những chỉ tiêu không có số liệu được miễn trình bày nhưng không được đánh lại “Mã 
+số” chỉ tiêu. 
+(2) Số liệu trong các chỉ tiêu có dấu (*) được ghi bằng số âm dưới hình thức ghi trong 
+ngoặc đơn (...). 
+(3) Đối với doanh nghiệp có kỳ kế toán năm là năm dương lịch (X) thì “Số cuối năm” có thể 
+ghi là “31.12.X"; “Số đầu năm" có thể ghi là “01.01.X".  
+(4) Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy 
+chứng nhận đăng ký hành nghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. 
+
+--- PAGE 84 ---
+ 
+ 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+85 
+ 
+2. Báo cáo tình hình tài chính (Mẫu số B01b - DNN) 
+ 
+Đơn vị báo cáo:................. 
+Mẫu số B01b - DNN 
+Địa chỉ:.............................. 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BÁO CÁO TÌNH HÌNH TÀI CHÍNH 
+Tại ngày... tháng... năm... 
+(Áp dụng cho doanh nghiệp đáp ứng giả định hoạt động liên tục) 
+ 
+ Đơn vị tính:............. 
+CHỈ TIÊU 
+Mã 
+số 
+Thuyết 
+minh 
+Số cuối 
+năm 
+Số đầu 
+năm 
+1 
+2 
+3 
+4 
+5 
+TÀI SẢN 
+ 
+ 
+ 
+ 
+ 
+A. TÀI SẢN NGẮN HẠN  
+(100 = 110 + 120 + 130 + 140 + 150)  
+ 
+ 
+100 
+ 
+ 
+ 
+I. Tiền và các khoản tương đương tiền 
+110 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+II. Đầu tư tài chính ngắn hạn 
+120 
+ 
+ 
+ 
+1. Chứng khoán kinh doanh 
+121 
+ 
+ 
+ 
+2. Dự phòng giảm giá chứng khoán kinh doanh (*)  
+122 
+ 
+(...) 
+(...) 
+3. Đầu tư nắm giữ đến ngày đáo hạn ngắn hạn 
+ 
+123 
+ 
+ 
+ 
+ 
+III. Các khoản phải thu ngắn hạn 
+130 
+ 
+ 
+ 
+1. Phải thu ngắn hạn của khách hàng  
+131 
+ 
+ 
+ 
+2. Trả trước cho người bán ngắn hạn 
+132 
+ 
+ 
+ 
+3. Phải thu ngắn hạn khác 
+4. Tài sản thiếu chờ xử lý 
+133 
+134 
+ 
+ 
+ 
+5. Dự phòng phải thu ngắn hạn khó đòi (*) 
+135 
+ 
+(...) 
+(...) 
+ 
+ 
+ 
+ 
+ 
+IV. Hàng tồn kho 
+140 
+ 
+ 
+ 
+1. Hàng tồn kho 
+2. Dự phòng giảm giá hàng tồn kho (*) 
+141 
+142 
+ 
+ 
+(...) 
+ 
+(...) 
+ 
+ 
+ 
+ 
+ 
+V. Tài sản ngắn hạn khác 
+150 
+ 
+ 
+ 
+1. Thuế GTGT được khấu trừ 
+151 
+ 
+ 
+ 
+2. Tài sản ngắn hạn khác 
+152 
+ 
+ 
+ 
+
+--- PAGE 85 ---
+ 
+86 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+  
+CHỈ TIÊU 
+Mã 
+số 
+Thuyết 
+minh 
+Số cuối 
+năm 
+Số đầu 
+năm 
+1 
+2 
+3 
+4 
+5 
+ 
+ 
+ 
+ 
+ 
+B. TÀI SẢN DÀI HẠN 
+(200 = 210 + 220 + 230 + 240 + 250 + 260) 
+200 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+I. Các khoản phải thu dài hạn  
+210 
+ 
+ 
+ 
+1. Phải thu dài hạn của khách hàng 
+211 
+ 
+ 
+ 
+2. Trả trước cho người bán dài hạn 
+212 
+ 
+ 
+ 
+3. Vốn kinh doanh ở đơn vị trực thuộc 
+213 
+ 
+ 
+ 
+4. Phải thu dài hạn khác 
+214 
+ 
+ 
+ 
+5. Dự phòng phải thu dài hạn khó đòi (*) 
+ 
+215 
+ 
+(...) 
+(...) 
+II. Tài sản cố định 
+220 
+ 
+ 
+ 
+- Nguyên giá 
+221 
+ 
+ 
+ 
+- Giá trị hao mòn lũy kế (*) 
+ 
+222 
+ 
+(...) 
+(...) 
+III. Bất động sản đầu tư 
+230 
+ 
+ 
+ 
+- Nguyên giá 
+231 
+ 
+ 
+ 
+- Giá trị hao mòn lũy kế (*) 
+ 
+232 
+ 
+(...) 
+(...) 
+IV. Xây dựng cơ bản dở dang 
+ 
+240 
+ 
+ 
+ 
+V. Đầu tư tài chính dài hạn 
+250 
+ 
+ 
+ 
+1. Đầu tư góp vốn vào đơn vị khác 
+2. Dự phòng tổn thất đầu tư vào đơn vị khác (*) 
+251 
+252 
+ 
+ 
+(...) 
+ 
+(...) 
+3. Đầu tư nắm giữ đến ngày đáo hạn dài hạn 
+ 
+253 
+ 
+ 
+ 
+VI. Tài sản dài hạn khác 
+260 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TỔNG CỘNG TÀI SẢN  
+(300 = 100 + 200) 
+300 
+ 
+ 
+ 
+NGUỒN VỐN 
+ 
+ 
+ 
+ 
+C. NỢ PHẢI TRẢ  
+(400 = 410 + 420) 
+400 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+I. Nợ ngắn hạn 
+410 
+ 
+ 
+ 
+1. Phải trả người bán ngắn hạn 
+411 
+ 
+ 
+ 
+2. Người mua trả tiền trước ngắn hạn 
+412 
+ 
+ 
+ 
+3. Thuế và các khoản phải nộp Nhà nước 
+413 
+ 
+ 
+ 
+4. Phải trả người lao động 
+414 
+ 
+ 
+ 
+5. Phải trả ngắn hạn khác 
+415 
+ 
+ 
+ 
+
+--- PAGE 86 ---
+ 
+ 
+CÔNG BÁO/Số 1103 + 1104/Ngày 12-10-2016 
+87 
+ 
+CHỈ TIÊU 
+Mã 
+số 
+Thuyết 
+minh 
+Số cuối 
+năm 
+Số đầu 
+năm 
+1 
+2 
+3 
+4 
+5 
+6. Vay và nợ thuê tài chính ngắn hạn 
+416 
+ 
+ 
+ 
+7. Dự phòng phải trả ngắn hạn  
+417 
+ 
+ 
+ 
+8. Quỹ khen thưởng, phúc lợi  
+418 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+II. Nợ dài hạn 
+420 
+ 
+ 
+ 
+1. Phải trả người bán dài hạn 
+421 
+ 
+ 
+ 
+2. Người mua trả tiền trước dài hạn 
+422 
+ 
+ 
+ 
+3. Phải trả nội bộ về vốn kinh doanh 
+423 
+ 
+ 
+ 
+4. Phải trả dài hạn khác 
+424 
+ 
+ 
+ 
+5. Vay và nợ thuê tài chính dài hạn  
+425 
+ 
+ 
+ 
+6. Dự phòng phải trả dài hạn  
+426 
+ 
+ 
+ 
+7. Quỹ phát triển khoa học và công nghệ 
+427 
+ 
+ 
+ 
+D. VỐN CHỦ SỞ HỮU 
+(500 = 511 + 512 + 513 + 514 + 515 + 516 + 517) 
+500 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1. Vốn góp của chủ sở hữu  
+511 
+ 
+ 
+ 
+2. Thặng dư vốn cổ phần 
+512 
+ 
+ 
+ 
+3. Vốn khác của chủ sở hữu  
+513 
+ 
+ 
+ 
+4. Cổ phiếu quỹ (*) 
+514 
+ 
+(...) 
+(...) 
+5. Chênh lệch tỷ giá hối đoái 
+6. Các quỹ thuộc vốn chủ sở hữu 
+515 
+516 
+ 
+ 
+ 
+7. Lợi nhuận sau thuế chưa phân phối 
+517 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TỔNG CỘNG NGUỒN VỐN  
+(600 = 400 + 500) 
+600 
+ 
+ 
+ 
+ 
+ 
+NGƯỜI LẬP BIỂU 
+(Ký, họ tên) 
+ 
+KẾ TOÁN TRƯỞNG 
+(Ký, họ tên)  
+Lập, ngày... tháng... năm... 
+NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT 
+(Ký, họ tên, đóng dấu) 
+ 
+Ghi chú: 
+(1) Những chỉ tiêu không có số liệu được miễn trình bày nhưng không được đánh lại “Mã 
+số” chỉ tiêu. 
+(2) Số liệu trong các chỉ tiêu có dấu (*) được ghi bằng số âm dưới hình thức ghi trong 
+ngoặc đơn (...). 
+(3) Đối với doanh nghiệp có kỳ kế toán năm là năm dương lịch (X) thì “Số cuối năm” có thể 
+ghi là “31.12.X"; “Số đầu năm" có thể ghi là “01.01.X".  
+(4) Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy 
+chứng nhận đăng ký hành nghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. 
+ 
+(Xem tiếp Công báo số 1105 + 1106) 

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: . itaxviewer_lib/swt.jar itaxviewer_lib/bcprov-jdk16-146.j
+ ar itaxviewer_lib/commons-io-1.4.jar itaxviewer_lib/commons-lang3-3.3
+ .2.jar itaxviewer_lib/pdfbox-app-1.8.8.jar itaxviewer_lib/fonts.jar i
+ taxviewer_lib/ss_css2.jar itaxviewer_lib/pd4ml.jar
+Main-Class: seatechit.ihtkk.tool.taxview.TaxViewer
+

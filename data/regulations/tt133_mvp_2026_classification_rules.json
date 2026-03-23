@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "source": "TT133 MVP classification policy",
+  "rules": [
+    {
+      "classification_id": "TT133_MVP_CLASS_001",
+      "applies_to_event": "mua_hang_dung_noi_bo",
+      "output": "ccdc_allocate",
+      "when_all": [
+        {"field": "amount", "operator": ">", "value": 3000000},
+        {"field": "useful_life_months", "operator": ">", "value": 12}
+      ]
+    },
+    {
+      "classification_id": "TT133_MVP_CLASS_002",
+      "applies_to_event": "mua_hang_dung_noi_bo",
+      "output": "direct_expense",
+      "when_any": [
+        {"field": "amount", "operator": "<=", "value": 3000000},
+        {"field": "useful_life_months", "operator": "<=", "value": 12}
+      ]
+    },
+    {
+      "classification_id": "TT133_MVP_CLASS_003",
+      "applies_to_event": "mua_dich_vu",
+      "output": "prepaid_allocate",
+      "when_all": [
+        {"field": "amount", "operator": ">", "value": 3000000},
+        {"field": "service_term_months", "operator": ">", "value": 12}
+      ]
+    },
+    {
+      "classification_id": "TT133_MVP_CLASS_004",
+      "applies_to_event": "mua_dich_vu",
+      "output": "direct_expense",
+      "when_any": [
+        {"field": "amount", "operator": "<=", "value": 3000000},
+        {"field": "service_term_months", "operator": "<=", "value": 12}
+      ]
+    }
+  ]
+}

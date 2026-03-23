@@ -1,0 +1,1869 @@
+{
+  "schema_version": "1.0",
+  "file_id": "accounting_law_2015_event_rule_mapping",
+  "law_source": {
+    "law_name": "Luat Ke toan 2015",
+    "law_number": "88/2015/QH13",
+    "amended_by": [
+      "38/2019/QH14",
+      "56/2024/QH15"
+    ]
+  },
+  "account_system": "TT200",
+  "generated_by": {
+    "requested_model": "gpt-5-mini",
+    "executed_by": "GPT-5.3-Codex",
+    "method": "LLM-assisted legal-to-event account mapping with template rules",
+    "generated_at": "2026-03-15T01:12:01+07:00"
+  },
+  "mapping_principles": [
+    "Map event substance to debit-credit templates under TT200 accounts",
+    "Enforce full evidence and journal traceability per Accounting Law 2015",
+    "Mark complex events as manual_review_required when one-size mapping is unsafe",
+    "Use valid_from-valid_to fields for future legal/version updates"
+  ],
+  "total_event_types": 92,
+  "total_rules": 92,
+  "rules": [
+    {
+      "rule_id": "AL2015_capital_contribution_committed",
+      "event_code": "capital_contribution_committed",
+      "event_name": "Capital Contribution Committed",
+      "category": "Capital & Equity",
+      "debit_account_template": "1388",
+      "credit_account_template": "4111",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận cam kết góp vốn chưa thu tiền.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_capital_contribution_received",
+      "event_code": "capital_contribution_received",
+      "event_name": "Capital Contribution Received",
+      "category": "Capital & Equity",
+      "debit_account_template": "111/112",
+      "credit_account_template": "4111",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhận vốn góp bằng tiền mặt hoặc chuyển khoản.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_capital_contribution_returned",
+      "event_code": "capital_contribution_returned",
+      "event_name": "Capital Contribution Returned",
+      "category": "Capital & Equity",
+      "debit_account_template": "4111",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Hoàn trả vốn góp cho chủ sở hữu.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_share_premium_recorded",
+      "event_code": "share_premium_recorded",
+      "event_name": "Share Premium Recorded",
+      "category": "Capital & Equity",
+      "debit_account_template": "111/112",
+      "credit_account_template": "4112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận thặng dư vốn cổ phần.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_treasury_shares_acquired",
+      "event_code": "treasury_shares_acquired",
+      "event_name": "Treasury Shares Acquired",
+      "category": "Capital & Equity",
+      "debit_account_template": "419",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Mua lại cổ phiếu quỹ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_treasury_shares_reissued",
+      "event_code": "treasury_shares_reissued",
+      "event_name": "Treasury Shares Reissued",
+      "category": "Capital & Equity",
+      "debit_account_template": "111/112",
+      "credit_account_template": "419",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Tái phát hành cổ phiếu quỹ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_dividend_declared",
+      "event_code": "dividend_declared",
+      "event_name": "Dividend Declared",
+      "category": "Capital & Equity",
+      "debit_account_template": "421",
+      "credit_account_template": "3388",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận nghĩa vụ cổ tức phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_dividend_paid",
+      "event_code": "dividend_paid",
+      "event_name": "Dividend Paid",
+      "category": "Capital & Equity",
+      "debit_account_template": "3388",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thanh toán cổ tức.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_profit_allocated",
+      "event_code": "profit_allocated",
+      "event_name": "Profit Allocated",
+      "category": "Capital & Equity",
+      "debit_account_template": "421",
+      "credit_account_template": "418",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Phân phối lợi nhuận sau thuế vào các quỹ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_retained_earnings_adjusted",
+      "event_code": "retained_earnings_adjusted",
+      "event_name": "Retained Earnings Adjusted",
+      "category": "Capital & Equity",
+      "debit_account_template": "4211",
+      "credit_account_template": "4212",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Điều chỉnh lợi nhuận giữ lại giữa các kỳ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_loan_received",
+      "event_code": "loan_received",
+      "event_name": "Loan Received",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "111/112",
+      "credit_account_template": "3411",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhận khoản vay ngắn hoặc dài hạn.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_loan_repaid",
+      "event_code": "loan_repaid",
+      "event_name": "Loan Repaid",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "3411",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trả nợ gốc khoản vay.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_interest_accrued",
+      "event_code": "interest_accrued",
+      "event_name": "Interest Accrued",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "635",
+      "credit_account_template": "335",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích trước chi phí lãi vay phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_interest_paid",
+      "event_code": "interest_paid",
+      "event_name": "Interest Paid",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "335",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thanh toán lãi vay đã trích trước.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_borrowing_cost_capitalized",
+      "event_code": "borrowing_cost_capitalized",
+      "event_name": "Borrowing Cost Capitalized",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "241",
+      "credit_account_template": "335",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Vốn hóa chi phí đi vay vào tài sản dở dang.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_bond_issued",
+      "event_code": "bond_issued",
+      "event_name": "Bond Issued",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "112",
+      "credit_account_template": "3431",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Phát hành trái phiếu ghi nhận nợ gốc trái phiếu.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_bond_redeemed",
+      "event_code": "bond_redeemed",
+      "event_name": "Bond Redeemed",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "3431",
+      "credit_account_template": "112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thanh toán gốc trái phiếu đến hạn.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_lease_liability_recognized",
+      "event_code": "lease_liability_recognized",
+      "event_name": "Lease Liability Recognized",
+      "category": "Financing & Borrowings",
+      "debit_account_template": "212",
+      "credit_account_template": "3412",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận thuê tài chính và nghĩa vụ nợ thuê.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payment_received",
+      "event_code": "payment_received",
+      "event_name": "Payment Received",
+      "category": "Payments & Cash Movement",
+      "debit_account_template": "111/112",
+      "credit_account_template": "131",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thu tiền từ khách hàng hoặc bên phải thu.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payment_made",
+      "event_code": "payment_made",
+      "event_name": "Payment Made",
+      "category": "Payments & Cash Movement",
+      "debit_account_template": "331",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Chi tiền thanh toán công nợ phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_fund_transfer",
+      "event_code": "fund_transfer",
+      "event_name": "Fund Transfer",
+      "category": "Payments & Cash Movement",
+      "debit_account_template": "112",
+      "credit_account_template": "111",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Chuyển tiền giữa quỹ tiền mặt và ngân hàng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_receivable_recognized",
+      "event_code": "receivable_recognized",
+      "event_name": "Receivable Recognized",
+      "category": "Accounts Receivable",
+      "debit_account_template": "131",
+      "credit_account_template": "511",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận phải thu từ doanh thu bán hàng/dịch vụ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_receivable_written_off",
+      "event_code": "receivable_written_off",
+      "event_name": "Receivable Written Off",
+      "category": "Accounts Receivable",
+      "debit_account_template": "2293/642",
+      "credit_account_template": "131",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Xóa sổ phải thu khó đòi theo dự phòng hoặc chi phí.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_receivable_provision_recorded",
+      "event_code": "receivable_provision_recorded",
+      "event_name": "Receivable Provision Recorded",
+      "category": "Accounts Receivable",
+      "debit_account_template": "642",
+      "credit_account_template": "2293",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích lập dự phòng phải thu khó đòi.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_receivable_provision_reversed",
+      "event_code": "receivable_provision_reversed",
+      "event_name": "Receivable Provision Reversed",
+      "category": "Accounts Receivable",
+      "debit_account_template": "2293",
+      "credit_account_template": "642",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Hoàn nhập dự phòng phải thu khó đòi.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_receivable_settled",
+      "event_code": "receivable_settled",
+      "event_name": "Receivable Settled",
+      "category": "Accounts Receivable",
+      "debit_account_template": "112",
+      "credit_account_template": "131",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thu hồi công nợ phải thu.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_customer_advance_received",
+      "event_code": "customer_advance_received",
+      "event_name": "Customer Advance Received",
+      "category": "Accounts Receivable",
+      "debit_account_template": "112",
+      "credit_account_template": "131",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhận tiền ứng trước của khách hàng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payable_recognized",
+      "event_code": "payable_recognized",
+      "event_name": "Payable Recognized",
+      "category": "Accounts Payable",
+      "debit_account_template": "152/156/642",
+      "credit_account_template": "331",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận công nợ phải trả nhà cung cấp khi nhận hàng/dịch vụ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payable_written_off",
+      "event_code": "payable_written_off",
+      "event_name": "Payable Written Off",
+      "category": "Accounts Payable",
+      "debit_account_template": "331",
+      "credit_account_template": "711",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Xóa công nợ phải trả không còn nghĩa vụ thanh toán.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payable_settled",
+      "event_code": "payable_settled",
+      "event_name": "Payable Settled",
+      "category": "Accounts Payable",
+      "debit_account_template": "331",
+      "credit_account_template": "112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thanh toán công nợ phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_supplier_advance_paid",
+      "event_code": "supplier_advance_paid",
+      "event_name": "Supplier Advance Paid",
+      "category": "Accounts Payable",
+      "debit_account_template": "331",
+      "credit_account_template": "112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ứng trước tiền cho nhà cung cấp (chi tiết theo đối tượng).",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_revenue_recognized",
+      "event_code": "revenue_recognized",
+      "event_name": "Revenue Recognized",
+      "category": "Revenue",
+      "debit_account_template": "131/111/112",
+      "credit_account_template": "511",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận doanh thu theo nguyên tắc dồn tích.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_revenue_accrued",
+      "event_code": "revenue_accrued",
+      "event_name": "Revenue Accrued",
+      "category": "Revenue",
+      "debit_account_template": "131",
+      "credit_account_template": "511",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận doanh thu dồn tích chưa thu tiền.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_revenue_deferred",
+      "event_code": "revenue_deferred",
+      "event_name": "Revenue Deferred",
+      "category": "Revenue",
+      "debit_account_template": "111/112/131",
+      "credit_account_template": "3387",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận doanh thu chưa thực hiện.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_deferred_revenue_recognized",
+      "event_code": "deferred_revenue_recognized",
+      "event_name": "Deferred Revenue Recognized",
+      "category": "Revenue",
+      "debit_account_template": "3387",
+      "credit_account_template": "511",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Kết chuyển doanh thu chưa thực hiện sang doanh thu kỳ này.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_sales_returned",
+      "event_code": "sales_returned",
+      "event_name": "Sales Returned",
+      "category": "Revenue",
+      "debit_account_template": "5212",
+      "credit_account_template": "131/111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận hàng bán bị trả lại.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_sales_discount_given",
+      "event_code": "sales_discount_given",
+      "event_name": "Sales Discount Given",
+      "category": "Revenue",
+      "debit_account_template": "5211",
+      "credit_account_template": "131/111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận chiết khấu thương mại cho khách hàng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_promotional_goods_issued",
+      "event_code": "promotional_goods_issued",
+      "event_name": "Promotional Goods Issued",
+      "category": "Revenue",
+      "debit_account_template": "641",
+      "credit_account_template": "156",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Xuất hàng khuyến mại/tiếp thị.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_purchase_recognized",
+      "event_code": "purchase_recognized",
+      "event_name": "Purchase Recognized",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "152/156/211/642 + 1331/1332",
+      "credit_account_template": "331",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận mua hàng hóa/dịch vụ/TSCĐ và thuế GTGT khấu trừ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_purchase_returned",
+      "event_code": "purchase_returned",
+      "event_name": "Purchase Returned",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "331",
+      "credit_account_template": "152/156 + 1331",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trả lại hàng mua và điều chỉnh thuế GTGT đầu vào.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_purchase_discount_received",
+      "event_code": "purchase_discount_received",
+      "event_name": "Purchase Discount Received",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "331",
+      "credit_account_template": "152/156/642",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhận chiết khấu từ nhà cung cấp.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_expense_incurred",
+      "event_code": "expense_incurred",
+      "event_name": "Expense Incurred",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "627/641/642",
+      "credit_account_template": "111/112/331",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận chi phí phát sinh trong kỳ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_expense_accrued",
+      "event_code": "expense_accrued",
+      "event_name": "Expense Accrued",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "627/641/642",
+      "credit_account_template": "335",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích trước chi phí phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_expense_prepaid",
+      "event_code": "expense_prepaid",
+      "event_name": "Expense Prepaid",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "242",
+      "credit_account_template": "111/112/331",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận chi phí trả trước phân bổ nhiều kỳ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_prepaid_expense_amortized",
+      "event_code": "prepaid_expense_amortized",
+      "event_name": "Prepaid Expense Amortized",
+      "category": "Purchases & Expenses",
+      "debit_account_template": "627/641/642",
+      "credit_account_template": "242",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Phân bổ chi phí trả trước vào kỳ hiện tại.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_received",
+      "event_code": "inventory_received",
+      "event_name": "Inventory Received",
+      "category": "Inventory",
+      "debit_account_template": "152/153/156",
+      "credit_account_template": "331/111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhập kho hàng tồn kho.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_issued",
+      "event_code": "inventory_issued",
+      "event_name": "Inventory Issued",
+      "category": "Inventory",
+      "debit_account_template": "621/627/632",
+      "credit_account_template": "152/153/156",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Xuất kho cho sản xuất/bán hàng/chi phí.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_transferred",
+      "event_code": "inventory_transferred",
+      "event_name": "Inventory Transferred",
+      "category": "Inventory",
+      "debit_account_template": "152/153/156",
+      "credit_account_template": "152/153/156",
+      "tax_deductibility": null,
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Điều chuyển nội bộ kho, mã vật tư hoặc địa điểm.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_adjusted",
+      "event_code": "inventory_adjusted",
+      "event_name": "Inventory Adjusted",
+      "category": "Inventory",
+      "debit_account_template": "152/153/156 or 632/1381",
+      "credit_account_template": "3381 or 152/153/156",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Điều chỉnh chênh lệch kiểm kê tồn kho.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_reserved",
+      "event_code": "inventory_reserved",
+      "event_name": "Inventory Reserved",
+      "category": "Inventory",
+      "debit_account_template": "632",
+      "credit_account_template": "2294",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích lập dự phòng giảm giá hàng tồn kho.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_released",
+      "event_code": "inventory_released",
+      "event_name": "Inventory Released",
+      "category": "Inventory",
+      "debit_account_template": "2294",
+      "credit_account_template": "632",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Hoàn nhập dự phòng giảm giá hàng tồn kho.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_written_down",
+      "event_code": "inventory_written_down",
+      "event_name": "Inventory Written Down",
+      "category": "Inventory",
+      "debit_account_template": "632",
+      "credit_account_template": "152/156",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi giảm giá trị hàng tồn kho do hư hỏng/lỗi thời.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_counted",
+      "event_code": "inventory_counted",
+      "event_name": "Inventory Counted",
+      "category": "Inventory",
+      "debit_account_template": "N/A",
+      "credit_account_template": "N/A",
+      "tax_deductibility": null,
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Sự kiện kiểm kê phục vụ đối soát, chỉ hạch toán khi có chênh lệch.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_inventory_shrinkage_recorded",
+      "event_code": "inventory_shrinkage_recorded",
+      "event_name": "Inventory Shrinkage Recorded",
+      "category": "Inventory",
+      "debit_account_template": "1381/632",
+      "credit_account_template": "152/156",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận thiếu hụt hàng tồn kho chờ xử lý hoặc tính vào chi phí.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_production_started",
+      "event_code": "production_started",
+      "event_name": "Production Started",
+      "category": "Production & Costing",
+      "debit_account_template": "N/A",
+      "credit_account_template": "N/A",
+      "tax_deductibility": null,
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Mốc nghiệp vụ sản xuất bắt đầu, thường chưa phát sinh bút toán độc lập.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_raw_material_issued_to_production",
+      "event_code": "raw_material_issued_to_production",
+      "event_name": "Raw Material Issued To Production",
+      "category": "Production & Costing",
+      "debit_account_template": "621",
+      "credit_account_template": "152",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Xuất nguyên vật liệu trực tiếp cho sản xuất.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_production_cost_accumulated",
+      "event_code": "production_cost_accumulated",
+      "event_name": "Production Cost Accumulated",
+      "category": "Production & Costing",
+      "debit_account_template": "154",
+      "credit_account_template": "621/622/627",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Tập hợp chi phí sản xuất vào sản phẩm dở dang.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_work_in_progress_recorded",
+      "event_code": "work_in_progress_recorded",
+      "event_name": "Work In Progress Recorded",
+      "category": "Production & Costing",
+      "debit_account_template": "154",
+      "credit_account_template": "621/622/627",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận giá trị sản phẩm dở dang cuối kỳ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_finished_goods_completed",
+      "event_code": "finished_goods_completed",
+      "event_name": "Finished Goods Completed",
+      "category": "Production & Costing",
+      "debit_account_template": "155",
+      "credit_account_template": "154",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhập kho thành phẩm hoàn thành.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_cost_of_goods_sold_recognized",
+      "event_code": "cost_of_goods_sold_recognized",
+      "event_name": "Cost Of Goods Sold Recognized",
+      "category": "Production & Costing",
+      "debit_account_template": "632",
+      "credit_account_template": "155/156",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Kết chuyển giá vốn hàng bán.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_overhead_allocated",
+      "event_code": "overhead_allocated",
+      "event_name": "Overhead Allocated",
+      "category": "Production & Costing",
+      "debit_account_template": "154",
+      "credit_account_template": "627",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Phân bổ chi phí sản xuất chung vào giá thành.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_cost_variance_recorded",
+      "event_code": "cost_variance_recorded",
+      "event_name": "Cost Variance Recorded",
+      "category": "Production & Costing",
+      "debit_account_template": "632/154",
+      "credit_account_template": "154/632",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận chênh lệch giá thành thực tế so với định mức.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_fixed_asset_acquired",
+      "event_code": "fixed_asset_acquired",
+      "event_name": "Fixed Asset Acquired",
+      "category": "Fixed Assets",
+      "debit_account_template": "211 + 1332",
+      "credit_account_template": "331/111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Mua TSCĐ và ghi nhận thuế GTGT được khấu trừ (nếu có).",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_fixed_asset_constructed",
+      "event_code": "fixed_asset_constructed",
+      "event_name": "Fixed Asset Constructed",
+      "category": "Fixed Assets",
+      "debit_account_template": "241",
+      "credit_account_template": "111/112/331",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Tập hợp chi phí đầu tư xây dựng cơ bản dở dang.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_put_into_use",
+      "event_code": "asset_put_into_use",
+      "event_name": "Asset Put Into Use",
+      "category": "Fixed Assets",
+      "debit_account_template": "211",
+      "credit_account_template": "241",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Đưa tài sản hoàn thành vào sử dụng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_depreciation_recorded",
+      "event_code": "depreciation_recorded",
+      "event_name": "Depreciation Recorded",
+      "category": "Fixed Assets",
+      "debit_account_template": "627/641/642",
+      "credit_account_template": "214",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích khấu hao tài sản cố định.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_impairment_recorded",
+      "event_code": "asset_impairment_recorded",
+      "event_name": "Asset Impairment Recorded",
+      "category": "Fixed Assets",
+      "debit_account_template": "811",
+      "credit_account_template": "214/229",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận tổn thất tài sản theo đánh giá suy giảm.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_revalued",
+      "event_code": "asset_revalued",
+      "event_name": "Asset Revalued",
+      "category": "Fixed Assets",
+      "debit_account_template": "211/214",
+      "credit_account_template": "412",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Đánh giá lại tài sản theo quyết định/căn cứ pháp lý.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_component_replaced",
+      "event_code": "asset_component_replaced",
+      "event_name": "Asset Component Replaced",
+      "category": "Fixed Assets",
+      "debit_account_template": "211",
+      "credit_account_template": "211/331/111/112",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thay thế bộ phận cấu thành tài sản.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_transferred",
+      "event_code": "asset_transferred",
+      "event_name": "Asset Transferred",
+      "category": "Fixed Assets",
+      "debit_account_template": "211/228/136",
+      "credit_account_template": "211/336/138",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Điều chuyển tài sản giữa đơn vị/bộ phận theo hồ sơ nội bộ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_disposed",
+      "event_code": "asset_disposed",
+      "event_name": "Asset Disposed",
+      "category": "Fixed Assets",
+      "debit_account_template": "811/214/111",
+      "credit_account_template": "211/711",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thanh lý tài sản, ghi giảm nguyên giá và ghi nhận thu nhập/chi phí thanh lý.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_asset_derecognized",
+      "event_code": "asset_derecognized",
+      "event_name": "Asset Derecognized",
+      "category": "Fixed Assets",
+      "debit_account_template": "811/214",
+      "credit_account_template": "211",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi giảm tài sản không còn kiểm soát/lợi ích kinh tế.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_investment_acquired",
+      "event_code": "investment_acquired",
+      "event_name": "Investment Acquired",
+      "category": "Investments",
+      "debit_account_template": "121/128/221/228",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Mua khoản đầu tư tài chính.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_investment_sold",
+      "event_code": "investment_sold",
+      "event_name": "Investment Sold",
+      "category": "Investments",
+      "debit_account_template": "111/112/131",
+      "credit_account_template": "121/128/221/228",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Bán khoản đầu tư tài chính.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_investment_income_recognized",
+      "event_code": "investment_income_recognized",
+      "event_name": "Investment Income Recognized",
+      "category": "Investments",
+      "debit_account_template": "111/112/1388",
+      "credit_account_template": "515",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận cổ tức, lãi trái phiếu, lãi đầu tư.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_investment_revalued",
+      "event_code": "investment_revalued",
+      "event_name": "Investment Revalued",
+      "category": "Investments",
+      "debit_account_template": "121/221/228",
+      "credit_account_template": "412/515",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Đánh giá lại khoản đầu tư theo quy định áp dụng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_investment_impairment_recorded",
+      "event_code": "investment_impairment_recorded",
+      "event_name": "Investment Impairment Recorded",
+      "category": "Investments",
+      "debit_account_template": "635",
+      "credit_account_template": "229",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích lập dự phòng tổn thất đầu tư tài chính.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_salary_accrued",
+      "event_code": "salary_accrued",
+      "event_name": "Salary Accrued",
+      "category": "Payroll",
+      "debit_account_template": "622/623/627/641/642",
+      "credit_account_template": "334",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Tính lương phải trả người lao động.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_salary_paid",
+      "event_code": "salary_paid",
+      "event_name": "Salary Paid",
+      "category": "Payroll",
+      "debit_account_template": "334",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Chi trả lương cho người lao động.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_bonus_accrued",
+      "event_code": "bonus_accrued",
+      "event_name": "Bonus Accrued",
+      "category": "Payroll",
+      "debit_account_template": "642",
+      "credit_account_template": "334",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích thưởng phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payroll_tax_accrued",
+      "event_code": "payroll_tax_accrued",
+      "event_name": "Payroll Tax Accrued",
+      "category": "Payroll",
+      "debit_account_template": "622/623/627/641/642",
+      "credit_account_template": "3383/3384/3386",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích BHXH/BHYT/BHTN và các khoản theo lương.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_payroll_tax_paid",
+      "event_code": "payroll_tax_paid",
+      "event_name": "Payroll Tax Paid",
+      "category": "Payroll",
+      "debit_account_template": "3383/3384/3386",
+      "credit_account_template": "112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nộp các khoản theo lương cho cơ quan chức năng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_tax_accrued",
+      "event_code": "tax_accrued",
+      "event_name": "Tax Accrued",
+      "category": "Tax",
+      "debit_account_template": "821/641/642/133",
+      "credit_account_template": "333",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận nghĩa vụ thuế phát sinh theo sắc thuế.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_tax_paid",
+      "event_code": "tax_paid",
+      "event_name": "Tax Paid",
+      "category": "Tax",
+      "debit_account_template": "333",
+      "credit_account_template": "111/112",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Thanh toán các khoản thuế phải nộp.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_tax_refund_received",
+      "event_code": "tax_refund_received",
+      "event_name": "Tax Refund Received",
+      "category": "Tax",
+      "debit_account_template": "111/112",
+      "credit_account_template": "333",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Nhận hoàn thuế từ cơ quan thuế.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_deferred_tax_asset_recognized",
+      "event_code": "deferred_tax_asset_recognized",
+      "event_name": "Deferred Tax Asset Recognized",
+      "category": "Tax",
+      "debit_account_template": "243",
+      "credit_account_template": "8212",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận tài sản thuế thu nhập hoãn lại.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_deferred_tax_liability_recognized",
+      "event_code": "deferred_tax_liability_recognized",
+      "event_name": "Deferred Tax Liability Recognized",
+      "category": "Tax",
+      "debit_account_template": "8212",
+      "credit_account_template": "347",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Ghi nhận thuế thu nhập hoãn lại phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_provision_recorded",
+      "event_code": "provision_recorded",
+      "event_name": "Provision Recorded",
+      "category": "Provisions & Estimates",
+      "debit_account_template": "642/811",
+      "credit_account_template": "352",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Trích lập dự phòng phải trả.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_provision_reversed",
+      "event_code": "provision_reversed",
+      "event_name": "Provision Reversed",
+      "category": "Provisions & Estimates",
+      "debit_account_template": "352",
+      "credit_account_template": "642/711",
+      "tax_deductibility": "Full",
+      "manual_review_required": false,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Hoàn nhập dự phòng phải trả khi không còn nghĩa vụ tương ứng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_accounting_estimate_updated",
+      "event_code": "accounting_estimate_updated",
+      "event_name": "Accounting Estimate Updated",
+      "category": "Provisions & Estimates",
+      "debit_account_template": "N/A",
+      "credit_account_template": "N/A",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Cập nhật ước tính kế toán, cần bút toán điều chỉnh theo từng trường hợp.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_fx_revaluation_recorded",
+      "event_code": "fx_revaluation_recorded",
+      "event_name": "Fx Revaluation Recorded",
+      "category": "Financial Adjustments",
+      "debit_account_template": "413/635",
+      "credit_account_template": "413/515",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Đánh giá lại chênh lệch tỷ giá cuối kỳ.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    },
+    {
+      "rule_id": "AL2015_fair_value_adjustment_recorded",
+      "event_code": "fair_value_adjustment_recorded",
+      "event_name": "Fair Value Adjustment Recorded",
+      "category": "Financial Adjustments",
+      "debit_account_template": "121/221/228",
+      "credit_account_template": "412/515",
+      "tax_deductibility": "Partial",
+      "manual_review_required": true,
+      "legal_citations": [
+        "Luật Kế toán 88/2015/QH13 - Điều 5 (Yêu cầu kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 6 (Nguyên tắc kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 16-18 (Chứng từ kế toán)",
+        "Luật Kế toán 88/2015/QH13 - Điều 26-27 (Sổ kế toán và sửa sai)"
+      ],
+      "description": "Điều chỉnh giá trị hợp lý theo chuẩn mực áp dụng.",
+      "valid_from": "2017-01-01",
+      "valid_to": null,
+      "account_system": "TT200"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-03-15T17:36:00",
+  "catalog_file": "d:\\Repos\\WSSMEAS\\data\\regulations\\tt99_2025_posting_methods_autonomous.json",
+  "integrity_errors": [],
+  "integrity_passed": true,
+  "tests_total": 5,
+  "tests_passed": 5,
+  "tests_failed": 0,
+  "test_results": [
+    {
+      "test": "cash_sale_vat",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0001",
+      "reason": null,
+      "score": 0.85,
+      "expected": [
+        "TT99_POSTING_0001"
+      ]
+    },
+    {
+      "test": "cash_to_bank_transfer",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0017",
+      "reason": null,
+      "score": 0.8286,
+      "expected": [
+        "TT99_POSTING_0017"
+      ]
+    },
+    {
+      "test": "bank_to_cash_transfer",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0005",
+      "reason": null,
+      "score": 0.7857,
+      "expected": [
+        "TT99_POSTING_0005"
+      ]
+    },
+    {
+      "test": "equity_contribution",
+      "passed": true,
+      "selected_method_id": "TT99_POSTING_0007",
+      "reason": null,
+      "score": 0.5,
+      "expected": [
+        "TT99_POSTING_0007"
+      ]
+    },
+    {
+      "test": "unknown_pattern_should_fail",
+      "passed": true,
+      "selected_method_id": null,
+      "reason": "NO_RULE_MATCH_HARD_CONSTRAINTS",
+      "score": 0.0,
+      "expected": []
+    }
+  ],
+  "notes": "cash_to_bank_transfer expectation updated to direct transfer rule TT99_POSTING_0017"
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "document": "TT99_2025",
+  "router_id": "tt99_posting_router_v1",
+  "generated_at": "2026-03-15T17:22:31",
+  "routing_order": [
+    "transaction_family_classification",
+    "context_field_validation",
+    "candidate_method_filter_by_accounts",
+    "scoring_and_rank",
+    "guardrail_validation",
+    "manual_review_if_ambiguous"
+  ],
+  "ambiguity_policy": {
+    "top_score_min": 0.75,
+    "min_gap_to_second": 0.15,
+    "otherwise": "manual_review"
+  }
+}

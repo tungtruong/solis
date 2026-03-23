@@ -1,0 +1,818 @@
+{
+  "document": "Thông tư 99/2025/TT-BTC",
+  "appendix": "Phụ lục I - Danh mục và biểu mẫu chứng từ kế toán",
+  "source_pdf": "data/regulations/TT133/133_2016_TT-BTC(15589).pdf",
+  "generated_by": "scripts/extract_tt99_appendix1_form_templates.py",
+  "total_forms": 19,
+  "html_output_dir": "data/regulations/tt133_2016_appendix_form_templates_html",
+  "html_files": [
+    {
+      "form_code": "01-BH",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/01_BH.html"
+    },
+    {
+      "form_code": "02-BH",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/02_BH.html"
+    },
+    {
+      "form_code": "01-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/01_TT.html"
+    },
+    {
+      "form_code": "02-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/02_TT.html"
+    },
+    {
+      "form_code": "03-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/03_TT.html"
+    },
+    {
+      "form_code": "04-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/04_TT.html"
+    },
+    {
+      "form_code": "05-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/05_TT.html"
+    },
+    {
+      "form_code": "06-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/06_TT.html"
+    },
+    {
+      "form_code": "07-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/07_TT.html"
+    },
+    {
+      "form_code": "08a-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/08a_TT.html"
+    },
+    {
+      "form_code": "08b-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/08b_TT.html"
+    },
+    {
+      "form_code": "09-TT",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/09_TT.html"
+    },
+    {
+      "form_code": "01-TSCĐ",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/01_TSCĐ.html"
+    },
+    {
+      "form_code": "02-TSCĐ",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/02_TSCĐ.html"
+    },
+    {
+      "form_code": "03-TSCĐ",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/03_TSCĐ.html"
+    },
+    {
+      "form_code": "04-TSCĐ",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/04_TSCĐ.html"
+    },
+    {
+      "form_code": "05-TSCĐ",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/05_TSCĐ.html"
+    },
+    {
+      "form_code": "06-TSCĐ",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/06_TSCĐ.html"
+    },
+    {
+      "form_code": "03a-DNN",
+      "path": "data/regulations/tt133_2016_appendix_form_templates_html/03a_DNN.html"
+    }
+  ],
+  "forms": [
+    {
+      "form_id": "tt99_appendix1_01_bh",
+      "form_code": "01-BH",
+      "form_group": "BH",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 1,
+      "source_page_end": 1,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 01 - BH) \n \n1. Mục đích: Phản ánh tình hình thanh toán hàng đại lý, ký gửi giữa đơn vị có \nhàng và đơn vị nhận bán hàng, là ch ứng từ để đơn vị có hàng và đơn vị nhận bán \nhàng đại lý, ký gửi thanh toán tiền và ghi sổ kế toán. \n2. Phương pháp và trách nhiệm ghi \n- Ghi rõ tên, địa chỉ hoặc đóng dấu đơn vị nhận bán hàng đại lý, ký g ửi ở góc \ntrên bên trái. \n- Ghi rõ số, ngày, tháng, năm lập bảng thanh toán hàng đại lý, ký gửi. \n- Ghi rõ số hiệu, ngày, tháng, năm của hợp đồng bán hàng đại lý, ký gửi. \nMục I Thanh toán số hàng đại lý, ký gửi: \n+ Cột A, B, C: Ghi s ố thứ tự và tên, quy cách, ph ẩm chất, đơn vị tính của sản \nphẩm, hàng hóa nhận đại lý, ký gửi. \n+ Cột 1: Ghi số lượng hàng còn tồn cuối kỳ trước. \n+ Cột 2: Ghi số lượng hàng nhận đại lý, ký gửi kỳ này. \n+ Cột 3: Ghi tổng số lượng hàng nhận đại lý, ký gửi tính đến cuối kỳ này gồm số \nlượng hàng tồn kỳ trước chưa bán và số lượng hàng nhận kỳ này (Cột 3 = cột 1 + cột 2). \n+ Cột 4, 5, 6: Ghi s ố lượng, đơn giá và số tiền của hàng hóa đã bán phải thanh \ntoán của kỳ này. Đơn giá thanh toán là đơn giá ghi trong hợp đồng bán hàng đại lý, \nký gửi giữa bên có hàng và bên nhận hàng. \n+ Cột 7: Ghi s ố hàng hóa nh ận đại lý, ký g ửi còn t ồn (tại quầy, tại kho) ch ưa \nbán được đến ngày lập bảng thanh toán. \nDòng cộng: Ghi tổng số tiền phải thanh toán phát sinh kỳ này.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/01_BH.html"
+    },
+    {
+      "form_id": "tt99_appendix1_02_bh",
+      "form_code": "02-BH",
+      "form_group": "BH",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 2,
+      "source_page_end": 2,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 02 - BH) \n \n1. Mục đích: Theo dõi s ố lượng và giá tr ị hàng hóa trong quá trình nh ận và \nbán t ại qu ầy hàng, giúp cho ng ười bán hàng th ường xuyên n ắm được tình hình \nnhập, xuất, tồn tại quầy, làm căn cứ để kiểm tra, qu ản lý hàng hóa và l ập bảng kê \nbán hàng từng ngày (kỳ). \n2. Phương pháp và trách nhiệm ghi \n- Ghi rõ họ\n tên, địa chỉ hoặc đóng dấu cơ quan vào góc trên bên trái. \n- Ghi số thẻ.  \n- Ghi rõ tên hàng, quy cách, đơn vị tính và đơn giá của hàng hóa. \nMỗi th ẻ qu ầy hàng theo dõi m ột m ặt hàng, không ghi nh ững m ặt hàng khác \nnhau về quy cách, phẩm chất vào cùng một thẻ. \n- Cột A, B: Ghi ngày, tháng và tên người bán hàng trong ngày (ca). \n- Cột 1: Ghi số lượng hàng hóa tồn đầu ngày (ca). \n- Cột 2: Ghi số lượng hàng hóa từ kho nhập vào quầy trong ngày (ca). \n- C ột 3: Ghi s ố l ượng hàng hóa nh ập trong ngày (ca) t ừ nh ững ngu ồn khác \nkhông qua kho của đơn vị. \n- Cột 4: Ghi tổng số lượng hàng hóa có trong ngày (ca).",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/02_BH.html"
+    },
+    {
+      "form_id": "tt99_appendix1_01_tt",
+      "form_code": "01-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 3,
+      "source_page_end": 3,
+      "fields": [
+        {
+          "field_key": "1_muc_dich",
+          "label": "1. Mục đích",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 01 - TT) \n \n1. Mục đích: Nhằm xác định số tiền mặt, ngoại tệ,... thực tế nhập quỹ và làm \ncăn cứ để thủ quỹ thu ti ền, ghi s ổ quỹ, kế toán ghi s ổ các kho ản thu có liên quan. \nMọi khoản tiền Việt Nam, ngoại tệ nhập quỹ đều phải có Phiếu thu. \nĐối với ngoại tệ trước khi nhập quỹ phải được kiểm tra và lập “Bảng kê ngoại tệ” \nđính kèm với Phiếu thu.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/01_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_02_tt",
+      "form_code": "02-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 4,
+      "source_page_end": 4,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 02 - TT) \n \n1. Mục đích: Nhằm xác định các khoản tiền mặt, ngoại tệ thực tế xuất quỹ và \nlàm căn cứ để thủ quỹ xuất quỹ, ghi sổ quỹ và kế toán ghi sổ kế toán. \n2. Phương pháp và trách nhiệm ghi  \nGóc trên bên trái của chứng từ ghi rõ tên đơn vị và địa chỉ đơn vị. \n- Phiếu chi ph ải đóng thành quy ển, trong m ỗi Phiếu chi ph ải ghi s ố quyển và \nsố của từng Phiếu chi. S ố phiếu chi ph ải đánh liên t ục trong 1 k ỳ k ế toán. T ừng \nPhiếu chi phải ghi rõ ngày, tháng, năm lập phiếu, ngày, tháng, năm chi tiền. \n- Ghi rõ họ, tên, địa chỉ người nhận tiền.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/02_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_03_tt",
+      "form_code": "03-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 5,
+      "source_page_end": 5,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 03 - TT) \n \n1. Mục đích: Giấy đề nghị tạm ứng là c ăn cứ để xét duy ệt tạm ứng, làm th ủ \ntục lập phiếu chi và xuất quỹ cho tạm ứng. \n2. Phương pháp và trách nhiệm ghi  \nGóc trên bên trái c ủa Gi ấy đề ngh ị t ạm ứng ghi rõ tên đơn v ị, tên b ộ ph ận. \nGiấy đề ngh ị t ạm ứng do ng ười xin t ạm ứng vi ết 1 liên và ghi rõ g ửi giám đốc \ndoanh nghiệp (Người xét duyệt tạm ứng).  \n- Người xin tạm ứng phải ghi rõ họ tên, đơn vị, bộ phận và số tiền xin tạm ứng \n(Viết bằng số và bằng chữ). \n- Lý do tạm ứng ghi rõ mục đích sử dụng tiền tạm ứng như: Tiền công tác phí, \nmua văn phòng phẩm, tiếp khách... \n- Thời hạn thanh toán: Ghi rõ ngày, tháng hoàn lại số tiền đã tạm ứng. \nGiấy đề nghị tạm ứng được chuyển cho k ế toán tr ưởng xem xét và ghi ý ki ến \nđề nghị giám đốc duyệt chi. Căn cứ quyết định của giám đốc, kế toán lập phiếu chi \nkèm theo giấy đề nghị tạm ứng và chuyển cho thủ quỹ làm thủ tục xuất quỹ.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/03_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_04_tt",
+      "form_code": "04-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 6,
+      "source_page_end": 5,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/04_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_05_tt",
+      "form_code": "05-TT",
+      "form_group": "TT",
+      "title": "GIẤY ĐỀ NGHỊ THANH TOÁN",
+      "source_page_start": 6,
+      "source_page_end": 6,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 04 - TT) \n \n1. Mục đích: Giấy thanh toán ti ền tạm ứng là b ảng liệt kê các kho ản tiền đã \nnhận tạm ứng và các khoản đã chi của người nhận tạm ứng, làm căn cứ thanh toán \nsố tiền tạm ứng và ghi sổ kế toán. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái c ủa Gi ấy đề ngh ị t ạm ứng ghi rõ tên đơn v ị, tên b ộ ph ận. \nPhần đầu ghi rõ ngày, tháng, n ăm, số hiệu của giấy thanh toán ti ền tạm ứng; H ọ \ntên, đơn vị người thanh toán. \nCăn cứ vào chỉ tiêu của cột A, kế toán ghi vào cột 1 như sau: \nMục I - Số tiền tạm ứng: Gồm số tiền tạm ứng các kỳ trước chưa chi hết và số \ntạm ứng kỳ này, gồm: \nMục 1: Số tạm ứng các kỳ trước chưa chi hết: Căn cứ vào dòng số dư tạm ứng \ntính đến ngày lập phiếu thanh toán trên sổ kế toán để ghi. \nMục 2: S ố t ạm ứng k ỳ này: C ăn c ứ vào các phi ếu chi t ạm ứng để ghi, m ỗi \nphiếu chi ghi 1 dòng. \nMục II - Số tiền đã chi: Căn cứ vào các chứng từ chi tiêu của người nhận tạm \nứng để ghi vào mục này. Mỗi chứng từ chi tiêu ghi 1 dòng. \nMục III - Chênh lệch: Là số chênh lệch giữa Mục I và Mục II.  \n- Nếu số tạm ứng chi không hết ghi vào dòng 1 của Mục III. \n- Nếu chi quá số tạm ứng ghi vào dòng 2 của Mục III. \nSau khi lập xong giấy thanh toán ti ền tạm ứng, kế toán thanh toán chuy ển cho \nkế toán trưởng soát xét và giám đốc doanh nghiệp duyệt. Giấy thanh toán tiền tạm \nứng kèm theo chứng từ gốc được dùng làm căn cứ ghi sổ kế toán. \nPhần chênh l ệch tiền tạm ứng chi không h ết phải làm th ủ tục thu h ồi nộp quỹ \nhoặc trừ vào lương. Phần chi quá s ố tạm ứng phải làm thủ tục xuất quỹ trả lại cho \nngười tạm ứng. Chứng từ gốc, giấy thanh toán t ạm ứng phải đính kèm phi ếu thu \nhoặc phiếu chi có liên quan. \n \nGIẤY ĐỀ NGHỊ THANH TOÁN \n(Mẫu số 05 - TT) \n \n1. M ục đích: Gi ấy đề ngh ị thanh toán dùng trong tr ường h ợp đã chi nh ưng \nchưa được thanh toán ho ặc chưa nhận tạm ứng để tổng hợp các khoản đã chi kèm \ntheo chứng từ (nếu có) để làm thủ tục thanh toán, làm c ăn cứ thanh toán và ghi s ổ \nkế toán.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/05_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_06_tt",
+      "form_code": "06-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 7,
+      "source_page_end": 7,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 06 - TT) \n \n1. M ục đích: Biên lai thu ti ền là gi ấy biên nh ận c ủa doanh nghi ệp ho ặc cá \nnhân đã thu tiền hoặc thu séc c ủa người nộp làm căn cứ để lập phiếu thu, nộp tiền \nvào quỹ, đồng thời để người nộp thanh toán với cơ quan hoặc lưu quỹ. \n2. Phương pháp và trách nhiệm ghi  \nBiên lai thu tiền phải đóng thành quyển, phải ghi rõ tên đơn vị, địa chỉ của đơn \nvị thu tiền và đóng dấu đơn vị, phải đánh số từng quyển. Trong mỗi quyển phải ghi \nrõ số hiệu của từng tờ biên lai thu tiền liên tục trong 1 quyển. \nGhi rõ họ tên, địa chỉ của người nộp tiền. \n- Dòng “Nội dung thu” ghi rõ nội dung thu tiền.  \n- Dòng “Số tiền thu” ghi bằng số và bằng chữ số tiền nộp, ghi rõ đơn vị tính là \n“đồng” hoặc USD... \nNếu thu bằng séc phải ghi rõ số, ngày, tháng, năm của tờ séc bắt đầu lưu hành \nvà họ tên người sử dụng séc. \nBiên lai thu tiền được lập thành hai liên (Đặt giấy than viết một lần). \nSau khi thu ti ền, người thu tiền và người nộp tiền cùng ký và ghi rõ h ọ tên để \nxác nhận số tiền đã thu, đã nộp. Ký xong người thu tiền lưu 1 liên, còn liên 2 giao \ncho người nộp tiền giữ.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/06_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_07_tt",
+      "form_code": "07-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 8,
+      "source_page_end": 7,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/07_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_08a_tt",
+      "form_code": "08a-TT",
+      "form_group": "TT",
+      "title": "BẢNG KIỂM KÊ QUỸ",
+      "source_page_start": 8,
+      "source_page_end": 8,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 07 - TT) \n \n1. Mục đích: Bảng kê vàng b ạc, kim khí quý, đá quý dùng để liệt kê s ố vàng \nbạc, kim khí quý, đá quý c ủa đơn v ị, nhằm qu ản lý ch ặt ch ẽ, chính xác các lo ại \nvàng bạc, kim khí quý, đá quý có t ại đơn vị và làm c ăn cứ cùng với chứng từ gốc \nđể lập chứng từ kế toán. \n2. Phương pháp và trách nhiệm ghi  \nCột A, B: Ghi s ố thứ tự và tên, lo ại, quy cách, ph ẩm chất của vàng b ạc, kim \nkhí quý, đá quý... \nCột C: Ghi đơn vị tính: gam, chỉ, Kg. \nCột 1: Ghi số lượng của từng loại.  \nCột 2: Ghi đơn giá của từng loại.  \nCột 3: Bằng cột 1 nhân (x) cột 2. \nGhi chú: Khi c ần thiết, tại cột B có th ể ghi rõ ký hi ệu của loại vàng b ạc, kim \nkhí quý, đá quý. \nBảng kê phải có đầy đủ chữ ký và ghi rõ họ tên như quy định. \n \nBẢNG KIỂM KÊ QUỸ \n(Dùng cho VNĐ) \n(Mẫu số 08a - TT) \n \n1. Mục đích: Bảng kiểm kê qu ỹ nhằm xác nh ận tiền bằng VNĐ tồn quỹ thực \ntế và số thừa, thiếu so với sổ quỹ trên cơ sở đó tăng cường quản lý quỹ và làm c ơ \nsở quy trách nhiệm vật chất, ghi sổ kế toán số chênh lệch. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái c ủa Biên b ản ki ểm kê qu ỹ ti ền m ặt ph ải ghi rõ tên đơn v ị \n(hoặc đóng dấu), bộ phận.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/08a_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_08b_tt",
+      "form_code": "08b-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 9,
+      "source_page_end": 9,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 08b - TT) \n \n1. Mục đích: Biên bản nhằm xác nhận tiền ngoại tệ, vàng bạc, kim khí quý, đá \nquý,... tồn thực tế và số thừa, thiếu so với sổ kế toán trên cơ sở đó tăng cường quản \nlý ngoại tệ, vàng bạc, kim khí quý, đá quý và làm c ơ sở quy trách nhi ệm vật chất, \nghi sổ kế toán số chênh lệch. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái ghi tên đơn vị, bộ phận. Việc kiểm kê ngoại tệ, vàng bạc, kim \nkhí quý, đá quý được tiến hành định kỳ vào cu ối tháng, cu ối quý, cu ối năm hoặc \nkhi cần thiết có thể kiểm kê đột xuất hoặc khi bàn giao ngoại tệ, vàng bạc, kim khí \nquý, đá quý. Khi ti ến hành ki ểm kê ph ải lập ban ki ểm kê, trong đó, thủ quỹ hoặc \nngười qu ản lý ngo ại t ệ, vàng b ạc, kim khí quý, đá quý và k ế toán hàng t ồn kho \n(vàng bạc, kim khí quý, đá quý là hàng t ồn kho) ho ặc kế toán đầu tư khác (vàng \nbạc, kim khí quý, đá quý không phải là hàng tồn kho) là các thành viên.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/08b_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_09_tt",
+      "form_code": "09-TT",
+      "form_group": "TT",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 10,
+      "source_page_end": 10,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 09 - TT) \n \n1. Mục đích: Bảng kê chi tiền là bảng liệt kê các khoản tiền đã chi, làm căn cứ \nquyết toán các khoản tiền đã chi và ghi sổ kế toán.  \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái ghi rõ tên đơn vị. Phần đầu ghi rõ họ tên, bộ phận, địa chỉ của \nngười chi tiền và ghi rõ nội dung chi cho công việc gì. \n- Cột A, B, C, D ghi rõ s ố thứ tự, số hiệu, ngày, tháng ch ứng từ và di ễn giải \nnội dung chi c ủa từng chứng từ. \n- Cột 1: Ghi số tiền.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/09_TT.html"
+    },
+    {
+      "form_id": "tt99_appendix1_01_tscd",
+      "form_code": "01-TSCĐ",
+      "form_group": "TSCĐ",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 11,
+      "source_page_end": 11,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 01 - TSCĐ) \n \n1. M ục đích: Nh ằm xác nh ận vi ệc giao nh ận TSC Đ sau khi hoàn thành xây \ndựng, mua sắm, được cấp trên cấp, được tặng, biếu, viện trợ, nhận góp vốn, TSCĐ \nthuê ngoài... đưa vào s ử dụng tại đơn vị hoặc tài s ản của đơn vị bàn giao cho đơn \nvị khác theo lệnh của cấp trên, theo hợp đồng góp vốn,... (không sử dụng biên bản \ngiao nhận TSCĐ trong trường hợp nhượng bán, thanh lý ho ặc tài sản cố định phát \nhiện thừa, thiếu khi ki ểm kê). Biên b ản giao nh ận TSCĐ là c ăn c ứ để giao nh ận \nTSCĐ và kế toán ghi sổ (thẻ) TSCĐ, sổ kế toán có liên quan.  \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái c ủa Biên b ản giao nh ận TSCĐ ghi rõ tên đơn vị (hoặc đóng \ndấu đơn vị), bộ phận sử dụng. Khi có tài sản mới đưa vào sử dụng hoặc điều tài sản \ncho đơn vị khác, đơn v ị phải lập hội đồng bàn giao g ồm: Đại diện bên giao, đại \ndiện bên nhận và 1 số ủy viên. \nBiên bản giao nhận TSCĐ lập cho từng TSCĐ. Đối với trường hợp giao nhận \ncùng một lúc nhi ều tài s ản cùng loại, cùng giá tr ị và do cùng 1 đơn vị giao có th ể \nlập chung 1 biên bản giao nhận TSCĐ.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/01_TSCĐ.html"
+    },
+    {
+      "form_id": "tt99_appendix1_02_tscd",
+      "form_code": "02-TSCĐ",
+      "form_group": "TSCĐ",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 12,
+      "source_page_end": 12,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 02 - TSCĐ) \n \n1. Mục đích: Xác nhận việc thanh lý TSCĐ và làm căn cứ để ghi giảm TSCĐ \ntrên sổ kế toán. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái c ủa Biên b ản thanh lý TSC Đ ghi rõ tên đơn v ị (hoặc đóng \ndấu đơn v ị), b ộ ph ận s ử d ụng. Khi có quy ết định v ề vi ệc thanh lý TSC Đ doanh \nnghiệp phải thành l ập Ban thanh lý TSC Đ. Thành viên Ban thanh lý TSC Đ được \nghi chép ở Mục I. \nỞ Mục II ghi các chỉ tiêu chung về TSCĐ có quyết định thanh lý như:  \n- Tên, ký hiệu TSCĐ, số hiệu, số thẻ TSCĐ, nước sản xuất, năm đưa vào sử dụng. \n- Nguyên giá TSCĐ, giá trị hao mòn đã trích cộng dồn đến thời điểm thanh lý, \ngiá trị còn lại của TSCĐ đó. \nMục III ghi k ết lu ận c ủa Ban thanh lý, ghi ý ki ến nh ận xét c ủa Ban v ề vi ệc \nthanh lý TSCĐ.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/02_TSCĐ.html"
+    },
+    {
+      "form_id": "tt99_appendix1_03_tscd",
+      "form_code": "03-TSCĐ",
+      "form_group": "TSCĐ",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 13,
+      "source_page_end": 13,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 03 - TSCĐ) \n \n1. Mục đích: Xác nhận việc bàn giao TSCĐ sau khi hoàn thành vi ệc sửa chữa \nlớn giữa bên có TSC Đ sửa chữa và bên th ực hiện việc sửa chữa. Là căn cứ ghi sổ \nkế toán và thanh toán chi phí sửa chữa TSCĐ. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái của Biên bản bàn giao TSCĐ sửa chữa lớn hoàn thành ghi rõ \ntên đơn vị (hoặc đóng dấu đơn vị), bộ phận sử dụng. Khi có TSC Đ sửa chữa lớn \nhoàn thành phải tiến hành lập Ban giao nh ận gồm đại diện bên th ực hiện việc sửa \nchữa và đại diện bên có TSCĐ sửa chữa. \nBiên bản bàn giao TSCĐ sửa chữa lớn hoàn thành gồm 2 phần chính: \n1. Ghi tên, ký hiệu, số hiệu TSCĐ sửa chữa. \nNơi quản lý sử dụng TSCĐ và ghi rõ thời gian bắt đầu sửa chữa và hoàn thành \nviệc sửa chữa TSCĐ. \n2. Các bộ phận sửa chữa. \nCột A: Ghi rõ tên của bộ phận cần phải sửa chữa của TSCĐ. \nCột B: Ghi nội dung (Mức độ) của công việc sửa chữa như: Thay thế mới hoặc \nsửa chữa, tân trang lại v.v... \nCột 1: Ghi giá dự toán (Giá kế hoạch) (Đối với trường hợp đơn vị tự làm) hoặc \ngiá hợp đồng hai bên đã thỏa thuận (Đối với trường hợp thuê ngoài) c ủa từng bộ \nphận cần sửa chữa. \nCột 2: Ghi số chi phí thực tế đã chi cho từng bộ phận sửa chữa (Đối với trường \nhợp đơn vị tự sửa chữa). \nĐối với trường hợp thuê ngoài s ửa chữa thì chỉ ghi vào c ột này khi có s ự thay \nđổi v ề giá c ả (So v ới giá ghi theo h ợp đồng) phát sinh trong quá trình s ửa ch ữa \nđược bên có TSCĐ sửa chữa chấp nhận thanh toán. \nCột 3: Ghi rõ kết quả kiểm tra của từng bộ phận sau khi đã sửa chữa xong. \n- Kết luận: Ghi ý kiến nhận xét tổng thể về việc sửa chữa lớn TSCĐ của Hội đồng \ngiao nhận.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/03_TSCĐ.html"
+    },
+    {
+      "form_id": "tt99_appendix1_04_tscd",
+      "form_code": "04-TSCĐ",
+      "form_group": "TSCĐ",
+      "title": "Biểu mẫu kế toán",
+      "source_page_start": 14,
+      "source_page_end": 13,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/04_TSCĐ.html"
+    },
+    {
+      "form_id": "tt99_appendix1_05_tscd",
+      "form_code": "05-TSCĐ",
+      "form_group": "TSCĐ",
+      "title": "lại TSCĐ.",
+      "source_page_start": 14,
+      "source_page_end": 14,
+      "fields": [],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 04 - TSCĐ) \n \n1. M ục đích: Xác nh ận vi ệc đánh giá l ại TSCĐ và làm c ăn c ứ để ghi s ổ k ế \ntoán và các tài liệu liên quan đến số chênh lệch (tăng, giảm) do đánh giá lại TSCĐ. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái của Biên bản đánh giá lại TSCĐ ghi rõ tên đơn vị (hoặc đóng \ndấu đơn vị), bộ phận sử dụng. Khi có quy ết định đánh giá l ại TSCĐ, đơn vị phải \nthành lập Hội đồng đánh giá TSCĐ.  \nCột A, B, C, D: Ghi s ố thứ tự, tên, ký mã hiệu, quy cách (cấp hạng) số hiệu và \nsố thẻ của TSCĐ. \nCột 1, 2, 3: Ghi nguyên giá, giá trị hao mòn và giá trị còn lại của TSCĐ trên sổ \nkế toán tại thời điểm đánh giá. \nCột 4: Ghi giá trị còn lại của TSCĐ sau khi đánh giá lại. Trường hợp đánh giá lại \ncả giá trị hao mòn thì cột này được chia thành 3 cột tương ứng cột 1, 2, 3 để ghi. \nCột 5, 6: Ghi số chênh lệch giữa giá đánh giá so với giá trị đang ghi trên sổ kế \ntoán trong trường hợp kiểm kê đánh giá lại cả nguyên giá, giá trị hao mòn và giá trị \ncòn lại thì các cột này được chia ra 3 cột tương ứng để lấy số liệu ghi sổ kế toán.  \nSau khi đánh giá xong, H ội đồng có trách nhi ệm lập biên b ản ghi đầy đủ các \nnội dung và các thành viên trong Hội đồng ký, ghi rõ họ tên vào Biên bản đánh giá \nlại TSCĐ. \nBiên bản đánh giá lại TSCĐ được lập thành 2 bản, 1 bản lưu tại phòng kế toán \nđể ghi sổ kế toán và 1 bản lưu cùng với hồ sơ kỹ thuật của TSCĐ. \n \nBIÊN BẢN KIỂM KÊ TÀI SẢN CỐ ĐỊNH \n(Mẫu số 05 - TSCĐ) \n \n1. Mục đích: Biên bản kiểm kê tài sản cố định nhằm xác nhận số lượng, giá trị tài \nsản cố định hiện có, thừa thiếu so với sổ kế toán trên cơ sở đó tăng cường quản lý tài \nsản cố định và làm cơ sở quy trách nhiệm vật chất, ghi sổ kế toán số chênh lệch. \n2. Phương pháp và trách nhiệm ghi \nGóc trên bên trái c ủa Biên b ản Kiểm kê TSC Đ ghi rõ tên đơn vị (hoặc đóng \ndấu đơn vị), bộ phận sử dụng. Việc kiểm kê tài s ản cố định được thực hiện theo \nquy định của pháp luật và theo yêu cầu của đơn vị. Khi tiến hành kiểm kê phải lập \nBan kiểm kê, trong đó kế toán theo dõi tài sản cố định là thành viên.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/05_TSCĐ.html"
+    },
+    {
+      "form_id": "tt99_appendix1_06_tscd",
+      "form_code": "06-TSCĐ",
+      "form_group": "TSCĐ",
+      "title": "CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 17 PHỤ LỤC 4 DANH MỤC BIỂU MẪU, NỘI DUNG, PHƯƠNG PHÁP GHI CHÉP SỔ KẾ TOÁN VÀ HÌNH THỨC SỔ KẾ TOÁN",
+      "source_page_start": 15,
+      "source_page_end": 63,
+      "fields": [
+        {
+          "field_key": "ngay_lap",
+          "label": "Ngày",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "field_key": "thang_lap",
+          "label": "Tháng",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "field_key": "nam_lap",
+          "label": "Năm",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "field_key": "don_vi",
+          "label": "Đơn vị",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "dia_chi",
+          "label": "Địa chỉ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "nam",
+          "label": "Năm",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ngay_mo_so",
+          "label": "- Ngày mở sổ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "so",
+          "label": "Số",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "so_hieu",
+          "label": "Số hiệu",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "don_vi_tinh",
+          "label": "Đơn vị tính",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "loai_quy",
+          "label": "Loại quỹ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "tai_khoan",
+          "label": "Tài khoản",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "noi_mo_tai_khoan_giao_dich",
+          "label": "Nơi mở tài khoản giao dịch",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "so_hieu_tai_khoan_tai_noi_gui",
+          "label": "Số hiệu tài khoản tại nơi gửi",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ten_kho",
+          "label": "Tên kho",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "nguoi_lap_the",
+          "label": "Người lập thẻ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ten_nhan_hieu_quy_cach_vat_tu",
+          "label": "- Tên, nhãn hiệu, quy cách vật tư",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ma_so",
+          "label": "- Mã số",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "loai_tai_san",
+          "label": "Loại tài sản",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ten_ky_ma_hieu_quy_cach_cap_hang_tscd",
+          "label": "Tên, ký mã hiệu, quy cách (cấp hạng) TSCD",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ghi_giam_tscd_chung_tu_so",
+          "label": "Ghi giảm TSCĐ chứng từ số",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ly_do_gi_am",
+          "label": "Lý do gi ảm",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "doi_tuong",
+          "label": "Đối tượng",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "loai_ngoai_te",
+          "label": "Loại ngoại tệ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "doi_tuong_cho_vay",
+          "label": "Đối tượng cho vay",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "khe_uoc_vay",
+          "label": "Khế ước vay",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ten_san_pham_hang_hoa_dich_vu_bat_dong_san_dau_tu",
+          "label": "Tên sản phẩm (hàng hóa, dịch vụ, bất động sản đầu tư)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "quyen_so",
+          "label": "Quyển số",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ten_phan_xuong",
+          "label": "- Tên phân xưởng",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "ten_san_pham_dich_vu",
+          "label": "- Tên sản phẩm, dịch vụ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "loai_chung_khoan",
+          "label": "Loại chứng khoán",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "tong_du_toan",
+          "label": "Tổng dự toán",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "table_schema": {
+        "has_grid": true,
+        "header_line_index": 563,
+        "table_columns": [
+          {
+            "key": "col_1",
+            "label": "STT",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_2",
+            "label": "Cột 2",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_3",
+            "label": "Cột 3",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_4",
+            "label": "Cột 4",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_5",
+            "label": "Cột 5",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_6",
+            "label": "Cột 6",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "key": "col_7",
+            "label": "Cột 7",
+            "data_type": "string",
+            "required": false
+          }
+        ],
+        "table_rows": [
+          {
+            "row_key": "row_1",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_2",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_3",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_4",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_5",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_6",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_7",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_8",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_9",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          },
+          {
+            "row_key": "row_10",
+            "row_type": "data",
+            "cells": {
+              "col_1": "",
+              "col_2": "",
+              "col_3": "",
+              "col_4": "",
+              "col_5": "",
+              "col_6": "",
+              "col_7": ""
+            }
+          }
+        ]
+      },
+      "signatures": [
+        "Người lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật",
+        "(Ký, họ tên)",
+        "Người lập biểu",
+        "Kế toán trưởng",
+        "Người đại diện theo pháp luật",
+        "(Ký, họ tên) (Ký, h ọ tên)"
+      ],
+      "layout_text": "Mẫu số 06 - TSCĐ) \n \n1. Mục đích: Dùng để phản ánh s ố khấu hao TSC Đ phải trích và phân b ổ số \nkhấu hao đó cho các đối tượng sử dụng TSCĐ hàng tháng. \n2. Kết cấu và nội dung chủ yếu \nBảng tính và phân b ổ kh ấu hao TSC Đ có các c ột d ọc ph ản ánh s ố khấu hao \nphải tính cho t ừng đối tượng sử dụng TSCĐ và các hàng ngang ph ản ánh số khấu \nhao tính trong tháng tr ước, số khấu hao tăng, giảm và số khấu hao phải tính trong \ntháng này. \nCơ sở lập: \n+ Dòng kh ấu hao đã tính tháng tr ước l ấy t ừ b ảng tính và phân b ổ kh ấu hao \nTSCĐ tháng trước. \n+ Các dòng s ố kh ấu hao TSC Đ t ăng, giảm tháng này được ph ản ánh chi ti ết \ncho từng TSCĐ có liên quan đến số tăng, giảm khấu hao TSC Đ theo ch ế độ quy \nđịnh hiện hành về khấu hao TSCĐ. \nDòng s ố kh ấu hao ph ải tính tháng này được tính b ằng (=) S ố kh ấu hao tính \ntháng trước cộng (+) Với số khấu hao tăng, trừ (-) Số khấu hao giảm trong tháng. \nSố khấu hao ph ải trích tháng này trên B ảng phân bổ khấu hao TSCĐ được sử \ndụng để ghi vào các Bảng kê và sổ kế toán có liên quan (cột ghi Có TK 214), đồng \nthời được sử dụng để tính giá thành thực tế sản phẩm, dịch vụ hoàn thành.  \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 17 \n \nPHỤ LỤC 4 \nDANH MỤC BIỂU MẪU, NỘI DUNG, PHƯƠNG PHÁP GHI CHÉP \nSỔ KẾ TOÁN VÀ HÌNH THỨC SỔ KẾ TOÁN \n(Ban hành kèm theo Thông tư số 133/2016/TT-BTC ngày 26/8/2016 của Bộ Tài chính) \n \n1. Các loại sổ kế toán và hình thức sổ kế toán \nSổ kế toán gồm sổ kế toán tổng hợp và sổ kế toán chi tiết. Sổ kế toán tổng hợp, \ngồm: Sổ Nhật ký, Sổ Cái. Sổ kế toán chi tiết, gồm: Sổ, thẻ kế toán chi tiết.  \na) Sổ kế toán tổng hợp \n- Sổ Nhật ký dùng để ghi chép các nghi ệp vụ kinh tế, tài chính phát sinh trong \ntừng kỳ kế toán và trong một niên độ kế toán theo trình tự thời gian và quan hệ đối \nứng các tài kho ản của các nghiệp vụ đó. Số liệu kế toán trên s ổ Nhật ký phản ánh \ntổng s ố phát sinh bên N ợ và bên Có c ủa t ất c ả các tài kho ản k ế toán s ử d ụng ở \ndoanh nghiệp. Sổ Nhật ký phải phản ánh đầy đủ các nội dung sau: \n+ Ngày, tháng ghi sổ; \n+ Số hiệu và ngày, tháng của chứng từ kế toán dùng làm căn cứ ghi sổ; \n+ Tóm tắt nội dung của nghiệp vụ kinh tế, tài chính phát sinh; \n+ Số tiền của nghiệp vụ kinh tế, tài chính phát sinh. \n- Sổ Cái dùng để ghi chép các nghiệp vụ kinh tế, tài chính phát sinh trong từng \nkỳ và trong m ột niên độ kế toán theo các tài kho ản kế toán được quy định trong \nchế độ tài kho ản kế toán áp d ụng cho doanh nghi ệp. Số liệu kế toán trên S ổ Cái \nphản ánh tổng hợp tình hình tài sản, nguồn vốn, tình hình và kết quả hoạt động sản \nxuất, kinh doanh của doanh nghiệp. Sổ Cái phải phản ánh đầy đủ các nội dung sau: \n+ Ngày, tháng ghi sổ; \n+ Số hiệu và ngày, tháng của chứng từ kế toán dùng làm căn cứ ghi sổ; \n+ Tóm tắt nội dung của nghiệp vụ kinh tế, tài chính phát sinh; \n+ Số tiền của nghiệp vụ kinh t ế, tài chính phát sinh ghi vào bên N ợ hoặc bên \nCó của từng tài khoản. \nb) Sổ, thẻ kế toán chi tiết \nSổ, thẻ kế toán chi ti ết dùng để ghi chép các nghi ệp vụ kinh tế, tài chính phát \nsinh liên quan đến các đối tượng kế toán c ần thiết phải theo dõi chi ti ết theo yêu \ncầu quản lý. Số liệu trên sổ, thẻ kế toán chi tiết cung cấp các thông tin phục vụ cho \nviệc quản lý từng loại tài sản, nguồn vốn, doanh thu, chi phí chưa được chi tiết trên \nsổ Nhật ký và Sổ Cái. Số lượng, kết cấu các sổ, thẻ kế toán chi tiết không quy định \nbắt buộc. Các doanh nghi ệp căn cứ vào quy định mang tính h ướng dẫn tại Chế độ \nkế toán về sổ, thẻ kế toán chi ti ết và yêu c ầu quản lý của doanh nghiệp để mở các \nsổ, thẻ kế toán chi tiết cần thiết, phù hợp. \n \n18 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nc) Các hình thức sổ kế toán \n- Hình thức kế toán Nhật ký chung; \n- Hình thức kế toán Nhật ký - Sổ Cái; \n- Hình thức kế toán Chứng từ ghi sổ. \nTrong mỗi hình thức sổ kế toán có những quy định cụ thể về số lượng, kết cấu, \nmẫu sổ, trình tự, phương pháp ghi chép và mối quan hệ giữa các sổ kế toán. \n2. Hình thức kế toán Nhật ký chung \na) Nguyên t ắc, đặc trưng cơ bản của hình th ức kế toán Nh ật ký chung: T ất cả \ncác nghiệp vụ kinh t ế, tài chính phát sinh đều phải được ghi vào s ổ Nhật ký, mà \ntrọng tâm là s ổ Nhật ký chung, theo trình t ự thời gian phát sinh và theo n ội dung \nkinh tế (định khoản kế toán) của nghiệp vụ đó. Sau đó lấy số liệu trên các sổ Nhật \nký để ghi Sổ Cái theo t ừng nghiệp vụ phát sinh. Hình th ức kế toán Nhật ký chung \ngồm các loại sổ chủ yếu sau: \n- Sổ Nhật ký chung, Sổ Nhật ký đặc biệt; \n- Sổ Cái; \n- Các sổ, thẻ kế toán chi tiết. \nb) Trình t ự ghi s ổ k ế toán theo hình th ức k ế toán Nh ật ký chung (S ơ đồ 01 \ndưới đây) \n- Hàng ngày, c ăn cứ vào các ch ứng từ đã kiểm tra được dùng làm c ăn cứ ghi \nsổ, trước hết ghi nghiệp vụ phát sinh vào s ổ Nhật ký chung, sau đó căn cứ số liệu \nđã ghi trên sổ Nhật ký chung để ghi vào Sổ Cái theo các tài khoản kế toán phù hợp. \nNếu đơn v ị có m ở s ổ, th ẻ k ế toán chi ti ết thì đồng th ời v ới vi ệc ghi s ổ Nh ật ký \nchung, các nghiệp vụ phát sinh được ghi vào các sổ, thẻ kế toán chi tiết liên quan. \nTrường hợp đơn vị mở các sổ Nhật ký đặc biệt thì hàng ngày hoặc định kỳ, căn \ncứ vào các ch ứng từ được dùng làm c ăn cứ ghi sổ, ghi nghiệp vụ phát sinh vào s ổ \nNhật ký đặc bi ệt liên quan. Định k ỳ (3, 5, 10... ngày) ho ặc cu ối tháng, tu ỳ kh ối \nlượng nghiệp vụ phát sinh, t ổng hợp từng sổ Nhật ký đặc biệt, lấy số liệu để ghi \nvào các tài kho ản phù h ợp trên S ổ Cái, sau khi đã lo ại tr ừ s ố trùng l ặp do m ột \nnghiệp vụ được ghi đồng thời vào nhiều sổ Nhật ký đặc biệt (nếu có). \nCuối tháng, cuối quý, cuối năm, cộng số liệu trên Sổ Cái, lập Bảng cân đối tài \nkhoản. Sau khi đã kiểm tra đối chiếu khớp đúng, số liệu ghi trên S ổ Cái và b ảng \ntổng hợp chi ti ết (được l ập t ừ các S ổ, thẻ k ế toán chi ti ết) được dùng để lập các \nBáo cáo tài chính. V ề nguyên t ắc, Tổng số phát sinh N ợ và Tổng số phát sinh Có \ntrên Bảng cân đối tài khoản phải bằng Tổng số phát sinh N ợ và Tổng số phát sinh \nCó trên s ổ Nhật ký chung (ho ặc sổ Nhật ký chung và các s ổ Nhật ký đặc biệt sau \nkhi đã loại trừ số trùng lặp trên các sổ Nhật ký đặc biệt) cùng kỳ. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 19 \n \nBiểu số 01 \nTRÌNH TỰ GHI SỔ KẾ TOÁN \nTHEO HÌNH THỨC KẾ TOÁN NHẬT KÝ CHUNG \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: \nGhi hàng ngày \nGhi cuối tháng, hoặc định kỳ  \nQuan hệ đối chiếu, kiểm tra \n3. Hình thức kế toán Nhật ký - Sổ Cái  \na) Đặc trưng cơ bản của hình th ức kế toán Nh ật ký - S ổ Cái: Các nghi ệp vụ \nkinh tế, tài chính phát sinh được kết hợp ghi chép theo trình t ự thời gian và theo \nnội dung kinh tế (theo tài khoản kế toán) trên cùng một quyển sổ kế toán tổ\nng hợp \nduy nh ất là s ổ Nh ật ký - S ổ Cái. C ăn c ứ để ghi vào s ổ Nh ật ký - S ổ Cái là các \nchứng t ừ k ế toán ho ặc B ảng t ổng h ợp ch ứng t ừ k ế toán cùng lo ại. Hình th ức k ế \ntoán Nhật ký - Sổ Cái gồm có các loại sổ kế toán sau: \n- Nhật ký - Sổ Cái; \n- Các Sổ, Thẻ kế toán chi tiết. \nb) Trình tự ghi sổ kế toán theo hình thức kế toán Nhật ký - Sổ Cái (Sơ đồ số 02) \n- Hàng ngày, căn cứ vào các chứng từ kế toán hoặc Bảng tổng hợp chứng từ kế \ntoán cùng lo ại đã được ki ểm tra và được dùng làm c ăn c ứ ghi s ổ, tr ước h ết xác \nSổ, thẻ kế toán chi tiết Sổ Nhật ký \nđặc biệt \nChứng từ kế toán \nSỔ NHẬT KÝ CHUNG \nSỔ CÁI \nBảng cân đối \ntài khoản \nBÁO CÁO TÀI CHÍNH  \nBảng tổng hợp chi tiết  \n \n20 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nđịnh tài kho ản ghi N ợ, tài kho ản ghi Có để ghi vào S ổ Nhật ký - S ổ Cái. S ố liệu \ncủa mỗi chứng từ (hoặc Bảng tổng hợp chứng từ kế toán cùng lo ại) được ghi trên \nmột dòng ở cả 2 ph ần Nhật ký và ph ần Sổ Cái. B ảng tổng hợp chứng từ kế toán \nđược l ập cho nh ững ch ứng t ừ cùng lo ại (Phi ếu thu, phi ếu chi, phi ếu xu ất, phi ếu \nnhập,...) phát sinh nhi ều lần trong một ngày hoặc định kỳ 1 đến 3 ngày. Ch ứng từ \nkế toán và B ảng tổng hợp chứng từ kế toán cùng lo ại sau khi đã ghi S ổ Nhật ký - \nSổ Cái, được dùng để ghi vào Sổ, Thẻ kế toán chi tiết có liên quan. \n- Cu ối tháng, sau khi đã ph ản ánh toàn b ộ ch ứng t ừ k ế toán phát sinh trong \ntháng vào S ổ Nh ật ký - S ổ Cái và các s ổ, th ẻ k ế toán chi ti ết, k ế toán ti ến hành \ncộng số liệu của cột số phát sinh ở phần Nhật ký và các cột Nợ, cột Có của từng tài \nkhoản ở phần Sổ Cái để ghi vào dòng c ộng phát sinh cu ối tháng. C ăn cứ vào s ố \nphát sinh các tháng tr ước và s ố phát sinh tháng này tính ra s ố phát sinh lu ỹ kế từ \nđầu quý đến cuối tháng này. Căn cứ vào số dư đầu tháng (đầu quý) và số phát sinh \ntrong tháng k ế toán tính ra s ố d ư cu ối tháng (cu ối quý) c ủa t ừng tài kho ản trên \nNhật ký - Sổ Cái. \n- Khi kiểm tra, đối chiếu số cộng cuối tháng (cuối quý) trong S ổ Nhật ký - S ổ \nCái phải đảm bảo các yêu cầu sau: \nTổng số tiền \ncủa cột “Phát sinh” \nở phần Nhật ký \n= Tổng số phát sinh  \nNợ của tất cả các TK = Tổng số phát sinh \nCó của tất cả các TK\n \nTổng số dư Nợ các Tài khoản = T ổng số dư Có các tài khoản \n- Các sổ, thẻ kế toán chi tiết cũng phải được khóa sổ để cộng số phát sinh Nợ, \nsố phát sinh Có và tính ra s ố dư cuối tháng của từng đối tượng. Căn cứ vào số liệu \nkhóa sổ của các đối tượng lập “Bảng tổng hợp chi tiết” cho từng tài khoản. Số liệu \ntrên “Bảng tổng hợp chi tiết” được đối chiếu với số phát sinh N ợ, số phát sinh Có \nvà Số dư cuối tháng của từng tài khoản trên Sổ Nhật ký - Sổ Cái. Số liệu trên Nhật \nký - S ổ Cái và trên “B ảng tổng hợp chi ti ết” sau khi khóa s ổ được kiểm tra, đối \nchiếu nếu khớp, đúng sẽ được sử dụng để lập báo cáo tài chính. \n \n \n \n \n \n \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 21 \n \nBiểu số 02 \nTRÌNH TỰ GHI SỔ KẾ TOÁN THEO HÌNH THỨC KẾ TOÁN \nNHẬT KÝ - SỔ CÁI \n \n \n \n \n \n \n \n \n \n \n  \n \n \n \n \n \n \n \nGhi chú: \nGhi hàng ngày \nGhi cuối tháng \nĐối chiếu, kiểm tra \n \n4. Hình thức kế toán Chứng từ ghi sổ \na) Đặc trưng cơ bản của hình thức kế toán Chứng từ ghi sổ: Căn cứ trực tiếp để \nghi sổ kế toán tổng hợp là “Chứng từ ghi sổ”. Việc ghi sổ kế toán tổ\nng hợp bao gồm: \n- Ghi theo trình tự thời gian trên Sổ Đăng ký Chứng từ ghi sổ.  \n- Ghi theo nội dung kinh tế trên Sổ Cái. \nChứng từ ghi s ổ do k ế toán l ập trên c ơ sở t ừng ch ứng t ừ kế toán ho ặc B ảng \nTổng hợp chứng từ kế toán cùng lo ại, có cùng n ội dung kinh t ế. Chứng từ ghi s ổ \nChứng từ kế toán \nSổ quỹ \nNHẬT KÝ - SỔ CÁI  \nBảng tổng \nhợp chứng  \ntừ kế toán \ncùng loại  \nSổ, thẻ  \nkế toán \nchi tiết  \nBảng \ntổng hợp \nchi tiết  \nBÁO CÁO TÀI CHÍNH  \n \n22 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nđược đánh số hiệu liên t ục trong t ừng tháng hoặc cả năm (theo số thứ tự trong Sổ \nĐăng ký Ch ứng t ừ ghi s ổ) và có ch ứng t ừ k ế toán đính kèm, ph ải được k ế toán \ntrưởng duyệt trước khi ghi s ổ kế toán. Hình th ức kế toán Chứng từ ghi sổ gồm có \ncác loại sổ kế toán sau: \n+ Chứng từ ghi sổ; \n+ Sổ Đăng ký Chứng từ ghi sổ; \n+ Sổ Cái; \n+ Các Sổ, Thẻ kế toán chi tiết.  \nb) Trình tự ghi sổ kế toán theo hình thức kế toán Chứng từ ghi sổ (Sơ đồ số 03) \n- Hàng ngày ho ặc định kỳ, căn cứ vào các ch ứng từ kế toán ho ặc Bảng Tổng \nhợp chứng từ kế toán cùng loại đã được kiểm tra, được dùng làm căn cứ ghi sổ, kế \ntoán l ập Ch ứng t ừ ghi s ổ. C ăn c ứ vào Ch ứng t ừ ghi s ổ để ghi vào s ổ Đăng ký \nChứng từ ghi s ổ, sau đó được dùng để ghi vào S ổ Cái. Các ch ứng từ kế toán sau \nkhi làm căn cứ lập Chứng từ ghi sổ được dùng để ghi vào S ổ, Thẻ kế toán chi ti ết \ncó liên quan. \n- Cuối tháng, ph ải khóa s ổ tính ra t ổng số tiền của các nghi ệp vụ kinh t ế, tài \nchính phát sinh trong tháng trên s ổ Đăng ký Chứng từ ghi sổ, tính ra Tổng số phát \nsinh Nợ, Tổng số phát sinh Có và S ố dư của từng tài kho ản trên S ổ Cái. C ăn cứ \nvào Sổ Cái lập Bảng cân đối tài khoản. \n- Sau khi đối chiếu khớp đúng, số liệu ghi trên S ổ Cái và B ảng tổng hợp chi \ntiết (được lập từ các s ổ, thẻ kế toán chi ti ết) được dùng để lập Báo cáo tài chính. \nQuan hệ đối chiếu, kiểm tra ph ải đảm bảo Tổng số phát sinh N ợ và Tổng số phát \nsinh Có c ủa tất c ả các tài kho ản trên B ảng cân đối tài kho ản ph ải b ằng nhau và \nbằng Tổng số tiền phát sinh trên s ổ Đăng ký Ch ứng từ ghi s ổ. Tổng số dư Nợ và \nTổng số dư Có của các tài kho ản trên B ảng cân đối tài kho ản phải bằng nhau, và \nsố dư của từng tài khoản trên Bảng cân đối tài khoản phải bằng số dư của từng tài \nkhoản tương ứng trên Bảng tổng hợp chi tiết. \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 23 \n \nBiểu số 03 \nTRÌNH TỰ GHI SỔ KẾ TOÁN THEO HÌNH THỨC \nKẾ TOÁN CHỨNG TỪ GHI SỔ \n  \n  \n \n \n \n \n \n \n  \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: \nGhi hàng ngày \nGhi cuối tháng \nĐối chiếu, kiểm tra  \n5. Hình thức kế toán trên máy vi tính  \na) Đặc trưng cơ bản của hình thức kế toán trên máy vi tính: Công vi ệc kế toán \nđược thực hi ện theo m ột ch ương trình ph ần mềm kế toán trên máy vi tính. Ph ần \nmềm k ế toán được thi ết k ế theo nguyên t ắc c ủa m ột trong ba hình th ức k ế toán \nhoặc kết hợp các hình th ức kế toán quy định trên đây. Phần mềm kế toán không \nhiển thị đầy đủ quy trình ghi s ổ kế toán, nhưng phải in được đầy đủ sổ kế toán và \nChứng từ kế toán \nSổ quỹ  \nCHỨNG TỪ GHI SỔ \nBảng tổng hợp \nchứng từ kế toán \ncùng loại \n \nSổ, thẻ \nkế toán \nchi tiết \nBảng \ntổng hợp \nchi tiết  \nSổ Cái \nSổ đăng ký \nchứng từ ghi sổ  \nBảng cân đối     \ntài khoản \nBÁO CÁO TÀI CHÍNH \n \n24 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nbáo cáo tài chính theo quy định. Phần mềm kế toán được thiết kế theo Hình th ức \nkế toán nào s ẽ có các lo ại s ổ c ủa hình th ức k ế toán đó nh ưng không hoàn toàn \ngiống mẫu sổ kế toán ghi bằng tay;  \nb) Trình tự ghi sổ kế toán theo Hình thức kế toán trên máy vi tính (Biểu số 04) \n- Hàng ngày, k ế toán c ăn c ứ vào ch ứng t ừ k ế toán ho ặc B ảng t ổng h ợp \nchứng t ừ kế toán cùng lo ại đã được kiểm tra, được dùng làm c ăn cứ ghi s ổ, xác \nđịnh tài kho ản ghi N ợ, tài kho ản ghi Có để nh ập d ữ li ệu vào máy vi tính theo \ncác b ảng, bi ểu được thi ết k ế s ẵn trên ph ần m ềm k ế toán. Theo quy trình c ủa \nphần m ềm k ế toán, các thông tin được t ự động nh ập vào s ổ kế toán t ổng h ợp \n(Sổ Cái hoặc Nhật ký - S ổ Cái...) và các s ổ, thẻ kế toán chi ti ết liên quan.  \n- Cuối tháng (ho ặc bất kỳ vào th ời điểm cần thiết nào), k ế toán th ực hiện các \nthao tác khóa s ổ (c ộng s ổ) và l ập báo cáo tài chính. Vi ệc đối chi ếu gi ữa s ố li ệu \ntổng hợp với số liệu chi ti ết được thực hiện tự động và luôn đảm bảo chính xác, \ntrung thực theo thông tin đã được nhập trong k ỳ. Người làm k ế toán có th ể kiểm \ntra, đối chiếu số liệu giữa sổ kế toán v ới báo cáo tài chính sau khi đã in ra gi ấy. \nCuối tháng, cu ối năm sổ kế toán t ổng hợp và s ổ kế toán chi ti ết được in ra gi ấy, \nđóng thành quyển và thực hiện các thủ tục pháp lý theo quy định.  \n \nBiểu số 04 \nTRÌNH TỰ GHI SỔ KẾ TOÁN \nTHEO HÌNH THỨC KẾ TOÁN TRÊN MÁY VI TÍNH \n \n \n \n \n \n \n \n \n  \n \n \nGhi chú:  \nNhập số liệu hàng ngày  \nIn sổ, báo cáo cuối tháng, cuối năm \nĐối chiếu, kiểm tra  \nSỔ KẾ  \nTOÁN \n \n - Sổ \n \nCHỨNG TỪ KẾ TOÁN \n \nBẢNG TỔNG HỢP \nCHỨNG TỪ KẾ \nTOÁN CÙNG LOẠI \n- Báo cáo tài chính \n- Báo cáo kế toán \nquản trị \n \nPHẦN MỀM \nKẾ TOÁN \nMÁY VI TÍNH \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 25 \n \nDANH MỤC BIỂU MẪU SỔ KẾ TOÁN \n \nHình thức kế toán \nSố \nTT Tên sổ Ký hi ệu Nhật \nký \nchung \nNhật \nký - Sổ \nCái \nChứng \ntừ \nghi sổ \n1 2 3 4 5 6 \n01 Nh ật ký - Sổ Cái  S01-DNN - x - \n02 Ch ứng từ ghi sổ S02a-DNN - - x \n03 S ổ Đăng ký Chứng từ ghi sổ S02b-DNN - - x \n04 Sổ Cái (dùng cho hình th ức Ch ứng \ntừ ghi sổ) \nS02c1-DNN \nS02c2-DNN \n- - x \nx \n05 S ổ Nhật ký chung  S03a-DNN x - - \n06 S ổ Nhật ký thu tiền S03a1-DNN x - - \n07 S ổ Nhật ký chi tiền S03a2-DNN x - - \n08 S ổ Nhật ký mua hàng  S03a3-DNN x - - \n09 S ổ Nhật ký bán hàng S03a4-DNN x - - \n10 Sổ Cái (dùng cho hình th ức Nhật ký \nchung) \nS03b-DNN x - - \n11 S ổ quỹ tiền mặt  S04a-DNN x x x \n12 S ổ kế toán chi tiết quỹ tiền mặt S04b-DNN x x x \n13 S ổ tiền gửi ngân hàng S05-DNN x x x \n14 Sổ chi tiết vật liệu, dụng cụ, sản phẩm, \nhàng hóa  \nS06-DNN x x x \n15  Bảng tổng hợp chi tiết vật liệu, dụng \ncụ, sản phẩm, hàng hóa  \nS07-DNN x x x \n16 Th ẻ kho (Sổ kho) S08-DNN x x x \n17 S ổ tài sản cố định  S09-DNN x x x \n18 Sổ theo dõi TSCĐ và công cụ, dụng cụ \ntại nơi sử dụng  \nS10-DNN x x x \n19 Th ẻ Tài sản cố định S11-DNN x x x \n20 Sổ chi tiết thanh toán v ới người mua \n(người bán)  \nS12-DNN x x x \n21 Sổ chi tiết thanh toán v ới người mua \n(người bán) bằng ngoại tệ \nS13-DNN x x x \n\n \n26 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nHình thức kế toán \nSố \nTT Tên sổ Ký hi ệu Nhật \nký \nchung \nNhật \nký - Sổ \nCái \nChứng \ntừ \nghi sổ \n1 2 3 4 5 6 \n22 S ổ theo dõi thanh toán bằng ngoại tệ S14-DNN x x x \n23 S ổ chi tiết tiền vay  S15-DNN x x x \n24 S ổ chi tiết bán hàng  S16-DNN x x x \n25 S ổ chi phí sản xuất, kinh doanh  S17-DNN x x x \n26 Th ẻ tính giá thành sản phẩm, dịch vụ S18-DNN x x x \n27 S ổ chi tiết các tài khoản  S19-DNN x x x \n28 S ổ chi tiết phát hành cổ phiếu S20-DNN x x x \n29 S ổ chi tiết cổ phiếu quỹ S21-DNN x x x \n30 S ổ chi tiết đầu tư chứng khoán S22-DNN x x x \n31 Sổ theo dõi chi ti ết vốn góp c ủa chủ \nsở hữu \nS23-DNN x x x \n32 S ổ chi phí đầu tư xây dựng S24-DNN x x x \n33 S ổ theo dõi thuế GTGT S25-DNN x x x \n34 S ổ chi tiết thuế GTGT được hoàn lại S26-DNN x x x \n35 S ổ chi tiết thuế GTGT được miễn giảm  S27-DNN x x x \n36 Các sổ chi tiết khác theo yêu cầu quản \nlý của doanh nghiệp \n    \n \n \n \n \n \n27\n27 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      27\n \nĐơn vị:........................................ \nĐịa chỉ:.......................................  \nMẫu số S01-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính)  \nNHẬT KÝ - SỔ CÁI \nNăm:......... \n \nChứng từ \nSố hiệu \ntài khoản \nđối ứng \nTK... TK... TK... TK... TK... TK... Thứ \ntự \ndòng \nNgày, \ntháng \nghi sổ Số \nhiệu\nNgày, \ntháng \nDiễn giải \nSố \ntiền \nphát \nsinh Nợ Có \nThứ tự \ndòng \nNợ Có N ợ Có N ợ Có N ợ Có N ợ Có N ợ Có \nA B C D E 1 F G H 2 3 4 5 6 7 8 9 10 11 ... ... \n - S ố dư đầu năm \n- Số phát sinh trong tháng \n                 \n \n  \n- Cộng số phát sinh tháng \n- Số dư cuối tháng \n- Cộng lũy kế từ đầu quý \n                \n \n- Sổ này có.... trang, đánh số từ trang số 01 đến trang.... \n- Ngày mở sổ:... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ s ố Giấy chứng nhận đăng ký hành \nnghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n28 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:............................ \nĐịa chỉ:........................... \nMẫu số S02a-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC \n ngày 26/8/2016 của Bộ Tài chính) \n \nCHỨNG TỪ GHI SỔ \nSố:........ \nNgày..... tháng.... năm.... \n \nSố hiệu tài khoản \nTrích yếu \nNợ Có \nSố tiền Ghi chú \nA B C 1 D \n     \n     \n     \n     \n     \n     \n     \n     \n     \nCộng x x  x \n \n      Kèm theo..... chứng từ gốc  \n \n \nNgười lập biểu \n(Ký, họ tên) \n \n \nKế toán trưởng \n(Ký, họ tên) \n  \nNgày... tháng... năm... \nNgười đại diện theo pháp luật \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 29 \n  \nĐơn vị:............................... \nĐịa chỉ:.............................. \nMẫu số S02b-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỐ ĐĂNG KÝ CHỨNG TỪ GHI SỔ \nNăm... \n \nChứng từ ghi sổ Ch ứng từ ghi sổ \nSố hiệu Ngày, tháng Số tiền Số hiệu Ngày, tháng Số tiền \nA B 1 A B 1 \n      \n      \n      \n      \n      \n      \n      \n- Cộng tháng \n- Cộng lũy kế từ đầu quý \n - C ộng tháng \n- Cộng lũy kế từ đầu quý \n \n \n- Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n- Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n30 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n   \nĐơn vị:................................... \nĐịa chỉ:.................................. \nMẫu số S02c1-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỐ CÁI \n(Dùng cho hình thức kế toán Chứng từ ghi sổ) \nNăm:............... \nTên tài khoản.......... \nSố hiệu:....... \n \nChứng từ ghi sổ S ố tiền Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải \nSố hiệu \nTK đối \nứng Nợ Có \nGhi \nchú\nA B C D E 1 2 G \n   - S ố dư đầu năm     \n   - Điều chỉnh số dư đầu kỳ     \n   - S ố phát sinh trong tháng     \n        \n        \n        \n        \n        \n        \n   - C ộng số phát sinh tháng x   x \n   - S ố dư cuối tháng x   x \n   - C ộng lũy kế từ đầu quý x   x \n \n      - Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n      - Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n31\n31 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      31\n \nĐơn vị:........................................ \nĐịa chỉ:.......................................  \nMẫu số S02c2-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỐ CÁI \n(Dùng cho hình thức kế toán Chứng từ ghi sổ) \nNăm:...... \nTên tài khoản...... \nSố hiệu:......  \nChứng từ ghi sổ S ố tiền Tài kho ản cấp 2 \nTK ... TK ... TK ... TK ... \nNgày, \ntháng, \nghi sổ Số hiệu Ngày, \ntháng \nDiễn giải \nSố hiệu \nTK đối \nứng Nợ Có Nợ Có N ợ Có N ợ Có N ợ Có \nA B C D E 1 2 3 4 5 6 7 8 9 10 \n   - S ố dư đầu năm            \n   - S ố phát sinh trong tháng             \n   - C ộng số phát sinh trong tháng x           \n   - S ố dư cuối tháng x           \n   - C ộng luỹ kế từ đầu quý x           \n \n    - Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n    - Ngày mở sổ:... \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) (Ký, h ọ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành \nnghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n32 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:............................. \nĐịa chỉ:............................ \nMẫu số S03a-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ NHẬT KÝ CHUNG \nNăm... \n \n       Đơn vị tính:............ \nChứng từ  Số phát \nsinh Ngày, \ntháng \nghi sổ Số \nhiệu \nNgày, \ntháng \nDiễn giải Đã ghi \nSổ Cái\nSTT \ndòng\nSố hiệu \nTK đối \nứng  Nợ Có \nA B C D E G H 1 2 \n   S ố trang trước chuyển sang      \n    \n \n \n \n \n \n     \n   C ộng chuyển sang trang sau x x x   \n \n- Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n- Ngày mở sổ:... \n \nNgày ... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật\n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 33 \n \nĐơn vị:........................... \nĐịa chỉ:.......................... \nMẫu số S03a1-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ NHẬT KÝ THU TIỀN \nNăm... \n \nChứng từ Ghi Có các TK \nTài khoản khác\nNgày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng\nDiễn giải Ghi Nợ \nTK...... ... ... ... ... Số tiền S ố hiệu\nA B C D 1 2 3 4 5 6 E \n   S ố trang trước \nchuyển sang \n       \n   \n \n \n \n \n \n \n \n       \n   C ộng chuyển \nsang trang sau \n       \n \n     - Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n     - Ngày mở sổ:... \n \n     Ngày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n \n \n \n  \n \n34 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:.................................. \nĐịa chỉ:................................. \nMẫu số S03a2-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ NHẬT KÝ CHI TIỀN \nNăm \n \nChứng từ Ghi N ợ các tài khoản \nTài khoản \nkhác \nNgày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng\nDiễn giải Ghi Có TK \n...... ... ... ... ... Số \ntiền \nSố \nhiệu\nA B C D 1 2 3 4 5 6 E \n   S ố trang trước \nchuyển sang \n       \n    \n \n \n \n \n \n       \n   C ộng chuyển \nsang trang sau \n       \n  \n- Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n- Ngày mở sổ:... \n \n   Ngày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 35 \n  \nĐơn vị:.............................. \nĐịa chỉ:............................. \nMẫu số S03a3-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ NHẬT KÝ MUA HÀNG \nNăm...... \n \nChứng từ Tài kho ản Ghi nợ \nTài khoản \nkhác \nNgày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải Hàng \nhóa \nNguyên \nliệu, vật \nliệu Số \nhiệu \nSố \ntiền \nPhải trả \nngười \nbán    \n(ghi Có)\nA B C D 1 2 E 3 4 \n   S ố trang trước \nchuyển sang \n     \n    \n \n \n \n \n \n     \n   C ộng chuyển \nsang trang sau \n     \n \n- Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n- Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n36 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n   \nĐơn vị:........................ \nĐịa chỉ:.......................\nMẫu số S03a4-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ NHẬT KÝ BÁN HÀNG \nNăm...... \n \nChứng từ Ghi Có tài khoản \ndoanh thu Ngày, \ntháng \nghi sổ Số \nhiệu \nNgày, \ntháng \nDiễn giải \nPhải thu từ \nngười mua \n(ghi Nợ) Hàng \nhóa \nThành \nphẩm \nDịch \nvụ \nA B C D 1 2 3 4 \n   S ố trang trước \nchuyển sang \n    \n    \n \n \n \n \n    \n   C ộng chuyển \nsang trang sau \n    \n \n  - Sổ này có.... trang, đánh số từ trang số 01 đến trang... \n  - Ngày mở sổ:... \n \n       Ngày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n \n \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 37 \n \nĐơn vị:............................ \nĐịa chỉ:........................... \nMẫu số S03b-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ CÁI \n(Dùng cho hình thức kế toán Nhật ký chung) \nNăm... \nTên tài khoản..............        \n  Số hiệu......... \n \nChứng từ Nh ật ký chung S ố tiền Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày \ntháng\nDiễn giải Trang \nsổ \nSTT \ndòng\nSố hiệu  \nTK  \nđối ứng Nợ Có\nA B C D E G H 1 2 \n   - S ố dư đầu năm \n- Số phát sinh trong tháng\n     \n         \n    \n \n \n \n \n     \n   - Cộng số phát sinh tháng\n- Số dư cuối tháng \n- Cộng lũy kế từ đầu quý \n     \n \n- Sổ này có.... trang, đánh số từ trang số 01 đến trang.... \n- Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu \n(Ký, họ tên) \n \nKế toán trưởng \n(Ký, họ tên) \n  \nNgười đại diện theo pháp luật \n(Ký, họ tên, đóng dấu) \n \nGhi chú: Đối v ới tr ường h ợp thuê d ịch v ụ làm k ế toán, làm k ế toán tr ưởng thì \nphải ghi rõ s ố Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp \ndịch vụ kế toán. \n \n \n38 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:............................ \nĐịa chỉ:........................... \nMẫu số S04a-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ QUỸ TIỀN MẶT  \nLoại quỹ:... \n \nSố hiệu chứng từ Số tiền Ngày, \ntháng \nghi sổ \nNgày, \ntháng \nchứng từ Thu Chi \nDiễn giải \nThu Chi T ồn \nGhi \nchú \nA B   E 1 2 3 G \n         \n         \n         \n         \n         \n         \n         \n         \n         \n \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n \n \n \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 39 \n \nĐơn vị:............................ \nĐịa chỉ:........................... \nMẫu số S04b-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ KẾ TOÁN CHI TIẾT QUỸ TIỀN MẶT \nTài khoản:... \nLoại quỹ:... \nNăm... \n \nĐơn vị tính... \nSố hiệu \nchứng từ \nSố \nphát sinh Ngày, \ntháng \nghi sổ \nNgày, \ntháng \nchứng \ntừ Thu Chi \nDiễn giải \nTK \nđối \nứng Nợ Có \nSố \ntồn\nGhi\nchú\nA B C D E F 1 2 3 G \n    - S ố tồn đầu kỳ      \n    - S ố phát sinh trong kỳ      \n     \n \n \n \n     \n    - C ộng số phát sinh \ntrong kỳ \nx   x x \n    - S ố tồn cuối kỳ x x x  x \n    \n   - Sổ này có... trang, đánh số từ trang 01 đến trang... \n   - Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \n \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm k ế toán, làm k ế toán tr ưởng thì phải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n40 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n   \nĐơn vị:........................... \nĐịa chỉ:.......................... \nMẫu số S05-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ TIỀN GỬI NGÂN HÀNG \nNơi mở tài khoản giao dịch:................ \nSố hiệu tài khoản tại nơi gửi:............... \n \nChứng từ Số tiền Ngày, \ntháng \nghi sổ  Số \nhiệu \nNgày, \ntháng\nDiễn \ngiải \nTài \nkhoản \nđối ứng Thu \n (gửi vào)\nChi \n (rút ra) Còn lại\nGhi \nchú\nA B C D E 1 2 3 F \n   - S ố dư đầu kỳ      \n   - S ố phát sinh trong \nkỳ \n     \n    \n \n \n \n     \n   - C ộng số phát sinh \ntrong kỳ \nx   x x \n   - S ố dư cuối kỳ x x x  x \n \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n \n41\n41 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      41\n \nĐơn vị:........................ \nĐịa chỉ:.......................  \nMẫu số S06-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ CHI TIẾT VẬT LIỆU, DỤNG CỤ (SẢN PHẨM, HÀNG HÓA) \nNăm...... \nTài khoản:...... Tên kho:...... \nTên, quy cách nguyên liệu, vật liệu, công cụ, dụng cụ (sản phẩm, hàng hóa)........................................... \n                                                                                                                            Đơn vị tính:........................ \nChứng từ Nh ập Xu ất T ồn \nSố \nhiệu \nNgày, \ntháng \nDiễn giải \nTài \nkhoản \nđối ứng \nĐơn \ngiá Số \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nGhi \nchú \nA B C D 1 2 3 = 1 x 2 4 5 = (1 x 4) 6 7 = (1 x 6) 8   \n  \nSố dư đầu kỳ \n \n \n         \n  C ộng tháng x x           \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành \nnghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n42 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:........................ \nĐịa chỉ:.......................\nMẫu số S07-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nBẢNG TỔNG HỢP CHI TIẾT \nVẬT LIỆU, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA \nTài khoản:... \nTháng..... năm....... \n \nSố tiền \nSTT \nTên, quy cách vật liệu, \ndụng cụ, sản phẩm \nhàng hóa \nTồn \nđầu kỳ \nNhập \ntrong kỳ \nXuất \ntrong kỳ \nTồn \ncuối kỳ \nA B 1 2 3 4 \n      \n      \n      \n      \n      \n      \n      \n      \n      \n      \n Cộng      \n \nNgày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm k ế toán trưởng thì phải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 43 \n \nĐơn vị:........................ \nĐịa chỉ:.......................\nMẫu số S08-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nTHẺ KHO (SỔ KHO) \nNgười lập thẻ:...... \nTờ số............... \n \n- Tên, nhãn hiệu, quy cách vật tư: ......................................................................... \n- Đơn vị tính:.......................................................................................................... \n- Mã số: .................................................................................................................. \nSố hiệu \nchứng từ Số lượng Số \nTT \nNgày, \ntháng \nNhập  Xu ất \nDiễn \ngiải \nNgày \nnhập, \nxuất Nhập Xu ất T ồn \nKý xác \nnhận của \nkế toán \nA B C D E F 1 2 3 G \n          \n          \n          \n          \n          \n          \n    C ộng \ncuối kỳ\nx    x \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:...  \n      Ngày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n44\n44\n  \n44 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \nĐơn vị:............................... \nĐịa chỉ:..............................  \nMẫu số S09-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ TÀI SẢN CỐ ĐỊNH \nNăm:...... \nLoại tài sản:...... \nGhi tăng TSCĐ Kh ấu hao TSCĐ Ghi gi ảm TSCĐ \nChứng từ Kh ấu hao Ch ứng từ Số \nTT Số \nhiệu\nNgày, \ntháng \nTên, đặc \nđiểm, ký \nhiệu \nTSCĐ \nNước \nsản \nxuất \nTháng, \nnăm \nđưa vào \nsử dụng \nSố \nhiệu \nTSCĐ\nNguyên \ngiá \nTSCĐ \nTỷ lệ (%) \nkhấu hao \nMức \nkhấu \nhao \nKhấu hao \nđã tính đến \nkhi ghi \ngiảm TSCĐ\nSố \nhiệu\nNgày, \ntháng, \nnăm \nLý do \ngiảm \nTSCĐ \nA B C D E G H 1 2 3 4 I K L \n              \n              \n   Cộng x x x     x x x \n - Sổ này có... trang, đánh số từ trang 01 đến trang... \n - Ngày mở sổ:... \n Ngày... tháng... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ s ố Giấy chứng nhận đăng ký hành \nnghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n45\n45 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      45\n \nĐơn vị:................................. \nĐịa chỉ:................................  \nMẫu số S10-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ THEO DÕI TSCĐ VÀ CÔNG CỤ, DỤNG CỤ TẠI NƠI SỬ DỤNG \nNăm...... \nTên đơn vị (phòng, ban hoặc người sử dụng)..... \n \nGhi tăng tài sản cố định và công cụ, dụng cụ Ghi gi ảm tài sản cố định và công cụ, dụng cụ\nChứng từ Ch ứng từ \nSố \nhiệu \nNgày, \ntháng \nTên, nhãn hiệu, quy \ncách tài sản cố định \nvà công cụ, dụng cụ \nĐơn \nvị tính\nSố \nlượng\nĐơn \ngiá Số tiền Số hiệu Ngày, \ntháng \nLý \ndo \nSố \nlượng Số tiền\nGhi \nchú \nA B C D 1 2 3 = 1 x 2 E G H 4 5 I \n             \n \n - Sổ này có... trang, đánh số từ trang 01 đến trang... \n - Ngày mở sổ:... \n Ngày... tháng... năm... \nNgười lập biểu \n(Ký, họ tên) \n \nKế toán trưởng \n(Ký, họ tên) \n  \nNgười đại diện theo pháp luật \n(Ký, họ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ s ố Giấy chứng nhận đăng ký hành \nnghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n46 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:........................ \nĐịa chỉ:.......................\nMẫu số S11-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nTHẺ TÀI SẢN CỐ ĐỊNH \nSố:................ \nNgày..... tháng.... năm...... lập thẻ....... \n \nCăn cứ vào Biên bản giao nhận TSCĐ số....................... ngày.... tháng.... năm... \nTên, ký mã hiệu, quy cách (cấp hạng) TSCD:................ Số hiệu TSCĐ.............. \nNước sản xuất (xây dựng)........................................... Năm sản xuất................... \nBộ phận quản lý, sử dụng .................................. Năm đưa vào sử dụng.............. \nCông suất (diện tích thiết kế)................................................................................ \nĐình chỉ sử dụng TSCĐ ngày......... tháng...... năm........ \nLý do đình chỉ.......................................................................................................  \nNguyên giá tài sản cố định Giá tr ị hao mòn tài sản cố định Số hiệu \nchứng \ntừ \nNgày, \ntháng, năm \nDiễn \ngiải \nNguyên \ngiá Năm Giá trị  \nhao mòn Cộng dồn\nA B C 1 2 3 4 \n       \nDụng cụ phụ tùng kèm theo \nSố \nTT \nTên, quy cách dụng cụ, \nphụ tùng \nĐơn vị \ntính Số lượng Giá tr ị \nA B C 1 2 \n  \n    \n \nGhi giảm TSCĐ chứng từ số:..................... ngày.... tháng.... năm ........................ \nLý do gi ảm:........................................................................................................... \n                                                                                         Ngày... tháng ... năm... \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật\n(Ký, họ tên) (Ký, h ọ tên)  (Ký, h ọ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải \nghi rõ số Giấy chứng nhận đăng ký hành ngh ề dịch vụ kế toán, tên đơn vị cung cấp dịch \nvụ kế toán. \n \n \n47\n47 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      47\n \nĐơn vị:…………………… \nĐịa chỉ:……………….…..  \nMẫu số S12-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính)  \nSỔ CHI TIẾT THANH TOÁN VỚI NGƯỜI MUA (NGƯỜI BÁN) \n(Dùng cho TK: 131, 331) \nTài khoản:........................ \nĐối tượng:........................ \nLoại tiền: VNĐ \nChứng từ S ố phát sinh S ố dư Ngày, \ntháng \n ghi sổ Số hiệu Ngày, \ntháng \nDiễn giải TK \nđối ứng \nThời hạn \nđược        \nchiết khấu Nợ Có N ợ Có \nA B C D E 1 2 3 4 5 \n   - S ố dư đầu kỳ \n- Số phát sinh trong kỳ \n.......... \n.......... \n      \n   - C ộng số phát sinh x x   x x \n   - S ố dư cuối kỳ x x x x   \n- Sổ này có... trang, đánh số từ trang 01 đến trang...  \n- Ngày mở sổ:... \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n48\n48\n  \n48 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \nĐơn vị:…………………… \nĐịa chỉ:…………….……..  \nMẫu số S13-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI TIẾT THANH TOÁN VỚI NGƯỜI MUA (NGƯỜI BÁN) BẰNG NGOẠI TỆ \n(Dùng cho TK: 131, 331) \nTài khoản:........................ \nĐối tượng:........................ \nLoại ngoại tệ:................... \nChứng từ S ố phát sinh S ố dư \nNợ Có N ợ Có Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải \nTK \nđối \nứng \nTỷ \ngiá \nhối \nđoái \nThời \nhạn \nđược \nchiết \nkhấu \nNgoại \ntệ \nQuy ra \nVNĐ \nNgoại \ntệ \nQuy ra \nVNĐ \nNgoại \ntệ \nQuy ra \nVNĐ \nNgoại \ntệ \nQuy ra  \nVNĐ \nA B C D E 1 2 3 4 5 6 7 8 9 10 \n   - S ố dư đầu kỳ \n- Số phát sinh \n...... \n           \n   - Cộng số  \nphát sinh x x x     x x x x \n   - Số dư cuối kỳ x x x x x x x     \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n49\n49 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      49\n \nĐơn vị:…………………… \nĐịa chỉ:………….………..  \nMẫu số S14-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ THEO DÕI THANH TOÁN BẰNG NGOẠI TỆ \n(Dùng cho các TK 136, 138, 141, 334, 336, 338) \nTài khoản:........................ \nĐối tượng:........................ \nLoại ngoại tệ:.................. \nChứng từ S ố phát sinh S ố dư \nNợ Có N ợ Có Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải \nTK \nđối \nứng \nTỷ \ngiá \nhối \nđoái Ngoại \ntệ \nQuy ra \nVNĐ \nNgoại \ntệ \nQuy ra \nVNĐ \nNgoại \ntệ \nQuy ra \nVNĐ \nNgoại \ntệ \nQuy ra \nVNĐ \nA B C D E 1 2 3 4 5 6 7 8 9 \n   - S ố dư đầu kỳ \n- Số phát sinh \n...... \n          \n   - Cộng số phát \nsinh x x     x x x x \n   - Số dư cuối kỳ x x x x x x     \n  - S ổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) (Ký, h ọ tên)  (Ký, h ọ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n50\n50\n  \n50 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S15-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI TIẾT TIỀN VAY \n(Dùng cho TK 341) \nTài khoản:......................................... \nĐối tượng cho vay:............................ \nKhế ước vay:......... Số......... ngày....... \n(Tỷ lệ lãi vay.................) \nChứng từ Số tiền Ngày, \ntháng ghi \nsổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải TK \nđối ứng Ngày đến hạn thanh toán \nNợ Có \nA B C D E G 1 2 \n   - S ố dư đầu kỳ \n- Số phát sinh trong kỳ \n.......... \n \n    \n   \n- Cộng số phát sinh \n- Số dư cuối kỳ \nx \nx \nx \nx   \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n \n51\n51 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      51\n \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S16-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ CHI TIẾT BÁN HÀNG \nTên sản phẩm (hàng hóa, dịch vụ, bất động sản đầu tư):......................... \nNăm:.......................... \nQuyển số:.................. \n \nChứng từ Doanh thu Các kho ản tính trừ Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải TK \nđối ứng Số lượng Đơn giá Thành ti ềnT h u ế Khác  \n(521) \nA B C D E 1 2 3 4 5 \n \n \n      \n   \nCộng số phát sinh \n- Doanh thu thuần \n- Giá vốn hàng bán \n- Lãi gộp \n      \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:... \n   Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n52\n52\n  \n52 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S17-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI PHÍ SẢN XUẤT, KINH DOANH \n(Dùng cho các TK 154, 631, 642, 242, 335, 632) \n- Tài khoản:........................................ \n- Tên phân xưởng:.............................. \n- Tên sản phẩm, dịch vụ:.................... \nChứng từ Ghi N ợ Tài khoản... \nChia ra \nNgày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải \nTài \nkhoản \nđối ứng\nTổng \n số tiền  ... ... ... ... ... ... \nA B C D E 1 2 3 4 5 6 7 8 \n   - S ố dư đầu kỳ \n- Số phát sinh trong kỳ \n \n         \n   \n- Cộng số phát sinh trong kỳ \n- Ghi Có TK... \n- Số dư cuối kỳ \n         \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \n     Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n53\n53 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      53\n \n \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S18-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nTHẺ TÍNH GIÁ THÀNH SẢN PHẨM, DỊCH VỤ \nTháng.......... năm...................... \nTên sản phẩm, dịch vụ:............. \n \nChia ra theo khoản mục \nChỉ tiêu \nTổng \nsố \ntiền \nNguyên liệu,  \nvật liệu ..... ..... ..... ..... ..... .... .... \nA 1 2 3 4 5 6 7 8 9 \n1. Chi phí SXKD dở dang đầu kỳ          \n2. Chi phí SXKD phát sinh trong kỳ          \n3. Giá thành sản phẩm, dịch vụ trong kỳ          \n4. Chi phí SXKD dở dang cuối kỳ          \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \n \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n \n54\n54\n  \n54 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \n \nĐơn vị:…………………… \nĐịa chỉ:…………………...  \nMẫu số S19-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI TIẾT CÁC TÀI KHOẢN \n(Dùng cho các TK: 136, 138, 141, 157, 242, 333, 334, \n335, 336, 338, 352, 353, 356,  411, 421,...) \nTài khoản:........................ \nĐối tượng:........................ \nLoại tiền: VNĐ \nChứng từ S ố phát sinh S ố dư Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải TK \nđối ứng Nợ Có N ợ Có \nA B C D E 1 2 3 4 \n   - S ố dư đầu kỳ \n- Số phát sinh trong kỳ \n.......... \n      \n   - C ộng số phát sinh x   x x \n   - S ố dư cuối kỳ x x x   \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n55\n55 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      55\n \n \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S20-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI TIẾT PHÁT HÀNH CỔ PHIẾU \nNăm:........ \nĐơn vị tính:........... \nĐăng ký phát hành Phát hành th ực tế \nGiấy phép \nphát hành Chứng từ \nSố cổ phiếu đã đăng \nký phát hành nhưng \nchưa bán \nSố \nhiệu \nNgày \ntháng \nLoại cổ \nphiếu \nSố \nlượng\nMệnh \ngiá Số \nhiệu\nNgày, \ntháng \n \nLoại \ncổ \nphiếu \nSố \nlượng \nGiá trị \ntheo \nmệnh \ngiá \nGiá \nthực tế \nphát \nhành \nThành \ntiền Số lượng M ệnh giá \nA B C 1 2 D E G 3 4 5 6 7 8 \n              \n  C ộng   x x x     x  \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n56\n56\n  \n56 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \n \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S21-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI TIẾT CỔ PHIẾU QUỸ \nNăm..................... \nLoại cổ phiếu....................  Mã s ố................. \n              Đơn vị tính:.............. \nChứng từ S ố phát sinh S ố dư \nTăng Gi ảm Ngày, \ntháng \nghi sổ \nSố \nhiệu\nNgày, \ntháng \nDiễn \ngiải \nTài \nkhoản \nđối \nứng \nGiá \nthực tế \nmua, \nbán \nphát \nhành \nSố \nlượng\nGiá trị \ntheo \nmệnh \ngiá \nGiá \nmua \nthực \ntế \nSố \nlượng\nGiá trị \ntheo \nmệnh \ngiá \nGiá \ntrị \nthực \ntế \nSố \nlượng\nGiá trị \ntheo \nmệnh \ngiá \nGiá \nmua \nthực tế \nA B C D E 1 2 3 4 5 6 7 8 9 10 \n               \n   C ộng x x x   x   x   \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \n   Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n57\n57 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      57\n \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S22-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI TIẾT ĐẦU TƯ CHỨNG KHOÁN \n(Dùng cho các TK: 121, 228) \nTài khoản:........................ \nLoại chứng khoán:................... Đơn vị phát hành................. \nMệnh giá.......... Lãi suất............ Thời hạn thanh toán.......... \nChứng từ S ố phát sinh S ố dư \nMua vào Xu ất ra Ngày \ntháng \nghi sổ \nSố \nhiệu \nNgày \ntháng \nDiễn giải TK \nđối ứng Số \nlượng \nThành \ntiền \nSố \nlượng \nThành \ntiền \nSố \nlượng\nThành \ntiền \nA B C D E 1 2 3 4 5 6 \n   - S ố dư đầu kỳ \n- Số phát sinh trong kỳ \n.......... \n       \n   - Cộng số phát sinh \n- Số dư cuối kỳ \nx \nx \n \nx \n \nx \n \nx \n \nx \nx \n \nx \n \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \n Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n58\n58\n  \n58 CÔNG BÁO/S ố 1107 + 1108/Ngày 12-10-2016 \nĐơn vị:…………………… \nĐịa chỉ:…………………..  \nMẫu số S23-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ THEO DÕI CHI TIẾT VỐN GÓP CỦA CHỦ SỞ HỮU (TK 411) \nNăm................ \nChứng từ S ố phát sinh S ố dư \nNợ (giảm) Có (t ăng) Ngày, \ntháng \nghi sổ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải \nTài \nkhoản \nđối \nứng \nVốn \ngóp \nThặng \ndư vốn\nVốn \nkhác \nVốn \ngóp \nThặng \ndư vốn \nVốn \nkhác\nVốn \ngóp \nThặng \ndư vốn \nVốn \nkhác \nA B C D E 1 2 3 4 5 6 7 8 9 \n \n \n \n \n \n  - Số dư đầu kỳ \n- Số phát sinh trong \nkỳ \n.......... \n.......... \n          \n   - Cộng số phát sinh \n- Số dư cuối kỳ \nx          \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \n    Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên)  (Ký, h ọ tên)  (Ký, h ọ tên, đóng dấu) \n \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n \n59\n59 \n   \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016      59\n \nĐơn vị:…………………… \nĐịa chỉ:……………..……..  \nMẫu số S24-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \nSỔ CHI PHÍ ĐẦU TƯ XÂY DỰNG \nTài khoản 241- Xây dựng cơ bản dở dang  \nNăm…… \n              Dự án:…………………………………… \n              Công trình (HMCT).................................. \n              Khởi công... ngày... tháng... năm... \n                                                                          Hoàn thành... ngày... tháng... năm... \n                                                                          Tổng dự toán:............................................ \nChứng từ N ội dung chi phí \nThiết bị Ngày, \ntháng \nghi sổ \nSố \nhiệu\nNgày, \ntháng \nDiễn giải \nTài \nkhoản \nđối \nứng \nTổng \nsố \nphát \nsinh \nXây \nlắp Tổng \nsố \nTB \ncần lắp \nTB không \ncần lắp \nCông cụ, \ndụng cụ \nKhác\nGhi \nchú \nA B C D E 1 2 3 4 5 6 7 F \n   1. S ố dư đầu kỳ          \n   2. S ố phát sinh trong kỳ          \n             \n   C ộng số phát sinh          \n   3. S ố dư cuối kỳ          \n   4. C ộng lũy kế phát sinh quý          \n   5. C ộng lũy kế phát sinh từ đầu năm          \n   6. C ộng lũy kế phát sinh từ khởi công          \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:…                                                                                                                                    Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) (Ký, h ọ tên)  (Ký, h ọ tên, đóng dấu) \nGhi chú: Đối với trường hợp thuê dịch vụ làm kế toán, làm kế toán trưởng thì phải ghi rõ số Giấy chứng nhận đăng ký hành nghề dịch \nvụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n60 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nĐơn vị:…………………… \nĐịa chỉ:…………………… \nMẫu số S25-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ THEO DÕI THUẾ GIÁ TRỊ GIA TĂNG \nNăm:................ \n \nChứng từ \nSố hiệu Ngày, tháng Diễn giải \nSố tiền thuế \nGTGT  \nđã nộp \nSố tiền thuế \nGTGT  \nphải nộp \nA B C 1 2 \n  S ố dư đầu kỳ    \n  - Điều chỉnh số dư đầu kỳ   \n  S ố phát sinh trong kỳ   \n     \n     \n     \n     \n     \n     \n     \n     \n     \n  C ộng số phát sinh   \n  S ố dư cuối kỳ    \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \n          Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \n \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải ghi rõ \nsố Giấy chứng nhận đăng ký hành nghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 61 \n \nĐơn vị:…………………… \nĐịa chỉ:…………………… \nMẫu số S26-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ CHI TIẾT THUẾ GIÁ TRỊ GIA TĂNG ĐƯỢC HOÀN LẠI \nNăm:................. \n \nChứng từ \nSố hiệu Ngày, \ntháng \nDiễn giải Số thuế GTGT \nđược hoàn lại \nSố thuế \nGTGT  \nđã hoàn lại \nA B C 1 2 \n  S ố dư đầu kỳ    \n  - Điều chỉnh số dư đầu kỳ   \n  S ố phát sinh trong kỳ    \n     \n     \n     \n     \n  C ộng số phát sinh   \n  S ố dư cuối kỳ    \n- Sổ này có... trang, đánh số từ trang 01 đến trang... \n- Ngày mở sổ:… \n      Ngày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên)  (Ký, h ọ tên, đóng dấu) \n \n \n \n \n \n \n \n \n \n \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải ghi rõ \nsố Giấy chứng nhận đăng ký hành nghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n62 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n \nĐơn vị:…………………… \nĐịa chỉ:………………….. \nMẫu số S27-DNN \n(Ban hành theo Thông tư số 133/2016/TT-BTC  \n ngày 26/8/2016 của Bộ Tài chính) \n \nSỔ CHI TIẾT THUẾ GIÁ TRỊ GIA TĂNG ĐƯỢC MIỄN GIẢM \nNăm:................ \n \nChứng từ \nSố \nhiệu \nNgày, \ntháng \nDiễn giải Số thuế GTGT \nđược miễn giảm \nSố thuế GTGT \nđã miễn giảm \nA B C 1 2 \n  - S ố dư đầu kỳ   \n  - Điều chỉnh số dư đầu kỳ   \n  \nSố phát sinh trong kỳ \n \n \n \n \n  \n  - Cộng số phát sinh \n- Số dư cuối kỳ   \n- Sổ này có... trang, đánh số từ trang 01 đến trang ... \n- Ngày mở sổ:… \nNgày… tháng… năm… \nNgười lập biểu K ế toán trưởng Ng ười đại diện theo pháp luật \n(Ký, họ tên) \n \n(Ký, họ tên) \n  \n(Ký, họ tên, đóng dấu) \n \n \n \n \n \n \n \n \n \nGhi chú: Đối với trường hợp thuê d ịch vụ làm k ế toán, làm k ế toán tr ưởng thì ph ải ghi rõ \nsố Giấy chứng nhận đăng ký hành nghề dịch vụ kế toán, tên đơn vị cung cấp dịch vụ kế toán. \n \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 63 \n \nC. NỘI DUNG VÀ PHƯƠNG PHÁP GHI CHÉP SỔ KẾ TOÁN \nI. Giải thích nội dung và phương pháp ghi sổ tổng hợp \n1. Nội dung, kết cấu và phương pháp ghi sổ theo hình thức Nhật ký - Sổ Cái: \nSổ kế toán tổng hợp của hình thức kế toán Nhật ký - S ổ Cái chỉ có một quyển sổ \nduy nhất là sổ Nhật ký - Sổ Cái (Mẫu số S01-DNN) \na) Nội dung: \n- Nhật ký - S ổ Cái là s ổ kế toán t ổng hợp duy nh ất dùng để phản ánh t ất cả các \nnghiệp vụ kinh tế phát sinh theo trình tự thời gian và hệ thống hóa theo nội dung kinh \ntế (Theo tài khoản kế toán). \n- Số liệu ghi trên Nhật ký - Sổ Cái dùng để lập Báo cáo tài chính. \nb) Kết cấu và phương pháp ghi sổ: \n+ Kết cấu: \nNhật ký - Sổ Cái là sổ kế toán tổng hợp gồm 2 phần: Phần Nhật ký và phần Sổ Cái. \nPhần Nhật ký: gồm các cột: Cột “Ngày, tháng ghi s ổ”, cột “Số hiệu”, cột “Ngày, \ntháng” của chứng từ, cột “Diễn giải” nội dung nghi ệp vụ và c ột \"Số tiền phát sinh”. \nPhần Nhật ký dùng để phản ánh các nghiệp vụ kinh tế phát sinh theo trình tự thời gian.  \nPhần Sổ Cái: Có nhiều cột, mỗi tài khoản ghi 2 cột: cột Nợ, cột Có. Số lượng cột \nnhiều hay ít phụ thuộc vào số lượng các tài khoản sử dụng ở đơn vị kế toán. Phần Sổ \nCái dùng để phản ánh các nghiệp vụ kinh tế phát sinh theo nội dung kinh tế (Theo tài \nkhoản kế toán). \n+ Phương pháp ghi sổ: \n- Ghi chép hàng ngày: \nHàng ngày, mỗi khi nhận được chứng từ kế toán, người giữ Nhật ký - Sổ Cái phải \nkiểm tra tính ch ất pháp lý c ủa ch ứng t ừ. C ăn c ứ vào n ội dung nghi ệp v ụ ghi trên \nchứng t ừ để xác định tài kho ản ghi N ợ, tài kho ản ghi Có. Đối với các ch ứng t ừ k ế \ntoán cùng lo ại, kế toán l ập “Bảng tổng hợp chứng từ kế toán cùng lo ại”. Sau đó ghi \ncác nội dung c ần thiết của chứng từ kế toán ho ặc “Bảng tổng hợp chứng từ kế toán \ncùng loại” vào Nhật ký - Sổ Cái. \nMỗi chứng từ kế toán hoặc “Bảng tổng hợp chứng từ kế toán cùng loại” được ghi \nvào Nhật ký - Sổ Cái trên một dòng, đồng thời cả ở 2 phần: Phần Nhật ký và phần Sổ \nCái. Tr ước h ết ghi vào ph ần Nh ật ký ở các c ột: C ột “Ngày, tháng ghi s ổ”, c ột “S ố \nhiệu” và cột “Ngày, tháng” của chứng từ, cột “Diễn giải” nội dung nghiệp vụ kinh tế \nphát sinh và c ăn cứ vào s ố tiền ghi trên ch ứng từ để ghi vào c ột “số tiền phát sinh”. \nSau đó ghi số tiền của nghiệp vụ kinh tế phát sinh vào cột ghi Nợ, cột ghi Có của các \ntài khoản liên quan trong phần Sổ Cái, cụ thể: \n- Cột F, G: Ghi số hiệu tài khoản đối ứng của nghiệp vụ kinh tế; \n- Cột H: Ghi số thứ tự dòng của nghiệp vụ trong Nhật ký - Sổ Cái; \n- Từ cột 2 trở đi: Ghi số tiền phát sinh của mỗi tài khoản theo quan hệ đối ứng đã \nđược định khoản ở các cột F, G. \n \n64 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nCuối tháng phải cộng số tiền phát sinh ở phần nhật ký và số phát sinh nợ, số phát \nsinh có, tính ra s ố dư và c ộng lũy kế số phát sinh t ừ đầu quý c ủa từng tài kho ản để \nlàm căn cứ lập Báo cáo tài chính. \n2. Nội dung, kết cấu và phương pháp ghi sổ theo hình thức Chứng từ ghi sổ \n(1) Sổ Đăng ký chứng từ ghi sổ (Mẫu số S02b-DNN) \na) Nội dung: \nSổ Đăng ký chứng từ ghi sổ là sổ kế toán tổng hợp dùng để ghi chép các nghi ệp \nvụ kinh tế phát sinh theo trình tự thời gian (Nhật ký). Sổ này vừa dùng để đăng ký các \nnghiệp vụ kinh t ế phát sinh, qu ản lý ch ứng từ ghi s ổ, vừa để kiểm tra, đối chiếu số \nliệu với Bảng cân đối tài khoản; \nb) Kết cấu và phương pháp ghi chép: \nCột A: Ghi số hiệu của Chứng từ ghi sổ. \nCột B: Ghi ngày, tháng lập Chứng từ ghi sổ. \nCột 1: Ghi số tiền của Chứng từ ghi sổ. \nCuối trang sổ phải cộng số lũy kế để chuyển sang trang sau. \nĐầu trang sổ phải ghi số cộng trang trước chuyển sang. \nCuối tháng, cuối năm, kế toán cộng tổng số tiền phát sinh trên Sổ Đăng ký chứng \ntừ ghi sổ, lấy số liệu đối chiếu với Bảng cân đối tài khoản. \n(2) Sổ Cái (Mẫu số S02c1-DNN và S02c2- DNN) \na) Nội dung: \nSổ Cái là s ổ k ế toán t ổng h ợp dùng để ghi các nghi ệp v ụ kinh t ế phát sinh \ntheo tài kho ản kế toán được quy định trong ch ế độ tài kho ản kế toán áp d ụng cho \ndoanh nghi ệp. \nSố liệu ghi trên Sổ Cái dùng để kiểm tra, đối chiếu với số liệu ghi trên Bảng tổng \nhợp chi ti ết hoặc các S ổ (thẻ) kế toán chi ti ết và dùng để lập Bảng cân đối tài kho ản \nvà Báo cáo Tài chính; \nb) Kết cấu và phương pháp ghi Sổ Cái: \nSổ Cái của hình thức kế toán Chứng từ ghi sổ được mở riêng cho từng tài khoản. \nMỗi tài kho ản được mở một trang ho ặc một số trang tùy theo s ố lượng ghi chép các \nnghiệp vụ kinh tế phát sinh nhiều hay ít của từng tài khoản. \nSổ Cái có 2 loại: Sổ Cái ít cột và Sổ Cái nhiều cột. \n+ Sổ Cái ít cột: thường được áp dụng cho những tài khoản có ít nghiệp vụ kinh tế \nphát sinh, hoặc nghiệp vụ kinh tế phát sinh đơn giản. \nKết cấu của Sổ Cái loại ít cột (Mẫu số S02c1-DNN) \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu, ngày, tháng của Chứng từ ghi sổ. \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ kinh tế phát sinh.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/06_TSCĐ.html"
+    },
+    {
+      "form_id": "tt99_appendix1_03a_dnn",
+      "form_code": "03a-DNN",
+      "form_group": "DNN",
+      "title": "66 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016",
+      "source_page_start": 64,
+      "source_page_end": 83,
+      "fields": [
+        {
+          "field_key": "nay_nhu",
+          "label": "này như",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "nghiep_vu",
+          "label": "nghiệp vụ",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "cot_l",
+          "label": "- Cột L",
+          "type": "string",
+          "required": false
+        },
+        {
+          "field_key": "cot_d",
+          "label": "- Cột D",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "table_schema": {
+        "has_grid": false,
+        "table_columns": [],
+        "table_rows": []
+      },
+      "signatures": [],
+      "layout_text": "Mẫu số 03a-DNN) \na) Nội dung: \nSổ Nhật ký chung là sổ kế toán tổng hợp dùng để ghi chép các nghiệp vụ kinh tế, \ntài chính phát sinh theo trình tự thời gian đồng thời phản ánh theo quan hệ đối ứng tài \nkhoản (Định khoản kế toán) để phục vụ việc ghi S ổ Cái. S ố liệu ghi trên s ổ Nhật ký \nchung được dùng làm căn cứ để ghi vào Sổ Cái. \nb) Kết cấu và phương pháp ghi sổ: \nKết cấu sổ Nhật ký chung được quy định thống nhất theo mẫu ban hành trong chế \nđộ này: \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu và ngày, tháng l ập của chứng từ kế toán dùng làm c ăn cứ \nghi sổ. \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ kinh tế, tài chính phát sinh c ủa chứng từ \nkế toán.  \n- Cột E: Đánh dấu các nghi ệp vụ ghi sổ Nhật ký chung đã được ghi vào S ổ Cái. \n- Cột G: Ghi số thứ tự dòng của Nhật ký chung \n \n66 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n- Cột H: Ghi s ố hiệu các tài kho ản ghi N ợ, ghi Có theo định khoản kế toán các \nnghiệp v ụ phát sinh. Tài kho ản ghi N ợ được ghi tr ước, Tài kho ản ghi Có được ghi \nsau, mỗi tài khoản được ghi một dòng riêng. \n- Cột 1: Ghi số tiền phát sinh các Tài khoản ghi Nợ. \n- Cột 2: Ghi số tiền phát sinh các Tài khoản ghi Có. \nCuối trang s ổ, cộng số phát sinh l ũy kế để chuyển sang trang sau. Đầu trang s ổ, \nghi số cộng trang trước chuyển sang. \nVề nguyên tắc tất cả các nghiệp vụ kinh tế, tài chính phát sinh đều phải ghi vào sổ \nNhật ký chung. Tuy nhiên, trong trường hợp một hoặc một số đối tượng kế toán có số \nlượng phát sinh lớn, để đơn giản và giảm bớt khối lượng ghi Sổ Cái, doanh nghiệp có thể \nmở các sổ Nhật ký đặc biệt để ghi riêng các nghiệp vụ phát sinh liên quan đến các đối \ntượng kế toán đó. \nCác sổ Nhật ký đặc biệt là một phần của sổ Nhật ký chung nên ph ương pháp ghi \nchép tương tự như sổ Nhật ký chung. Song để tránh sự trùng lặp các nghiệp vụ đã ghi \nvào sổ Nhật ký đặc biệt thì không ghi vào s ổ Nhật ký chung. Trường hợp này, căn cứ \nđể ghi Sổ Cái là Sổ Nhật ký chung và các Sổ Nhật ký đặc biệt. \nDưới đây là hướng dẫn nội dung, kết cấu và cách ghi s ổ của một số Nhật ký đặc \nbiệt thông dụng. \n(1.1) Sổ Nhật ký thu tiền (Mẫu số 03a1-DNN) \na) Nội dung: Là s ổ Nhật ký đặc biệt dùng để ghi chép các nghi ệp vụ thu tiền của \ndoanh nghiệp. Mẫu sổ này được mở riêng cho thu ti ền mặt, thu qua ngân hàng, cho \ntừng lo ại tiền ( đồng Việt Nam, ngo ại t ệ) ho ặc cho t ừng n ơi thu ti ền (Ngân hàng A, \nNgân hàng B...); \nb) Kết cấu và phương pháp ghi sổ: \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B,C: Ghi s ố hiệu và ngày, tháng l ập của chứng từ kế toán dùng làm c ăn cứ \nghi sổ.  \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ kinh tế phát sinh của chứng từ kế toán. \n- Cột 1: Ghi số tiền thu được vào bên Nợ của tài khoản tiền được theo dõi trên sổ \nnày như: Tiền mặt, tiền gửi ngân hàng... \n- Cột 2, 3, 4, 5, 6: Ghi số tiền phát sinh bên Có của các tài khoản đối ứng. \nCuối trang sổ, cộng số phát sinh lũy kế để chuyển sang trang sau. \nĐầu trang sổ, ghi số cộng trang trước chuyển sang. \n(1.2) Nhật ký chi tiền (Mẫu số S03a2-DNN) \na) N ội dung: Là s ổ Nh ật ký đặc bi ệt dùng để ghi chép các nghi ệp v ụ chi ti ền \ncủa doanh nghi ệp. M ẫu sổ này được m ở riêng cho chi ti ền m ặt, chi ti ền qua ngân \nhàng, cho t ừng lo ại ti ền ( đồng Vi ệt Nam, ngo ại t ệ) ho ặc cho t ừng n ơi chi ti ền \n(Ngân hàng A, Ngân hàng B...); \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 67 \n \nb) Kết cấu và phương pháp ghi sổ: \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu và ngày, tháng lập của chứng từ dùng làm căn cứ ghi sổ. \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ phát sinh của chứng từ kế toán. \n- Cột 1: Ghi s ố tiền chi ra vào bên Có c ủa tài kho ản tiền được theo dõi trên s ổ \nnày, như: Tiền mặt, tiền gửi Ngân hàng... \n- Cột 2, 3, 4, 5, 6: Ghi số tiền phát sinh bên Nợ của các tài khoản đối ứng. \nCuối trang s ổ, cộng số phát sinh l ũy kế để chuyển sang trang sau. Đầu trang s ổ, \nghi số cộng trang trước chuyển sang. \n(1.3) Nhật ký mua hàng (Mẫu số S03a3-DNN) \na) Nội dung: Là S ổ Nhật ký đặc biệt dùng để ghi chép các nghi ệp vụ mua hàng \ntheo từng loại hàng tồn kho của đơn vị, như: Nguyên liệu, vật liệu; công cụ, dụng cụ; \nhàng hóa;... \nSổ Nhật ký mua hàng dùng để ghi chép các nghi ệp vụ mua hàng theo hình th ức \ntrả ti ền sau (mua ch ịu). Tr ường h ợp tr ả ti ền tr ước cho ng ười bán thì khi phát sinh \nnghiệp vụ mua hàng cũng ghi vào sổ này. \nb) Kết cấu và phương pháp ghi sổ. \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu và ngày, tháng l ập của chứng từ kế toán dùng làm c ăn cứ \nghi sổ. \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ phát sinh của chứng từ kế toán. \n- Cột 1, 2, 3: Ghi N ợ các tài kho ản hàng tồn kho như: Hàng hóa, nguyên li ệu vật \nliệu, công cụ, dụng cụ... Trường hợp đơn vị mở sổ này cho t ừng loại hàng tồn kho thì \ncác cột này có thể dùng để ghi chi tiết cho loại hàng tồn kho đó như: Hàng hóa A, hàng \nhóa B... \n- Cột 4: Ghi số tiền phải trả người bán tương ứng với số hàng đã mua. \nCuối trang sổ, cộng số lũy kế để chuyển sang trang sau. Đầu trang sổ, ghi số cộng \ntrang trước chuyển sang. \n(1.4) Nhật ký bán hàng (Mẫu số S03a4-DNN) \na) Nội dung: Là S ổ Nhật ký đặc biệt dùng để ghi chép các nghi ệp vụ bán hàng \ncủa doanh nghiệp như: Bán hàng hóa, bán thành phẩm, bán dịch vụ. \nSổ Nhật ký bán hàng dùng để ghi chép các nghiệp vụ bán hàng theo hình thức thu \ntiền sau (bán ch ịu). Trường hợp người mua tr ả tiền trước thì khi phát sinh nghi ệp vụ \nbán hàng cũng ghi vào sổ này. \nb) Kết cấu và cách ghi sổ: \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu và ngày, tháng lập của chứng từ dùng làm căn cứ ghi sổ. \n \n68 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ phát sinh của chứng từ kế toán. \n- Cột 1: Ghi số tiền phải thu từ người mua theo doanh thu bán hàng. \n- Cột 2, 3, 4: M ở theo yêu c ầu của doanh nghiệp để ghi doanh thu theo t ừng loại \nnghiệp vụ: Bán hàng hóa, bán thành phẩm, bán bất động sản đầu tư, cung cấp dịch vụ... \nTrường hợp doanh nghiệp mở sổ này cho từng loại doanh thu: Bán hàng hóa, bán thành \nphẩm, bán bất động sản đầu tư, cung cấp dịch vụ... thì các cột này có thể dùng để ghi \nchi tiết cho từng loại hàng hóa, thành phẩm, bất động sản đầu tư, dịch vụ. Trường hợp \nkhông cần thiết, doanh nghiệp có th ể gộp 3 c ột này thành 1 c ột để ghi doanh thu bán \nhàng chung. \nCuối trang sổ, cộng số lũy kế để chuyển sang trang sau. Đầu trang sổ, ghi số cộng \ntrang trước chuyển sang. \nDoanh nghiệp có thể mở một hoặc một số sổ Nhật ký đặc biệt như đã nêu trên để \nghi chép. Tr ường hợp cần mở thêm các s ổ Nhật ký đặc biệt khác ph ải tuân theo các \nnguyên tắc mở sổ và ghi sổ đã quy định. \n(2) Sổ Cái (Mẫu số S03b-DNN) \na) Nội dung: Sổ Cái là s ổ kế toán tổng hợp dùng để ghi chép các nghi ệp vụ kinh \ntế, tài chính phát sinh trong niên độ k ế toán theo tài kho ản k ế toán được quy định \ntrong hệ thống tài khoản kế toán áp d ụng cho doanh nghi ệp. Mỗi tài kho ản được mở \nmột hoặc một số trang liên tiếp trên Sổ Cái đủ để ghi chép trong một niên độ kế toán; \nb) Kết cấu và phương pháp ghi sổ: \nSổ Cái được quy định thống nhất theo mẫu ban hành trong chế độ này. \nCách ghi Sổ Cái được quy định như sau: \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi s ố hiệu và ngày, tháng l ập của chứng từ kế toán được dùng làm \ncăn cứ ghi sổ. \n- Cột D: Ghi tóm tắt nội dung nghiệp vụ phát sinh. \n- Cột E: Ghi số trang của sổ Nhật ký chung đã ghi nghiệp vụ này. \n- Cột G: Ghi số dòng của sổ Nhật ký chung đã ghi nghiệp vụ này. \n- Cột H: Ghi số hiệu của các tài khoản đối ứng liên quan đến nghiệp vụ phát sinh \nvới tài khoản trang Sổ Cái này (Tài khoản ghi Nợ trước, tài khoản ghi Có sau). \n- Cột 1, 2: Ghi số tiền phát sinh bên Nợ hoặc bên Có của Tài khoản theo từng nghiệp \nvụ kinh tế. \nĐầu tháng, ghi số dư đầu kỳ của tài khoản vào dòng đầu tiên, cột số dư (Nợ hoặc \nCó). Cuối tháng, cộng số phát sinh N ợ, số phát sinh Có, tính ra s ố dư và cộng lũy kế \nsố phát sinh t ừ đầu quý của từng tài khoản để làm căn cứ lập Bảng cân đối tài khoản \nvà báo cáo tài chính. \nII. Giải thích nội dung và phương pháp ghi sổ chi tiết \nSổ chi tiết dùng chung cho các hình thức kế toán nên hướng dẫn chung như sau: \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 69 \n \nSỔ QUỸ TIỀN MẶT \n(Mẫu số S04a-DNN) \n{Sổ chi tiết quỹ tiền mặt (mẫu số S04a-DNN)} \n \n1. Mục đích: Sổ này dùng cho thủ quỹ (hoặc dùng cho kế toán tiền mặt) để phản \nánh tình hình thu, chi tồn quỹ tiền mặt bằng tiền Việt Nam của đơn vị. \n2. Căn cứ và phương pháp ghi sổ \nSổ này mở cho thủ quỹ: Mỗi quỹ dùng một sổ hay một số trang sổ. Sổ này cũng \ndùng cho kế toán chi tiết quỹ tiền mặt và tên sổ sửa lại là “Sổ kế toán chi tiết quỹ tiền \nmặt”. Tương ứng với 1 sổ của thủ quỹ thì có 1 sổ của kế toán cùng ghi song song. \n- C ăn c ứ để ghi s ổ qu ỹ ti ền m ặt là các Phi ếu thu, Phi ếu chi đã được th ực hi ện \nnhập, xuất quỹ. \n- Cột A: Ghi ngày tháng ghi sổ. \n- Cột B: Ghi ngày tháng của Phiếu thu, Phiếu chi. \n- Cột C, D: Ghi số hiệu của Phiếu thu, số hiệu Phiếu chi liên tục từ nhỏ đến lớn. \n- Cột E: Ghi nội dung nghiệp vụ kinh tế của Phiếu thu, Phiếu chi. \n- Cột 1: Số tiền nhập quỹ. \n- Cột 2: Số tiền xuất quỹ. \n- Cột 3: S ố dư tồn quỹ cuối ngày. S ố tồn quỹ cuối ngày ph ải khớp đúng với số \ntiền mặt trong két. \nĐịnh kỳ kế toán ki ểm tra, đối chiếu giữa “Sổ kế toán chi ti ết quỹ tiền mặt” với \n“Sổ quỹ tiền mặt”, ký xác nhận vào cột G.  \n* Chú ý: Để theo dõi quỹ tiền mặt, kế toán quỹ tiền mặt phải mở “Sổ kế toán chi \ntiết quỹ tiền mặt” (Mẫu số S04b-DNN). Sổ này có thêm cột F “Tài khoản đối ứng” để \nphản ánh s ố hiệu Tài kho ản đối ứng với từng nghiệp vụ ghi N ợ, từng nghiệp vụ ghi \nCó của Tài khoản 111 “Tiền mặt”. \n \nSỔ TIỀN GỬI NGÂN HÀNG \n(Mẫu số S05-DNN) \n \n1. Mục đích: Sổ này dùng cho k ế toán theo dõi chi ti ết tiền Việt Nam của doanh \nnghiệp gửi tại Ngân hàng. M ỗi ngân hàng có m ở tài khoản tiền gửi thì được theo dõi \nriêng trên một quyển sổ, phải ghi rõ nơi mở\n tài khoản và số hiệu tài khoản giao dịch. \n2. Căn cứ và phương pháp ghi sổ \nCăn cứ để ghi vào sổ là giấy báo Nợ, báo Có hoặc sổ phụ của ngân hàng.  \nĐầu kỳ: Ghi số dư tiền gửi kỳ trước vào cột 8. \nHàng ngày: \n \n70 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nCột A: Ghi ngày, tháng ghi sổ. \nCột B, C: Ghi s ố hiệu, ngày, tháng c ủa chứng từ (giấy báo N ợ, báo Có) dùng để \nghi sổ. \nCột D: Ghi tóm tắt nội dung của chứng từ. \nCột E: Ghi số hiệu tài khoản đối ứng. \nCột 1, 2: Ghi số tiền gửi vào hoặc rút ra khỏi tài khoản tiền gửi. \nCột 3: Ghi số tiền hiện còn gửi tại Ngân hàng. \nCuối tháng: \nCộng số tiền đã gửi vào, hoặc đã rút ra trên cơ sở đó tính số tiền còn gửi tại Ngân \nhàng chuyển sang tháng sau. Số dư trên sổ tiền gửi được đối chiếu với số dư tại Ngân \nhàng nơi mở tài khoản. \n \nSỔ CHI TIẾT VẬT LIỆU, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA \n(Mẫu số S06-DNN) \n \n1. Mục đích: Dùng để theo dõi chi ti ết tình hình nh ập, xuất và t ồn kho c ả về số \nlượng và giá trị\n của từng thứ nguyên liệu, vật liệu, dụng cụ, sản phẩm hàng hóa ở từng \nkho làm căn cứ đối chiếu với việc ghi chép của thủ kho. \n2. Căn cứ và phương pháp ghi sổ \nSổ này được mở theo t ừng tài kho ản (Nguyên li ệu, v ật liệu; Công c ụ, dụng cụ; \nThành phẩm; Hàng hóa: 152, 153, 155, 156) theo t ừng kho và theo t ừng thứ vật liệu, \ndụng cụ, thành phẩm, hàng hóa. \nCột A, B: Ghi số hiệu, ngày, tháng của chứng từ nhập, xuất kho vật liệu, dụng cụ, \nthành phẩm, hàng hóa. \n- Cột C: Ghi diễn giải nội dung của chứng từ dùng để ghi sổ. \n- Cột D: Ghi số hiệu tài khoản đối ứng. \n- Cột 1: Ghi đơn giá (giá vốn) của 1 đơn vị vật liệu, dụng cụ, sản phẩm, hàng hóa \nnhập, xuất kho. \n- Cột 2: Ghi số lượng vật liệu, dụng cụ, sản phẩm, hàng hóa nhập kho. \n- Cột 3: Căn cứ vào hóa đơn, phiếu nhập kho ghi giá trị (số tiền) vật liệu, dụng cụ, \nsản phẩm, hàng hóa nhập kho (Cột 3 = cột 1 x cột 2). \n- Cột 4: Ghi số lượng sản phẩm, dụng cụ, vật liệu, hàng hóa xuất kho. \n- Cột 5: Ghi giá trị vật liệu, dụng cụ, sản phẩm, hàng hóa xuất kho (Cột 5 = cột 1 x \nCột 4). \n- Cột 6: Ghi số lượng vật liệu, dụng cụ, sản phẩm, hàng hóa tồn kho. \n- Cột 7: Ghi giá trị vật liệu, dụng cụ, sản phẩm, hàng hóa tồn kho (Cột 7 = cột 1 x \ncột 6). \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 71 \n \nBẢNG TỔNG HỢP CHI TIẾT VẬT LIỆU, DỤNG CỤ, \nSẢN PHẨM, HÀNG HÓA \n(Mẫu số S07-DNN) \n \n1. Mục đích: Dùng để tổng hợp phần giá tr ị từ các trang s ổ, thẻ chi ti ết nguyên \nliệu, vật liệu, công c ụ, dụng cụ, sản phẩm, hàng hóa, nh ằm đối chiếu với số liệu Tài \nkhoản 152, 153, 155, 156 trên Sổ Cái hoặc Nhật ký - Sổ Cái. \n2. Căn cứ và phương pháp ghi sổ \nMỗi tài kho ản v ật li ệu, d ụng c ụ, s ản ph ẩm, hàng hóa được l ập m ột b ảng riêng. \nBảng này được lập vào cu ối tháng, c ăn cứ vào s ố liệu dòng c ộng trên s ổ chi ti ết vật \nliệu, dụng cụ, sản phẩm, hàng hóa để lập.  \n- Cột A: Ghi số thứ tự vật liệu, dụng cụ, sản phẩm, hàng hóa. \n- Cột B: Ghi tên, quy cách v ật liệu, dụng cụ, sản phẩm, hàng hóa theo S ổ chi tiết \nvật liệu, dụng cụ, sản phẩm, hàng hóa (Mỗi thứ ghi 1 dòng).  \n- Cột 1: Ghi giá tr ị tồn đầu kỳ (Số liệu dòng t ồn đầu kỳ ở cột 7 trên S ổ vật liệu, \ndụng cụ, sản phẩm, hàng hóa).  \n- Cột 2: Ghi giá trị nhập trong kỳ (Số liệu dòng cộng cột 3 trên Sổ chi tiết vật liệu, \ndụng cụ, sản phẩm, hàng hóa).  \n- Cột 3: Giá trị xuất trong kỳ (Lấy số liệu dòng cộng cột 5 trên Sổ chi tiết vật liệu, \ndụng cụ, sản phẩm, hàng hóa).  \n- Cột 4: Giá trị tồn cuối kỳ (Lấy số liệu tồn cuối kỳ ở cột 7 trên Sổ chi tiết vật liệu, \ndụng cụ, sản phẩm, hàng hóa).  \nSau khi ghi xong tiến hành cộng Bảng tổng hợp. Số liệu trên dòng tổng cộng được \nđối chiếu với số liệu trên Nhật ký - Sổ Cái hoặc trên Sổ Cái của các Tài khoản 152, 153, \n155 và 156.   \n+ Số liệu cột 1: Được đối chiếu số dư đầu kỳ. \n+ Số liệu cột 2: Được đối chiếu với số phát sinh Nợ. \n+ Số liệu cột 3: Đối chiếu với số phát sinh Có.  \n+ Số liệu cột 4: Đối chiếu với số dư cuối kỳ. \n \nTHẺ KHO (SỔ KHO) \n(Mẫu số S08-DNN) \n \n1. M ục đích: Theo dõi s ố lượng nhập, xuất, tồn, kho t ừng thứ nguyên li ệu, v ật \nliệu, công cụ, dụng cụ, sản phẩm, hàng hóa ở từng kho. Làm căn cứ xác định số lượng \ntồn kho dự trữ vật liệu, dụng cụ, sản phẩm, hàng hóa và xác định trách nhiệm vật chất \ncủa thủ kho  \n \n72 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n2. Căn cứ và phương pháp ghi sổ \nThẻ kho là sổ tờ rời. Nếu đóng thành quyển thì gọi là “Sổ kho”. Thẻ tờ rời sau khi \ndùng xong phải đóng thành quyển. “Sổ kho” hoặc “thẻ kho” sau khi đóng thành quyển \nphải có chữ ký của giám đốc. \nMỗi thẻ kho dùng cho m ột thứ vật liệu, dụng cụ, sản phẩm, hàng hóa cùng nhãn \nhiệu, quy cách ở cùng m ột kho. Phòng k ế toán l ập thẻ và ghi các ch ỉ tiêu: tên, nhãn \nhiệu, quy cách, đơn vị tính, mã s ố vật liệu, dụng cụ, sản phẩm, hàng hóa sau đó giao \ncho th ủ kho để ghi chép hàng ngày. Hàng ngày th ủ kho c ăn cứ vào Phiếu nhập kho, \nPhiếu xuất kho ghi vào các cột tương ứng trong thẻ kho. Mỗi chứng từ ghi 1 dòng, cuối \nngày tính số tồn kho.  \n- Cột A: Ghi số thứ tự; \n- Cột B: Ghi ngày tháng của Phiếu nhập kho, Phiếu xuất kho;  \n- Cột C, D: Ghi số hiệu của Phiếu nhập kho hoặc Phiếu xuất kho; \n- Cột E: Ghi nội dung của nghiệp vụ kinh tế phát sinh; \n- Cột F: Ghi ngày nhập, xuất kho; \n- Cột 1: Ghi số lượng nhập kho; \n- Cột 2: Ghi số lượng xuất kho; \n- Cột 3: Ghi số lượng tồn kho sau mỗi lần nhập, xuất hoặc cuối mỗi ngày. \nTheo định kỳ, nhân viên kế toán vật tư xuống kho nhận chứng từ và kiểm tra việc \nghi chép Thẻ kho của Thủ kho, sau đó ký xác nhận vào Thẻ kho (Cột G). \nSau mỗi lần kiểm kê phải tiến hành điều chỉnh số liệu trên Thẻ kho cho phù h ợp \nvới số liệu thực tế kiểm kê theo chế độ quy định.  \n \nSỔ TÀI SẢN CỐ ĐỊNH \n(Mẫu số S09-DNN) \n \n1. Mục đích: Sổ tài sản cố định dùng để đăng ký, theo dõi và quản lý chặt chẽ tài \nsản trong đơn vị từ khi mua sắm, đưa vào sử dụng đến khi ghi giả\nm tài sản cố định. \n2. Căn cứ và phương pháp ghi sổ \nMỗi một sổ hoặc một số trang sổ được mở theo dõi cho một loại TSCĐ (nhà cửa, \nmáy móc thiết bị...). Căn cứ vào chứng từ tăng, giảm TSCĐ để ghi vào sổ TSCĐ:  \n- Cột A: Ghi số thứ tự \n- Cột B, C: Ghi số hiệu, ngày, tháng của chứng từ dùng để ghi sổ \n- Cột D: Ghi tên, đặc điểm, ký hiệu của TSCĐ \n- Cột E: Ghi tên nước sản xuất TSCĐ \n- Cột G: Ghi tháng, năm đưa TSCĐ vào sử dụng \n- Cột H: Ghi số hiệu TSCĐ \n- Cột 1: Ghi nguyên giá TSCĐ \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 73 \n \n- Cột 2: Ghi tỷ lệ khấu hao một năm \n- Cột 3: Ghi số tiền khấu hao một năm \n- Cột 4: Ghi số khấu hao TSCĐ tính đến thời điểm ghi giảm TSCĐ \n- Cột I, K: Ghi số hiệu, ngày, tháng, năm của chứng từ ghi giảm TSCĐ  \n- Cột L: Ghi lý do giảm TSCĐ (nhượng bán, thanh lý...).  \n \nSỔ THEO DÕI TÀI SẢN CỐ ĐỊNH VÀ CÔNG CỤ, \nDỤNG CỤ TẠI NƠI SỬ DỤNG \n(Mẫu số S10-DNN) \n \n1. M ục đích: S ổ này dùng để ghi chép tình hình t ăng, gi ảm tài s ản c ố định và \ncông cụ, dụng cụ tại từng nơi sử dụng nhằm quản lý tài s ản và d ụng cụ đã được cấp \ncho các phòng, ban làm căn cứ để đối chiếu khi tiến hành kiểm kê định kỳ. \n2. Căn cứ và phương pháp ghi sổ \nMỗi đơn vị hoặc bộ phận (phân xưởng, phòng ban...) thuộ\nc doanh nghiệp phải mở \nmột sổ để theo dõi tài s ản. Căn cứ vào chứng từ gốc về tăng, giảm tài sản để ghi vào \nsổ tài sản theo đơn vị sử dụng như sau: \n- Cột A, B: Ghi số hiệu, ngày tháng của chứng từ tăng tài sản cố định và công cụ, \ndụng cụ. \n- Cột C: Ghi tên nhãn hiệu TSCĐ và công cụ, dụng cụ \n- Cột D: Ghi đơn vị tính (cái, chiếc...) \n- Cột 1: Ghi số lượng \n- Cột 2: Ghi nguyên giá TSCĐ hoặc đơn giá công cụ, dụng cụ \n- Cột 3: Ghi số tiền (Cột 3 = Cột 1 x Cột 2) \n- Cột E, G: Ghi số hiệu, ngày tháng của chứng từ ghi giảm tài sản cố định và công \ncụ, dụng cụ. \n- Cột H: Ghi lý do giảm tài sản cố định và công cụ, dụng cụ \n- Cột 4: Ghi số lượng tài sản cố định và công cụ, dụng cụ giảm \n- Cột 5: Ghi nguyên giá tài sản cố định và giá trị công cụ, dụng cụ giảm. \n \nTHẺ TÀI SẢN CỐ ĐỊNH \n(Mẫu số S11-DNN) \n \n1. Mục đích: Theo dõi chi ti ết từng TSCĐ của doanh nghi ệp, tình hình thay đổi \nnguyên giá và giá trị hao mòn đã trích hàng năm của từng TSCĐ. \n2. Căn cứ và phương pháp ghi sổ \nCăn cứ để lập thẻ TSCĐ: \n- Biên bản giao nhận TSCĐ; \n \n74 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n- Biên bản đánh giá lại TSCĐ; \n- Bảng phân bổ khấu hao TSCĐ; \n- Biên bản thanh lý TSCĐ; \n- Các tài liệu kỹ thuật có liên quan.  \nThẻ được lập cho từng đối tượng ghi tài s ản cố định. Thẻ TSCĐ dùng chung cho \nmọi TSCĐ là nhà cửa, vật kiến trúc, máy móc thi ết bị, cây, con, gia súc... Th ẻ tài sản \ncố định bao gồm 4 phần chính:  \n1. Ghi các chỉ tiêu chung về TSCĐ như: tên, ký mã hi ệu, quy cách (cấp hạng); số \nhiệu, nước sản xuất (xây dựng) ; năm sản xuất, bộ phận quản lý, sử dụng; năm bắt đầu \nđưa vào sử dụng, công suất (diện tích) thiết kế; ngày, tháng, năm và lý do đình chỉ sử \ndụng TSCĐ. \n2. Ghi các ch ỉ tiêu nguyên giá TSC Đ ngay khi b ắt đầu hình thành TSC Đ và qua \ntừng thời kỳ do đánh giá lại, xây dựng, trang bị thêm hoặc tháo bớt các bộ phận... và \ngiá trị hao mòn đã trích qua các năm. \nCột A, B, C, 1: Ghi s ố hiệu, ngày, tháng, năm của chứng từ, lý do hình thành nên \nnguyên giá và nguyên giá của TSCĐ tại thời điểm đó. \nCột 2: Ghi năm tính giá trị hao mòn TSCĐ.  \nCột 3: Ghi giá trị hao mòn TSCĐ của từng năm.  \nCột 4: Ghi t ổng số giá tr ị hao mòn đã trích cộng dồn đến thời điểm vào th ẻ. Đối \nvới nh ững TSC Đ không ph ải trích kh ấu hao nh ưng ph ải tính hao mòn (nh ư TSC Đ \ndùng cho sự nghiệp, phúc lợi,…) thì cũng tính và ghi giá trị hao mòn vào thẻ.  \n3. Ghi số phụ tùng, dụng cụ kèm theo TSCĐ. \nCột A, B, C: Ghi số thứ tự, tên quy cách và đơn vị tính của dụng cụ, phụ tùng. \nCột 1, 2: Ghi số lượng và giá trị của từng loại dụng cụ, phụ tùng kèm theo TSCĐ. \nCuối tờ thẻ, ghi giảm TSCĐ: Ghi số ngày, tháng, năm của chứng từ ghi giảm TSCĐ \nvà lý do giảm.  \nThẻ TSCĐ do kế toán TSCĐ lập, kế toán trưởng ký soát xét và giám đốc ký. Thẻ \nđược lưu ở phòng, ban kế toán suốt quá trình sử dụng tài sản.  \n \nSỔ CHI TIẾT THANH TOÁN VỚI NGƯỜI MUA \n(NGƯỜI BÁN) \n(Mẫu số S12-DNN) \n \n1. Mục đích: Sổ này dùng để theo dõi việc thanh toán với người mua (người bán) \ntheo từng đối tượng, từng thời hạn thanh toán. \n2. Căn cứ và phương pháp ghi sổ \nSổ chi ti ết thanh toán v ới người mua (ng ười bán) được mở theo t ừng tài kho ản, \ntheo từng đối tượng thanh toán. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 75 \n \n- Cột A: Ghi ngày, tháng, năm kế toán ghi sổ. \n- Cột B, C: Ghi số hiệu, ngày, tháng của chứng từ dùng để ghi sổ. \n- Cột D: Ghi nội dung của nghiệp vụ kinh tế phát sinh. \n- Cột E: Ghi số hiệu tài khoản đối ứng. \n- Cột 1: Ghi th ời hạn được hưởng chiết khấu thanh toán trên hóa đơn mua (bán) \nhàng hoặc các chứng từ liên quan đến việc mua (bán) hàng. \n- Cột 2, 3: Ghi số phát sinh bên Nợ (hoặc bên Có) của tài khoản. \n- C ột 4, 5: Ghi s ố d ư bên N ợ (ho ặc bên Có) c ủa tài kho ản sau t ừng nghi ệp v ụ \nthanh toán. \n \nSỔ CHI TIẾT THANH TOÁN VỚI NGƯỜI MUA \n(NGƯỜI BÁN) BẰNG NGOẠI TỆ \n(Mẫu số S13-DNN) \n \n1. Mục đích: Sổ này dùng để theo dõi việc thanh toán với người mua (người bán) \ntheo từng đối tượng, từng thời hạn thanh toán và theo từng loại ngoại tệ. \n2. Căn cứ và phương pháp ghi sổ \nSổ chi ti ết theo dõi thanh toán b ằng ngoại tệ được mở theo t ừng tài kho ản, đối \ntượng thanh toán và theo từng loại ngoại tệ. \n- Cột A: Ghi ngày, tháng kế toán ghi sổ \n- Cột B, C: Ghi số hiệu và ngày, tháng của chứng từ dùng để ghi sổ. \n- Cột D: Ghi nội dung nghiệp vụ kinh tế phát sinh. \n- Cột E: Ghi số hiệu tài khoản đối ứng với tài khoản thanh toán ghi trong sổ này. \n- Cột 1: Ghi tỷ giá ngoại tệ quy đổi ra đồng Việt Nam. \n- C ột 2: Ghi th ời hạn được chiết kh ấu thanh toán trên hóa đơn mua (bán) hàng \nhoặc các chứng từ liên quan đến việc mua (bán) hàng.  \n- Cột 3: Ghi số tiền ngoại tệ (nguyên tệ) phát sinh bên Nợ. \n- Cột 4: Ghi s ố tiền phát sinh bên N ợ được quy đổi ra đồng Việt Nam (C ột 4 = \nCột 1 x Cột 3). \n- Cột 5: Ghi số tiền ngoại tệ phát sinh bên Có của tài khoản. \n- C ột 6: Ghi s ố tiền phát sinh bên Có c ủa tài kho ản được quy đổi ra đồng Việt \nNam (Cột 6 = Cột 1 x Cột 5). \n- C ột 7,9: Ghi s ố d ư N ợ (ho ặc d ư Có) b ằng ngo ại t ệ sau t ừng nghi ệp v ụ \nthanh toán. \n- Cột 8, 10: Ghi s ố dư Nợ (hoặc dư Có) đã được quy đổi ra đồng Việt Nam sau \ntừng nghiệp vụ thanh toán. \n \n76 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nSỔ THEO DÕI THANH TOÁN BẰNG NGOẠI TỆ \n(Mẫu số S14-DNN) \n \n1. Mục đích: Sổ này dùng cho một số tài khoản thuộc loại thanh toán (ngoài TK \n131, 331) theo từng đối tượng, từng thời hạn thanh toán và theo từng loại ngoại tệ. \n2. Căn cứ và phương pháp ghi sổ \nSổ chi ti ết theo dõi thanh toán b ằng ngoại tệ được mở theo t ừng tài kho ản, theo \ntừng đối tượng thanh toán và theo từng loại ngoại tệ. \n- Cột A: Ghi ngày, tháng kế toán ghi sổ; \n- Cột B, C: Ghi số hiệu, ngày, tháng của chứng từ dùng để ghi sổ; \n- Cột D: Ghi diễn giải nội dung nghiệp vụ kinh tế phát sinh;  \n- Cột E: Ghi số hiệu tài khoản đối ứng; \n- Cột 1: Ghi tỷ giá ngoại tệ quy đổi ra đồng Việt Nam; \n- Cột 2: Ghi số tiền ngoại tệ (Nguyên tệ) phát sinh bên Nợ;  \n- Cột 3: Ghi số tiền ngoại tệ quy đổi ra đồng Việt Nam; \n- Cột 4: Ghi số tiền phát sinh bên Có: Số tiền bằng ngoại tệ;  \n- C ột 5: Ghi s ố phát sinh bên Có: S ố ti ền b ằng ngo ại t ệ đã quy đổi ra đồng \nViệt Nam; \n- Cột 6, 8: Ghi số dư Nợ (hoặc dư Có) bằng ngoại tệ sau mỗi nghiệp vụ thanh toán; \n- Cột 7,9: Ghi số dư Nợ (hoặc dư Có) bằng ngoại tệ đã được quy đổi ra đồng Việt \nNam sau mỗi nghiệp vụ thanh toán. \n \nSỔ CHI TIẾT TIỀN VAY \n(Mã số S15-DNN) \n \n1. Mục đích: Sổ này được dùng để theo dõi theo t ừng tài kho ản, theo t ừng đối \ntượng vay (Ngân hàng, người cho vay...) và theo từng khế ước vay.  \n2. Căn cứ và phương pháp ghi sổ \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu ngày, tháng của chứng từ dùng để ghi sổ. \n- Cột D: Ghi nội dung nghiệp vụ kinh tế phát sinh. \n- Cột E: Ghi số hiệu tài khoản đối ứng. \n- Cột G: Ghi ngày, tháng, năm đến hạn thanh toán. \n- Cột 1: Ghi số tiền trả nợ vay vào bên Nợ. \n- Cột 2: Ghi số tiền vay vào bên Có. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 77 \n \nSỔ CHI TIẾT BÁN HÀNG \n(Mã số S16-DNN) \n \n1. Mục đích: Sổ này mở theo từng sản phẩm, hàng hóa, bất động sản đầu tư, dịch \nvụ đã bán ho ặc đã cung c ấp được khách hàng thanh toán ti ền ngay hay ch ấp nh ận \nthanh toán. \n2. Căn cứ và phương pháp ghi sổ \n- Cột A: Ghi ngày tháng kế toán ghi sổ. \n- Cột B, C: Ghi số hiệu, ngày tháng của chứng từ dùng để ghi sổ. \n- Cột D: Ghi nội dung nghiệp vụ kinh tế phát sinh. \n- Cột E: Ghi số hiệu tài khoản đối ứng. \n- Cột 1, 2, 3: Ghi số lượng, đơn giá và số tiền của khối lượng hàng hóa (sản phẩm, \nbất động sản đầu tư, dịch vụ) đã bán hoặc đã cung cấp. \n- Cột 4: Ghi s ố thuế giá trị gia tăng (Thuế tiêu thụ đặc biệt, thuế xuất khẩu) phải \nnộp tính trên doanh s ố bán của số hàng hóa (s ản phẩm, dịch vụ, BĐS đầu tư) đã bán \nhoặc đã cung cấp. \n- Cột 5: Ghi số phải giảm trừ vào doanh thu (nếu có) như: Chiết khấu thương mại, \nhàng bán bị trả lại, giảm giá hàng bán,... \nSau khi cộng “Số phát sinh”, tính Chỉ tiêu “Doanh thu thuần” ghi vào cột 3. Cột 3 = Cột 3 \ntrừ (-) Cột 4 và Cột 5. Chỉ tiêu “Giá vốn hàng bán”: Ghi số giá vốn của hàng hóa (sản \nphẩm, bất động sản đầu tư, dịch vụ) đã bán. \nChỉ tiêu “Lãi g ộp” bằng (=) ch ỉ tiêu “Doanh thu thu ần” trừ (-) ch ỉ tiêu “Giá v ốn \nhàng bán”. \n \nSỔ CHI PHÍ SẢN XUẤT, KINH DOANH \n(Mã số S17-DNN) \n \n1. Mục đích: Sổ này mở theo từng đối tượng tập hợp chi phí (Theo phân x ưởng, \nbộ phận sản xuất, theo sản phẩm, nhóm sản phẩm,... dịch vụ hoặc theo từng nội dung \nchi phí). \n2. Căn cứ và phương pháp ghi sổ \nCăn cứ vào sổ chi tiết chi phí SXKD kỳ trước - phần “Số dư cuối kỳ”, để ghi vào \ndòng “Số dư đầu kỳ” ở các cột phù hợp (Cột 1 đến Cột 8). \n- Phần “Số phát sinh trong kỳ”: Căn cứ vào chứng từ kế toán (chứng từ gốc, bảng \nphân bổ) để ghi vào sổ chi tiết chi phí SXKD như sau: \n- Cột A: Ghi ngày, tháng ghi sổ; \n- Cột B, C: Ghi số hiệu, ngày, tháng của chứng từ dùng để ghi sổ; \n- Cột D: Ghi diễn giải nội dung nghiệp vụ kinh tế phát sinh;  \n- Cột E: Ghi số hiệu tài khoản đối ứng; \n \n78 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n- Cột 1: Ghi tổng số tiền của nghiệp vụ kinh tế phát sinh; \n- Từ Cột 2 đến Cột 8: Căn cứ vào nội dung nghiệp vụ kinh tế phát sinh để ghi vào \ncác cột phù hợp tương ứng với nội dung chi phí đáp ứng yêu cầu quản lý của từng tài \nkhoản của doanh nghiệp. \n- Phần (dòng) “Số dư cuối kỳ” được xác định như sau: \nSố dư S ố dư Phát sinh Phát sinh \ncuối kỳ = đầu kỳ + Nợ - Có \n \nTHẺ TÍNH GIÁ THÀNH SẢN PHẨM, DỊCH VỤ \n(Mẫu số S18-DNN) \n \n1. M ục đích: Dùng để theo dõi và tính giá thành s ản xu ất t ừng lo ại s ản ph ẩm, \ndịch vụ trong từng kỳ hạch toán. \n2. Căn cứ và phương pháp ghi sổ \nCăn cứ vào Thẻ tính giá thành kỳ trước và sổ chi tiết chi phí SXKD kỳ này để ghi \nsố liệu vào Thẻ tính giá thành, như sau: \n- Cột A: Ghi tên các chỉ tiêu. \n- Cột 1: Ghi tổng số tiền của từng chỉ tiêu. \n- Từ Cột 2 đến Cột 9: Ghi s ố tiền theo t ừng khoản mục giá thành. S ố liệu ghi ở \ncột 1 phải bằng tổng số liệu ghi từ cột 2 đến cột 9. \n- Chỉ tiêu (dòng) “Chi phí SXKD d ở dang đầu kỳ”: Căn cứ vào thẻ tính giá thành \nkỳ trước (dòng “chi phí SXKD dở dang cuối kỳ”) để ghi vào chỉ tiêu “Chi phí SXKD \ndở dang đầu kỳ” ở các cột phù hợp. \n- Chỉ tiêu (dòng) “Chi phí SXKD phát sinh trong k ỳ”: Căn cứ vào s ố liệu phản \nánh trên s ổ kế toán chi ti ết chi phí SXKD để ghi vào ch ỉ tiêu “Chi phí SXKD phát \nsinh trong kỳ” ở các cột phù hợp. \n- Chỉ tiêu (dòng) “Giá thành sản phẩm, dịch vụ trong kỳ” được xác định như sau: \nGiá thành \nsản phẩm = Chi phí SXKD \ndở dang đầu kỳ + Chi phí SXKD \nphát sinh - Chi phí SXKD \ndở dang cuối kỳ \n - Chỉ tiêu (dòng) “Chi phí SXKD dở dang cuối kỳ”: Căn cứ vào biên bản kiểm kê \nvà đánh giá sản phẩm dở dang để ghi vào chỉ tiêu \"Chi phí SXKD dở dang cuối kỳ”. \n \nSỔ CHI TIẾT CÁC TÀI KHOẢN \n(Mã số S19-DNN) \n(Dùng cho các TK: 136, 138, 141, 157, 242, 333, 334, \n335, 336, 338, 352, 353, 356, 411, 421, ...) \n \n1. Mục đích: Sổ này dùng cho m ột số tài khoản thuộc loại thanh toán nguồn vốn \nmà chưa có mẫu sổ riêng. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 79 \n \n2. Căn cứ và phương pháp ghi sổ \nSổ chi tiết các tài khoản được mở theo từng tài khoản, theo từng đối tượng thanh \ntoán (theo từng nội dung chi phí, nguồn vốn...). \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu, ngày, tháng của chứng từ dùng để ghi sổ. \n- Cột D: Ghi diễn giải tóm tắt nội dung nghiệp vụ kinh tế phát sinh. \n- Cột E: Ghi số hiệu tài khoản đối ứng. \n- Cột 1, 2: Ghi số tiền phát sinh bên Nợ hoặc bên Có. \n- Cột 3, 4: Ghi số dư bên Nợ hoặc bên Có sau mỗi nghiệp vụ phát sinh. \n- Ḍng Số dư đầu kỳ: Được lấy số liệu từ sổ chi ti ết theo dõi thanh toán c ủa kỳ \ntrước (dòng “Số dư cuối kỳ”) để ghi vào Cột 3 hoặc Cột 4 phù hợp. \n \nSỔ CHI TIẾT PHÁT HÀNH CỔ PHIẾU \n(Mẫu số S20-DNN) \n  \n1. Mục đích: Sổ này dùng để theo dõi chi ti ết số cổ phiếu do doanh nghi ệp phát \nhành ra công chúng.  \n2. Căn cứ và phương pháp ghi sổ \nMỗi lo ại c ổ phi ếu phát hành được theo dõi riêng m ột quy ển s ổ ho ặc m ột s ố \ntrang sổ. \nCột A, B: Ghi s ố và ngày tháng c ủa gi ấy phép phát hành, ho ặc quy ết định c ủa \nHĐQT. \nCột C: Ghi loại cổ phiếu đăng ký phát hành. \nCột 1: Ghi số lượng cổ phiếu đăng ký phát hành. \nCột 2: Ghi giá trị theo mệnh giá của số cổ phiếu đăng ký phát hành.  \nCột D, E: Ghi số hiệu, ngày, tháng của chứng từ thực tế phát hành cổ phiếu. \nCột G: Ghi loại cổ phiếu phát hành. \nCột 3: Ghi số lượng cổ phiếu thực tế phát hành.  \nCột 4: Ghi giá trị theo mệnh giá của số lượng cổ phiếu thực tế phát hành.  \nCột 5: Ghi giá bán cổ phiếu (Giá thực tế phát hành). \nCột 6: Ghi tổng số tiền bán cổ phiếu.  \nCột 7: Ghi số lượng cổ phiếu đã đăng ký phát hành nhưng chưa bán.  \nCột 8: Ghi mệnh giá của cổ phiếu đăng ký phát hành nhưng chưa bán.  \nCuối tháng, cuối kỳ cộng sổ để tính ra số cổ phiếu hiện đang phát hành cuối kỳ.  \n \n80 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \nSỔ CHI TIẾT CỔ PHIẾU QUỸ \n(Mẫu số S21-DNN) \n  \n1. Mục đích: Sổ này dùng để theo dõi chi ti ết số cổ phiếu doanh nghiệp mua lại \ncủa chính doanh nghiệp đã phát hành ra công chúng theo từng loại cổ phiếu.  \n2. Căn cứ và phương pháp ghi sổ \nCăn cứ ghi sổ là các chứng từ về thanh toán mua, bán cổ phiếu. Mỗi loại cổ phiếu \nmua lại (Cổ phiếu quỹ) được theo dõi riêng một quyển sổ hoặc một số trang sổ. \nCột A: Ghi ngày, tháng ghi sổ. \nCột B, C: Ghi số hiệu, ngày, tháng của chứng từ mua, bán hoặc sử dụng cổ phiếu \nmua lại. \nCột D: Ghi tóm t ắt nội dung nghi ệp vụ kinh t ế phát sinh phù h ợp với chứng t ừ \ndùng để ghi sổ. \nCột E: Ghi số hiệu tài khoản đối ứng. \nCột 1: Ghi giá thực tế mua, giá thực tế tái phát hành. \nCột 2: Ghi số lượng cổ phiếu mua lại. \nCột 3: Ghi giá trị của cổ phiếu mua lại theo mệnh giá. \nCột 4: Ghi giá trị cổ phiếu mua lại theo giá mua thực tế trên thị trường.  \nCột 5: Ghi s ố lượng cổ phiếu bán l ại ra công chúng, ho ặc sử dụng, hủy bỏ theo \nquyết định của Hội đồng quản trị. \nCột 6: Ghi giá tr ị của cổ phiếu mua l ại được tái phát hành ho ặc sử dụng, hủy bỏ \ntheo mệnh giá. \nCột 7: Ghi giá tr ị của cổ phiếu mua l ại được tái phát hành ho ặc sử dụng hủy bỏ \ntheo giá thực tế trên thị trường. \nCột 8: Ghi số lượng cổ phiếu mua lại doanh nghiệp đang nắm giữ cuối kỳ. \nCột 9: Ghi giá tr ị c ổ phi ếu mua l ại doanh nghi ệp đang n ắm gi ữ cu ối k ỳ theo \nmệnh giá. \nCột 10: Ghi giá trị của cổ phiếu mua lại doanh nghiệp đang nắm giữ cuối kỳ theo \ngiá mua thực tế. \nCuối tháng, cu ối kỳ cộng sổ để tính ra s ố cổ phiếu hiện đang mua l ại cuối kỳ.  \n \nSỔ CHI TIẾT ĐẦU TƯ CHỨNG KHOÁN \n(Mẫu số S22-DNN) \n \n1. M ục đích: S ổ này được m ở theo t ừng tài kho ản (TK 121; TK 228) và theo \ntừng loại chứng khoán có cùng m ệnh giá, t ỷ lệ lãi su ất được hưởng và ph ương thức \nthanh toán lãi suất. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 81 \n \n2. Căn cứ và phương pháp ghi sổ \n- Cột A: Ghi ngày, tháng ghi sổ. \n- Cột B, C: Ghi số hiệu, ngày, tháng của chứng từ dùng để ghi sổ. \n- Cột D: Ghi diễn giải nội dung nghiệp vụ kinh tế phát sinh. \n- Cột E: Ghi số hiệu tài khoản đối ứng. \n- Cột 1: Ghi số lượng chứng khoán mua vào. \n- Cột 2: Ghi số tiền mua chứng khoán trong kỳ. \n- Cột 3: Ghi số lượng chứng khoán xuất bán hoặc thanh toán trong kỳ. \n- Cột 4: Ghi giá vốn của chứng khoán xuất bán hoặc thanh toán. \n- Cột 5: Ghi số lượng chứng khoán còn lại cuối kỳ. \n- Cột 6: Ghi giá trị chứng khoán còn lại cuối kỳ. \n \nSỔ THEO DÕI CHI TIẾT VỐN GÓP CỦA CHỦ SỞ HỮU \n(Mẫu số S23-DNN) \n  \n1. Mục đích: Sổ theo dõi chi ti ết vốn góp c ủa chủ sở hữu dùng để ghi chép s ố \nhiện có và tình hình t ăng, giảm vốn góp c ủa chủ sở hữu của doanh nghiệp theo t ừ\nng \nnội dung: Vốn góp ban đầu, thặng dư vốn trong quá trình ho ạt động và v ốn được bổ \nsung từ nguồn khác (Tài trợ, viện trợ (nếu có)…). \n2. Căn cứ và phương pháp ghi sổ \nSổ này theo dõi toàn b ộ vốn góp của chủ sở hữu của doanh nghiệp từ khi bắt đầu \nthành lập cho đến khi gi ải thể, phá s ản. Căn cứ ghi s ổ là các ch ứng từ liên quan đến \nnghiệp vụ góp vốn, mua bán cổ phiếu và tăng, giảm vốn góp của chủ sở hữu khác. \nCột A: Ghi ngày tháng ghi sổ. \nCột B, C: Ghi ngày, tháng và số hiệu của chứng từ dùng để ghi sổ. \nCột D: Ghi tóm tắt nội dung nghiệp vụ kinh tế phát sinh. \nCột E: Ghi số hiệu tài khoản đối ứng.  \n- Cột 1: Ghi s ố vốn góp ban đầu bị giảm do thu h ồi cổ phiếu hủy bỏ, các thành \nviên rút vốn và các nguyên nhân khác. \n- Cột 2: Ghi số thặng dư vốn giảm do bán cổ phiếu mua lại thấp hơn giá mua lại. \n- Cột 3: Ghi số vốn khác giảm. \n- C ột 4: Ghi s ố v ốn góp c ủa ch ủ s ở h ữu t ăng do các thành viên góp v ốn, c ổ \nđông mua c ổ phiếu (Ghi theo m ệnh giá) ho ặc chủ doanh nghi ệp tư nhân bỏ vốn vào \nkinh doanh. \n- Cột 5: Ghi số chênh lệch giữa giá bán thực tế cổ phiếu lớn hơn mệnh giá cổ phiếu. \n \n82 CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 \n  \n- Cột 6: Ghi s ố vốn kinh doanh t ăng do được tài tr ợ, viện trợ không hoàn l ại và \ncác khoản tăng vốn khác. \nCuối tháng c ộng sổ tính ra t ổng số phát sinh t ăng, phát sinh gi ảm và s ố dư cuối \ntháng để ghi vào cột phù hợp với từng loại nguồn vốn. \n \nSỔ CHI PHÍ ĐẦU TƯ XÂY DỰNG \n(Mẫu số S24-DNN) \n \n1. M ục đích: Sổ này dùng để theo dõi chi phí đầu t ư xây d ựng t ập h ợp cho \ntừ\nng d ự án, công trình, h ạng m ục công trình k ể từ khi kh ởi công cho đến khi k ết \nthúc xây d ựng đưa dự án vào khai thác, s ử dụng. \nChi phí đầu tư xây dựng cho dự án, công trình, hạng mục công trình được tập hợp \ntrên sổ theo các nội dung chi phí: Chi phí xây lắp, chi phí thiết bị và chi phí khác. \n2. Căn cứ và ph ương pháp ghi s ổ \nCăn cứ vào ch ứng từ kế toán (Ch ứng từ gốc, ch ứng từ ghi s ổ có liên quan nh ư \nphiếu giá, các phi ếu xu ất thi ết bị, dụng c ụ, ch ứng t ừ phân b ổ chi phí Ban qu ản lý \ndự án, phân b ổ chi phí khác) để ghi vào s ổ chi phí đầu tư xây d ựng. \nKế toán c ăn c ứ vào n ội dung chi phí đầu t ư xây d ựng phát sinh trên các \nchứng từ kế toán có liên quan để ghi vào các c ột cho phù h ợp. \n - Cột A: Ghi ngày, tháng ghi s ổ. \n - Cột B, C: Ghi s ố hiệu, ngày, tháng c ủa chứng từ phát sinh dùng để ghi s ổ. \n - Cột D: Ghi tóm t ắt diễn giải nội dung nghi ệp vụ kinh t ế phát sinh. \n - Cột E: Ghi s ố hiệu tài kho ản đối ứng với TK 241. \n - Cột 1: Ghi t ổng số chi phí đầu tư xây d ựng phát sinh. \n - Cột 2: Ghi s ố chi phí phát sinh cho xây l ắp. \n - Cột 3: Ghi t ổng số chi phí phát sinh cho thi ết bị. \nTrong đó: \nCột 4: Ghi s ố chi phí phát sinh cho thi ết bị cần lắp. \nCột 5: Ghi s ố chi phí phát sinh cho thi ết bị không c ần lắp. \nCột 6: Ghi s ố chi phí phát sinh cho công c ụ, dụng cụ. \n- Cột 7: Ghi s ố chi phí phát sinh cho các kho ản chi phí khác. \nSố liệu ghi vào cột 1 phải bằng tổng số liệu ghi vào cột 2 + cột 3 + cột 7 \n- Cột G: Ghi nh ững chú thích c ần thi ết khác. \nNhững tr ường h ợp ghi gi ảm chi phí đầu t ư xây d ựng, k ế toán ghi s ố âm để \ntính t ổng s ố phát sinh gi ảm trong k ỳ. Cu ối tháng c ộng s ố phát sinh t ăng, gi ảm \nthực t ế trong tháng, trong quý, c ộng l ũy k ế t ừ đầu n ăm đến cu ối quý báo cáo, \ncộng lũy kế từ khi kh ởi công đến cuối quý báo cáo. \n \n CÔNG BÁO/Số 1107 + 1108/Ngày 12-10-2016 83 \n \nSỔ THEO DÕI THUẾ GTGT \n(Mẫu số S25-DNN) \n \n1. Mục đích: Sổ này ch ỉ áp d ụng cho các c ơ sở sản xuất, kinh doanh thu ộc đối \ntượng tính thuế GTGT phải nộp theo phương pháp trực tiếp. Sổ này dùng để phản ánh \nsố thuế GTGT phải nộp, đã nộp và còn phải nộp. \n2. Căn cứ và phương pháp ghi sổ \nSổ này được mở hàng tháng, được ghi chép theo t ừng Hóa đơn GTGT (Mỗi hóa \nđơn ghi 01 dòng). Riêng thu ế GTGT ph ải nộp có th ể không ghi theo t ừng Hóa đơn, \n1 tháng có thể ghi 1 lần vào thời điểm cuối tháng. \n- Cột A, B: Ghi số hiệu, ngày tháng của chứng từ (Hóa đơn GTGT, chứng từ nộp \nthuế GTGT). \n- Cột C: Ghi diễn giải nội dung nghiệp vụ kinh tế phát sinh. \n- Cột 1: Ghi số tiền thuế GTGT đã nộp trong kỳ theo từng chứng từ. \n- Cột 2: Ghi số tiền thuế GTGT còn phải nộp đầu kỳ, số tiền thuế GTGT phải nộp \nphát sinh trong kỳ theo từng chứng từ, số tiền thuế GTGT còn phải nộp cuối kỳ. \nCuối kỳ, kế toán ti ến hành khóa s ổ, cộng số phát sinh thu ế GTGT ph ải nộp, đã \nnộp trong kỳ và tính ra số thuế GTGT còn phải nộp cuối kỳ. Sau khi khóa sổ kế toán, \nngười ghi sổ và kế toán trưởng phải ký và ghi họ tên. \n \nSỔ CHI TIẾT THUẾ GTGT ĐƯỢC HOÀN LẠI \n(Mẫu số S26-DNN) \n \n1. Mục đích: Sổ này áp dụng cho các cơ sở sản xuất, kinh doanh thuộc đối tượng \ntính thuế theo phương pháp khấu trừ thuế. Sổ này dùng để ghi chép ph ản ánh số thuế \nGTGT được hoàn lại, đã hoàn lại và còn được hoàn lại cuối kỳ báo cáo. \n2. Căn cứ và phương pháp ghi sổ \nSổ này được mở hàng tháng, được ghi chép theo t ừng ch ứng t ừ v ề thu ế GTGT \nđược hoàn lại, đã hoàn l\nại trong kỳ báo cáo. \n- Cột A, B: Ghi số hiệu ngày, tháng của chứng từ. \n- Cột C: Ghi diễn giải nội dung nghiệp vụ kinh tế phát sinh theo từng chứng từ. \n- Cột 1: Ghi s ố tiền thuế GTGT còn được hoàn l ại đầu kỳ, số thuế GTGT được \nhoàn lại trong kỳ và số thuế GTGT còn được hoàn lại cuối kỳ báo cáo. \n- Cột 2: Ghi số tiền thuế GTGT đã hoàn lại trong kỳ báo cáo. \nCuối kỳ, kế toán tiến hành khóa s ổ, cộng số phát sinh thu ế GTGT được hoàn lại, \nđã hoàn lại và tính ra số thuế GTGT còn được hoàn lại cuối kỳ báo cáo. Sau khi khóa \nsổ kế toán, người ghi sổ và kế toán trưởng phải ký và ghi rõ họ tên.",
+      "print_template_html": "data/regulations/tt133_2016_appendix_form_templates_html/03a_DNN.html"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "catalog_id": "tt133_mvp_report_catalog_v1",
+  "source": "Thong tu 133/2016/TT-BTC",
+  "financial_reports": [
+    {
+      "report_code": "BCTC_BANG_CAN_DOI_KE_TOAN",
+      "name": "Bang can doi ke toan",
+      "frequency_supported": ["month", "quarter", "year", "as_of_date"]
+    },
+    {
+      "report_code": "BCTC_KQHDKD",
+      "name": "Bao cao ket qua hoat dong kinh doanh",
+      "frequency_supported": ["month", "quarter", "year", "as_of_date"]
+    },
+    {
+      "report_code": "BCTC_LCTT",
+      "name": "Bao cao luu chuyen tien te",
+      "frequency_supported": ["month", "quarter", "year", "as_of_date"]
+    },
+    {
+      "report_code": "BCTC_THUYET_MINH",
+      "name": "Thuyet minh bao cao tai chinh",
+      "frequency_supported": ["quarter", "year", "as_of_date"]
+    }
+  ],
+  "tax_reports": [
+    {
+      "report_code": "TAX_VAT",
+      "name": "Bao cao thue GTGT",
+      "frequency_supported": ["month", "quarter", "as_of_date"]
+    },
+    {
+      "report_code": "TAX_PIT",
+      "name": "Bao cao thue TNCN",
+      "frequency_supported": ["month", "quarter", "year", "as_of_date"]
+    },
+    {
+      "report_code": "TAX_CIT",
+      "name": "Bao cao thue TNDN",
+      "frequency_supported": ["quarter", "year", "as_of_date"]
+    }
+  ],
+  "traceability_required": true
+}

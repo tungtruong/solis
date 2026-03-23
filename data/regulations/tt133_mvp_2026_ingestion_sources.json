@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "ingestion_policy_id": "tt133_mvp_ingestion_sources_v1",
+  "allow_manual_entry": false,
+  "allowed_sources": [
+    {
+      "source_id": "sales_invoice_xml",
+      "description": "Invoice XML dau ra cua chinh cong ty",
+      "required_fields": [
+        "invoice_no",
+        "issue_date",
+        "buyer_tax_code",
+        "amount_untaxed",
+        "vat_amount",
+        "amount_total",
+        "payment_status"
+      ],
+      "target_event_candidates": ["ban_hang_dich_vu"]
+    },
+    {
+      "source_id": "purchase_invoice_xml",
+      "description": "Invoice XML dau vao cua nha cung cap",
+      "required_fields": [
+        "invoice_no",
+        "issue_date",
+        "seller_tax_code",
+        "amount_untaxed",
+        "vat_amount",
+        "amount_total",
+        "goods_service_type"
+      ],
+      "target_event_candidates": ["mua_hang_dung_noi_bo", "mua_dich_vu", "mua_tscd"]
+    },
+    {
+      "source_id": "bank_statement",
+      "description": "Sao ke ngan hang",
+      "required_fields": [
+        "statement_date",
+        "amount",
+        "debit_credit_flag",
+        "counterparty_name",
+        "description",
+        "reference_no"
+      ],
+      "target_event_candidates": ["gop_von", "rut_tien", "tam_ung", "nop_tien", "hoan_ung", "nop_thue"]
+    }
+  ],
+  "reject_policy": {
+    "on_unknown_source": "reject",
+    "on_missing_required_fields": "reject",
+    "on_schema_mismatch": "reject"
+  }
+}

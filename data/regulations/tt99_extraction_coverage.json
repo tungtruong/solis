@@ -1,0 +1,25 @@
+{
+  "document": "TT99_2025",
+  "source_mode": "PDF-only",
+  "generated_at": "2026-03-15T17:06:44",
+  "source_pdf_count": 10,
+  "source_pdfs": [
+    "2025_1563 + 1564_99-2025-TT-BTC.pdf",
+    "2025_1565 + 1566_99-2025-TT-BTC.pdf",
+    "2025_1567 + 1568_99-2025-TT-BTC.pdf",
+    "2025_1569 + 1570_99-2025-TT-BTC.pdf",
+    "2025_1571 + 1572_99-2025-TT-BTC.pdf",
+    "2025_1573 + 1574_99-2025-TT-BTC.pdf",
+    "2025_1575 + 1576_99-2025-TT-BTC.pdf",
+    "2025_1577 + 1578_99-2025-TT-BTC.pdf",
+    "2025_1579 + 1580_99-2025-TT-BTC.pdf",
+    "2025_1581 + 1582_99-2025-TT-BTC.pdf"
+  ],
+  "output_file": "d:\\Repos\\WSSMEAS\\data\\regulations\\raw_tt99_full.txt",
+  "output_line_count": 27398,
+  "article_mentions": 31,
+  "unique_articles": 31,
+  "article_range": "1-31",
+  "missing_articles": [],
+  "notes": "Merged from PDF files only as requested."
+}

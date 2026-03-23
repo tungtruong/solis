@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "source": "Thong tu 133/2016/TT-BTC",
+  "total_items": 16,
+  "items": [
+    {
+      "method_id": "TT133_MVP_POSTING_0001",
+      "event_code": "gop_von",
+      "description": "Gop von bang tien mat hoac chuyen khoan",
+      "journal_lines": [
+        {"side": "debit", "account": "{cash_or_bank_account}", "amount_expr": "amount"},
+        {"side": "credit", "account": "411", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0002",
+      "event_code": "rut_tien",
+      "description": "Rut/chuyen tien giua 111 va 112",
+      "journal_lines": [
+        {"side": "debit", "account": "{to_account}", "amount_expr": "amount"},
+        {"side": "credit", "account": "{from_account}", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0003",
+      "event_code": "tam_ung",
+      "description": "Tam ung nhan vien",
+      "journal_lines": [
+        {"side": "debit", "account": "141", "amount_expr": "amount"},
+        {"side": "credit", "account": "{cash_or_bank_account}", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0004",
+      "event_code": "nop_tien",
+      "description": "Nop tien vao tai khoan ngan hang",
+      "journal_lines": [
+        {"side": "debit", "account": "112", "amount_expr": "amount"},
+        {"side": "credit", "account": "111", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0005",
+      "event_code": "hoan_ung",
+      "description": "Hoan ung chi bang tien",
+      "journal_lines": [
+        {"side": "debit", "account": "{cash_or_bank_account}", "amount_expr": "amount"},
+        {"side": "credit", "account": "141", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0006",
+      "event_code": "ban_hang_dich_vu",
+      "description": "Ban hang/dich vu co VAT",
+      "conditions": {"has_vat": true},
+      "journal_lines": [
+        {"side": "debit", "account": "{receipt_account_111_112_131}", "amount_expr": "total_amount"},
+        {"side": "credit", "account": "511", "amount_expr": "untaxed_amount"},
+        {"side": "credit", "account": "3331", "amount_expr": "vat_amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0007",
+      "event_code": "ban_hang_dich_vu",
+      "description": "Ban hang/dich vu khong VAT",
+      "conditions": {"has_vat": false},
+      "journal_lines": [
+        {"side": "debit", "account": "{receipt_account_111_112_131}", "amount_expr": "amount"},
+        {"side": "credit", "account": "511", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0008",
+      "event_code": "mua_hang_dung_noi_bo",
+      "description": "Mua hang dung noi bo ghi nhan CCDC",
+      "conditions": {"classification": "ccdc_allocate"},
+      "journal_lines": [
+        {"side": "debit", "account": "153", "amount_expr": "untaxed_amount"},
+        {"side": "debit", "account": "1331", "amount_expr": "vat_amount_optional"},
+        {"side": "credit", "account": "{payment_account_111_112_331}", "amount_expr": "total_amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0009",
+      "event_code": "mua_hang_dung_noi_bo",
+      "description": "Mua hang dung noi bo ghi thang chi phi",
+      "conditions": {"classification": "direct_expense"},
+      "journal_lines": [
+        {"side": "debit", "account": "642", "amount_expr": "untaxed_amount"},
+        {"side": "debit", "account": "1331", "amount_expr": "vat_amount_optional"},
+        {"side": "credit", "account": "{payment_account_111_112_331}", "amount_expr": "total_amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0010",
+      "event_code": "mua_dich_vu",
+      "description": "Mua dich vu dua vao chi phi tra truoc",
+      "conditions": {"classification": "prepaid_allocate"},
+      "journal_lines": [
+        {"side": "debit", "account": "242", "amount_expr": "untaxed_amount"},
+        {"side": "debit", "account": "1331", "amount_expr": "vat_amount_optional"},
+        {"side": "credit", "account": "{payment_account_111_112_331}", "amount_expr": "total_amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0011",
+      "event_code": "mua_dich_vu",
+      "description": "Mua dich vu ghi thang chi phi",
+      "conditions": {"classification": "direct_expense"},
+      "journal_lines": [
+        {"side": "debit", "account": "642", "amount_expr": "untaxed_amount"},
+        {"side": "debit", "account": "1331", "amount_expr": "vat_amount_optional"},
+        {"side": "credit", "account": "{payment_account_111_112_331}", "amount_expr": "total_amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0012",
+      "event_code": "mua_tscd",
+      "description": "Mua TSCĐ",
+      "journal_lines": [
+        {"side": "debit", "account": "211", "amount_expr": "untaxed_amount"},
+        {"side": "debit", "account": "1332", "amount_expr": "vat_amount_optional"},
+        {"side": "credit", "account": "{payment_account_111_112_331}", "amount_expr": "total_amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0013",
+      "event_code": "khau_hao",
+      "description": "Khau hao TSCĐ",
+      "journal_lines": [
+        {"side": "debit", "account": "642", "amount_expr": "amount"},
+        {"side": "credit", "account": "214", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0014",
+      "event_code": "nop_thue",
+      "description": "Nop thue bang tien",
+      "journal_lines": [
+        {"side": "debit", "account": "{tax_payable_account_333x}", "amount_expr": "amount"},
+        {"side": "credit", "account": "{cash_or_bank_account}", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0015",
+      "event_code": "phan_bo_ccdc",
+      "description": "Phan bo CCDC dinh ky",
+      "journal_lines": [
+        {"side": "debit", "account": "642", "amount_expr": "amount"},
+        {"side": "credit", "account": "242", "amount_expr": "amount"}
+      ]
+    },
+    {
+      "method_id": "TT133_MVP_POSTING_0016",
+      "event_code": "phan_bo_chi_phi_tra_truoc",
+      "description": "Phan bo chi phi tra truoc dinh ky",
+      "journal_lines": [
+        {"side": "debit", "account": "642", "amount_expr": "amount"},
+        {"side": "credit", "account": "242", "amount_expr": "amount"}
+      ]
+    }
+  ]
+}

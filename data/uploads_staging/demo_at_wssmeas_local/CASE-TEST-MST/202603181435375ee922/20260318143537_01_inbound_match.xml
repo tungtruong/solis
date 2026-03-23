@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<HDon>
+  <DLHDon>
+    <TTChung><SHDon>IN-001</SHDon><NLap>2026-03-18</NLap></TTChung>
+    <NDHDon>
+      <NBan><Ten>NCC B</Ten><MST>0102222222</MST><DChi>HN</DChi></NBan>
+      <NMua><Ten>SME Demo</Ten><MST>0312345678</MST><DChi>123 Le Loi, Q1, HCM</DChi></NMua>
+      <DSHHDVu><HHDVu><THHDVu>Dich vu ke toan</THHDVu><ThTien>5000000</ThTien><TSuat>10</TSuat></HHDVu></DSHHDVu>
+      <TToan><TgTCThue>5000000</TgTCThue><TgTThue>500000</TgTThue><TgTTTBSo>5500000</TgTTTBSo></TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>

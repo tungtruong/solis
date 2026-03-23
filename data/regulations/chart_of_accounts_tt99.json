@@ -1,0 +1,1458 @@
+[
+  {
+    "account_code": "111",
+    "account_name": "Tiền mặt",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "112",
+    "account_name": "Tiền gửi không kỳ hạn",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "113",
+    "account_name": "Tiền đang chuyển",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "121",
+    "account_name": "Chứng khoán kinh doanh",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "128",
+    "account_name": "Đầu tư nắm giữ đến ngày đáo hạn",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1281",
+    "account_name": "Tiền gửi có kỳ hạn",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1282",
+    "account_name": "Trái phiếu",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1283",
+    "account_name": "Cho vay",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1288",
+    "account_name": "Các khoản đầu tư khác nắm giữ đến ngày đáo hạn",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "131",
+    "account_name": "Phải thu của khách hàng",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "133",
+    "account_name": "Thuế GTGT được khấu trừ",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1331",
+    "account_name": "Thuế GTGT được khấu trừ của hàng hóa, dịch vụ",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1332",
+    "account_name": "Thuế GTGT được khấu trừ của TSCĐ",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "136",
+    "account_name": "Phải thu nội bộ",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1361",
+    "account_name": "Vốn kinh doanh ở đơn vị trực thuộc",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1362",
+    "account_name": "Phải thu nội bộ về chênh lệch tỷ giá",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1363",
+    "account_name": "Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1368",
+    "account_name": "Phải thu nội bộ khác",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "138",
+    "account_name": "Phải thu khác",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1381",
+    "account_name": "Tài sản thiếu chờ xử lý",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1383",
+    "account_name": "Thuế TTĐB của hàng nhập khẩu",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "1388",
+    "account_name": "Phải thu khác",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "141",
+    "account_name": "Tạm ứng",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "151",
+    "account_name": "Hàng mua đang đi đường",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "152",
+    "account_name": "Nguyên liệu, vật liệu",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "153",
+    "account_name": "Công cụ, dụng cụ",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "154",
+    "account_name": "Chi phí sản xuất, kinh doanh dở dang",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "155",
+    "account_name": "Sản phẩm",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "156",
+    "account_name": "Hàng hóa",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "157",
+    "account_name": "Hàng gửi đi bán",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "158",
+    "account_name": "Nguyên liệu, vật tư tại kho bảo thuế",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "171",
+    "account_name": "Giao dịch mua, bán lại trái phiếu chính phủ",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "211",
+    "account_name": "Tài sản cố định hữu hình",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "212",
+    "account_name": "Tài sản cố định thuê tài chính",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "213",
+    "account_name": "Tài sản cố định vô hình",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "214",
+    "account_name": "Hao mòn tài sản cố định",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2141",
+    "account_name": "Hao mòn TSCĐ hữu hình",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2142",
+    "account_name": "Hao mòn TSCĐ thuê tài chính",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2143",
+    "account_name": "Hao mòn TSCĐ vô hình",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2147",
+    "account_name": "Hao mòn BĐSĐT",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "215",
+    "account_name": "Tài sản sinh học",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2151",
+    "account_name": "Súc vật nuôi cho sản phẩm định kỳ",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "21511",
+    "account_name": "Súc vật nuôi cho sản phẩm định kỳ chưa đạt đến giai đoạn trưởng",
+    "account_type": "Asset",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "21512",
+    "account_name": "Súc vật nuôi cho sản phẩm định kỳ đạt đến giai đoạn trưởng thành",
+    "account_type": "Asset",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2152",
+    "account_name": "Súc vật nuôi lấy sản phẩm một lần",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2153",
+    "account_name": "Cây trồng theo mùa vụ hoặc lấy sản phẩm một lần",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "217",
+    "account_name": "Bất động sản đầu tư",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "221",
+    "account_name": "Đầu tư vào công ty con",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "222",
+    "account_name": "Đầu tư vào công ty liên doanh, liên kết",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "228",
+    "account_name": "Đầu tư khác",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2281",
+    "account_name": "Đầu tư góp vốn vào đơn vị khác",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2288",
+    "account_name": "Đầu tư khác",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "229",
+    "account_name": "Dự phòng tổn thất tài sản",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2291",
+    "account_name": "Dự phòng giảm giá chứng khoán kinh doanh",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2292",
+    "account_name": "Dự phòng tổn thất đầu tư vào đơn vị khác",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2293",
+    "account_name": "Dự phòng phải thu khó đòi",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2294",
+    "account_name": "Dự phòng giảm giá hàng tồn kho",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2295",
+    "account_name": "Dự phòng tổn thất tài sản sinh học",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "241",
+    "account_name": "Xây dựng cơ bản dở dang",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2411",
+    "account_name": "Mua sắm TSCĐ",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2412",
+    "account_name": "Xây dựng cơ bản",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2413",
+    "account_name": "Sửa chữa, bảo dưỡng định kỳ TSCĐ",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "2414",
+    "account_name": "Nâng cấp, cải tạo TSCĐ",
+    "account_type": "Asset",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "242",
+    "account_name": "Chi phí chờ phân bổ",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "243",
+    "account_name": "Tài sản thuế thu nhập hoãn lại",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "244",
+    "account_name": "Ký quỹ, ký cược",
+    "account_type": "Asset",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "331",
+    "account_name": "Phải trả cho người bán",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "332",
+    "account_name": "Phải trả cổ tức, lợi nhuận",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "333",
+    "account_name": "Thuế và các khoản phải nộp Nhà nước",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3331",
+    "account_name": "Thuế giá trị gia tăng phải nộp",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "33311",
+    "account_name": "Thuế GTGT đầu ra",
+    "account_type": "Liability",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "33312",
+    "account_name": "Thuế GTGT hàng nhập khẩu",
+    "account_type": "Liability",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3332",
+    "account_name": "Thuế tiêu thụ đặc biệt",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3333",
+    "account_name": "Thuế xuất, nhập khẩu",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3334",
+    "account_name": "Thuế thu nhập doanh nghiệp",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3335",
+    "account_name": "Thuế thu nhập cá nhân",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3336",
+    "account_name": "Thuế tài nguyên",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3337",
+    "account_name": "Thuế nhà đất, tiền thuê đất",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3338",
+    "account_name": "Thuế bảo vệ môi trường và các loại thuế khác",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "33381",
+    "account_name": "Thuế bảo vệ môi trường",
+    "account_type": "Liability",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "33382",
+    "account_name": "Các loại thuế khác",
+    "account_type": "Liability",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3339",
+    "account_name": "Phí, lệ phí và các khoản phải nộp khác",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "334",
+    "account_name": "Phải trả người lao động",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "335",
+    "account_name": "Chi phí phải trả",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "336",
+    "account_name": "Phải trả nội bộ",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3361",
+    "account_name": "Phải trả nội bộ về vốn kinh doanh",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3362",
+    "account_name": "Phải trả nội bộ về chênh lệch tỷ giá",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3363",
+    "account_name": "Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hóa",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3368",
+    "account_name": "Phải trả nội bộ khác",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "337",
+    "account_name": "Thanh toán theo tiến độ hợp đồng xây dựng",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "338",
+    "account_name": "Phải trả, phải nộp khác",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3381",
+    "account_name": "Tài sản thừa chờ giải quyết",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3382",
+    "account_name": "Kinh phí công đoàn",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3383",
+    "account_name": "Bảo hiểm xã hội",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3384",
+    "account_name": "Bảo hiểm y tế",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3386",
+    "account_name": "Bảo hiểm thất nghiệp",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3387",
+    "account_name": "Doanh thu chờ phân bổ",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3388",
+    "account_name": "Phải trả, phải nộp khác",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "341",
+    "account_name": "Vay và nợ thuê tài chính",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3411",
+    "account_name": "Các khoản đi vay",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3412",
+    "account_name": "Nợ thuê tài chính",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "343",
+    "account_name": "Trái phiếu phát hành",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3431",
+    "account_name": "Trái phiếu thường",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3432",
+    "account_name": "Trái phiếu chuyển đổi",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "344",
+    "account_name": "Nhận ký quỹ, ký cược",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "347",
+    "account_name": "Thuế thu nhập hoãn lại phải trả",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "352",
+    "account_name": "Dự phòng phải trả",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3521",
+    "account_name": "Dự phòng bảo hành sản phẩm, hàng hóa",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3522",
+    "account_name": "Dự phòng bảo hành công trình xây dựng",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3523",
+    "account_name": "Dự phòng tái cơ cấu doanh nghiệp",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3525",
+    "account_name": "Dự phòng phải trả khác",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "353",
+    "account_name": "Quỹ khen thưởng, phúc lợi",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3531",
+    "account_name": "Quỹ khen thưởng",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3532",
+    "account_name": "Quỹ phúc lợi",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3533",
+    "account_name": "Quỹ phúc lợi đã hình thành TSCĐ",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3534",
+    "account_name": "Quỹ thưởng ban quản lý điều hành công ty",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "356",
+    "account_name": "Quỹ phát triển khoa học và công nghệ",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3561",
+    "account_name": "Quỹ phát triển khoa học và công nghệ",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "3562",
+    "account_name": "Quỹ phát triển khoa học và công nghệ đã hình thành tài sản",
+    "account_type": "Liability",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "357",
+    "account_name": "Quỹ bình ổn giá",
+    "account_type": "Liability",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "411",
+    "account_name": "Vốn đầu tư của chủ sở hữu",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "4111",
+    "account_name": "Vốn góp của chủ sở hữu",
+    "account_type": "Equity",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "41111",
+    "account_name": "Cổ phiếu phổ thông có quyền biểu quyết",
+    "account_type": "Equity",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "41112",
+    "account_name": "Cổ phiếu ưu đãi",
+    "account_type": "Equity",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "4112",
+    "account_name": "Thặng dư vốn",
+    "account_type": "Equity",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "4113",
+    "account_name": "Quyền chọn chuyển đổi trái phiếu",
+    "account_type": "Equity",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "4118",
+    "account_name": "Vốn khác",
+    "account_type": "Equity",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "412",
+    "account_name": "Chênh lệch đánh giá lại tài sản",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "413",
+    "account_name": "Chênh lệch tỷ giá hối đoái",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "414",
+    "account_name": "Quỹ đầu tư phát triển",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "418",
+    "account_name": "Các quỹ khác thuộc vốn chủ sở hữu",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "419",
+    "account_name": "Cổ phiếu mua lại của chính mình",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "421",
+    "account_name": "Lợi nhuận sau thuế chưa phân phối",
+    "account_type": "Equity",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "4211",
+    "account_name": "Lợi nhuận sau thuế chưa phân phối lũy kế đến cuối năm trước",
+    "account_type": "Equity",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "4212",
+    "account_name": "Lợi nhuận sau thuế chưa phân phối năm nay",
+    "account_type": "Equity",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "511",
+    "account_name": "Doanh thu bán hàng và cung cấp dịch vụ",
+    "account_type": "Revenue",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "515",
+    "account_name": "Doanh thu hoạt động tài chính",
+    "account_type": "Revenue",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "521",
+    "account_name": "Các khoản giảm trừ doanh thu",
+    "account_type": "Revenue",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "621",
+    "account_name": "Chi phí nguyên liệu, vật liệu trực tiếp",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "622",
+    "account_name": "Chi phí nhân công trực tiếp",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "623",
+    "account_name": "Chi phí sử dụng máy thi công",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6231",
+    "account_name": "Chi phí nhân công",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6232",
+    "account_name": "Chi phí vật liệu",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6233",
+    "account_name": "Chi phí dụng cụ sản xuất",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6234",
+    "account_name": "Chi phí khấu hao máy thi công",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6237",
+    "account_name": "Chi phí dịch vụ mua ngoài",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6238",
+    "account_name": "Chi phí bằng tiền khác",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "627",
+    "account_name": "Chi phí sản xuất chung",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6271",
+    "account_name": "Chi phí nhân viên phân xưởng",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6272",
+    "account_name": "Chi phí vật liệu",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6273",
+    "account_name": "Chi phí dụng cụ sản xuất",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6274",
+    "account_name": "Chi phí khấu hao TSCĐ",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6275",
+    "account_name": "Thuế, phí, lệ phí",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6277",
+    "account_name": "Chi phí dịch vụ mua ngoài",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6278",
+    "account_name": "Chi phí bằng tiền khác",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "632",
+    "account_name": "Giá vốn hàng bán",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "635",
+    "account_name": "Chi phí tài chính",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "641",
+    "account_name": "Chi phí bán hàng",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6411",
+    "account_name": "Chi phí nhân viên",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6412",
+    "account_name": "Chi phí vật liệu, bao bì",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6413",
+    "account_name": "Chi phí dụng cụ, đồ dùng",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6414",
+    "account_name": "Chi phí khấu hao TSCĐ",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6415",
+    "account_name": "Thuế, phí, lệ phí",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6417",
+    "account_name": "Chi phí dịch vụ mua ngoài",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6418",
+    "account_name": "Chi phí bằng tiền khác",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "642",
+    "account_name": "Chi phí quản lý doanh nghiệp",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6421",
+    "account_name": "Chi phí nhân viên quản lý",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6422",
+    "account_name": "Chi phí vật liệu quản lý",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6423",
+    "account_name": "Chi phí đồ dùng văn phòng",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6424",
+    "account_name": "Chi phí khấu hao TSCĐ",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6425",
+    "account_name": "Thuế, phí và lệ phí",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6426",
+    "account_name": "Chi phí dự phòng",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6427",
+    "account_name": "Chi phí dịch vụ mua ngoài",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "6428",
+    "account_name": "Chi phí bằng tiền khác",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "711",
+    "account_name": "Thu nhập khác",
+    "account_type": "Revenue",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "811",
+    "account_name": "Chi phí khác",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "821",
+    "account_name": "Chi phí thuế thu nhập doanh nghiệp",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "8211",
+    "account_name": "Chi phí thuế TNDN hiện hành",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "82111",
+    "account_name": "Chi phí thuế thu nhập doanh nghiệp hiện hành theo quy định của",
+    "account_type": "Expense",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "82112",
+    "account_name": "Chi phí thuế thu nhập doanh nghiệp bổ sung theo quy định về thuế",
+    "account_type": "Expense",
+    "level": 3,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "8212",
+    "account_name": "Chi phí thuế TNDN hoãn lại",
+    "account_type": "Expense",
+    "level": 2,
+    "circular": "TT99",
+    "is_active": true
+  },
+  {
+    "account_code": "911",
+    "account_name": "Xác định kết quả kinh doanh",
+    "account_type": "Expense",
+    "level": 1,
+    "circular": "TT99",
+    "is_active": true
+  }
+]

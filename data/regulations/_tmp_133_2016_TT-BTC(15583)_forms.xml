@@ -1,0 +1,3232 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TT99AppendixIForms document="Thông tư 99/2025/TT-BTC" source_pdf="D:/Repos/WSSMEAS/data/regulations/TT133/133_2016_TT-BTC(15583).pdf">
+  <Meta>
+    <GeneratedBy>scripts/extract_tt99_appendix1_form_templates.py</GeneratedBy>
+    <TotalForms>53</TotalForms>
+  </Meta>
+  <Forms>
+    <Form code="01a-LĐTL" id="tt99_appendix1_01a_ldtl" group="LĐTL" start_page="34" end_page="35">
+      <Title>BẢNG CHẤM CÔNG</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="don_vi" label="Đơn vị" type="string" required="false" />
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="nt" label="NT" type="string" required="false" />
+        <Field key="nn" label="NN" type="string" required="false" />
+        <Field key="nl" label="NL" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người chấm công</Signer>
+        <Signer>Phụ trách bộ phận</Signer>
+        <Signer>Người duyệt</Signer>
+        <Signer>có người làm thêm</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số: 01a-LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+BẢNG CHẤM CÔNG 
+Tháng... năm...... 
+ 
+Ngày trong tháng Quy ra công 
+STT H ọ và tên 
+Ngạch bậc 
+lương 
+hoặc cấp 
+bậc 
+chức vụ 
+1 2 3 ... 31
+Số công 
+hưởng 
+lương 
+sản phẩm 
+Số công 
+hưởng 
+lương 
+thời gian
+Số công nghỉ 
+việc, ngừng 
+việc hưởng 
+100% lương 
+Số công nghỉ 
+việc, ngừng 
+việc hưởng...% 
+lương 
+Số công 
+hưởng 
+BHXH 
+A B C 1 2 3 ... 31 32 33 34 35 36 
+             
+             
+             
+ C ộng            
+             
+ 
+Người chấm công 
+(Ký, họ tên) 
+ 
+Phụ trách bộ phận 
+(Ký, họ tên) 
+Ngày... tháng... năm... 
+Người duyệt 
+(Ký, họ tên) 
+   
+Ký hiệu chấm công:  
+- Lương SP: SP - Ngh ỉ phép:  P  
+- Lương thời gian:  +  - H ội nghị, học tập:  H  
+- Ốm, điều dưỡng:  Ô  - Ngh ỉ bù:  NB 
+- Con ốm:  Cô - Ngh ỉ không lương:  KL 
+- Thai sản:  TS  - Ng ừng việc:  N 
+- Tai nạn:  T  - Lao động nghĩa vụ:  L Đ 
+ 
+36 CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 
+  
+Đơn vị:.............................  M ẫu số 01b - LĐTL 
+Bộ phận:..........................  (Ban hành theo Thông tư số 133/2016/TT-BTC  
+ ngày 26/8/2016 của Bộ Tài chính) 
+ 
+ Số:................... 
+BẢNG CHẤM CÔNG LÀM THÊM GIỜ  
+Tháng..... năm...... 
+ 
+Ngày trong tháng C ộng giờ làm thêm 
+Số 
+TT Họ và tên 1 2 ... 31 Ngày 
+làm việc
+Ngày 
+thứ bảy, 
+chủ nhật 
+Ngày 
+lễ, tết 
+Làm 
+đêm 
+A B 1 2 ... 31 32 33 34 35 
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+ C ộng         
+ 
+Ký hiệu chấm công 
+NT: Làm thêm ngày làm việc (Từ giờ..... đến giờ) 
+NN: Làm thêm ngày thứ bảy, chủ nhật (Từ giờ..... đến giờ) 
+NL: Làm thêm ngày lễ, tết (Từ giờ..... đến giờ) 
+Đ: Làm thêm buổi đêm 
+  
+ 
+Xác nhận của bộ phận (phòng ban) 
+ có người làm thêm 
+(Ký, họ tên) 
+ 
+Người chấm công 
+(Ký, họ tên) 
+Ngày... tháng... năm... 
+Người duyệt 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01a_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="02-LĐTL" id="tt99_appendix1_02_ldtl" group="LĐTL" start_page="36" end_page="36">
+      <Title>Số:............... BẢNG THANH TOÁN TIỀN LƯƠNG</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập biểu K ế toán trưởng Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số: 02-LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+Số:............... 
+ 
+BẢNG THANH TOÁN TIỀN LƯƠNG 
+Tháng.......... năm........... 
+ 
+Lương 
+sản phẩm
+Lương 
+thời gian 
+Nghỉ việc 
+ngừng việc 
+hưởng...% 
+lương 
+Các khoản 
+phải khấu trừ vào lương 
+Kỳ II 
+được lĩnh Số 
+TT 
+Họ và 
+tên 
+Bậc 
+lương 
+Hệ 
+số 
+Số 
+SP 
+Số 
+tiền
+Số 
+công
+Số 
+tiền
+Số 
+công
+Số 
+tiền
+Phụ 
+cấp 
+thuộc 
+quỹ 
+lương
+Phụ 
+cấp 
+khác 
+Tổng 
+số 
+Tạm 
+ứng 
+kỳ I 
+BHXH ...
+Thuế 
+TNCN 
+phải nộp
+Cộng Số 
+tiền
+Ký 
+nhận 
+A B 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 C 
+                    
+                    
+                    
+                    
+ C ộng                   
+Tổng số tiền (viết bằng chữ):................................................................................... 
+ 
+  Ngày.... tháng.... năm... 
+Người lập biểu K ế toán trưởng Giám đốc 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="03-LĐTL" id="tt99_appendix1_03_ldtl" group="LĐTL" start_page="37" end_page="39">
+      <Title>BẢNG THANH TOÁN TIỀN THƯỞNG</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quy_nam_so" label="Quý..... năm....                                              Số" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (Viết bằng chữ)" type="string" required="false" />
+        <Field key="don_vi" label="Đơn vị" type="string" required="false" />
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="cap_cho" label="Cấp cho" type="string" required="false" />
+        <Field key="chuc_vu" label="Chức vụ" type="string" required="false" />
+        <Field key="duoc_cu_di_cong_tac_tai" label="Được cử đi công tác tại" type="string" required="false" />
+        <Field key="1_phu_cap_di_duong" label="1. Phụ cấp đi đường" type="string" required="false" />
+        <Field key="tong_cong_ngay_cong_tac" label="Tổng cộng ngày công tác" type="string" required="false" />
+        <Field key="s_o_tien_duoc_thanh_toan_la" label="S ố tiền được thanh toán là" type="string" required="false" />
+        <Field key="ten_don_vi_hoac_ca_nhan" label="Tên đơn vị (hoặc cá nhân)" type="string" required="false" />
+        <Field key="theo_hop_dong_so" label="Theo Hợp đồng số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập biểu K ế toán trưởng Giám đốc</Signer>
+        <Signer>Người duyệt</Signer>
+        <Signer>của cơ quan</Signer>
+        <Signer>Người đi công tác Ph ụ trách bộ phận  K ế toán trưởng</Signer>
+        <Signer>Người giao việc Ng ười nhận việc Ng ười kiểm tra chất lượng Ng ười duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03-LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BẢNG THANH TOÁN TIỀN THƯỞNG 
+                                                                        Quý..... năm....                                              Số:................ 
+ 
+Mức thưởng STT H ọ và tên Ch ức vụ Bậc 
+lương Xếp loại thưởng S ố tiền Ký nh ận Ghi chú 
+A B C 1 2 3 D E 
+        
+        
+        
+        
+        
+        
+        
+ C ộng x x x  x  
+Tổng số tiền (Viết bằng chữ):......................................................................... 
+ 
+  Ngày.... tháng.... năm... 
+Người lập biểu K ế toán trưởng Giám đốc 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+ 
+ 
+ CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 39 
+ 
+Đơn vị:........ C ộng hòa xã hội chủ nghĩa Việt Nam M ẫu số: 04-LĐTL 
+Bộ phận:..... Độc lập - Tự do - Hạnh phúc (Ban hành theo Thông t ư       
+số 133/2016/TT-BTC          
+ngày 26/8/2016 của Bộ Tài chính)
+ 
+GIẤY ĐI ĐƯỜNG 
+Số:......................... 
+ 
+Cấp cho:............................................................................................................................ 
+Chức vụ:........................................................................................................................... 
+Được cử đi công tác tại:.................................................................................................. 
+Theo công lệnh (hoặc giấy giới thiệu) số............ ngày........... tháng............ năm............ 
+Từ ngày........... tháng......... năm.......... đến ngày.......... tháng.......... năm....................... 
+Ngày...... tháng...... năm...... 
+Người duyệt 
+(Ký, họ tên, đóng dấu) 
+Tiền ứng trước  
+Lương...........................đ 
+Công tác phí.................đ 
+Cộng.............................đ 
+Nơi đi 
+Nơi đến Ngày 
+Phương 
+tiện 
+sử dụng 
+Độ dài 
+chặng 
+đường 
+Số ngày 
+công 
+tác 
+Lý do 
+lưu trú 
+Chứng nhận 
+của cơ quan 
+(Ký tên, đóng dấu) 
+1 2 3 4 5 6 7 
+       
+Nơi đi...       
+Nơi đến...       
+       
+Nơi đi...       
+Nơi đến...       
+ 
+- Vé người.........................................vé x...................... đ =............................. đ 
+- Vé cước......................................... vé x...................... đ =............................. đ 
+- Phụ phí lấy vé bằng điện thoại....... vé x...................... đ =............................. đ 
+- Phòng nghỉ......................................vé x...................... đ =............................. đ 
+1. Phụ cấp đi đường: cộng............................................. đ 
+2. Phụ cấp lưu trú:  
+Tổng cộng ngày công tác:.............................................. đ 
+ Ngày... tháng... năm... 
+Duyệt 
+ S ố tiền được thanh toán là:..................................... 
+  
+Người đi công tác Ph ụ trách bộ phận  K ế toán trưởng  
+(Ký, họ tên)  (Ký, h ọ tên)  (Ký, h ọ tên)   
+ 
+40 CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 
+  
+Đơn vị:.................. M ẫu số: 05-LĐTL 
+Bộ phận:............... (Ban hành theo Thông tư số 133/2016/TT- BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+PHIẾU XÁC NHẬN SẢN PHẨM HOẶC 
+CÔNG VIỆC HOÀN THÀNH 
+ 
+ Ngày... tháng... năm...  
+ 
+Tên đơn vị (hoặc cá nhân):............................................................................................... 
+Theo Hợp đồng số:.................... ngày................ tháng.............. năm.............................. 
+ 
+STT Tên sản phẩm           
+(công việc) 
+Đơn vị 
+tính 
+Số 
+lượng 
+Đơn 
+giá 
+Thành 
+tiền 
+Ghi 
+chú 
+A B B 1 2 3 D 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      
+ C ộng      
+ 
+Tổng số tiền (viết bằng chữ):..................................................................................... 
+ 
+ 
+   Ngày... tháng... năm... 
+Người giao việc Ng ười nhận việc Ng ười kiểm tra chất lượng Ng ười duyệt 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/03_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="06-LĐTL" id="tt99_appendix1_06_ldtl" group="LĐTL" start_page="40" end_page="40">
+      <Title>BẢNG THANH TOÁN TIỀN LÀM THÊM GIỜ</Title>
+      <Fields>
+        <Field key="s_o" label="S ố" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (Viết bằng chữ)" type="string" required="false" />
+        <Field key="kem_theo_chung_tu_goc" label="(Kèm theo.... chứng từ gốc" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người đề nghị thanh toán</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 06-LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC  
+ngày 26/8/2016 của Bộ Tài chính) 
+BẢNG THANH TOÁN TIỀN LÀM THÊM GIỜ 
+Tháng.......... năm........... 
+               S ố:........................ 
+Mức lương Làm thêm 
+ngày làm việc
+Làm thêm 
+ngày thứ 
+bảy, chủ nhật
+Làm thêm 
+ngày lễ, ngày 
+tết 
+Làm thêm 
+buổi đêm 
+Số ngày 
+nghỉ bù T 
+T 
+Họ 
+và 
+tên 
+Hệ 
+số 
+lương
+Hệ số 
+phụ 
+cấp 
+chức 
+vụ 
+Cộng 
+hệ 
+số 
+Tiền 
+lương 
+tháng Ngày Gi ờ Số 
+giờ 
+Thành 
+tiền 
+Số 
+giờ
+Thành 
+tiền 
+Số 
+giờ 
+Thanh 
+toán 
+Số 
+giờ 
+Thành 
+tiền 
+Tổng 
+cộng 
+tiền Số 
+giờ 
+Thành 
+tiền 
+Số tiền 
+thực 
+được 
+thanh 
+toán 
+ 
+Người 
+nhận 
+tiền 
+ký tên 
+A B 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 C 
+                     
+                     
+                     
+                     
+Cộng x x x x x x x  x  x  x   x   x 
+ 
+Tổng số tiền (Viết bằng chữ):..................................................................................... 
+(Kèm theo.... chứng từ gốc: Bảng chấm công làm thêm ngoài giờ tháng.....năm.....)  
+ 
+  Ngày... tháng... n ăm... 
+Người đề nghị thanh toán 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Người duyệt 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/06_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="07-LĐTL" id="tt99_appendix1_07_ldtl" group="LĐTL" start_page="41" end_page="41">
+      <Title>BẢNG THANH TOÁN TIỀN THUÊ NGOÀI S ố:.......................</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="s_o" label="S ố" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_thue" label="Họ và tên người thuê" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (hoặc địa chỉ)" type="string" required="false" />
+        <Field key="da_thue_nhung_cong_viec_sau_de" label="Đã thuê những công việc sau để" type="string" required="false" />
+        <Field key="de_nghi_cho_thanh_toan_so_tien" label="Đề nghị............... cho thanh toán số tiền" type="string" required="false" />
+        <Field key="so_tien_viet_bang_chu" label="Số tiền (Viết bằng chữ)" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người đề nghị thanh toán  K ế toán trưởng Ng ười duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 07-LĐTL 
+Bộ phận:................  (Ban hành theo Thông t ư số 133/2016/TT-BTC  
+  ngày 26/8/2016 c ủa Bộ Tài chính) 
+BẢNG THANH TOÁN TIỀN THUÊ NGOÀI 
+(Dùng cho thuê nhân công, thuê khoán việc) 
+           S ố:....................... 
+Họ và tên người thuê:........................................................................................  
+Bộ phận (hoặc địa chỉ):..................................................................................... 
+Đã thuê những công việc sau để:.................................. tại địa điểm............................... từ ngày.../.../... đến ngày.../.../.... 
+STT 
+Họ và tên 
+người được 
+thuê 
+Địa chỉ 
+hoặc số CMT/      
+thẻ căn cước 
+Nội dung 
+hoặc tên công 
+việc thuê 
+Số công hoặc 
+khối lượng công 
+việc đã làm 
+Đơn giá 
+thanh 
+toán 
+Thành 
+tiền 
+Tiền 
+thuế 
+khấu 
+trừ 
+Số tiền 
+còn lại 
+được 
+nhận 
+Ký 
+nhận 
+A B C D 1 2 3 4 5 = 3 - 4 E 
+          
+          
+          
+ Cộng          
+ 
+Đề nghị............... cho thanh toán số tiền:.................................................................... 
+Số tiền (Viết bằng chữ):.............................................................................................. 
+(Kèm theo... chứng từ kế toán khác)  
+  Ngày... tháng... năm... 
+Người đề nghị thanh toán  K ế toán trưởng Ng ười duyệt  
+(Ký, họ tên)  (Ký, h ọ tên)  (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/07_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+          <Column key="col_11" label="Cột 11" type="string" required="false" />
+          <Column key="col_12" label="Cột 12" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="08-LĐTL" id="tt99_appendix1_08_ldtl" group="LĐTL" start_page="42" end_page="42">
+      <Title>HỢP ĐỒNG GIAO KHOÁN</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten" label="Họ và tên" type="string" required="false" />
+        <Field key="phuong_thuc_giao_khoan" label="- Phương thức giao khoán" type="string" required="false" />
+        <Field key="dieu_kien_thuc_hien_hop_dong" label="- Điều kiện thực hiện hợp đồng" type="string" required="false" />
+        <Field key="thoi_gian_thuc_hien_hop_dong" label="- Thời gian thực hiện hợp đồng" type="string" required="false" />
+        <Field key="cac_dieu_kien_khac" label="- Các điều kiện khác" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Đại diện bên nhận khoán Đại diện bên giao khoán</Signer>
+        <Signer>Người lập K ế toán trưởng bên giao khoán</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số: 08 - LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC  
+ ngày 26/8/2016 của Bộ Tài chính) 
+ 
+HỢP ĐỒNG GIAO KHOÁN 
+Ngày... tháng... năm... 
+ Số:..................... 
+Họ và tên:........................... Chức vụ........................................................................... 
+Đại diện.............................. bên giao khoán................................................................ 
+Họ và tên:........................... Chức vụ........................................................................... 
+Đại diện.............................. bên nhận khoán............................................................... 
+ 
+CÙNG KÝ KẾT HỢP ĐỒNG GIAO KHOÁN NHƯ SAU: 
+I. Điều khoản chung: 
+- Phương thức giao khoán:.......................................................................................... 
+- Điều kiện thực hiện hợp đồng:.................................................................................. 
+- Thời gian thực hiện hợp đồng:.................................................................................. 
+- Các điều kiện khác:................................................................................................... 
+ 
+II. Điều khoản cụ thể: 
+1. Nội dung công việc khoán: 
+- .................................................................................................................................. 
+- .................................................................................................................................. 
+2. Trách nhiệm, quy
+ền lợi và nghĩa vụ của người nhận khoán: 
+- .................................................................................................................................. 
+- .................................................................................................................................. 
+3. Trách nhiệm, quyền lợi và nghĩa vụ của bên giao khoán: 
+- .................................................................................................................................. 
+- .................................................................................................................................. 
+ 
+Đại diện bên nhận khoán Đại diện bên giao khoán 
+(Ký, họ tên) (Ký, h ọ tên) 
+ 
+ Ngày... tháng... năm... 
+Người lập K ế toán trưởng bên giao khoán 
+(Ký, họ tên) (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/08_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="09-LĐTL" id="tt99_appendix1_09_ldtl" group="LĐTL" start_page="43" end_page="43">
+      <Title>Số:............... BIÊN BẢN THANH LÝ (NGHIỆM THU) HỢP ĐỒNG GIAO KHOÁN</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten" label="Họ và tên" type="string" required="false" />
+        <Field key="noi_dung_cong_viec_ghi_trong_hop_dong_da_duoc_thuc_hien" label="Nội dung công việc (ghi trong hợp đồng) đã được thực hiện" type="string" required="false" />
+        <Field key="gia_tri_hop_dong_da_thuc_hien" label="Giá trị hợp đồng đã thực hiện" type="string" required="false" />
+        <Field key="t_do_ben_vi_pham_hop_dong" label="t do bên..... vi phạm hợp đồng" type="string" required="false" />
+        <Field key="ket_luan" label="Kết luận" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Đại diện bên nhận khoán   Đại diện bên giao khoán</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 09 - LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+Số:............... 
+ 
+ BIÊN BẢN THANH LÝ (NGHIỆM THU) HỢP ĐỒNG GIAO KHOÁN 
+Ngày... tháng... năm... 
+ 
+ 
+Họ và tên:............... Chức vụ............. Đại diện............... Bên giao khoán....................... 
+Họ và tên:............... Chức vụ............. Đại diện............... Bên nhận khoán......................  
+ 
+Cùng thanh lý Hợp đồng số... ngày... tháng... năm... 
+Nội dung công việc (ghi trong hợp đồng) đã được thực hiện:......................................... 
+Giá trị hợp đồng đã thực hiện:.......................................................................................... 
+Bên...... đã thanh toán cho bên...... số tiền là.............. đồng (viết bằng chữ).................... 
+Số tiền bị phạ
+t do bên..... vi phạm hợp đồng:............ đồng (viết bằng chữ).................... 
+Số tiền bên.... còn phải thanh toán cho bên..... là........ đồng (viết bằng chữ)................... 
+ 
+Kết luận:........................................................................................................................... 
+ 
+ Đại diện bên nhận khoán   Đại diện bên giao khoán  
+ (Ký, họ tên) (Ký, h ọ tên, đóng dấu)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/09_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="10-LĐTL" id="tt99_appendix1_10_ldtl" group="LĐTL" start_page="44" end_page="44">
+      <Title>BẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG</Title>
+      <Fields>
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="don_vi_tinh" label="Đơn vị tính" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Ng ười lập bảng  K ế toán trưởng  Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 10 - LĐTL 
+Bộ phận:................  (Ban hành theo Thông t ư số 133/2016/TT-BTC  
+  ngày 26/8/2016 c ủa Bộ Tài chính) 
+ 
+BẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG 
+Tháng.... năm... 
+  Đơn vị tính:......... 
+Bảo hiểm xã hội, bảo hiểm y tế, 
+bảo hiểm thất nghiệp, bảo hiểm 
+tai nạn lao động 
+Kinh phí công đoàn 
+Trong đó: Trong đó: STT 
+Số tháng trích 
+BHXH, BHYT, 
+BHTN, 
+BHTNLĐ, 
+KPCĐ 
+Tổng quỹ lương 
+trích BHXH, 
+BHYT, BHTN, 
+BHTNLĐ, 
+KPCĐ 
+Tổng 
+số 
+Trích 
+vào chi 
+phí 
+Trừ vào 
+lương 
+Tổng 
+số 
+Trích 
+vào chi 
+phí 
+Trừ 
+vào 
+lương 
+Số phải 
+nộp công 
+đoàn cấp 
+trên 
+Số được 
+để lại chi 
+tại đơn vị 
+A B 1 2 3 4 5 6 7 8 9 
+           
+           
+           
+ Cộng          
+  
+   Ngày... tháng... n ăm... 
+ Ng ười lập bảng  K ế toán trưởng  Giám đốc 
+  (Ký, h ọ tên)   (Ký, h ọ tên)   (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/10_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+          <Column key="col_11" label="Cột 11" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="11-LĐTL" id="tt99_appendix1_11_ldtl" group="LĐTL" start_page="45" end_page="45">
+      <Title>BẢNG PHÂN BỔ TIỀN LƯƠNG VÀ BẢO HIỂM XÃ HỘI</Title>
+      <Fields />
+      <Signatures>
+        <Signer>Ng ười lập bảng  K ế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 11 - LĐTL 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BẢNG PHÂN BỔ TIỀN LƯƠNG VÀ BẢO HIỂM XÃ HỘI 
+Tháng... năm... 
+ 
+TK 334 - Phải trả 
+người lao động TK 338 - Phải trả, phải nộp khác 
+Số 
+TT 
+ Ghi Có Tài khoản
+ 
+ 
+Đối tượng  
+sử dụng (Ghi 
+Nợ các Tài khoản) 
+Lương
+Các 
+khoản 
+khác 
+Cộng 
+Có 
+TK 
+334 
+Kinh 
+phí 
+công 
+đoàn 
+Bảo 
+hiểm 
+xã hội 
+Bảo 
+hiểm 
+y tế 
+Bảo 
+hiểm 
+thất 
+nghiệp
+Bảo 
+hiểm tai 
+nạn lao 
+động 
+Cộng Có TK 
+338 (3382, 
+3383, 3384, 
+3385, 3388) 
+TK 335
+Chi phí 
+phải trả
+Tổng 
+cộng 
+A B 1 2 3 4 5 6 7 8 9 10 11 
+1 
+ 
+TK 154- Chi phí sản xuất, kinh 
+doanh dở dang (TK 631- Giá 
+thành sản xuất) 
+           
+ 2 TK 642- Chi phí qu ản lý kinh doanh            
+3 TK 242- Chi phí tr ả trước             
+4 TK 335- Chi phí ph ải trả            
+5 TK 241- Xây d ựng cơ bản dở dang            
+6 TK 334- Ph ải trả người lao động            
+7 TK 338- Ph ải trả, phải nộp khác            
+8 ...............................................            
+ Cộng:            
+  Ngày...... tháng..... n ăm... 
+ Ng ười lập bảng  K ế toán trưởng 
+ (Ký, h ọ tên)  (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/11_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="01-VT" id="tt99_appendix1_01_vt" group="VT" start_page="46" end_page="46">
+      <Title>PHIẾU NHẬP KHO</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="s_o" label="S ố" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_giao" label="- Họ và tên người giao" type="string" required="false" />
+        <Field key="nhap_tai_kho" label="Nhập tại kho" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="- Tổng số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="so_chung_tu_goc_kem_theo" label="- Số chứng từ gốc kèm theo" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Người giao hàng</Signer>
+        <Signer>Thủ kho</Signer>
+        <Signer>có nhu cầu nhập)</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+ PHIẾU NHẬP KHO   
+ Ngày....tháng.... năm.......  Nợ.............................. 
+ S ố:................................. Có...............................
+ 
+- Họ và tên người giao:................................................................................................... 
+- Theo............ số........... ngày..... tháng..... năm..... của.................................................. 
+Nhập tại kho:............................... địa điểm..................................................................... 
+ 
+Số lượng 
+STT 
+Tên, nhãn hiệu, quy 
+cách, phẩm chất vật tư, 
+dụng cụ sản phẩm,     
+hàng hóa 
+Mã 
+số 
+Đơn 
+vị 
+tính 
+Theo 
+chứng từ
+Thực 
+nhập 
+Đơn 
+giá 
+Thành
+tiền 
+A B C D 1 2 3 4 
+        
+        
+        
+ Cộng x x x x x  
+- Tổng số tiền (viết bằng chữ):....................................................................................... 
+- Số chứng từ gốc kèm theo:........................................................................................... 
+ 
+ 
+Người lập phiếu 
+(Ký, họ tên) 
+ 
+Người giao hàng 
+(Ký, họ tên) 
+ 
+Thủ kho 
+(Ký, họ tên) 
+Ngày... tháng... năm... 
+Kế toán trưởng 
+(Hoặc bộ phận 
+có nhu cầu nhập) 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="02-VT" id="tt99_appendix1_02_vt" group="VT" start_page="47" end_page="47">
+      <Title>PHIẾU XUẤT KHO</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="s_o" label="S ố" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nhan_hang" label="- Họ và tên người nhận hàng" type="string" required="false" />
+        <Field key="ly_do_xuat_kho" label="- Lý do xuất kho" type="string" required="false" />
+        <Field key="xuat_tai_kho_ngan_lo" label="- Xuất tại kho (ngăn lô)" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="- Tổng số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="so_chung_tu_goc_kem_theo" label="- Số chứng từ gốc kèm theo" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Người nhận hàng</Signer>
+        <Signer>Thủ kho</Signer>
+        <Signer>nhu cầu nhập)</Signer>
+        <Signer>Giám đốc</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+ PHIẾU XUẤT KHO  
+ Ngày..... tháng..... năm...... Nợ....................................
+ S ố:................................... Có....................................
+ 
+- Họ và tên người nhận hàng:.................. Địa chỉ (bộ phận)................................ 
+- Lý do xuất kho:................................................................................................... 
+- Xuất tại kho (ngăn lô):.......................... Địa điểm.............................................. 
+ 
+Số lượng 
+STT 
+Tên, nhãn hiệu, quy cách, 
+phẩm chất vật tư, dụng cụ, 
+sản phẩm, hàng hóa 
+Mã 
+số 
+Đơn 
+vị 
+tính 
+Yêu 
+cầu 
+Thực 
+xuất 
+Đơn 
+giá 
+Thành 
+tiền 
+A B C D 1 2 3 4 
+        
+        
+        
+        
+        
+ Cộng x x x x x  
+- Tổng số tiền (viết bằng chữ):.............................................................................. 
+- Số chứng từ gốc kèm theo:................................................................................. 
+ 
+  Ngày.... tháng.... năm... 
+Người lập phiếu 
+(Ký, họ tên) 
+Người nhận hàng 
+(Ký, họ tên) 
+Thủ kho 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Hoặc bộ phận có  
+nhu cầu nhập) 
+(Ký, họ tên) 
+Giám đốc 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="03-VT" id="tt99_appendix1_03_vt" group="VT" start_page="48" end_page="48">
+      <Title>BIÊN BẢN KIỂM NGHIỆM</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="y_kien_cua_ban_kiem_nghiem" label="Ý kiến của Ban kiểm nghiệm" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Đại diện kỹ thuật Th ủ kho Tr ưởng ban</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN KIỂM NGHIỆM 
+Vật tư, công cụ, sản phẩm, hàng hóa 
+Ngày... tháng... năm.... 
+Số:...................... 
+ 
+- Căn cứ................... số..... ngày..... tháng..... năm..... của........................................... 
+Ban kiểm nghiệm gồm: 
++ Ông/Bà..................... Chức vụ............ Đại diện.......... Trưởng ban 
++ Ông/Bà..................... Chức vụ............ Đại diện................ Ủy viên 
++ Ông/Bà..................... Chức vụ............ Đại diện................ Ủy viên 
+Đã kiểm nghiệm các loại: 
+Kết quả kiểm nghiệm 
+Số 
+TT 
+Tên nhãn 
+hiệu, quy 
+cách vật tư, 
+công cụ, sản 
+phẩm, hàng 
+hóa 
+Mã 
+số 
+Phương 
+thức 
+kiểm 
+nghiệm 
+Đơn 
+vị 
+tính 
+Số 
+lượng 
+theo 
+chứng 
+từ 
+Số lượng 
+đúng quy 
+cách, 
+phẩm chất 
+Số lượng 
+không 
+đúng quy 
+cách, 
+phẩm 
+chất 
+Ghi 
+chú
+A B C D E 1 2 3 F 
+         
+         
+         
+         
+Ý kiến của Ban kiểm nghiệm:............................................................................... 
+............................................................................................................................... 
+ 
+Đại diện kỹ thuật Th ủ kho Tr ưởng ban 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/03_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="04-VT" id="tt99_appendix1_04_vt" group="VT" start_page="49" end_page="49">
+      <Title>PHIẾU BÁO VẬT TƯ CÒN LẠI CUỐI KỲ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="bo_phan_su_dung" label="Bộ phận sử dụng" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Ph ụ trách bộ phận sử dụng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+PHIẾU BÁO VẬT TƯ CÒN LẠI CUỐI KỲ 
+Ngày... tháng... năm... 
+Số:................... 
+ 
+Bộ phận sử dụng:.................................................................................................. 
+Số 
+TT 
+Tên, nhãn hiệu, quy cách, 
+phẩm chất vật tư 
+Mã 
+số 
+Đơn 
+vị tính
+Số 
+lượng
+Lý do:                 
+còn sử dụng hay trả lại 
+A B C D 1 E 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+ 
+  Ph ụ trách bộ phận sử dụng 
+  (Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/04_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="05-VT" id="tt99_appendix1_05_vt" group="VT" start_page="50" end_page="50">
+      <Title>BIÊN BẢN KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ong_ba" label="Ông/Bà" type="string" required="false" />
+        <Field key="chuc_vu_dai_dien" label="Chức vụ............................................. Đại diện" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc K ế toán trưởng Th ủ kho Tr ưởng ban kiểm kê</Signer>
+        <Signer>(Ý kiến giải quyết số chênh lệch) (Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 05 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA 
+ 
+- Thời điểm kiểm kê..... giờ... ngày... tháng... năm...... 
+- Ban kiểm kê gồm:  
+Ông/Bà:............................................... Chức vụ............................................. Đại diện:.............................................. Trưởng ban  
+Ông/Bà:............................................... Chức vụ............................................. Đại diện:.................................................... Ủy viên 
+Ông/Bà:............................................... Chức vụ............................................. Đại diện:.................................................... Ủy viên  
+- Đã kiểm kê kho có những mặt hàng dưới đây:  
+Chênh lệch Ph ẩm chất Theo 
+sổ kế toán 
+Theo 
+kiểm kê Thừa Thi ếu S 
+T 
+T 
+Tên, nhãn hiệu, 
+quy cách vật tư, 
+dụng cụ,... 
+Mã 
+số 
+Đơn 
+vị 
+tính 
+Đơn 
+giá Số 
+lượng 
+Thành 
+tiền 
+Số 
+lượng 
+Thành 
+tiền 
+Số 
+lượng 
+Thành 
+tiền 
+Số 
+lượng 
+Thành 
+tiền 
+Còn 
+tốt 
+100%
+Kém 
+phẩm 
+chất 
+Mất 
+phẩm 
+chất 
+A B C D 1 2 3 4 5 6 7 8 9 10 11 12 
+                
+                
+                
+                
+ Cộng  x x x x  x  x  x  x x x 
+ 
+   Ngày... tháng... n ăm... 
+Giám đốc K ế toán trưởng Th ủ kho Tr ưởng ban kiểm kê 
+(Ý kiến giải quyết số chênh lệch) (Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên) 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/05_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="06-VT" id="tt99_appendix1_06_vt" group="VT" start_page="51" end_page="51">
+      <Title>B ẢNG KÊ MUA HÀNG</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="s_o" label="S ố" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_mua" label="- Họ và tên người mua" type="string" required="false" />
+        <Field key="bo_phan_phong_ban" label="- Bộ phận (phòng, ban)" type="string" required="false" />
+        <Field key="tong_so_tien_viet_bang_chu" label="Tổng số tiền (Viết bằng chữ)" type="string" required="false" />
+        <Field key="ghi_chu" label="* Ghi chú" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người mua  K ế toán trưởng Ng ười duyệt mua</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 06 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+ B ẢNG KÊ MUA HÀNG  
+ Ngày.... tháng.... năm....  
+Quyển số:............... 
+  S ố:............... 
+Nợ:.............. 
+Có:............... 
+- Họ và tên người mua:................................................................... 
+- Bộ phận (phòng, ban):.................................................................. 
+ 
+STT Tên, quy cách, phẩm chất 
+hàng hóa (vật tư, công cụ...) 
+Địa chỉ 
+mua hàng
+Đơn 
+vị tính 
+Số 
+lượng 
+Đơn 
+giá 
+Thành 
+tiền 
+A B C D 1 2 3 
+       
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+       
+       
+ C ộng  x x x  
+ 
+Tổng số tiền (Viết bằng chữ):......................................................................................... 
+* Ghi chú:....................................................................................................................... 
+ 
+Người mua  K ế toán trưởng Ng ười duyệt mua 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/06_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="07-VT" id="tt99_appendix1_07_vt" group="VT" start_page="52" end_page="52">
+      <Title>BẢNG PHÂN BỔ NGUYÊN LIỆU, VẬT LIỆU CÔNG CỤ, DỤNG CỤ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập biểu</Signer>
+        <Signer>Kế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 07 - VT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC  
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BẢNG PHÂN BỔ NGUYÊN LIỆU, VẬT LIỆU  
+CÔNG CỤ, DỤNG CỤ 
+Tháng...... năm...... 
+ Số:.................. 
+ 
+Tài khoản 152 Tài kho ản 153 
+TT 
+Ghi Có các TK
+ 
+ 
+Đối tượng sử dụng 
+(Ghi Nợ các TK) 
+Giá 
+hạch 
+toán 
+Giá 
+thực tế 
+Giá 
+hạch 
+toán 
+Giá 
+thực 
+tế 
+Tài 
+khoản 
+242 
+A B 1 2 3 4 5 
+1 
+ 
+TK154- Chi phí sản xuất kinh 
+doanh dở dang (TK 631- Giá 
+thành sản xuất) 
+     
+2 TK 642- Chi phí qu ản lý kinh 
+doanh  
+     
+3 TK 242- Chi phí tr ả trước      
+4 
+ 
+............................      
+ Cộng     
+ 
+ 
+Người lập biểu 
+(Ký, họ tên) 
+Ngày.... tháng.... năm... 
+Kế toán trưởng 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/07_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="01-BH" id="tt99_appendix1_01_bh" group="BH" start_page="53" end_page="54">
+      <Title>BẢNG THANH TOÁN HÀNG ĐẠI LÝ, KÝ GỬI</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ngay_thang_nam_quyen_so" label="Ngày... tháng... năm... Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="n_o" label="N ợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_hop_dong_so" label="Căn cứ Hợp đồng số" type="string" required="false" />
+        <Field key="ii_so_tien_con_no_cua_cac_ky_truoc" label="II. Số tiền còn nợ của các kỳ trước" type="string" required="false" />
+        <Field key="iii_so_tien_phai_thanh_toan_den_ky_nay" label="III. Số tiền phải thanh toán đến kỳ này" type="string" required="false" />
+        <Field key="iv_so_tien_duoc_nhan_lai" label="IV. Số tiền được nhận lại" type="string" required="false" />
+        <Field key="tien_mat" label="+ Tiền mặt" type="string" required="false" />
+        <Field key="sec" label="+ Séc" type="string" required="false" />
+        <Field key="ghi_chu" label="* Ghi chú" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc đơn vị gửi</Signer>
+        <Signer>hàng đại lý (ký gửi)</Signer>
+        <Signer>Người lập bảng thanh toán</Signer>
+        <Signer>bán hàng đại lý</Signer>
+        <Signer>hàng đạ</Signer>
+        <Signer>i lý (ký gửi)</Signer>
+        <Signer>nhận bán hàng đại lý</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - BH 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+  
+BẢNG THANH TOÁN HÀNG ĐẠI LÝ, KÝ GỬI 
+ 
+ Ngày... tháng... năm... Quyển số:............
+  Số:.......................
+  N ợ:......................
+  Có:.......................
+ 
+Căn cứ Hợp đồng số:.... ngày... tháng... năm... về việc bán hàng đại lý (ký gửi), 
+Chúng tôi gồm: 
+- Ông/Bà.......... chức vụ......... Đại diện........................ có hàng đại lý (ký gửi). 
+- Ông/Bà.......... chức vụ......... Đại diện................................................................ 
+- Ông/Bà.......... chức vụ......... Đại diện............... nhận bán hàng đại lý (ký gửi). 
+- Ông/Bà.......... chức vụ......... Đại diện đơn vị..................................................... 
+I. Thanh quyết toán số hàng đại lý từ ngày..../.../... đến ngày.../.../.... như sau: 
+Số hàng đã bán        
+trong kỳ Số 
+TT 
+Tên, quy 
+cách, phẩm 
+chất sản 
+phẩm       
+(hàng hóa) 
+Đơn 
+vị 
+tính 
+Số 
+lượng
+tồn 
+đầu kỳ
+Số 
+lượng 
+nhận 
+trong 
+kỳ 
+Tổng 
+số Số 
+lượng
+Đơn 
+giá 
+Thành 
+tiền 
+Số 
+lượng 
+tồn 
+cuối 
+kỳ 
+A B C 1 2 3= 
+1+2 4 5 6 7=    
+3-4 
+          
+          
+ 
+ 
+         
+          
+          
+ C ộng x x x x x x  x 
+II. Số tiền còn nợ của các kỳ trước:...................................................................... 
+III. Số tiền phải thanh toán đến kỳ này: (III = II + Cột 6).................................... 
+IV. Số tiền được nhận lại:..................................................................................... 
++ Hoa hồng............................................................................................................ 
+ 
+ CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 55 
+ 
++ Thuế nộp hộ....................................................................................................... 
++ Chi phí (nếu có)................................................................................................. 
++ ........................................................................................................................... 
+V. Số tiền thanh toán kỳ này: 
++ Tiền mặt:............................................................................................................ 
++ Séc:.................................................................................................................... 
+VI. Số tiền nợ lại (VI = III - IV - V) 
+* Ghi chú:.............................................................................................................. 
+ 
+Giám đốc đơn vị gửi 
+hàng đại lý (ký gửi) 
+(Ký, họ tên, đóng dấu) 
+Người lập bảng thanh toán 
+(Ký, họ tên) 
+Giám đốc đơn vị nhận 
+bán hàng đại lý 
+(Ký, họ tên, đóng dấu) 
+ 
+ 
+Kế toán trưởng đơn vị gửi 
+hàng đạ
+i lý (ký gửi) 
+(Ký, họ tên) 
+ K ế toán trưởng đơn vị 
+nhận bán hàng đại lý 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01_BH.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="02-BH" id="tt99_appendix1_02_bh" group="BH" start_page="55" end_page="55">
+      <Title>THẺ QUẦY HÀNG</Title>
+      <Fields>
+        <Field key="ngay_lap_the_to_so" label="Ngày lập thẻ.............................. Tờ số" type="string" required="false" />
+        <Field key="ten_hang" label="- Tên hàng" type="string" required="false" />
+        <Field key="quy_cach" label="Quy cách" type="string" required="false" />
+        <Field key="don_vi_tinh" label="- Đơn vị tính" type="string" required="false" />
+        <Field key="don_gia" label="Đơn giá" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - BH 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+  
+THẺ QUẦY HÀNG 
+ 
+Ngày lập thẻ.............................. Tờ số:.............................. 
+ 
+- Tên hàng:........................................ Quy cách:................................................... 
+- Đơn vị tính:..................................... Đơn giá:..................................................... 
+ 
+Xuất bán Xu ất khác 
+Ngày 
+tháng 
+Tên 
+người 
+bán 
+hàng 
+Tồn 
+đầu 
+ngày 
+(ca) 
+Nhập 
+từ 
+kho 
+trong 
+ngày 
+(ca) 
+Nhập 
+khác 
+trong 
+ngày 
+(ca) 
+Cộng 
+tồn đầu 
+ngày (ca) 
+và nhập 
+trong 
+ngày (ca)
+Lượng Ti ềnL ượng Ti ền 
+Tồn 
+cuối 
+ngày 
+(ca) 
+A B 1 2 3 4 = 
+1+2+3 5 6 7 8 9 
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+ C ộng          
+ 
+ Người lập 
+(Ký, họ và tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_BH.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="01-TT" id="tt99_appendix1_01_tt" group="TT" start_page="56" end_page="56">
+      <Title>PHIẾU THU    Quyển số:............</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="phieu_thu_quyen_so" label="PHIẾU THU    Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nop_tien" label="Họ và tên người nộp tiền" type="string" required="false" />
+        <Field key="dia_chi" label="Địa chỉ" type="string" required="false" />
+        <Field key="ly_do_nop" label="Lý do nộp" type="string" required="false" />
+        <Field key="so_tien" label="Số tiền" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+        <Field key="kem_theo" label="Kèm theo" type="string" required="false" />
+        <Field key="da_nhan_du_so_tien_viet_bang_chu" label="Đã nhận đủ số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="ty_gia_ngoai_te" label="+ Tỷ giá ngoại tệ" type="string" required="false" />
+        <Field key="so_tien_quy_doi" label="+ Số tiền quy đổi" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người nộp tiền</Signer>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Thủ quỹ</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+  
+PHIẾU THU    Quyển số:............ 
+Ngày.......tháng.......năm....... 
+ Số:........................... 
+Nợ:.......................... 
+ Có:.......................... 
+ 
+Họ và tên người nộp tiền:............................................................................................ 
+Địa chỉ:........................................................................................................................ 
+Lý do nộp:................................................................................................................... 
+Số tiền:............................... (Viết bằng chữ):.............................................................. 
+................................................................................................................................... 
+Kèm theo:..................................................................... Chứng từ gốc: 
+ 
+   Ngày..... tháng..... năm...... 
+Giám đốc 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Người nộp tiền 
+(Ký, họ tên) 
+Người lập phiếu 
+(Ký, họ tên) 
+Thủ quỹ 
+(Ký, họ tên) 
+ 
+Đã nhận đủ số tiền (viết bằng chữ):............................................................................. 
++ Tỷ giá ngoại tệ:......................................................................................................... 
++ Số tiền quy đổi:........................................................................................................ 
+(Liên gửi ra ngoài phải đóng dấu)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="02-TT" id="tt99_appendix1_02_tt" group="TT" start_page="57" end_page="57">
+      <Title>PHIẾU CHI</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nhan_tien" label="Họ và tên người nhận tiền" type="string" required="false" />
+        <Field key="dia_chi" label="Địa chỉ" type="string" required="false" />
+        <Field key="ly_do_chi" label="Lý do chi" type="string" required="false" />
+        <Field key="so_tien" label="Số tiền" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+        <Field key="da_nhan_du_so_tien_viet_bang_chu" label="Đã nhận đủ số tiền (viết bằng chữ)" type="string" required="false" />
+        <Field key="ty_gia_ngoai_te" label="+ Tỷ giá ngoại tệ" type="string" required="false" />
+        <Field key="so_tien_quy_doi" label="+ Số tiền quy đổi" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Thủ quỹ</Signer>
+        <Signer>Người lập phiếu</Signer>
+        <Signer>Người nhận tiền</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính)  
+ 
+PHIẾU CHI 
+Ngày..... tháng..... năm....... 
+Quyển số:..........  
+Số:..................... 
+Nợ:.................... 
+Có:..................... 
+ 
+Họ và tên người nhận tiền:.................................................................................................... 
+Địa chỉ:.................................................................................................................................. 
+Lý do chi:............................................................................................................................... 
+Số tiền:................................................. (Viết bằng chữ):....................................................... 
+............................................................................................................................................... 
+Kèm theo.................................................................... Chứng từ gốc: 
+  Ngày...... tháng...... năm.... 
+Giám đốc 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Thủ quỹ  
+(Ký, họ tên) 
+Người lập phiếu 
+(Ký, họ tên) 
+Người nhận tiền 
+(Ký, họ tên) 
+ 
+Đã nhận đủ số tiền (viết bằng chữ):............................................................................ 
++ Tỷ giá ngoại tệ:......................................................................................................... 
++ Số tiền quy đổi:........................................................................................................ 
+(Liên gửi ra ngoài phải đóng dấu)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="03-TT" id="tt99_appendix1_03_tt" group="TT" start_page="58" end_page="58">
+      <Title>GIẤY ĐỀ NGHỊ TẠM ỨNG</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="kinh_gui" label="Kính gửi" type="string" required="false" />
+        <Field key="ten_toi_la" label="Tên tôi là" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (hoặc Địa chỉ)" type="string" required="false" />
+        <Field key="de_nghi_cho_tam_ung_so_tien" label="Đề nghị cho tạm ứng số tiền" type="string" required="false" />
+        <Field key="ly_do_tam_ung" label="Lý do tạm ứng" type="string" required="false" />
+        <Field key="thoi_han_thanh_toan" label="Thời hạn thanh toán" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Phụ trách bộ phận</Signer>
+        <Signer>Người đề nghị tạm ứng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+GIẤY ĐỀ NGHỊ TẠM ỨNG 
+Ngày..... tháng..... năm...... 
+Số:..................... 
+Kính gửi:..................................................................................................................... 
+Tên tôi là:..................................................................................................................... 
+Bộ phận (hoặc Địa chỉ):.............................................................................................. 
+Đề nghị cho tạm ứng số tiền:............................ (Viết bằng chữ)................................ 
+..................................................................................................................................... 
+Lý do tạm ứng:............................................................................................................ 
+Thời hạn thanh toán:.................................................................................................... 
+ 
+Giám đốc  
+(Ký, họ tên) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Phụ trách bộ phận  
+(Ký, họ tên) 
+Người đề nghị tạm ứng 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/03_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="04-TT" id="tt99_appendix1_04_tt" group="TT" start_page="59" end_page="59">
+      <Title>GIẤY THANH TOÁN TIỀN TẠM ỨNG</Title>
+      <Fields>
+        <Field key="ngay_thang_n_am_so" label="Ngày..... tháng..... n ăm.......  Số" type="string" required="false" />
+        <Field key="n_o" label="N ợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_thanh_toan" label="- Họ và tên người thanh toán" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="- Bộ phận (hoặc địa chỉ)" type="string" required="false" />
+        <Field key="2_so_tam_ung_ky_nay" label="2. Số tạm ứng kỳ này" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Kế toán thanh toán</Signer>
+        <Signer>Người đề nghị thanh toán</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+GIẤY THANH TOÁN TIỀN TẠM ỨNG 
+ Ngày..... tháng..... n ăm.......  Số:................ 
+ N ợ:............... 
+ Có :............... 
+- Họ và tên người thanh toán:....................................................................... 
+- Bộ phận (hoặc địa chỉ):...............................................................................  
+- Số tiền tạm ứng được thanh toán theo bảng dưới đây: 
+Diễn giải S ố tiền  
+A 1 
+I. Số tiền tạm ứng  
+1. Số tạm ứng các kỳ trước chưa chi hết ............................... 
+2. Số tạm ứng kỳ này: ............................... 
+ - Phiếu chi số.............ngày......... ...............................  
+ - Phiếu chi số.............ngày......... ...............................  
+ - ... ............................... 
+II. Số tiền đã chi ............................... 
+1. Chứng từ số...........ngày........... ............................... 
+2.... ............................... 
+III. Chênh lệch ............................... 
+1. Số tạm ứng chi không hết (I - II) ............................... 
+2. Chi quá số tạm ứng (II - I) ............................... 
+  
+Giám đốc 
+(Ký, họ tên) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Kế toán thanh toán 
+(Ký, họ tên) 
+Người đề nghị thanh toán 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/04_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="05-TT" id="tt99_appendix1_05_tt" group="TT" start_page="60" end_page="59">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText />
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/05_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="06-TT" id="tt99_appendix1_06_tt" group="TT" start_page="60" end_page="60">
+      <Title>GIẤY ĐỀ NGHỊ THANH TOÁN</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="kinh_gui" label="Kính gửi" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_de_nghi_thanh_toan" label="Họ và tên người đề nghị thanh toán" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (Hoặc địa chỉ)" type="string" required="false" />
+        <Field key="noi_dung_thanh_toan" label="Nội dung thanh toán" type="string" required="false" />
+        <Field key="so_tien" label="Số tiền" type="string" required="false" />
+        <Field key="viet_bang_chu" label="(Viết bằng chữ)" type="string" required="false" />
+        <Field key="don_vi" label="Đơn vị" type="string" required="false" />
+        <Field key="dia_chi" label="Địa chỉ" type="string" required="false" />
+        <Field key="quyen_so" label="Quyển số" type="string" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ho_va_ten_nguoi_nop" label="- Họ và tên người nộp" type="string" required="false" />
+        <Field key="noi_dung_thu" label="- Nội dung thu" type="string" required="false" />
+        <Field key="so_tien_thu" label="- Số tiền thu" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người đề nghị thanh toán</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người duyệt</Signer>
+        <Signer>Người nộp tiền</Signer>
+        <Signer>Người thu tiền</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 05 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+GIẤY ĐỀ NGHỊ THANH TOÁN  
+Ngày....... tháng........ năm....... 
+Kính gửi:....................................................................................................... 
+Họ và tên người đề nghị thanh toán:............................................................. 
+Bộ phận (Hoặc địa chỉ):................................................................................. 
+Nội dung thanh toán:..................................................................................... 
+Số tiền:.................... (Viết bằng chữ):........................................................... 
+(Kèm theo............ chứng từ gốc). 
+ 
+Người đề nghị thanh toán 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Người duyệt 
+(Ký, họ tên) 
+ 
+ 
+ 
+ 
+Đơn vị:................... 
+Địa chỉ:.................. 
+Mẫu số 06 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN LAI THU TIỀN  
+Ngày..... tháng..... năm.....  
+ Quyển số:............... 
+ Số:.......................... 
+- Họ và tên người nộp:...................................................................................... 
+- Địa chỉ:........................................................................................................... 
+- Nội dung thu:................................................................................................. 
+- Số tiền thu:............................ (Viết bằng chữ):.............................................. 
+........................................................................................................................... 
+ 
+Người nộp tiền 
+(Ký, họ tên) 
+Người thu tiền 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/06_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="07-TT" id="tt99_appendix1_07_tt" group="TT" start_page="61" end_page="61">
+      <Title>BẢNG KÊ VÀNG BẠC, KIM KHÍ QUÝ, ĐÁ QUÝ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="dinh_kem_phieu_quy_en_so" label="(Đính kèm phiếu..................................  Quy ển số" type="string" required="false" />
+        <Field key="ngay_thang_nam_s_o" label="Ngày....... tháng......... năm............)  S ố" type="string" required="false" />
+        <Field key="don_vi" label="Đơn vị" type="string" required="false" />
+        <Field key="bo_phan" label="Bộ phận" type="string" required="false" />
+        <Field key="dung_cho_vnd_so" label="(Dùng cho VNĐ)  Số" type="string" required="false" />
+        <Field key="ong_ba" label="- Ông/Bà" type="string" required="false" />
+        <Field key="i_s_o_du_theo_so_quy" label="I S ố dư theo sổ quỹ" type="string" required="false" />
+        <Field key="ii_s_o_kiem_ke_thuc_te" label="II S ố kiểm kê thực tế" type="string" required="false" />
+        <Field key="1_trong_do" label="1 Trong đó" type="string" required="false" />
+        <Field key="iii_chenh_l_ech_iii_i_ii" label="III Chênh l ệch (III = I - II)" type="string" required="false" />
+        <Field key="thua" label="+ Thừa" type="string" required="false" />
+        <Field key="ly_do" label="- Lý do" type="string" required="false" />
+        <Field key="thi_eu" label="+ Thi ếu" type="string" required="false" />
+        <Field key="ket_luan_sau_khi_kiem_ke_quy" label="- Kết luận sau khi kiểm kê quỹ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người nộp (nhận)</Signer>
+        <Signer>Thủ quỹ</Signer>
+        <Signer>Người kiểm nghiệm</Signer>
+        <Signer>Kế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 07 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+BẢNG KÊ VÀNG BẠC, KIM KHÍ QUÝ, ĐÁ QUÝ 
+(Đính kèm phiếu..................................  Quy ển số:............... 
+Ngày....... tháng......... năm............)  S ố:.......................... 
+STT Tên, loại, quy cách 
+phẩm chất 
+Đơn vị 
+tính 
+Số 
+lượng Đơn giá Thành ti ền Ghi chú 
+A B C 1 2 3 D 
+       
+       
+ C ộng x x x   
+ 
+  Ngày....... tháng...... năm...... 
+Kế toán trưởng  
+(Ký, họ tên) 
+Người nộp (nhận) 
+(Ký, họ tên) 
+Thủ quỹ 
+(Ký, họ tên) 
+Người kiểm nghiệm 
+(Ký, họ tên) 
+ 
+ 
+Đơn vị:................... M ẫu số 08a - TT 
+Bộ phận:................ (Ban hành theo Thông tư số 133/2016/TT-BTC 
+ ngày 26/8/2016 của BTC) 
+ 
+BẢNG KIỂM KÊ QUỸ  
+  (Dùng cho VNĐ)  Số:............ 
+Hôm nay, vào........ giờ......... ngày......... tháng......... năm....... 
+Chúng tôi gồm: 
+- Ông/Bà:..................................................................... đại diện kế toán 
+- Ông/Bà:..................................................................... đại diện thủ quỹ 
+- Ông/Bà:............................................................. đại diện.................... 
+Cùng tiến hành kiểm kê quỹ tiền mặt kết quả như sau: 
+STT Di ễn giải S ố lượng (tờ) S ố tiền  
+A B 1 2 
+I S ố dư theo sổ quỹ: x ....................... 
+II S ố kiểm kê thực tế:  x ....................... 
+1 Trong đó: - Loại ....................... ....................... 
+2   - Lo ại ....................... ....................... 
+3   - Lo ại ....................... ....................... 
+4   - Lo ại ....................... ....................... 
+5   - ... ....................... ....................... 
+III Chênh l ệch (III = I - II):  x ....................... 
+- Lý do: + Thừa:....................................................................................... 
+ + Thi ếu:...................................................................................... 
+- Kết luận sau khi kiểm kê quỹ:................................................................ 
+Kế toán trưởng Thủ quỹ Người chịu trách nhiệm kiểm kê quỹ 
+(Ký, họ tên) (Ký, h ọ tên) (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/07_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="08b-TT" id="tt99_appendix1_08b_tt" group="TT" start_page="62" end_page="62">
+      <Title>BẢNG KIỂM KÊ VÀNG BẠC, KIM KHÍ QUÝ, ĐÁ QUÝ Số:..................</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="ong_ba" label="- Ông/Bà" type="string" required="false" />
+        <Field key="thua" label="+ Thừa" type="string" required="false" />
+        <Field key="ly_do" label="- Lý do" type="string" required="false" />
+        <Field key="thi_eu" label="+ Thi ếu" type="string" required="false" />
+        <Field key="ket_luan_sau_khi_kiem_ke_ngoai_te_vang_bac_kim_khi_quy_da_quy" label="- Kết luận sau khi kiểm kê ngoại tệ, vàng bạc, kim khí quý, đá quý" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Thủ quỹ</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người chịu trách nhiệm kiểm kê quỹ</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 08b - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BẢNG KIỂM KÊ VÀNG BẠC, KIM KHÍ QUÝ, ĐÁ QUÝ  
+  Số:.................. 
+ 
+Hôm nay, vào........ giờ......... ngày......... tháng......... năm......... 
+Chúng tôi gồm: 
+- Ông/Bà:...................................... đại diện kế toán 
+- Ông/Bà:...................................... đại diện thủ quỹ 
+- Ông/Bà:...................................... đại diện............ 
+Cùng tiến hành kiểm kê quỹ ngoại tệ, vàng bạc... kết quả như sau: 
+Tính ra VNĐ Số 
+TT Diễn giải Đơn vị 
+tính 
+Số 
+lượng 
+Đơn 
+giá Tỷ giá VN Đ 
+Ghi 
+chú 
+A B C 1 2 3 4 D 
+I S ố dư theo sổ kế toán x x .......... ........... ......... ............
+II S ố kiểm kê thực tế (*) x x .......... ........... ......... ............
+1 - Lo ại ........... ............ .......... ........... ......... ............
+2 - Lo ại ........... ............ .......... ........... ......... ............
+3 - ... ........... ............ .......... ........ ......... ............
+III Chênh l ệch (III = I - II) x x .......... ........... ......... ............
+- Lý do: + Thừa:.............................................................................................................. 
+  + Thi ếu:............................................................................................................. 
+- Kết luận sau khi kiểm kê ngoại tệ, vàng bạc, kim khí quý, đá quý:............................. 
+........................................................................................................................................ 
+ 
+Thủ quỹ 
+(Ký, họ tên) 
+Kế toán trưởng  
+(Ký, họ tên) 
+Người chịu trách nhiệm kiểm kê quỹ 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/08b_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="09-TT" id="tt99_appendix1_09_tt" group="TT" start_page="63" end_page="63">
+      <Title>BẢNG KÊ CHI TIỀN</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ho_va_ten_nguoi_chi" label="Họ và tên người chi" type="string" required="false" />
+        <Field key="bo_phan_hoac_dia_chi" label="Bộ phận (hoặc địa chỉ)" type="string" required="false" />
+        <Field key="chi_cho_cong_viec" label="Chi cho công việc" type="string" required="false" />
+        <Field key="so_tien_bang_chu" label="Số tiền bằng chữ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng kê</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Người duyệt</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 09 - TT 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+BẢNG KÊ CHI TIỀN  
+Ngày..... tháng..... năm.... 
+ 
+Họ và tên người chi:..............................................................................................  
+Bộ phận (hoặc địa chỉ):......................................................................................... 
+Chi cho công việc:................................................................................................ 
+Chứng từ STT Số hiệu Ngày, tháng Nội dung chi S ố tiền 
+A B C D 1 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+   C ộng  
+Số tiền bằng chữ:........................................................................................ 
+(Kèm theo.... chứng từ gốc).  
+ 
+Người lập bảng kê 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Người duyệt 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/09_TT.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="01-TSCĐ" id="tt99_appendix1_01_tscd" group="TSCĐ" start_page="64" end_page="64">
+      <Title>BIÊN BẢN GIAO NHẬN TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="dia_diem_giao_nhan_tscd" label="Địa điểm giao nhận TSCĐ" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Giám đốc bên nhận</Signer>
+        <Signer>Kế toán trưởng bên nhận</Signer>
+        <Signer>Người nhận</Signer>
+        <Signer>Người giao</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 01 - TSCĐ 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN GIAO NHẬN TSCĐ 
+Ngày..... tháng..... năm...... 
+ Số:........................... 
+Nợ:..........................  
+Có:.......................... 
+Căn cứ Quyết định số:.................. ngày....... tháng....... năm....... của............................ 
+......................................................................... về việc bàn giao TSCĐ......................... 
+Ban giao nhận TSCĐ gồm: 
+- Ông/Bà.................................. chức vụ............................... Đại diện bên giao 
+- Ông/Bà.................................. chức vụ............................... Đại diện bên nhận 
+- Ông/Bà.................................. chức vụ......................... Đại diện..................... 
+Địa điểm giao nhận TSCĐ:............................................................................... 
+Xác nhận việc giao nhận TSCĐ như sau:  
+Tính nguyên giá tài sản cố định 
+STT 
+Tên, 
+ ký hiệu 
+quy cách 
+(cấp  
+hạng 
+TSCĐ) 
+Số 
+hiệu 
+TSCĐ 
+Nước 
+sản  
+xuất 
+(XD) 
+Năm  
+sản  
+xuất 
+Năm 
+đưa  
+vào sử
+dụng 
+Công  
+suất 
+(diện  
+tích  
+thiết kế)
+Giá  
+mua 
+(ZSX) 
+Chi 
+phí  
+vận  
+chuyển 
+Chi  
+phí 
+chạy  
+thử 
+... 
+Nguyên 
+giá 
+TSCĐ 
+Tài liệu 
+kỹ thuật 
+kèm theo
+A B C D 1 2 3 4 5 6 7 8 E 
+             
+             
+             
+ C ộng  x x x x x      x 
+  
+DỤNG CỤ, PHỤ TÙNG KÈM THEO 
+Số 
+thứ tự 
+Tên, quy cách dụng cụ, 
+phụ tùng Đơn vị tính S ố lượng Giá tr ị 
+A B C 1 2 
+     
+     
+     
+  
+Giám đốc bên nhận 
+(Ký, họ tên, đóng dấu) 
+Kế toán trưởng bên nhận 
+(Ký, họ tên) 
+Người nhận 
+(Ký, họ tên) 
+Người giao 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="02-TSCĐ" id="tt99_appendix1_02_tscd" group="TSCĐ" start_page="65" end_page="65">
+      <Title>BIÊN BẢN THANH LÝ TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="so" label="Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="ong_ba" label="Ông/Bà" type="string" required="false" />
+        <Field key="chi_phi_thanh_ly_tscd" label="- Chi phí thanh lý TSCĐ" type="string" required="false" />
+        <Field key="gia_tri_thu_hoi" label="- Giá trị thu hồi" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Trưởng Ban thanh lý</Signer>
+        <Signer>Giám đốc  K ế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 02 - TSCĐ 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN THANH LÝ TSCĐ  
+Ngày..... tháng...... năm...... 
+ Số:.............. 
+ Nợ:............. 
+ Có:............. 
+Căn cứ Quyết định số:........ ngày...... tháng...... năm...... của.......................... 
+................................................................Về việc thanh lý tài sản cố định. 
+I. Ban thanh lý TSCĐ gồm:  
+Ông/Bà:............................... Chức vụ........................ Đại diện................... Trưởng ban 
+Ông/Bà:............................... Chức vụ........................ Đại diện......................... Ủy viên  
+Ông/Bà:............................... Chức vụ........................ Đại diện......................... Ủy viên 
+II. Tiến hành thanh lý TSCĐ: 
+- Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ.............................................................. 
+- Số hiệu TSCĐ............................................................................................................... 
+- Nước sản xuất (xây dựng)............................................................................................ 
+- Năm sản xuất................................................................................................................ 
+- Năm đưa vào sử dụng................................. Số thẻ TSCĐ........................................... 
+- Nguyên giá TSCĐ........................................................................................................ 
+- Giá trị hao mòn đã trích đến thời điểm thanh lý.......................................................... 
+- Giá trị còn lại của TSCĐ.............................................................................................. 
+III. Kết luận của Ban thanh lý TSCĐ: 
+........................................................................................................................................ 
+........................................................................................................................................ 
+ 
+Ngày......... tháng......... năm..... 
+Trưởng Ban thanh lý 
+(Ký, họ tên) 
+ 
+IV. Kết quả thanh lý TSCĐ:  
+- Chi phí thanh lý TSCĐ:......................................... (viết bằng chữ)............................. 
+- Giá trị thu hồi:........................................................ (viết bằng chữ)............................. 
+- Đã ghi giảm sổ TSCĐ ngày........... tháng.......... năm.......... 
+ 
+  Ngày......... tháng......... n ăm......  
+ Giám đốc  K ế toán trưởng  
+ (Ký, h ọ tên, đóng dấu)  (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="03-TSCĐ" id="tt99_appendix1_03_tscd" group="TSCĐ" start_page="66" end_page="66">
+      <Title>BIÊN BẢN BÀN GIAO TSCĐ SỬA CHỮA LỚN HOÀN THÀNH</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ngay_thang_nam_so" label="Ngày... tháng... năm...  Số" type="string" required="false" />
+        <Field key="n_o" label="N ợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="so_hieu_tscd_so_the_tscd" label="- Số hiệu TSCĐ................................... Số thẻ TSCĐ" type="string" required="false" />
+        <Field key="bo_phan_quan_ly_su_dung" label="- Bộ phận quản lý, sử dụng" type="string" required="false" />
+        <Field key="ket_luan" label="Kết luận" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng Đại diện đơn vị nhận  Đại diện đơn vị giao</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 03 - TSCĐ 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN BÀN GIAO TSCĐ  
+SỬA CHỮA LỚN HOÀN THÀNH  
+  Ngày... tháng... năm...  Số:.......................
+    N ợ:......................
+  Có:......................
+  
+Căn cứ Quyết định số:................ ngày.... tháng.... năm.... của................... 
+ 
+Chúng tôi gồm:  
+- Ông/Bà............... Chức vụ............. Đại diện....................... đơn vị sửa chữa 
+- Ông/Bà............... Chức vụ............. Đại diện..................... đơn vị có TSCĐ. 
+ 
+Đã kiểm nhận việc sửa chữa TSCĐ như sau: 
+ 
+- Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ.............................................................. 
+- Số hiệu TSCĐ................................... Số thẻ TSCĐ:.................................................... 
+- Bộ phận quản lý, sử dụng:............................................................................................ 
+- Thời gian sửa chữa từ ngày..... tháng....... năm........ đến ngày...... tháng.... năm....... 
+Các bộ phận sửa chữa gồm có: 
+Tên bộ phận       
+sửa chữa 
+Nội dung (mức độ) 
+công việc sửa chữa 
+Giá 
+dự toán 
+Chi phí 
+thực tế 
+Kết quả 
+kiểm tra 
+A B 1 2 3 
+     
+     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+ C ộng    
+Kết luận:.......................................................................................................................... 
+.......................................................................................................................... 
+ 
+Kế toán trưởng Đại diện đơn vị nhận  Đại diện đơn vị giao 
+ (Ký, họ tên) (Ký, họ tên)  (Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/03_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="04-TSCĐ" id="tt99_appendix1_04_tscd" group="TSCĐ" start_page="67" end_page="67">
+      <Title>BIÊN BẢN ĐÁNH GIÁ LẠI TSCĐ</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="ngay_thang_nam_so" label="Ngày..... tháng..... năm......                           Số" type="string" required="false" />
+        <Field key="no" label="Nợ" type="string" required="false" />
+        <Field key="co" label="Có" type="string" required="false" />
+        <Field key="can_cu_quyet_dinh_so" label="- Căn cứ Quyết định số" type="string" required="false" />
+        <Field key="ket_luan" label="Kết luận" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Ủy viên/người lập</Signer>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Chủ tịch Hội đồng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 04 - TSCĐ 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN ĐÁNH GIÁ LẠI TSCĐ 
+ 
+Ngày..... tháng..... năm......                           Số:.................. 
+Nợ:.................. 
+Có:.................. 
+ 
+- Căn cứ Quyết định số:.......... ngày....... tháng....... năm........ 
+Của............................................................................ Về việc đánh giá lại TSCĐ 
+- Ông/Bà................. Chức vụ................ Đại diện...................... Chủ tịch Hội đồng 
+- Ông/Bà................. Chức vụ........................ Đại diện..................................... Ủy viên 
+- Ông/Bà................. Chức vụ........................ Đại diện..................................... Ủy viên 
+ 
+Đã thực hiện đánh giá lại giá trị các TSCĐ sau đây: 
+ 
+Giá trị đang ghi sổ Chênh l ệch 
+STT 
+Tên, ký mã 
+hiệu, quy 
+cách (cấp 
+hạng) TSCĐ 
+Số 
+hiệu 
+TSCĐ 
+Số 
+thẻ 
+TSCĐ Nguyên 
+giá 
+Hao 
+mòn
+Giá trị
+còn lại
+Giá trị 
+còn lại 
+theo đánh 
+giá lại Tăng Gi ảm
+A B C D 1 2 3 4 5 6 
+          
+          
+  
+ 
+ 
+        
+          
+ C ộng X X       
+ 
+Ghi chú: Cột 4 “Giá trị còn lại theo đánh giá lại”. Nếu đánh giá lại cả giá trị hao mòn thì 
+Cột 4 phải tách ra 3 cột tương ứng cột 1, 2, 3.  
+Kết luận:............................................................................................................................... 
+............................................................................................................................... 
+ 
+  Ngày... tháng... năm... 
+Ủy viên/người lập 
+(Ký, họ tên) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Chủ tịch Hội đồng 
+(Ký, họ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/04_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="true">
+        <Columns>
+          <Column key="col_1" label="STT" type="string" required="false" />
+          <Column key="col_2" label="Cột 2" type="string" required="false" />
+          <Column key="col_3" label="Cột 3" type="string" required="false" />
+          <Column key="col_4" label="Cột 4" type="string" required="false" />
+          <Column key="col_5" label="Cột 5" type="string" required="false" />
+          <Column key="col_6" label="Cột 6" type="string" required="false" />
+          <Column key="col_7" label="Cột 7" type="string" required="false" />
+          <Column key="col_8" label="Cột 8" type="string" required="false" />
+          <Column key="col_9" label="Cột 9" type="string" required="false" />
+          <Column key="col_10" label="Cột 10" type="string" required="false" />
+        </Columns>
+      </TableSchema>
+    </Form>
+    <Form code="05-TSCĐ" id="tt99_appendix1_05_tscd" group="TSCĐ" start_page="68" end_page="68">
+      <Title>BIÊN BẢN KIỂM KÊ TÀI SẢN CỐ ĐỊNH</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Kế toán trưởng</Signer>
+        <Signer>Trưởng Ban kiểm kê</Signer>
+        <Signer>(Ký, họ tên)</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 05 - TSCĐ 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BIÊN BẢN KIỂM KÊ TÀI SẢN CỐ ĐỊNH 
+ 
+Thời điểm kiểm kê............ giờ......... ngày......... tháng........ năm.......... 
+Ban kiểm kê gồm: 
+- Ông/Bà................................................. Chức vụ............................... Đại diện........................................ Trưởng ban 
+- Ông/Bà................................................. Chức vụ............................... Đại diện.............................................. Ủy viên 
+- Ông/Bà................................................. Chức vụ............................... Đại diện.............................................. Ủy viên 
+ 
+Đã kiểm kê TSCĐ, kết quả nh
+ư sau:   
+Theo sổ kế toán Theo ki ểm kê Chênh l ệch Số 
+TT 
+Tên 
+TSCĐ 
+Mã 
+số 
+Nơi sử 
+dụng Số 
+lượng 
+Nguyên 
+giá 
+Giá trị 
+còn lại 
+Số 
+lượng 
+Nguyên 
+giá 
+Giá trị 
+còn lại 
+Số 
+lượng 
+Nguyên 
+giá 
+Giá trị 
+còn lại 
+Ghi 
+chú 
+A B C D 1 2 3 4 5 6 7 8 9 10 
+             
+ 
+ 
+ 
+ 
+ C ộng x x x   x   x   x 
+ 
+  Ngày...... tháng...... năm..... 
+Giám đốc 
+ (Ghi ý kiến giải quyết số chênh lệch) 
+Kế toán trưởng 
+(Ký, họ tên) 
+Trưởng Ban kiểm kê 
+(Ký, họ tên) 
+ (Ký, họ tên, đóng dấu)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/05_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="06-TSCĐ" id="tt99_appendix1_06_tscd" group="TSCĐ" start_page="69" end_page="69">
+      <Title>BẢNG TÍNH VÀ PHÂN BỔ KHẤU HAO TSCĐ  Số:............</Title>
+      <Fields>
+        <Field key="ngay_lap" label="Ngày" type="integer" required="false" />
+        <Field key="thang_lap" label="Tháng" type="integer" required="false" />
+        <Field key="nam_lap" label="Năm" type="integer" required="false" />
+        <Field key="bang_tinh_va_phan_bo_khau_hao_tscd_so" label="BẢNG TÍNH VÀ PHÂN BỔ KHẤU HAO TSCĐ  Số" type="string" required="false" />
+      </Fields>
+      <Signatures>
+        <Signer>Người lập bảng  K ế toán trưởng</Signer>
+      </Signatures>
+      <LayoutText>Mẫu số 06 - TSCĐ 
+(Ban hành theo Thông tư số 133/2016/TT-BTC 
+ngày 26/8/2016 của Bộ Tài chính) 
+ 
+BẢNG TÍNH VÀ PHÂN BỔ KHẤU HAO TSCĐ  Số:............ 
+Tháng....... năm.......  
+Nơi sử dụng
+ 
+Toàn DN 
+TK 154 - Chi phí 
+sản xuất kinh doanh dở dang 
+(TK 631 - Giá thành SX) Số 
+TT Chỉ tiêu 
+Tỷ lệ 
+khấu 
+hao (%) 
+hoặc 
+thời 
+gian sử 
+dụng 
+Nguyên 
+giá 
+TSCĐ 
+Số 
+khấu 
+hao 
+Hoạt 
+động 
+....... 
+Hoạt 
+động 
+....... 
+Hoạt 
+động 
+....... 
+Hoạt 
+động 
+....... 
+TK 642 
+Chi phí 
+quản lý 
+kinh 
+doanh 
+TK 241 
+XDCB 
+dở dang
+TK 
+242 
+Chi phí 
+trả 
+trước 
+TK 
+335 
+Chi 
+phí 
+phải 
+trả 
+... 
+A B 1 2 3 4 5 6 7 8 9 10 11 ... 
+1 I. Số khấu hao trích 
+tháng trước 
+            
+2 II. Số KH TSCĐ tăng 
+trong tháng 
+            
+ -             
+3 III. Số KH TSCĐ 
+giảm trong tháng 
+            
+ -             
+4 IV. Số KH trích tháng 
+này (I + II - III) 
+            
+ C ộng x            
+ 
+  Ngày..... tháng.... năm... 
+Người lập bảng  K ế toán trưởng 
+(Ký, họ tên)  (Ký, h ọ tên)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/06_TSCĐ.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="01a-LĐTL" id="tt99_appendix1_01a_ldtl" group="LĐTL" start_page="70" end_page="71">
+      <Title>72 CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 01a - LĐTL) 
+ 
+1. Mục đích: Bảng chấm công dùng để theo dõi ngày công th ực tế làm vi ệc, 
+nghỉ việc, nghỉ hưởng BHXH,... để có c ăn cứ tính tr ả lương, bảo hiểm xã h ội trả 
+thay lương cho từng người và quản lý lao động trong đơn vị. 
+2. Phương pháp và trách nhiệm ghi  
+Mỗi bộ phận (phòng, ban, tổ, nhóm…) phải lập bảng chấm công hàng tháng. 
+Cột A, B: Ghi số thứ tự, họ và tên từng người trong bộ phận công tác. 
+Cột C: Ghi ngạch bậc lương hoặc cấp bậc chức vụ của từng người. 
+Cột 1 - 31: Ghi các ngày trong tháng (Từ ngày 01 đến ngày cuối cùng của tháng). 
+Cột 32: Ghi tổng số công hưởng lương sản phẩm của từng người trong tháng. 
+ 
+72 CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 
+  
+Cột 33: Ghi tổng số công hưởng lương thời gian của từng người trong tháng. 
+Cột 34: Ghi tổng số công nghỉ việc và ngừng việc hưởng 100% lương của từng 
+người trong tháng. 
+Cột 35: Ghi tổng số công nghỉ việc và ngừng việc hưởng các loại % lương của 
+từng người trong tháng. 
+Cột 36: Ghi tổng số công nghỉ hưởng bảo hiểm xã hội của từng người trong tháng. 
+Hàng ngày tổ trưởng (Trưởng ban, phòng, nhóm,...) hoặc người được ủy quyền 
+căn cứ vào tình hình thực tế của bộ phận mình để chấm công cho từng người trong 
+ngày, ghi vào ngày t ương ứng trong các c ột từ cột 1 đến cột 31 theo các ký hi ệu 
+quy định trong chứng từ. 
+Cuối tháng, ng ười chấm công và ng ười phụ trách b ộ phận ký vào B ảng chấm 
+công và chuy ển B ảng ch ấm công cùng các ch ứng t ừ liên quan nh ư Gi ấy ch ứng 
+nhận nghỉ việc hưởng BHXH, giấy xin nghỉ việc không hưởng lương,... về bộ phận 
+kế toán kiểm tra, đối chiếu quy ra công để tính lương và bảo hiểm xã hội. Kế toán 
+tiền lương căn cứ vào các ký hi ệu chấm công của từng người tính ra số ngày công 
+theo từng loại tương ứng để ghi vào các cột 32, 33, 34, 35. 
+ Ngày công được quy định là 8 giờ. Khi tổng hợp quy thành ngày công nếu còn 
+giờ lẻ thì ghi số giờ lẻ bên cạnh số công và đánh dấu phẩy ở giữa. 
+ Ví dụ: 22 công 4 giờ ghi 22,4 
+ Bảng chấm công được lưu tại phòng (ban, tổ,…) kế toán cùng các chứng từ có 
+liên quan. 
+Phương pháp ch ấm công:  Tùy thu ộc vào điều ki ện công tác và trình độ k ế 
+toán tại đơn vị để sử dụng 1 trong các phương pháp chấm công sau: 
+- Chấm công ngày: M ỗi khi ng ười lao động làm việc tại đơn vị hoặc làm việc 
+khác như hội nghị, họp,... thì mỗi ngày dùng một ký hiệu để chấm công cho ngày đó. 
+Cần chú ý 2 trường hợp:  
++ Nếu trong ngày, ng ười lao động làm 2 vi ệc có thời gian khác nhau thì ch ấm 
+công theo ký hiệu của công việc chiếm nhiều thời gian nhất. Ví dụ người lao động A 
+trong ngày họp 5 giờ làm lương thời gian 3 giờ thì cả ngày hôm đó chấm “H” Hội họp. 
++ Nếu trong ngày, người lao động làm 2 vi ệc có thời gian bằng nhau thì ch ấm 
+công theo ký hiệu của công việc diễn ra trước.  
+- Chấm công theo giờ: 
+Trong ngày ng ười lao động làm bao nhiêu công vi ệc thì ch ấm công theo các 
+ký hiệu đã quy định và ghi s ố giờ công th ực hiện công vi ệc đó bên c ạnh ký hi ệu 
+tương ứng. 
+- Ch ấm công ngh ỉ bù: Ngh ỉ bù ch ỉ áp d ụng trong tr ường h ợp làm thêm gi ờ 
+hưởng lương thời gian nh ưng không thanh toán l ương làm thêm, do đó khi ng ười 
+lao động nghỉ bù thì chấm "NB" và vẫn tính trả lương thời gian.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01a_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="01b-LĐTL" id="tt99_appendix1_01b_ldtl" group="LĐTL" start_page="72" end_page="71">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText />
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01b_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="02-LĐTL" id="tt99_appendix1_02_ldtl" group="LĐTL" start_page="72" end_page="72">
+      <Title>BẢNG THANH TOÁN TIỀN LƯƠNG</Title>
+      <Fields>
+        <Field key="cot_1_den_cot_31" label="Cột 1 đến cột 31" type="string" required="false" />
+      </Fields>
+      <Signatures />
+      <LayoutText>Mẫu số 01b - LĐTL) 
+ 
+1. Mục đích: Theo dõi ngày công thực tế làm thêm ngoài giờ để có căn cứ tính 
+thời gian nghỉ bù hoặc thanh toán cho người lao động trong đơn vị.  
+2. Phương pháp lập và trách nhiệm ghi  
+Mỗi b ộ ph ận (phòng, ban, t ổ, nhóm...) có phát sinh làm thêm ngoài gi ờ làm 
+việc theo quy định thì phải lập bảng chấm công làm thêm giờ.  
+Cột A, B: Ghi số thứ tự, họ và tên từng người làm việc thêm giờ trong bộ ph
+ận 
+công tác.  
+Cột 1 đến cột 31: Ghi s ố giờ làm thêm c ủa các ngày (T ừ gi ờ... đến giờ...) từ 
+ngày 01 đến ngày cuối cùng của tháng.  
+Cột 32: Ghi tổng số giờ làm thêm vào các ngày thường trong tháng.  
+Cột 33: Ghi tổng số giờ làm thêm vào các ngày nghỉ thứ bảy, chủ nhật.  
+Cột 34: Ghi tổng số giờ làm thêm vào các ngày lễ, tết.  
+Cột 35: Ghi tổng số giờ làm thêm vào buổi tối (tính theo quy định của pháp luật) 
+không thuộc ca làm việc của người lao động. 
+Hàng ngày t ổ trưởng (phòng ban, t ổ nhóm...) ho ặc người được ủy quyền căn 
+cứ vào số giờ làm thêm thực tế theo yêu cầu công việc của bộ phận mình để chấm 
+giờ làm thêm cho từng người trong ngày, ghi vào ngày tương ứng trong các cột từ 1 
+đến 31 theo các ký hiệu quy định trong chứng từ. 
+Cuối tháng, ng ười ch ấm công, ph ụ trách b ộ ph ận có ng ười làm thêm ký và 
+giám đốc hoặc người được ủy quyền duyệt vào b ảng chấm công làm thêm gi ờ và 
+chuyển bảng chấm công làm thêm gi ờ cùng các ch ứng từ liên quan v ề bộ phận kế 
+toán kiểm tra, đối chiếu, quy ra công để thanh toán (tr ường hợp thanh toán ti ền). 
+Kế toán c ăn c ứ vào các ký hi ệu ch ấm công c ủa t ừng ng ười tính ra s ố công theo 
+từng loại tương ứng để ghi vào các cột 32, 33, 34, 35. 
+ 
+BẢNG THANH TOÁN TIỀN LƯƠNG 
+(Mẫu số 02 - LĐTL) 
+ 
+1. Mục đích: Bảng thanh toán tiề
+n lương là chứng từ làm căn cứ để thanh toán 
+tiền lương, phụ cấp, các khoản thu nhập tăng thêm ngoài ti ền lương cho người lao 
+động, kiểm tra việc thanh toán tiền lương cho người lao động làm việc trong doanh 
+nghiệp đồng thời là căn cứ để thống kê về lao động tiền lương. 
+2. Phương pháp và trách nhiệm ghi 
+Bảng thanh toán tiền lương được lập hàng tháng. Cơ sở để lập Bảng thanh toán 
+tiền l ương là các ch ứng t ừ liên quan nh ư: B ảng ch ấm công, phi ếu xác nh ận s ản 
+phẩm hoặc công việc hoàn thành...</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="03-LĐTL" id="tt99_appendix1_03_ldtl" group="LĐTL" start_page="73" end_page="73">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 03 - LĐTL) 
+ 
+1. Mục đích: Là ch ứng từ xác nh ận số tiền thưởng cho t ừng người lao động, 
+làm cơ sở để tính thu nhập của mỗi người lao động và ghi sổ kế toán. 
+2. Phương pháp và trách nhiệm ghi 
+Góc trên bên trái c ủa Bảng thanh toán ti ền thưởng phải ghi rõ tên đơn vị, bộ 
+phận được thưởng. 
+Cột A, B, C: Ghi số thứ tự, họ tên, chức vụ, của người được thưởng.  
+Cột 1: Ghi bậc lương hiện đang được hưởng để tính ra lương hàng tháng. 
+Cột 2, 3: Ghi rõ loại thưởng được bình xét, số tiền được thưởng theo mỗi loại. 
+Cột D: Người được thưởng ký nhận tiền thưởng. 
+Bảng thanh toán ti ền thưởng do phòng k ế toán l ập theo t ừng bộ phận và ph ải 
+có chữ ký (họ tên) của người lập, kế toán trưởng và giám đốc.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/03_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="04-LĐTL" id="tt99_appendix1_04_ldtl" group="LĐTL" start_page="74" end_page="73">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText />
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/04_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="05-LĐTL" id="tt99_appendix1_05_ldtl" group="LĐTL" start_page="74" end_page="74">
+      <Title>PHIẾU XÁC NHẬN SẢN PHẨM HOẶC CÔNG VIỆC HOÀN THÀNH</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 04 - LĐTL)  
+ 
+1. Mục đích: Giấy đi đường là c ăn cứ để cán b ộ và ng ười lao động làm th ủ 
+tục c ần thi ết khi đến n ơi công tác và thanh toán công tác phí, tàu xe sau khi v ề 
+doanh nghiệp. 
+2. Phương pháp và trách nhiệm ghi 
+Sau khi có lệnh cử cán bộ, người lao động đi công tác, bộ phận hành chính làm 
+thủ tục cấp giấy đi đường. Người đi công tác có nhu c ầu ứng tiền tàu xe, công tác 
+phí... mang giấy đi đường đến phòng kế toán làm thủ tục ứng tiền.  
+Cột 1: Ghi nơi đi, nơi đến công tác. 
+Cột 2: Ghi ngày đi và ngày đến. 
+Khi đến nơi công tác, c ơ quan đến công tác ph ải xác nhận ngày, giờ đến và đi 
+(đóng dấu và chữ ký xác nhận của người có trách nhiệm ở cơ quan đến công tác). 
+Cột 3: Ph ương tiện sử dụng: Cần ghi rõ đi ô tô c ơ quan, ô tô khách, tàu h ỏa, 
+máy bay... 
+Cột 4: Độ dài chặng đường từ nơi đi đến nơi đến.  
+Cột 5: Ghi thời gian công tác. 
+Cột 6: Ghi lý do lưu trú. 
+Cột 7: Lấy chữ ký của người có thẩm quyền và đóng dấu của nơi cán bộ, người 
+lao động đến công tác. 
+Khi đi công tác v ề người đi công tác xu ất trình giấy đi đường để phụ trách bộ 
+phận xác nh ận ngày v ề và th ời gian được h ưởng l ưu trú. Sau đó đính kèm các 
+chứng từ trong đợt công tác (như vé tàu xe, vé phà, hóa đơn thanh toán tiền phòng 
+nghỉ...) vào gi ấy đi đường và n ộp cho phòng k ế toán để làm th ủ t ục thanh toán 
+công tác phí, thanh toán t ạm ứng. Sau đó chuy ển cho k ế toán tr ưởng duy ệt chi 
+thanh toán. 
+Giấy đi đường và các chứng từ liên quan được lưu ở phòng kế toán.  
+ 
+PHIẾU XÁC NHẬN SẢN PHẨM HOẶC CÔNG VIỆC HOÀN THÀNH 
+(Mẫu số 05 - LĐTL) 
+ 
+1. Mục đích: Là chứng từ xác nh ận số sản phẩm hoặc công vi ệc hoàn thành 
+của đơn v ị ho ặc cá nhân ng ười lao động, làm c ơ s ở để l ập b ảng thanh toán ti ền 
+lương hoặc tiền công cho người lao động. 
+2. Phương pháp và trách nhiệm ghi 
+- Phía trên góc trái ghi rõ tên đơn v ị, b ộ ph ận qu ản lý công vi ệc ph ải thanh 
+toán cho người lao động.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/05_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="06-LĐTL" id="tt99_appendix1_06_ldtl" group="LĐTL" start_page="75" end_page="75">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 06 - LĐTL) 
+ 
+1. M ục đích: B ảng thanh toán ti ền làm thêm gi ờ nh ằm xác định kho ản ti ền 
+lương, ti ền công làm thêm gi ờ mà ng ười lao động được h ưởng sau khi làm vi ệc 
+ngoài giờ theo yêu cầu công việc. 
+2. Phương pháp lập và trách nhiệm ghi  
+Góc trên bên trái của Bảng thanh toán tiền làm thêm giờ phải ghi rõ tên đơn vị, 
+bộ phận làm việc.  
+Dòng tháng năm: Ghi rõ tháng và năm mà người lao động tiến hành làm thêm giờ. 
+Cột A, B: Ghi số thứ tự, họ và tên của người làm việc thêm giờ. 
+Cột 1: Ghi hệ số lương người lao động đang hưởng. 
+Cột 2: Ghi hệ số phụ cấp chức vụ người lao động đang hưởng. 
+Cột 3: Ghi tổng số hệ số người làm thêm được hưởng (Cột 3 = cột 1 + cột 2).  
+Cột 4: Ghi tiền lương tháng được hưởng tính bằng: Lương tối thiểu (Theo quy 
+định của nhà nước) nhân với (x) Hệ số lương cộng với (+) Phụ cấp chức vụ.  
+Cột 5: Ghi mức lương ngày được tính bằng Lương tối thiểu (theo quy định của 
+Nhà nước) x (hệ số lương + hệ số phụ cấp chức vụ)/22 ngày. 
+Cột 6: Ghi mức lương giờ được tính bằng Cột 5 chia cho 8 giờ. 
+Cột số giờ làm thêm ngày thường, số giờ làm thêm ngày thứ 7, chủ nhật, số giờ 
+làm thêm ngày lễ (Cột 7, 9, 11, 13) căn cứ vào bảng chấm công làm thêm giờ thực 
+tế của tháng đó để ghi. 
+Cột thành tiền của làm thêm ngày th ường (cột 8) = số giờ (cột 7) x mức lương 
+giờ (cột 6) x Hệ số làm thêm theo quy định hiện hành.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/06_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="07-LĐTL" id="tt99_appendix1_07_ldtl" group="LĐTL" start_page="76" end_page="76">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 07 - LĐTL) 
+ 
+1. M ục đích: B ản thanh toán ti ền thuê ngoài là ch ứng t ừ k ế toán nh ằm xác 
+nhận s ố ti ền đã thanh toán cho ng ười được thuê để th ực hi ện nh ững công vi ệc 
+không lập được hợp đồng, như: Thuê lao động bốc vác, thuê v ận chuyển thiết bị, 
+thuê làm khoán 1 công vi ệc nào đó.......... Chứng từ được dùng để thanh toán cho 
+người lao động thuê ngoài. 
+2. Phương pháp và trách nhiệm ghi  
+Chứng từ này do người thuê lao động lập. 
+Ghi họ và tên người thuê thuộc bộ phận (Phòng, ban,...).  
+Ghi rõ nội dung, địa điểm và thời gian thuê. 
+Cột A, B, C: Ghi s ố thứ tự, họ tên, địa chỉ hoặc số chứng minh th ư, hoặc thẻ 
+căn cước của người được thuê.  
+Cột D: Ghi rõ nội dung hoặc tên công việc thuê. 
+Cột 1: Ghi số công lao động hoặc khối lượng công việc đã làm. 
+Cột 2: Ghi đơn giá ph ải thanh toán cho 1 công lao động ho ặc 1 đơn v ị khối 
+lượng công việc. Trường hợp thuê khoán gọn công việc thì cột này để trống.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/07_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="08-LĐTL" id="tt99_appendix1_08_ldtl" group="LĐTL" start_page="77" end_page="77">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 08 - LĐTL) 
+ 
+1. M ục đích: H ợp đồng giao khoán là b ản ký k ết gi ữa ng ười giao khoán và 
+người nhận khoán nh ằm xác nh ận về khối lượng công vi ệc khoán ho ặc nội dung 
+công việc khoán, th ời gian làm vi ệc, trách nhi ệm, quyền lợi của mỗi bên khi th ực 
+hiện công việc đó. Đồng thời là cơ sở thanh toán chi phí cho người nhận khoán. 
+2. Phương pháp và trách nhiệm ghi  
+Góc trên bên trái ghi rõ tên đơn vị, địa chỉ và số của hợp đồng giao khoán (nếu có). 
+Ghi rõ h ọ tên, ch ức vụ đại diện cho phòng, ban, b ộ ph ận của bên giao khoán và 
+bên nhận khoán. 
+Phần I. Điều khoản chung: 
+- Phương thức giao khoán: Ghi rõ phương thức giao khoán cho người nhận khoán. 
+- Điều kiện thực hiện hợp đồng: Ghi rõ các điều kiện cam kết của 2 bên khi ký 
+hợp đồng giao khoán.  
+- Th ời gian th ực hi ện h ợp đồng: Ghi rõ th ời gian th ực hi ện công vi ệc nh ận 
+khoán từ ngày bắt đầu đến ngày kết thúc hợp đồng. 
+- Các điều kiện khác: Ghi rõ các điều kiện khác khi ký kết hợp đồng. 
+Phần II. Điều khoản cụ thể: 
+Ghi rõ n ội dung các công vi ệc khoán, trách nhi ệm, quyền lợi và ngh ĩa vụ của 
+người nhận khoán và người giao khoán (như điều kiện làm việc, yêu cầu sản phẩm 
+(công vi ệc) khoán, th ời gian hoàn thành và s ố ti ền ph ải thanh toán) đối v ới bên 
+nhận khoán. 
+Hợp đồng giao khoán do bên giao khoán lập thành 3 bản:  
+- 1 bản giao cho người nhận khoán; 
+- 1 bản lưu ở bộ phận lập hợp đồng; 
+- 1 b ản chuyển về phòng k ế toán cho ng ười có trách nhi ệm theo dõi quá trình 
+thực hiện hợp đồng giao khoán và làm căn cứ để thanh toán hợp đồng. 
+Hợp đồng giao khoán ph ải có đầy đủ ch ữ ký, h ọ tên c ủa đại di ện bên giao 
+khoán và đại diện bên nhận khoán, người lập và kế toán trưởng bên giao khoán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/08_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="09-LĐTL" id="tt99_appendix1_09_ldtl" group="LĐTL" start_page="78" end_page="77">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText />
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/09_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="10-LĐTL" id="tt99_appendix1_10_ldtl" group="LĐTL" start_page="78" end_page="78">
+      <Title>BẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 09 - LĐTL) 
+ 
+1. Mục đích: Biên b ản thanh lý h ợp đồng giao khoán là ch ứng từ nh ằm xác 
+nhận số lượng, chất lượng công việc và giá trị của hợp đồng đã thực hiện, làm căn 
+cứ để hai bên thanh toán và chấm dứt hợp đồng. 
+2. Phương pháp và trách nhiệm ghi 
+Góc trên bên trái ghi rõ tên đơn vị, bộ phận có bản thanh lý hợp đồng giao khoán. 
+Ghi rõ ngày, tháng, năm thanh lý hợp đồng, số hiệu bản thanh lý. 
+Ghi rõ họ tên, chức vụ của những người được đại diện cho bên giao khoán và 
+bên nhận khoán. 
+Ghi rõ số, ngày tháng của hợp đồng được thanh lý. 
+Ghi rõ n ội dung công vi ệc đã thực hiện và giá tr ị của hợp đồng đã thực hiện 
+đến thời điểm thanh lý hợp đồng. 
+Ghi rõ s ố tiền bằng số và b ằng chữ mà bên giao khoán đã thanh toán cho bên 
+nhận khoán từ khi ký hợp đồng đến ngày thanh lý hợp đồng. 
+Ghi rõ nội dung của từng bên vi phạm hợp đồng (nếu có) và số tiền bị phạt do 
+vi phạm hợp đồng. 
+Ghi rõ s ố tiền b ằng số và b ằng ch ữ bên giao khoán còn ph ải thanh toán cho 
+bên nhận khoán (Theo tính toán trong h ợp đồng, nghiệm thu công vi ệc và s ố tiền 
+đã thanh toán tr ước cho nhau) đến khi thanh lý h ợp đồng hoặc ngược lại bên giao 
+khoán đã thanh toán quá cho bên nhận khoán. 
+Sau khi kiểm tra thực tế việc thực hiện hợp đồng, kết quả thực hiện hợp đồng 
+hai bên nh ất trí đưa ra k ết luận về từng nội dung c ụ thể về khối lượng thực hiện, 
+đánh giá chất lượng và kiến nghị, các việc cần làm (nếu có). 
+Biên bản thanh lý h ợp đồng giao khoán được lập thành 4 b ản, mỗi bên gi ữ 2 
+bản. Biên b ản thanh lý h ợp đồng giao khoán ph ải có đầy đủ chữ ký c ủa đại diện 
+bên giao khoán và đại diện bên nhận khoán thực hiện hợp đồng. 
+ 
+BẢNG KÊ TRÍCH NỘP CÁC KHOẢN THEO LƯƠNG 
+(Mẫu số 10 - LĐTL) 
+ 
+1. Mục đích: Bảng kê trích nộp các khoản theo lương dùng để xác định số tiền 
+bảo hiểm xã hội, bảo hiểm y tế, bảo hiểm thất nghiệp, KPCĐ mà đơn vị và ng ười 
+lao động ph ải n ộp trong tháng (ho ặc quý) cho c ơ quan b ảo hiểm xã h ội và công 
+đoàn. Chứng từ này là cơ sở để ghi sổ kế toán về các khoản trích nộp theo lương. 
+2. Phương pháp và trách nhiệm ghi 
+Góc trên bên trái ghi rõ tên đơn vị, bộ phận trích nộp các khoản theo lương.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/10_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="11-LĐTL" id="tt99_appendix1_11_ldtl" group="LĐTL" start_page="79" end_page="79">
+      <Title>TK 335.</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 11 - LĐTL) 
+ 
+1. Mục đích: Dùng để tập hợp và phân bổ tiền lương tiền công thực tế phải trả 
+(gồm tiền lương, tiền công và các khoản phụ cấp), bảo hiểm xã hội, bảo hiểm y tế, 
+bảo hiểm thất nghiệp, bảo hiểm tai n ạn lao động và kinh phí công đoàn phải trích 
+nộp trong tháng cho các đối tượng sử dụng lao động (ghi Có TK 334, TK 335, TK 338 
+(3382, 3383, 3384, 3385, 3388). 
+2. Phương pháp l
+ập và trách nhiệm ghi  
+- Kết cấu và n ội dung ch ủ yếu của bảng phân b ổ này g ồm có các c ột dọc ghi 
+Có TK 334, TK 335, TK 338 (3382, 3383, 33 84, 3385, 38 88), các dòng ngang 
+phản ánh ti ền lương, bảo hiểm xã h ội, bảo hiểm y t ế, bảo hiểm tai n ạn lao động, 
+kinh phí công đoàn tính cho các đối tượng sử dụng lao động. 
+- Cơ sở lập: 
++ Căn cứ vào các b ảng thanh toán l ương, thanh toán làm đêm, làm thêm gi ờ... 
+kế toán t ập hợp, phân lo ại chứng từ theo từng đối tượng sử dụng tính toán s ố tiền 
+để ghi vào b ảng phân b ổ này theo các dòng phù h ợp cột ghi Có TK 334 ho ặc có 
+TK 335. 
++ Căn cứ vào tỷ lệ trích bảo hiểm xã hội, bảo hiểm y tế, bảo hiểm thất nghiệp, 
+kinh phí công đoàn và t ổng số tiền lương phải trả (theo quy định hiện hành) theo 
+từng đối tượng sử dụng tính ra s ố tiền phải trích b ảo hiểm xã h ội, bảo hiểm y t ế, 
+bảo hiểm thất nghiệp, bảo hiểm tai n ạn lao động, kinh phí công đoàn để ghi vào 
+các dòng phù hợp cột ghi Có TK 338 (3382, 3383, 3384, 3385, 3388).</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/11_LĐTL.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="01-VT" id="tt99_appendix1_01_vt" group="VT" start_page="80" end_page="80">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 01 - VT) 
+ 
+1. M ục đích: Nh ằm xác nh ận s ố l ượng v ật t ư, công c ụ, d ụng c ụ, s ản ph ẩm, 
+hàng hóa nh ập kho làm c ăn cứ ghi Th ẻ kho, thanh toán ti ền hàng, xác định trách 
+nhiệm với người có liên quan và ghi sổ kế toán. 
+2. Phương pháp và trách nhiệm ghi  
+Góc trên bên trái c ủa Phi ếu nh ập kho ph ải ghi rõ tên c ủa đơn v ị (ho ặc đóng 
+dấu đơn vị), bộ phận nhập kho. Phiếu nhập kho áp dụng trong các trường hợp nhập 
+kho v ật t ư, công c ụ, d ụng c ụ, s ản ph ẩm, hàng hóa mua ngoài, t ự s ản xu ất, thuê 
+ngoài gia công chế biến, nhận góp vốn, hoặc thừa phát hiện trong kiểm kê. 
+Khi l ập phi ếu nh ập kho ph ải ghi rõ s ố phi ếu nh ập và ngày, tháng, n ăm l ập 
+phiếu, họ tên người giao vật tư, công cụ, dụng cụ, sản phẩm, hàng hóa, số hóa đơn 
+hoặc lệnh nhập kho, tên kho, địa điểm kho nhập. 
+Cột A, B, C, D: Ghi s ố thứ tự, tên, nhãn hi ệu, quy cách, ph ẩm chất, mã s ố và 
+đơn vị tính của vật tư, công cụ, dụng cụ, sản phẩm, hàng hóa. 
+Cột 1: Ghi số lượng theo chứng từ (hóa đơn hoặc lệnh nhập). 
+Cột 2: Thủ kho ghi số lượng thực nhập vào kho.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/01_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="02-VT" id="tt99_appendix1_02_vt" group="VT" start_page="81" end_page="81">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 02 - VT)  
+ 
+1. Mục đích: Theo dõi ch ặt chẽ số lượng vật tư, công cụ, dụng cụ, sản phẩm, 
+hàng hóa xu ất kho cho các b ộ ph ận s ử d ụng trong doanh nghi ệp, làm c ăn c ứ để 
+hạch toán chi phí s ản xuất, tính giá thành s ản phẩm, dịch vụ và ki ểm tra vi ệc sử 
+dụng, thực hiện định mức tiêu hao vật tư. 
+2. Phương pháp và trách nhiệm ghi 
+Góc bên trái của Phiếu xuất kho phải ghi rõ tên của đơn vị (hoặc đóng dấu đơn vị), 
+bộ phận xuất kho. Phiếu xuất kho lập cho một hoặc nhiều thứ vật tư, công cụ, dụng 
+cụ, sản phẩm, hàng hóa cùng m ột kho dùng cho m ột đối tượng hạch toán chi phí 
+hoặc cùng một mục đích sử dụng.  
+Khi lập phiếu xuất kho phải ghi rõ: Họ tên người nhận hàng, tên, đơn vị (bộ phận): 
+số và ngày, tháng, năm lập phiếu; lý do xuất kho và kho xuất vật tư, công cụ, dụng 
+cụ, sản phẩm, hàng hóa. 
+- Cột A, B, C, D: Ghi s ố thứ tự, tên, nhãn hiệu, quy cách, phẩm chất, mã số và 
+đơn vị tính của vật tư, công cụ, dụng cụ, sản phẩm, hàng hóa. 
+- Cột 1: Ghi s ố lượng vật tư, công c ụ, dụng cụ, sản phẩm, hàng hóa theo yêu 
+cầu xuất kho của người (bộ phận) sử dụng. 
+- Cột 2: Thủ kho ghi s ố lượng thực tế xuất kho (số lượng thực tế xuất kho chỉ 
+có thể bằng hoặc ít hơn số lượng yêu cầu). 
+- Cột 3, 4: Kế toán ghi đơn giá (tùy theo quy định hạch toán của doanh nghiệp) 
+và tính thành ti ền của từng loại vật tư, công cụ, dụng cụ, sản phẩm, hàng hóa xuất 
+kho (cột 4 = cột 2 x cột 3).</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="03-VT" id="tt99_appendix1_03_vt" group="VT" start_page="82" end_page="82">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 03 - VT) 
+ 
+1. Mục đích: Xác định số lượng, quy cách, chất lượng vật tư, công cụ, sản phẩm, 
+hàng hóa tr ước khi nh ập kho, làm c ăn cứ để quy trách nhi ệm trong thanh toán và 
+bảo quản. 
+2. Phương pháp và trách nhiệm ghi 
+Góc bên trái c ủa Biên b ản ki ểm nghi ệm ghi rõ tên đơn v ị (ho ặc đóng d ấu 
+đơn vị), bộ phận sử dụng. 
+Biên b ản này áp d ụng cho các lo ại v ật t ư, d ụng c ụ, s ản ph ẩm, hàng hóa c ần 
+phải kiểm nghiệm trước khi nhập kho trong các trường hợp: 
+- Nhập kho với số lượng lớn; 
+- Các loại vật tư, công cụ, sản phẩm, hàng hóa có tính chất lý, hóa phức tạp; 
+- Các loại vật tư, công cụ, sản phẩm, hàng hóa quý hiếm; 
+Những vật tư, công cụ, sản phẩm, hàng hóa không cần kiểm nghiệm trước khi nhập 
+kho, nhưng trong quá trình nhập kho nếu phát hiện có sự khác biệt lớn về số lượng và 
+chất lượng giữa hóa đơn và thực nhập thì vẫn phải lập biên bản kiểm nghiệm. 
+- Cột A, B, C: Ghi số thứ tự, tên nhãn hiệu, quy cách và mã số của vật tư, công 
+cụ, dụng cụ, sản phẩm, hàng hóa kiểm nghiệm. 
+- Cột D: “Phương thức kiểm nghiệm” ghi phương pháp kiểm nghiệm toàn diện 
+hay xác suất.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/03_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="04-VT" id="tt99_appendix1_04_vt" group="VT" start_page="83" end_page="82">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText />
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/04_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="02-VT" id="tt99_appendix1_02_vt" group="VT" start_page="83" end_page="82">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText />
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/02_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="05-VT" id="tt99_appendix1_05_vt" group="VT" start_page="83" end_page="83">
+      <Title>BIÊN BẢN KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 04 - VT) 
+ 
+1. Mục đích: Theo dõi s ố lượng vật tư còn l ại cuối kỳ hạch toán ở đơn vị sử 
+dụng, làm căn cứ tính giá thành sản phẩm và kiểm tra tình hình thực hiện định mức sử 
+dụng vật tư. 
+2 . Phương pháp và trách nhiệm ghi 
+Góc bên trái của Phiếu báo vật tư còn lại cuối kỳ ghi rõ tên đơn vị (hoặc đóng 
+dấu đơn vị), bộ phận sử dụng. 
+Số lượng vật tư còn lại cuối kỳ ở đơn vị sử dụng được phân thành hai loại: 
+- Nếu vật tư không cần sử dụng nữa thì lập Phiếu nhập kho (Mẫu số 02 - VT) 
+và nộp lại kho. 
+- Nếu vật tư còn sử dụng tiếp thì bộ phận sử dụng lập Phiếu báo vật tư còn lại 
+cuối kỳ thành 2 bản. 
+Phụ trách bộ phận sử dụng ký tên: 
+- 1 bản giao cho phòng vật tư (nếu có); 
+- 1 bản giao cho phòng kế toán. 
+ 
+BIÊN BẢN KIỂM KÊ VẬT TƯ, CÔNG CỤ, SẢN PHẨM, HÀNG HÓA  
+(Mẫu số 05 - VT)  
+ 
+1. Mục đích: Biên bản kiểm kê vật tư, công cụ, sản phẩm, hàng hóa nhằm xác 
+định số lượng, chất lượng và giá tr ị vật tư, công c ụ, sản phẩm, hàng hóa có ở kho 
+tại thời điểm kiểm kê làm c ăn cứ xác định trách nhiệm trong việc bảo quản, xử lý 
+vật tư, công cụ, sản phẩm, hàng hóa thừa, thiếu và ghi sổ kế toán.</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/05_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="06-VT" id="tt99_appendix1_06_vt" group="VT" start_page="84" end_page="84">
+      <Title>Biểu mẫu kế toán</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 06 - VT) 
+ 
+1. M ục đích: Là ch ứng t ừ kê  k ha i m ua vật t ư, công c ụ, d ụng c ụ, hàng hóa, 
+dịch vụ lặt vặt trên thị trường tự do trong tr ường hợp người bán thuộc diện không 
+phải lập hóa đơn khi bán hàng hóa, cung c ấp dịch vụ theo quy định làm c ăn cứ 
+lập phiếu nhập kho, thanh toán và h ạch toán chi phí v ật tư, hàng hóa,... l ập trong 
+Bảng kê khai này không được kh ấu tr ừ thu ế GTGT. (Tr ường h ợp mua v ật t ư,</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/06_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+    <Form code="07-VT" id="tt99_appendix1_07_vt" group="VT" start_page="85" end_page="87">
+      <Title>CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 87</Title>
+      <Fields />
+      <Signatures />
+      <LayoutText>Mẫu số 07 - VT) 
+ 
+1. M ục đích: Dùng để ph ản ánh t ổng giá tr ị nguyên li ệu, v ật li ệu, công c ụ, 
+dụng cụ xuất kho trong tháng theo giá th ực tế và giá h ạch toán và phân b ổ giá tr ị 
+nguyên liệu, vật liệu, công cụ, dụng cụ xuất dùng cho các đối tượng sử dụng hàng 
+tháng (Ghi Có TK 152, TK 153, N ợ các tài kho ản liên quan), B ảng này còn dùng 
+để phân b ổ giá tr ị công c ụ, dụng cụ xuất dùng m ột lần có giá tr ị lớn, thời gian s
+ử 
+dụng dưới một năm hoặc trên một năm đang được phản ánh trên TK 242. 
+ 
+ CÔNG BÁO/Số 1105 + 1106/Ngày 12-10-2016 87 
+ 
+2. Phương pháp và trách nhiệm ghi 
+- B ảng g ồm các c ột d ọc ph ản ánh các lo ại nguyên li ệu, v ật li ệu và công c ụ, 
+dụng c ụ xu ất dùng trong tháng tính theo giá h ạch toán và giá th ực t ế, các dòng 
+ngang phản ánh các đối tượng sử dụng nguyên liệu, vật liệu, công cụ, dụng cụ. 
+- Căn cứ vào các chứng từ xuất kho vật liệu và hệ số chênh lệch giữa giá hạch 
+toán và giá th ực tế của từng loại vật liệu để tính giá th ực tế nguyên li ệu, vật liệu, 
+công cụ xuất kho. 
+Giá trị nguyên li ệu, vật liệu, công c ụ, dụng cụ xuất kho trong tháng theo giá 
+thực tế phản ánh trong B ảng phân bổ nguyên liệu, vật liệu, công cụ, dụng cụ theo 
+từng đối tượng sử dụng được dùng làm c ăn cứ để ghi vào bên Có các Tài kho ản 
+152, 153, 242 c ủa các Bảng kê và s ổ kế toán liên quan tùy theo hình th ức kế toán 
+đơn vị áp dụng (Sổ Cái ho ặc Nhật ký - S ổ Cái TK 152, 153,...). S ố liệu của Bảng 
+phân bổ này đồng thời được sử dụng để tập hợp chi phí tính giá thành s ản phẩm, 
+dịch vụ.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(Xem tiếp Công báo số 1107 + 1108)</LayoutText>
+      <PrintTemplateHtml>data/regulations/_tmp_133_2016_TT-BTC(15583)_html/07_VT.html</PrintTemplateHtml>
+      <TableSchema has_grid="false">
+        <Columns />
+      </TableSchema>
+    </Form>
+  </Forms>
+</TT99AppendixIForms>

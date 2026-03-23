@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "document": "TT133_MVP_2026",
+  "router_id": "tt133_mvp_posting_router_v1",
+  "routing_order": [
+    "ingestion_source_validation",
+    "event_type_resolution",
+    "context_field_validation",
+    "classification_rule_evaluation",
+    "posting_template_selection",
+    "journal_balance_check",
+    "post_or_reject"
+  ],
+  "ambiguity_policy": {
+    "mode": "deterministic_only",
+    "otherwise": "reject_with_reason"
+  }
+}

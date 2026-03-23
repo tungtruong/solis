@@ -1,0 +1,26 @@
+{
+  "engine_id": "tt133_mvp_auto_posting_engine_v1",
+  "mode": "deterministic_rule_based",
+  "preconditions": [
+    "source_allowed",
+    "all_required_facts_present",
+    "ledger_period_open",
+    "amount_positive"
+  ],
+  "selection_flow": [
+    "resolve_event_type",
+    "resolve_classification",
+    "select_unique_posting_method",
+    "apply_validations",
+    "post_or_reject_with_reason"
+  ],
+  "failure_policy": {
+    "on_no_match": "reject_with_reason_code",
+    "reason_codes": [
+      "SRC_NOT_ALLOWED",
+      "CTX_MISSING_REQUIRED_FACTS",
+      "NO_RULE_MATCH",
+      "VALIDATION_FAILED"
+    ]
+  }
+}

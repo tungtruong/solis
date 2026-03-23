@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "document": "TT99_2025",
+  "name": "context_dimensions_for_auto_posting",
+  "dimensions": [
+    {
+      "field": "transaction_date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "field": "amount",
+      "type": "number",
+      "required": true
+    },
+    {
+      "field": "currency",
+      "type": "string",
+      "required": true
+    },
+    {
+      "field": "counterparty_type",
+      "type": "enum(customer|supplier|employee|internal|other)",
+      "required": true
+    },
+    {
+      "field": "counterparty_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "field": "payment_method",
+      "type": "enum(cash|bank_transfer|offset|other)",
+      "required": false
+    },
+    {
+      "field": "vat_rate",
+      "type": "number",
+      "required": false
+    },
+    {
+      "field": "tax_code",
+      "type": "string",
+      "required": false
+    },
+    {
+      "field": "fx_rate",
+      "type": "number",
+      "required": false
+    },
+    {
+      "field": "warehouse_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "field": "item_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "field": "asset_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "field": "cost_center_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "field": "project_id",
+      "type": "string",
+      "required": false
+    }
+  ]
+}
