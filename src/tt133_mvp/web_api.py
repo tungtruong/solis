@@ -605,6 +605,19 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         for alias in aliases:
             alias_to_field[alias] = field
 
+    def resolve_field_from_header_token(raw_value: Any) -> str:
+        normalized = _normalize_header_token(raw_value)
+        if not normalized:
+            return ""
+        if normalized in alias_to_field:
+            return alias_to_field[normalized]
+        for alias, field in alias_to_field.items():
+            if len(alias) < 3:
+                continue
+            if alias in normalized or normalized in alias:
+                return field
+        return ""
+
     def parse_date_value(value: Any) -> str:
         if value is None:
             return ""
@@ -770,13 +783,88 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
     for idx, row in enumerate(sample_rows, start=1):
         current_mapping: Dict[int, str] = {}
         for col_idx, cell in enumerate(row):
-            normalized = _normalize_header_token(cell)
-            if normalized in alias_to_field:
-                current_mapping[col_idx] = alias_to_field[normalized]
+            resolved_field = resolve_field_from_header_token(cell)
+            if resolved_field:
+                current_mapping[col_idx] = resolved_field
         if len(current_mapping) >= 4 and any(field in current_mapping.values() for field in ["amount_total", "description", "event_date"]):
             header_row_idx = idx
             header_mapping = current_mapping
             break
+
+    if header_row_idx < 0:
+        candidate_patterns: List[Dict[int, str]] = [
+            {
+                0: "event_date",
+                1: "reference_no",
+                2: "description",
+                3: "counterparty_name",
+                4: "debit_account",
+                5: "credit_account",
+                6: "amount_total",
+                7: "amount_untaxed",
+                8: "vat_amount",
+            },
+            {
+                0: "event_date",
+                1: "reference_no",
+                2: "description",
+                3: "counterparty_name",
+                4: "amount_total",
+                5: "amount_untaxed",
+                6: "vat_amount",
+            },
+            {
+                0: "reference_no",
+                1: "event_date",
+                2: "description",
+                3: "counterparty_name",
+                4: "amount_total",
+                5: "amount_untaxed",
+                6: "vat_amount",
+            },
+        ]
+
+        best_score = -1
+        best_pattern: Dict[int, str] = {}
+        best_start_idx = 1
+
+        for start_idx, row in enumerate(sample_rows, start=1):
+            non_empty_cells = [str(cell or "").strip() for cell in row if str(cell or "").strip()]
+            if not non_empty_cells:
+                continue
+
+            for pattern in candidate_patterns:
+                score = 0
+                sample_size = 0
+                for probe_idx in range(start_idx - 1, min(start_idx - 1 + 12, len(sample_rows))):
+                    probe_row = sample_rows[probe_idx]
+                    mapped_row: Dict[str, Any] = {}
+                    for col_idx, field in pattern.items():
+                        mapped_row[field] = probe_row[col_idx] if col_idx < len(probe_row) else None
+
+                    amount_hint = max(
+                        _coerce_sheet_number(mapped_row.get("amount_total")),
+                        _coerce_sheet_number(mapped_row.get("amount_untaxed")) + _coerce_sheet_number(mapped_row.get("vat_amount")),
+                    )
+                    has_description = bool(str(mapped_row.get("description") or "").strip())
+                    has_reference = bool(str(mapped_row.get("reference_no") or "").strip())
+                    has_date = bool(parse_date_value(mapped_row.get("event_date")))
+                    if amount_hint > 0 and (has_description or has_reference or has_date):
+                        score += 2
+                    elif has_description or has_reference:
+                        score += 1
+                    sample_size += 1
+
+                if sample_size:
+                    adjusted_score = score
+                    if adjusted_score > best_score:
+                        best_score = adjusted_score
+                        best_pattern = pattern
+                        best_start_idx = start_idx
+
+        if best_score >= 6 and best_pattern:
+            header_mapping = dict(best_pattern)
+            header_row_idx = best_start_idx - 1
 
     if header_row_idx < 0:
         return {
