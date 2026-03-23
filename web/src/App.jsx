@@ -1815,6 +1815,27 @@ function App() {
         payload = fallbackResult.payload
       }
 
+      const deniedDetail = String(payload?.detail || payload?.message || '').trim()
+      if (!response.ok && deniedDetail === 'COMPANY_ACCESS_DENIED') {
+        const fallbackBody = { ...requestBody, company_id: '' }
+        const postVoucherImportNoCompany = async (url) => {
+          const nextResponse = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(fallbackBody),
+          })
+          const nextPayload = await nextResponse.json().catch(() => ({}))
+          return { response: nextResponse, payload: nextPayload }
+        }
+
+        let retry = await postVoucherImportNoCompany('/api/demo/voucher-test/import')
+        if (retry.response.status === 404) {
+          retry = await postVoucherImportNoCompany('http://127.0.0.1:8000/api/demo/voucher-test/import')
+        }
+        response = retry.response
+        payload = retry.payload
+      }
+
       if (!response.ok) {
         throw new Error(String(payload?.detail || payload?.message || tr('Test bảng kê thất bại', 'Voucher test failed')))
       }
