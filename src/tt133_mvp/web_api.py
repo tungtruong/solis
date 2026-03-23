@@ -598,6 +598,8 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         "amount_total": ["sotien", "thanhtien", "tongtien", "amount", "total"],
         "amount_untaxed": ["tientruocthue", "doanhsothuachue", "untaxed", "subtotal"],
         "vat_amount": ["thuevat", "tienthue", "vat", "taxamount"],
+        "debit_amount": ["psno", "phatsinhno", "no", "debitamount", "debitvalue", "amtdebit"],
+        "credit_amount": ["psco", "phatsinhco", "co", "creditamount", "creditvalue", "amtcredit"],
     }
 
     alias_to_field: Dict[str, str] = {}
@@ -669,7 +671,9 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         counterparty_name = str(row_data.get("counterparty_name") or "Đối tác").strip()
         reference_no = str(row_data.get("reference_no") or f"BK-{seq:04d}").strip()
         tax_code = _normalize_tax_code(str(row_data.get("counterparty_tax_code") or ""))
-        amount_total = max(_coerce_sheet_number(row_data.get("amount_total")), 0.0)
+        debit_amount = max(_coerce_sheet_number(row_data.get("debit_amount")), 0.0)
+        credit_amount = max(_coerce_sheet_number(row_data.get("credit_amount")), 0.0)
+        amount_total = max(_coerce_sheet_number(row_data.get("amount_total")), debit_amount, credit_amount, 0.0)
         amount_untaxed = max(_coerce_sheet_number(row_data.get("amount_untaxed")), 0.0)
         vat_amount = max(_coerce_sheet_number(row_data.get("vat_amount")), 0.0)
 
@@ -775,98 +779,138 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             "source": "xlsx",
         }
 
-    worksheet = workbook.active
-    sample_rows = list(worksheet.iter_rows(min_row=1, max_row=40, values_only=True))
-    header_row_idx = -1
-    header_mapping: Dict[int, str] = {}
+    def parse_sheet(worksheet: Any) -> Dict[str, Any]:
+        sample_rows = list(worksheet.iter_rows(min_row=1, max_row=60, values_only=True))
+        header_row_idx = -1
+        header_mapping: Dict[int, str] = {}
 
-    for idx, row in enumerate(sample_rows, start=1):
-        current_mapping: Dict[int, str] = {}
-        for col_idx, cell in enumerate(row):
-            resolved_field = resolve_field_from_header_token(cell)
-            if resolved_field:
-                current_mapping[col_idx] = resolved_field
-        if len(current_mapping) >= 4 and any(field in current_mapping.values() for field in ["amount_total", "description", "event_date"]):
-            header_row_idx = idx
-            header_mapping = current_mapping
-            break
+        for idx, row in enumerate(sample_rows, start=1):
+            current_mapping: Dict[int, str] = {}
+            for col_idx, cell in enumerate(row):
+                resolved_field = resolve_field_from_header_token(cell)
+                if resolved_field:
+                    current_mapping[col_idx] = resolved_field
+            has_amount_field = any(field in current_mapping.values() for field in ["amount_total", "amount_untaxed", "debit_amount", "credit_amount"])
+            if len(current_mapping) >= 3 and has_amount_field:
+                header_row_idx = idx
+                header_mapping = current_mapping
+                break
 
-    if header_row_idx < 0:
-        candidate_patterns: List[Dict[int, str]] = [
-            {
-                0: "event_date",
-                1: "reference_no",
-                2: "description",
-                3: "counterparty_name",
-                4: "debit_account",
-                5: "credit_account",
-                6: "amount_total",
-                7: "amount_untaxed",
-                8: "vat_amount",
-            },
-            {
-                0: "event_date",
-                1: "reference_no",
-                2: "description",
-                3: "counterparty_name",
-                4: "amount_total",
-                5: "amount_untaxed",
-                6: "vat_amount",
-            },
-            {
-                0: "reference_no",
-                1: "event_date",
-                2: "description",
-                3: "counterparty_name",
-                4: "amount_total",
-                5: "amount_untaxed",
-                6: "vat_amount",
-            },
-        ]
+        if header_row_idx < 0:
+            candidate_patterns: List[Dict[int, str]] = [
+                {0: "event_date", 1: "reference_no", 2: "description", 3: "counterparty_name", 4: "debit_account", 5: "credit_account", 6: "amount_total", 7: "amount_untaxed", 8: "vat_amount"},
+                {0: "event_date", 1: "reference_no", 2: "description", 3: "counterparty_name", 4: "debit_account", 5: "credit_account", 6: "debit_amount", 7: "credit_amount"},
+                {0: "event_date", 1: "reference_no", 2: "description", 3: "counterparty_name", 4: "amount_total", 5: "amount_untaxed", 6: "vat_amount"},
+                {0: "reference_no", 1: "event_date", 2: "description", 3: "counterparty_name", 4: "amount_total", 5: "amount_untaxed", 6: "vat_amount"},
+            ]
+            best_score = -1
+            best_pattern: Dict[int, str] = {}
+            best_start_idx = 1
 
-        best_score = -1
-        best_pattern: Dict[int, str] = {}
-        best_start_idx = 1
-
-        for start_idx, row in enumerate(sample_rows, start=1):
-            non_empty_cells = [str(cell or "").strip() for cell in row if str(cell or "").strip()]
-            if not non_empty_cells:
-                continue
-
-            for pattern in candidate_patterns:
-                score = 0
-                sample_size = 0
-                for probe_idx in range(start_idx - 1, min(start_idx - 1 + 12, len(sample_rows))):
-                    probe_row = sample_rows[probe_idx]
-                    mapped_row: Dict[str, Any] = {}
-                    for col_idx, field in pattern.items():
-                        mapped_row[field] = probe_row[col_idx] if col_idx < len(probe_row) else None
-
-                    amount_hint = max(
-                        _coerce_sheet_number(mapped_row.get("amount_total")),
-                        _coerce_sheet_number(mapped_row.get("amount_untaxed")) + _coerce_sheet_number(mapped_row.get("vat_amount")),
-                    )
-                    has_description = bool(str(mapped_row.get("description") or "").strip())
-                    has_reference = bool(str(mapped_row.get("reference_no") or "").strip())
-                    has_date = bool(parse_date_value(mapped_row.get("event_date")))
-                    if amount_hint > 0 and (has_description or has_reference or has_date):
-                        score += 2
-                    elif has_description or has_reference:
-                        score += 1
-                    sample_size += 1
-
-                if sample_size:
-                    adjusted_score = score
-                    if adjusted_score > best_score:
-                        best_score = adjusted_score
+            for start_idx, row in enumerate(sample_rows, start=1):
+                if not any(str(cell or "").strip() for cell in row):
+                    continue
+                for pattern in candidate_patterns:
+                    score = 0
+                    for probe_idx in range(start_idx - 1, min(start_idx - 1 + 16, len(sample_rows))):
+                        probe_row = sample_rows[probe_idx]
+                        mapped_row: Dict[str, Any] = {}
+                        for col_idx, field in pattern.items():
+                            mapped_row[field] = probe_row[col_idx] if col_idx < len(probe_row) else None
+                        amount_hint = max(
+                            _coerce_sheet_number(mapped_row.get("amount_total")),
+                            _coerce_sheet_number(mapped_row.get("debit_amount")),
+                            _coerce_sheet_number(mapped_row.get("credit_amount")),
+                            _coerce_sheet_number(mapped_row.get("amount_untaxed")) + _coerce_sheet_number(mapped_row.get("vat_amount")),
+                        )
+                        if amount_hint > 0:
+                            score += 2
+                        if str(mapped_row.get("description") or "").strip():
+                            score += 1
+                        if str(mapped_row.get("reference_no") or "").strip():
+                            score += 1
+                        if parse_date_value(mapped_row.get("event_date")):
+                            score += 1
+                    if score > best_score:
+                        best_score = score
                         best_pattern = pattern
                         best_start_idx = start_idx
 
-        if best_score >= 6 and best_pattern:
-            header_mapping = dict(best_pattern)
-            header_row_idx = best_start_idx - 1
+            if best_score >= 8 and best_pattern:
+                header_mapping = dict(best_pattern)
+                header_row_idx = best_start_idx - 1
 
-    if header_row_idx < 0:
+        if header_row_idx < 0:
+            return {"events": [], "rows": [], "score": 0, "sheet": str(getattr(worksheet, "title", ""))}
+
+        parsed_rows: List[Dict[str, Any]] = []
+        events: List[Dict[str, Any]] = []
+        empty_streak = 0
+
+        for row in worksheet.iter_rows(min_row=max(header_row_idx + 1, 1), values_only=True):
+            mapped: Dict[str, Any] = {}
+            for col_idx, field in header_mapping.items():
+                mapped[field] = row[col_idx] if col_idx < len(row) else None
+
+            if not any(str(value or "").strip() for value in mapped.values()):
+                empty_streak += 1
+                if empty_streak >= 8:
+                    break
+                continue
+            empty_streak = 0
+
+            mapped["event_date"] = parse_date_value(mapped.get("event_date"))
+            mapped["description"] = str(mapped.get("description") or "").strip()
+            mapped["counterparty_name"] = str(mapped.get("counterparty_name") or "").strip()
+            mapped["reference_no"] = str(mapped.get("reference_no") or "").strip()
+            mapped["counterparty_tax_code"] = _normalize_tax_code(str(mapped.get("counterparty_tax_code") or ""))
+
+            event_payload = build_event(mapped, len(events) + 1)
+            amount_preview = max(
+                _coerce_sheet_number(mapped.get("amount_total")),
+                _coerce_sheet_number(mapped.get("debit_amount")),
+                _coerce_sheet_number(mapped.get("credit_amount")),
+            )
+            if amount_preview <= 0:
+                amount_preview = _coerce_sheet_number(mapped.get("amount_untaxed")) + _coerce_sheet_number(mapped.get("vat_amount"))
+
+            parsed_rows.append(
+                {
+                    "event_date": mapped.get("event_date") or "",
+                    "reference_no": mapped.get("reference_no") or "",
+                    "counterparty_name": mapped.get("counterparty_name") or "",
+                    "description": mapped.get("description") or "",
+                    "event_type": event_payload.get("event_type"),
+                    "amount": float(round(amount_preview)) if amount_preview > 0 else 0.0,
+                }
+            )
+
+            event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
+            numeric_values = [
+                float(event.get("amount") or 0),
+                float(event.get("amount_total") or 0),
+                float(event.get("total_amount") or 0),
+                float(event.get("amount_untaxed") or 0),
+            ]
+            if max(numeric_values) <= 0:
+                continue
+            events.append(event_payload)
+
+        score = len(events) * 2 + len(parsed_rows)
+        return {
+            "events": events,
+            "rows": parsed_rows,
+            "score": score,
+            "sheet": str(getattr(worksheet, "title", "")),
+        }
+
+    best_sheet_result: Dict[str, Any] = {"events": [], "rows": [], "score": -1, "sheet": ""}
+    for ws in workbook.worksheets:
+        result = parse_sheet(ws)
+        if int(result.get("score") or -1) > int(best_sheet_result.get("score") or -1):
+            best_sheet_result = result
+
+    if not best_sheet_result.get("events") and not best_sheet_result.get("rows"):
         return {
             "events": [],
             "rows": [],
@@ -874,58 +918,9 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             "source": "xlsx",
         }
 
-    parsed_rows: List[Dict[str, Any]] = []
-    events: List[Dict[str, Any]] = []
-    empty_streak = 0
-
-    for row in worksheet.iter_rows(min_row=header_row_idx + 1, values_only=True):
-        mapped: Dict[str, Any] = {}
-        for col_idx, field in header_mapping.items():
-            mapped[field] = row[col_idx] if col_idx < len(row) else None
-
-        if not any(str(value or "").strip() for value in mapped.values()):
-            empty_streak += 1
-            if empty_streak >= 8:
-                break
-            continue
-        empty_streak = 0
-
-        mapped["event_date"] = parse_date_value(mapped.get("event_date"))
-        mapped["description"] = str(mapped.get("description") or "").strip()
-        mapped["counterparty_name"] = str(mapped.get("counterparty_name") or "").strip()
-        mapped["reference_no"] = str(mapped.get("reference_no") or "").strip()
-        mapped["counterparty_tax_code"] = _normalize_tax_code(str(mapped.get("counterparty_tax_code") or ""))
-
-        event_payload = build_event(mapped, len(events) + 1)
-        amount_preview = _coerce_sheet_number(mapped.get("amount_total"))
-        if amount_preview <= 0:
-            amount_preview = _coerce_sheet_number(mapped.get("amount_untaxed")) + _coerce_sheet_number(mapped.get("vat_amount"))
-
-        parsed_rows.append(
-            {
-                "event_date": mapped.get("event_date") or "",
-                "reference_no": mapped.get("reference_no") or "",
-                "counterparty_name": mapped.get("counterparty_name") or "",
-                "description": mapped.get("description") or "",
-                "event_type": event_payload.get("event_type"),
-                "amount": float(round(amount_preview)) if amount_preview > 0 else 0.0,
-            }
-        )
-
-        event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
-        numeric_values = [
-            float(event.get("amount") or 0),
-            float(event.get("amount_total") or 0),
-            float(event.get("total_amount") or 0),
-            float(event.get("amount_untaxed") or 0),
-        ]
-        if max(numeric_values) <= 0:
-            continue
-        events.append(event_payload)
-
     return {
-        "events": events,
-        "rows": parsed_rows,
+        "events": best_sheet_result.get("events", []),
+        "rows": best_sheet_result.get("rows", []),
         "issues": [],
         "source": "xlsx",
     }
