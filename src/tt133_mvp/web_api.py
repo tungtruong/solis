@@ -583,23 +583,25 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         "event_date": [
             "ngaychungtu",
             "ngayct",
+            "ngaygs",
+            "ngayghiso",
             "ngayhachtoan",
             "ngayhoadon",
             "issue_date",
             "date",
         ],
-        "reference_no": ["sochungtu", "soct", "sohoadon", "sodon", "invoice", "invoiceno"],
-        "description": ["diengiai", "noidung", "ghichu", "description"],
+        "reference_no": ["sochungtu", "soct", "soctu", "sochungtugoc", "sohoadon", "sodon", "invoice", "invoiceno"],
+        "description": ["diengiai", "diengiaichung", "noidung", "ghichu", "description"],
         "counterparty_name": ["doituong", "tenkhachhang", "tennhacungcap", "counterparty", "partner"],
         "counterparty_tax_code": ["mst", "masothue", "taxcode", "madoituong"],
         "event_type": ["loainghiepvu", "nghiepvu", "eventtype", "type"],
-        "debit_account": ["tkno", "taikhoanno", "debitaccount", "debit"],
-        "credit_account": ["tkco", "taikhoanco", "creditaccount", "credit"],
+        "debit_account": ["tkno", "taikhoanno", "accountno", "debitaccount", "debit"],
+        "credit_account": ["tkco", "taikhoanco", "accountco", "creditaccount", "credit"],
         "amount_total": ["sotien", "thanhtien", "tongtien", "amount", "total"],
         "amount_untaxed": ["tientruocthue", "doanhsothuachue", "untaxed", "subtotal"],
         "vat_amount": ["thuevat", "tienthue", "vat", "taxamount"],
-        "debit_amount": ["psno", "phatsinhno", "no", "debitamount", "debitvalue", "amtdebit"],
-        "credit_amount": ["psco", "phatsinhco", "co", "creditamount", "creditvalue", "amtcredit"],
+        "debit_amount": ["psno", "phatsinhno", "sotienno", "tienno", "debitamount", "debitvalue", "amtdebit"],
+        "credit_amount": ["psco", "phatsinhco", "sotienco", "tienco", "creditamount", "creditvalue", "amtcredit"],
     }
 
     alias_to_field: Dict[str, str] = {}
@@ -780,6 +782,15 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         }
 
     def parse_sheet(worksheet: Any) -> Dict[str, Any]:
+        def infer_amount_from_raw_row(row_values: Any) -> float:
+            candidates: List[float] = []
+            for value in row_values:
+                amount = max(_coerce_sheet_number(value), 0.0)
+                # Ignore tiny values and likely date parts (e.g., 2026) unless they look like money.
+                if amount >= 1_000:
+                    candidates.append(amount)
+            return max(candidates) if candidates else 0.0
+
         sample_rows = list(worksheet.iter_rows(min_row=1, max_row=60, values_only=True))
         header_row_idx = -1
         header_mapping: Dict[int, str] = {}
@@ -846,6 +857,12 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
         parsed_rows: List[Dict[str, Any]] = []
         events: List[Dict[str, Any]] = []
         empty_streak = 0
+        last_context: Dict[str, str] = {
+            "event_date": "",
+            "reference_no": "",
+            "description": "",
+            "counterparty_name": "",
+        }
 
         for row in worksheet.iter_rows(min_row=max(header_row_idx + 1, 1), values_only=True):
             mapped: Dict[str, Any] = {}
@@ -865,6 +882,13 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             mapped["reference_no"] = str(mapped.get("reference_no") or "").strip()
             mapped["counterparty_tax_code"] = _normalize_tax_code(str(mapped.get("counterparty_tax_code") or ""))
 
+            for context_key in ["event_date", "reference_no", "description", "counterparty_name"]:
+                value = str(mapped.get(context_key) or "").strip()
+                if value:
+                    last_context[context_key] = value
+                elif last_context.get(context_key):
+                    mapped[context_key] = last_context[context_key]
+
             event_payload = build_event(mapped, len(events) + 1)
             amount_preview = max(
                 _coerce_sheet_number(mapped.get("amount_total")),
@@ -873,6 +897,8 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
             )
             if amount_preview <= 0:
                 amount_preview = _coerce_sheet_number(mapped.get("amount_untaxed")) + _coerce_sheet_number(mapped.get("vat_amount"))
+            if amount_preview <= 0:
+                amount_preview = infer_amount_from_raw_row(row)
 
             parsed_rows.append(
                 {
@@ -892,8 +918,14 @@ def _extract_voucher_events_from_workbook_bytes(content: bytes) -> Dict[str, Any
                 float(event.get("total_amount") or 0),
                 float(event.get("amount_untaxed") or 0),
             ]
-            if max(numeric_values) <= 0:
+            if max(numeric_values) <= 0 and amount_preview <= 0:
                 continue
+            if max(numeric_values) <= 0 and amount_preview > 0:
+                fallback_event = event_payload.get("event") if isinstance(event_payload.get("event"), dict) else {}
+                fallback_event["amount"] = float(round(amount_preview))
+                fallback_event["amount_total"] = float(round(amount_preview))
+                fallback_event["total_amount"] = float(round(amount_preview))
+                event_payload["event"] = fallback_event
             events.append(event_payload)
 
         score = len(events) * 2 + len(parsed_rows)
@@ -4523,6 +4555,10 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
             }
 
         attachment_count = len(payload.attachments)
+        has_voucher_sheet_attachment = any(
+            Path(str(item.name or "")).suffix.lower() in {".xlsx", ".xlsm"}
+            for item in payload.attachments
+        )
         staged_attachments = save_case_attachments_to_staging(case_id, payload.attachments)
         staged_attachment_names = [str(item.get("name") or item.get("stored_name") or "") for item in staged_attachments]
         attachment_details = parse_attachment_details(payload.attachments, staged_attachment_names)
@@ -4533,7 +4569,7 @@ def run_demo_ui_action(payload: DemoUiActionWithAttachmentsPayload) -> Dict[str,
         voucher_batch_issues = voucher_batch.get("issues") if isinstance(voucher_batch.get("issues"), list) else []
         company_validation = parse_meta.get("company_validation") if isinstance(parse_meta.get("company_validation"), dict) else {}
         parse_warnings = parse_meta.get("warnings") if isinstance(parse_meta.get("warnings"), list) else []
-        tax_match_ok = bool(company_validation.get("is_tax_code_match")) or bool(voucher_batch_events)
+        tax_match_ok = bool(company_validation.get("is_tax_code_match")) or bool(voucher_batch_events) or has_voucher_sheet_attachment
         blocking_reason = str(company_validation.get("blocking_reason") or "").strip()
 
         if not tax_match_ok:
